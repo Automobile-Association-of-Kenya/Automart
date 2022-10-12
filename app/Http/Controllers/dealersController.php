@@ -63,7 +63,7 @@ class dealersController extends Controller
         return redirect(route('login'))->with('successMsg', 'Car Dealer Registered Successfully. Login');
     }
     public function show(){
-        $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(10);
+        $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);
         $makes = CarMake::all();
         return view('dealer',compact('vehicles','makes'));
     }
