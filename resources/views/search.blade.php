@@ -1025,8 +1025,7 @@
                             <div class="card-body">
                                 <h6 class="card-title">Year of Manufacture: <b>{{ $vehicle->year }}</b></h6>
                                 <h6 class="card-title">Price: <b>Ksh. {{ number_format("$vehicle->price", 2) }}</b></h6>
-                                <h6 class="card-title">Make&Model: <b>{{ ucwords($vehicle->make) }} /
-                                        {{ ucwords($vehicle->model) }}</b></h6>
+                                <h6 class="card-title">Make&Model: <b>{{ strtoupper($vehicle->carmake->car_make_name) }}/{{ strtoupper($vehicle->carmodel->car_model_name) }}</b></h6>
                                 <h6 class="card-title">Mileage: <b>{{ number_format("$vehicle->miles", 1) }} Kms</b></h6>
                                 <h6 class="card-title">Dealer/Yard: <b>{{ $vehicle->firstname }}</b></h6>
                                 <i class="fas fa-phone fa-1x"></i>&nbsp;{{ $vehicle->phone }}
