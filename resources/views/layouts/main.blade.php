@@ -530,15 +530,8 @@
                         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                             <!-- Content -->
                             <h4 class="text-uppercase fw-bold mb-4" style=" color: #00472F;">
-                                <i class="fas fa-gem me-3"></i>AAutomart | AAkenya
+                                <i class="fas fa-gem me-3"></i>Automart | AAkenya
                             </h4>
-                            <p>
-                                Thinking about selling your current vehicle?
-
-                                Bring your car for an appraisal, and get a free written offer good for 7 days.
-
-                                Submit your vehicle information now.
-                            </p>
                         </div>
                         <!-- Grid column -->
 

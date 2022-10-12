@@ -14,10 +14,10 @@
             </div>
         @endforeach
     @endif
-     
-@php
-    $user = session('user');
-@endphp
+
+    @php
+        $user = session('user');
+    @endphp
 
     <style>
         .show-when-target {
@@ -58,7 +58,37 @@
             text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
             background: #749A02;
         }
+
+        .images-preview-div img {
+            padding: 0px;
+            max-width: 200px;
+            min-height: 200px;
+            padding: 1% !important;
+        }
+
+        #loading {
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.7;
+            background-color: #fff;
+            z-index: 99;
+        }
+
+        #loading-image {
+            z-index: 100;
+        }
     </style>
+    @if (session('loader'))
+        <div id="loading">
+            <img id="loading-image" src="{{ asset('loader.gif') }}" alt="Loading..." />
+        </div>
+    @endif
     <div class="row" style="padding-right:10px">
 
         <!-- user profile start -->
@@ -106,7 +136,7 @@
                     </div>
                     </br>
                 </div>
-                
+
                 <div class="col-md-10  mt-5 pt-5">
                     <div class="row">
                         <div class="col-md-4" style="padding-bottom:20px; color:#000;">
@@ -231,29 +261,32 @@
                             @foreach ($vehicles->all() as $vehicle)
                                 <!-- use this for slideshow -->
                                 <!-- @foreach (json_decode($vehicle->images, true) as $image)
-                -->
+    -->
                                 <!-- <a href="{{ url('public/images/' . json_decode($vehicle->images, true)[0]) }}" class="portfolio-box">
-                                        <img src="{{ url('public/images/' . json_decode($vehicle->images, true)[0]) }}" class="img-responsive" alt="--">
-                                @endforeach -->
+                                                                            <img src="{{ url('public/images/' . json_decode($vehicle->images, true)[0]) }}" class="img-responsive" alt="--">
+    @endforeach -->
                                 <div class="col-6 col-md-4" style="padding-bottom: 15px;">
                                     <div class="card" style="color: #000">
                                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                                            <img src="{{ url('images/' . json_decode($vehicle->images, true)[0]) }}" style=""
-                                                class="img-fluide" width="100%" height="300px" />
+                                            <img src="{{ url('images/' . json_decode($vehicle->images, true)[0]) }}"
+                                                style="" class="img-fluide" width="100%" height="300px" />
                                             <a href="{{ route('details', $vehicle->id) }}">
-                                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
+                                                </div>
                                             </a>
                                         </div>
                                         <div class="card-body">
                                             <h6 class="card-title">Year of Manufacture: <b>{{ $vehicle->year }}</b></h6>
-                                            <h6 class="card-title">Price: <b>Ksh. {{ number_format("$vehicle->price", 2) }}</b></h6>
-                                            <h6 class="card-title">Make&Model: <b>{{ ucwords($vehicle->make) }} /
-                                                    {{ ucwords($vehicle->model) }}</b></h6>
-                                            <h6 class="card-title">Mileage: <b>{{ number_format("$vehicle->miles", 1) }} Kms</b></h6>
+                                            <h6 class="card-title">Price: <b>Ksh.
+                                                    {{ number_format("$vehicle->price", 2) }}</b></h6>
+                                            <h6 class="card-title">Make&Model: <b>{{ strtoupper($vehicle->carmake->car_make_name) }}/{{ strtoupper($vehicle->carmodel->car_model_name) }}</b></h6>
+                                            <h6 class="card-title">Mileage: <b>{{ number_format("$vehicle->miles", 1) }}
+                                                    Kms</b></h6>
                                             <h6 class="card-title">Dealer/Yard: <b>{{ $vehicle->firstname }}</b></h6>
                                             <i class="fas fa-phone fa-1x"></i>&nbsp;{{ $vehicle->phone }}
                                             <i class="fas fa-map-marker-alt fa-1x"></i>&nbsp;{{ $vehicle->county }}
-                                            <a href="{{ route('details', $vehicle->id) }}" class="btn btn-primary">More Details</a>
+                                            <a href="{{ route('details', $vehicle->id) }}" class="btn btn-primary">More
+                                                Details</a>
                                         </div>
                                     </div>
                                 </div>
@@ -290,29 +323,39 @@
                 <div class="col-md-2">
                     <!-- sidebar -->
                     <div class="col-md-12">
-                        <a href="#5"> <button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"> <i class="fa fa-home"></i> Home</button></a>
+                        <a href="#5"> <button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                    class="fa fa-home"></i> Home</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#0"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-car"></i> My Cars</button></a>
+                        <a href="#0"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                    class="fa fa-car"></i> My Cars</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#1"><button type="submit"
-                                class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-credit-card"></i> Subscriptions</button></a>
+                        <a href="#1"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                    class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#2"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-money-bill"></i> My Sells</button></a>
+                        <a href="#2"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                    class="fa fa-money-bill"></i> My Sells</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#3"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-plus"></i> Add Car</button></a>
+                        <a href="#3"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                    class="fa fa-plus"></i> Add Car</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="{{ route('logout') }}"><button type="submit"
-                                class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"> <i class="fa fa-sign-out-alt"></i> Logout</button></a>
+                        <a href="{{ route('logout') }}"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                    class="fa fa-sign-out-alt"></i> Logout</button></a>
                     </div>
                     </br>
                 </div>
@@ -333,8 +376,8 @@
                 </div>
                 <!-- Copyright -->
             </footer>
-            
-            
+
+
         </div>
         <!-- Subscriptions tab end -->
 
@@ -348,29 +391,39 @@
                 <div class="col-md-2">
                     <!-- sidebar -->
                     <div class="col-md-12">
-                        <a href="#5"> <button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"> <i class="fa fa-home"></i> Home</button></a>
+                        <a href="#5"> <button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                    class="fa fa-home"></i> Home</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#0"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-car"></i> My Cars</button></a>
+                        <a href="#0"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                    class="fa fa-car"></i> My Cars</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#1"><button type="submit"
-                                class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-credit-card"></i> Subscriptions</button></a>
+                        <a href="#1"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                    class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#2"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-money-bill"></i> My Sells</button></a>
+                        <a href="#2"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                    class="fa fa-money-bill"></i> My Sells</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#3"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-plus"></i> Add Car</button></a>
+                        <a href="#3"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                    class="fa fa-plus"></i> Add Car</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="{{ route('logout') }}"><button type="submit"
-                                class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"> <i class="fa fa-sign-out-alt"></i> Logout</button></a>
+                        <a href="{{ route('logout') }}"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                    class="fa fa-sign-out-alt"></i> Logout</button></a>
                     </div>
                     </br>
                 </div>
@@ -383,7 +436,7 @@
                     We'll keep this updated.
                 </div>
             </div>
-            <footer class="mt-5 w-100 pt-5" >
+            <footer class="mt-5 w-100 pt-5">
                 <!-- Copyright -->
                 <div class="text-center p-3" style="background-color: #CBBC27 ; border-radius: 10px;">
                     © {{ now()->year }} Copyright:
@@ -404,29 +457,39 @@
                 <div class="col-md-2">
                     <!-- sidebar -->
                     <div class="col-md-12">
-                        <a href="#5"> <button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"> <i class="fa fa-home"></i> Home</button></a>
+                        <a href="#5"> <button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                    class="fa fa-home"></i> Home</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#0"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-car"></i> My Cars</button></a>
+                        <a href="#0"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                    class="fa fa-car"></i> My Cars</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#1"><button type="submit"
-                                class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-credit-card"></i> Subscriptions</button></a>
+                        <a href="#1"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                    class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#2"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-money-bill"></i> My Sells</button></a>
+                        <a href="#2"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                    class="fa fa-money-bill"></i> My Sells</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#3"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-plus"></i> Add Car</button></a>
+                        <a href="#3"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                    class="fa fa-plus"></i> Add Car</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="{{ route('logout') }}"><button type="submit"
-                                class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"> <i class="fa fa-sign-out-alt"></i> Logout</button></a>
+                        <a href="{{ route('logout') }}"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                    class="fa fa-sign-out-alt"></i> Logout</button></a>
                     </div>
                     </br>
                 </div>
@@ -447,6 +510,7 @@
                             @endforeach
                         @endif
                         <!--upload form here -->
+                        <div class="pageLoader" id="pageLoader"></div>
                         <form action="{{ route('savecar') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <h2 class="form-title" style="color: #00472F">Enter Vehicle Information » </h2>
@@ -813,19 +877,10 @@
                                     <span class="instructions-cont">You may upload up to 12 images and each image may be
                                         no larger than 5MB</span>
                                 </div>
-                                <div id="upload-result">
-                                    <table id="uploaded-files" style="display: table;">
-                                        <!--<thead>-->
-                                        <!--<tr>-->
-                                        <!--<th>Preview</th>-->
-                                        <!--<th>Name</th>-->
-                                        <!--<th>Size</th>-->
-                                        <!--<th>Status</th>-->
-                                        <!--<th></th>-->
-                                        <!--</tr>-->
-                                        <!--</thead>-->
-                                        <!--<tbody><tr><td class="thumb"><img class="gt-thumb" src="Sell%20your%20Car%20%E2%80%93%20Gariweza_files/WIN_20210504_10_14_51_Pro-Copy.jpg"></td><td class="name">WIN_20210504_10_14_51_Pro - Copy.jpg</td><td class="size">103.73 KB</td><td class="status"><span class="gt-success">Complete</span></td><td class="operations"><a class="gt-remove btn-default button tiny round alert" href="javascript:;">Remove</a></td></tr></tbody>-->
-                                        <!--</table>-->
+                                <div class="col-md-12">
+                                    <div class="mt-1">
+                                        <div class="images-preview-div" style="margin:1%"> </div>
+                                    </div>
                                 </div>
                             </div>
                             <h2 class="form-title" style="color: #00472F">Personal Information</h2>
@@ -855,8 +910,7 @@
                                 <div class="col-md-8">
                                     <input type="checkbox" value="Rear View Camera" id="Rear View Camera"
                                         name="features[]" required>&nbsp;&nbsp;&nbsp;
-                                    <a class="text-center p-3"
-                                        href="/Terms and conditions to seller.pdf"
+                                    <a class="text-center p-3" href="/Terms and conditions to seller.pdf"
                                         target="_blank">Terms And Conditions<br></a>
                                     By clicking this, you have agreed to terms and conditions
                                 </div>
@@ -866,7 +920,7 @@
                         </form>
                     </div>
                 </div>
-                <footer class="mt-5 w-100 pt-5" >
+                <footer class="mt-5 w-100 pt-5">
                     <!-- Copyright -->
                     <div class="text-center p-3" style="background-color: #CBBC27 ; border-radius: 10px;">
                         © {{ now()->year }} Copyright:
@@ -906,4 +960,42 @@
             })
         });
     </script>
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
+    <script>
+        $(function() {
+            // Multiple images preview with JavaScript
+            var previewImages = function(input, imgPreviewPlaceholder) {
+                if (input.files) {
+                    var filesAmount = input.files.length;
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+                        reader.onload = function(event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(
+                                imgPreviewPlaceholder);
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            };
+            $('#fileupload').on('change', function() {
+                previewImages(this, 'div.images-preview-div');
+            });
+        });
+    </script>
+    <script>
+        @if (session('loader'))
+            $(window).on('load', function() {
+
+                const myTimeout = setTimeout(myGreeting, 5000);
+
+                function myGreeting() {
+                    $('#loading').hide();
+                }
+
+                function myStopFunction() {
+                    clearTimeout(myTimeout);
+                }
+            })
+        @endif
+    </script>>
 @endsection

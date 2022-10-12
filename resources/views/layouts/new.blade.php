@@ -68,13 +68,25 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-4 col-sm-5">
+
                     <ul class="top-social-media pull-right">
-                        <li>
-                            <a href="{{ route('login') }}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('userreg') }}" class="sign-in"><i class="fa fa-user"></i> Register</a>
-                        </li>
+                        @guest
+                            <li>
+                                <a href="{{ route('login') }}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('userreg') }}" class="sign-in"><i class="fa fa-user"></i> Register</a>
+                            </li>
+                        @endguest
+                        @auth
+                            <li>
+                                <a href="{{ route('login') }}" class="sign-in"><i class="fa fa-user"></i>
+                                    {{ Auth::user()->name }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout') }}" class="sign-in"><i class="fa fa-sign-out"></i> Logout</a>
+                            </li>
+                        @endauth
                     </ul>
                 </div>
             </div>
@@ -99,15 +111,26 @@
                             <a class="nav-link" href="{{ route('all_cars') }}" style="color: #fed925;">All Cars</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{ route('dealerHome') }}" style="color: #fed925;">Sell Your Car</a>
+                            <a class="nav-link" href="{{ route('dealerHome') }}" style="color: #fed925;">Sell Your
+                                Car</a>
                         </li>
+                       
+                        @guest
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="{{ route('login') }}" style="color: #fed925;">Login</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="{{ route('contact') }}" style="color: #fed925;">Contact</a>
                         </li>
-                        
+                        @endguest
+                        @auth
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="{{ route('login') }}" style="color: #fed925;">{{Auth::user()->name}}</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="{{ route('logout') }}" style="color: #fed925;">Logout</a>
+                        </li>
+                        @endauth
                     </ul>
                 </div>
             </nav>
@@ -260,17 +283,18 @@
     @yield('content')
     <!-- Footer start -->
     <footer class="footer">
-       
+
         <div class="sub-footer">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <p class="copy">© {{now()->year}} <a href="#">AAK Kenya.</a> All Rights Reserved.</p>
+                        <p class="copy">© {{ now()->year }} <a href="#">AAK Kenya.</a> All Rights Reserved.
+                        </p>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="social-media clearfix">
                             <div class="social-list">
-                               
+
                             </div>
                         </div>
                     </div>
@@ -283,9 +307,7 @@
     <!-- Full Page Search -->
     <div id="full-page-search">
         <button type="button" class="close">×</button>
-        <form
-            action="#"
-            class="full-page-search-inner">
+        <form action="#" class="full-page-search-inner">
             <input type="search" value="" placeholder="type keyword(s) here" />
             <button type="submit" class="btn btn-sm button-theme">Search</button>
         </form>

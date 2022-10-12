@@ -33,6 +33,7 @@ Route::get('/SellYourCar/Payment', 'App\Http\Controllers\sellController@pay')->n
 Route::get('/Contact Us', 'App\Http\Controllers\contactController@index')->name('contact');
 Route::post('/Contact Us', 'App\Http\Controllers\contactController@store')->name('store');
 Route::get('/DealersPage/Dashboard', 'App\Http\Controllers\dealersController@index')->name('dealerHome');
+Route::get('/DealersPage/home', 'App\Http\Controllers\dealersController@show')->name('dealershow');
 Route::post('/DealersPage/Dashboard', 'App\Http\Controllers\dealersController@store')->name('dealerreg');
 Route::get('/LoginPage', 'App\Http\Controllers\buyerController@index')->name('login');
 Route::post('/Dashboard/GariwezaUser', 'App\Http\Controllers\buyerController@login')->name('userlogin');

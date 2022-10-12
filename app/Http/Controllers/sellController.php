@@ -9,6 +9,7 @@ use App\Models\car_make;
 use App\Models\car_model;
 use App\Models\CarMake;
 use App\Models\CarModel;
+use Illuminate\Support\Facades\Session;
 
 class sellController extends Controller
 {
@@ -95,7 +96,8 @@ class sellController extends Controller
         $carOnSell->carId = $carID;
         $carOnSell->save();
         $message = 'Vehicle uploaded successfully';
-        return redirect()->route('all_cars')->with(['successMsg' => $message, 'carID' => $carID]);
+        Session::flash('loader','Load');
+        return redirect('/DealersPage/home#0')->with(['successMsg' => $message, 'carID' => $carID]);
     }
 
     public function pay()

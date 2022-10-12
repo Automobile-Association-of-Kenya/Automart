@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\CarMake;
 use App\Models\Caronsells;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Auth\Passwords\PasswordBroker;
 
 class dealersController extends Controller
 {
@@ -17,6 +18,7 @@ class dealersController extends Controller
         if (is_null(session('user'))) {
             redirect()->route('login');
         }
+        $this->middleware('auth')->except(['index','store']);
     }
 
     public function index(){
@@ -61,8 +63,9 @@ class dealersController extends Controller
         return redirect(route('login'))->with('successMsg', 'Car Dealer Registered Successfully. Login');
     }
     public function show(){
-      
-        return view('dealer');
+        $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(10);
+        $makes = CarMake::all();
+        return view('dealer',compact('vehicles','makes'));
     }
     
 }
