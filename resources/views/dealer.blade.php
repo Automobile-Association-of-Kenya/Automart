@@ -807,7 +807,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Side Airbags" id="Side Airbags"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Side Airbags
+                                        name="features[]">&nbsp;&nbsp;&nbsp;Airbags
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="SiriusXM Trial Avail" id="SiriusXM Trial Avail"

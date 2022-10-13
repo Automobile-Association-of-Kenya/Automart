@@ -481,13 +481,18 @@
                     </a>
                     <!-- Left links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 10% !important">
-                        <li class="nav-item">
+                    
+                    <li class="nav-item">
                             <a class="nav-link" style="font-size: 20px;color:#CBBC27"
-                                href="{{ route('all_cars') }}">All Cars</a>
+                                href="{{ route('home') }}">Search</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="font-size: 20px;color:#CBBC27"
-                                href="{{ route('dealerHome') }}">Sell Your Car</a>
+                                href="{{ route('all_cars') }}">View All</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: 20px;color:#CBBC27"
+                                href="{{ route('dealerHome') }}">Sell</a>
                         </li>
                         <!--<li class="nav-item">-->
                         <!--<a class="nav-link" style="font-size: 20px;color:#CBBC27" href="{{ route('dealerHome') }}">Register as Seller</a>-->
@@ -504,8 +509,7 @@
                                 href="{{ route('contact') }}">Contact Us</a>
                         </li>
                     </ul>
-                    <div class="float-end"><a class="nav-link" href="#"><button type="button"
-                                class="btn btn-info">Most Liked!</button></a></div>
+                
                     <!-- Left links -->
                 </div>
                 <!-- Collapsible wrapper -->

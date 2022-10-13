@@ -107,11 +107,15 @@
                 <div class="navbar-collapse collapse w-100 justify-content-end" id="navbar">
                     <ul class="navbar-nav ml-auto">
 
+                    <li class="nav-item dropdown">
+                            <a class="nav-link" href="{{ route('home') }}" style="color: #fed925;">Search</a>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="{{ route('all_cars') }}" style="color: #fed925;">All Cars</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{ route('dealerHome') }}" style="color: #fed925;">Sell Your
+                            <a class="nav-link" href="{{ route('dealerHome') }}" style="color: #fed925;">Sell
                                 Car</a>
                         </li>
                        

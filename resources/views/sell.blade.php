@@ -21,12 +21,12 @@
          @endforeach
   @endif
 
-<div class="col-6 col-md-4"  style="background-color: rgba(0,0,0, 0.2); padding-top:10px;">
+<!-- <div class="col-6 col-md-4"  style="background-color: rgba(0,0,0, 0.2); padding-top:10px;"> -->
 <!-- Pills content -->
-<div class="tab-content">
+<!-- <div class="tab-content">
 <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
 <span class="badge bg-info" style="width: 100%; padding-top:10px;padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">SEARCH VEHICLES</span>
-<form action="{{ route('search') }}" method="POST">
+<form action="{{ route('search') }}" method="POST"> -->
           <!-- show success message -->
           @if (session('successMsg'))
       <div class="alert alert-success" role="alert">
@@ -42,8 +42,8 @@
          @endforeach
   @endif
 {{ csrf_field() }}
-<div class="col-md-12" style="padding-bottom:5px; padding-top:5px;">
-<select class="" id="make_search" name="make" aria-hidden="true" style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
+<!-- <div class="col-md-12" style="padding-bottom:5px; padding-top:5px;">
+<select class="" id="make_search" name="make" aria-hidden="true" style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;"> -->
 <!-- <option value="Any Make" selected>Select Make</option>
 <option value="TOYOTA">TOYOTA</option>
 <option value="NISSAN">NISSAN</option>
@@ -120,7 +120,7 @@
 </div>
 
 
-<select class="" name="model" id="model" required aria-hidden="true"
+<!-- <select class="" name="model" id="model" required aria-hidden="true"
 style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
 <option value="Select model" selected>Select Model</option>
 <option value="147">147</option>
@@ -993,19 +993,20 @@ style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radi
   <div class="col-6">
 <label>Max Price</label>
 <input class="form-control" type="number" name="max_price" placeholder="Max Price"></div>
-</div>
+</div> -->
 <!-- Submit button -->
-<button type="submit" class="btn btn-primary btn-block mb-4" 
+<!-- <button type="submit" class="btn btn-primary btn-block mb-4" 
 style="background-color : rgba(0, 101, 68, 0.9) !Important;"><i class="fa fa-search" aria-hidden=""></i>&nbsp;SEARCH</button>
 </form>
 </div>
-</div>
+</div> -->
 <!-- <div class="row" style="padding-left: 20px; padding-top: 10px; padding-bottom: 20px; color: #fff;">
 <div class="col-6 col-md-4" style="background-color : rgba(0,0,0, 0.3) !Important;"> -->
 <span class="badge bg-info" style="width: 100%; padding-top:10px;
-padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL OF THE WEEK</span>
+padding-bottom:10px; background-color: #000000 !Important;"><a href="{{ route('dealershow') }}" class="sign-in"><i class="fa fa-sign-out"></i>Upload  another car</a></span>
+
 <!-- Deal of the week start -->
-<div class="card">
+<!-- <div class="card">
   <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
     <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid"/>
     <a href="#">
@@ -1016,7 +1017,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL O
     <h5 class="card-title">Card title</h5>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     <a href="#" class="btn btn-primary">More Details</a>
-  </div>
+  </div> -->
 <!-- </div>
 Deal of the week end -->
 </div>
@@ -1039,7 +1040,7 @@ Deal of the week end -->
          @endforeach
   @endif
 <!--upload form here -->
-<form action="{{ route('savecar') }}" method="POST" enctype="multipart/form-data">
+<!-- <form action="{{ route('savecar') }}" method="POST" enctype="multipart/form-data">
 {{ csrf_field() }}
 <h3 class="form-title">Enter Vehicle Information » </h3>
 <label class="gt-title" for="gt-title">Your listing title</label>
@@ -1113,10 +1114,10 @@ Deal of the week end -->
 </div>
 <div class="row" style="padding-bottom: 10px;">
   <div class="col-6">
-    <label>Make</label>
+    <label>Make</label> -->
     <!-- <input class="form-control" type="text" name="make" placeholder="Enter Vehicle Make" style="text-transform:uppercase" required> -->
     <!-- <div class="col-md-12" style="padding-bottom:5px; padding-top:5px;"> -->
-<select class="" id="make_search" name="make" aria-hidden="true" style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;" required>
+<!-- <select class="" id="make_search" name="make" aria-hidden="true" style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;" required>
 <option value="Any Make" selected>Select Make</option>
 <option value="TOYOTA">TOYOTA</option>
 <option value="NISSAN">NISSAN</option>
@@ -1191,11 +1192,11 @@ Deal of the week end -->
 <option value="DODGE">DODGE</option>
 </select>
   <!-- </div> -->
-  </div>
+  <!-- </div>
   <div class="col-6">
-    <label>Model</label>
+    <label>Model</label> --> 
     <!-- <input class="form-control" type="text" name="model" placeholder="Enter Vehicle Model" style="text-transform:uppercase" required> -->
-<select class="" name="model" id="model" required aria-hidden="true"
+<!-- <select class="" name="model" id="model" required aria-hidden="true"
 style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;" required>
 <option value="Select model" selected>Select Model</option>
 <option value="147">147</option>
@@ -2130,8 +2131,8 @@ style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radi
             <option value="Semi-Auto">Semi-Auto</option>
             <option value="None">None</option>
         </select>
-    </div>
-  <div class="col-6">
+    </div> -->
+  <!-- <div class="col-6">
     <label>Vehicle Type</label>
     <select id="vehicle_type" name="vehicle_type" tabindex="14" required
     style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
@@ -2190,5 +2191,5 @@ style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radi
 </div>
 <button type="submit" class="btn btn-primary btn-block mb-4">Submit &amp; pay for your listing</button>
 </form>
-</div>
+</div> -->
 @endsection 
