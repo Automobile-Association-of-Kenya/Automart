@@ -266,7 +266,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                 <div class="slider-for">
                                     @foreach (json_decode($vehicle->images) as $key => $item)
                                         <img src="{{ url('images/' . $item) }}" class="img-fluid w-100" alt="slider-car"
-                                           style="max-width: 700px !important; height:500px">
+                                           style="max-width: 870px !important; height:590px">
                                     @endforeach
                                 </div>
                                 <div class="slider-nav">
