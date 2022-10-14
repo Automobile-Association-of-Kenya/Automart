@@ -400,6 +400,24 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                 </tbody>
                             </table>
                         </div>
+                        <div class="card text-center">
+                                <div class="card-header">Safety Tips</div>
+                                <div class="card-body">
+                                    <h5 class="card-title"> Beware of cons, please take note of the following;</h5>
+                                       <div class="text-center">
+                                         
+                                       <p>   1. Inspect the vehicle to make sure they meet your needs.</p><br>
+                                       <p style="margin-top:-30px; margin-right:130px">  2.Meet the seller at a safe public place.</p><br>
+                                       <p style="margin-top:-30px;margin-right:178px">  3.Don't send any pre-payments.</p></br>
+                                       <p style="margin-top:-30px; margin-right:-10px">  4.Check all documentation and only pay if you're satisfied.</p></br>
+                                          
+            
+                                        <!--  >
+                                         
+                                         <br>
+                                          <br> -->
+                                </div>
+                            </div>
                     </div>
 
                     <!-- Car details page end -->

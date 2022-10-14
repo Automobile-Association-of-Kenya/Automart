@@ -720,8 +720,8 @@
                                         name="features[]">&nbsp;&nbsp;&nbsp;AM/FM Stereo
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="Automatic Transmission" id="Automatic Transmission"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Auto Transmission
+                                    <input type="checkbox" value="Roof Racks" id="Roof Racks"
+                                        name="features[]">&nbsp;&nbsp;&nbsp;Roof Racks
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Auxiliary Audio Input" id="Auxiliary Audio Input"
