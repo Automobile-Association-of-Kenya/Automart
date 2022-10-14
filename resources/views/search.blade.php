@@ -1038,7 +1038,7 @@
             @else
             <div class="col-md-12">
                 <div class="alert alert-success" role="alert">
-                    Sorry. No Records Found. Try a Different Search.
+                    Sorry. No Records Found. <a href="{{ route('home') }}">Click here and try a Different search</a>
                 </div>
                 </div>
             @endif

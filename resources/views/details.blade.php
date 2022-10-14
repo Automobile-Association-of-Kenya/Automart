@@ -266,7 +266,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                 <div class="slider-for">
                                     @foreach (json_decode($vehicle->images) as $key => $item)
                                         <img src="{{ url('images/' . $item) }}" class="img-fluid w-100" alt="slider-car"
-                                            width="589" height="421">
+                                           style="max-width: 700px !important; height:500px">
                                     @endforeach
                                 </div>
                                 <div class="slider-nav">
@@ -279,113 +279,128 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                             </div>
                         </div>
                         <!-- Advanced search start -->
-                        
-        </div>
-       
 
-    </div>
-    <div class="col-md-12">
-        <div class="card">
-  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-    
-    <a href="#">
-      <div class="mask " style="background-color: rgba(251, 251, 251, 0.15);"></div>
-    </a>
-  </div>
-  <div class="card-body" style="color: #000">
-    <h5 class="card-title text-center">More Details.</h5>
-   
-  </div>
-</div>
-<!-- Deal of the week end -->
-</div>
+                    </div>
 
-  <div class="col-md-12">
-<div class="row" style="color:#000; padding-bottom:10px;">
-  <div class="col-6 col-sm-3">
-    <div class="card">
-  <div class="card-body">
-      <h5>Price:</h5>
-     <h5><b>Ksh.{{ number_format("$vehicle->price"); }}</b></h5> 
-  </div>
-</div>
-  </div>
-  <div class="col-6 col-sm-3">
-  <div class="card">
-  <div class="card-body">
-  <h5>Mileage:</h5>
-     <h5><b>{{ number_format("$vehicle->miles"); }} Kms</b></h5> 
-  </div>
-</div>
-  </div>
-  <div class="col-6 col-sm-3">
-  <div class="card">
-  <div class="card-body">
-    <h5>Location:</h5>
-      <h5><b><i class="fas fa-map-marker-alt fa-1x"></i>&nbsp;{{ $vehicle->county }} {{ $vehicle->country }}&nbsp</b></h5>
-    
-  </div>
-</div>
-  </div>
-  <div class="col-6 col-sm-3">
-  <div class="card">
-     <h5 class="card-title">Contacts:</h5>
-  <div class="card-body">
-  <h6><b>{{ $vehicle->phone }} - {{ $vehicle->email }}</b></h6>
-   
-</div>
-  </div>
-</div>
 
-<div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
-<h4 style="font-family:Garamond;color:white;" ><b>Vehicle Details</b></h4>
-<table class="table" style="color:#000000;">
-<tbody>
-<tr>
-      <td>
-       Make/Model:&nbsp;<b>{{ strtoupper($vehicle->carmake->car_make_name) }} {{ strtoupper($vehicle->carmodel->car_model_name); }}</b>
-      </td>
-      <td>
-      Year of Manufacture:&nbsp;<b>{{ $vehicle->year }}</b>
-      </td>
-      <td>
-      Transmission:&nbsp;<b>{{ strtoupper($vehicle->transmission); }}</b>
-      </td>
-    </tr>
-    <tr>
-      <td>
-       Fuel:&nbsp;<b>{{ strtoupper($vehicle->fuel_type); }}</b>
-      </td>
-      <td>
-      Color:&nbsp;<b>{{ strtoupper($vehicle->exterior); }}</b>
-      </td>
-      <td>
-      Vehicle Type:&nbsp;<b>{{ strtoupper($vehicle->vehicle_type); }}</b>
-      </td>
-    </tr>
-    <tr>
-    <td>
-      Vehicle Regiatration No.&nbsp;:&nbsp;<b>{{ strtoupper($vehicle->vin); }}</b>
-      </td>  
-    </tr>
-  </tbody>
-</table>
-</div>
-&nbsp;
-<div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
-<h4 style="font-family:Garamond; color: whitesmoke;"><b>Vehicle Feartures</b></h4>
- @foreach (json_decode($vehicle->features, true) as $feature)
- <i class='fa fa-check' style='color: #006544;'></i> |&nbsp;{{ $feature }}&nbsp;|&nbsp;&nbsp;
-@endforeach
-<table class="table" style="color:#fff;"><tbody><tr><td></td></tr></tbody></table>
-</div>
-&nbsp;
-<div class="container-fluid" style="!Important; border-radius:5px; padding-bottom:5px;">
-<h4 style="font-family:Garamond;color: ghostwhite;"><b>Description</b></h4>
- {{ $vehicle->description }}
-<table class="table" style="color:#fff;"><tbody><tr><td></td></tr></tbody></table>
-</div>
-    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
 
-    <!-- Car details page end -->
-@endsection
+                            <a href="#">
+                                <div class="mask " style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                            </a>
+                        </div>
+                        <div class="card-body" style="color: #000">
+                            <h5 class="card-title text-center">More Details.</h5>
+
+                        </div>
+                    </div>
+                    <!-- Deal of the week end -->
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row" style="color:#000; padding-bottom:10px;">
+                        <div class="col-6 col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Price:</h5>
+                                    <h5><b>Ksh.{{ number_format("$vehicle->price") }}</b></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Mileage:</h5>
+                                    <h5><b>{{ number_format("$vehicle->miles") }} Kms</b></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Location:</h5>
+                                    <h5><b><i class="fas fa-map-marker-alt fa-1x"></i>&nbsp;{{ $vehicle->county }}
+                                            {{ $vehicle->country }}&nbsp</b></h5>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-3">
+                            <div class="card">
+                                <h5 class="card-title">Contacts:</h5>
+                                <div class="card-body">
+                                    <h6><b>{{ $vehicle->phone }} - {{ $vehicle->email }}</b></h6>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
+                            <h4 style="font-family:Garamond;color:white;"><b>Vehicle Details</b></h4>
+                            <table class="table" style="color:#000000;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            Make/Model:&nbsp;<b>{{ strtoupper($vehicle->carmake->car_make_name) }}
+                                                {{ strtoupper($vehicle->carmodel->car_model_name) }}</b>
+                                        </td>
+                                        <td>
+                                            Year of Manufacture:&nbsp;<b>{{ $vehicle->year }}</b>
+                                        </td>
+                                        <td>
+                                            Transmission:&nbsp;<b>{{ strtoupper($vehicle->transmission) }}</b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Fuel:&nbsp;<b>{{ strtoupper($vehicle->fuel_type) }}</b>
+                                        </td>
+                                        <td>
+                                            Color:&nbsp;<b>{{ strtoupper($vehicle->exterior) }}</b>
+                                        </td>
+                                        <td>
+                                            Vehicle Type:&nbsp;<b>{{ strtoupper($vehicle->vehicle_type) }}</b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Vehicle Regiatration No.&nbsp;:&nbsp;<b>{{ strtoupper($vehicle->vin) }}</b>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        &nbsp;
+                        <div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
+                            <h4 style="font-family:Garamond; color: whitesmoke;"><b>Vehicle Feartures</b></h4>
+                            @foreach (json_decode($vehicle->features, true) as $feature)
+                                <i class='fa fa-check' style='color: #006544;'></i>
+                                |&nbsp;{{ $feature }}&nbsp;|&nbsp;&nbsp;
+                            @endforeach
+                            <table class="table" style="color:#fff;">
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        &nbsp;
+                        <div class="container-fluid" style="!Important; border-radius:5px; padding-bottom:5px;">
+                            <h4 style="font-family:Garamond;color: ghostwhite;"><b>Description</b></h4>
+                            {{ $vehicle->description }}
+                            <table class="table" style="color:#fff;">
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Car details page end -->
+                @endsection

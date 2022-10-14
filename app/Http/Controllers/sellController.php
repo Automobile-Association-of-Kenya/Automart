@@ -54,10 +54,10 @@ class sellController extends Controller
         if (count($request->images) > 10) {
             return redirect()->back()->with('errorMsg', 'Images must not be more than 10');
         }
-        $vehicles = Caronsells::where('vin', $request->vin)->first();
-        if ($vehicles == true) {
-            return redirect(route('sellcar'))->with('errorMsg', 'Vehicle Already Listed.');
-        }
+        // $vehicles = Caronsells::where('vin', $request->vin)->first();
+        // if ($vehicles == true) {
+        //     return redirect(route('sellcar'))->with('errorMsg', 'Vehicle Already Listed.');
+        // }
 
         if ($request->hasfile('images')) {
 
