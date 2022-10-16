@@ -474,6 +474,9 @@
                     </a>
                     <!-- Left links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0"  style="margin-left: 29% !important">
+                    <li class="nav-item">
+                        <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="{{ route('all_cars') }}">View All</a>
+                        </li>
                         <li class="nav-item">
                         <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="{{ route('home') }}">Search</a>
                         </li>

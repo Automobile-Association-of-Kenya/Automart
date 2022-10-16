@@ -75,7 +75,7 @@
                                 <a href="{{ route('login') }}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
                             </li>
                             <li>
-                                <a href="{{ route('userreg') }}" class="sign-in"><i class="fa fa-user"></i> Register</a>
+                                <a href="{{ route('dealerreg') }}" class="sign-in"><i class="fa fa-user"></i> Register</a>
                             </li>
                         @endguest
                         @auth

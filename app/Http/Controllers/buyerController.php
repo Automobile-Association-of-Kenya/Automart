@@ -89,7 +89,7 @@ class buyerController extends Controller
                 return view('buyer');
             } else {
                 $makes = CarMake::all();
-                $vehicles = Caronsells::where('email', $request->email)->paginate(10);
+                $vehicles = Caronsells::where('email', $request->email)->paginate(9);
                 $request->session()->put('user', Auth::user());
                 return view('dealer', compact('makes', 'vehicles'));
             }
