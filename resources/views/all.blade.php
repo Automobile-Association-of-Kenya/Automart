@@ -1114,17 +1114,19 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                     <div class="row">
                         @if (!empty($vehicles) && $vehicles->count())
                             @foreach ($vehicles->all() as $vehicle)
+                            
                                 <div class="col-lg-4 col-md-4">
+                                    <a href="{{ route('details', $vehicle->id) }}" class="car-img">
                                     <div class="car-box-3">
                                         <div class="car-thumbnail">
-                                            <a href="{{ route('details', $vehicle->id) }}" class="car-img">
+                                          
                                                 <div class="for">For Sale</div>
                                                 <div class="price-box">
                                                    
                                                     <span>Ksh. {{ number_format("$vehicle->price", 2) }}</span>
                                                 </div>
                                                 <img class="d-block w-100" src="{{ url('images/' . json_decode($vehicle->images, true)[0]) }}" width="356" height="254" alt="car">
-                                            </a>
+                                          
                                             <div class="carbox-overlap-wrapper">
                                                 <div class="overlap-box">
                                                     {{-- <div class="overlap-btns-area">
@@ -1210,7 +1212,9 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                             </div>
                                         </div>
                                     </div>
+                                </a>
                                 </div>
+                         
                             @endforeach
                         @endif
                     </div>
