@@ -226,7 +226,17 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
     </div>
 @endsection --}}
 @extends('layouts.new')
-
+{{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+    .center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
 @section('content')
     <!-- Sub banner start -->
     <div class="sub-banner">
@@ -299,7 +309,6 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                     </div>
                     <!-- Deal of the week end -->
                 </div>
-
                 <div class="col-md-12">
                     <div class="row" style="color:#000; padding-bottom:10px;">
                         <div class="col-6 col-sm-3">
@@ -400,27 +409,43 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                 </tbody>
                             </table>
                         </div>
-                        <div class="card text-center">
-                            <div class="card-header">Safety Tips</div>
-                            <div class="card-body">
-                                <h5 class="card-title"> Beware of cons, please take note of the following;</h5>
-                                <div class="text-center">
-
-                                    <p> 1. Inspect the vehicle to make sure they meet your needs.</p><br>
-                                    <p style="margin-top:-30px; margin-right:130px"> 2.Meet the seller at a safe public
-                                        place.</p><br>
-                                    <p style="margin-top:-30px;margin-right:178px"> 3.Don't send any pre-payments.</p></br>
-                                    <p style="margin-top:-30px; margin-right:-10px"> 4.Check all documentation and only pay
-                                        if you're satisfied.</p></br>
-
-
-                                    <!--  >
-                                             
-                                             <br>
-                                              <br> -->
-                                </div>
-                            </div>
-                        </div>
+                     
 
                         <!-- Car details page end -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalCenterTitle">Safety Tips</h5>
+                                  <button type="button" onclick="closeModal()" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <h5 class="card-title"> Beware of cons, please take note of the following;</h5>
+                                    <div class="text-center">
+    
+                                        <p> 1. Inspect the vehicle to make sure they meet your needs.</p><br>
+                                        <p style="margin-top:-30px; margin-right:130px"> 2.Meet the seller at a safe public
+                                            place.</p><br>
+                                        <p style="margin-top:-30px;margin-right:178px"> 3.Don't send any pre-payments.</p></br>
+                                        <p style="margin-top:-30px; margin-right:-10px"> 4.Check all documentation and only pay
+                                            if you're satisfied.</p></br>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" onclick="closeModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <script>
+                            $(window).on('load', function() {
+                                $("#exampleModalCenter").modal("show");
+                            })
+                            function closeModal()
+                            {
+                                $("#exampleModalCenter").modal("hide");
+                            }
+                        </script>
                     @endsection

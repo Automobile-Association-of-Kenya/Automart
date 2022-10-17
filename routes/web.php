@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\dealersController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
@@ -87,6 +88,16 @@ Route::get('/getCarMakes', 'App\Http\Controllers\CarController@getCarMakes')->na
 
 Route::post('fetch/car-models',[VehicleController::class,'fetchModels'])->name('carmodels.fetch');
 
+
+Route::controller(dealersController::class)->group(function(){
+    Route::prefix('dealer')->group(function(){
+        Route::get('addcar','addCar')->name('dealer.addcar');
+        Route::get('home','home')->name('dealer.home');
+        Route::get('mycars','mycars')->name('dealer.mycars');
+        Route::get('mysales','mysales')->name('dealer.mysales');
+        Route::get('subscriptions','subscriptions')->name('dealer.subscriptions');
+    });
+});
 
 
 

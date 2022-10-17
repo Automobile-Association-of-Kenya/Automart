@@ -65,7 +65,37 @@ class dealersController extends Controller
     public function show(){
         $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);
         $makes = CarMake::all();
-        return view('dealer',compact('vehicles','makes'));
+       
+        return view('dealer.addcar',compact('makes','vehicles'));
     }
-    
+    public function addcar()
+    {
+        $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);
+        $makes = CarMake::all();
+        return view('dealer.addcar',compact('makes','vehicles'));
+    }
+    public function home()
+    {
+        $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);
+        $makes = CarMake::all();
+        return view('dealer.home',compact('makes','vehicles'));
+    }
+    public function mycars()
+    {
+        $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(1);
+        $makes = CarMake::all();
+        return view('dealer.mycars',compact('makes','vehicles'));
+    }
+    public function mysales()
+    {
+        $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);
+        $makes = CarMake::all();
+        return view('dealer.mysales',compact('makes','vehicles'));
+    }
+    public function subscriptions()
+    {
+        $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);
+        $makes = CarMake::all();
+        return view('dealer.subscriptions',compact('makes','vehicles'));
+    }
 }
