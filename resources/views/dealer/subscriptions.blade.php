@@ -90,41 +90,42 @@
         </div>
     @endif
     <div class="row" style="padding-right:10px">
-
         <!-- user profile start -->
-        <div id="5" class="show-when-target:target">
+        <div id="5" class="show-when-target:target" >
             <div class="row">
                 <div class="alert alert-success" role="alert">
-                    Welcome to Your Profile: {{ $user->name }},
+                    All Subscriptions made under Firstname: {{ $user->name }}, Email: {{ $user->email }}, Phone:
+                    {{ $user->number }}
                 </div>
-                <div class="col-md-2 mt-5 pt-5">
-                    <div class="col-md-12">
-                        <a href="#5"> <button type="submit" class="btn  btn-block"
+                <div class="col-md-2 mt-5 pt-5" >
+                    <!-- sidebar -->
+                    <div class="col-md-12 ">
+                        <a href="{{route('dealer.home')}}"> <button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
                                     class="fa fa-home"></i> Home</button></a>
                     </div>
                     </br>
 
                     <div class="col-md-12">
-                        <a href="#0"><button type="submit" class="btn  btn-block"
+                        <a href="{{route('dealer.mycars')}}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-car"></i> My Cars</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#1"><button type="submit" class="btn  btn-block"
+                        <a href="{{route('dealer.subscriptions')}}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#2"><button type="submit" class="btn  btn-block"
+                        <a href="{{route('dealer.mysales')}}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-money-bill"></i> My Sale</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="#3"><button type="submit" class="btn  btn-block"
+                        <a href="{{route('dealer.addcar')}}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-plus"></i> Add Car</button></a>
                     </div>
@@ -136,68 +137,16 @@
                     </div>
                     </br>
                 </div>
-
-                <div class="col-md-10  mt-5 pt-5">
-                    <div class="row">
-                        <div class="col-md-4" style="padding-bottom:20px; color:#000;">
-                            <div class="card">
-                                <img src="{{ url('/images/bg/user.jpg') }}" class="card-img-top"
-                                    alt="Fissure in Sandstone" />
-                                <div class="card-body">
-                                    <h5 class="card-title"><b>User Details</b></h5>
-                                    <p class="card-text"><b>Dealer Name:</b> {{ $user->dName }}</p>
-                                    <p class="card-text"><b>Email:</b> {{ $user->email }}</p>
-                                    <p class="card-text"><b>Phone:</b> {{ $user->number }}</p>
-                                    <p class="card-text"><b>Sec Phone:</b> {{ $user->number2 }}</p>
-                                    <a href="#!" class="btn btn-primary">Update</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8" style="color:#000;">
-                            <div class="card text-center">
-                                <div class="card-header">Tips to Sell Quicker On Automart</div>
-                                <div class="card-body">
-                                    <h5 class="card-title"> Invest in Quality Product Images</h5>
-                                    <p class="card-text">Given how important appearance is in relation to how we perceive
-                                        things
-                                        (including other people), it stands to reason that investing in quality product
-                                        photography
-                                        will have a similar effect on visitors to your posts.</p>
-                                    <h5 class="card-title">Be Honest in Your Sales Post</h5>
-                                    <p class="card-text">Not only is honesty in your post crucial to your business&apos;
-                                        reputation, it also fosters and encourages trust in your brand. Don&apos;t make
-                                        claims
-                                        you can&apos;t substantiate, and don&apos;t use hyperbole lightly today&apos;s
-                                        consumers are
-                                        hypersensitive to marketing BS, so be honest, straightforward, and approachable in
-                                        all your sales copy,
-                                        from your homepage to your email campaigns.</p>
-                                </div>
-                            </div>
-                            <div class="container" style="padding-bottom:20px;padding-top:30px;">
-                                <div class="row">
-                                    <div class="col-md">
-                                        <div class="card">
-                                            <div class="card-body">Number of Cars</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md">
-                                        <div class="card">
-                                            <div class="card-body">Sales</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md">
-                                        <div class="card">
-                                            <div class="card-body">Recently added</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-10 mt-5 pt-5">
+                    Hello
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    We'll keep this payments updated.
                 </div>
             </div>
-            <footer class="mt-5 w-100 ">
+            <footer class="mt-5 w-100 pt-5">
                 <!-- Copyright -->
                 <div class="text-center p-3" style="background-color: #CBBC27 ; border-radius: 10px;">
                     © {{ now()->year }} Copyright:

@@ -326,7 +326,7 @@
                                         </div>
                                         <div class="form-group ">
                                             <h3 style="color:#CBBC27">Quick Search</h3>
-                                            <h5 style="color:#CBBC27">Amount </h5>
+                                            <!-- <h5 style="color:#CBBC27">Amount </h5>
                                             <button class="btn btn-warning bg-white rounded "
                                                 style="color: #00472F;font-weight:bolder;font-size:100%">
                                                 < 500K </button>
@@ -335,7 +335,7 @@
                                                         - 1M </button>
                                                     <button class="btn btn-warning bg-white rounded "
                                                         style="color: #00472F;font-weight:bolder;font-size:100%"> >
-                                                        1M</button>
+                                                        1M</button> -->
                                         </div>
 
 
