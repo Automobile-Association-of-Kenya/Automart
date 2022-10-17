@@ -82,7 +82,11 @@ class dealersController extends Controller
     }
     public function mycars()
     {
+<<<<<<< HEAD
         $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(1);
+=======
+        $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);
+>>>>>>> 40fbe8544eaeb4d531f82ee258285cd113c4368c
         $makes = CarMake::all();
         return view('dealer.mycars',compact('makes','vehicles'));
     }
