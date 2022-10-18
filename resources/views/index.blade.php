@@ -181,7 +181,7 @@
                             <li>
                                 <a href="#">Car Details <em class="fa fa-chevron-down"></em></a>
                                 <ul>
-                                    <li><a href="car-details.html">Car Details 1</a></li>
+                                    <li><a href="{{ route('details', $item->id) }}">Car Details 1</a></li>
                                     <li><a href="car-details-2.html">Car Details 2</a></li>
                                     <li><a href="car-details-3.html">Car Details 3</a></li>
                                 </ul>
@@ -288,8 +288,7 @@
         <div id="carouselExampleIndicators" class="carousel slide h-60" data-ride="carousel">
             <div class="carousel-inner banner-slider-inner text-center">
                 <div class="carousel-item banner-max-height active item-bg">
-                    <img class="d-block w-100 h-100" src="{{ url('assets/img/banner/img-6.jpg') }}"
-                        alt="banner">
+                    <img class="d-block w-100 h-100" src="{{ url('assets/img/banner/img-6.jpg') }}" alt="banner">
                     <div class="carousel-content container banner-info-2 bi-2 h-100">
                         <div class="row bi5">
                             <div class="col-lg-7 text-start">
@@ -625,259 +624,51 @@
             <div class="featured-slider row slide-box-btn slider "
                 style="border: solid white 2px !important;background:white "
                 data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
-                <div class="slide slide-box">
-                    <div class="car-box">
-                        <div class="car-image">
-                            <img class="d-block w-100" src="{{ url('assets/img/car/car-3.jpg') }}"
-                                alt="car-photo">
-                            <div class="tag">Best Deal</div>
-                        </div>
-                        <div class="detail" style="background:rgb(190, 186, 186)">
+                @foreach ($vehicles as $item)
+            
+                    <div class="slide slide-box">
+                        <div class="car-box">
+                            <a href="{{ route('details', $item->id) }}">
+                            <div class="car-image">
+                                <img class="d-block w-100" src="{{ url('images/' .json_decode($item->images)[0]) }}"
+                                    alt="car-photo">
+                                <div class="tag">Best Deal</div>
+                            </div>
+                            </a>
+                            <div class="detail" style="background:rgb(190, 186, 186)">
 
-                            <div class="location ratings" style="margin-left: -5%">
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star-o text-success"></i>
+                                <div class="location ratings" style="margin-left: -5%">
+                                    <i class="fa fa-star text-success"></i>
+                                    <i class="fa fa-star text-success"></i>
+                                    <i class="fa fa-star text-success"></i>
+                                    <i class="fa fa-star text-success"></i>
+                                    <i class="fa fa-star-o text-success"></i>
+                                </div>
+                                <div class="location">
+                                    <a href="{{ route('details', $item->id) }}">
+                                        <i class="fa-solid fa-engine"></i>Model: {{$item->carmodel->car_model_name}}
+                                    </a>
+                                </div>
+                                <div class="location">
+                                    <a href="{{ route('details', $item->id) }}">
+                                        <i class="fa-solid fa-engine"></i>Make: {{$item->carmake->car_make_name}}
+                                    </a>
+                                </div>
+                                <div class="location">
+                                    <a href="{{ route('details', $item->id) }}">
+                                        <i class="fa-solid fa-engine"></i>Fuel: {{$item->fuel_type}}
+                                    </a>
+                                </div>
                             </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Model: LAMBORGHINI
-                                </a>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Engine: 1798 CC
-                                </a>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Fuel: Petrol
-                                </a>
-                            </div>
-                        </div>
-                        <div class="footer clearfix" style="text-align: center;background:rgb(190, 186, 186)">
-                            <div class="w-100 ratings">
-                                <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i
-                                    class="fa fa-envelope text-success"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide slide-box">
-                    <div class="car-box">
-                        <div class="car-image">
-                            <img class="d-block w-100" src="{{ url('assets/img/car/car-4.jpg') }}"
-                                alt="car-photo">
-                            <div class="tag">Best Deal</div>
-
-                        </div>
-                        <div class="detail" style="background:#CBBC27">
-
-                            <div class="location ratings" style="margin-left: -5%">
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star-o text-success"></i>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Model: Ferrari
-                                </a>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Engine: 1798 CC
-                                </a>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Fuel: Petrol
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="footer clearfix" style="text-align: center;background:#CBBC27">
-                            <div class="w-100 ratings">
-                                <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i
-                                    class="fa fa-envelope text-success"></i>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="slide slide-box">
-                    <div class="car-box">
-                        <div class="car-image">
-                            <img class="d-block w-100" src="{{ url('assets/img/car/car-1.jpg') }}"
-                                alt="car-photo">
-                            <div class="tag">Best Deal</div>
-                        </div>
-                        <div class="detail" style="background:rgb(190, 186, 186)">
-
-                            <div class="location ratings" style="margin-left: -5%">
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star-o text-success"></i>
-
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Model: BMW
-                                </a>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Engine: 1798 CC
-                                </a>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Fuel: Petrol
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="footer clearfix" style="text-align: center;background:rgb(190, 186, 186)">
-                            <div class="w-100 ratings">
-                                <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i
-                                    class="fa fa-envelope text-success"></i>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="slide slide-box">
-                    <div class="car-box">
-                        <div class="car-image">
-                            <img class="d-block w-100" src="{{ url('assets/img/car/car-2.jpg') }}"
-                                alt="car-photo">
-                            <div class="tag">Best Deal</div>
-                        </div>
-                        <div class="detail" style="background:#CBBC27">
-
-                            <div class="location ratings" style="margin-left: -5%">
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star-o text-success"></i>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Model: Ferrari
-                                </a>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Engine: 1798 CC
-                                </a>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Fuel: Petrol
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="footer clearfix" style="text-align: center; background:#CBBC27">
-                            <div class="w-100 ratings">
-                                <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i
-                                    class="fa fa-envelope text-success"></i>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="slide slide-box">
-                    <div class="car-box">
-                        <div class="car-image">
-                            <img class="d-block w-100" src="{{ url('assets/img/car/car-5.jpg') }}"
-                                alt="car-photo">
-                            <div class="tag">Best Deal</div>
-                        </div>
-                        <div class="detail" style="background:rgb(190, 186, 186)">
-
-                            <div class="location ratings" style="margin-left: -5%">
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star-o text-success"></i>
-
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Model: Porsche
-                                </a>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Engine: 1798 CC
-                                </a>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Fuel: Petrol
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="footer clearfix" style="text-align: center;background:rgb(190, 186, 186)">
-                            <div class="w-100 ratings">
-                                <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i
-                                    class="fa fa-envelope text-success"></i>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="slide slide-box">
-                    <div class="car-box">
-                        <div class="car-image">
-                            <img class="d-block w-100" src="{{ url('assets/img/car/car-6.jpg') }}"
-                                alt="car-photo">
-                            <div class="tag">Best Deal</div>
-                        </div>
-                        <div class="detail" style="background:#CBBC27">
-
-                            <div class="location ratings" style="margin-left: -5%">
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star text-success"></i>
-                                <i class="fa fa-star-o text-success"></i>
-
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Model: Lexus
-                                </a>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Engine: 1798 CC
-                                </a>
-                            </div>
-                            <div class="location">
-                                <a href="car-details.html">
-                                    <i class="fa-solid fa-engine"></i>Fuel: Petrol
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="footer clearfix" style="text-align: center; background:#CBBC27">
-                            <div class="w-100 ratings">
-                                <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i
-                                    class="fa fa-envelope text-success"></i>
+                            <div class="footer clearfix" style="text-align: center;background:rgb(190, 186, 186)">
+                                <div class="w-100 ratings">
+                                    <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i
+                                        class="fa fa-envelope text-success"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -942,8 +733,7 @@
                         <div class="row modal-raw">
                             <div class="col-lg-6 modal-left">
                                 <div class="item active">
-                                    <img src="{{ url('assets/img/car-11.jpg') }}" alt="best-car"
-                                        class="img-fluid">
+                                    <img src="{{ url('assets/img/car-11.jpg') }}" alt="best-car" class="img-fluid">
                                     <div class="sobuz">
                                         <div class="price-box">
                                             <span class="del"><del>$950.00</del></span>
@@ -996,7 +786,7 @@
                                         <h3>Description</h3>
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                             Lorem Ipsum has been the industry's standard.</p>
-                                        <a href="car-details.html" class="btn btn-md btn-round btn-theme">Show
+                                        <a href="{{ route('details', $item->id) }}" class="btn btn-md btn-round btn-theme">Show
                                             Detail</a>
                                     </div>
                                 </div>
