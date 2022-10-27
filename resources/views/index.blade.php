@@ -146,7 +146,7 @@
                     AAutomart | AAKENYA
                 </a>
             </div>
-            {{-- <div class="sidebar-navigation">
+            <!-- {{-- <div class="sidebar-navigation"> -->
                 <!-- <h3 class="heading">Pages</h3>
                 <ul class="menu-list">
                     <li><a href="#" class="active pt0">Index <em class="fa fa-chevron-down"></em></a>
@@ -278,9 +278,9 @@
                 <a href="#" class="linkedin-bg">
                     <i class="fa fa-linkedin"></i>
                 </a>
-            </div> --}}
-        </div>
-    </nav> -->
+            </div> --}} -->
+        <!-- </div> -->
+    </nav> 
     <!-- Sidenav end -->
 
     <!-- Banner start -->
@@ -686,14 +686,14 @@
                 </div>
                 <div class="col-lg-3">
                     <h1 style="color: #00472F;font-size:400%">DOWNLOAD </h1>
-                    <p style="color: #00472F">AA Automart APP on Google Play & App Store</p>
+                    <p style="color: #00472F">Automart APP on Google Play & App Store</p>
                 </div>
                 <div class="col-lg-3">
 
                 </div>
                 <div class="col-lg-3">
                     <h2 style="color: #00472F">
-                        AA Automart powered by <br>
+                        Automart powered by <br>
                         Automobile Association of Kenya
                     </h2>
                 </div>
