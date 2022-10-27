@@ -147,7 +147,7 @@
                 </a>
             </div>
             {{-- <div class="sidebar-navigation">
-                <h3 class="heading">Pages</h3>
+                <!-- <h3 class="heading">Pages</h3>
                 <ul class="menu-list">
                     <li><a href="#" class="active pt0">Index <em class="fa fa-chevron-down"></em></a>
                         <ul>
@@ -280,7 +280,7 @@
                 </a>
             </div> --}}
         </div>
-    </nav>
+    </nav> -->
     <!-- Sidenav end -->
 
     <!-- Banner start -->

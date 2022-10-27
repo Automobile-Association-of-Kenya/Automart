@@ -148,7 +148,7 @@
         <div id="dismiss">
             <i class="fa fa-close"></i>
         </div>
-        <div class="sidebar-inner">
+        <!-- <div class="sidebar-inner">
             <div class="sidebar-logo">
                 <a href="index.html">
                     <img src="img/logos/black-logo.png" alt="sidebarlogo">
@@ -281,7 +281,7 @@
                     <i class="fa fa-twitter"></i>
                 </a>
             </div>
-        </div>
+        </div> -->
     </nav>
     <!-- Sidenav end -->
     @yield('content')

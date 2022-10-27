@@ -14,7 +14,7 @@
             </div>
         @endforeach
     @endif
-    <div class="col-6 col-md-12" style="background-color: rgba(0,0,0, 0.2); padding-top:10px;">
+    <div style="background-color: rgba(0,0,0, 0.2); padding-top:10px;">
         <!-- Pills content -->
         {{-- <div class="tab-content">
             <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
@@ -1007,7 +1007,13 @@
         <!-- <div class="row" style="padding-left: 20px; padding-top: 10px; padding-bottom: 20px; color: #fff;">
         <div class="col-6 col-md-4" style="background-color : rgba(0,0,0, 0.3) !Important;"> -->
         
-    <div class="col-md-12" style="padding-left : 20px; padding-right : 20px;">
+
+
+
+<!--start of container-->
+<div>
+
+    <div  style="padding-left : 20px; padding-right : 20px;">
 
         <div class="row">
             <!-- image card 1 line 1 start -->
@@ -1047,4 +1053,7 @@
             {{ $vehicles->links() }}
         </div>
     </div>
+</div>
+<!--close of container-->
+        </div>
 @endsection
