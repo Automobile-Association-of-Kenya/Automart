@@ -275,7 +275,7 @@
                                 </div>
                             @endforeach
                         @else
-                            <div class="alert alert-success" role="alert">
+                            <div class="alert alert-success" role="alert" style="color:#000">
                                 You have not added any car
                             </div>
                         @endif

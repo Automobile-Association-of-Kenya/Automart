@@ -426,7 +426,7 @@
 
     <style>
         body {
-            background-color: #CBBC27;
+            background-color: #FFFFFF;
             font-family: 'Nunito', sans-serif;
             color: #fff;
             height: 25vh;

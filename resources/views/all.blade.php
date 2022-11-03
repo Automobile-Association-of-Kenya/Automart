@@ -14,12 +14,12 @@
             </div>
         @endforeach
     @endif
-    <div class="col-6 col-md-4" style="background-color: rgba(0,0,0, 0.2); padding-top:10px;">
+    <div class="col-6 col-md-4" style="background-color: #FFFFFF; padding-top:10px;">
         <!-- Pills content -->
         {{-- <div class="tab-content">
             <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                 <span class="badge bg-info"
-                    style="width: 100%; padding-top:10px;padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">SEARCH
+                    style="width: 100%; padding-top:10px;padding-bottom:10px; background-color: #FFFFFF !Important;">SEARCH
                     VEHICLES</span>
                 <form action="{{ route('search') }}" method="POST">
                     <!-- show success message -->
@@ -1009,10 +1009,10 @@
                     <div class="col-6 col-md-4" style="background-color : rgba(0,0,0, 0.3) !Important;"> -->
         <span class="badge bg-info"
             style="width: 100%; padding-top:10px;
-padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
+             padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
             OF THE WEEK</span>
-        <!-- Deal of the week start -->
-        <div class="card">
+                 <!-- Deal of the week start -->
+                  <div class="card">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                 <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid" />
                 <a href="#">

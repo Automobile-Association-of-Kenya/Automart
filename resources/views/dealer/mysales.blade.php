@@ -138,7 +138,7 @@
                     </div>
                     </br>
                 </div>
-                <div class="col-md-10 mt-5 pt-5">
+                <div class="col-md-10 mt-5 pt-5" style="color:#000" >
                     Hello
                     </br>
                     </br>

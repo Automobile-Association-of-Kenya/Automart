@@ -89,7 +89,7 @@
             <img id="loading-image" src="{{ asset('loader.gif') }}" alt="Loading..." />
         </div>
     @endif
-    <div class="row" style="padding-right:10px">
+    <div class="row" style="padding-right:10px; background: #FFFFFF;">
 
         <!-- user profile start -->
         <div id="5" class="show-when-target:target">
@@ -199,7 +199,7 @@
             </div>
             <footer class="mt-5 w-100 ">
                 <!-- Copyright -->
-                <div class="text-center p-3" style="background-color: #CBBC27 ; border-radius: 10px;">
+                <div class="text-center p-3" style="background-color: #FFFFFF ; border-radius: 10px;">
                     © {{ now()->year }} Copyright:
                     <a class="text-center p-3" href="https://www.aakenya.co.ke/">Automobile Association of Kenya</a>
                 </div>
@@ -210,7 +210,7 @@
         <!-- user profile end -->
 
         <!-- all cars tab start -->
-        <div id="0" class="show-when-target w-100" style="background-color : #CBBC27 !Important;">
+        <div id="0" class="show-when-target w-100" style="background-color : #FFFFFF !Important;">
             <div class="row" style="padding-bottom: 0px;">
                 <div class="alert alert-success" role="alert">
                     All cars under Firstname: {{ $user->name }}, Email: {{ $user->email }}, Phone: {{ $user->number }}

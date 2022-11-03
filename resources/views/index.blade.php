@@ -134,16 +134,37 @@
     <!-- Main header end -->
 
     <!-- Sidenav start -->
-    <nav id="sidebar" class="nav-sidebar">
+    <nav id="sidebar" class="nav-sidebar" style="background: #00472F">
         <!-- Close btn-->
         <div id="dismiss">
             <i class="fa fa-close"></i>
         </div>
         <div class="sidebar-inner">
             <div class="sidebar-logo">
-                <a href="/">
+                <a href="/" style="color:#fff">
                     {{-- <img src="{{url('assets/img/logos/black-logo.png')}}" alt="sidebarlogo"> --}}
                     AAutomart | AAKENYA
+                </a>
+            </div>
+
+            <div >
+                <h3 style="color: #fff;margin-top:5px;text-align:center; margin-bottom: 0">I want to..</h3>
+                <ul class="navbar-nav " style="width:100%; margin:3px; margin-top:0 !important">
+                    <li class="nav-item dropdown active" style="width:100%;">
+                        <a class="nav-link font-weight-bold" style="width:100%;text-align:center" href="{{ route('all_cars') }}"> 
+                            <button class="btn btn-warning" style="width:95%;"> <span style="color: #00472F">Buy a car</span></button>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown active" style="width:100%;">
+                        <a class="nav-link font-weight-bold" style="width:100%;text-align:center" href="{{ route('dealerHome') }}"> 
+                            <button class="btn btn-warning" style="width:95%;"> <span style="color: #00472F"> Sell a Car</span></button>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <a href="{{ route('login') }}" style="margin: 10px;text-align:left;" >
+                    <button class="btn btn-outline-warning"> Sign in</button>
                 </a>
             </div>
             <!-- {{-- <div class="sidebar-navigation"> -->
@@ -285,63 +306,49 @@
 
     <!-- Banner start -->
     <div class="banner" id="banner">
-        <div id="carouselExampleIndicators" class="carousel slide h-60" data-ride="carousel">
-            <div class="carousel-inner banner-slider-inner text-center">
-                <div class="carousel-item banner-max-height active item-bg">
-                    <img class="d-block w-100 h-100" src="{{ url('assets/img/banner/img-6.jpg') }}" alt="banner">
-                    <div class="carousel-content container banner-info-2 bi-2 h-100">
-                        <div class="row bi5">
-                            <div class="col-lg-7 text-start">
-                                <div class="banner-content3">
-                                    <h3 class="mb-30">Buying or Selling <br>a Car?</h3>
-                                    <div class="price">
-                                        <div class="monthly">
-                                            <div class="freshd">
-                                                <h5 class="text-uppercase" style="color:#CBBC27">GET THE BEST DEAL IN
-                                                    THE COUNTRY <br>FROM
-                                                    TRUSTED AND RELIABLE DEALERS</h5>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                  <div class="row" style="width:100%; background:url({{ url('assets/img/banner/img-6.jpg') }}); background-size:cover;padding-top: 180px; min-height:90vh">
+                   
+                   
+                    <div class="col-md" style="text-align:center;">
+                        <h3 class="">Buying or Selling <br>a Car?</h3>
+                        <div class="price">
+                                <div class="rounded" style="background:#00472f75;backdrop-filter: blur(5px); padding:15px 5px; width:70%; text-align:center;margin:auto">
+                                    <h5 class="text-uppercase" style="color:#CBBC27">GET THE BEST DEAL IN
+                                        THE COUNTRY <br>FROM
+                                        TRUSTED AND RELIABLE DEALERS</h5>
                                 </div>
+                        </div>
+                    </div>
+
+                    <div class="search-bo col-md" style="background: transparent; text-align:center">
+                        <form method="GET">
+                            <div class="form-group mb-3">
+                                {{-- <select class="selectpicker search-fields" name="select-brand">
+                                    <option>Select Brand</option>
+                                    <option>Audi</option>
+                                    <option>BMW</option>
+                                    <option>Honda</option>
+                                    <option>Nissan</option>
+                                </select> --}}
+                                <a href="{{ route('login') }}" class="btn btn-warning rounded ">
+                                    <h4 style="color: #00472F"> </h4>Sign In
+                                </a>
+                                <h5>New User? Click Here</h5>
                             </div>
-                            <div class="col-lg-5">
-                                <div class="search-box-4 sb-7 sb-8" style="background: transparent">
-                                    <form method="GET">
-                                        <div class="form-group mb-3">
-                                            {{-- <select class="selectpicker search-fields" name="select-brand">
-                                                <option>Select Brand</option>
-                                                <option>Audi</option>
-                                                <option>BMW</option>
-                                                <option>Honda</option>
-                                                <option>Nissan</option>
-                                            </select> --}}
-                                            <a href="{{ route('login') }}" class="btn btn-warning rounded ">
-                                                <h4 style="color: #00472F"> SIGN IN</h4>
-                                            </a>
-                                            <h5>New User? Click Here</h5>
-                                        </div>
-                                        <div class="form-group ">
-                                            <h3 style="color:#CBBC27">Quick Search</h3>
-                                            <!-- <h5 style="color:#CBBC27">Amount </h5>
-                                            <button class="btn btn-warning bg-white rounded "
-                                                style="color: #00472F;font-weight:bolder;font-size:100%">
-                                                < 500K </button>
-                                                    <button class="btn btn-warning bg-white rounded "
-                                                        style="color: #00472F;font-weight:bolder;font-size:100%"> 500K
-                                                        - 1M </button>
-                                                    <button class="btn btn-warning bg-white rounded "
-                                                        style="color: #00472F;font-weight:bolder;font-size:100%"> >
-                                                        1M</button> -->
-                                        </div>
-
-
-                                    </form>
-
-                                </div>
-                                <div class="btn-group w-100" style="margin-left: 30%">
+                            <div class="form-group ">
+                                <h3 style="color:#CBBC27">Quick Search</h3>
+                                <!-- <h5 style="color:#CBBC27">Amount </h5>
+                                <button class="btn btn-warning bg-white rounded "
+                                    style="color: #00472F;font-weight:bolder;font-size:100%">
+                                    < 500K </button>
+                                        <button class="btn btn-warning bg-white rounded "
+                                            style="color: #00472F;font-weight:bolder;font-size:100%"> 500K
+                                            - 1M </button>
+                                        <button class="btn btn-warning bg-white rounded "
+             <div class="btn-group w-100" style="margin-left: 30%">
                                     <button class="btn btn-light rounded" style="width: 20%"><i
                                             class="fa fa-search fa-2x " style="color: #00472F;"></i></button>
                                     <a href="#search" class="btn btn-warning" style="width: 80%">
@@ -350,14 +357,31 @@
                                     <br>
 
                                 </div>
-                                <h5 style="margin-left:50%">You can search using model</h5>
+                                <h5 style="margin-left:50%">You can search using model</h5>                               style="color: #00472F;font-weight:bolder;font-size:100%"> >
+                                            1M</button> -->
                             </div>
 
+
+                        </form>
+
+                        <div class="btn-group " style="width:100%; margin-left:2%">
+                            <button class="btn btn-light rounded" style="width: 20%"><i
+                                    class="fa fa-search fa-2x " style="color: #00472F;"></i></button>
+                            <a href="#search" class="btn btn-warning" style="width: 80%">
+                                <h5 style="color: #00472F;font-size:250%;" class="m-2">SEARCH HERE</h5>
+                            </a>
+                            <br>
+
                         </div>
-                    </div>
-                </div>
+                        <h5 >You can search using model</h5>
+                    </div> 
+
+
+                  </div>
+              </div>
+            
             </div>
-        </div>
+          </div>
     </div>
     <!-- Banner end -->
 
@@ -786,7 +810,7 @@
                                         <h3>Description</h3>
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                             Lorem Ipsum has been the industry's standard.</p>
-                                        <a href="{{ route('details', $item->id) }}" class="btn btn-md btn-round btn-theme">Show
+                                        <a href="{{ route('details', 1) }}" class="btn btn-md btn-round btn-theme">Show
                                             Detail</a>
                                     </div>
                                 </div>

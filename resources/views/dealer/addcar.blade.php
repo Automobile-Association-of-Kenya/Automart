@@ -341,7 +341,7 @@
                                 </div>
                             </div>
                             <h2 class="form-title" style="color: #000000">Select Vehicle Features » </h2>
-                            <div class="row">
+                            <div class="row" style="color:#000;">
                                 <div class="col-md-3">
                                     <input type="checkbox" value="4WD/AWD" id="4WD/AWD"
                                         name="features[]">&nbsp;&nbsp;&nbsp;4WD/AWD
@@ -359,7 +359,7 @@
                                         name="features[]">&nbsp;&nbsp;&nbsp;Alloy Wheels
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" style="color:#000;">
                                 <div class="col-md-3">
                                     <input type="checkbox" value="AM/FM Stereo" id="AM/FM Stereo"
                                         name="features[]">&nbsp;&nbsp;&nbsp;AM/FM Stereo
@@ -377,7 +377,7 @@
                                         name="features[]">&nbsp;&nbsp;&nbsp;CD Audio
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" style="color:#000;">
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Cruise Control" id="Cruise Control"
                                         name="features[]">&nbsp;&nbsp;&nbsp;Cruise Control
@@ -395,7 +395,7 @@
                                         name="features[]">&nbsp;&nbsp;&nbsp;Memory Seat(s)
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" style="color:#000;">
                                 <div class="col-md-3">
                                     <input type="checkbox" value=" Navigation System" id=" Navigation System"
                                         name="features[]">&nbsp;&nbsp;&nbsp;Navigation System
@@ -413,7 +413,7 @@
                                         name="features[]">&nbsp;&nbsp;&nbsp;Parking Sensors
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" style="color:#000;">
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Power Locks" id="Power Locks"
                                         name="features[]">&nbsp;&nbsp;&nbsp;Power Locks
@@ -431,7 +431,7 @@
                                         name="features[]">&nbsp;&nbsp;&nbsp;Power Windows
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" style="color:#000;">
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Premium Package" id="Premium Package"
                                         name="features[]">&nbsp;&nbsp;&nbsp;Premium Package
@@ -449,7 +449,7 @@
                                         name="features[]">&nbsp;&nbsp;&nbsp;Satellite Radio Ready
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" style="color:#000;">
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Side Airbags" id="Side Airbags"
                                         name="features[]">&nbsp;&nbsp;&nbsp;Airbags
@@ -515,7 +515,7 @@
                                             multiple=""><br>
                                     </label></p>
                                 </div>
-                                <div class="col-sm-6 col-lg-8">
+                                <div class="col-sm-6 col-lg-8" style="color:#000;">
                                     <span class="instructions">Images will be automatically resized to fit
                                         the listing layout. We recommend that you upload photos in full
                                         resolution for better results.</span>
@@ -555,9 +555,11 @@
                                 <div class="col-md-8">
                                     <input type="checkbox" value="Rear View Camera" id="Rear View Camera"
                                         name="features[]" required>&nbsp;&nbsp;&nbsp;
-                                    <a class="text-center p-3" href="/Terms and conditions to seller.pdf"
+                                    <a class="text-center p-3" style="color:#000;" href="/Terms and conditions to seller.pdf"
                                         target="_blank">Terms And Conditions<br></a>
+                                        <div class="" style="color:#000;">
                                     By clicking this, you have agreed to terms and conditions
+                                        </div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
@@ -1231,7 +1233,7 @@
                             </div>
                             <div class="form-outline" style="padding-top:10px; padding-bottom:15px;">
                                 <textarea class="form-control" required placeholder="Enter vehicle listing description." id="description"
-                                    name="description" rows="4" style="background: #fff;" required></textarea>
+                                    name="description" rows="4" style="background: #fff;border:4px solid yellow;" required></textarea>
                                 <label class="form-label" for="description">Vehicle Description</label>
                             </div>
                             <div class="row">
@@ -1287,7 +1289,7 @@
                                     By clicking this, you have agreed to terms and conditions
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
+                            <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color:#00472F;">Submit &amp; pay for your
                                 listing</button>
                         </form>
                     </div>

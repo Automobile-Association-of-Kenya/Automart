@@ -96,7 +96,7 @@
 
         .bg-white {
             --bg-opacity: 1;
-            background-color: #fed925;
+            /* background-color: #fed925; */
             background-color: rgba(255, 255, 255, var(--bg-opacity))
         }
 
@@ -435,7 +435,7 @@
 
     <style>
         body {
-            background-color: #CBBC27;
+            background-color: #FFFFFF;
             font-family: 'Nunito', sans-serif;
             color: #fff;
             padding-top: 10px;
@@ -449,7 +449,7 @@
 <body class="antialiased">
 
     <div class="container-xxl2"
-        style="background-color : rgba(0,0,0, 0.3) !Important; width: 98% !Important;  padding-bottom : 10px !Important;">
+        style="background-color : #FFFFFF !Important; width: 100% !Important;  padding-bottom : 10px !Important; padding-left : 25px; padding-right : 25px">
 
         {{-- <div class="row" style="color: #fff; padding-bottom: 15px;">
             <div class="col-md-8">

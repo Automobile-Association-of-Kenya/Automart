@@ -424,7 +424,7 @@
 
     <style>
         body {
-            background-color: #006544;
+            background-color: #FFFFFF;
             font-family: 'Nunito', sans-serif;
             color: #fff;
             padding-top: 10px;

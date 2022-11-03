@@ -93,7 +93,7 @@
         <!-- user profile start -->
         <div id="5" class="show-when-target:target" >
             <div class="row">
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-success" role="alert" style="color:#000">
                     All Subscriptions made under Firstname: {{ $user->name }}, Email: {{ $user->email }}, Phone:
                     {{ $user->number }}
                 </div>
@@ -137,7 +137,7 @@
                     </div>
                     </br>
                 </div>
-                <div class="col-md-10 mt-5 pt-5">
+                <div class="col-md-10 mt-5 pt-5" style="color:#000">
                     Hello
                     </br>
                     </br>

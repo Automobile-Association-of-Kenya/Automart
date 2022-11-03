@@ -14,12 +14,12 @@
             </div>
         @endforeach
     @endif
-    <div style="background-color: rgba(0,0,0, 0.2); padding-top:10px;">
+    <div style="background-color:#FFFFFF; padding-top:10px;">
         <!-- Pills content -->
         {{-- <div class="tab-content">
             <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                 <span class="badge bg-info"
-                    style="width: 100%; padding-top:10px;padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">SEARCH
+                    style="width: 100%; padding-top:10px;padding-bottom:10px; background-color:#FFFFFF !Important;">SEARCH
                     VEHICLES</span>
                 <form action="{{ route('search') }}" method="POST">
                     <!-- show success message -->
@@ -1013,13 +1013,13 @@
 <!--start of container-->
 <div>
 
-    <div  style="padding-left : 20px; padding-right : 20px;">
+    <div  style="padding-left : 20px; padding-right : 20px; width: 100% !Important;">
 
         <div class="row">
             <!-- image card 1 line 1 start -->
             @if (!empty($vehicles) && $vehicles->count())
                 @foreach ($vehicles as $vehicle)
-                    <div class="col-6 col-md-4" style="padding-bottom: 15px;">
+                    <div class=" col-md-4" style="padding-bottom: 15px;">
                         <div class="card" style="color: #000">
                             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                                 <img src="{{ url('/images/' . json_decode($vehicle->images, true)[0]) }}"
@@ -1036,7 +1036,7 @@
                                 <h6 class="card-title">Dealer/Yard: <b>{{ $vehicle->firstname }}</b></h6>
                                 <i class="fas fa-phone fa-1x"></i>&nbsp;{{ $vehicle->phone }}
                                 <i class="fas fa-map-marker-alt fa-1x"></i>&nbsp;{{ $vehicle->county }}
-                                <a href="{{ route('details', $vehicle->id) }}" class="btn btn-primary">More Details</a>
+                                <a href="{{ route('details', $vehicle->id) }}" class="btn btn-primary" style="background:#00472F">More Details</a>
                             </div>
                         </div>
                     </div>
