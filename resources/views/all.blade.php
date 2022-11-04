@@ -1094,7 +1094,7 @@
     <!-- Sub Banner end -->
 
     <!-- Featured car start -->
-    <div class="featured-car content-area">
+    <div class="featured-car content-area" style="background-color:#FFFFFF">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
@@ -1174,7 +1174,7 @@
                                         </div>
                                         <div class="detail">
                                             <h1 class="title">
-                                                <a href="{{ route('details', $vehicle->id) }}">{{$vehicle->carmodel?$vehicle->carmodel->car_model_name:''}}</a>
+                                                <a  style="color:black"  href="{{ route('details', $vehicle->id) }}">{{$vehicle->carmodel?$vehicle->carmodel->car_model_name:''}}</a>
                                             </h1>
                                             <ul class="custom-list">
                                                 <li>
@@ -1203,11 +1203,10 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="footer clearfix">
+                                        <div class="footer clearfix" style="background-color:#00472F;">
                                             <div class="pull-left ratings">
                                                 <i class="fa fa-phone"></i>
-                                        
-                                                <span>Call or Chat with the owner</span>
+                                               <span style="color:white">Call or Chat with the owner</span>
                                                 <i class="fa fa-envelope"></i>
                                             </div>
                                         </div>

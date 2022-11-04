@@ -922,7 +922,7 @@
                 </div>
                 <footer class="mt-5 w-100 pt-5">
                     <!-- Copyright -->
-                    <div class="text-center p-3" style="background-color: #CBBC27 ; border-radius: 10px;">
+                    <div class="text-center p-3" style="background-color: #CBBC27; border-radius: 10px;">
                         © {{ now()->year }} Copyright:
                         <a class="text-center p-3" href="https://www.aakenya.co.ke/">Automobile Association of Kenya</a>
                     </div>

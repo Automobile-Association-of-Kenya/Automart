@@ -100,7 +100,7 @@
     <!-- Sub Banner end -->
 
     <!-- Shop checkout start -->
-    <div class="shop-checkout content-area-5">
+    <div class="shop-checkout content-area-5" style="background-color:#FFFFFF">
         <div class="container">
             <div class="from-checkout">
                 <div class="row">

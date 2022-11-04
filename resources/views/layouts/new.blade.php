@@ -286,12 +286,12 @@
     <!-- Sidenav end -->
     @yield('content')
     <!-- Footer start -->
-    <footer class="footer">
+    <footer class="footer" >
 
-        <div class="sub-footer">
+        <div class="sub-footer"  style="background-color:#00472F;">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
+                <div class="row" >
+                    <div class="col-lg-6 col-md-6" style="align-content:center;">
                         <p class="copy">© {{ now()->year }} <a href="#">AAK Kenya.</a> All Rights Reserved.
                         </p>
                     </div>
