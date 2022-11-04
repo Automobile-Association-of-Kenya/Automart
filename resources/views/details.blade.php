@@ -260,7 +260,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                     <div class="slide car-details-section cds-2">
                         <!-- Heading start -->
                         <div class="heading-car clearfix">
-                            <div class="pull-left">
+                            <div class="pull-left" style="color:#00472F;">
                                 <h3>{{ strtoupper($vehicle->carmake->car_make_name) }}
                                     {{ strtoupper($vehicle->carmodel->car_model_name) }}</h3>
                                 <p>
@@ -276,7 +276,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                 <div class="slider-for">
                                     @foreach (json_decode($vehicle->images) as $key => $item)
                                         <img src="{{ url('images/' . $item) }}" class="img-fluid w-100" alt="slider-car"
-                                            style="max-width: 870px !important; height:580px">
+                                            style="max-width: 870px !important">
                                     @endforeach
                                 </div>
                                 <div class="slider-nav">
@@ -302,8 +302,8 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                 <div class="mask " style="background-color: rgba(251, 251, 251, 0.15);"></div>
                             </a>
                         </div>
-                        <div class="card-body" style="color: #000">
-                            <h5 class="card-title text-center">More Details.</h5>
+                        <div class="card-body" style="color: #000; background-color:#00472F;">
+                            <h5 class="card-title text-center" style="color:white">More Details.</h5>
 
                         </div>
                     </div>
@@ -348,7 +348,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                         </div>
 
                         <div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
-                            <h4 style="font-family:Garamond;color:white;"><b>Vehicle Details</b></h4>
+                            <h4 style="font-family:Garamond;color:ghostblack;"><b>Vehicle Details</b></h4>
                             <table class="table" style="color:#000000;">
                                 <tbody>
                                     <tr>
@@ -384,7 +384,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                         </div>
                         &nbsp;
                         <div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
-                            <h4 style="font-family:Garamond; color: whitesmoke;"><b>Vehicle Feartures</b></h4>
+                            <h4 style="font-family:Garamond; color: ghostblack;"><b>Vehicle Feartures</b></h4>
                             @foreach (json_decode($vehicle->features, true) as $feature)
                                 <i class='fa fa-check' style='color: #006544;'></i>
                                 |&nbsp;{{ $feature }}&nbsp;|&nbsp;&nbsp;
@@ -399,7 +399,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                         </div>
                         &nbsp;
                         <div class="container-fluid" style="!Important; border-radius:5px; padding-bottom:5px;">
-                            <h4 style="font-family:Garamond;color: ghostwhite;"><b>Description</b></h4>
+                            <h4 style="font-family:Garamond;color: ghostblack;"><b>Description</b></h4>
                             {{ $vehicle->description }}
                             <table class="table" style="color:#fff;">
                                 <tbody>
