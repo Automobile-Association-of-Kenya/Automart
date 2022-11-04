@@ -17,7 +17,7 @@
     <div class="col-6 col-md-4" style="background-color : rgba(0,0,0, 0.3) !Important;">
       <span class="badge bg-info"
           style="width: 100%; padding-top:10px;
-padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;"></span>
+           padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;"></span>
       <!-- Deal of the week start -->
       <div class="card">
           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
@@ -254,13 +254,13 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
 
     <!-- Car details page start -->
     <div class="car-details-page content-area-4">
-        <div class="container">
-            <div class="row">
+        <div class="container" >
+            <div class="row" style="background-color:#FFFFFF;" >
                 <div class="col-lg-12 col-md-12 col-xs-12">
                     <div class="slide car-details-section cds-2">
                         <!-- Heading start -->
                         <div class="heading-car clearfix">
-                            <div class="pull-left" style="color:#00472F;">
+                            <div class="pull-left" style="color:#00472F">
                                 <h3>{{ strtoupper($vehicle->carmake->car_make_name) }}
                                     {{ strtoupper($vehicle->carmodel->car_model_name) }}</h3>
                                 <p>
