@@ -144,7 +144,7 @@
             <div class="breadcrumb-areas">
                 <h1>Register</h1>
                 <ul class="breadcrumbs">
-                    <li><a href="index.html">Home</a></li>
+                <li><a href="/">Home</a></li>
                     <li class="active">Register</li>
                 </ul>
             </div>
@@ -153,7 +153,7 @@
     <!-- Sub Banner end -->
 
     <!-- Shop checkout start -->
-    <div class="shop-checkout content-area-5">
+    <div class="shop-checkout content-area-5" style="background-color:#FFFFFF">
         <div class="container">
             <div class="from-checkout">
                 <div class="row">
@@ -282,7 +282,7 @@
                                 </div>
                             </div>
                             <button class="btn w-25 btn-sm bg-success" type="submit"><span class="text-white h3">Sign
-                                    Up</span></button>
+                                    Up</span></button><span class="text-success bolder h3"> Already have an Account? <a href="{{ route('logout') }}"> Login Here</a></span>
                         </form>
                         <br>
                     </div>

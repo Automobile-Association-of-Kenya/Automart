@@ -618,7 +618,7 @@
                                 </div>
                                 <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 mt-3 search-col mt-3"
                                     style="text-align: center">
-                                    <i class="fa fa-play fa-4x" style="color: #00472F"></i>
+                                    
                                 </div>
                                 <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 mt-3">
                                     <button class="btn white-btn btn-search w-100" style="background: #00472F">
