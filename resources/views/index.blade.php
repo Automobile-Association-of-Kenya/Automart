@@ -670,12 +670,12 @@
                                 </div>
                                 <div class="location">
                                     <a href="{{ route('details', $item->id) }}">
-                                        <i class="fa-solid fa-engine"></i>Model: {{$item->carmodel->car_model_name}}
+                                        <i class="fa-solid fa-engine"></i>Model: {{$item->carmodel->car_model_name ??''}}
                                     </a>
                                 </div>
                                 <div class="location">
                                     <a href="{{ route('details', $item->id) }}">
-                                        <i class="fa-solid fa-engine"></i>Make: {{$item->carmake->car_make_name}}
+                                        <i class="fa-solid fa-engine"></i>Make: {{$item->carmake->car_make_name ?? ''}}
                                     </a>
                                 </div>
                                 <div class="location">

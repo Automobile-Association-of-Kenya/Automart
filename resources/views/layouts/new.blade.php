@@ -95,8 +95,8 @@
     <!-- Top header end -->
 
     <!-- Main header start -->
-    <header class="main-header sticky-header sh-2">
-        <div class="container">
+    <header class="main-header sticky-header sh-2" style="background:#00472f6b; backdrop-filter: blur(5px)">
+        <div class="container" >
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand company-logo-2" href="{{ route('home') }}">
                     <h1 class="text-white"> Automart | Home</h1>
@@ -143,11 +143,42 @@
     <!-- Main header end -->
 
     <!-- Sidenav start -->
-    <nav id="sidebar" class="nav-sidebar">
+    <nav id="sidebar" class="nav-sidebar" style="background: #00472F">
         <!-- Close btn-->
         <div id="dismiss">
             <i class="fa fa-close"></i>
         </div>
+
+        <ul class="navbar-na" style="width: 100%;margin-top:40px;">
+
+            <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
+                    <a class="nav-link" href="{{ route('home') }}" style="color: #fff;">Search</a>
+                </li>
+
+                <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
+                    <a class="nav-link" href="{{ route('all_cars') }}" style="color: #fff;">All Cars</a>
+                </li>
+                <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
+                    <a class="nav-link" href="{{ route('dealerHome') }}" style="color: #fff;">Sell
+                        Car</a>
+                </li>
+               
+                @guest
+                <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
+                    <a class="nav-link" href="{{ route('login') }}" style="color: #fff;">Login</a>
+                </li>
+                <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
+                    <a class="nav-link" href="{{ route('contact') }}" style="color: #fff;">Contact</a>
+                </li>
+                @endguest
+                @auth
+                <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
+                    <a class="nav-link" href="{{ route('login') }}" style="color: #fff;">{{Auth::user()->name}}</a>
+                </li>
+                <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
+                    <a class="nav-link" href="{{ route('logout') }}" style="color: #fff;">Logout</a>
+                </li>
+                @endauth
         <!-- <div class="sidebar-inner">
             <div class="sidebar-logo">
                 <a href="index.html">
@@ -286,12 +317,12 @@
     <!-- Sidenav end -->
     @yield('content')
     <!-- Footer start -->
-    <footer class="footer" >
+    <footer class="footer" style="background-color:#00472F">
 
-        <div class="sub-footer"  style="background-color:#00472F;">
-            <div class="container">
-                <div class="row" >
-                    <div class="col-lg-6 col-md-6" style="align-content:center;">
+        <div class="sub-footer" style="background-color:#00472F">
+            <div class="container" >
+                <div class="row">
+                    <div class="col-lg-6 col-md-6" style="background-color:#00472F">
                         <p class="copy">© {{ now()->year }} <a href="#">AAK Kenya.</a> All Rights Reserved.
                         </p>
                     </div>
