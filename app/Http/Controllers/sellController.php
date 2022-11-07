@@ -97,7 +97,7 @@ class sellController extends Controller
         $carOnSell->save();
         $message = 'Vehicle uploaded successfully';
         Session::flash('loader','Load');
-        return redirect('/DealersPage/home#0')->with(['successMsg' => $message, 'carID' => $carID]);
+        return redirect('/dealer/mycars')->with(['successMsg' => $message, 'carID' => $carID]);
     }
 
     public function pay()
