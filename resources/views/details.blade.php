@@ -197,7 +197,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
             &nbsp;
             <div class="container-fluid"
                 style="background-color : rgba(0, 0, 0, 0.7) !Important; border-radius:5px; padding-bottom:5px;">
-                <h4 style="font-family:Garamond;"><b>Vehicle Feartures</b></h4>
+                <h4 style="font-family:Garamond;"><b>Vehicle Features</b></h4>
                 @foreach (json_decode($vehicle->features, true) as $feature)
                     <i class='fa fa-check' style='color: #fed925;'></i> |&nbsp;{{ $feature }}&nbsp;|&nbsp;&nbsp;
                 @endforeach
@@ -376,7 +376,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                     </tr>
                                     <tr>
                                         <td>
-                                            Vehicle Regiatration No.&nbsp;:&nbsp;<b>{{ strtoupper($vehicle->vin) }}</b>
+                                            Vehicle Registration No.&nbsp;:&nbsp;<b>{{ strtoupper($vehicle->vin) }}</b>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -384,7 +384,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                         </div>
                         &nbsp;
                         <div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
-                            <h4 style="font-family:Garamond; color: ghostblack;"><b>Vehicle Feartures</b></h4>
+                            <h4 style="font-family:Garamond; color: ghostblack;"><b>Vehicle Features</b></h4>
                             @foreach (json_decode($vehicle->features, true) as $feature)
                                 <i class='fa fa-check' style='color: #006544;'></i>
                                 |&nbsp;{{ $feature }}&nbsp;|&nbsp;&nbsp;
