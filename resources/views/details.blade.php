@@ -257,43 +257,73 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
         <div class="container" >
             <div class="row" style="background-color:#FFFFFF;" >
                 <div class="col-lg-12 col-md-12 col-xs-12">
-                    <div class="slide car-details-section cds-2">
-                        <!-- Heading start -->
-                        <div class="heading-car clearfix">
-                            <div class="pull-left" style="color:#00472F">
-                                <h3>{{ strtoupper($vehicle->carmake->car_make_name) }}
-                                    {{ strtoupper($vehicle->carmodel->car_model_name) }}</h3>
-                                <p>
-                                    <i class="flaticon-pin"></i>{{ $vehicle->county }}
-                                </p>
-                            </div>
-                            <div class="pull-right">
-                                <div class="price-box-3"><sup>Kshs <span>{{ $vehicle->price }}</span></div>
-                            </div>
-                        </div>
-                        <div class="product-slider-box cds-2 clearfix mb-30">
-                            <div class="product-img-slide">
-                                <div class="slider-for">
-                                    @foreach (json_decode($vehicle->images) as $key => $item)
-                                        <img src="{{ url('images/' . $item) }}" class="img-fluid w-100" alt="slider-car"
-                                            style="max-width: 870px !important">
-                                    @endforeach
-                                </div>
-                                <div class="slider-nav">
-                                    @foreach (json_decode($vehicle->images) as $key => $item)
-                                        <div class="thumb-slide"><img src="{{ url('images/' . $item) }}" class="img-fluid"
-                                                alt="small-car" width="133" height="95">
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Advanced search start -->
+                    <div class="">
+                        <div class="card">
+                            <div class="">
+                                <div class=" row">
+                                    <div class="preview col-md-6">
+                                        
+                                        <div class="preview-pic tab-content">
 
+                                            @foreach (json_decode($vehicle->images) as $key => $item)
+                                                @if ($loop->index==0)
+                                                 <div class="tab-pane active" id="pic-{{$loop->index}}"><img src="{{ url('images/' . $item) }}" /></div>
+                                                @else  
+                                                 <div class="tab-pane" id="pic-{{$loop->index}}"><img src="{{ url('images/' . $item) }}" /></div>
+                                                @endif
+                                                
+                                            @endforeach
+                                        </div>
+
+                                        <ul class="preview-thumbnail nav nav-tabs">
+                                            @foreach (json_decode($vehicle->images) as $key => $item)
+                                                @if ($loop->index==0)
+                                                    <li class="active"><a data-target="#pic-{{$loop->index}}" data-toggle="tab"><img src="{{ url('images/' . $item) }}" /></a></li>
+                                                @else
+                                                    <li><a data-target="#pic-{{$loop->index}}" data-toggle="tab"><img src="{{ url('images/' . $item) }}" /></a></li>
+                                                    
+                                                @endif
+                                            @endforeach        
+                                        </ul>
+                                        
+                                    </div>
+                                    <div class="details col-md-6">
+                                        <h3 class="product-title">{{ strtoupper($vehicle->carmake->car_make_name) }}
+                                            {{ strtoupper($vehicle->carmodel->car_model_name) }}</h3>
+                                        <div class="rating">
+                                            <div class="stars">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            </div>
+                                            <span class="review-no">41 reviews</span>
+                                        </div>
+                                        <p class="product-description">{{ $vehicle->description }}</p>
+                                        <h4 class="price">current price: <span>KES {{ $vehicle->price }}</span></h4>
+                                        <i class="flaticon-pin"></i>{{ $vehicle->county }}
+                                        <div class="action" style="text-align:left, font-family:fantasy">
+                                            <!-- <button class="btn btn-success btn-lg" type="button">Buy The Car</button> -->
+                                            <h5 class="card-title" style="text-align:left, font-family:fantasy"> Safety Tips</h5>
+                                            <ol type = "disc">
+                                             <li>Inspect the vehicle to make sure they meet your needs.</li>
+                                             <li>Meet the seller at a safe public place.</li>
+                                             <li>Don't send any pre-payments.</li>
+                                             <li>Check all documentation and only pay if you're satisfied.</li>
+                                            </ol>
+                                        </div>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
 
                 </div>
+                
                 <div class="col-md-12">
                     <div class="card">
                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
@@ -349,38 +379,35 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
 
                         <div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
                             <h4 style="font-family:Garamond;color:ghostblack;"><b>Vehicle Details</b></h4>
-                            <table class="table" style="color:#000000;">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Make/Model:&nbsp;<b>{{ strtoupper($vehicle->carmake->car_make_name) }}
-                                                {{ strtoupper($vehicle->carmodel->car_model_name) }}</b>
-                                        </td>
-                                        <td>
-                                            Year of Manufacture:&nbsp;<b>{{ $vehicle->year }}</b>
-                                        </td>
-                                        <td>
-                                            Transmission:&nbsp;<b>{{ strtoupper($vehicle->transmission) }}</b>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
+                           <div class="row">
+                               <div class="col-md-3 col-sm-6">
+                                Make/Model:&nbsp;<b>{{ strtoupper($vehicle->carmake->car_make_name) }}
+                                    {{ strtoupper($vehicle->carmodel->car_model_name) }}</b>
+                               </div>
+
+                               <div class="col-md-3 col-sm-6">
+                                Year of Manufacture:&nbsp;<b>{{ $vehicle->year }}</b>
+                               </div>
+
+                               <div class="col-md-3 col-sm-6">
+                                Transmission:&nbsp;<b>{{ strtoupper($vehicle->transmission) }}</b>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6">
                                             Fuel:&nbsp;<b>{{ strtoupper($vehicle->fuel_type) }}</b>
-                                        </td>
-                                        <td>
-                                            Color:&nbsp;<b>{{ strtoupper($vehicle->exterior) }}</b>
-                                        </td>
-                                        <td>
-                                            Vehicle Type:&nbsp;<b>{{ strtoupper($vehicle->vehicle_type) }}</b>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Vehicle Registration No.&nbsp;:&nbsp;<b>{{ strtoupper($vehicle->vin) }}</b>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                Color:&nbsp;<b>{{ strtoupper($vehicle->exterior) }}</b>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                Vehicle Type:&nbsp;<b>{{ strtoupper($vehicle->vehicle_type) }}</b>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6">
+                                Vehicle Registration No.&nbsp;:&nbsp;<b>{{ strtoupper($vehicle->vin) }}</b>
+                            </div>
+                           </div>
+                           
                         </div>
                         &nbsp;
                         <div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
@@ -398,7 +425,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                             </table>
                         </div>
                         &nbsp;
-                        <div class="container-fluid" style="!Important; border-radius:5px; padding-bottom:5px;">
+                        {{-- <div class="container-fluid" style="!Important; border-radius:5px; padding-bottom:5px;">
                             <h4 style="font-family:Garamond;color: ghostblack;"><b>Description</b></h4>
                             {{ $vehicle->description }}
                             <table class="table" style="color:#fff;">
@@ -408,7 +435,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> --}}
                      
 
                         <!-- Car details page end -->
@@ -421,7 +448,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
-                                <div class="modal-body">
+                                <!-- <div class="modal-body">
                                     <h5 class="card-title"> Beware of cons, please take note of the following;</h5>
                                     <div class="text-center">
     
@@ -432,14 +459,14 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                         <p style="margin-top:-30px; margin-right:-10px"> 4.Check all documentation and only pay
                                             if you're satisfied.</p></br>
                                     </div>
-                                </div>
-                                <div class="modal-footer" >
+                                </div> -->
+                                <!-- <div class="modal-footer" >
                                   <button type="button" onclick="closeModal()" class="btn btn-secondary" style="background-color:green" data-dismiss="modal">Close</button>
-                                </div>
+                                </div> -->
                               </div>
                             </div>
                           </div>
-                        <script>
+                        <!-- <script>
                             $(window).on('load', function() {
                                 $("#exampleModalCenter").modal("show");
                             })
@@ -447,5 +474,5 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                             {
                                 $("#exampleModalCenter").modal("hide");
                             }
-                        </script>
+                        </script> -->
                     @endsection

@@ -333,10 +333,15 @@
                                     <option>Honda</option>
                                     <option>Nissan</option>
                                 </select> --}}
+                                <h5 class="d-lg-none">I want To</h5>
+                                <div class="d-lg-none" style="display: flex;margin:auto; align-items:center;margin-bottom:30px;text-align:center;margin-top:20px; justify-content:center">
+                                     <a href="{{ route('all_cars') }}" class="btn btn-success " style="margin-right: 20px">Buy a Car</a>
+                                     <a href="{{ route('dealerHome') }}" class="btn btn-warning">Sell a Car</a>
+                                 </div>
+
                                 <a href="{{ route('login') }}" class="btn btn-warning rounded ">
                                     <h4 style="color: #00472F"> </h4>Sign In
                                 </a>
-                                <h5>New User? Click Here</h5>
                             </div>
                             <div class="form-group ">
                                 <h3 style="color:#CBBC27">Quick Search</h3>

@@ -10,7 +10,7 @@ use App\Models\car_model;
 use App\Models\CarMake;
 use App\Models\CarModel;
 use Illuminate\Support\Facades\Session;
-
+use Intervention\Image\Facades\Image;
 class sellController extends Controller
 {
    
@@ -65,6 +65,11 @@ class sellController extends Controller
                 $name = $image->getClientOriginalName();
                 $image->move(public_path() . '/images/', $name);
                 $data[] = $name;
+
+                //add watermark
+                $img = Image::make(public_path('images'.$name));
+                $img->insert(public_path('images/logo.jpg'), 'bottom-right', 10, 10);
+                $img->save(public_path('images/'.$name));
             }
         }
         $prefix = "GWAAK";
