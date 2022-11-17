@@ -67,8 +67,15 @@ class sellController extends Controller
                 $data[] = $name;
 
                 //add watermark
-                $img = Image::make(public_path('images'.$name));
-                $img->insert(public_path('images/logo.jpg'), 'bottom-right', 10, 10);
+                $img = Image::make(public_path('images/'.$name));
+                $img->text(' '.$request->firstname.' '.$request->lastname, 150, 120, function($font) {  
+                    $font->file(public_path('assets\fonts/font.ttf'));  
+                    $font->size(30);  
+                    $font->color('#DCCDB4');  
+                    $font->align('center');  
+                    $font->valign('center');  
+                    $font->angle(0);  
+                });
                 $img->save(public_path('images/'.$name));
             }
         }

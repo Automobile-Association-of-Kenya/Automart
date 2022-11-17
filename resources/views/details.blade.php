@@ -298,11 +298,12 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                                 <span class="fa fa-star"></span>
                                                 <span class="fa fa-star"></span>
                                             </div>
-                                            <span class="review-no">41 reviews</span>
+                                            <!-- <span class="review-no">41 reviews</span> -->
                                         </div>
                                         <p class="product-description">{{ $vehicle->description }}</p>
                                         <h4 class="price">current price: <span>KES {{ $vehicle->price }}</span></h4>
                                         <i class="flaticon-pin"></i>{{ $vehicle->county }}
+                                    
                                         <div class="action" style="text-align:left, font-family:fantasy">
                                             <!-- <button class="btn btn-success btn-lg" type="button">Buy The Car</button> -->
                                             <h5 class="card-title" style="text-align:left, font-family:fantasy"> Safety Tips</h5>
@@ -313,7 +314,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                              <li>Check all documentation and only pay if you're satisfied.</li>
                                             </ol>
                                         </div>
-            
+                                        
                                         </div>
                                     </div>
                                 </div>
