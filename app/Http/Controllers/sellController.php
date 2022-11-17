@@ -71,7 +71,7 @@ class sellController extends Controller
                 $img->text(' '.$request->firstname.' '.$request->lastname, 150, 120, function($font) {  
                     $font->file(public_path('assets/fonts/font.ttf'));  
                     $font->size(30);  
-                    $font->color('#DCCDB4');  
+                    $font->color('#CECECE');  
                     $font->align('center');  
                     $font->valign('center');  
                     $font->angle(0);  
