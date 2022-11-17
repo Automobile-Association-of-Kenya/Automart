@@ -166,7 +166,7 @@
                                 <div class="col-6">
                                     <select name="country" id="country" class="gt-select" tabindex="3" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                        <option value="-1" selected="selected">Select Your Country</option>
+                                        <option value="-1" selected="selected">Country</option>
                                         <option class="level-0" value="Kenya" data-value="41">Kenya</option>
                                         <option class="level-0" value="Tanzania" data-value="48">Tanzania</option>
                                         <option class="level-0" value="Uganda" data-value="48">Uganda</option>
@@ -178,7 +178,7 @@
                                 <div class="col-6">
                                     <select name="county" id="county" tabindex="4" data-value="" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                        <option value="" data-value="-1" selected="selected">Select Your County
+                                        <option value="" data-value="-1" selected="selected">County
                                         </option>
                                         <option class="level-0" value="Other" data-value="48">Other</option>
                                         <option class="level-0" value="Nairobi" data-value="48">Nairobi</option>
@@ -241,7 +241,7 @@
                                     <select class="form-control" id="car_make" name="make" aria-hidden="true"
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;"
                                         required>
-                                        <option value="Any Make" selected="false">Select Make</option>
+                                        <option value="Any Make" selected="false">Make</option>
                                         @foreach ($makes as $item)
                                             <option value="{{ $item->car_make_id }}">{{ $item->car_make_name }}</option>
                                         @endforeach
@@ -253,7 +253,7 @@
                                     <select class="" name="model" id="car_model" required aria-hidden="true"
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;"
                                         required>
-                                        <option value="Any Make" selected="false">Select Model</option>
+                                        <option value="Any Make" selected="false">Model</option>
                                     </select>
 
                                 </div>
@@ -261,7 +261,7 @@
                             <label>Year of Manufacture</label>
                             <select name="year" id="year" tabindex="4" data-value="" required
                                 style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                <option value="-1" selected="selected">Select Year of Manufacture</option>
+                                <option value="-1" selected="selected">Year of Manufacture</option>
                                 <option value="2021">2021</option>
                                 <option value="2020">2020</option>
                                 <option value="2019">2019</option>
@@ -288,15 +288,15 @@
                             <div class="row" style="padding-top:10px;">
                                 <div class="col-6 col-md-4">
                                     <input class="form-control" type="number" id="price" name="price"
-                                        placeholder="Enter vehicle selling Price (Ksh)" required>
+                                        placeholder="selling Price (Ksh)" required>
                                 </div>
                                 <div class="col-6 col-md-4">
                                     <input class="form-control" type="number" id="miles" name="miles"
-                                        placeholder="Enter mileage (Kms)" required>
+                                        placeholder="mileage (Kms)" required>
                                 </div>
                                 <div class="col-6 col-md-4">
                                     <input class="form-control" type="text" id="gt-vin" tabindex="11"
-                                        name="vin" placeholder="Enter Plate number" required
+                                        name="vin" placeholder="Plate number" required
                                         style="text-transform:uppercase">
                                 </div>
                             </div>
@@ -305,7 +305,7 @@
                                 <div class="col-6 col-md-4">
                                     <select id="exterior" tabindex="8" name="exterior" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                        <option value="-1" selected="selected">Select Color</option>
+                                        <option value="-1" selected="selected">Color</option>
                                         <option value="White">White</option>
                                         <option value="Black">Black</option>
                                         <option value="Silver">Silver</option>
@@ -321,7 +321,7 @@
                                 <div class="col-6 col-md-4">
                                     <select id="interior" value="" tabindex="4" name="interior" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                        <option value="-1" selected="selected">Select Interior Type</option>
+                                        <option value="-1" selected="selected">Interior Type</option>
                                         <option value="Brown">Leather</option>
                                         <option value="Yellow">Cloth</option>
                                         <option value="Other">Other</option>
@@ -330,7 +330,7 @@
                                 <div class="col-6 col-md-4">
                                     <select id="fuel_type" tabindex="5" name="fuel_type" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                        <option value="-1" selected="selected">Select Fuel Type</option>
+                                        <option value="-1" selected="selected">Fuel Type</option>
                                         <option value="Petrol">Petrol</option>
                                         <option value="Diesel">Diesel</option>
                                         <option value="Hybrid">Hybrid</option>
@@ -472,7 +472,7 @@
                                     <label>Transmission</label>
                                     <select id="transmission" name="transmission" tabindex="13" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                        <option value="-1" selected="selected">Select Transmission Type</option>
+                                        <option value="-1" selected="selected">Transmission Type</option>
                                         <option value="Automatic">Automatic</option>
                                         <option value="Manual">Manual</option>
                                         <option value="Semi-Auto">Semi-Auto</option>
