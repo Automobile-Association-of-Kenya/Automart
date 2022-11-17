@@ -10,7 +10,7 @@ use App\Models\car_model;
 use App\Models\CarMake;
 use App\Models\CarModel;
 use Illuminate\Support\Facades\Session;
-
+use Intervention\Image\Facades\Image;
 class sellController extends Controller
 {
    
@@ -65,6 +65,18 @@ class sellController extends Controller
                 $name = $image->getClientOriginalName();
                 $image->move(public_path() . '/images/', $name);
                 $data[] = $name;
+
+                //add watermark
+                $img = Image::make(public_path('images/'.$name));
+                $img->text(' '.$request->firstname.' '.$request->lastname, 150, 120, function($font) {  
+                    $font->file(public_path('assets\fonts/font.ttf'));  
+                    $font->size(30);  
+                    $font->color('#DCCDB4');  
+                    $font->align('center');  
+                    $font->valign('center');  
+                    $font->angle(0);  
+                });
+                $img->save(public_path('images/'.$name));
             }
         }
         $prefix = "GWAAK";
