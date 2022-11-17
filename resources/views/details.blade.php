@@ -342,7 +342,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                 </div>
                 <div class="col-md-12">
                     <div class="row" style="color:#000; padding-bottom:10px;">
-                        <div class="col-6 col-sm-3">
+                        <div class="col-md-3 col-sm-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h5>Price:</h5>
@@ -350,7 +350,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-sm-3">
+                        <div class="col-md-3 col-sm-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h5>Mileage:</h5>
@@ -358,7 +358,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-sm-3">
+                        <div class="col-md-3 col-sm-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h5>Location:</h5>
@@ -368,7 +368,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-sm-3">
+                        <div class="col-md-3 col-sm-6">
                             <div class="card">
                                 <h5 class="card-title">Contacts:</h5>
                                 <div class="card-body">
