@@ -20,8 +20,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("data", [searchApi:: class, 'getData']); 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get("data", [searchApi::class, 'getData']);
 
-Route:: get("list/{id?}", [VehicleController::class, 'list']);
-Route:: post("add", [VehicleController:: class,'add']);
-Route:: get("search/{make}", [VehicleController::class,'search']);
+    Route::get("list", [VehicleController::class, 'list']);
+    Route::post("add", [VehicleController::class, 'add']);
+    Route::get("search/{make}", [VehicleController::class, 'search']);
+
+    Route::get('models', [VehicleController::class, 'fetchmodels']);
+    Route::get('makes', [VehicleController::class, 'fetchmakes']);
+});
+
+Route::post('login', [VehicleController::class, 'login']);
