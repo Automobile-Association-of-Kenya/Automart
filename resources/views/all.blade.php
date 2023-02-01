@@ -1111,25 +1111,184 @@
                             </div>
                         </div>
                     </div>
+                    <div class="search-box-2 mb-5" id="search"  style="background-color:#FFFFFF; border-style:inset">
+                        <div class="container">
+                            <div class="row">
+                                <form action="{{ route('search') }}" method="POST">
+                                    <!-- show success message -->
+                                    @if (session('successMsg'))
+                                        <div class="alert alert-success" role="alert">
+                                            {{ session('successMsg') }}
+                                        </div>
+                                    @endif
+                                    <!-- show error messages -->
+                                    @if ($errors->any())
+                                        @foreach ($errors->all() as $error)
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $error }}
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                    {{ csrf_field() }}
+                                    <div class="col-lg-12" style="background-color:#FFFFFF" >
+                                        <div class="inline-search-area">
+                                            <div class="row row-3">
+                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
+                                                    <select class="selectpicker search-fields" name="make"
+                                                        id="car_make">
+                                                        <option> Select Make</option>
+                                                        @foreach ($makes as $item)
+                                                            <option value="{{ $item->car_make_id }}">
+                                                                {{ $item->car_make_name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
+                                                    <select class="selectpicker2 form-control search-fields" name="model"
+                                                        id="car_model">
+                                                        <option value="Any Make" selected="false">Select Model</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
+                                                    <select class="selectpicker search-fields" name="from_year">
+                                                        <option> Year of Manufacture (From)</option>
+                                                        <option value="2001">2001</option>
+                                                        <option value="2002">2002</option>
+                                                        <option value="2003">2003</option>
+                                                        <option value="2004">2004</option>
+                                                        <option value="2005">2005</option>
+                                                        <option value="2006">2006</option>
+                                                        <option value="2007">2007</option>
+                                                        <option value="2008">2008</option>
+                                                        <option value="2009">2009</option>
+                                                        <option value="2010">2010</option>
+                                                        <option value="2011">2011</option>
+                                                        <option value="2012">2012</option>
+                                                        <option value="2013">2013</option>
+                                                        <option value="2014">2014</option>
+                                                        <option value="2015">2015</option>
+                                                        <option value="2016">2016</option>
+                                                        <option value="2017">2017</option>
+                                                        <option value="2018">2018</option>
+                                                        <option value="2019">2019</option>
+                                                        <option value="2020">2020</option>
+                                                        <option value="2021">2021</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
+                                                    <select class="selectpicker search-fields" name="from_year">
+                                                        <option> Year of Manufacture (To)</option>
+                                                        <option value="2001">2001</option>
+                                                        <option value="2002">2002</option>
+                                                        <option value="2003">2003</option>
+                                                        <option value="2004">2004</option>
+                                                        <option value="2005">2005</option>
+                                                        <option value="2006">2006</option>
+                                                        <option value="2007">2007</option>
+                                                        <option value="2008">2008</option>
+                                                        <option value="2009">2009</option>
+                                                        <option value="2010">2010</option>
+                                                        <option value="2011">2011</option>
+                                                        <option value="2012">2012</option>
+                                                        <option value="2013">2013</option>
+                                                        <option value="2014">2014</option>
+                                                        <option value="2015">2015</option>
+                                                        <option value="2016">2016</option>
+                                                        <option value="2017">2017</option>
+                                                        <option value="2018">2018</option>
+                                                        <option value="2019">2019</option>
+                                                        <option value="2020">2020</option>
+                                                        <option value="2021">2021</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
+                                                    <select class="selectpicker search-fields" name="min_mileage">
+                                                        <option> Minimum Mileage</option>
+                                                        <option value="0" selected="selected" data-select2-id="13">0
+                                                        </option>
+                                                        <option value="10000">10,000</option>
+                                                        <option value="30000">30,000</option>
+                                                        <option value="50000">50,000</option>
+                                                        <option value="100000">100,000</option>
+                                                        <option value="150000">150,000</option>
+                                                        <option value="250000">250,000</option>
+                                                        <option value="350000">350,000</option>
+                                                        <option value="450000">450,000</option>
+                                                        <option value="500000">500,000</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
+                                                    <select class="selectpicker search-fields" name="max_mileage">
+                                                        <option> Maximum Mileage </option>
+                                                        <option value="0" selected="selected" data-select2-id="13">0
+                                                        </option>
+                                                        <option value="10000">10,000</option>
+                                                        <option value="30000">30,000</option>
+                                                        <option value="50000">50,000</option>
+                                                        <option value="100000">100,000</option>
+                                                        <option value="150000">150,000</option>
+                                                        <option value="250000">250,000</option>
+                                                        <option value="350000">350,000</option>
+                                                        <option value="450000">450,000</option>
+                                                        <option value="500000">500,000</option>
+                                                    </select>
+                                                </div>
+
+
+                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset;">
+                                                    <input type="text" class="form-control" name="min_engine"
+                                                        id="" placeholder="Minimum Engine CC">
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
+                                                    <input type="text" class="form-control" name="max_engine"
+                                                        id="" placeholder="Maximum Engine CC">
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
+                                                    <input type="text" class="form-control" name="min_price"
+                                                        id="" placeholder="Minimum Price">
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
+                                                    <input type="text" class="form-control" name="max_price"
+                                                        id="" placeholder="Maximum Price">
+                                                </div>
+                                                <!-- <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 mt-3 search-col mt-3" style="border-style:outset"
+                                                    style="text-align: center">
+
+                                                </div> -->
+                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 mt-3" style="border-style:outset">
+                                                    <button class="btn white-btn btn-search w-100"
+                                                        style="background: #00472F">
+                                                        <h4><strong>Proceed </strong></h4>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         @if (!empty($vehicles) && $vehicles->count())
                             @foreach ($vehicles->all() as $vehicle)
-                            
                                 <div class="col-lg-4 col-md-4">
                                     <a href="{{ route('details', $vehicle->id) }}" class="car-img">
-                                    <div class="car-box-3">
-                                        <div class="car-thumbnail">
-                                          
+                                        <div class="car-box-3">
+                                            <div class="car-thumbnail">
+
                                                 <div class="for">For Sale</div>
                                                 <div class="price-box">
-                                                   
+
                                                     <span>Ksh. {{ number_format("$vehicle->price", 2) }}</span>
                                                 </div>
-                                                <img class="d-block w-100" src="{{ url('images/' . json_decode($vehicle->images, true)[0]) }}" width="356" height="254" alt="car">
-                                          
-                                            <div class="carbox-overlap-wrapper">
-                                                <div class="overlap-box">
-                                                    {{-- <div class="overlap-btns-area">
+                                                <img class="d-block w-100"
+                                                    src="{{ url('images/' . json_decode($vehicle->images, true)[0]) }}"
+                                                    width="356" height="254" alt="car">
+
+                                                <div class="carbox-overlap-wrapper">
+                                                    <div class="overlap-box">
+                                                        {{-- <div class="overlap-btns-area">
                                                         <a class="overlap-btn" data-bs-toggle="modal"
                                                             data-bs-target="#carOverviewModal">
                                                             <i class="fa fa-eye-slash"></i>
@@ -1169,51 +1328,55 @@
                                                             </a>
                                                         </div>
                                                     </div> --}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="detail">
+                                                <h1 class="title">
+                                                    <a style="color:black"
+                                                        href="{{ route('details', $vehicle->id) }}">{{ $vehicle->carmodel ? $vehicle->carmodel->car_model_name : '' }}</a>
+                                                </h1>
+                                                <ul class="custom-list">
+                                                    <li>
+                                                        <a
+                                                            href="{{ route('details', $vehicle->id) }}">{{ $vehicle->carmake ? $vehicle->carmake->car_make_name : '' }}</a>
+                                                    </li>
+
+                                                </ul>
+                                                <ul class="facilities-list clearfix">
+                                                    <li>
+                                                        <i class="flaticon-fuel"></i> {{ $vehicle->firstname }}
+                                                    </li>
+                                                    <li>
+                                                        <i class="flaticon-way"></i>
+                                                        {{ number_format("$vehicle->miles", 1) }} Kms
+                                                    </li>
+                                                    <li>
+                                                        <i class="flaticon-manual-transmission"></i>
+                                                        {{ $vehicle->county }}
+                                                    </li>
+                                                    <li>
+                                                        <i class="flaticon-car"></i> {{ $vehicle->phone }}
+                                                    </li>
+                                                    <li>
+                                                        <i class="flaticon-gear"></i> Ksh.
+                                                        {{ number_format("$vehicle->price", 2) }}
+                                                    </li>
+                                                    <li>
+                                                        <i class="flaticon-calendar-1"></i>{{ $vehicle->year }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="footer clearfix" style="background-color:#00472F;">
+                                                <div class="pull-left ratings">
+                                                    <i class="fa fa-phone"></i>
+                                                    <span style="color:white">Call or Chat with the owner</span>
+                                                    <i class="fa fa-envelope"></i>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="detail">
-                                            <h1 class="title">
-                                                <a  style="color:black"  href="{{ route('details', $vehicle->id) }}">{{$vehicle->carmodel?$vehicle->carmodel->car_model_name:''}}</a>
-                                            </h1>
-                                            <ul class="custom-list">
-                                                <li>
-                                                    <a href="{{ route('details', $vehicle->id) }}">{{$vehicle->carmake?$vehicle->carmake->car_make_name:''}}</a> 
-                                                </li>
-                                               
-                                            </ul>
-                                            <ul class="facilities-list clearfix">
-                                                <li>
-                                                    <i class="flaticon-fuel"></i> {{ $vehicle->firstname }}
-                                                </li>
-                                                <li>
-                                                    <i class="flaticon-way"></i> {{ number_format("$vehicle->miles", 1) }} Kms
-                                                </li>
-                                                <li>
-                                                    <i class="flaticon-manual-transmission"></i> {{ $vehicle->county }}
-                                                </li>
-                                                <li>
-                                                    <i class="flaticon-car"></i> {{ $vehicle->phone }}
-                                                </li>
-                                                <li>
-                                                    <i class="flaticon-gear"></i> Ksh. {{ number_format("$vehicle->price", 2) }}
-                                                </li>
-                                                <li>
-                                                    <i class="flaticon-calendar-1"></i>{{ $vehicle->year }}
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="footer clearfix" style="background-color:#00472F;">
-                                            <div class="pull-left ratings">
-                                                <i class="fa fa-phone"></i>
-                                               <span style="color:white">Call or Chat with the owner</span>
-                                                <i class="fa fa-envelope"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
+                                    </a>
                                 </div>
-                         
                             @endforeach
                         @endif
                     </div>
@@ -1221,7 +1384,7 @@
                     <div class="pagination-box text-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
-                              {{$vehicles->links()}}
+                                {{ $vehicles->links() }}
                             </ul>
                         </nav>
                     </div>

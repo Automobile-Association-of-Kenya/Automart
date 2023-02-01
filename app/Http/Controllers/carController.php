@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\CarMake;
 use App\Models\Caronsells;
+use Illuminate\Http\Request;
 
 class carController extends Controller
 {
     public function index(){
         $vehicles = Caronsells::orderBy('created_at', 'desc')->paginate(9);
-        return view('all', compact('vehicles'));
+        $makes = CarMake::all();
+        return view('all', compact('vehicles','makes'));
     }
 
     public function show($id){
