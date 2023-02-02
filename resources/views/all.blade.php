@@ -1111,7 +1111,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="search-box-2 mb-5" id="search"  style="background-color:#FFFFFF; border-style:inset">
+                    <div class="search-box-2 mb-5" id="search"  style="background-color:#FFFFFF; border-style:solid">
                         <div class="container">
                             <div class="row">
                                 <form action="{{ route('search') }}" method="POST">
@@ -1130,142 +1130,137 @@
                                         @endforeach
                                     @endif
                                     {{ csrf_field() }}
-                                    <div class="col-lg-12" style="background-color:#FFFFFF" >
-                                        <div class="inline-search-area">
-                                            <div class="row row-3">
-                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
-                                                    <select class="selectpicker search-fields" name="make"
-                                                        id="car_make">
-                                                        <option> Select Make</option>
-                                                        @foreach ($makes as $item)
-                                                            <option value="{{ $item->car_make_id }}">
-                                                                {{ $item->car_make_name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
-                                                    <select class="selectpicker2 form-control search-fields" name="model"
-                                                        id="car_model">
-                                                        <option value="Any Make" selected="false">Select Model</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
-                                                    <select class="selectpicker search-fields" name="from_year">
-                                                        <option> Year of Manufacture (From)</option>
-                                                        <option value="2001">2001</option>
-                                                        <option value="2002">2002</option>
-                                                        <option value="2003">2003</option>
-                                                        <option value="2004">2004</option>
-                                                        <option value="2005">2005</option>
-                                                        <option value="2006">2006</option>
-                                                        <option value="2007">2007</option>
-                                                        <option value="2008">2008</option>
-                                                        <option value="2009">2009</option>
-                                                        <option value="2010">2010</option>
-                                                        <option value="2011">2011</option>
-                                                        <option value="2012">2012</option>
-                                                        <option value="2013">2013</option>
-                                                        <option value="2014">2014</option>
-                                                        <option value="2015">2015</option>
-                                                        <option value="2016">2016</option>
-                                                        <option value="2017">2017</option>
-                                                        <option value="2018">2018</option>
-                                                        <option value="2019">2019</option>
-                                                        <option value="2020">2020</option>
-                                                        <option value="2021">2021</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
-                                                    <select class="selectpicker search-fields" name="from_year">
-                                                        <option> Year of Manufacture (To)</option>
-                                                        <option value="2001">2001</option>
-                                                        <option value="2002">2002</option>
-                                                        <option value="2003">2003</option>
-                                                        <option value="2004">2004</option>
-                                                        <option value="2005">2005</option>
-                                                        <option value="2006">2006</option>
-                                                        <option value="2007">2007</option>
-                                                        <option value="2008">2008</option>
-                                                        <option value="2009">2009</option>
-                                                        <option value="2010">2010</option>
-                                                        <option value="2011">2011</option>
-                                                        <option value="2012">2012</option>
-                                                        <option value="2013">2013</option>
-                                                        <option value="2014">2014</option>
-                                                        <option value="2015">2015</option>
-                                                        <option value="2016">2016</option>
-                                                        <option value="2017">2017</option>
-                                                        <option value="2018">2018</option>
-                                                        <option value="2019">2019</option>
-                                                        <option value="2020">2020</option>
-                                                        <option value="2021">2021</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
-                                                    <select class="selectpicker search-fields" name="min_mileage">
-                                                        <option> Minimum Mileage</option>
-                                                        <option value="0" selected="selected" data-select2-id="13">0
-                                                        </option>
-                                                        <option value="10000">10,000</option>
-                                                        <option value="30000">30,000</option>
-                                                        <option value="50000">50,000</option>
-                                                        <option value="100000">100,000</option>
-                                                        <option value="150000">150,000</option>
-                                                        <option value="250000">250,000</option>
-                                                        <option value="350000">350,000</option>
-                                                        <option value="450000">450,000</option>
-                                                        <option value="500000">500,000</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
-                                                    <select class="selectpicker search-fields" name="max_mileage">
-                                                        <option> Maximum Mileage </option>
-                                                        <option value="0" selected="selected" data-select2-id="13">0
-                                                        </option>
-                                                        <option value="10000">10,000</option>
-                                                        <option value="30000">30,000</option>
-                                                        <option value="50000">50,000</option>
-                                                        <option value="100000">100,000</option>
-                                                        <option value="150000">150,000</option>
-                                                        <option value="250000">250,000</option>
-                                                        <option value="350000">350,000</option>
-                                                        <option value="450000">450,000</option>
-                                                        <option value="500000">500,000</option>
-                                                    </select>
-                                                </div>
+                                    <div class="col-lg-12">
+                        <div class="inline-search-area">
+                            <div class="row row-3">
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
+                                    <select class="selectpicker search-fields" name="make" id="car_make">
+                                        <option> Select Make</option>
+                                        @foreach ($makes as $item)
+                                            <option value="{{ $item->car_make_id }}">{{ $item->car_make_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
+                                    <select class="selectpicker2 form-control search-fields" name="model"
+                                        id="car_model">
+                                        <option value="Any Make" selected="false">Select Model</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
+                                    <select class="selectpicker search-fields" name="from_year">
+                                        <option> Year of Manufacture (From)</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
+                                    <select class="selectpicker search-fields" name="from_year">
+                                        <option> Year of Manufacture (To)</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
+                                    <select class="selectpicker search-fields" name="min_mileage">
+                                        <option> Minimum Mileage</option>
+                                        <option value="0" selected="selected" data-select2-id="13">0</option>
+                                        <option value="10000">10,000</option>
+                                        <option value="30000">30,000</option>
+                                        <option value="50000">50,000</option>
+                                        <option value="100000">100,000</option>
+                                        <option value="150000">150,000</option>
+                                        <option value="250000">250,000</option>
+                                        <option value="350000">350,000</option>
+                                        <option value="450000">450,000</option>
+                                        <option value="500000">500,000</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
+                                    <select class="selectpicker search-fields" name="max_mileage">
+                                        <option> Maximum Mileage </option>
+                                        <option value="0" selected="selected" data-select2-id="13">0</option>
+                                        <option value="10000">10,000</option>
+                                        <option value="30000">30,000</option>
+                                        <option value="50000">50,000</option>
+                                        <option value="100000">100,000</option>
+                                        <option value="150000">150,000</option>
+                                        <option value="250000">250,000</option>
+                                        <option value="350000">350,000</option>
+                                        <option value="450000">450,000</option>
+                                        <option value="500000">500,000</option>
+                                    </select>
+                                </div>
 
 
-                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset;">
-                                                    <input type="text" class="form-control" name="min_engine"
-                                                        id="" placeholder="Minimum Engine CC">
-                                                </div>
-                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
-                                                    <input type="text" class="form-control" name="max_engine"
-                                                        id="" placeholder="Maximum Engine CC">
-                                                </div>
-                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
-                                                    <input type="text" class="form-control" name="min_price"
-                                                        id="" placeholder="Minimum Price">
-                                                </div>
-                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3" style="border-style:outset">
-                                                    <input type="text" class="form-control" name="max_price"
-                                                        id="" placeholder="Maximum Price">
-                                                </div>
-                                                <!-- <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 mt-3 search-col mt-3" style="border-style:outset"
-                                                    style="text-align: center">
-
-                                                </div> -->
-                                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 mt-3" style="border-style:outset">
-                                                    <button class="btn white-btn btn-search w-100"
-                                                        style="background: #00472F">
-                                                        <h4><strong>Proceed </strong></h4>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
+                                    <input type="text" class="form-control" name="min_engine" id=""
+                                        placeholder="Minimum Engine CC">
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
+                                    <input type="text" class="form-control" name="max_engine" id=""
+                                        placeholder="Maximum Engine CC">
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
+                                    <input type="text" class="form-control" name="min_price" id=""
+                                        placeholder="Minimum Price">
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
+                                    <input type="text" class="form-control" name="max_price" id=""
+                                        placeholder="Maximum Price">
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 mt-3 search-col mt-3"
+                                    style="text-align: center">
+                                    
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 mt-3">
+                                    <button class="btn white-btn btn-search w-100" style="background: #00472F">
+                                        <h4><strong>Proceed </strong></h4>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </form>
                             </div>
                         </div>
                     </div>
@@ -1367,7 +1362,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="footer clearfix" style="background-color:#00472F;">
+                                            <div class="footer clearfix" style="background-color:#00472F">
                                                 <div class="pull-left ratings">
                                                     <i class="fa fa-phone"></i>
                                                     <span style="color:white">Call or Chat with the owner</span>
