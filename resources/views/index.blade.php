@@ -693,6 +693,10 @@
                                 <div class="w-100 ratings">
                                     <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i
                                         class="fa fa-envelope text-success"></i>
+
+                                                <a href="https://wa.me/{{$item->phone}}" style="color: #00472F; margin-left:5px">
+                                                    <i class="fa fa-whatsapp"></i>
+                                                </a>
                                 </div>
                             </div>
                         </div>
@@ -872,11 +876,12 @@
                         $('#car_model').html(
                             '<option value="">Select Car Model</option>');
 
-                        $.each(result.models, function(key, value) {
-                            $("#car_model").append('<option value="' + value
-                                .car_model_id + '">' + value.car_model_name +
-                                '</option>');
-                        });
+                            result.data.forEach(model => {
+                        document.querySelector('#car_model').innerHTML+='<option value="' + model
+                                                    .id + '">' + model.name +
+                                                    '</option>';
+                    
+                    });
                     }
                 });
             })

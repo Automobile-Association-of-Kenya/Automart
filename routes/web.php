@@ -81,7 +81,9 @@ Route::post('/reset-password', [App\Http\Controllers\ForgotPasswordController::c
 
 Route::get('/getCarMakes', 'App\Http\Controllers\CarController@getCarMakes')->name('getCarMakes');
 
-
+Route::get('/terms',function(){
+    return view('terms');
+});
 
 ///Route::get('/getCarMakes', 'VehicleController@getCarMakes')->name('getCarMakes');
 

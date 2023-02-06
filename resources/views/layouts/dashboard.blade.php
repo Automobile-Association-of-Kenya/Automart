@@ -489,6 +489,7 @@
                         <li class="nav-item">
                             <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="#2">Sales</a>
                         </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="#3">Add Car</a>
                         </li>
@@ -517,6 +518,9 @@
                             </li>
                             <li>
                                 <a class="dropdown-item" href="#">Settings</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/terms">Terms</a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>

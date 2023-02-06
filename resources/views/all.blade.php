@@ -1111,27 +1111,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="search-box-2 mb-5" id="search"  style="background-color:#FFFFFF; border-style:solid">
+                    <!-- <div class="search-box-2 mb-5" id="search"  style="background-color:#FFFFFF; border-style:solid">
                         <div class="container">
                             <div class="row">
-                                <form action="{{ route('search') }}" method="POST">
+                                <form action="{{ route('search') }}" method="POST"> -->
                                     <!-- show success message -->
-                                    @if (session('successMsg'))
+                                    <!-- @if (session('successMsg'))
                                         <div class="alert alert-success" role="alert">
                                             {{ session('successMsg') }}
                                         </div>
-                                    @endif
+                                    @endif -->
                                     <!-- show error messages -->
-                                    @if ($errors->any())
+                                    <!-- @if ($errors->any())
                                         @foreach ($errors->all() as $error)
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $error }}
                                             </div>
                                         @endforeach
                                     @endif
-                                    {{ csrf_field() }}
-                                    <div class="col-lg-12">
-                        <div class="inline-search-area">
+                                    {{ csrf_field() }} -->
+                                    <!-- <div class="col-lg-12"> -->
+                        <!-- <div class="inline-search-area">
                             <div class="row row-3">
                                 <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
                                     <select class="selectpicker search-fields" name="make" id="car_make">
@@ -1258,7 +1258,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                  </form>
                             </div>
@@ -1367,6 +1367,9 @@
                                                     <i class="fa fa-phone"></i>
                                                     <span style="color:white">Call or Chat with the owner</span>
                                                     <i class="fa fa-envelope"></i>
+                                                    <a href="https://wa.me/{{$vehicle->phone}}" style="color: #00472F; margin-left:5px">
+                                                    <i class="fa fa-whatsapp"></i>
+                                                </a>
                                                 </div>
                                             </div>
                                         </div>

@@ -62,7 +62,6 @@
         .images-preview-div img {
             padding: 0px;
             max-width: 200px;
-            min-height: 200px;
             padding: 1% !important;
         }
 
@@ -296,7 +295,7 @@
                                 </div>
                                 <div class="col-6 col-md-4">
                                     <input class="form-control" type="text" id="gt-vin" tabindex="11"
-                                        name="vin" placeholder="Plate number" required
+                                        name="vin" placeholder="Plate number" 
                                         style="text-transform:uppercase">
                                 </div>
                             </div>
@@ -510,7 +509,9 @@
                             <div class="row">
                                 <div class="col-6 col-lg-4">
                                     <label class="btn btn-success btn-file"><br>
-                                        Upload Photos<input class="form-control" id="fileupload" type="file"
+                                        Upload Photos
+                                        <input type="hidden" name="removedImages" value=''>
+                                        <input class="form-control" id="fileupload" type="file"
                                             name="images[]" tabindex="21" style="display:none" value="Upload Photos"
                                             multiple=""><br>
                                     </label></p>
@@ -562,7 +563,7 @@
                                         </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
+                            <button style="background: #00472F;color:white;"  type="submit" class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
                                 listing</button>
                         </form>
                     </div>
@@ -1239,7 +1240,9 @@
                             <div class="row">
                                 <div class="col-6 col-lg-4">
                                     <label class="btn btn-success btn-file"><br>
-                                        Upload Photos<input class="form-control" id="fileupload" type="file"
+                                        Upload Photos
+                                        <input type="hidden" name="removed-images" class="removedImgs">
+                                        <input class="form-control" id="fileupload" type="file"
                                             name="images[]" tabindex="21" style="display:none" value="Upload Photos"
                                             multiple=""><br>
                                     </label></p>
@@ -1289,7 +1292,7 @@
                                     By clicking this, you have agreed to terms and conditions
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
+                            <button type="submit" style="background: #00472F;color:white;"  class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
                                 listing</button>
                         </form>
                     </div>
@@ -1324,11 +1327,12 @@
                     success: function(result) {
                         $('#car_model').html(
                             '<option value="">Select Car Model</option>');
-                        $.each(result.models, function(key, value) {
-                            $("#car_model").append('<option value="' + value
-                                .car_model_id + '">' + value.car_model_name +
-                                '</option>');
-                        });
+                            result.data.forEach(model => {
+                        document.querySelector('#car_model').innerHTML+='<option value="' + model
+                                                    .id + '">' + model.name +
+                                                    '</option>';
+                    
+                    });
                     }
                 });
             })
@@ -1338,23 +1342,53 @@
     <script>
         $(function() {
             // Multiple images preview with JavaScript
+            
             var previewImages = function(input, imgPreviewPlaceholder) {
                 if (input.files) {
-                    var filesAmount = input.files.length;
-                    for (i = 0; i < filesAmount; i++) {
+                    var noFiles = input.files.length;
+                    for (let i = 0; i < noFiles; i++) {
+                        if(input.files[i].size>5000000){
+                            alert(input.files[i].name+' is greater than 5mb');
+                            input.value=''
+                            break;
+                        }
                         var reader = new FileReader();
                         reader.onload = function(event) {
-                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(
-                                imgPreviewPlaceholder);
+                            const div= document.createElement('span');
+                            div.classList.add('img_'+i)
+                            div.style.cssText='position:relative'
+                            const img = document.createElement('img');
+                            img.setAttribute('src',event.target.result);
+                            const deleter=document.createElement('span');
+                            deleter.innerHTML='<i class="fa fa-times-circle"></i>'
+                            deleter.style.cssText='cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
+                            deleter.addEventListener('click',e=>{
+                                removeImage(input,imgPreviewPlaceholder,i);
+                            })
+                            div.appendChild(img);
+                            div.appendChild(deleter);
+                                document.querySelector(imgPreviewPlaceholder).appendChild(div)
+                            
                         }
                         reader.readAsDataURL(input.files[i]);
                     }
                 }
             };
             $('#fileupload').on('change', function() {
+                document.querySelector('.removedImgs').value=''
                 previewImages(this, 'div.images-preview-div');
             });
+
+        const removeImage=(input, imgPreviewPlaceholder,index)=>{
+            let removedImages=document.querySelector('.removedImgs').value;
+            removedImages=removedImages+=index+',';
+            document.querySelector('.removedImgs').value=removedImages
+            const el=document.querySelector('.img_'+index);
+            el.parentElement.removeChild(el)
+        }
         });
+
+        
     </script>
     <script>
         @if (session('loader'))
