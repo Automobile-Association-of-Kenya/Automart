@@ -349,7 +349,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                              <li>Check all documentation and only pay if you're satisfied.</li>
                                             </ol>
                                         </div>
-                                        <a href="https://wa.me/{{$vehicle->phone}}" style="color: #00472F; margin-left:5px">
+                                        <a target="blank" href="https://wa.me/{{$vehicle->phone}}" style="color: #00472F; margin-left:5px">
 
                                         <button class="btn btn-success">
                                                 <i class="fa fa-whatsapp"></i> WhatsApp seller
