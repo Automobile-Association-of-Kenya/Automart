@@ -563,8 +563,7 @@
                                         </div>
                                 </div>
                             </div>
-                            <button style="background: #00472F;color:white;"  type="submit" class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
-                                listing</button>
+                            <button style="background: #00472F;color:white;"  type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -1292,8 +1291,7 @@
                                     By clicking this, you have agreed to terms and conditions
                                 </div>
                             </div>
-                            <button type="submit" style="background: #00472F;color:white;"  class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
-                                listing</button>
+                            <button type="submit" style="background: #00472F;color:white;"  class="btn btn-primary btn-block mb-4">Submit</button>
                         </form>
                     </div>
                 </div>

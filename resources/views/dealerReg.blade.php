@@ -49,10 +49,10 @@
                         <input type="number" class="form-control" name="number" id="number"
                             placeholder="Your Phone Number" required>
                     </div>
-                    <div class="container-fluid" style="padding-top:5px; padding-bottom:10px;">
+                    <!-- <div class="container-fluid" style="padding-top:5px; padding-bottom:10px;">
                         <input type="number" class="form-control" name="number2" id="number2"
-                            placeholder="Your Secondary Phone Number" required>
-                    </div>
+                            placeholder="Your Secondary Phone Number">
+                    </div> -->
                     <div class="container-fluid" style="padding-top:5px; padding-bottom:10px;">
                         <select name="county" id="county" tabindex="4" data-value="" required
                             style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
@@ -203,10 +203,10 @@
                                 <input type="text" class="form-control" placeholder="Phone Number"
                                     aria-label="Company Name" name="number">
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Secondary Phone Number"
                                     aria-label="Address" name="number2">
-                            </div>
+                            </div> -->
                             <div class="form-group">
 
                                 <select name="county" class="" id="county" tabindex="4" data-value="" required

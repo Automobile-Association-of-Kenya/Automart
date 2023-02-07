@@ -30,7 +30,7 @@ class dealersController extends Controller
             'name' => 'required',
             'email'  => 'required',
             'number' => 'required',
-            'number2' => 'required',
+            'number2' => 'optional',
             'county' => 'required',
             'dName' => 'required',
             'pass' => 'required|confirmed|min:8',
