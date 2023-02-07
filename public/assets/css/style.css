@@ -2076,7 +2076,7 @@ input[type=checkbox]:checked + label:before {
 
 .show-search-area {
     z-index: 9999;
-. search-contents transition: all 0.4 s;
+    transition: all 0.4 s;
     display: block;
 }
 
@@ -5958,7 +5958,7 @@ input[type=checkbox]:checked + label:before {
 
 /** Footer start **/
 .footer {
-    background: url(../img/img-7.jpg);
+    text-align: center;
     z-index: 0;
     background-position: center center;
     background-repeat: no-repeat;

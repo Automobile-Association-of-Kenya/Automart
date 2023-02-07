@@ -263,24 +263,59 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                 <div class=" row">
                                     <div class="preview col-md-6">
                                         
-                                        <div class="preview-pic tab-content">
+                                        <div class="preview-pic tab-content" style="position: relative;">
 
                                             @foreach (json_decode($vehicle->images) as $key => $item)
                                                 @if ($loop->index==0)
-                                                 <div class="tab-pane active" id="pic-{{$loop->index}}"><img src="{{ url('images/' . $item) }}" /></div>
+                                                 <div id="pict-{{$loop->index}}" class="tab-pane active" id="pic-{{$loop->index}}"><img src="{{ url('images/' . $item) }}" /></div>
                                                 @else  
-                                                 <div class="tab-pane" id="pic-{{$loop->index}}"><img src="{{ url('images/' . $item) }}" /></div>
+                                                 <div id="pict-{{$loop->index}}" class="tab-pane" id="pic-{{$loop->index}}"><img src="{{ url('images/' . $item) }}" /></div>
                                                 @endif
                                                 
                                             @endforeach
+                                            <a  data-target="#pic-1" data-toggle="tab" class="next-image" style="position: absolute;right:0;top:40%;padding:15px;background:#00472F;color:white;cursor:pointer;">
+                                            <i class="fa fa-chevron-right"></i>
+                                            </a>
+
+                                            <a data-target="#pic-{{count(json_decode($vehicle->images))-1}}" data-toggle="tab" class="prev-image" style="position: absolute;left:0;top:40%;padding:15px;background:#00472F;color:white;cursor:pointer;">
+                                                <i class="fa fa-chevron-left"></i>
+                                                </a>
+                                                <script>
+                                                    document.querySelector('.next-image').addEventListener('click',e=>{
+                                                        let element= document.querySelector('.next-image');
+                                                        let number= (element.getAttribute('data-target').split('-')[1]*1)+1;
+                                                        if(number>{{count(json_decode($vehicle->images))-1}}){
+                                                            number=0;
+                                                        }
+                                                        element.parentNode.querySelectorAll('.tab-pane').forEach(tab => {
+                                                            tab.classList.remove('active');
+                                                        });
+                                                        document.querySelector('#pict-'+number).classList.add('active') 
+                                                        element.setAttribute('data-target','#pic-'+number);
+                                                    })
+
+                                                    document.querySelector('.prev-image').addEventListener('click',e=>{
+                                                        let element= document.querySelector('.prev-image');
+                                                        let number= (element.getAttribute('data-target').split('-')[1]*1)-1;
+                                                        if(number<0){
+                                                            number=0;
+                                                        }
+                                                        element.parentNode.querySelectorAll('.tab-pane').forEach(tab => {
+                                                            tab.classList.remove('active');
+                                                        });
+                                                        document.querySelector('#pict-'+number).classList.add('active') 
+                                                        element.setAttribute('data-target','#pic-'+number);
+
+                                                    })
+                                                </script>
                                         </div>
 
                                         <ul class="preview-thumbnail nav nav-tabs">
                                             @foreach (json_decode($vehicle->images) as $key => $item)
                                                 @if ($loop->index==0)
-                                                    <li class="active"><a data-target="#pic-{{$loop->index}}" data-toggle="tab"><img src="{{ url('images/' . $item) }}" /></a></li>
+                                                    <li  class="active"><a data-target="#pic-{{$loop->index}}" data-toggle="tab"><img src="{{ url('images/' . $item) }}" /></a></li>
                                                 @else
-                                                    <li><a data-target="#pic-{{$loop->index}}" data-toggle="tab"><img src="{{ url('images/' . $item) }}" /></a></li>
+                                                    <li ><a   data-target="#pic-{{$loop->index}}" data-toggle="tab"><img src="{{ url('images/' . $item) }}" /></a></li>
                                                     
                                                 @endif
                                             @endforeach        
@@ -314,7 +349,13 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                                              <li>Check all documentation and only pay if you're satisfied.</li>
                                             </ol>
                                         </div>
-                                        
+                                        <a target="blank" href="https://wa.me/{{$vehicle->phone}}" style="color: #00472F; margin-left:5px">
+
+                                        <button class="btn btn-success">
+                                                <i class="fa fa-whatsapp"></i> WhatsApp seller
+                                        </button>
+                                    </a>
+
                                         </div>
                                     </div>
                                 </div>

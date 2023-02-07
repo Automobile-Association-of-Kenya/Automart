@@ -2189,7 +2189,7 @@ style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radi
     <input class="form-control" type="number" id="phone" tabindex="25" name="phone" placeholder="Enter phone number" required>
   </div>
 </div>
-<button type="submit" class="btn btn-primary btn-block mb-4">Submit &amp; pay for your listing</button>
+<button type="submit" style="background: #00472F;color:white;"  class="btn btn-primary btn-block mb-4">Submit &amp; pay for your listing</button>
 </form>
 </div> -->
 @endsection 

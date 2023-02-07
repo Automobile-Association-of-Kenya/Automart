@@ -118,7 +118,9 @@
                             <a class="nav-link" href="{{ route('dealerHome') }}" style="color: #fed925;">Sell
                                 Car</a>
                         </li>
-                       
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="/terms" style="color: #fed925;">Terms</a>
+                        </li>
                         @guest
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="{{ route('login') }}" style="color: #fed925;">Login</a>
@@ -126,6 +128,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="{{ route('contact') }}" style="color: #fed925;">Contact</a>
                         </li>
+                    
                         @endguest
                         @auth
                         <li class="nav-item dropdown">
@@ -162,7 +165,9 @@
                     <a class="nav-link" href="{{ route('dealerHome') }}" style="color: #fff;">Sell
                         Car</a>
                 </li>
-               
+                <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
+                    <a class="nav-link" href="/terms" style="color: #fff;">Terms</a>
+                </li>
                 @guest
                 <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
                     <a class="nav-link" href="{{ route('login') }}" style="color: #fff;">Login</a>
@@ -322,8 +327,8 @@
         <div class="sub-footer" style="background-color:#00472F">
             <div class="container" >
                 <div class="row">
-                    <div class="col-lg-6 col-md-6" style="background-color:#00472F">
-                        <p class="copy">© {{ now()->year }} <a href="#">AAK Kenya.</a> All Rights Reserved.
+                    <div class="col-lg-6 col-md-6" style="background-color:#00472F;text-align:center;width:100%">
+                        <p class="copy" style="text-align: center;width:100%">© {{ now()->year }} <a href="#">AAK Kenya.</a> All Rights Reserved.
                         </p>
                     </div>
                     <div class="col-lg-6 col-md-6">

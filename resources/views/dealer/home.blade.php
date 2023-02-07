@@ -62,7 +62,6 @@
         .images-preview-div img {
             padding: 0px;
             max-width: 200px;
-            min-height: 200px;
             padding: 1% !important;
         }
 
@@ -591,9 +590,9 @@
                             </div>
                             <div class="row" style="padding-bottom: 10px;">
                                 <div class="col-6">
-                                    <label>Make</label>
+                                    <label>Makjjje</label>
                                     <!-- <input class="form-control" type="text" name="make" placeholder="Enter Vehicle Make" style="text-transform:uppercase" required> -->
-                                    <select class="form-control" id="car_make" name="make" aria-hidden="true"
+                                    <select class="form-controgl" id="car_make" name="make" aria-hidden="true"
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;"
                                         required>
                                         <option value="Any Make" selected="false">Select Make</option>
@@ -915,7 +914,7 @@
                                     By clicking this, you have agreed to terms and conditions
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
+                            <button type="submit" style="background: #00472F;color:white;"  class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
                                 listing</button>
                         </form>
                     </div>
@@ -938,6 +937,7 @@
         $(document).ready(function() {
             $('#car_make').on('change', function() {
                 var carmake_id = this.value;
+
                 $("#car_model").html('');
                 $.ajax({
                     url: "{{ url('fetch/car-models') }}",
@@ -950,11 +950,12 @@
                     success: function(result) {
                         $('#car_model').html(
                             '<option value="">Select Car Model</option>');
-                        $.each(result.models, function(key, value) {
-                            $("#car_model").append('<option value="' + value
-                                .car_model_id + '">' + value.car_model_name +
-                                '</option>');
-                        });
+                            result.data.forEach(model => {
+                        document.querySelector('#car_model').innerHTML+='<option value="' + model
+                                                    .id + '">' + model.name +
+                                                    '</option>';
+                    
+                    });
                     }
                 });
             })

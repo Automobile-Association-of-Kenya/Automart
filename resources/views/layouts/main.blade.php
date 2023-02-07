@@ -508,6 +508,10 @@
                             <a class="nav-link" style="font-size: 20px;color:#CBBC27"
                                 href="{{ route('contact') }}">Contact Us</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: 20px;color:#CBBC27"
+                                href="/terms">Terms</a>
+                        </li>
                     </ul>
                 
                     <!-- Left links -->

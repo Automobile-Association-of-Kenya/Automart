@@ -856,7 +856,7 @@
                                     By clicking this, you have agreed to terms and conditions
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
+                            <button type="submit" style="background: #00472F;color:white;" class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
                                 listing</button>
                         </form>
                     </div>
@@ -891,11 +891,12 @@
                     success: function(result) {
                         $('#car_model').html(
                             '<option value="">Select Car Model</option>');
-                        $.each(result.models, function(key, value) {
-                            $("#car_model").append('<option value="' + value
-                                .car_model_id + '">' + value.car_model_name +
-                                '</option>');
-                        });
+                            result.data.forEach(model => {
+                        document.querySelector('#car_model').innerHTML+='<option value="' + model
+                                                    .id + '">' + model.name +
+                                                    '</option>';
+                    
+                    });
                     }
                 });
             })
