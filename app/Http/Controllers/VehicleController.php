@@ -167,4 +167,9 @@ class VehicleController extends Controller
        $makes = CarMake::all();
        return CarMakeResource::collection($makes);
     }
+    public function getModels(Request $request)
+    {
+        $models = CarModel::where('car_make_id',$request->car_make_id)->get();
+        return CarModelResource::collection($models);
+    }
 }

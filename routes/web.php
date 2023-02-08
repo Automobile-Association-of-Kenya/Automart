@@ -88,7 +88,7 @@ Route::get('/terms',function(){
 ///Route::get('/getCarMakes', 'VehicleController@getCarMakes')->name('getCarMakes');
 
 
-Route::post('fetch/car-models',[VehicleController::class,'fetchModels'])->name('carmodels.fetch');
+Route::post('fetch/car-models',[VehicleController::class,'getModels'])->name('carmodels.fetch');
 
 
 Route::controller(dealersController::class)->group(function(){
