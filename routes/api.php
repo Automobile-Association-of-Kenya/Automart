@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\searchApi;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('models', [VehicleController::class, 'fetchmodels']);
     Route::get('makes', [VehicleController::class, 'fetchmakes']);
+    
 });
 
 Route::post('login', [VehicleController::class, 'login']);
+Route::post('upload',[FileController::class,'upload']);
