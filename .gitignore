@@ -1,6 +1,8 @@
 /node_modules
 /public/hot
 /public/storage
+/public/images
+composer.lock
 /storage/*.key
 /vendor
 .env
