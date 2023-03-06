@@ -506,6 +506,19 @@
                                     name="description" rows="4" style="background: #fff;" required></textarea>
                                 <label class="form-label" for="description">Vehicle Description</label>
                             </div>
+                            <div class="row mb-5">
+                                <div class="col-6 col-lg-4">
+                                    <label class="btn btn-success btn-file"><br>
+                                        Upload Cover Photo
+                                        <input class="form-control" type="file"
+                                            name="cover_photo" tabindex="21" style="display:none" value="Upload Photos"
+                                            multiple=""><br>
+                                    </label></p>
+                                </div>
+                                <div class="col-sm-6 col-lg-8" style="color:#000;">
+                                    <span class="instructions">This is the image that will appear on the top.</span>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-6 col-lg-4">
                                     <label class="btn btn-success btn-file"><br>
