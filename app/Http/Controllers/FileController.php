@@ -9,7 +9,7 @@ class FileController extends Controller
     //
 
     function upload(Request $req){
-        $result=$req->file('file')->store('images');
+        $result=$req->file('file')->storeAs(public_path().'/images',$req->file->getClientOriginalName());
         return ["result"=>$result];
     }
 }

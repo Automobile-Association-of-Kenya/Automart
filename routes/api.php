@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\searchApi;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\AddmodelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,4 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::post('login', [VehicleController::class, 'login']);
 Route::post('upload',[FileController::class,'upload']);
+Route::post('addmodel', [AddmodelController::class,'add']);

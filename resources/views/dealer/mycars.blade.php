@@ -141,11 +141,10 @@
                         @if (!empty($vehicles) && $vehicles->count())
                             @foreach ($vehicles->all() as $vehicle)
                                 <!-- use this for slideshow -->
-
-                                <div class="col-6 col-md-4" style="padding-bottom: 15px;">
+                                <div class="col-sm-12 col-md-4  " style="padding-bottom: 15px;">
                                     <div class="card" style="color: #000">
                                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                                            <img src="{{ url('images/' . json_decode($vehicle->images, true)[0]) }}"
+                                            <img src="{{ $vehicle->cover ??  url('images/' . json_decode($vehicle->images, true)[0]) }}"
                                                 style="" class="img-fluide" width="100%" height="300px" />
                                             <a href="{{ route('details', $vehicle->id) }}">
                                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
