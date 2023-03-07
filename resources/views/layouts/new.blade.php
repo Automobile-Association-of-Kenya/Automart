@@ -107,36 +107,64 @@
                 <div class="navbar-collapse collapse w-100 justify-content-end" id="navbar">
                     <ul class="navbar-nav ml-auto">
 
-                    <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{ route('home') }}" style="color: #fed925;">Search</a>
-                        </li>
+                    <li>
+                    <a href="{{ route('home') }}"> <button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left; padding-top:40px"> <i
+                                    class="fa fa-home"></i> Search</button></a>
+                    </li>
+                    <li>
+                    <a href="{{ route('all_cars') }}"> <button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left; padding-top:40px"> <i
+                                    class="fa fa-home"></i>All Cars</button></a>
+                    </li>
+                    <li>
+                    <a class="nav-link" href="/terms" button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left; padding-top:45px"> <i
+                                    class="fa fa-home"></i>Terms</button></a>
+                    </li>
 
-                        <li class="nav-item dropdown">
+                        <!-- <li class="nav-item dropdown">
                             <a class="nav-link" href="{{ route('all_cars') }}" style="color: #fed925;">All Cars</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="{{ route('dealerHome') }}" style="color: #fed925;">Sell
                                 Car</a>
-                        </li>
-                        <li class="nav-item dropdown">
+                        </li> -->
+                    
+                        <!-- <li class="nav-item dropdown">
                             <a class="nav-link" href="/terms" style="color: #fed925;">Terms</a>
-                        </li>
+                        </li> -->
                         @guest
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{ route('login') }}" style="color: #fed925;">Login</a>
-                        </li>
-                        <li class="nav-item dropdown">
+                        <!-- <li class="nav-item dropdown">
+                            <a class="nav-link" href="{{ route('login') }}" button type="submit" class="btn  btn-block"
+                            style="background: #00472F;color:white;font-size:120%;text-align:left; padding-top:45px"> <i
+                                    class="fa fa-home"></i>Login</button></a>
+                        </li> -->
+                        <!-- <li class="nav-item dropdown">
                             <a class="nav-link" href="{{ route('contact') }}" style="color: #fed925;">Contact</a>
-                        </li>
+                        </li> -->
                     
                         @endguest
                         @auth
-                        <li class="nav-item dropdown">
+                        <!-- <li class="nav-item dropdown">
                             <a class="nav-link" href="{{ route('login') }}" style="color: #fed925;">{{Auth::user()->name}}</a>
-                        </li>
+                        </li> -->
+
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{ route('logout') }}" style="color: #fed925;">Logout</a>
+                            <a class="nav-link" href="{{ route('login') }}" button type="submit" class="btn  btn-block"
+                            style="background: #00472F;color:white;font-size:120%;text-align:left; padding-top:45px"> <i
+                                    class="fa fa-home">{{Auth::user()->name}}</a>
                         </li>
+
+                        <li>
+                    <a  class="nav-link" href="{{ route('logout') }}" button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left; padding-top:30px"> <i
+                                    class="fa fa-home"></i>Logout</button></a>
+                    </li>
+
+                        <!-- <li class="nav-item dropdown">
+                            <a class="nav-link" href="{{ route('logout') }}" style="color: #fed925;">Logout</a>
+                        </li> -->
                         @endauth
                     </ul>
                 </div>
@@ -151,7 +179,7 @@
         <div id="dismiss">
             <i class="fa fa-close"></i>
         </div>
-
+<!-- 
         <ul class="navbar-na" style="width: 100%;margin-top:40px;">
 
             <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
@@ -183,7 +211,7 @@
                 <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
                     <a class="nav-link" href="{{ route('logout') }}" style="color: #fff;">Logout</a>
                 </li>
-                @endauth
+                @endauth -->
         <!-- <div class="sidebar-inner">
             <div class="sidebar-logo">
                 <a href="index.html">
