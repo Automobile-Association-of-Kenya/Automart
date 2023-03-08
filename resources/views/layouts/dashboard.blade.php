@@ -499,8 +499,8 @@
                         <li>
                         <a href="{{ route('dealer.mycars') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
-                                    class="fa fa-car"></i> My Cars</button></a>
-                        </li>           
+                                class="fa fa-car"></i> My Cars</button></a>
+                        </li>         
 
                         <!-- <li class="nav-item">
                             <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="#0">My Cars</a>

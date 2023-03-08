@@ -6,6 +6,7 @@ use App\Http\Controllers\searchApi;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\AddmodelController;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,6 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::post('login', [VehicleController::class, 'login']);
 Route::post('upload',[FileController::class,'upload']);
 Route::post('addmodel', [AddmodelController::class,'add']);
+
+Route::get('resizeImage', [ImageController::class, 'resizeImage']);
+Route::post('resizeImagePost', [ImageController::class, 'store'])->name('resizeImagePost');

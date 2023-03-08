@@ -101,7 +101,7 @@
                     <!-- sidebar -->
                     <div class="col-md-12 ">
                         <a href="{{ route('dealer.home') }}"> <button type="submit" class="btn  btn-block"
-                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-home"></i> Home</button></a>
                     </div>
                     </br>

@@ -110,17 +110,17 @@
                     <li>
                     <a href="{{ route('home') }}"> <button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left; padding-top:40px"> <i
-                                    class="fa fa-home"></i> Search</button></a>
+                                    ></i> Search</button></a>
                     </li>
                     <li>
                     <a href="{{ route('all_cars') }}"> <button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left; padding-top:40px"> <i
-                                    class="fa fa-home"></i>All Cars</button></a>
+                                    ></i>All Cars</button></a>
                     </li>
                     <li>
                     <a class="nav-link" href="/terms" button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left; padding-top:45px"> <i
-                                    class="fa fa-home"></i>Terms</button></a>
+                                    ></i>Terms</button></a>
                     </li>
 
                         <!-- <li class="nav-item dropdown">
@@ -153,13 +153,13 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="{{ route('login') }}" button type="submit" class="btn  btn-block"
                             style="background: #00472F;color:white;font-size:120%;text-align:left; padding-top:45px"> <i
-                                    class="fa fa-home">{{Auth::user()->name}}</a>
+                                    >{{Auth::user()->name}}</a>
                         </li>
 
                         <li>
                     <a  class="nav-link" href="{{ route('logout') }}" button type="submit" class="btn  btn-block"
-                                style="background: #00472F;color:white;font-size:120%;text-align:left; padding-top:30px"> <i
-                                    class="fa fa-home"></i>Logout</button></a>
+                                style="background: #00472F;color:white;font-size:120%;text-align:left; padding-top:45px"> <i
+                                ></i>Logout</button></a>
                     </li>
 
                         <!-- <li class="nav-item dropdown">
