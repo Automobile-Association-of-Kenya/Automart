@@ -1132,7 +1132,7 @@
                                                 </div>
                                                 <img class="d-block w-100"
                                                     src="{{ url('images/' . json_decode($vehicle->images, true)[0]) }}"
-                                                    width="356" height="500" alt="car">
+                                                    width="300" height="400" alt="car">
 
                                                 <div class="carbox-overlap-wrapper">
                                                     <div class="overlap-box">
