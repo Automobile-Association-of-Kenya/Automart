@@ -474,25 +474,50 @@
                     </a>
                     <!-- Left links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0"  style="margin-left: 29% !important">
-                    <li class="nav-item">
+                    <li>
+                    <a href="{{ route('dealer.home') }}"> <button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                    class="fa fa-home"></i> Home</button></a>
+                    </li>
+                    <li>
+                    <a href="{{ route('all_cars') }}"> <button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                    class="fa fa-home"></i> View All</button></a>
+                    </li>
+                    
+                    <li>
+                    <a href="{{ route('home') }}"> <button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                    class="fa fa-home"></i> Search</button></a>
+                    </li>
+                    <!-- <li class="nav-item">
                         <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="{{ route('all_cars') }}">View All</a>
-                        </li>
-                        <li class="nav-item">
+                        </li> -->
+                        <!-- <li class="nav-item">
                         <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="{{ route('home') }}">Search</a>
-                        </li>
-                        <li class="nav-item">
+                        </li> -->
+                        <li>
+                        <a href="{{ route('dealer.mycars') }}"><button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                class="fa fa-car"></i> My Cars</button></a>
+                        </li>         
+
+                        <!-- <li class="nav-item">
                             <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="#0">My Cars</a>
-                        </li>
-                        <li class="nav-item">
+                        </li> -->
+                        <!-- <li class="nav-item">
                             <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="#1">Subscriptions</a>
-                        </li>
-                        <li class="nav-item">
+                        </li> -->
+                        <!-- <li class="nav-item">
+                        <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="{{ route('home') }}">Search</a>
+                        </li> -->
+                        <!-- <li class="nav-item">
                             <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="#2">Sales</a>
-                        </li>
+                        </li> -->
                         
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="#3">Add Car</a>
-                        </li>
+                        </li> -->
 
                     </ul>
                     <!-- Left links -->

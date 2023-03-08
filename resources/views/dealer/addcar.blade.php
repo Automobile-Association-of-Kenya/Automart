@@ -100,32 +100,32 @@
                 <div class="col-md-2 mt-5 pt-5">
                     <!-- sidebar -->
                     <div class="col-md-12 ">
-                        <a href="{{route('dealer.home')}}"> <button type="submit" class="btn  btn-block"
-                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                        <a href="{{ route('dealer.home') }}"> <button type="submit" class="btn  btn-block"
+                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-home"></i> Home</button></a>
                     </div>
                     </br>
 
                     <div class="col-md-12">
-                        <a href="{{route('dealer.mycars')}}"><button type="submit" class="btn  btn-block"
+                        <a href="{{ route('dealer.mycars') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-car"></i> My Cars</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="{{route('dealer.subscriptions')}}"><button type="submit" class="btn  btn-block"
+                        <a href="{{ route('dealer.subscriptions') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="{{route('dealer.mysales')}}"><button type="submit" class="btn  btn-block"
+                        <a href="{{ route('dealer.mysales') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-money-bill"></i> My Sale</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="{{route('dealer.addcar')}}"><button type="submit" class="btn  btn-block"
+                        <a href="{{ route('dealer.addcar') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-plus"></i> Add Car</button></a>
                     </div>
@@ -295,8 +295,7 @@
                                 </div>
                                 <div class="col-6 col-md-4">
                                     <input class="form-control" type="text" id="gt-vin" tabindex="11"
-                                        name="vin" placeholder="Plate number" 
-                                        style="text-transform:uppercase">
+                                        name="vin" placeholder="Plate number" style="text-transform:uppercase">
                                 </div>
                             </div>
 
@@ -510,13 +509,18 @@
                                 <div class="col-6 col-lg-4">
                                     <label class="btn btn-success btn-file"><br>
                                         Upload Cover Photo
-                                        <input class="form-control" type="file"
-                                            name="cover_photo" tabindex="21" style="display:none" value="Upload Photos"
-                                            multiple=""><br>
+                                        <input type="hidden" name="removedImages1" class="removedImgs1" value=''>
+                                        <input class="form-control" type="file" id="fileupload1"  name="cover_photo" tabindex="21"
+                                            style="display:none" value="Upload Photos" multiple=""><br>
                                     </label></p>
                                 </div>
                                 <div class="col-sm-6 col-lg-8" style="color:#000;">
                                     <span class="instructions">This is the image that will appear on the top.</span>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mt-1">
+                                        <div class="images-preview-div1" style="margin:1%"> </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -524,8 +528,8 @@
                                     <label class="btn btn-success btn-file"><br>
                                         Upload Photos
                                         <input type="hidden" name="removedImages" value=''>
-                                        <input class="form-control" id="fileupload" type="file"
-                                            name="images[]" tabindex="21" style="display:none" value="Upload Photos"
+                                        <input class="form-control" id="fileupload" type="file" name="images[]"
+                                            tabindex="21" style="display:none" value="Upload Photos"
                                             multiple=""><br>
                                     </label></p>
                                 </div>
@@ -569,14 +573,16 @@
                                 <div class="col-md-8">
                                     <input type="checkbox" value="Rear View Camera" id="Rear View Camera"
                                         name="features[]" required>&nbsp;&nbsp;&nbsp;
-                                    <a class="text-center p-3" style="color:#000;" href="/Terms and conditions to seller.pdf"
-                                        target="_blank">Terms And Conditions<br></a>
-                                        <div class="" style="color:#000;">
-                                    By clicking this, you have agreed to terms and conditions
-                                        </div>
+                                    <a class="text-center p-3" style="color:#000;"
+                                        href="/Terms and conditions to seller.pdf" target="_blank">Terms And
+                                        Conditions<br></a>
+                                    <div class="" style="color:#000;">
+                                        By clicking this, you have agreed to terms and conditions
+                                    </div>
                                 </div>
                             </div>
-                            <button style="background: #00472F;color:white;"  type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+                            <button style="background: #00472F;color:white;" type="submit"
+                                class="btn btn-primary btn-block mb-4">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -648,7 +654,7 @@
                                 <!-- @foreach (json_decode($vehicle->images, true) as $image)
     -->
                                 <!-- <a href="{{ url('public/images/' . json_decode($vehicle->images, true)[0]) }}" class="portfolio-box">
-                                                                                <img src="{{ url('public/images/' . json_decode($vehicle->images, true)[0]) }}" class="img-responsive" alt="--">
+                                                                                    <img src="{{ url('public/images/' . json_decode($vehicle->images, true)[0]) }}" class="img-responsive" alt="--">
     @endforeach -->
                                 <div class="col-6 col-md-4" style="padding-bottom: 15px;">
                                     <div class="card" style="color: #000">
@@ -951,9 +957,12 @@
                                         <option class="level-0" value="Turkana " data-value="48">Turkana </option>
                                         <option class="level-0" value="West Pokot" data-value="48">West Pokot</option>
                                         <option class="level-0" value="Samburu" data-value="48">Samburu</option>
-                                        <option class="level-0" value="Trans-Nzoia" data-value="48">Trans-Nzoia </option>
-                                        <option class="level-0" value="Uasin Gishu" data-value="48">Uasin Gishu</option>
-                                        <option class="level-0" value="Elgeyo-Marakwet" data-value="48">Elgeyo-Marakwet
+                                        <option class="level-0" value="Trans-Nzoia" data-value="48">Trans-Nzoia
+                                        </option>
+                                        <option class="level-0" value="Uasin Gishu" data-value="48">Uasin Gishu
+                                        </option>
+                                        <option class="level-0" value="Elgeyo-Marakwet" data-value="48">
+                                            Elgeyo-Marakwet
                                         </option>
                                         <option class="level-0" value="Nandi" data-value="48">Nandi</option>
                                         <option class="level-0" value="Baringo" data-value="48">Baringo </option>
@@ -1254,8 +1263,8 @@
                                     <label class="btn btn-success btn-file"><br>
                                         Upload Photos
                                         <input type="hidden" name="removed-images" class="removedImgs">
-                                        <input class="form-control" id="fileupload" type="file"
-                                            name="images[]" tabindex="21" style="display:none" value="Upload Photos"
+                                        <input class="form-control" id="fileupload" type="file" name="images[]"
+                                            tabindex="21" style="display:none" value="Upload Photos"
                                             multiple=""><br>
                                     </label></p>
                                 </div>
@@ -1304,7 +1313,8 @@
                                     By clicking this, you have agreed to terms and conditions
                                 </div>
                             </div>
-                            <button type="submit" style="background: #00472F;color:white;"  class="btn btn-primary btn-block mb-4">Submit</button>
+                            <button type="submit" style="background: #00472F;color:white;"
+                                class="btn btn-primary btn-block mb-4">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -1338,12 +1348,13 @@
                     success: function(result) {
                         $('#car_model').html(
                             '<option value="">Select Car Model</option>');
-                            result.data.forEach(model => {
-                        document.querySelector('#car_model').innerHTML+='<option value="' + model
-                                                    .id + '">' + model.name +
-                                                    '</option>';
-                    
-                    });
+                        result.data.forEach(model => {
+                            document.querySelector('#car_model').innerHTML +=
+                                '<option value="' + model
+                                .id + '">' + model.name +
+                                '</option>';
+
+                        });
                     }
                 });
             })
@@ -1353,53 +1364,102 @@
     <script>
         $(function() {
             // Multiple images preview with JavaScript
-            
+
             var previewImages = function(input, imgPreviewPlaceholder) {
                 if (input.files) {
                     var noFiles = input.files.length;
                     for (let i = 0; i < noFiles; i++) {
-                        if(input.files[i].size>5000000){
-                            alert(input.files[i].name+' is greater than 5mb');
-                            input.value=''
+                        if (input.files[i].size > 5000000) {
+                            alert(input.files[i].name + ' is greater than 5mb');
+                            input.value = ''
                             break;
                         }
                         var reader = new FileReader();
                         reader.onload = function(event) {
-                            const div= document.createElement('span');
-                            div.classList.add('img_'+i)
-                            div.style.cssText='position:relative'
+                            const div = document.createElement('span');
+                            div.classList.add('img_' + i)
+                            div.style.cssText = 'position:relative'
                             const img = document.createElement('img');
-                            img.setAttribute('src',event.target.result);
-                            const deleter=document.createElement('span');
-                            deleter.innerHTML='<i class="fa fa-times-circle"></i>'
-                            deleter.style.cssText='cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
-                            deleter.addEventListener('click',e=>{
-                                removeImage(input,imgPreviewPlaceholder,i);
+                            img.setAttribute('src', event.target.result);
+                            const deleter = document.createElement('span');
+                            deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
+                            deleter.style.cssText =
+                                'cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
+                            deleter.addEventListener('click', e => {
+                                removeImage(input, imgPreviewPlaceholder, i);
                             })
                             div.appendChild(img);
                             div.appendChild(deleter);
-                                document.querySelector(imgPreviewPlaceholder).appendChild(div)
-                            
+                            document.querySelector(imgPreviewPlaceholder).appendChild(div)
+
                         }
                         reader.readAsDataURL(input.files[i]);
                     }
                 }
             };
             $('#fileupload').on('change', function() {
-                document.querySelector('.removedImgs').value=''
+                document.querySelector('.removedImgs').value = ''
                 previewImages(this, 'div.images-preview-div');
             });
 
-        const removeImage=(input, imgPreviewPlaceholder,index)=>{
-            let removedImages=document.querySelector('.removedImgs').value;
-            removedImages=removedImages+=index+',';
-            document.querySelector('.removedImgs').value=removedImages
-            const el=document.querySelector('.img_'+index);
-            el.parentElement.removeChild(el)
-        }
+            const removeImage = (input, imgPreviewPlaceholder, index) => {
+                let removedImages = document.querySelector('.removedImgs').value;
+                removedImages = removedImages += index + ',';
+                document.querySelector('.removedImgs').value = removedImages
+                const el = document.querySelector('.img_' + index);
+                el.parentElement.removeChild(el)
+            }
         });
+    </script>
+    <script>
+        $(function() {
+            // Multiple images preview with JavaScript
 
-        
+            var previewImages = function(input, imgPreviewPlaceholder) {
+                if (input.files) {
+                    var noFiles = input.files.length;
+                    for (let i = 0; i < noFiles; i++) {
+                        if (input.files[i].size > 5000000) {
+                            alert(input.files[i].name + ' is greater than 5mb');
+                            input.value = ''
+                            break;
+                        }
+                        var reader = new FileReader();
+                        reader.onload = function(event) {
+                            const div = document.createElement('span');
+                            div.classList.add('img_' + i)
+                            div.style.cssText = 'position:relative'
+                            const img = document.createElement('img');
+                            img.setAttribute('src', event.target.result);
+                            const deleter = document.createElement('span');
+                            deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
+                            deleter.style.cssText =
+                                'cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
+                            deleter.addEventListener('click', e => {
+                                removeImage(input, imgPreviewPlaceholder, i);
+                            })
+                            div.appendChild(img);
+                            div.appendChild(deleter);
+                            document.querySelector(imgPreviewPlaceholder).appendChild(div)
+
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            };
+            $('#fileupload1').on('change', function() {
+                document.querySelector('.removedImgs').value = ''
+                previewImages(this, 'div.images-preview-div1');
+            });
+
+            const removeImage = (input, imgPreviewPlaceholder, index) => {
+                let removedImages = document.querySelector('.removedImgs').value;
+                removedImages = removedImages += index + ',';
+                document.querySelector('.removedImgs').value = removedImages
+                const el = document.querySelector('.img_' + index);
+                el.parentElement.removeChild(el)
+            }
+        });
     </script>
     <script>
         @if (session('loader'))

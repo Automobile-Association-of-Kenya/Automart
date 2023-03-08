@@ -61,8 +61,13 @@ class sellController extends Controller
         // }
         if ($request->has('cover_photo')) {
             $image = $request->cover_photo;
-            $name = $image->getClientOriginalName();
-            $image->move(public_path() . '/images/', $name);
+            $name = time().$image->getClientOriginalName();
+            $img = Image::make($image);
+            $img->resize(480, 293, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $img->save(public_path('images/'.$name));
 
             //add watermark
             $img = Image::make(public_path('images/'.$name));
@@ -79,8 +84,13 @@ class sellController extends Controller
         if ($request->hasfile('images')) {
 
             foreach ($request->file('images') as $image) {
-                $name = $image->getClientOriginalName();
-                $image->move(public_path() . '/images/', $name);
+                $name = time().$image->getClientOriginalName();
+                $img = Image::make($image);
+                $img->resize(480, 293, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $img->save(public_path('images/'.$name));
                 $data[] = $name;
 
                 //add watermark

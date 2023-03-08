@@ -331,10 +331,5 @@
                                 type: 'image'
                             });
                         });
-                        // $('.parent-container').magnificPopup({
-                        //     delegate: 'img', // child items selector, by clicking on it popup will open
-                        //     type: 'image'
-                        //     // other options
-                        // });
                     </script>
                 @endsection
