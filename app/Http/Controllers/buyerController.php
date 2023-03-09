@@ -7,6 +7,7 @@ use App\Models\CarMake;
 use App\Models\Caronsells;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Passwords\PasswordBroker;
 
@@ -20,6 +21,40 @@ class buyerController extends Controller
     {
         return view('login');
     }
+    public function register(Request $req){
+        
+       
+
+        $validator = $this->validate($req,[
+            'name' => 'required',
+            'email'  => 'required',
+            'number'  => 'required',
+            'password' => 'required|confirmed|min:8',
+            'password' => 'required|same:password',
+        ]);
+       
+        if (!$validator) {
+            # code...
+            return response->json([
+                'errors'=>$validate->errors()
+            ],422);
+        }
+            else
+            {
+                 $encpass = Hash::make($req->password);
+                 $register= new User;
+                 $register->name = $req->name;
+                 $register->number = $req->number;
+                 $register->email = $req->email;
+                 $register->password = $encpass;
+                 $register->save();
+                return response()->json([
+                    'message' => 'Account created'
+                ]);
+            }
+    }    
+        
+    
     public function show_reg()
     {
         return view('buyerReg');
@@ -84,7 +119,7 @@ class buyerController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            if (Auth::user()->dName == '') {
+            if (Auth::user()->name == '') {
                 $request->session()->put('user', Auth::user());
                 return view('buyer');
             } else {
@@ -109,4 +144,6 @@ class buyerController extends Controller
     {
         return view('dealer');
     }
+
+    
 }

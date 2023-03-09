@@ -1,5 +1,5 @@
-{{-- @extends('layouts.main')
-@section('content')
+@extends('layouts.main')
+{{--@section('content')
     <!-- show success message -->
     @if (session('successMsg'))
         <div class="alert alert-success" role="alert">
@@ -1054,7 +1054,7 @@
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title">Year of Manufacture: <b>{{ $vehicle->year }}</b></h6>
-                                <h6 class="card-title">Price: <b>Ksh. {{ number_format("$vehicle->price", 2) }}</b></h6>
+                                <h6 class="card-title">Price: <b>Ksh. {{ number_format("$vehicle->price") }}</b></h6>
                                 <h6 class="card-title">Make&Model: <b>{{ ucwords($vehicle->make) }} /
                                         {{ ucwords($vehicle->model) }}</b></h6>
                                 <h6 class="card-title">Mileage: <b>{{ number_format("$vehicle->miles", 1) }} Kms</b></h6>
@@ -1128,7 +1128,7 @@
                                                 <div class="for">For Sale</div>
                                                 <div class="price-box">
 
-                                                    <span>Ksh. {{ number_format("$vehicle->price", 2) }}</span>
+                                                    <span>Ksh. {{ number_format("$vehicle->price") }}</span>
                                                 </div>
                                                 <img class="d-block w-100"
                                                     src="{{ url('images/' . json_decode($vehicle->images, true)[0]) }}"
@@ -1197,7 +1197,7 @@
                                                     </li>
                                                     <li>
                                                         <i class="flaticon-way"></i>
-                                                        {{ number_format("$vehicle->miles", 1) }} Kms
+                                                        {{ number_format("$vehicle->miles") }} Kms
                                                     </li>
                                                     <li>
                                                         <i class="flaticon-manual-transmission"></i>
@@ -1208,7 +1208,7 @@
                                                     </li>
                                                     <li>
                                                         <i class="flaticon-gear"></i> Ksh.
-                                                        {{ number_format("$vehicle->price", 2) }}
+                                                        {{ number_format("$vehicle->price" )}}
                                                     </li>
                                                     <li>
                                                         <i class="flaticon-calendar-1"></i>{{ $vehicle->year }}
