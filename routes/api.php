@@ -7,6 +7,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\AddmodelController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\buyerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,5 @@ Route::post('addmodel', [AddmodelController::class,'add']);
 
 Route::get('resizeImage', [ImageController::class, 'resizeImage']);
 Route::post('resizeImagePost', [ImageController::class, 'store'])->name('resizeImagePost');
+Route:: post('register',[buyerController::class, 'register']);
+

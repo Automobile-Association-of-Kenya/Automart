@@ -138,7 +138,7 @@
                                             <!-- <span class="review-no">41 reviews</span> -->
                                         </div>
                                         <p class="product-description">{{ $vehicle->description }}</p>
-                                        <h4 class="price">current price: <span>KES {{ $vehicle->price }}</span></h4>
+                                        <h4 class="price">current price: <span>KES {{number_format( $vehicle->price )}}</span></h4>
                                         <i class="flaticon-pin"></i>{{ $vehicle->county }}
 
                                         <div class="action" style="text-align:left, font-family:fantasy">

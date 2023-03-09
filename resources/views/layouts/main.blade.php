@@ -1,11 +1,11 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Automart | AAKenya</title>
+    <title>AAutomart | AAKenya</title>
     <!-- favicon -->
     <link rel="shortcut icon" href="{{ url('favicon/favicon.ico') }}">
     <link rel="apple-touch-icon" sizes="57x57" href="{{ url('favicon/apple-icon-57x57.png') }}">
@@ -96,7 +96,7 @@
 
         .bg-white {
             --bg-opacity: 1;
-            /* background-color: #fed925; */
+            background-color: #fed925;
             background-color: rgba(255, 255, 255, var(--bg-opacity))
         }
 
@@ -435,7 +435,7 @@
 
     <style>
         body {
-            background-color: #FFFFFF;
+            background-color: #CBBC27;
             font-family: 'Nunito', sans-serif;
             color: #fff;
             padding-top: 10px;
@@ -449,11 +449,11 @@
 <body class="antialiased">
 
     <div class="container-xxl2"
-        style="background-color : #FFFFFF !Important; width: 100% !Important;  padding-bottom : 10px !Important; padding-left : 25px; padding-right : 25px">
+        style="background-color : rgba(0,0,0, 0.3) !Important; width: 98% !Important;  padding-bottom : 10px !Important;">
 
         {{-- <div class="row" style="color: #fff; padding-bottom: 15px;">
             <div class="col-md-8">
-                <a href="{{ route('home') }}"></a><h1>Automart | Home</h1>
+                <h1>AAutomart | AAKENYA</h1>
                 <h6>A PRODUCT OF AUTOMOBILE ASSOCIATION OF KENYA</h6>
             </div>
             <div class="col-md-4" style="padding-top: 25px; padding-left: 20px; ">
@@ -461,6 +461,43 @@
                         style="font-size:24px"><i class="fa fa-phone"></i></button></h2>
             </div>
         </div> --}}
+
+
+        <nav id="sidebar" class="nav-sidebar" style="background: #00472F">
+        <!-- Close btn-->
+        <div id="dismiss">
+            <i class="fa fa-close"></i>
+        </div>
+        <div class="sidebar-inner">
+            <div class="sidebar-logo">
+                <a href="/" style="color:#fff">
+                    {{-- <img src="{{url('assets/img/logos/black-logo.png')}}" alt="sidebarlogo"> --}}
+                    AAutomart | AAKENYA
+                </a>
+            </div>
+
+            <div >
+                <h3 style="color: #fff;margin-top:5px;text-align:center; margin-bottom: 0">I want to..</h3>
+                <ul class="navbar-nav " style="width:100%; margin:3px; margin-top:0 !important">
+                    <li class="nav-item dropdown active" style="width:100%;">
+                        <a class="nav-link font-weight-bold" style="width:100%;text-align:center" href="{{ route('all_cars') }}"> 
+                            <button class="btn btn-warning" style="width:95%;"> <span style="color: #00472F">Buy a car</span></button>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown active" style="width:100%;">
+                        <a class="nav-link font-weight-bold" style="width:100%;text-align:center" href="{{ route('dealerHome') }}"> 
+                            <button class="btn btn-warning" style="width:95%;"> <span style="color: #00472F"> Sell a Car</span></button>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <a href="{{ route('login') }}" style="margin: 10px;text-align:left;" >
+                    <button class="btn btn-outline-warning"> Sign in</button>
+                </a>
+            </div>
+            </nav> 
+
 
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #00472F;">
@@ -477,49 +514,37 @@
                 <div class="collapse navbar-collapse m-5" id="navbarSupportedContent">
                     <!-- Navbar brand -->
                     <a class="navbar-brand mt-2 mt-lg-0" href="{{ route('home') }}">
-                        <h1 style="font-family:Garamond;color:white;margin-left:5%!important">Automart | Home</h1>
+                        <h1 style="font-family:Garamond;color:white;margin-left:5%!important">AAutomart | AA Kenya</h1>
                     </a>
                     <!-- Left links -->
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 10% !important">
-                    
-                    <li class="nav-item">
-                            <a class="nav-link" style="font-size: 20px;color:#CBBC27"
-                                href="{{ route('home') }}">Search</a>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 30% !important">
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: 25px;color:#CBBC27" href="{{ route('all_cars') }}">All Cars</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="font-size: 20px;color:#CBBC27"
-                                href="{{ route('all_cars') }}">View All</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="font-size: 20px;color:#CBBC27"
-                                href="{{ route('dealerHome') }}">Sell</a>
+                            <a class="nav-link" style="font-size: 25px;color:#CBBC27" href="{{ route('dealerHome') }}">Sell Your Car</a>
                         </li>
                         <!--<li class="nav-item">-->
-                        <!--<a class="nav-link" style="font-size: 20px;color:#CBBC27" href="{{ route('dealerHome') }}">Register as Seller</a>-->
+                        <!--<a class="nav-link" style="font-size: 25px;color:#CBBC27" href="{{ route('dealerHome') }}">Register as Seller</a>-->
                         <!--</li>-->
                         <!--<li class="nav-item">-->
-                        <!--<a class="nav-link" style="font-size: 20px;color:#CBBC27" href="{{ route('userreg') }}">Register as Buyer</a>-->
+                        <!--<a class="nav-link" style="font-size: 25px;color:#CBBC27" href="{{ route('userreg') }}">Register as Buyer</a>-->
                         <!--</li>-->
                         <li class="nav-item">
-                            <a class="nav-link" style="font-size: 20px;color:#CBBC27"
-                                href="{{ route('login') }}">Login</a>
+                            <a class="nav-link" style="font-size: 25px;color:#CBBC27" href="{{ route('login') }}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="font-size: 20px;color:#CBBC27"
-                                href="{{ route('contact') }}">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="font-size: 20px;color:#CBBC27"
-                                href="/terms">Terms</a>
+                            <a class="nav-link" style="font-size: 25px;color:#CBBC27" href="{{ route('contact') }}">Contact Us</a>
                         </li>
                     </ul>
-                
+                    <div class="float-end"><a class="nav-link" href="#"><button type="button"
+                                class="btn btn-info">Most Liked!</button></a></div>
                     <!-- Left links -->
                 </div>
                 <!-- Collapsible wrapper -->
             </div>
             <!-- Container wrapper -->
-        </nav>
+          </nav>
         <!-- Navbar -->
         <div class="row"
             style="padding-left: 20px;padding-right: 20px; padding-top: 10px; padding-bottom: 10px; color: #fff; ">
@@ -538,8 +563,15 @@
                         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                             <!-- Content -->
                             <h4 class="text-uppercase fw-bold mb-4" style=" color: #00472F;">
-                                <i class="fas fa-gem me-3"></i>Automart | AAkenya
+                                <i class="fas fa-gem me-3"></i>AAutomart | AAkenya
                             </h4>
+                            <p>
+                                Thinking about selling your current vehicle?
+
+                                Bring your car for an appraisal, and get a free written offer good for 7 days.
+
+                                Submit your vehicle information now.
+                            </p>
                         </div>
                         <!-- Grid column -->
 

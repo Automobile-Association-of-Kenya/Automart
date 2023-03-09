@@ -5,7 +5,8 @@
 
 <head>
     <title>Automart</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <meta charset="utf-8">
 
     <!-- External CSS libraries -->
@@ -179,7 +180,7 @@
         <div id="dismiss">
             <i class="fa fa-close"></i>
         </div>
-<!-- 
+ 
         <ul class="navbar-na" style="width: 100%;margin-top:40px;">
 
             <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
@@ -189,10 +190,10 @@
                 <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
                     <a class="nav-link" href="{{ route('all_cars') }}" style="color: #fff;">All Cars</a>
                 </li>
-                <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
+                <!-- <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
                     <a class="nav-link" href="{{ route('dealerHome') }}" style="color: #fff;">Sell
                         Car</a>
-                </li>
+                </li> -->
                 <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
                     <a class="nav-link" href="/terms" style="color: #fff;">Terms</a>
                 </li>

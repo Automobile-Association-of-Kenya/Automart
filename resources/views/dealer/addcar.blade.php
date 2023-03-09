@@ -161,8 +161,8 @@
                             <label class="gt-title" for="gt-title">Your listing title</label>
                             <input class="form-control" type="text" id="gt-title" tabindex="2" name="title"
                                 placeholder="Enter listing title" required style="text-transform:uppercase">
-                            <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
-                                <div class="col-6">
+                            <div class="row" style="padding-top: 10px; padding-bottom: 1px;">
+                                <div class="col-md-12">
                                     <select name="country" id="country" class="gt-select" tabindex="3" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
                                         <option value="-1" selected="selected">Country</option>
@@ -174,7 +174,7 @@
                                         <option class="level-0" value="Other" data-value="48">Other</option>
                                     </select>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-md-12 mt-1">
                                     <select name="county" id="county" tabindex="4" data-value="" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
                                         <option value="" data-value="-1" selected="selected">County
@@ -234,7 +234,7 @@
                                 </div>
                             </div>
                             <div class="row" style="padding-bottom: 10px;">
-                                <div class="col-6">
+                                <div class="col-md-6 ">
                                     <label>Make</label>
                                     <!-- <input class="form-control" type="text" name="make" placeholder="Enter Vehicle Make" style="text-transform:uppercase" required> -->
                                     <select class="form-control" id="car_make" name="make" aria-hidden="true"
@@ -247,7 +247,7 @@
 
                                     </select>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-md-6 ">
                                     <label>Model</label>
                                     <select class="" name="model" id="car_model" required aria-hidden="true"
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;"
@@ -285,22 +285,22 @@
                                 <option value="2000">2000</option>
                             </select>
                             <div class="row" style="padding-top:10px;">
-                                <div class="col-6 col-md-4">
+                                <div class="col-6 col-md-6">
                                     <input class="form-control" type="number" id="price" name="price"
                                         placeholder="selling Price (Ksh)" required>
                                 </div>
-                                <div class="col-6 col-md-4">
+                                <div class="col-6 col-md-6">
                                     <input class="form-control" type="number" id="miles" name="miles"
                                         placeholder="mileage (Kms)" required>
                                 </div>
-                                <div class="col-6 col-md-4">
+                                <!-- <div class="col-6 col-md-4">
                                     <input class="form-control" type="text" id="gt-vin" tabindex="11"
                                         name="vin" placeholder="Plate number" style="text-transform:uppercase">
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="row" style="padding-top:10px; padding-bottom:10px;">
-                                <div class="col-6 col-md-4">
+                                <div class="col-md-12">
                                     <select id="exterior" tabindex="8" name="exterior" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
                                         <option value="-1" selected="selected">Color</option>
@@ -316,7 +316,7 @@
                                         <option value="Other">Other</option>
                                     </select>
                                 </div>
-                                <div class="col-6 col-md-4">
+                                <div class="col-md-12 mt-2">
                                     <select id="interior" value="" tabindex="4" name="interior" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
                                         <option value="-1" selected="selected">Interior Type</option>
@@ -325,7 +325,7 @@
                                         <option value="Other">Other</option>
                                     </select>
                                 </div>
-                                <div class="col-6 col-md-4">
+                                <div class="col-md-12 mt-2">
                                     <select id="fuel_type" tabindex="5" name="fuel_type" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
                                         <option value="-1" selected="selected">Fuel Type</option>
@@ -466,7 +466,7 @@
                                 </div>
                             </div>
                             <div class="row" style="padding-top:10px; padding-bottom:15px;">
-                                <div class="col-6">
+                                <div class=" col-md-12">
                                     <label>Transmission</label>
                                     <select id="transmission" name="transmission" tabindex="13" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
@@ -477,7 +477,7 @@
                                         <option value="None">None</option>
                                     </select>
                                 </div>
-                                <div class="col-6">
+                                <!-- <div class="col-6">
                                     <label>Vehicle Type</label>
                                     <select id="vehicle_type" name="vehicle_type" tabindex="14" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
@@ -498,20 +498,20 @@
                                         <option value="Quad Bikes">Quad Bikes</option>
                                         <option value="Other">Other</option>
                                     </select>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="form-outline" style="padding-top:10px; padding-bottom:15px;">
                                 <textarea class="form-control" required placeholder="Enter vehicle listing description." id="description"
                                     name="description" rows="4" style="background: #fff;" required></textarea>
                                 <label class="form-label" for="description">Vehicle Description</label>
                             </div>
-                            <div class="row mb-5">
+                            <div class="row">
                                 <div class="col-6 col-lg-4">
                                     <label class="btn btn-success btn-file"><br>
                                         Upload Cover Photo
                                         <input type="hidden" name="removedImages1" class="removedImgs1" value=''>
                                         <input class="form-control" type="file" id="fileupload1"  name="cover_photo" tabindex="21"
-                                            style="display:none" value="Upload Photos" multiple=""><br>
+                                            style="display:none" value="Upload Photos" ><br>
                                     </label></p>
                                 </div>
                                 <div class="col-sm-6 col-lg-8" style="color:#000;">
@@ -519,7 +519,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mt-1">
-                                        <div class="images-preview-div1" style="margin:1%"> </div>
+                                        <div class="images-preview-div1 col-sm-6" style="margin:10px;width:20px;"> </div>
                                     </div>
                                 </div>
                             </div>
@@ -1045,11 +1045,11 @@
                                     <input class="form-control" type="number" id="miles" name="miles"
                                         placeholder="Enter mileage (Kms)" required>
                                 </div>
-                                <div class="col-6 col-md-4">
+                                <!-- <div class="col-6 col-md-4">
                                     <input class="form-control" type="text" id="gt-vin" tabindex="11"
-                                        name="vin" placeholder="Enter Plate number" required
+                                        name="vin" placeholder="Enter Plate number"
                                         style="text-transform:uppercase">
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="row" style="padding-top:10px; padding-bottom:10px;">
@@ -1230,7 +1230,7 @@
                                         <option value="None">None</option>
                                     </select>
                                 </div>
-                                <div class="col-6">
+                                <!-- <div class="col-6">
                                     <label>Vehicle Type</label>
                                     <select id="vehicle_type" name="vehicle_type" tabindex="14" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
@@ -1251,7 +1251,7 @@
                                         <option value="Quad Bikes">Quad Bikes</option>
                                         <option value="Other">Other</option>
                                     </select>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="form-outline" style="padding-top:10px; padding-bottom:15px;">
                                 <textarea class="form-control" required placeholder="Enter vehicle listing description." id="description"

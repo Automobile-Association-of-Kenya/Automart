@@ -36,13 +36,13 @@ class sellController extends Controller
             'year' => 'required',
             'price' => 'required',
             'miles' => 'required',
-            'vin' => 'required',
+            // 'vin' => 'required',
             'exterior' => 'required',
             'interior' => 'required',
             'fuel_type' => 'required',
             // 'features' => 'required',
             'transmission' => 'required',
-            'vehicle_type' => 'required',
+            // 'vehicle_type' => 'required',
             'description' => 'required',
             'cover_photo' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'images' => 'required|max:10|min:1',
@@ -63,7 +63,7 @@ class sellController extends Controller
             $image = $request->cover_photo;
             $name = time().$image->getClientOriginalName();
             $img = Image::make($image);
-            $img->resize(480, 293, function ($constraint) {
+            $img->resize(300, 293, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
@@ -118,14 +118,14 @@ class sellController extends Controller
         $carOnSell->year = $request->year;
         $carOnSell->price = $request->price;
         $carOnSell->miles = $request->miles;
-        $carOnSell->vin = $request->vin;
+        // $carOnSell->vin = $request->vin;
         $carOnSell->exterior = $request->exterior;
         $carOnSell->interior = $request->interior;
         $carOnSell->fuel_type = $request->fuel_type;
         // $carOnSell->feartures = json_encode($featdata);
         $carOnSell['features'] = json_encode($request->input('features'));
         $carOnSell->transmission = $request->transmission;
-        $carOnSell->vehicle_type = $request->vehicle_type;
+        // $carOnSell->vehicle_type = $request->vehicle_type;
         $carOnSell->description = $request->description;
         $carOnSell->images = json_encode($data);
         $carOnSell->firstname = $request->firstname;

@@ -31,32 +31,32 @@ class dealersController extends Controller
             'email'  => 'required',
             'number' => 'required',
             'number2' => 'optional',
-            'county' => 'required',
-            'dName' => 'required',
+            // 'county' => 'required',
+            // 'dName' => 'required',
             'pass' => 'required|confirmed|min:8',
             'pass' => 'required|same:pass'
         ]);
        
         $user = User::where('email', $request->email)->first();
         $number = User::where('number', $request->number)->first();
-        $dName = User::where('dName', $request->dName)->first();
+        // $dName = User::where('dName', $request->dName)->first();
         if($user == true){
             return redirect(route('dealerreg'))->with('errorMsg', 'Email is already taken');
         }
         if($number == true){
             return redirect(route('dealerreg'))->with('errorMsg', 'Number is already taken');
         }
-        if($dName == true){
-            return redirect(route('dealerreg'))->with('errorMsg', 'dName is already taken');
-        }
+        // if($dName == true){
+        //     return redirect(route('dealerreg'))->with('errorMsg', 'dName is already taken');
+        // }
         $encpass = Hash::make($request->pass);
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->number = $request->number;
         $user->number2 = $request->number2;
-        $user->county = $request->county;
-        $user->dName = $request->dName;
+        // $user->county = $request->county;
+        // $user->dName = $request->dName;
         $user->password = $encpass;
         $user->save();
         

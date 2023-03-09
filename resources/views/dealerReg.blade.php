@@ -53,7 +53,7 @@
                         <input type="number" class="form-control" name="number2" id="number2"
                             placeholder="Your Secondary Phone Number">
                     </div> -->
-                    <div class="container-fluid" style="padding-top:5px; padding-bottom:10px;">
+                    <!-- <div class="container-fluid" style="padding-top:5px; padding-bottom:10px;">
                         <select name="county" id="county" tabindex="4" data-value="" required
                             style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
                             <option value="" data-value="-1" selected="selected">Select Your County</option>
@@ -106,11 +106,11 @@
                             <option class="level-0" value="Kisii" data-value="48">Kisii</option>
                             <option class="level-0" value="Nyamira" data-value="48">Nyamira</option>
                         </select>
-                    </div>
-                    <div class="container-fluid" style="padding-top:5px; padding-bottom:10px;">
+                    </div> -->
+                    <!-- <div class="container-fluid" style="padding-top:5px; padding-bottom:10px;">
                         <input type="text" class="form-control" name="dName" id="dName"
                             placeholder="Preffered Dealer Name" required>
-                    </div>
+                    </div> -->
                     <div class="row" style="padding-bottom:15px; padding-top:px;">
                         <div class="container-fluid" style="padding-top:10px; padding-bottom:15px;">
                             <input id="pass" class="form-control" type="Password" name="pass"
@@ -207,7 +207,7 @@
                                 <input type="text" class="form-control" placeholder="Secondary Phone Number"
                                     aria-label="Address" name="number2">
                             </div> -->
-                            <div class="form-group">
+                            <!-- <div class="form-group">
 
                                 <select name="county" class="" id="county" tabindex="4" data-value="" required
                                     style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
@@ -262,11 +262,11 @@
                                     <option class="level-0" value="Kisii" data-value="48">Kisii</option>
                                     <option class="level-0" value="Nyamira" data-value="48">Nyamira</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
+                            </div> -->
+                            <!-- <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Preferred Dealer Name"
                                     aria-label="State / Country" name="dName">
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
