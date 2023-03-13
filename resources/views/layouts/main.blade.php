@@ -435,7 +435,7 @@
 
     <style>
         body {
-            background-color: #CBBC27;
+            background-color: #FFFFFF;
             font-family: 'Nunito', sans-serif;
             color: #fff;
             padding-top: 10px;
@@ -463,20 +463,20 @@
         </div> --}}
 
 
-        <nav id="sidebar" class="nav-sidebar" style="background: #00472F">
-        <!-- Close btn-->
-        <div id="dismiss">
-            <i class="fa fa-close"></i>
-        </div>
-        <div class="sidebar-inner">
-            <div class="sidebar-logo">
+        <nav id="sidebar" class="nav-sidebar" style="background: #FFFFFF">
+             <!-- Close btn-->
+             <div id="dismiss">
+              <i class="fa fa-close"></i>
+              </div>
+              <div class="sidebar-inner">
+              <!-- <div class="sidebar-logo">
                 <a href="/" style="color:#fff">
                     {{-- <img src="{{url('assets/img/logos/black-logo.png')}}" alt="sidebarlogo"> --}}
                     AAutomart | AAKENYA
                 </a>
-            </div>
+            </div> -->
 
-            <div >
+             <!-- <div >
                 <h3 style="color: #fff;margin-top:5px;text-align:center; margin-bottom: 0">I want to..</h3>
                 <ul class="navbar-nav " style="width:100%; margin:3px; margin-top:0 !important">
                     <li class="nav-item dropdown active" style="width:100%;">
@@ -490,13 +490,13 @@
                         </a>
                     </li>
 
-                </ul>
+                 </ul>
 
-                <a href="{{ route('login') }}" style="margin: 10px;text-align:left;" >
+                 <a href="{{ route('login') }}" style="margin: 10px;text-align:left;" >
                     <button class="btn btn-outline-warning"> Sign in</button>
-                </a>
-            </div>
-            </nav> 
+                 </a>
+               </div>
+             </nav>  -->
 
 
         <!-- Navbar -->
@@ -519,10 +519,10 @@
                     <!-- Left links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 30% !important">
                         <li class="nav-item">
-                            <a class="nav-link" style="font-size: 25px;color:#CBBC27" href="{{ route('all_cars') }}">All Cars</a>
+                            <a class="nav-link" style="font-size: 25px;color:#FFFFFF" href="{{ route('all_cars') }}">All Cars</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="font-size: 25px;color:#CBBC27" href="{{ route('dealerHome') }}">Sell Your Car</a>
+                            <a class="nav-link" style="font-size: 25px;color:#FFFFFF" href="{{ route('dealerHome') }}">Sell Your Car</a>
                         </li>
                         <!--<li class="nav-item">-->
                         <!--<a class="nav-link" style="font-size: 25px;color:#CBBC27" href="{{ route('dealerHome') }}">Register as Seller</a>-->
@@ -531,16 +531,16 @@
                         <!--<a class="nav-link" style="font-size: 25px;color:#CBBC27" href="{{ route('userreg') }}">Register as Buyer</a>-->
                         <!--</li>-->
                         <li class="nav-item">
-                            <a class="nav-link" style="font-size: 25px;color:#CBBC27" href="{{ route('login') }}">Login</a>
+                            <a class="nav-link" style="font-size: 25px;color:#FFFFFF" href="{{ route('login') }}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="font-size: 25px;color:#CBBC27" href="{{ route('contact') }}">Contact Us</a>
+                            <a class="nav-link" style="font-size: 25px;color:#FFFFFF" href="{{ route('contact') }}">Contact Us</a>
                         </li>
                     </ul>
-                    <div class="float-end"><a class="nav-link" href="#"><button type="button"
-                                class="btn btn-info">Most Liked!</button></a></div>
+                    <!-- <div class="float-end"><a class="nav-link" href="#"><button type="button"
+                                class="btn btn-info">Most Liked!</button></a></div> -->
                     <!-- Left links -->
-                </div>
+                <!-- </div> -->
                 <!-- Collapsible wrapper -->
             </div>
             <!-- Container wrapper -->
@@ -553,7 +553,7 @@
 
         <!-- Footer -->
         <footer class="text-center text-lg-start text-muted"
-            style="background-color : #CBBC27 !Important; padding-top: 1px;">
+            style="background-color : #FFFFFF !Important; padding-top: 1px;">
             <!-- Section: Links  -->
             <section class="">
                 <div class="container text-center text-md-start mt-5" style="color: #fff">

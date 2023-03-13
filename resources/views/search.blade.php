@@ -115,7 +115,7 @@
                             <!-- </select> -->
                     </div>
 
-
+<!-- 
                     <select class="select2-selection select2-selection--single" name="model" id="model" required>
                         <option value="Select model" selected>Select Model</option>
                         <option value="147">1473</option>
@@ -1003,7 +1003,7 @@
                             aria-hidden=""></i>&nbsp;SEARCH</button>
                 </form>
             </div>
-        </div> --}}
+        </div> --}} -->
         <!-- <div class="row" style="padding-left: 20px; padding-top: 10px; padding-bottom: 20px; color: #fff;">
         <div class="col-6 col-md-4" style="background-color : rgba(0,0,0, 0.3) !Important;"> -->
         

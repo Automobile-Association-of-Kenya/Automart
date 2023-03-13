@@ -300,7 +300,7 @@
                     <i class="fa fa-linkedin"></i>
                 </a>
             </div> --}} -->
-        <!-- </div> -->
+        </div>
     </nav> 
     <!-- Sidenav end -->
 
@@ -573,7 +573,7 @@
                                         <option value="2021">2021</option>
                                     </select>
                                 </div>
-                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
+                                <!-- <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
                                     <select class="selectpicker search-fields" name="min_mileage">
                                         <option> Minimum Mileage</option>
                                         <option value="0" selected="selected" data-select2-id="13">0</option>
@@ -602,17 +602,17 @@
                                         <option value="450000">450,000</option>
                                         <option value="500000">500,000</option>
                                     </select>
-                                </div>
+                                </div> -->
 
 
-                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
+                                <!-- <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
                                     <input type="text" class="form-control" name="min_engine" id=""
                                         placeholder="Minimum Engine CC">
-                                </div>
-                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
+                                </div> -->
+                                <!-- <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
                                     <input type="text" class="form-control" name="max_engine" id=""
                                         placeholder="Maximum Engine CC">
-                                </div>
+                                </div> -->
                                 <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col mt-3">
                                     <input type="text" class="form-control" name="min_price" id=""
                                         placeholder="Minimum Price">
@@ -621,12 +621,12 @@
                                     <input type="text" class="form-control" name="max_price" id=""
                                         placeholder="Maximum Price">
                                 </div>
-                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 mt-3 search-col mt-3"
+                                <div class="col-xl-8 col-lg-2 col-md-6 col-sm-6 col-6 mt-3 search-col mt-3"
                                     style="text-align: center">
                                     
                                 </div>
-                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 mt-3">
-                                    <button class="btn white-btn btn-search w-100" style="background: #00472F">
+                                <div class="col-xl-4 col-lg-12 col-md-6 col-sm-6 col-md-6 mt-3 " style="align:left">
+                                    <button class="btn white-btn btn-search w-100" style="background: #00472F; text-align:center">
                                         <h4><strong>Proceed </strong></h4>
                                     </button>
                                 </div>

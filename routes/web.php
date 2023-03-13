@@ -85,7 +85,7 @@ Route::get('/terms',function(){
     return view('terms');
 });
 
-///Route::get('/getCarMakes', 'VehicleController@getCarMakes')->name('getCarMakes');
+Route::get('/getCarMakes', 'VehicleController@getCarMakes')->name('getCarMakes');
 
 
 Route::post('fetch/car-models',[VehicleController::class,'getModels'])->name('carmodels.fetch');
