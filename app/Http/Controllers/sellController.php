@@ -63,23 +63,23 @@ class sellController extends Controller
             $image = $request->cover_photo;
             $name = time().$image->getClientOriginalName();
             $img = Image::make($image);
-            $img->resize(300, 293, function ($constraint) {
+            $img->resize(400, 293, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
             $img->save(public_path('images/'.$name));
 
             //add watermark
-            $img = Image::make(public_path('images/'.$name));
-            $img->text(' '.$request->firstname.' '.$request->lastname, 150, 120, function($font) {  
-                $font->file(public_path('assets/fonts/font.ttf'));  
-                $font->size(30);  
-                $font->color('#CECECE');  
-                $font->align('center');  
-                $font->valign('center');  
-                $font->angle(0);  
-            });
-            $img->save(public_path('images/'.$name));
+            // $img = Image::make(public_path('images/'.$name));
+            // $img->text(' '.$request->firstname.' '.$request->lastname, 70, 50, function($font) {  
+            //     $font->file(public_path('assets/fonts/font.ttf'));  
+            //     $font->size(30);  
+            //     $font->color('#CECECE');  
+            //     $font->align('center');  
+            //     $font->valign('center');  
+            //     $font->angle(0);  
+            // });
+            // $img->save(public_path('images/'.$name));
         }
         if ($request->hasfile('images')) {
 
@@ -93,17 +93,17 @@ class sellController extends Controller
                 $img->save(public_path('images/'.$name));
                 $data[] = $name;
 
-                //add watermark
-                $img = Image::make(public_path('images/'.$name));
-                $img->text(' '.$request->firstname.' '.$request->lastname, 150, 120, function($font) {  
-                    $font->file(public_path('assets/fonts/font.ttf'));  
-                    $font->size(30);  
-                    $font->color('#CECECE');  
-                    $font->align('center');  
-                    $font->valign('center');  
-                    $font->angle(0);  
-                });
-                $img->save(public_path('images/'.$name));
+                // //add watermark
+                // $img = Image::make(public_path('images/'.$name));
+                // $img->text(' '.$request->firstname.' '.$request->lastname, 150, 120, function($font) {  
+                //     $font->file(public_path('assets/fonts/font.ttf'));  
+                //     $font->size(30);  
+                //     $font->color('#CECECE');  
+                //     $font->align('center');  
+                //     $font->valign('center');  
+                //     $font->angle(0);  
+                // });
+                // $img->save(public_path('images/'.$name));
             }
         }
         $prefix = "GWAAK";
