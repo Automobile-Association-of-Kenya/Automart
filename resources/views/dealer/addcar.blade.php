@@ -167,11 +167,11 @@
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
                                         <option value="-1" selected="selected">Country</option>
                                         <option class="level-0" value="Kenya" data-value="41">Kenya</option>
-                                        <option class="level-0" value="Tanzania" data-value="48">Tanzania</option>
+                                        <!-- <option class="level-0" value="Tanzania" data-value="48">Tanzania</option>
                                         <option class="level-0" value="Uganda" data-value="48">Uganda</option>
                                         <option class="level-0" value="Rwanda" data-value="48">Rwanda</option>
                                         <option class="level-0" value="Burundi" data-value="48">Burundi</option>
-                                        <option class="level-0" value="Other" data-value="48">Other</option>
+                                        <option class="level-0" value="Other" data-value="48">Other</option> -->
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-1">
@@ -519,7 +519,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mt-1">
-                                        <div class="images-preview-div1 col-sm-6" style="margin:10px;width:20px;"> </div>
+                                        <div class="images-preview-div1" style="margin:10px;width:20px;"> </div>
                                     </div>
                                 </div>
                             </div>
@@ -1066,6 +1066,11 @@
                                         <option value="Dark Blue">Dark Blue</option>
                                         <option value="Brown">Brown</option>
                                         <option value="Yellow">Yellow</option>
+                                        <option value="Red">Red</option>
+                                        <option value="Grey">Grey</option>
+                                        <option value="Bronze">Bronze</option>
+                                        <option value="Maroon">Orange</option>
+                                        <option value="Maroon">Maroon</option>
                                         <option value="Other">Other</option>
                                     </select>
                                 </div>
@@ -1074,7 +1079,7 @@
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
                                         <option value="-1" selected="selected">Select Interior Type</option>
                                         <option value="Brown">Leather</option>
-                                        <option value="Yellow">Cloth</option>
+                                        <option value="Yellow">Fabric</option>
                                         <option value="Other">Other</option>
                                     </select>
                                 </div>

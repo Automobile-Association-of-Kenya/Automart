@@ -7,7 +7,7 @@
 <style>
     p{
         padding: 2px;
-        color:#00472F
+        color:#000000
     }
 </style>
 <br><br>

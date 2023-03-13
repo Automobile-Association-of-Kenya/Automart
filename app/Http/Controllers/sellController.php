@@ -63,7 +63,7 @@ class sellController extends Controller
             $image = $request->cover_photo;
             $name = time().$image->getClientOriginalName();
             $img = Image::make($image);
-            $img->resize(400, 293, function ($constraint) {
+            $img->resize(480, 293, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
