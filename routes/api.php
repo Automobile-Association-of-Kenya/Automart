@@ -31,8 +31,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post("add", [VehicleController::class, 'add']);
     Route::get("search/{make}", [VehicleController::class, 'search']);
 
-    Route::get('models', [VehicleController::class, 'fetchmodels']);
-    Route::get('makes', [VehicleController::class, 'fetchmakes']);
+   
+    
     
 });
 
@@ -43,4 +43,6 @@ Route::post('addmodel', [AddmodelController::class,'add']);
 Route::get('resizeImage', [ImageController::class, 'resizeImage']);
 Route::post('resizeImagePost', [ImageController::class, 'store'])->name('resizeImagePost');
 Route:: post('register',[buyerController::class, 'register']);
+Route::get('models', [VehicleController::class, 'fetchmodels']);
+Route::get('makes', [VehicleController::class, 'fetchmakes']);
 
