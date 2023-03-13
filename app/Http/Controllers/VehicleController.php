@@ -164,7 +164,7 @@ class VehicleController extends Controller
     }
     public function fetchMakes(Request $request)
     {
-       $makes = CarMake::all()->paginate(10);
+       $makes = CarMake::all();
        return CarMakeResource::collection($makes);
     }
     public function getModels(Request $request)
