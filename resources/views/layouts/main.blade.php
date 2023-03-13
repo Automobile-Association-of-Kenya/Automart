@@ -556,7 +556,7 @@
             style="background-color : #FFFFFF !Important; padding-top: 1px;">
             <!-- Section: Links  -->
             <section class="">
-                <div class="container text-center text-md-start mt-5" style="color: #fff">
+                <div class="container text-center text-md-start mt-5" style="color: #000000">
                     <!-- Grid row -->
                     <div class="row mt-3">
                         <!-- Grid column -->
