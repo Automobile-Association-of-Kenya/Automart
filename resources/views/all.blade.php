@@ -1047,7 +1047,7 @@
                         <div class="card" style="color: #000">
                             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                                 <img src="{{ url('images/' . json_decode($vehicle->images, true)[0]) }}" style=""
-                                    class="img-fluide" width="100%" height="300px" />
+                                    class="img-fluide" width="200px" height="500px" />
                                 <a href="{{ route('details', $vehicle->id) }}">
                                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                                 </a>
@@ -1132,7 +1132,7 @@
                                                 </div>
                                                 <img class="d-block w-100"
                                                     src="{{ url('images/' . json_decode($vehicle->images, true)[0]) }}"
-                                                    width="170px" height="300px" alt="car">
+                                                    width="200px" height="500px" alt="car">
 
                                                 <div class="carbox-overlap-wrapper">
                                                     <div class="overlap-box">
