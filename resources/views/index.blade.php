@@ -656,9 +656,9 @@
                 @foreach ($vehicles as $item)
             
                     <div class="slide slide-box">
-                        <div class="car-box">
+                        <div class="car-box" style="width:100%; height=100%">
                             <a href="{{ route('details', $item->id) }}">
-                            <div class="car-image">
+                            <div class="car-image" style="width:100%; height=100%">
                                 <img class="d-block w-100" src="{{ url('images/' .json_decode($item->images)[0]) }}"
                                     alt="car-photo">
                                 <div class="tag">Best Deal</div>
@@ -689,7 +689,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="footer clearfix" style="text-align: center;background:rgb(190, 186, 186)">
+                            <div class="footer clearfix" style="text-align: center; width:100%; height=30%; background:rgb(190, 186, 186)">
                                 <div class="w-100 ratings">
                                     <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i
                                         class="fa fa-envelope text-success"></i>
