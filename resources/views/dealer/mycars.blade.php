@@ -98,32 +98,32 @@
                 </div>
                 <div class="col-md-2 mt-5 pt-5">
                     <div class="col-md-12">
-                        <a href="{{route('dealer.home')}}"> <button type="submit" class="btn  btn-block"
+                        <a href="{{ route('dealer.home') }}"> <button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
                                     class="fa fa-home"></i> Home</button></a>
                     </div>
                     </br>
 
                     <div class="col-md-12">
-                        <a href="{{route('dealer.mycars')}}"><button type="submit" class="btn  btn-block"
+                        <a href="{{ route('dealer.mycars') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-car"></i> My Cars</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="{{route('dealer.subscriptions')}}"><button type="submit" class="btn  btn-block"
+                        <a href="{{ route('dealer.subscriptions') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="{{route('dealer.mysales')}}"><button type="submit" class="btn  btn-block"
+                        <a href="{{ route('dealer.mysales') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-money-bill"></i> My Sale</button></a>
                     </div>
                     </br>
                     <div class="col-md-12">
-                        <a href="{{route('dealer.addcar')}}"><button type="submit" class="btn  btn-block"
+                        <a href="{{ route('dealer.addcar') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-plus"></i> Add Car</button></a>
                     </div>
@@ -144,7 +144,7 @@
                                 <div class="col-sm-12 col-md-4  " style="padding-bottom: 15px;">
                                     <div class="card" style="color: #000">
                                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                                            <img src="{{ $vehicle->cover ??  url('images/' . json_decode($vehicle->images, true)[0]) }}"
+                                            <img src="{{ $vehicle->cover_photo !=null ? asset('images/'.$vehicle->cover_photo) : url('images/' . json_decode($vehicle->images, true)[0]) }}"
                                                 style="" class="img-fluide" width="100%" height="300px" />
                                             <a href="{{ route('details', $vehicle->id) }}">
                                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
@@ -162,9 +162,15 @@
                                                     Kms</b></h6>
                                             <h6 class="card-title">Dealer/Yard: <b>{{ $vehicle->firstname }}</b></h6>
                                             <i class="fas fa-phone fa-1x"></i>&nbsp;{{ $vehicle->phone }}
-                                            <i class="fas fa-map-marker-alt fa-1x"></i>&nbsp;{{ $vehicle->county }}
-                                            <a href="{{ route('details', $vehicle->id) }}" class="btn btn-primary">More
-                                                Details</a>
+                                            <i class="fas fa-map-marker-alt fa-1x"></i>&nbsp;{{ $vehicle->county }} <br>
+                                            <a href="{{ route('details', $vehicle->id) }}" class="btn btn-primary"> <i
+                                                    class="fa fa-eye"></i> More
+                                                Details
+                                            </a>
+                                            <a href="{{ route('dealer.editcar', $vehicle->id) }}" class="btn btn-warning"> <i
+                                                    class="fa fa-edit"></i> Edit
+                                                Details
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -265,7 +271,7 @@
                                                     Kms</b></h6>
                                             <h6 class="card-title">Dealer/Yard: <b>{{ $vehicle->firstname }}</b></h6>
                                             <i class="fas fa-phone fa-1x"></i>&nbsp;{{ $vehicle->phone }}
-                                            <i class="fas fa-map-marker-alt fa-1x"></i>&nbsp;{{ $vehicle->county }}
+                                            <i class="fas fa-map-marker-alt fa-1x"></i>&nbsp;{{ $vehicle->county }} <br>
                                             <a href="{{ route('details', $vehicle->id) }}" class="btn btn-primary">More
                                                 Details</a>
                                         </div>
@@ -896,7 +902,8 @@
                                     By clicking this, you have agreed to terms and conditions
                                 </div>
                             </div>
-                            <button type="submit" style="background: #00472F;color:white;"  class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
+                            <button type="submit" style="background: #00472F;color:white;"
+                                class="btn btn-primary btn-block mb-4">Submit &amp; pay for your
                                 listing</button>
                         </form>
                     </div>
@@ -931,12 +938,13 @@
                     success: function(result) {
                         $('#car_model').html(
                             '<option value="">Select Car Model</option>');
-                            result.data.forEach(model => {
-                        document.querySelector('#car_model').innerHTML+='<option value="' + model
-                                                    .id + '">' + model.name +
-                                                    '</option>';
-                    
-                    });
+                        result.data.forEach(model => {
+                            document.querySelector('#car_model').innerHTML +=
+                                '<option value="' + model
+                                .id + '">' + model.name +
+                                '</option>';
+
+                        });
                     }
                 });
             })

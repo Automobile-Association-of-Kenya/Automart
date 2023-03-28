@@ -155,23 +155,24 @@
                         @endif
                         <!--upload form here -->
                         <div class="pageLoader" id="pageLoader"></div>
-                        <form action="{{ route('savecar') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('updatecar', $details->id) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            <h2 class="form-title" style="color: #00472F">Enter Vehicle Information » </h2>
+                            <h2 class="form-title" style="color: #00472F">Edit Vehicle Information » </h2>
                             <label class="gt-title" for="gt-title">Your listing title</label>
                             <input class="form-control" type="text" id="gt-title" tabindex="2" name="title"
-                                placeholder="Enter listing title" required style="text-transform:uppercase">
+                                placeholder="Enter listing title" required style="text-transform:uppercase"
+                                value="{{ $details->title }}">
                             <div class="row" style="padding-top: 10px; padding-bottom: 1px;">
                                 <div class="col-md-12">
                                     <select name="country" id="country" class="gt-select" tabindex="3" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
                                         <option value="-1" selected="selected">Country</option>
-                                        <option class="level-0" value="Kenya" data-value="41">Kenya</option>
+                                        <option class="level-0" value="Kenya" selected data-value="41">Kenya</option>
                                         <!-- <option class="level-0" value="Tanzania" data-value="48">Tanzania</option>
-                                        <option class="level-0" value="Uganda" data-value="48">Uganda</option>
-                                        <option class="level-0" value="Rwanda" data-value="48">Rwanda</option>
-                                        <option class="level-0" value="Burundi" data-value="48">Burundi</option>
-                                        <option class="level-0" value="Other" data-value="48">Other</option> -->
+                                                                    <option class="level-0" value="Uganda" data-value="48">Uganda</option>
+                                                                    <option class="level-0" value="Rwanda" data-value="48">Rwanda</option>
+                                                                    <option class="level-0" value="Burundi" data-value="48">Burundi</option>
+                                                                    <option class="level-0" value="Other" data-value="48">Other</option> -->
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-1">
@@ -179,57 +180,160 @@
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
                                         <option value="" data-value="-1" selected="selected">County
                                         </option>
-                                        <option class="level-0" value="Other" data-value="48">Other</option>
-                                        <option class="level-0" value="Nairobi" data-value="48">Nairobi</option>
-                                        <option class="level-0" value="Mombasa" data-value="48">Mombasa</option>
-                                        <option class="level-0" value="Kwale" data-value="48">Kwale</option>
-                                        <option class="level-0" value="Kilifi" data-value="48">Kilifi</option>
-                                        <option class="level-0" value="Tana River" data-value="48">Tana River</option>
-                                        <option class="level-0" value="Lamu" data-value="48">Lamu</option>
-                                        <option class="level-0" value="Taita–Taveta " data-value="48">Taita–Taveta
+                                        <option class="level-0" value="Other"
+                                            {{ $details->county == 'Other' ? 'selected' : '' }} data-value="48">Other
                                         </option>
-                                        <option class="level-0" value="Garissa" data-value="48">Garissa </option>
-                                        <option class="level-0" value="Wajir" data-value="48">Wajir </option>
-                                        <option class="level-0" value="Mandera" data-value="48">Mandera </option>
-                                        <option class="level-0" value="Marsabit" data-value="48">Marsabit</option>
-                                        <option class="level-0" value="Isiolo" data-value="48">Isiolo</option>
-                                        <option class="level-0" value="Meru" data-value="48">Meru</option>
-                                        <option class="level-0" value="Tharaka-Nithi" data-value="48">Tharaka-Nithi
+                                        <option class="level-0" value="Nairobi"
+                                            {{ $details->county == 'Nairobi' ? 'selected' : '' }} data-value="48">Nairobi
                                         </option>
-                                        <option class="level-0" value="Embu" data-value="48">Embu</option>
-                                        <option class="level-0" value="Kitui" data-value="48">Kitui</option>
-                                        <option class="level-0" value="Machakos" data-value="48">Machakos </option>
-                                        <option class="level-0" value="Makueni" data-value="48">Makueni</option>
-                                        <option class="level-0" value="Nyandarua" data-value="48">Nyandarua</option>
-                                        <option class="level-0" value="Nyeri" data-value="48">Nyeri</option>
-                                        <option class="level-0" value="Kirinyaga" data-value="48">Kirinyaga</option>
-                                        <option class="level-0" value="Murang'a" data-value="48">Murang’a </option>
-                                        <option class="level-0" value="Kiambu" data-value="48">Kiambu</option>
-                                        <option class="level-0" value="Turkana " data-value="48">Turkana </option>
-                                        <option class="level-0" value="West Pokot" data-value="48">West Pokot</option>
-                                        <option class="level-0" value="Samburu" data-value="48">Samburu</option>
-                                        <option class="level-0" value="Trans-Nzoia" data-value="48">Trans-Nzoia </option>
-                                        <option class="level-0" value="Uasin Gishu" data-value="48">Uasin Gishu</option>
-                                        <option class="level-0" value="Elgeyo-Marakwet" data-value="48">Elgeyo-Marakwet
+                                        <option class="level-0" value="Mombasa"
+                                            {{ $details->county == 'Mombasa' ? 'selected' : '' }} data-value="48">Mombasa
                                         </option>
-                                        <option class="level-0" value="Nandi" data-value="48">Nandi</option>
-                                        <option class="level-0" value="Baringo" data-value="48">Baringo </option>
-                                        <option class="level-0" value="Laikipia" data-value="48">Laikipia </option>
-                                        <option class="level-0" value="Nakuru" data-value="48">Nakuru </option>
-                                        <option class="level-0" value="Narok" data-value="48">Narok </option>
-                                        <option class="level-0" value="Kajiado" data-value="48">Kajiado </option>
-                                        <option class="level-0" value="Kericho" data-value="48">Kericho</option>
-                                        <option class="level-0" value="Bomet" data-value="48">Bomet</option>
-                                        <option class="level-0" value="Kakamega" data-value="48">Kakamega </option>
-                                        <option class="level-0" value="Vihiga" data-value="48">Vihiga </option>
-                                        <option class="level-0" value="Bungoma" data-value="48">Bungoma</option>
-                                        <option class="level-0" value="Busia " data-value="48">Busia</option>
-                                        <option class="level-0" value="Siaya " data-value="48">Siaya</option>
-                                        <option class="level-0" value="Kisumu" data-value="48">Kisumu</option>
-                                        <option class="level-0" value="Homa Bay" data-value="48">Homa Bay</option>
-                                        <option class="level-0" value="Migori" data-value="48">Migori</option>
-                                        <option class="level-0" value="Kisii" data-value="48">Kisii</option>
-                                        <option class="level-0" value="Nyamira" data-value="48">Nyamira</option>
+                                        <option class="level-0" value="Kwale"
+                                            {{ $details->county == 'Kwale' ? 'selected' : '' }} data-value="48">Kwale
+                                        </option>
+                                        <option class="level-0" value="Kilifi"
+                                            {{ $details->county == 'Kilifi' ? 'selected' : '' }} data-value="48">Kilifi
+                                        </option>
+                                        <option class="level-0" value="Tana River"
+                                            {{ $details->county == 'Tana River' ? 'selected' : '' }} data-value="48">Tana
+                                            River</option>
+                                        <option class="level-0" value="Lamu"
+                                            {{ $details->county == 'Lamu' ? 'selected' : '' }} data-value="48">Lamu
+                                        </option>
+                                        <option class="level-0" value="Taita-Taveta"
+                                            {{ $details->county == 'Taita-Taveta' ? 'selected' : '' }} data-value="48">
+                                            Taita–Taveta
+                                        </option>
+                                        <option class="level-0" value="Garissa"
+                                            {{ $details->county == 'Garissa' ? 'selected' : '' }} data-value="48">Garissa
+                                        </option>
+                                        <option class="level-0" value="Wajir"
+                                            {{ $details->county == 'Wajir' ? 'selected' : '' }} data-value="48">Wajir
+                                        </option>
+                                        <option class="level-0" value="Mandera"
+                                            {{ $details->county == 'Mandera' ? 'selected' : '' }} data-value="48">Mandera
+                                        </option>
+                                        <option class="level-0" value="Marsabit"
+                                            {{ $details->county == 'Marsabit' ? 'selected' : '' }} data-value="48">
+                                            Marsabit
+                                        </option>
+                                        <option class="level-0" value="Isiolo"
+                                            {{ $details->county == 'Isiolo' ? 'selected' : '' }} data-value="48">Isiolo
+                                        </option>
+                                        <option class="level-0" value="Meru"
+                                            {{ $details->county == 'Meru' ? 'selected' : '' }} data-value="48">Meru
+                                        </option>
+                                        <option class="level-0" value="Tharaka-Nithi"
+                                            {{ $details->county == 'Tharaka-Nithi' ? 'selected' : '' }} data-value="48">
+                                            Tharaka-Nithi
+                                        </option>
+                                        <option class="level-0" value="Embu"
+                                            {{ $details->county == 'Embu' ? 'selected' : '' }} data-value="48">Embu
+                                        </option>
+                                        <option class="level-0" value="Kitui"
+                                            {{ $details->county == 'Kitui' ? 'selected' : '' }} data-value="48">Kitui
+                                        </option>
+                                        <option class="level-0" value="Machakos"
+                                            {{ $details->county == 'Machakos' ? 'selected' : '' }} data-value="48">
+                                            Machakos
+                                        </option>
+                                        <option class="level-0" value="Makueni"
+                                            {{ $details->county == 'Makueni' ? 'selected' : '' }} data-value="48">Makueni
+                                        </option>
+                                        <option class="level-0" value="Nyandarua"
+                                            {{ $details->county == 'Nyandarua' ? 'selected' : '' }} data-value="48">
+                                            Nyandarua</option>
+                                        <option class="level-0" value="Nyeri"
+                                            {{ $details->county == 'Nyeri' ? 'selected' : '' }} data-value="48">Nyeri
+                                        </option>
+                                        <option class="level-0" value="Kirinyaga"
+                                            {{ $details->county == 'Kirinyaga' ? 'selected' : '' }} data-value="48">
+                                            Kirinyaga</option>
+                                        <option class="level-0" value="Murang'a"
+                                            {{ $details->county == "Murang'a" ? 'selected' : '' }} data-value="48">
+                                            Murang’a
+                                        </option>
+                                        <option class="level-0" value="Kiambu"
+                                            {{ $details->county == 'Kiambu' ? 'selected' : '' }} data-value="48">Kiambu
+                                        </option>
+                                        <option class="level-0" value="Turkana"
+                                            {{ $details->county == 'Turkana' ? 'selected' : '' }} data-value="48">Turkana
+                                        </option>
+                                        <option class="level-0" value="West Pokot"
+                                            {{ $details->county == 'West Pokot' ? 'selected' : '' }} data-value="48">West
+                                            Pokot</option>
+                                        <option class="level-0" value="Samburu"
+                                            {{ $details->county == 'Samburu' ? 'selected' : '' }} data-value="48">Samburu
+                                        </option>
+                                        <option class="level-0" value="Trans-Nzoia"
+                                            {{ $details->county == 'Trans-Nzoia' ? 'selected' : '' }} data-value="48">
+                                            Trans-Nzoia </option>
+                                        <option class="level-0" value="Uasin Gishu"
+                                            {{ $details->county == 'Uasin Gishu' ? 'selected' : '' }} data-value="48">
+                                            Uasin
+                                            Gishu</option>
+                                        <option class="level-0" value="Elgeyo-Marakwet"
+                                            {{ $details->county == 'Elgeyo-Marakwet' ? 'selected' : '' }} data-value="48">
+                                            Elgeyo-Marakwet
+                                        </option>
+                                        <option class="level-0" value="Nandi"
+                                            {{ $details->county == 'Nandi' ? 'selected' : '' }} data-value="48">Nandi
+                                        </option>
+                                        <option class="level-0" value="Baringo"
+                                            {{ $details->county == 'Baringo' ? 'selected' : '' }} data-value="48">Baringo
+                                        </option>
+                                        <option class="level-0" value="Laikipia"
+                                            {{ $details->county == 'Laikipia' ? 'selected' : '' }} data-value="48">
+                                            Laikipia
+                                        </option>
+                                        <option class="level-0" value="Nakuru"
+                                            {{ $details->county == 'Nakuru' ? 'selected' : '' }} data-value="48">Nakuru
+                                        </option>
+                                        <option class="level-0" value="Narok"
+                                            {{ $details->county == 'Narok' ? 'selected' : '' }} data-value="48">Narok
+                                        </option>
+                                        <option class="level-0" value="Kajiado"
+                                            {{ $details->county == 'Kajiado' ? 'selected' : '' }} data-value="48">Kajiado
+                                        </option>
+                                        <option class="level-0" value="Kericho"
+                                            {{ $details->county == 'Kericho' ? 'selected' : '' }} data-value="48">Kericho
+                                        </option>
+                                        <option class="level-0" value="Bomet"
+                                            {{ $details->county == 'Bomet' ? 'selected' : '' }} data-value="48">Bomet
+                                        </option>
+                                        <option class="level-0" value="Kakamega"
+                                            {{ $details->county == 'Kakamega' ? 'selected' : '' }} data-value="48">
+                                            Kakamega
+                                        </option>
+                                        <option class="level-0" value="Vihiga"
+                                            {{ $details->county == 'Vihiga' ? 'selected' : '' }} data-value="48">Vihiga
+                                        </option>
+                                        <option class="level-0" value="Bungoma"
+                                            {{ $details->county == 'Bungoma' ? 'selected' : '' }} data-value="48">Bungoma
+                                        </option>
+                                        <option class="level-0" value="Busia"
+                                            {{ $details->county == 'Busia' ? 'selected' : '' }} data-value="48">Busia
+                                        </option>
+                                        <option class="level-0" value="Siaya"
+                                            {{ $details->county == 'Siaya' ? 'selected' : '' }} data-value="48">Siaya
+                                        </option>
+                                        <option class="level-0" value="Kisumu"
+                                            {{ $details->county == 'Kisumu' ? 'selected' : '' }} data-value="48">Kisumu
+                                        </option>
+                                        <option class="level-0" value="Homa Bay"
+                                            {{ $details->county == 'Homa Bay' ? 'selected' : '' }} data-value="48">Homa
+                                            Bay
+                                        </option>
+                                        <option class="level-0" value="Migori"
+                                            {{ $details->county == 'Migori' ? 'selected' : '' }} data-value="48">Migori
+                                        </option>
+                                        <option class="level-0" value="Kisii"
+                                            {{ $details->county == 'Kisii' ? 'selected' : '' }} data-value="48">Kisii
+                                        </option>
+                                        <option class="level-0" value="Nyamira"
+                                            {{ $details->county == 'Nyamira' ? 'selected' : '' }} data-value="48">Nyamira
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -242,7 +346,9 @@
                                         required>
                                         <option value="Any Make" selected="false">Make</option>
                                         @foreach ($makes as $item)
-                                            <option value="{{ $item->car_make_id }}">{{ $item->car_make_name }}</option>
+                                            <option value="{{ $item->car_make_id }}"
+                                                {{ $details->make == $item->car_make_id ? 'selected' : '' }}>
+                                                {{ $item->car_make_name }}</option>
                                         @endforeach
 
                                     </select>
@@ -253,6 +359,11 @@
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;"
                                         required>
                                         <option value="Any Make" selected="false">Model</option>
+                                        @if ($details->carmodel != null)
+                                            <option value="{{ $details->carmodel->car_model_id }}" selected>
+                                                {{ $details->carmodel->car_model_name }}
+                                            </option>
+                                        @endif
                                     </select>
 
                                 </div>
@@ -260,80 +371,104 @@
                             <label>Year of Manufacture</label>
                             <select name="year" id="year" tabindex="4" data-value="" required
                                 style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                <option value="-1" selected="selected">Year of Manufacture</option>
-                                <option value="2021">2021</option>
-                                <option value="2020">2020</option>
-                                <option value="2019">2019</option>
-                                <option value="2018">2018</option>
-                                <option value="2017">2017</option>
-                                <option value="2016">2016</option>
-                                <option value="2015">2015</option>
-                                <option value="2014">2014</option>
-                                <option value="2013">2013</option>
-                                <option value="2012">2012</option>
-                                <option value="2011">2011</option>
-                                <option value="2010">2010</option>
-                                <option value="2009">2009</option>
-                                <option value="2008">2008</option>
-                                <option value="2007">2007</option>
-                                <option value="2006">2006</option>
-                                <option value="2005">2005</option>
-                                <option value="2004">2004</option>
-                                <option value="2003">2003</option>
-                                <option value="2002">2002</option>
-                                <option value="2001">2001</option>
-                                <option value="2000">2000</option>
+                                <option value="-1">Select Year of Manufacture</option>
+                                <option value="2021" {{ $details->year == '2021' ? 'selected' : '' }}>2021</option>
+                                <option value="2020" {{ $details->year == '2020' ? 'selected' : '' }}>2020</option>
+                                <option value="2019" {{ $details->year == '2019' ? 'selected' : '' }}>2019</option>
+                                <option value="2018" {{ $details->year == '2018' ? 'selected' : '' }}>2018</option>
+                                <option value="2017" {{ $details->year == '2017' ? 'selected' : '' }}>2017</option>
+                                <option value="2016" {{ $details->year == '2016' ? 'selected' : '' }}>2016</option>
+                                <option value="2015" {{ $details->year == '2015' ? 'selected' : '' }}>2015</option>
+                                <option value="2014" {{ $details->year == '2014' ? 'selected' : '' }}>2014</option>
+                                <option value="2013" {{ $details->year == '2013' ? 'selected' : '' }}>2013</option>
+                                <option value="2012" {{ $details->year == '2012' ? 'selected' : '' }}>2012</option>
+                                <option value="2011" {{ $details->year == '2011' ? 'selected' : '' }}>2011</option>
+                                <option value="2010" {{ $details->year == '2010' ? 'selected' : '' }}>2010</option>
+                                <option value="2009" {{ $details->year == '2009' ? 'selected' : '' }}>2009</option>
+                                <option value="2008" {{ $details->year == '2008' ? 'selected' : '' }}>2008</option>
+                                <option value="2007" {{ $details->year == '2007' ? 'selected' : '' }}>2007</option>
+                                <option value="2006" {{ $details->year == '2006' ? 'selected' : '' }}>2006</option>
+                                <option value="2005" {{ $details->year == '2005' ? 'selected' : '' }}>2005</option>
+                                <option value="2004" {{ $details->year == '2004' ? 'selected' : '' }}>2004</option>
+                                <option value="2003" {{ $details->year == '2003' ? 'selected' : '' }}>2003</option>
+                                <option value="2002" {{ $details->year == '2002' ? 'selected' : '' }}>2002</option>
+                                <option value="2001" {{ $details->year == '2001' ? 'selected' : '' }}>2001</option>
+                                <option value="2000" {{ $details->year == '2000' ? 'selected' : '' }}>2000</option>
                             </select>
                             <div class="row" style="padding-top:10px;">
                                 <div class="col-6 col-md-6">
                                     <input class="form-control" type="number" id="price" name="price"
-                                        placeholder="selling Price (Ksh)" required>
+                                        placeholder="selling Price (Ksh)" required value="{{ $details->price }}">
                                 </div>
                                 <div class="col-6 col-md-6">
                                     <input class="form-control" type="number" id="miles" name="miles"
-                                        placeholder="mileage (Kms)" required>
+                                        placeholder="mileage (Kms)" required value="{{ $details->miles }}">
                                 </div>
                                 <!-- <div class="col-6 col-md-4">
-                                    <input class="form-control" type="text" id="gt-vin" tabindex="11"
-                                        name="vin" placeholder="Plate number" style="text-transform:uppercase">
-                                </div> -->
+                                                                <input class="form-control" type="text" id="gt-vin" tabindex="11"
+                                                                    name="vin" placeholder="Plate number" style="text-transform:uppercase">
+                                                            </div> -->
                             </div>
 
                             <div class="row" style="padding-top:10px; padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <select id="exterior" tabindex="8" name="exterior" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                        <option value="-1" selected="selected">Color</option>
-                                        <option value="White">White</option>
-                                        <option value="Black">Black</option>
-                                        <option value="Silver">Silver</option>
-                                        <option value="Green">Green</option>
-                                        <option value="Dark Green">Dark Green</option>
-                                        <option value="Blue">Blue</option>
-                                        <option value="Dark Blue">Dark Blue</option>
-                                        <option value="Brown">Brown</option>
-                                        <option value="Yellow">Yellow</option>
-                                        <option value="Other">Other</option>
+                                        <option value="-1">Color</option>
+                                        <option value="White" {{ $details->exterior == 'White' ? 'selected' : '' }}>White
+                                        </option>
+                                        <option value="Black" {{ $details->exterior == 'Black' ? 'selected' : '' }}>Black
+                                        </option>
+                                        <option value="Silver" {{ $details->exterior == 'Silver' ? 'selected' : '' }}>
+                                            Silver
+                                        </option>
+                                        <option value="Green" {{ $details->exterior == 'Green' ? 'selected' : '' }}>Green
+                                        </option>
+                                        <option value="Dark Green"
+                                            {{ $details->exterior == 'Dark Green' ? 'selected' : '' }}>Dark Green</option>
+                                        <option value="Blue" {{ $details->exterior == 'Blue' ? 'selected' : '' }}>Blue
+                                        </option>
+                                        <option value="Dark Blue"
+                                            {{ $details->exterior == 'Dark Blue' ? 'selected' : '' }}>Dark Blue</option>
+                                        <option value="Brown" {{ $details->exterior == 'Brown' ? 'selected' : '' }}>
+                                            Brown
+                                        </option>
+                                        <option value="Yellow" {{ $details->exterior == 'Yellow' ? 'selected' : '' }}>
+                                            Yellow</option>
+                                        <option value="Other" {{ $details->exterior == 'Other' ? 'selected' : '' }}>
+                                            Other
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-2">
                                     <select id="interior" value="" tabindex="4" name="interior" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                        <option value="-1" selected="selected">Interior Type</option>
-                                        <option value="Leather">Leather</option>
-                                        <option value="Fabric">Fabric</option>
-                                        <option value="Other">Other</option>
+                                        <option value="-1">Interior Type</option>
+                                        <option value="Leather" {{ $details->interior == 'Leather' ? 'selected' : '' }}>
+                                            Leather</option>
+                                        <option value="Fabric" {{ $details->interior == 'Fabric' ? 'selected' : '' }}>
+                                            Fabric</option>
+                                        <option value="Other" {{ $details->interior == 'Other' ? 'selected' : '' }}>
+                                            Other
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-2">
                                     <select id="fuel_type" tabindex="5" name="fuel_type" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                        <option value="-1" selected="selected">Fuel Type</option>
-                                        <option value="Petrol">Petrol</option>
-                                        <option value="Diesel">Diesel</option>
-                                        <option value="Hybrid">Hybrid</option>
-                                        <option value="Diesel-Hybrid">Diesel-Hybrid</option>
-                                        <option value="Electic">Electic</option>
+                                        <option value="-1">Fuel Type</option>
+                                        <option value="Petrol" {{ $details->fuel_type == 'Petrol' ? 'selected' : '' }}>
+                                            Petrol</option>
+                                        <option value="Diesel" {{ $details->fuel_type == 'Diesel' ? 'selected' : '' }}>
+                                            Diesel</option>
+                                        <option value="Hybrid" {{ $details->fuel_type == 'Hybrid' ? 'selected' : '' }}>
+                                            Hybrid</option>
+                                        <option value="Diesel-Hybrid"
+                                            {{ $details->fuel_type == 'Diesel-Hybrid' ? 'selected' : '' }}>Diesel-Hybrid
+                                        </option>
+                                        <option value="Electic"
+                                            {{ $details->fuel_type == 'Electric' ? 'selected' : '' }}>
+                                            Electic</option>
                                         <option value="Other">Other</option>
                                     </select>
                                 </div>
@@ -341,128 +476,167 @@
                             <h2 class="form-title" style="color: #000000">Select Vehicle Features » </h2>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="4WD/AWD" id="4WD/AWD"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;4WD/AWD
+                                    <input type="checkbox" value="4WD/AWD" id="4WD/AWD" name="features[]"
+                                        {{ in_array('4WD/AWD', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;4WD/AWD
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="ABS Brakes" id="ABS Brakes"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;ABS Brakes
+                                    <input type="checkbox" value="ABS Brakes" id="ABS Brakes" name="features[]"
+                                        {{ in_array('ABS Brakes', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;ABS
+                                    Brakes
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Air Conditioning" id="Air Conditioning"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Air Conditioning
+                                        name="features[]"
+                                        {{ in_array('Air Conditioning', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Air
+                                    Conditioning
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="Alloy Wheels" id="Alloy Wheels"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Alloy Wheels
+                                    <input type="checkbox" value="Alloy Wheels" id="Alloy Wheels" name="features[]"
+                                        {{ in_array('Alloy Wheels', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Alloy
+                                    Wheels
                                 </div>
                             </div>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="AM/FM Stereo" id="AM/FM Stereo"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;AM/FM Stereo
+                                    <input type="checkbox" value="AM/FM Stereo" id="AM/FM Stereo" name="features[]"
+                                        {{ in_array('AM/FM Stereo', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;AM/FM
+                                    Stereo
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="Roof Racks" id="Roof Racks"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Roof Racks
+                                    <input type="checkbox" value="Roof Racks" id="Roof Racks" name="features[]"
+                                        {{ in_array('Roof Racks', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Roof
+                                    Racks
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Auxiliary Audio Input" id="Auxiliary Audio Input"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Auxiliary Audio Input
+                                        name="features[]"
+                                        {{ in_array('Auxiliary Audio Input', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Auxiliary
+                                    Audio Input
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="CD Audio" id="CD Audio"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;CD Audio
+                                    <input type="checkbox" value="CD Audio" id="CD Audio" name="features[]"
+                                        {{ in_array('CD Audio', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;CD
+                                    Audio
                                 </div>
                             </div>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="Cruise Control" id="Cruise Control"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Cruise Control
+                                    <input type="checkbox" value="Cruise Control" id="Cruise Control" name="features[]"
+                                        {{ in_array('Cruise Control', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Cruise
+                                    Control
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Front Seat Heaters" id="Front Seat Heaters"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Front Seat Heaters
+                                        name="features[]"
+                                        {{ in_array('Front Seat Heaters', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Front
+                                    Seat Heaters
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="Leather Seats" id="Leather Seats"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Leather Seats
+                                    <input type="checkbox" value="Leather Seats" id="Leather Seats" name="features[]"
+                                        {{ in_array('Leather Seats', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Leather
+                                    Seats
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="Memory Seat(s)" id="Memory Seat(s)"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Memory Seat(s)
+                                    <input type="checkbox" value="Memory Seat(s)" id="Memory Seat(s)" name="features[]"
+                                        {{ in_array('Memory Seat(s)', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Memory
+                                    Seat(s)
                                 </div>
                             </div>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
-                                    <input type="checkbox" value=" Navigation System" id=" Navigation System"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Navigation System
+                                    <input type="checkbox" value="Navigation System" id=" Navigation System"
+                                        name="features[]"
+                                        {{ in_array('Navigation System', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Navigation
+                                    System
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Overhead Airbags" id="Overhead Airbags"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Overhead Airbags
+                                        name="features[]"
+                                        {{ in_array('Overhead Airbags', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Overhead
+                                    Airbags
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Panoramic Sunroof" id="Panoramic Sunroof"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Panoramic Sunroof
+                                        name="features[]"
+                                        {{ in_array('Panoramic Sunroof', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Panoramic
+                                    Sunroof
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Parking Sensors" id="Parking Sensors"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Parking Sensors
+                                        name="features[]"
+                                        {{ in_array('Parking Sensors', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Parking
+                                    Sensors
                                 </div>
                             </div>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="Power Locks" id="Power Locks"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Power Locks
+                                    <input type="checkbox" value="Power Locks" id="Power Locks" name="features[]"
+                                        {{ in_array('Power Locks', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Power
+                                    Locks
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="Power Mirrors" id="Power Mirrors"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Power Mirrors
+                                    <input type="checkbox" value="Power Mirrors" id="Power Mirrors" name="features[]"
+                                        {{ in_array('Power Mirrors', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Power
+                                    Mirrors
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="Power Seat(s)" id="Power Seat(s)"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Power Seat(s)
+                                    <input type="checkbox" value="Power Seat(s)" id="Power Seat(s)" name="features[]"
+                                        {{ in_array('Power Seat(s)', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Power
+                                    Seat(s)
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="Power Windows" id="Power Windows"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Power Windows
+                                    <input type="checkbox" value="Power Windows" id="Power Windows" name="features[]"
+                                        {{ in_array('Power Windows', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Power
+                                    Windows
                                 </div>
                             </div>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Premium Package" id="Premium Package"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Premium Package
+                                        name="features[]"
+                                        {{ in_array('Premium Package', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Premium
+                                    Package
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="Rear Defroster" id="Rear Defroster"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Rear Defroster
+                                    <input type="checkbox" value="Rear Defroster" id="Rear Defroster" name="features[]"
+                                        {{ in_array('Rear Defroster', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Rear
+                                    Defroster
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Rear View Camera" id="Rear View Camera"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Rear View Camera
+                                        name="features[]"
+                                        {{ in_array('Rear View Camera', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Rear
+                                    View Camera
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Satellite Radio Ready" id="Satellite Radio Ready"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Satellite Radio Ready
+                                        name="features[]"
+                                        {{ in_array('Satellite Radio Ready', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Satellite
+                                    Radio Ready
                                 </div>
                             </div>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
-                                    <input type="checkbox" value="Side Airbags" id="Side Airbags"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Airbags
+                                    <input type="checkbox" value="Side Airbags" id="Side Airbags" name="features[]"
+                                        {{ in_array('Side Airbags', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Airbags
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="SiriusXM Trial Avail" id="SiriusXM Trial Avail"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;SiriusXM Trial Avail
+                                        name="features[]"
+                                        {{ in_array('SiriusXM Trial Avail', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;SiriusXM
+                                    Trial Avail
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Technology Package" id="Technology Package"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Technology Package
+                                        name="features[]"
+                                        {{ in_array('Technology Package', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Technology
+                                    Package
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Traction Control" id="Traction Control"
-                                        name="features[]">&nbsp;&nbsp;&nbsp;Traction Control
+                                        name="features[]"
+                                        {{ in_array('Traction Control', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Traction
+                                    Control
                                 </div>
                             </div>
                             <div class="row" style="padding-top:10px; padding-bottom:15px;">
@@ -470,39 +644,46 @@
                                     <label>Transmission</label>
                                     <select id="transmission" name="transmission" tabindex="13" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                        <option value="-1" selected="selected">Transmission Type</option>
-                                        <option value="Automatic">Automatic</option>
-                                        <option value="Manual">Manual</option>
-                                        <option value="Semi-Auto">Semi-Auto</option>
-                                        <option value="None">None</option>
+                                        <option value="" s>Transmission Type</option>
+                                        <option value="Automatic"
+                                            {{ $details->transmission == 'Automatic' ? 'selected' : '' }}>Automatic
+                                        </option>
+                                        <option value="Manual"
+                                            {{ $details->transmission == 'Manual' ? 'selected' : '' }}>
+                                            Manual</option>
+                                        <option value="Semi-Auto"
+                                            {{ $details->transmission == 'Semi-Auto' ? 'selected' : '' }}>Semi-Auto
+                                        </option>
+                                        <option value="None" {{ $details->transmission == 'None' ? 'selected' : '' }}>
+                                            None</option>
                                     </select>
                                 </div>
                                 <!-- <div class="col-6">
-                                    <label>Vehicle Type</label>
-                                    <select id="vehicle_type" name="vehicle_type" tabindex="14" required
-                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                        <option value="-1" selected="selected">Vehicle Type</option>
-                                        <option value="Convertibles">Convertibles</option>
-                                        <option value="Hatchbacks">Hatchbacks</option>
-                                        <option value="SUVs">SUVs</option>
-                                        <option value="Saloon Car">Saloon Car</option>
-                                        <option value="Station Wagons">Station Wagons</option>
-                                        <option value="Pickup Trucks">Pickup Trucks</option>
-                                        <option value="Buses, Taxis and Vans">Buses, Taxis and Vans</option>
-                                        <option value="Motorbikes">Motorbikes</option>
-                                        <option value="Trucks">Trucks</option>
-                                        <option value="Machinery and Tractors">Machinery and Tractors</option>
-                                        <option value="Trailers">Trailers</option>
-                                        <option value="Minis">Minis</option>
-                                        <option value="Coupes">Coupes</option>
-                                        <option value="Quad Bikes">Quad Bikes</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </div> -->
+                                                                <label>Vehicle Type</label>
+                                                                <select id="vehicle_type" name="vehicle_type" tabindex="14" required
+                                                                    style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
+                                                                    <option value="-1" selected="selected">Vehicle Type</option>
+                                                                    <option value="Convertibles">Convertibles</option>
+                                                                    <option value="Hatchbacks">Hatchbacks</option>
+                                                                    <option value="SUVs">SUVs</option>
+                                                                    <option value="Saloon Car">Saloon Car</option>
+                                                                    <option value="Station Wagons">Station Wagons</option>
+                                                                    <option value="Pickup Trucks">Pickup Trucks</option>
+                                                                    <option value="Buses, Taxis and Vans">Buses, Taxis and Vans</option>
+                                                                    <option value="Motorbikes">Motorbikes</option>
+                                                                    <option value="Trucks">Trucks</option>
+                                                                    <option value="Machinery and Tractors">Machinery and Tractors</option>
+                                                                    <option value="Trailers">Trailers</option>
+                                                                    <option value="Minis">Minis</option>
+                                                                    <option value="Coupes">Coupes</option>
+                                                                    <option value="Quad Bikes">Quad Bikes</option>
+                                                                    <option value="Other">Other</option>
+                                                                </select>
+                                                            </div> -->
                             </div>
                             <div class="form-outline" style="padding-top:10px; padding-bottom:15px;">
                                 <textarea class="form-control" required placeholder="Enter vehicle listing description." id="description"
-                                    name="description" rows="4" style="background: #fff;" required></textarea>
+                                    name="description" rows="4" style="background: #fff;" required>{{ $details->description }}</textarea>
                                 <label class="form-label" for="description">Vehicle Description</label>
                             </div>
                             <div class="row">
@@ -510,8 +691,8 @@
                                     <label class="btn btn-success btn-file"><br>
                                         Upload Cover Photo
                                         <input type="hidden" name="removedImages1" class="removedImgs1" value=''>
-                                        <input class="form-control" type="file" id="fileupload1"  name="cover_photo" tabindex="21"
-                                            style="display:none" value="Upload Photos" ><br>
+                                        <input class="form-control" type="file" id="fileupload1" name="cover_photo"
+                                            tabindex="21" style="display:none" value="Upload Photos"><br>
                                     </label></p>
                                 </div>
                                 <div class="col-sm-6 col-lg-8" style="color:#000;">
@@ -520,6 +701,14 @@
                                 <div class="col-md-12">
                                     <div class="mt-1">
                                         <div class="images-preview-div1" style="margin:10px;width:20px;"> </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mt-1">
+                                        <div class="images-preview-div1" style="margin:10px;width:20px;">
+                                            <img src="{{ asset('images/' . $details->cover_photo) }}" width="200"
+                                                alt="">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -545,6 +734,16 @@
                                         <div class="images-preview-div" style="margin:1%"> </div>
                                     </div>
                                 </div>
+                                @foreach (json_decode($details->images, true) as $item)
+                                    <div class="col-md-3">
+                                        <div class="mt-1">
+                                            <div class="">
+                                                <img src="{{ asset('images/' . $item) }}" width="300"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                             <h2 class="form-title" style="color: #00472F">Personal Information</h2>
                             <div class="row">
@@ -567,12 +766,12 @@
                                 </div>
                                 <div class="col-6">
                                     <input class="form-control" type="number" id="phone" tabindex="25"
-                                        name="phone" value="{{ $user->number }}" placeholder="Enter phone number"
+                                        name="phone" value="{{ $details->phone }}" placeholder="Enter phone number"
                                         required>
                                 </div>
                                 <div class="col-md-8">
                                     <input type="checkbox" value="Rear View Camera" id="Rear View Camera"
-                                        name="features[]" required>&nbsp;&nbsp;&nbsp;
+                                        name="features[]" required checked>&nbsp;&nbsp;&nbsp;
                                     <a class="text-center p-3" style="color:#000;"
                                         href="/Terms and conditions to seller.pdf" target="_blank">Terms And
                                         Conditions<br></a>
@@ -604,7 +803,8 @@
         <div id="0" class="show-when-target w-100" style="background-color : #CBBC27 !Important;">
             <div class="row" style="padding-bottom: 0px;">
                 <div class="alert alert-success" role="alert">
-                    All cars under Firstname: {{ $user->name }}, Email: {{ $user->email }}, Phone: {{ $user->number }}
+                    All cars under Firstname: {{ $user->name }}, Email: {{ $user->email }}, Phone:
+                    {{ $user->number }}
                 </div>
                 <div class="col-md-2">
                     <div class="col-md-12">
@@ -651,11 +851,12 @@
                         @if (!empty($vehicles) && $vehicles->count())
                             @foreach ($vehicles->all() as $vehicle)
                                 <!-- use this for slideshow -->
-                                <!-- @foreach (json_decode($vehicle->images, true) as $image)
-    -->
-                                <!-- <a href="{{ url('public/images/' . json_decode($vehicle->images, true)[0]) }}" class="portfolio-box">
-                                                                                    <img src="{{ url('public/images/' . json_decode($vehicle->images, true)[0]) }}" class="img-responsive" alt="--">
-    @endforeach -->
+                                {{-- @foreach (json_decode($vehicle->images, true) as $image)
+                                    <a href="{{ url('public/images/' . json_decode($vehicle->images, true)[0]) }}"
+                                        class="portfolio-box">
+                                        <img src="{{ url('public/images/' . json_decode($vehicle->images, true)[0]) }}"
+                                            class="img-responsive" alt="--">
+                                @endforeach --}}
                                 <div class="col-6 col-md-4" style="padding-bottom: 15px;">
                                     <div class="card" style="color: #000">
                                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
@@ -994,7 +1195,8 @@
                                         required>
                                         <option value="Any Make" selected="false">Select Make</option>
                                         @foreach ($makes as $item)
-                                            <option value="{{ $item->car_make_id }}">{{ $item->car_make_name }}</option>
+                                            <option value="{{ $item->car_make_id }}">{{ $item->car_make_name }}
+                                            </option>
                                         @endforeach
 
                                     </select>
@@ -1009,32 +1211,32 @@
 
                                 </div>
                             </div>
-                            <label>Year of Manufacture</label>
+                            <label>Year of Manufacturee</label>
                             <select name="year" id="year" tabindex="4" data-value="" required
                                 style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                <option value="-1" selected="selected">Select Year of Manufacture</option>
-                                <option value="2021">2021</option>
-                                <option value="2020">2020</option>
-                                <option value="2019">2019</option>
-                                <option value="2018">2018</option>
-                                <option value="2017">2017</option>
-                                <option value="2016">2016</option>
-                                <option value="2015">2015</option>
-                                <option value="2014">2014</option>
-                                <option value="2013">2013</option>
-                                <option value="2012">2012</option>
-                                <option value="2011">2011</option>
-                                <option value="2010">2010</option>
-                                <option value="2009">2009</option>
-                                <option value="2008">2008</option>
-                                <option value="2007">2007</option>
-                                <option value="2006">2006</option>
-                                <option value="2005">2005</option>
-                                <option value="2004">2004</option>
-                                <option value="2003">2003</option>
-                                <option value="2002">2002</option>
-                                <option value="2001">2001</option>
-                                <option value="2000">2000</option>
+                                <option value="-1">Select Year of Manufacture</option>
+                                <option value="2021" {{ $details->year == '2021' ? 'selected' : '' }}>2021</option>
+                                <option value="2020" {{ $details->year == '2020' ? 'selected' : '' }}>2020</option>
+                                <option value="2019" {{ $details->year == '2019' ? 'selected' : '' }}>2019</option>
+                                <option value="2018" {{ $details->year == '2018' ? 'selected' : '' }}>2018</option>
+                                <option value="2017" {{ $details->year == '2017' ? 'selected' : '' }}>2017</option>
+                                <option value="2016" {{ $details->year == '2016' ? 'selected' : '' }}>2016</option>
+                                <option value="2015" {{ $details->year == '2015' ? 'selected' : '' }}>2015</option>
+                                <option value="2014" {{ $details->year == '2014' ? 'selected' : '' }}>2014</option>
+                                <option value="2013" {{ $details->year == '2013' ? 'selected' : '' }}>2013</option>
+                                <option value="2012" {{ $details->year == '2012' ? 'selected' : '' }}>2012</option>
+                                <option value="2011" {{ $details->year == '2011' ? 'selected' : '' }}>2011</option>
+                                <option value="2010" {{ $details->year == '2010' ? 'selected' : '' }}>2010</option>
+                                <option value="2009" {{ $details->year == '2009' ? 'selected' : '' }}>2009</option>
+                                <option value="2008" {{ $details->year == '2008' ? 'selected' : '' }}>2008</option>
+                                <option value="2007" {{ $details->year == '2007' ? 'selected' : '' }}>2007</option>
+                                <option value="2006" {{ $details->year == '2006' ? 'selected' : '' }}>2006</option>
+                                <option value="2005" {{ $details->year == '2005' ? 'selected' : '' }}>2005</option>
+                                <option value="2004" {{ $details->year == '2004' ? 'selected' : '' }}>2004</option>
+                                <option value="2003" {{ $details->year == '2003' ? 'selected' : '' }}>2003</option>
+                                <option value="2002" {{ $details->year == '2002' ? 'selected' : '' }}>2002</option>
+                                <option value="2001" {{ $details->year == '2001' ? 'selected' : '' }}>2001</option>
+                                <option value="2000" {{ $details->year == '2000' ? 'selected' : '' }}>2000</option>
                             </select>
                             <div class="row" style="padding-top:10px;">
                                 <div class="col-6 col-md-4">
@@ -1046,10 +1248,10 @@
                                         placeholder="Enter mileage (Kms)" required>
                                 </div>
                                 <!-- <div class="col-6 col-md-4">
-                                    <input class="form-control" type="text" id="gt-vin" tabindex="11"
-                                        name="vin" placeholder="Enter Plate number"
-                                        style="text-transform:uppercase">
-                                </div> -->
+                                                                <input class="form-control" type="text" id="gt-vin" tabindex="11"
+                                                                    name="vin" placeholder="Enter Plate number"
+                                                                    style="text-transform:uppercase">
+                                                            </div> -->
                             </div>
 
                             <div class="row" style="padding-top:10px; padding-bottom:10px;">
@@ -1236,27 +1438,27 @@
                                     </select>
                                 </div>
                                 <!-- <div class="col-6">
-                                    <label>Vehicle Type</label>
-                                    <select id="vehicle_type" name="vehicle_type" tabindex="14" required
-                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                        <option value="-1" selected="selected">Vehicle Type</option>
-                                        <option value="Convertibles">Convertibles</option>
-                                        <option value="Hatchbacks">Hatchbacks</option>
-                                        <option value="SUVs">SUVs</option>
-                                        <option value="Saloon Car">Saloon Car</option>
-                                        <option value="Station Wagons">Station Wagons</option>
-                                        <option value="Pickup Trucks">Pickup Trucks</option>
-                                        <option value="Buses, Taxis and Vans">Buses, Taxis and Vans</option>
-                                        <option value="Motorbikes">Motorbikes</option>
-                                        <option value="Trucks">Trucks</option>
-                                        <option value="Machinery and Tractors">Machinery and Tractors</option>
-                                        <option value="Trailers">Trailers</option>
-                                        <option value="Minis">Minis</option>
-                                        <option value="Coupes">Coupes</option>
-                                        <option value="Quad Bikes">Quad Bikes</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </div> -->
+                                                                <label>Vehicle Type</label>
+                                                                <select id="vehicle_type" name="vehicle_type" tabindex="14" required
+                                                                    style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
+                                                                    <option value="-1" selected="selected">Vehicle Type</option>
+                                                                    <option value="Convertibles">Convertibles</option>
+                                                                    <option value="Hatchbacks">Hatchbacks</option>
+                                                                    <option value="SUVs">SUVs</option>
+                                                                    <option value="Saloon Car">Saloon Car</option>
+                                                                    <option value="Station Wagons">Station Wagons</option>
+                                                                    <option value="Pickup Trucks">Pickup Trucks</option>
+                                                                    <option value="Buses, Taxis and Vans">Buses, Taxis and Vans</option>
+                                                                    <option value="Motorbikes">Motorbikes</option>
+                                                                    <option value="Trucks">Trucks</option>
+                                                                    <option value="Machinery and Tractors">Machinery and Tractors</option>
+                                                                    <option value="Trailers">Trailers</option>
+                                                                    <option value="Minis">Minis</option>
+                                                                    <option value="Coupes">Coupes</option>
+                                                                    <option value="Quad Bikes">Quad Bikes</option>
+                                                                    <option value="Other">Other</option>
+                                                                </select>
+                                                            </div> -->
                             </div>
                             <div class="form-outline" style="padding-top:10px; padding-bottom:15px;">
                                 <textarea class="form-control" required placeholder="Enter vehicle listing description." id="description"

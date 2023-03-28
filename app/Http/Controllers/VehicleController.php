@@ -169,7 +169,7 @@ class VehicleController extends Controller
     }
     public function getModels(Request $request)
     {
-        $models = CarModel::where('car_make_id',$request->car_make_id)->get();
+        $models = CarModel::where('car_make_id',$request->car_make_id)->orderBy('car_model_name','ASC')->get();
         return CarModelResource::collection($models);
     }
 }
