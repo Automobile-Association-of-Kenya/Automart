@@ -462,11 +462,11 @@
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
                                         <option value="-1">Vehicle Usage</option>
                                         <option value="New" {{ $details->usage == 'New' ? 'selected' : '' }}>
-                                            Leather</option>
+                                         New   </option>
                                         <option value="Local" {{ $details->usage == 'Local' ? 'selected' : '' }}>
-                                            Fabric</option>
+                                            Locally Used</option>
                                         <option value="Foreign" {{ $details->usage == 'Foreign' ? 'selected' : '' }}>
-                                            Other
+                                            Foreign Used
                                         </option>
                                     </select>
                                 </div>
