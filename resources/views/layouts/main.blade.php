@@ -648,7 +648,7 @@
 
             <!-- Copyright -->
 
-            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05) !Important!; color: #fff">
+            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05) !Important; color: #fff;">
                 © 2022 Copyright:
                 <a class="text-reset fw-bold" href="https://www.aakenya.co.ke/">AUTOMOBILE ASSOCIATION OF KENYA</a>
             </div>
