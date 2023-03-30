@@ -30,6 +30,7 @@ Route::get('/landing',function(){
 });
 Route::get('/SellYourCar', 'App\Http\Controllers\sellController@index')->name('sellcar');
 Route::post('/SellYourCar', 'App\Http\Controllers\sellController@store')->name('savecar');
+Route::post('/updateCar/{id}', 'App\Http\Controllers\sellController@update')->name('updatecar');
 Route::get('/SellYourCar/Payment', 'App\Http\Controllers\sellController@pay')->name('payment');
 Route::get('/Contact Us', 'App\Http\Controllers\contactController@index')->name('contact');
 Route::post('/Contact Us', 'App\Http\Controllers\contactController@store')->name('store');
@@ -94,6 +95,7 @@ Route::post('fetch/car-models',[VehicleController::class,'getModels'])->name('ca
 Route::controller(dealersController::class)->group(function(){
     Route::prefix('dealer')->group(function(){
         Route::get('addcar','addCar')->name('dealer.addcar');
+        Route::get('editcar/{id}','editCar')->name('dealer.editcar');
         Route::get('home','home')->name('dealer.home');
         Route::get('mycars','mycars')->name('dealer.mycars');
         Route::get('mysales','mysales')->name('dealer.mysales');

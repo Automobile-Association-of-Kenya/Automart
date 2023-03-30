@@ -71,8 +71,16 @@ class dealersController extends Controller
     public function addcar()
     {
         $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);
-        $makes = CarMake::all();
+        $makes = CarMake::orderBy('car_make_name','ASC')->get();
         return view('dealer.addcar',compact('makes','vehicles'));
+    }
+    public function editcar($id)
+    {
+        $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);
+        $makes = CarMake::orderBy('car_make_name','ASC')->get();
+        $details = Caronsells::findOrFail($id);
+       // dd($details);
+        return view('dealer.editcar',compact('makes','vehicles','details'));
     }
     public function home()
     {
@@ -82,7 +90,6 @@ class dealersController extends Controller
     }
     public function mycars()
     {
-        $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(1);
         $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);
         $makes = CarMake::all();
         return view('dealer.mycars',compact('makes','vehicles'));
