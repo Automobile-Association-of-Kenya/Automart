@@ -21,11 +21,7 @@ class sellController extends Controller
         $make = CarMake::all();
         return view('sell', compact('make'));
     }
-    // public function dealer()
-    // {
-    //     $make= car_make::all();
-    //     return view('make'));
-    // }
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -37,13 +33,13 @@ class sellController extends Controller
             'year' => 'required',
             'price' => 'required',
             'miles' => 'required',
-            // 'vin' => 'required',
+            'enginecc' => 'required',
             'exterior' => 'required',
             'interior' => 'required',
             'fuel_type' => 'required',
             // 'features' => 'required',
             'transmission' => 'required',
-            // 'vehicle_type' => 'required',
+             'usage' => 'required',
             'description' => 'required',
             'cover_photo' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'images' => 'required|max:10|min:1',
@@ -56,10 +52,7 @@ class sellController extends Controller
         if (count($request->images) > 10) {
             return redirect()->back()->with('errorMsg', 'Images must not be more than 10');
         }
-        // $vehicles = Caronsells::where('vin', $request->vin)->first();
-        // if ($vehicles == true) {
-        //     return redirect(route('sellcar'))->with('errorMsg', 'Vehicle Already Listed.');
-        // }
+ 
         if ($request->has('cover_photo')) {
             $image = $request->cover_photo;
             $name = time() . $image->getClientOriginalName();
@@ -70,17 +63,7 @@ class sellController extends Controller
             });
             $img->save(public_path('images/' . $name));
 
-            //add watermark
-            // $img = Image::make(public_path('images/'.$name));
-            // $img->text(' '.$request->firstname.' '.$request->lastname, 70, 50, function($font) {  
-            //     $font->file(public_path('assets/fonts/font.ttf'));  
-            //     $font->size(30);  
-            //     $font->color('#CECECE');  
-            //     $font->align('center');  
-            //     $font->valign('center');  
-            //     $font->angle(0);  
-            // });
-            // $img->save(public_path('images/'.$name));
+    
         }
         if ($request->hasfile('images')) {
 
@@ -94,17 +77,7 @@ class sellController extends Controller
                 $img->save(public_path('images/' . $name));
                 $data[] = $name;
 
-                // //add watermark
-                // $img = Image::make(public_path('images/'.$name));
-                // $img->text(' '.$request->firstname.' '.$request->lastname, 150, 120, function($font) {  
-                //     $font->file(public_path('assets/fonts/font.ttf'));  
-                //     $font->size(30);  
-                //     $font->color('#CECECE');  
-                //     $font->align('center');  
-                //     $font->valign('center');  
-                //     $font->angle(0);  
-                // });
-                // $img->save(public_path('images/'.$name));
+             
             }
         }
         $prefix = "GWAAK";
@@ -119,14 +92,13 @@ class sellController extends Controller
         $carOnSell->year = $request->year;
         $carOnSell->price = $request->price;
         $carOnSell->miles = $request->miles;
-        // $carOnSell->vin = $request->vin;
+        $carOnSell->enginecc = $request->enginecc;
+        $carOnSell->usage = $request->usage;
         $carOnSell->exterior = $request->exterior;
         $carOnSell->interior = $request->interior;
         $carOnSell->fuel_type = $request->fuel_type;
-        // $carOnSell->feartures = json_encode($featdata);
         $carOnSell['features'] = json_encode($request->input('features'));
         $carOnSell->transmission = $request->transmission;
-        // $carOnSell->vehicle_type = $request->vehicle_type;
         $carOnSell->description = $request->description;
         $carOnSell->images = json_encode($data);
         $carOnSell->firstname = $request->firstname;
@@ -151,13 +123,13 @@ class sellController extends Controller
             'year' => 'required',
             'price' => 'required',
             'miles' => 'required',
-            // 'vin' => 'required',
+            'enginecc' => 'required',
             'exterior' => 'required',
             'interior' => 'required',
             'fuel_type' => 'required',
-            // 'features' => 'required',
+            'usage' => 'required',
             'transmission' => 'required',
-            // 'vehicle_type' => 'required',
+           
             'description' => 'required',
             'cover_photo' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'images' => 'nullable|max:10|min:1',
@@ -173,10 +145,7 @@ class sellController extends Controller
             }
         }
 
-        // $vehicles = Caronsells::where('vin', $request->vin)->first();
-        // if ($vehicles == true) {
-        //     return redirect(route('sellcar'))->with('errorMsg', 'Vehicle Already Listed.');
-        // }
+     
         $carOnSell = Caronsells::find($id);
         $name = $carOnSell->cover_photo;
         $data = json_decode($carOnSell->images);
@@ -190,17 +159,7 @@ class sellController extends Controller
             });
             $img->save(public_path('images/' . $name));
 
-            //add watermark
-            // $img = Image::make(public_path('images/'.$name));
-            // $img->text(' '.$request->firstname.' '.$request->lastname, 70, 50, function($font) {  
-            //     $font->file(public_path('assets/fonts/font.ttf'));  
-            //     $font->size(30);  
-            //     $font->color('#CECECE');  
-            //     $font->align('center');  
-            //     $font->valign('center');  
-            //     $font->angle(0);  
-            // });
-            // $img->save(public_path('images/'.$name));
+
         }
         if ($request->hasfile('images')) {
 
@@ -214,17 +173,7 @@ class sellController extends Controller
                 $img->save(public_path('images/' . $name));
                 $data[] = $name;
 
-                // //add watermark
-                // $img = Image::make(public_path('images/'.$name));
-                // $img->text(' '.$request->firstname.' '.$request->lastname, 150, 120, function($font) {  
-                //     $font->file(public_path('assets/fonts/font.ttf'));  
-                //     $font->size(30);  
-                //     $font->color('#CECECE');  
-                //     $font->align('center');  
-                //     $font->valign('center');  
-                //     $font->angle(0);  
-                // });
-                // $img->save(public_path('images/'.$name));
+
             }
         }
         $prefix = "GWAAK";
@@ -239,14 +188,14 @@ class sellController extends Controller
         $carOnSell->year = $request->year;
         $carOnSell->price = $request->price;
         $carOnSell->miles = $request->miles;
-        // $carOnSell->vin = $request->vin;
+        $carOnSell->usage = $request->usage;
         $carOnSell->exterior = $request->exterior;
         $carOnSell->interior = $request->interior;
         $carOnSell->fuel_type = $request->fuel_type;
-        // $carOnSell->feartures = json_encode($featdata);
+    
         $carOnSell['features'] = json_encode($request->input('features'));
         $carOnSell->transmission = $request->transmission;
-        // $carOnSell->vehicle_type = $request->vehicle_type;
+        $carOnSell->enginecc = $request->enginecc;
         $carOnSell->description = $request->description;
         $carOnSell->images = json_encode($data);
         $carOnSell->firstname = $request->firstname;

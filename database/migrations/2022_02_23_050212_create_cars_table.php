@@ -23,7 +23,7 @@ class CreateCarsTable extends Migration
             $table->string('year');
             $table->string('price');
             $table->string('miles');
-            $table->string('vin')->unique();
+            $table->string('enginecc');
             $table->string('exterior');
             $table->string('interior');
             $table->string('fuel_type');
@@ -37,10 +37,12 @@ class CreateCarsTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('carId');
+            $table->string('usage');
             $table->string('trans_id')->nullable(true);
             $table->string('package')->nullable(true);
             $table->string('deal_slideshow')->nullable(true);
             $table->timestamps();
+            
         });
     }
 
