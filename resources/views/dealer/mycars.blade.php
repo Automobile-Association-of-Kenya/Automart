@@ -152,6 +152,10 @@
                                             </a>
                                         </div>
                                         <div class="card-body">
+                                        <h1 class="title">
+                                                    <a style="color:black"
+                                                        href="#">{{ $vehicle->approved ? 'AA Approved' : '' }}</a>
+                                                </h1>
                                             <h6 class="card-title">Year of Manufacture: <b>{{ $vehicle->year }}</b></h6>
                                             <h6 class="card-title">Price: <b>Ksh.
                                                     {{ number_format("$vehicle->price", 2) }}</b></h6>
@@ -161,6 +165,7 @@
                                             <h6 class="card-title">Mileage: <b>{{ number_format("$vehicle->miles", 1) }}
                                                     Kms</b></h6>
                                             <h6 class="card-title">Dealer/Yard: <b>{{ $vehicle->firstname }}</b></h6>
+                                            <h6 class="card-title">Views: <b>{{ $vehicle->views }}</b></h6>
                                             <i class="fas fa-phone fa-1x"></i>&nbsp;{{ $vehicle->phone }}
                                             <i class="fas fa-map-marker-alt fa-1x"></i>&nbsp;{{ $vehicle->county }} <br>
                                             <a href="{{ route('details', $vehicle->id) }}" class="btn btn-primary"> <i

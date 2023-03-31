@@ -138,6 +138,7 @@
                                             <!-- <span class="review-no">41 reviews</span> -->
                                         </div>
                                         <p class="product-description">{{ $vehicle->description }}</p>
+                                      
                                         <h4 class="price">current price: <span>KES {{number_format( $vehicle->price )}}</span></h4>
                                         <i class="flaticon-pin"></i>{{ $vehicle->county }}
 
@@ -200,6 +201,7 @@
                             <div class="card-body">
                                 <h5>Mileage:</h5>
                                 <h5><b>{{ number_format("$vehicle->miles") }} Kms</b></h5>
+                                <p class="product-count">{{ $vehicle->count }}</p>
                             </div>
                         </div>
                     </div>
@@ -218,7 +220,7 @@
                             <h5 class="card-title">Contacts:</h5>
                             <div class="card-body">
                                 <h6><b>{{ $vehicle->phone }} - {{ $vehicle->email }}</b></h6>
-
+                               
                             </div>
                         </div>
                     </div>

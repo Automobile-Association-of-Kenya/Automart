@@ -92,12 +92,12 @@
 
         <!-- user profile start -->
         <div id="5" class="show-when-target:target">
-            <div class="row" style="padding-bottom: 0px;">
+            <div class="row border-warning" style="padding-bottom: 0px;">
                 <div class="alert alert-success" role="alert">
                     All your vehicles will be posted under Firstname: {{ $user->name }}, Email: {{ $user->email }},
                     Phone: {{ $user->number }}
                 </div>
-                <div class="col-md-2 mt-5 pt-5">
+                <div class="col-md-2 mt-5 pt-5 ">
                     <!-- sidebar -->
                     <div class="col-md-12 ">
                         <a href="{{ route('dealer.home') }}"> <button type="submit" class="btn  btn-block"
@@ -106,7 +106,7 @@
                     </div>
                     </br>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 ">
                         <a href="{{ route('dealer.mycars') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-car"></i> My Cars</button></a>
@@ -155,11 +155,14 @@
                         @endif
                         <!--upload form here -->
                         <div class="pageLoader" id="pageLoader"></div>
+                       
                         <form action="{{ route('savecar') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <h2 class="form-title" style="color: #00472F">Enter Vehicle Information » </h2>
+                            <!-- <div class="card border border-warning shadow-lg p-3 mb-5 bg-body rounded">
+                                <div class="card-body border-success "> -->
                             <label class="gt-title" for="gt-title">Your listing title</label>
-                            <input class="form-control" type="text" id="gt-title" tabindex="2" name="title"
+                            <input class="form-control border-success" type="text" id="gt-title" tabindex="2" name="title"
                                 placeholder="Enter listing title" required style="text-transform:uppercase">
                             <div class="row" style="padding-top: 10px; padding-bottom: 1px;">
                                 <div class="col-md-6 mt-1">
@@ -287,15 +290,15 @@
                            
                             <div class="row" style="padding-top:10px;">
                                 <div class="col-md-4 mt-1">
-                                    <input class="form-control" type="number" id="price" name="price"
+                                    <input class="form-control border-success" type="number" id="price" name="price"
                                         placeholder="selling Price (Ksh)" required>
                                 </div>
                                 <div class=" col-md-4 mt-1">
-                                    <input class="form-control" type="number" id="miles" name="miles"
+                                    <input class="form-control border-success" type="number" id="miles" name="miles"
                                         placeholder="mileage (Kms)" required>
                                 </div>
                                 <div class=" col-md-4 mt-1">
-                                    <input class="form-control" type="number" id="enginecc" name="enginecc"
+                                    <input class="form-control border-success" type="number" id="enginecc" name="enginecc"
                                         placeholder="Engine CC" required>
                                 </div>
                                
@@ -356,6 +359,10 @@
                                     </select>
                                 </div>
                             </div>
+                            <!-- </div>
+    </div> -->
+                                <!-- <div class="card border border-warning shadow-lg mb-5 bg-body rounded">
+                                <div class="card-body "> -->
                             <h2 class="form-title" style="color: #000000">Select Vehicle Features » </h2>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
@@ -478,13 +485,17 @@
                                     <input type="checkbox" value="Technology Package" id="Technology Package"
                                         name="features[]">&nbsp;&nbsp;&nbsp;Technology Package
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 border-success">
                                     <input type="checkbox" value="Traction Control" id="Traction Control"
                                         name="features[]">&nbsp;&nbsp;&nbsp;Traction Control
                                 </div>
                             </div>
+                                <!-- </div>
+                                </div> -->
+                                <!-- <div class="card border border-warning shadow-lg p-3 mb-5 bg-body rounded">
+                                <div class="card-body ">     -->
                             <div class="row" style="padding-top:10px; padding-bottom:15px;">
-                                <div class=" col-md-12">
+                                <div class=" col-md-12 border-success">
                                     <label>Transmission</label>
                                     <select id="transmission" name="transmission" tabindex="13" required
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
@@ -497,11 +508,15 @@
                                 </div>
                               
                             </div>
-                            <div class="form-outline" style="padding-top:10px; padding-bottom:15px;">
-                                <textarea class="form-control" required placeholder="Enter vehicle listing description." id="description"
-                                    name="description" rows="4" style="background: #fff;" required></textarea>
-                                <label class="form-label" for="description">Vehicle Description</label>
+                            <div class="form-outline border-success" style="padding-top:10px; padding-bottom:15px;">
+                                <textarea class="form-control border-success " required placeholder="Enter vehicle listing description." id="description"
+                                    name="description" rows="4"  required></textarea>
+                                <label class="form-label " for="description">Vehicle Description</label>
                             </div>
+                        <!-- </div>
+                    </div> -->
+                                <!-- <div class="card border border-warning shadow-lg p-3 mb-5 bg-body rounded">
+                                <div class="card-body "> -->
                             <div class="row">
                                 <div class="col-6 col-lg-4">
                                     <label class="btn btn-success btn-file"><br>
@@ -543,27 +558,30 @@
                                     </div>
                                 </div>
                             </div>
+                                <!-- </div>
+                                </div> -->
+                                
                             <h2 class="form-title" style="color: #00472F">Personal Information</h2>
                             <div class="row">
                                 <div class="col-6">
-                                    <input class="form-control" type="text" id="firstname" tabindex="22"
+                                    <input class="form-control border-warning" type="text" id="firstname" tabindex="22"
                                         name="firstname" placeholder="Enter first name" value="{{ $user->name }}"
                                         required style="text-transform:uppercase">
                                 </div>
                                 <div class="col-6">
-                                    <input class="form-control" type="text" id="gt-lastname" tabindex="23"
+                                    <input class="form-control border-warning" type="text" id="gt-lastname" tabindex="23"
                                         name="lastname" placeholder="Enter last name" value="{{ $user->name }}"
                                         required style="text-transform:uppercase">
                                 </div>
                             </div>
                             <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
                                 <div class="col-6">
-                                    <input class="form-control" type="email" id="email" tabindex="24"
+                                    <input class="form-control border-warning" type="email" id="email" tabindex="24"
                                         name="email" value="{{ $user->email }}"
                                         placeholder="Enter your e-mail address " required>
                                 </div>
                                 <div class="col-6">
-                                    <input class="form-control" type="number" id="phone" tabindex="25"
+                                    <input class="form-control border-warning" type="number" id="phone" tabindex="25"
                                         name="phone" value="{{ $user->number }}" placeholder="Enter phone number"
                                         required>
                                 </div>
@@ -580,7 +598,10 @@
                             </div>
                             <button style="background: #00472F;color:white;" type="submit"
                                 class="btn btn-primary btn-block mb-4">Submit</button>
+                                </div>
+                                </div>
                         </form>
+                        
                     </div>
                 </div>
                 <footer class="mt-5 w-100 pt-5">

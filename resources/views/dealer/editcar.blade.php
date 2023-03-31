@@ -155,11 +155,13 @@
                         @endif
                         <!--upload form here -->
                         <div class="pageLoader" id="pageLoader"></div>
+                       
                         <form action="{{ route('updatecar', $details->id) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <h2 class="form-title" style="color: #00472F">Edit Vehicle Information » </h2>
+                         
                             <label class="gt-title" for="gt-title">Your listing title</label>
-                            <input class="form-control" type="text" id="gt-title" tabindex="2" name="title"
+                            <input class="form-control border-success" type="text" id="gt-title" tabindex="2" name="title"
                                 placeholder="Enter listing title" required style="text-transform:uppercase"
                                 value="{{ $details->title }}">
                             <div class="row" style="padding-top: 10px; padding-bottom: 1px;">
@@ -400,15 +402,15 @@
                             
                             <div class="row" style="padding-top:10px;">
                                 <div class="col-md-4">
-                                    <input class="form-control" type="number" id="price" name="price"
+                                    <input class="form-control border-success" type="number" id="price" name="price"
                                         placeholder="selling Price (Ksh)" required value="{{ $details->price }}">
                                 </div>
                                 <div class="col-md-4">
-                                    <input class="form-control" type="number" id="miles" name="miles"
+                                    <input class="form-control border-success" type="number" id="miles" name="miles"
                                         placeholder="mileage (Kms)" required value="{{ $details->miles }}">
                                 </div>
                                 <div class="col-md-4">
-                                    <input class="form-control" type="number" id="enginecc" name="enginecc"
+                                    <input class="form-control border-success" type="number" id="enginecc" name="enginecc"
                                         placeholder="mileage (Kms)" required value="{{ $details->enginecc }}">
                                 </div>
                                 
@@ -490,6 +492,8 @@
                                     </select>
                                 </div>
                             </div>
+                            
+                           
                             <h2 class="form-title" style="color: #000000">Select Vehicle Features » </h2>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
@@ -656,6 +660,8 @@
                                     Control
                                 </div>
                             </div>
+                              
+                            
                             <div class="row" style="padding-top:10px; padding-bottom:15px;">
                                 <div class=" col-md-12">
                                     <label>Transmission</label>
@@ -679,9 +685,11 @@
                             </div>
                             <div class="form-outline" style="padding-top:10px; padding-bottom:15px;">
                                 <textarea class="form-control" required placeholder="Enter vehicle listing description." id="description"
-                                    name="description" rows="4" style="background: #fff;" required>{{ $details->description }}</textarea>
+                                    name="description" rows="4" style="border: #fed925;" required>{{ $details->description }}</textarea>
                                 <label class="form-label" for="description">Vehicle Description</label>
                             </div>
+                              
+                            
                             <div class="row">
                                 <div class="col-6 col-lg-4">
                                     <label class="btn btn-success btn-file"><br>
@@ -708,6 +716,7 @@
                                     </div>
                                 </div>
                             </div>
+                               
                             <div class="row">
                                 <div class="col-6 col-lg-4">
                                     <label class="btn btn-success btn-file"><br>
@@ -725,13 +734,14 @@
                                     <span class="instructions-cont">You may upload up to 12 images and each image may be
                                         no larger than 5MB</span>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="mt-1">
                                         <div class="images-preview-div" style="margin:1%"> </div>
                                     </div>
-                                </div>
+                                
+                            </div>
                                 @foreach (json_decode($details->images, true) as $item)
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 mt-1">
                                         <div class="mt-1">
                                             <div class="">
                                                 <img src="{{ asset('images/' . $item) }}" width="300"
@@ -741,27 +751,29 @@
                                     </div>
                                 @endforeach
                             </div>
+                            
                             <h2 class="form-title" style="color: #00472F">Personal Information</h2>
+                            
                             <div class="row">
                                 <div class="col-6">
-                                    <input class="form-control" type="text" id="firstname" tabindex="22"
+                                    <input class="form-control border-success" type="text" id="firstname" tabindex="22"
                                         name="firstname" placeholder="Enter first name" value="{{ $user->name }}"
                                         required style="text-transform:uppercase">
                                 </div>
                                 <div class="col-6">
-                                    <input class="form-control" type="text" id="gt-lastname" tabindex="23"
+                                    <input class="form-control border-success" type="text" id="gt-lastname" tabindex="23"
                                         name="lastname" placeholder="Enter last name" value="{{ $user->name }}"
                                         required style="text-transform:uppercase">
                                 </div>
                             </div>
                             <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
                                 <div class="col-6">
-                                    <input class="form-control" type="email" id="email" tabindex="24"
+                                    <input class="form-control border-success" type="email" id="email" tabindex="24"
                                         name="email" value="{{ $user->email }}"
                                         placeholder="Enter your e-mail address " required>
                                 </div>
                                 <div class="col-6">
-                                    <input class="form-control" type="number" id="phone" tabindex="25"
+                                    <input class="form-control border-success" type="number" id="phone" tabindex="25"
                                         name="phone" value="{{ $details->phone }}" placeholder="Enter phone number"
                                         required>
                                 </div>
@@ -778,9 +790,11 @@
                             </div>
                             <button style="background: #00472F;color:white;" type="submit"
                                 class="btn btn-primary btn-block mb-4">Submit</button>
+                                </div>
+                            </div>
                         </form>
-                    </div>
-                </div>
+                        
+                
                 <footer class="mt-5 w-100 pt-5">
                     <!-- Copyright -->
                     <div class="text-center p-3" style="background-color: #CBBC27 ; border-radius: 10px;">

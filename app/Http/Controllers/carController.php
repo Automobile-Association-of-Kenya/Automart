@@ -16,6 +16,19 @@ class carController extends Controller
 
     public function show($id){
         $vehicle = Caronsells::find($id);
+       
+        if ($vehicle) {
+            # code...
+            $count = $vehicle->views;
+            $newcount = $count +=1;
+            $vehicle->views = $newcount;
+            $vehicle->update();
+        }
+       
+        // if ($count <= 0) {
+        //     # code...
+        //     $count = 'zero views';
+        // }
         
         return view('details', compact('vehicle'));
     }

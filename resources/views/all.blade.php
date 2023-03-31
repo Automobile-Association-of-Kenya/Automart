@@ -105,6 +105,10 @@
                                                     <a style="color:black"
                                                         href="{{ route('details', $vehicle->id) }}">{{ $vehicle->carmodel ? $vehicle->carmodel->car_model_name : '' }}</a>
                                                 </h1>
+                                                <h1 class="title">
+                                                    <a style="color:black"
+                                                        href="{{ route('details', $vehicle->id) }}">{{ $vehicle->approved ? 'AA Approved' : '' }}</a>
+                                                </h1>
                                                 <ul class="custom-list">
                                                     <li>
                                                         <a
@@ -113,6 +117,7 @@
 
                                                 </ul>
                                                 <ul class="facilities-list clearfix">
+                                                
                                                     <li>
                                                         <i class="flaticon-user"></i> {{ $vehicle->firstname }}
                                                     </li>
@@ -133,6 +138,9 @@
                                                     </li>
                                                     <li>
                                                         <i class="flaticon-calendar-1"></i>{{ $vehicle->year }}
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-eye"></i> <b>  {{ $vehicle->views }}</b>
                                                     </li>
                                                 </ul>
                                             </div>

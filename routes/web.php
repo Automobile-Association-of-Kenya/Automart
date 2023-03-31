@@ -102,6 +102,8 @@ Route::controller(dealersController::class)->group(function(){
         Route::get('subscriptions','subscriptions')->name('dealer.subscriptions');
     });
 });
+//Admin path 
+require __DIR__ .'/admin.php';
 
 
 
