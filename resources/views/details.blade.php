@@ -138,7 +138,8 @@
                                             <!-- <span class="review-no">41 reviews</span> -->
                                         </div>
                                         <p class="product-description">{{ $vehicle->description }}</p>
-                                        <h4 class="price">current price: <span>KES {{number_format( $vehicle->price )}}</span></h4>
+                                        <h4 class="price">current price: <span>KES
+                                                {{ number_format($vehicle->price) }}</span></h4>
                                         <i class="flaticon-pin"></i>{{ $vehicle->county }}
 
                                         <div class="action" style="text-align:left, font-family:fantasy">
@@ -297,20 +298,20 @@
                                     </button>
                                 </div>
                                 <!-- <div class="modal-body">
-                                            <h5 class="card-title"> Beware of cons, please take note of the following;</h5>
-                                            <div class="text-center">
-            
-                                                <p> 1. Inspect the vehicle to make sure they meet your needs.</p><br>
-                                                <p style="margin-top:-30px; margin-right:130px"> 2.Meet the seller at a safe public
-                                                    place.</p><br>
-                                                <p style="margin-top:-30px;margin-right:178px"> 3.Don't send any pre-payments.</p></br>
-                                                <p style="margin-top:-30px; margin-right:-10px"> 4.Check all documentation and only pay
-                                                    if you're satisfied.</p></br>
-                                            </div>
-                                        </div> -->
+                                                <h5 class="card-title"> Beware of cons, please take note of the following;</h5>
+                                                <div class="text-center">
+
+                                                    <p> 1. Inspect the vehicle to make sure they meet your needs.</p><br>
+                                                    <p style="margin-top:-30px; margin-right:130px"> 2.Meet the seller at a safe public
+                                                        place.</p><br>
+                                                    <p style="margin-top:-30px;margin-right:178px"> 3.Don't send any pre-payments.</p></br>
+                                                    <p style="margin-top:-30px; margin-right:-10px"> 4.Check all documentation and only pay
+                                                        if you're satisfied.</p></br>
+                                                </div>
+                                            </div> -->
                                 <!-- <div class="modal-footer" >
-                                          <button type="button" onclick="closeModal()" class="btn btn-secondary" style="background-color:green" data-dismiss="modal">Close</button>
-                                        </div> -->
+                                              <button type="button" onclick="closeModal()" class="btn btn-secondary" style="background-color:green" data-dismiss="modal">Close</button>
+                                            </div> -->
                             </div>
                         </div>
                     </div>

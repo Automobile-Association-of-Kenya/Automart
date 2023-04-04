@@ -38,6 +38,9 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+    
+    @yield('header_styles')
+
     <style>
         /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
         html {
@@ -424,7 +427,7 @@
         }
     </style>
 
-    <style>
+    {{-- <style>
         body {
             background-color: #FFFFFF;
             font-family: 'Nunito', sans-serif;
@@ -432,7 +435,7 @@
             height: 25vh;
             padding-top: 10px;
         }
-    </style>
+    </style> --}}
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
     <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
@@ -563,5 +566,9 @@
             @yield('content')
         </div>
 </body>
+
+<script src="{{ asset('js/components.js') }}"></script>
+
+@yield('footer_scripts')
 
 </html>

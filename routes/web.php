@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dealersController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
@@ -19,26 +20,21 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome')->name('home');
 // });
 Route::group(['middleware' => ['auth']], function() {
-    /**
-    * Logout Route
-    */
-    Route::get('/logout', 'App\Http\Controllers\logoutController@perform')->name('logout');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
  });
+
 Route::get('/', 'App\Http\Controllers\Controller@index')->name('home');
 Route::get('/landing',function(){
     return view('index');
 });
-Route::get('/SellYourCar', 'App\Http\Controllers\sellController@index')->name('sellcar');
-Route::post('/SellYourCar', 'App\Http\Controllers\sellController@store')->name('savecar');
-Route::post('/updateCar/{id}', 'App\Http\Controllers\sellController@update')->name('updatecar');
-Route::get('/SellYourCar/Payment', 'App\Http\Controllers\sellController@pay')->name('payment');
+
+Route::get('/SellYourCar', 'App\Http\Controllers\SellController@index')->name('sellcar');
+Route::post('/SellYourCar', 'App\Http\Controllers\SellController@store')->name('savecar');
+Route::post('/updateCar/{id}', 'App\Http\Controllers\SellController@update')->name('updatecar');
+Route::get('/SellYourCar/Payment', 'App\Http\Controllers\SellController@pay')->name('payment');
 Route::get('/Contact Us', 'App\Http\Controllers\contactController@index')->name('contact');
 Route::post('/Contact Us', 'App\Http\Controllers\contactController@store')->name('store');
 Route::get('/DealersPage/Dashboard', 'App\Http\Controllers\dealersController@index')->name('dealerHome');
-Route::get('/DealersPage/home', 'App\Http\Controllers\dealersController@show')->name('dealershow');
-Route::post('/DealersPage/Dashboard', 'App\Http\Controllers\dealersController@store')->name('dealerreg');
-Route::get('/LoginPage', 'App\Http\Controllers\buyerController@index')->name('login');
-Route::post('/Dashboard/GariwezaUser', 'App\Http\Controllers\buyerController@login')->name('userlogin');
 Route::get('/BuyerPage/Dashboard', 'App\Http\Controllers\buyerController@show_reg')->name('userreg');
 Route::post('/BuyerPage/Register', 'App\Http\Controllers\buyerController@user1')->name('user');
 Route::get('/Available', 'App\Http\Controllers\carController@index')->name('all_cars');
@@ -59,26 +55,26 @@ Route::get('/Admin@AAIT/Panel/Admins{id}', 'App\Http\Controllers\adminController
 Route::get('/Admin@AAIT/Panel/Admins/delete/{id}/admin{adm}','App\Http\Controllers\adminController@rm_admin')->name('del_admin');
 // Route::get('/Admin@AAIT/Panel/Dash', 'App\Http\Controllers\adminController@dash')->name('adminReg');
 //Admin Reset
-Route::get('/forget-password/admin', 'App\Http\Controllers\AdminReset@show')->name('forget.admin');
 
-Route::post('/forget-password/admin', [App\Http\Controllers\AdminReset::class, 'submitForgetPasswordForm'])->name('forget.password.post.admin'); 
+/** Auth routes */
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'doLogin'])->name('userlogin');
+    Route::get('/forget-password', [AuthController::class, 'forgetPassword'])->name('forget.password');
+    Route::post('/forget-password', [AuthController::class, 'forget'])->name('forget');
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'registerUser'])->name('register');
+    Route::get('/password-reset/{token}', [AuthController::class, 'reset'])->name('password.reset');
+    Route::post('/reset-password', [AuthController::class, 'passwordReset'])->name('reset.password');
+    Route::get('/email-verify/{token}', [AuthController::class, 'verify']);
+});
 
-Route::get('/reset-password/admin/{token}', [App\Http\Controllers\AdminReset::class, 'showResetPasswordForm'])->name('reset.password.get.admin');
 
-Route::post('/reset-password/admin', [App\Http\Controllers\AdminReset::class, 'submitResetPasswordForm'])->name('reset.password.post.admin');
 
-//user password reset
-Route::get('/forget-password', 'App\Http\Controllers\ForgotPasswordController@show')->name('forget');
 
-Route::post('/forget-password', [App\Http\Controllers\ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('/getmodel/{id}','SellController@getmodel')-> name('getmodel');
 
-Route::get('/reset-password/{token}', [App\Http\Controllers\ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
-
-Route::post('/reset-password', [App\Http\Controllers\ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
-
-//Route::get('/getmodel/{id}','sellController@getmodel')-> name('getmodel');
-
-//Route::get('/getCarMakes',[VehicleController::class, 'getCarMakes']) -> name('getCarMakes');
+Route::get('/getCarMakes',[VehicleController::class, 'getCarMakes']) -> name('getCarMakes');
 
 Route::get('/getCarMakes', 'App\Http\Controllers\CarController@getCarMakes')->name('getCarMakes');
 
@@ -92,7 +88,7 @@ Route::get('/getCarMakes', 'VehicleController@getCarMakes')->name('getCarMakes')
 Route::post('fetch/car-models',[VehicleController::class,'getModels'])->name('carmodels.fetch');
 
 
-Route::controller(dealersController::class)->group(function(){
+Route::controller(DealersController::class)->group(function(){
     Route::prefix('dealer')->group(function(){
         Route::get('addcar','addCar')->name('dealer.addcar');
         Route::get('editcar/{id}','editCar')->name('dealer.editcar');

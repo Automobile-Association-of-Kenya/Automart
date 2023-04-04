@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\Mailer;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -24,6 +28,8 @@ class User extends Authenticatable
         'number2',
         'county',
         'dName',
+        'remember_token',
+        'email_verified_at',
         'password',
     ];
 
@@ -45,4 +51,36 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function register($name, $email, $phone, $password)
+    {
+        return $this->create([
+            'name' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'password' => Hash::make($password),
+            'remember_token' => Str::random(26),
+        ]);
+    }
+
+    public function getUserBy($key, $value)
+    {
+        return $this->where("$key", "$value")->first();
+    }
+
+    public function emailAccountVerification($email)
+    {
+        $mail = new Mailer();
+        $user = $this->getUserBy('email', $email);
+        $mail->sendEMailVerificationLink($email, $user->remember_token);
+    }
+
+    public function  createPasswordReset($email, $token)
+    {
+        return DB::table('password_resets')->insert([
+            'email' => $email,
+            'token' => $token,
+            'created_at' => Carbon::now()
+        ]);
+    }
 }

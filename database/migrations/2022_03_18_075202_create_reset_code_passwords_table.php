@@ -17,6 +17,7 @@ class CreateResetCodePasswordsTable extends Migration
             $table->id();
             $table->string('email')->index();
             $table->string('code');
+            $table->string('expires_in')->default(4);
             $table->timestamp('created_at')->nullable();
         });
     }

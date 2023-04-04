@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
-<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/autocar-2-html/HTML/main/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 Sep 2022 18:44:29 GMT -->
 
 <head>
     <title>Automart|AAKenya</title>
@@ -60,10 +59,8 @@
         .selectpicker2,
         input {
             color: #777 !important;
-            /* text-align: center; */
             text-transform: capitalize !important;
             padding: 16.5px 20px 16px 15px !important;
-
         }
     </style>
 </head>
@@ -84,7 +81,7 @@
     <header class="main-header sticky-header header-with-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand company-logo" href="index.html">
+                <a class="navbar-brand company-logo" href="{{ url('/') }}">
                     {{-- <img src="{{url('assets/img/favicon.ico')}}" alt="logo"> --}}
                     <h1 class="text-white"> Automart | AAKENYA</h1>
                 </a>
@@ -101,7 +98,7 @@
                         </li>
                         <li class="nav-item dropdown active">
 
-                            <a class="nav-link font-weight-bold" href="{{ route('dealerHome') }}"> &nbsp; &nbsp; &nbsp;
+                            <a class="nav-link font-weight-bold" href="{{ route('dealer.home') }}"> &nbsp; &nbsp; &nbsp;
                                 Selling a Car?
                                 <br> <button class="btn btn-warning rounded-pill"> <span style="color: #00472F"> GET
                                         STARTED HERE</span></button></a>
@@ -151,12 +148,12 @@
                 <h3 style="color: #fff;margin-top:5px;text-align:center; margin-bottom: 0">I want to..</h3>
                 <ul class="navbar-nav " style="width:100%; margin:3px; margin-top:0 !important">
                     <li class="nav-item dropdown active" style="width:100%;">
-                        <a class="nav-link font-weight-bold" style="width:100%;text-align:center" href="{{ route('all_cars') }}"> 
+                        <a class="nav-link font-weight-bold" style="width:100%;text-align:center" href="{{ route('all_cars') }}">
                             <button class="btn btn-warning" style="width:95%;"> <span style="color: #00472F">Buy a car</span></button>
                         </a>
                     </li>
                     <li class="nav-item dropdown active" style="width:100%;">
-                        <a class="nav-link font-weight-bold" style="width:100%;text-align:center" href="{{ route('dealerHome') }}"> 
+                        <a class="nav-link font-weight-bold" style="width:100%;text-align:center" href="{{ route('dealer.home') }}">
                             <button class="btn btn-warning" style="width:95%;"> <span style="color: #00472F"> Sell a Car</span></button>
                         </a>
                     </li>
@@ -301,7 +298,7 @@
                 </a>
             </div> --}} -->
         </div>
-    </nav> 
+    </nav>
     <!-- Sidenav end -->
 
     <!-- Banner start -->
@@ -310,8 +307,8 @@
             <div class="carousel-inner">
               <div class="carousel-item active">
                   <div class="row" style="width:100%; background:url({{ url('assets/img/banner/img-6.jpg') }}); background-size:cover;padding-top: 180px; min-height:90vh">
-                   
-                   
+
+
                     <div class="col-md" style="text-align:center;">
                         <h3 class="">Buying or Selling <br>a Car?</h3>
                         <div class="price">
@@ -336,7 +333,7 @@
                                 <h5 class="d-lg-none">I want To</h5>
                                 <div class="d-lg-none" style="display: flex;margin:auto; align-items:center;margin-bottom:30px;text-align:center;margin-top:20px; justify-content:center">
                                      <a href="{{ route('all_cars') }}" class="btn btn-success " style="margin-right: 20px">Buy a Car</a>
-                                     <a href="{{ route('dealerHome') }}" class="btn btn-warning">Sell a Car</a>
+                                     <a href="{{ route('dealer.home') }}" class="btn btn-warning">Sell a Car</a>
                                  </div>
 
                                 <a href="{{ route('login') }}" class="btn btn-warning rounded ">
@@ -379,12 +376,12 @@
 
                         </div>
                         <h5 >You can search using model</h5>
-                    </div> 
+                    </div>
 
 
                   </div>
               </div>
-            
+
             </div>
           </div>
     </div>
@@ -623,7 +620,7 @@
                                 </div>
                                 <div class="col-xl-8 col-lg-2 col-md-6 col-sm-6 col-6 mt-3 search-col mt-3"
                                     style="text-align: center">
-                                    
+
                                 </div>
                                 <div class="col-xl-4 col-lg-12 col-md-6 col-sm-6 col-md-6 mt-3 " style="align:left">
                                     <button class="btn white-btn btn-search w-100" style="background: #00472F; text-align:center">
@@ -639,32 +636,29 @@
     </div>
     <!-- Search box 2 end -->
     <!-- Featured car start -->
-    <div class="container2">
-        <div class=" card main-title pull-left mb-5"
+    {{-- <div class="container2">
+        <div class="card main-title pull-left mb-5"
             style="background: rgb(218, 216, 216) !important;z-index:-1;position: relative;display:block; width:30%;height:100px;margin-left:-1%; border-top-right-radius: 25px;">
             <h1 style="color: black !important;padding:7%;font-size:250%">TOP PICKS</h1>
         </div>
-    </div>
+    </div> --}}
     <div class="featured-car content-area">
 
-        <div class="container2">
+        <div class="container">
             <!-- Main title -->
 
-            <div class="featured-slider row slide-box-btn slider "
-                style="border: solid white 2px !important;background:white "
-                data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+            <div class="featured-slider row slide-box-btn slider ">
                 @foreach ($vehicles as $item)
-            
+
                     <div class="slide slide-box">
-                        <div class="car-box" style="width:100%; height=100%">
+                        <div class="car-box bg-white">
                             <a href="{{ route('details', $item->id) }}">
-                            <div class="car-image" style="width:100%; height=100%">
-                                <img class="d-block w-100" src="{{ url('images/' .json_decode($item->images)[0]) }}"
-                                    alt="car-photo">
-                                <div class="tag">Best Deal</div>
-                            </div>
+                                <div class="car-image">
+                                    <img class="img-fluid" src="{{ url('images/' .json_decode($item->images)[0]) }}" alt="car-photo" width="100%" height="250px">
+                                    <div class="tag">Best Deal</div>
+                                </div>
                             </a>
-                            <div class="detail" style="background:rgb(190, 186, 186)">
+                            <div class="detail">
 
                                 <div class="location ratings" style="margin-left: -5%">
                                     <i class="fa fa-star text-success"></i>
@@ -689,16 +683,16 @@
                                     </a>
                                 </div>
                             </div>
+
                             <div class="footer clearfix" style="text-align: center; width:100%; height=30%; background:rgb(190, 186, 186)">
                                 <div class="w-100 ratings">
-                                    <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i
-                                        class="fa fa-envelope text-success"></i>
-
-                                                <a href="https://wa.me/{{$item->phone}}" style="color: #00472F; margin-left:5px">
-                                                    <i class="fa fa-whatsapp"></i>
-                                                </a>
+                                    <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i class="fa fa-envelope text-success"></i>
+                                        <a href="https://wa.me/{{$item->phone}}" style="color: #00472F; margin-left:5px">
+                                        <i class="fa fa-whatsapp"></i>
+                                    </a>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 @endforeach
@@ -880,7 +874,7 @@
                         document.querySelector('#car_model').innerHTML+='<option value="' + model
                                                     .id + '">' + model.name +
                                                     '</option>';
-                    
+
                     });
                     }
                 });
