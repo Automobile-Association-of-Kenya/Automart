@@ -480,6 +480,31 @@
                         </div>
 
                         <div class="row">
+                            <h2 class="form-title" style="color: #00472F">Personal Information</h2>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input class="form-control" type="text" id="firstname" tabindex="22"
+                                        name="firstname" placeholder="Enter first name" value="{{ $user->name }}"
+                                        required style="text-transform:uppercase">
+                                </div>
+                                <div class="col-6">
+                                    <input class="form-control" type="text" id="gt-lastname" tabindex="23"
+                                        name="lastname" placeholder="Enter last name" value="{{ $user->name }}"
+                                        required style="text-transform:uppercase">
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
+                                <div class="col-6">
+                                    <input class="form-control" type="email" id="email" tabindex="24"
+                                        name="email" value="{{ $user->email }}"
+                                        placeholder="Enter your e-mail address " required>
+                                </div>
+                                <div class="col-6">
+                                    <input class="form-control" type="number" id="phone" tabindex="25"
+                                        name="phone" value="{{ $user->number }}" placeholder="Enter phone number"
+                                        required>
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <input type="checkbox" value="Rear View Camera" id="Rear View Camera" name="features[]"
                                     required>&nbsp;&nbsp;&nbsp;

@@ -72,7 +72,7 @@ class User extends Authenticatable
     {
         $mail = new Mailer();
         $user = $this->getUserBy('email', $email);
-        $mail->sendEMailVerificationLink($email, $user->remember_token);
+        return $mail->sendEMailVerificationLink($email, $user->remember_token);
     }
 
     public function  createPasswordReset($email, $token)

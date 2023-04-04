@@ -121,12 +121,12 @@ class Mailer extends Notification
             $mail->Body    = $message;
 
             if (!$mail->send()) {
-                return back()->with("failed", "Email not sent.")->withErrors($mail->ErrorInfo);
+                return $mail->ErrorInfo;
             } else {
-                return back()->with("success", "Email has been sent.");
+                return "success";
             }
         } catch (Exception $e) {
-            return back()->with('error', 'Message could not be sent.');
+            return $e->getTrace();
         }
     }
 }

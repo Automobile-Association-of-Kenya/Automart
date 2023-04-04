@@ -34,7 +34,7 @@ class AuthController extends Controller
     public function registerUser(UserRequest $request)
     {
         $user = $this->user->register($request->name, $request->email, $request->phone, $request->password);
-        $this->user->emailAccountVerification($user->email);
+        $this->user->emailAccountVerification($request->email);
         return redirect('login')->with('success', 'Account created successfully and an email has been sent to you for confirmation');
     }
 
@@ -50,7 +50,7 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
         $user = $this->user->getUserBy('email', $credentials["email"]);
-        if (!is_null($user->email_verified_at)) {
+        // if (!is_null($user->email_verified_at)) {
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
 
@@ -62,9 +62,9 @@ class AuthController extends Controller
                     return redirect()->route('dealer.home');
                 }
             }
-        } else {
+        // } else {
             return back()->withErrors('Email is not verified. Please check the email we sent you and verify your email to proceed');
-        }
+        // }
         return back()->withErrors('Invalid email or password.');
     }
 

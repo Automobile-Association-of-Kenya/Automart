@@ -60,7 +60,7 @@ class SellController extends Controller
             $size = filesize($image) / 1024;
             $name = time() . $image->getClientOriginalName();
             $img = Image::make($image);
-            $img->resize(480, 293, function ($constraint) {
+            $img->resize(600, 450, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
@@ -73,7 +73,7 @@ class SellController extends Controller
             foreach ($request->file('images') as $image) {
                 $name = time() . $image->getClientOriginalName();
                 $img = Image::make($image);
-                $img->resize(480, 293, function ($constraint) {
+                $img->resize(600, 450, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
@@ -164,7 +164,7 @@ class SellController extends Controller
             $image = $request->cover_photo;
             $name = time() . $image->getClientOriginalName();
             $img = Image::make($image);
-            $img->resize(480, 293, function ($constraint) {
+            $img->resize(600, 450, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
@@ -177,7 +177,7 @@ class SellController extends Controller
             foreach ($request->file('images') as $image) {
                 $name = time() . $image->getClientOriginalName();
                 $img = Image::make($image);
-                $img->resize(480, 293, function ($constraint) {
+                $img->resize(600, 450, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
