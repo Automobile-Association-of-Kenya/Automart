@@ -59,7 +59,7 @@ class AuthController extends Controller
                     return view('buyer');
                 } else {
                     $request->session()->put('user', Auth::user());
-                    return redirect()->route('dealer.home');
+                    return redirect()->route('home');
                 }
             }
         // } else {
@@ -93,7 +93,7 @@ class AuthController extends Controller
         if (!is_null($user)) {
             $token = Str::random(20);
             $this->user->createPasswordReset($email, $token);
-            return $mail->sendPasswordRecoveryEmail($email, $token);
+            $mail->sendPasswordRecoveryEmail($email, $token);
         } else {
             return back()->withErrors('email', 'User with that email address does not exist');
         }

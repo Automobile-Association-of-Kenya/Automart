@@ -183,8 +183,6 @@ class SellController extends Controller
                 });
                 $img->save(public_path('images/' . $name));
                 $data[] = $name;
-
-
             }
         }
         $prefix = "GWAAK";
