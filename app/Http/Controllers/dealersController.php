@@ -16,9 +16,6 @@ class DealersController extends Controller
 {
     public function __construct()
     {
-        if (is_null(session('user'))) {
-            redirect()->route('login');
-        }
         $this->middleware('auth')->except(['index','store']);
     }
 

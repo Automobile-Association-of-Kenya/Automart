@@ -116,8 +116,6 @@ class SellController extends Controller
         return redirect()->back()->with('success', "Vehicle added successfully");
     }
 
-
-
     public function formatPhone($phone)
     {
         $country_code = "+254";
@@ -164,6 +162,8 @@ class SellController extends Controller
 
 
         $carOnSell = Caronsells::find($id);
+        $images = json_decode($carOnSell, true);
+
         $name = $carOnSell->cover_photo;
         $data = json_decode($carOnSell->images);
         if ($request->has('cover_photo')) {
@@ -175,11 +175,9 @@ class SellController extends Controller
                 $constraint->upsize();
             });
             $img->save(public_path('images/' . $name));
-
-
         }
-        if ($request->hasfile('images')) {
 
+        if ($request->hasfile('images')) {
             foreach ($request->file('images') as $image) {
                 $name = time() . $image->getClientOriginalName();
                 $img = Image::make($image);
@@ -188,7 +186,8 @@ class SellController extends Controller
                     $constraint->upsize();
                 });
                 $img->save(public_path('images/' . $name));
-                $data[] = $name;
+                array_push($images, $name);
+                
             }
         }
         $prefix = "GWAAK";
@@ -212,7 +211,7 @@ class SellController extends Controller
         $carOnSell->transmission = $request->transmission;
         $carOnSell->enginecc = $request->enginecc;
         $carOnSell->description = $request->description;
-        $carOnSell->images = json_encode($data);
+        $carOnSell->images = json_encode($images);
         $carOnSell->firstname = $request->firstname;
         $carOnSell->lastname = $request->lastname;
         $carOnSell->email = $request->email;

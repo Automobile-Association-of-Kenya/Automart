@@ -98,7 +98,8 @@
                         </li>
                         <li class="nav-item dropdown active">
 
-                            <a class="nav-link font-weight-bold" href="{{ route('dealer.home') }}"> &nbsp; &nbsp; &nbsp;
+                            <a class="nav-link font-weight-bold" href="{{ route('dealer.home') }}"> &nbsp; &nbsp;
+                                &nbsp;
                                 Selling a Car?
                                 <br> <button class="btn btn-warning rounded-pill"> <span style="color: #00472F"> GET
                                         STARTED HERE</span></button></a>
@@ -116,13 +117,8 @@
                                         <span style="font-size: 25px;color:white"> Contact us</span><span
                                             style="font-size: 35px;color:#CBBC27">|</span></span> <br> </a>
                                 </div>
-
                             </div>
-
-
                         </li>
-
-
                     </ul>
                 </div>
             </nav>
@@ -144,23 +140,27 @@
                 </a>
             </div>
 
-            <div >
+            <div>
                 <h3 style="color: #fff;margin-top:5px;text-align:center; margin-bottom: 0">I want to..</h3>
                 <ul class="navbar-nav " style="width:100%; margin:3px; margin-top:0 !important">
                     <li class="nav-item dropdown active" style="width:100%;">
-                        <a class="nav-link font-weight-bold" style="width:100%;text-align:center" href="{{ route('all_cars') }}">
-                            <button class="btn btn-warning" style="width:95%;"> <span style="color: #00472F">Buy a car</span></button>
+                        <a class="nav-link font-weight-bold" style="width:100%;text-align:center"
+                            href="{{ route('all_cars') }}">
+                            <button class="btn btn-warning" style="width:95%;"> <span style="color: #00472F">Buy a
+                                    car</span></button>
                         </a>
                     </li>
                     <li class="nav-item dropdown active" style="width:100%;">
-                        <a class="nav-link font-weight-bold" style="width:100%;text-align:center" href="{{ route('dealer.home') }}">
-                            <button class="btn btn-warning" style="width:95%;"> <span style="color: #00472F"> Sell a Car</span></button>
+                        <a class="nav-link font-weight-bold" style="width:100%;text-align:center"
+                            href="{{ route('dealer.home') }}">
+                            <button class="btn btn-warning" style="width:95%;"> <span style="color: #00472F"> Sell a
+                                    Car</span></button>
                         </a>
                     </li>
 
                 </ul>
 
-                <a href="{{ route('login') }}" style="margin: 10px;text-align:left;" >
+                <a href="{{ route('login') }}" style="margin: 10px;text-align:left;">
                     <button class="btn btn-outline-warning"> Sign in</button>
                 </a>
             </div>
@@ -305,44 +305,48 @@
     <div class="banner" id="banner">
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-              <div class="carousel-item active">
-                  <div class="row" style="width:100%; background:url({{ url('assets/img/banner/img-6.jpg') }}); background-size:cover;padding-top: 180px; min-height:90vh">
+                <div class="carousel-item active">
+                    <div class="row"
+                        style="width:100%; background:url({{ url('assets/img/banner/img-6.jpg') }}); background-size:cover;padding-top: 180px; min-height:90vh">
 
 
-                    <div class="col-md" style="text-align:center;">
-                        <h3 class="">Buying or Selling <br>a Car?</h3>
-                        <div class="price">
-                                <div class="rounded" style="background:#00472f75;backdrop-filter: blur(5px); padding:15px 5px; width:70%; text-align:center;margin:auto">
+                        <div class="col-md" style="text-align:center;">
+                            <h3 class="">Buying or Selling <br>a Car?</h3>
+                            <div class="price">
+                                <div class="rounded"
+                                    style="background:#00472f75;backdrop-filter: blur(5px); padding:15px 5px; width:70%; text-align:center;margin:auto">
                                     <h5 class="text-uppercase" style="color:#CBBC27">GET THE BEST DEAL IN
                                         THE COUNTRY <br>FROM
                                         TRUSTED AND RELIABLE DEALERS</h5>
                                 </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="search-bo col-md" style="background: transparent; text-align:center">
-                        <form method="GET">
-                            <div class="form-group mb-3">
-                                {{-- <select class="selectpicker search-fields" name="select-brand">
+                        <div class="search-bo col-md" style="background: transparent; text-align:center">
+                            <form method="GET">
+                                <div class="form-group mb-3">
+                                    {{-- <select class="selectpicker search-fields" name="select-brand">
                                     <option>Select Brand</option>
                                     <option>Audi</option>
                                     <option>BMW</option>
                                     <option>Honda</option>
                                     <option>Nissan</option>
                                 </select> --}}
-                                <h5 class="d-lg-none">I want To</h5>
-                                <div class="d-lg-none" style="display: flex;margin:auto; align-items:center;margin-bottom:30px;text-align:center;margin-top:20px; justify-content:center">
-                                     <a href="{{ route('all_cars') }}" class="btn btn-success " style="margin-right: 20px">Buy a Car</a>
-                                     <a href="{{ route('dealer.home') }}" class="btn btn-warning">Sell a Car</a>
-                                 </div>
+                                    <h5 class="d-lg-none">I want To</h5>
+                                    <div class="d-lg-none"
+                                        style="display: flex;margin:auto; align-items:center;margin-bottom:30px;text-align:center;margin-top:20px; justify-content:center">
+                                        <a href="{{ route('all_cars') }}" class="btn btn-success "
+                                            style="margin-right: 20px">Buy a Car</a>
+                                        <a href="{{ route('dealer.home') }}" class="btn btn-warning">Sell a Car</a>
+                                    </div>
 
-                                <a href="{{ route('login') }}" class="btn btn-warning rounded ">
-                                    <h4 style="color: #00472F"> </h4>Sign In
-                                </a>
-                            </div>
-                            <div class="form-group ">
-                                <h3 style="color:#CBBC27">Quick Search</h3>
-                                <!-- <h5 style="color:#CBBC27">Amount </h5>
+                                    <a href="{{ route('login') }}" class="btn btn-warning rounded ">
+                                        <h4 style="color: #00472F"> </h4>Sign In
+                                    </a>
+                                </div>
+                                <div class="form-group ">
+                                    <h3 style="color:#CBBC27">Quick Search</h3>
+                                    <!-- <h5 style="color:#CBBC27">Amount </h5>
                                 <button class="btn btn-warning bg-white rounded "
                                     style="color: #00472F;font-weight:bolder;font-size:100%">
                                     < 500K </button>
@@ -361,29 +365,29 @@
                                 </div>
                                 <h5 style="margin-left:50%">You can search using model</h5>                               style="color: #00472F;font-weight:bolder;font-size:100%"> >
                                             1M</button> -->
+                                </div>
+
+
+                            </form>
+
+                            <div class="btn-group " style="width:100%; margin-left:2%">
+                                <button class="btn btn-light rounded" style="width: 20%"><i
+                                        class="fa fa-search fa-2x " style="color: #00472F;"></i></button>
+                                <a href="#search" class="btn btn-warning" style="width: 80%">
+                                    <h5 style="color: #00472F;font-size:250%;" class="m-2">SEARCH HERE</h5>
+                                </a>
+                                <br>
+
                             </div>
-
-
-                        </form>
-
-                        <div class="btn-group " style="width:100%; margin-left:2%">
-                            <button class="btn btn-light rounded" style="width: 20%"><i
-                                    class="fa fa-search fa-2x " style="color: #00472F;"></i></button>
-                            <a href="#search" class="btn btn-warning" style="width: 80%">
-                                <h5 style="color: #00472F;font-size:250%;" class="m-2">SEARCH HERE</h5>
-                            </a>
-                            <br>
-
+                            <h5>You can search using model</h5>
                         </div>
-                        <h5 >You can search using model</h5>
+
+
                     </div>
-
-
-                  </div>
-              </div>
+                </div>
 
             </div>
-          </div>
+        </div>
     </div>
     <!-- Banner end -->
 
@@ -623,7 +627,8 @@
 
                                 </div>
                                 <div class="col-xl-4 col-lg-12 col-md-6 col-sm-6 col-md-6 mt-3 " style="align:left">
-                                    <button class="btn white-btn btn-search w-100" style="background: #00472F; text-align:center">
+                                    <button class="btn white-btn btn-search w-100"
+                                        style="background: #00472F; text-align:center">
                                         <h4><strong>Proceed </strong></h4>
                                     </button>
                                 </div>
@@ -649,12 +654,19 @@
 
             <div class="featured-slider row slide-box-btn slider ">
                 @foreach ($vehicles as $item)
-
+                    @php
+                        $images = json_decode($item->images);
+                    @endphp
                     <div class="slide slide-box">
                         <div class="car-box bg-white">
                             <a href="{{ route('details', $item->id) }}">
                                 <div class="car-image">
-                                    <img src="{{ url('images/' .json_decode($item->images)[0]) }}" alt="car-photo" width="100%" height="250px">
+                                    @if (count($images) > 0)
+                                        <img src="{{ url('images/' . $images[0], true) }}" alt="car-photo"
+                                            width="100%" height="250px">
+                                    @else
+                                        <img src="#" alt="car-photo" width="100%" height="250px">
+                                    @endif
                                     <div class="tag">Best Deal</div>
                                 </div>
                             </a>
@@ -669,25 +681,30 @@
                                 </div>
                                 <div class="location">
                                     <a href="{{ route('details', $item->id) }}">
-                                        <i class="fa-solid fa-engine"></i>Model: {{$item->carmodel->car_model_name ??''}}
+                                        <i class="fa-solid fa-engine"></i>Model:
+                                        {{ $item->carmodel->car_model_name ?? '' }}
                                     </a>
                                 </div>
                                 <div class="location">
                                     <a href="{{ route('details', $item->id) }}">
-                                        <i class="fa-solid fa-engine"></i>Make: {{$item->carmake->car_make_name ?? ''}}
+                                        <i class="fa-solid fa-engine"></i>Make:
+                                        {{ $item->carmake->car_make_name ?? '' }}
                                     </a>
                                 </div>
                                 <div class="location">
                                     <a href="{{ route('details', $item->id) }}">
-                                        <i class="fa-solid fa-engine"></i>Fuel: {{$item->fuel_type}}
+                                        <i class="fa-solid fa-engine"></i>Fuel: {{ $item->fuel_type }}
                                     </a>
                                 </div>
                             </div>
 
-                            <div class="footer clearfix" style="text-align: center; width:100%; height=30%; background:rgb(190, 186, 186)">
+                            <div class="footer clearfix"
+                                style="text-align: center; width:100%; height=30%; background:rgb(190, 186, 186)">
                                 <div class="w-100 ratings">
-                                    <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i class="fa fa-envelope text-success"></i>
-                                        <a href="https://wa.me/{{$item->phone}}" style="color: #00472F; margin-left:5px">
+                                    <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i
+                                        class="fa fa-envelope text-success"></i>
+                                    <a href="https://wa.me/{{ $item->phone }}"
+                                        style="color: #00472F; margin-left:5px">
                                         <i class="fa fa-whatsapp"></i>
                                     </a>
                                 </div>
@@ -695,7 +712,6 @@
 
                         </div>
                     </div>
-
                 @endforeach
             </div>
         </div>
@@ -814,7 +830,8 @@
                                         <h3>Description</h3>
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                             Lorem Ipsum has been the industry's standard.</p>
-                                        <a href="{{ route('details', 1) }}" class="btn btn-md btn-round btn-theme">Show
+                                        <a href="{{ route('details', 1) }}"
+                                            class="btn btn-md btn-round btn-theme">Show
                                             Detail</a>
                                     </div>
                                 </div>
@@ -871,12 +888,13 @@
                         $('#car_model').html(
                             '<option value="">Select Car Model</option>');
 
-                            result.data.forEach(model => {
-                        document.querySelector('#car_model').innerHTML+='<option value="' + model
-                                                    .id + '">' + model.name +
-                                                    '</option>';
+                        result.data.forEach(model => {
+                            document.querySelector('#car_model').innerHTML +=
+                                '<option value="' + model
+                                .id + '">' + model.name +
+                                '</option>';
 
-                    });
+                        });
                     }
                 });
             })
