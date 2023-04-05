@@ -11,7 +11,7 @@
           {{ session('errorMsg') }}
       </div>
         @endif
-        
+
 <!-- show error messages -->
   @if ($errors->any())
       @foreach($errors->all() as $error)
@@ -21,7 +21,7 @@
          @endforeach
   @endif
   <div class="container" style="padding-left: 20px;padding-right: 20px;background-color: rgba(0,0,0, 0.6); border-radius:8px; padding-top: 10px; padding-bottom: 20px; color: #fff; ">
-  <div class="container" style="background-image: url('./public/images/bg/Motor Website FHD-01.jp'); 
+  <div class="container" style="background-image: url('./public/images/bg/Motor Website FHD-01.jp');
   background-repeat: no-repeat;background-position: center; background-size: cover; border-radius:10px;">
   <div class="row" style="padding-top: 15px; padding-bottom: 15px; padding-left: 15px;">
     <div class="col-md">
@@ -44,14 +44,14 @@
   <div class="row" style="padding-bottom:15px; padding-top:px;">
   <div class="container-fluid" style="padding-top:10px; padding-bottom:15px;">
     <input id="pass" class="form-control" type="Password" name="pass" placeholder="Choose Password" required>
-  </div>  
+  </div>
   <div class="container-fluid" style="padding-top:10px; padding-bottom:15px;">
     <input id="pass" class="form-control" type="Password" name="pass" placeholder="Confirm Password" required>
-  </div>  
+  </div>
 </div>
   <!-- Submit button -->
   <button type="submit" class="btn btn-primary btn-block mb-4"><h6>Register</h6></button>
-  
+
   </form>
     </div>
 
@@ -60,8 +60,8 @@
     </div>
   </div>
 </div>
-</br>
-</br>
+<br>
+<br>
 <div>
 <footer class="">
   <!-- Copyright -->
@@ -75,6 +75,6 @@
 </div>
 
 <!-- end dash -->
- 
-  
+
+
 @endsection

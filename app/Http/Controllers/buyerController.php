@@ -22,8 +22,8 @@ class buyerController extends Controller
         return view('login');
     }
     public function register(Request $req){
-        
-       
+
+
 
         $validator = $this->validate($req,[
             'name' => 'required',
@@ -32,12 +32,12 @@ class buyerController extends Controller
             'password' => 'required|confirmed|min:8',
             'password' => 'required|same:password',
         ]);
-       
+
         if (!$validator) {
             # code...
-            return response->json([
-                'errors'=>$validate->errors()
-            ],422);
+            // return response->json([
+            //     'errors'=>$validate->errors()
+            // ],422);
         }
             else
             {
@@ -52,9 +52,9 @@ class buyerController extends Controller
                     'message' => 'Account created'
                 ]);
             }
-    }    
-        
-    
+    }
+
+
     public function show_reg()
     {
         return view('buyerReg');
@@ -69,7 +69,7 @@ class buyerController extends Controller
             'password' => 'required|same:password',
         ]);
         // if($request->password != $request->password2){
-        //     return redirect(route('userreg'))->with('errorMsg', 'Passwords Do Not Match. Try Again!'); 
+        //     return redirect(route('userreg'))->with('errorMsg', 'Passwords Do Not Match. Try Again!');
         // }
         $user = User::where('email', $request->email)->first();
         if ($user == true) {
@@ -106,7 +106,7 @@ class buyerController extends Controller
         //             return view('dealer',compact('makes','vehicles'));
         //         }
         //     }else{
-        //         return redirect()->route('login')->with('errorMsg', 'Password is Incorrect. Try Again');  
+        //         return redirect()->route('login')->with('errorMsg', 'Password is Incorrect. Try Again');
         //     }
         // }else{
         //     return redirect()->route('login')->with('errorMsg', 'User does not exist.');
@@ -145,5 +145,5 @@ class buyerController extends Controller
         return view('dealer');
     }
 
-    
+
 }

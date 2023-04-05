@@ -2,41 +2,24 @@
 
 @section('content')
 @section('content')
-  <!-- show success message -->
-  @if (session('successMsg'))
-      <div class="alert alert-success" role="alert">
-          {{ session('successMsg') }}
-      </div>
-        @endif
-        @if (session('errorMsg'))
-      <div class="alert alert-danger" role="alert">
-          {{ session('errorMsg') }}
-      </div>
-        @endif
-<!-- show error messages -->
-  @if ($errors->any())
-      @foreach($errors->all() as $error)
-        <div class="alert alert-danger" role="alert">
-          {{ $error }}
-        </div>
-         @endforeach
-  @endif
+
 
 <main class="login-form">
 
   <div class="cotainer">
 
-      <div class="row justify-content-center"> 
+      <div class="row justify-content-center">
 
           <div class="col-md-8">
 
               <div class="card">
+                  @include('partials.alert');
 
                   <div class="card-header">Reset Password</div>
 
                   <div class="card-body">
 
-  
+
 
                       <form action="{{ route('reset.password.post') }}" method="POST">
 
@@ -44,7 +27,7 @@
 
                           <input type="hidden" name="token" value="{{ $token }}">
 
-  
+
 
                           <div class="form-group row">
 
@@ -64,7 +47,7 @@
 
                           </div>
 
-  
+
 
                           <div class="form-group row">
 
@@ -84,7 +67,7 @@
 
                           </div>
 
-  
+
 
                           <div class="form-group row">
 
@@ -104,7 +87,7 @@
 
                           </div>
 
-  
+
 
                           <div class="col-md-6 offset-md-4">
 
@@ -118,7 +101,7 @@
 
                       </form>
 
-                        
+
 
                   </div>
 

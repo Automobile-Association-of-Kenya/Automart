@@ -70,20 +70,20 @@
                     <div class="col-md-12">
                         <a href="#5"><button type="submit" class="btn btn-primary btn-block">Dashboard</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#0"><button type="submit" class="btn btn-primary btn-block">Liked</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#1"><button type="submit" class="btn btn-primary btn-block">Saved</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('logout') }}"><button type="submit"
                                 class="btn btn-danger btn-block">Logout</button></a>
                     </div>
-                    </br>
+                    <br>
                 </div>
                 <div class="col-md-10">
                     <div class="row">

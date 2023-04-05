@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
   <!-- show success message -->
-  @if (session('successMsg')) 
+  @if (session('successMsg'))
       <div class="alert alert-success" role="alert">
           {{ session('successMsg') }}
       </div>
@@ -63,10 +63,10 @@
   </tbody>
 </table>
 
-</br>
+<br>
   <a href="{{ route('adminReg', $admin->id) }}" class="btn btn-primary">New Admin</a>
-</br>
-</br>
+<br>
+<br>
 <div>
 <footer class="">
   <!-- Copyright -->
@@ -80,5 +80,5 @@
 </div>
 
 <!-- end dash -->
-  
+
 @endsection
