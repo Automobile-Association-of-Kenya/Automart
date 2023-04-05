@@ -115,7 +115,7 @@
                             <!-- </select> -->
                     </div>
 
-<!-- 
+<!--
                     <select class="select2-selection select2-selection--single" name="model" id="model" required>
                         <option value="Select model" selected>Select Model</option>
                         <option value="147">1473</option>
@@ -1006,7 +1006,7 @@
         </div> --}} -->
         <!-- <div class="row" style="padding-left: 20px; padding-top: 10px; padding-bottom: 20px; color: #fff;">
         <div class="col-6 col-md-4" style="background-color : rgba(0,0,0, 0.3) !Important;"> -->
-        
+
 
 
 
@@ -1023,7 +1023,7 @@
                         <div class="card" style="color: #000">
                             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                                 <img src="{{ url('/images/' . json_decode($vehicle->images, true)[0]) }}"
-                                    style="" class="img-fluid" />
+                                    style="" />
                                 <a href="{{ route('details', $vehicle->id) }}">
                                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                                 </a>

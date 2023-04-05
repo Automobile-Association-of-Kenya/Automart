@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +16,7 @@ class CreateCarsTable extends Migration
     {
         Schema::create('caronsells', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(User::class)->constrained();
             $table->string('title');
             $table->string('country');
             $table->string('county');
@@ -32,17 +34,11 @@ class CreateCarsTable extends Migration
             $table->string('vehicle_type');
             $table->longText('description');
             $table->longText('images');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('carId');
-            $table->string('usage');
             $table->string('trans_id')->nullable(true);
             $table->string('package')->nullable(true);
             $table->string('deal_slideshow')->nullable(true);
             $table->timestamps();
-            
+
         });
     }
 

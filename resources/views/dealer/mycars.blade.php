@@ -1,19 +1,5 @@
 @extends('layouts.dashboard')
 @section('content')
-    <!-- show success message -->
-    @if (session('successMsg'))
-        <div class="alert alert-success" role="alert">
-            {{ session('successMsg') }}
-        </div>
-    @endif
-    <!-- show error messages -->
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger" role="alert">
-                {{ $error }}
-            </div>
-        @endforeach
-    @endif
 
     @php
         $user = session('user');
@@ -34,7 +20,7 @@
             line-height: 2em;
             font-size: 1em;
             font-weight: bold;
-            color: #FFF;
+            /* color: #FFF; */
             border-radius: .4em;
             background: rgba(0, 0, 0, .5);
         }
@@ -51,7 +37,7 @@
             font-weight: bold;
 
             margin: auto;
-            color: #FFF;
+            /* color: #FFF; */
             border-radius: .4em;
             -webkit-box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
             box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
@@ -102,50 +88,98 @@
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
                                     class="fa fa-home"></i> Home</button></a>
                     </div>
-                    </br>
 
                     <div class="col-md-12">
                         <a href="{{ route('dealer.mycars') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-car"></i> My Cars</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('dealer.subscriptions') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('dealer.mysales') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-money-bill"></i> My Sale</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('dealer.addcar') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-plus"></i> Add Car</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('logout') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
                                     class="fa fa-sign-out-alt"></i> Logout</button></a>
                     </div>
-                    </br>
+                    <br>
                 </div>
                 <div class="col-md-10 mt-5 pt-5">
                     <div class="row">
                         <!-- image card 1 line 1 start -->
                         @if (!empty($vehicles) && $vehicles->count())
-                            @foreach ($vehicles->all() as $vehicle)
+                            @foreach ($vehicles->all() as $item)
+                                <div class="col-md-4">
+                                    <div class="car-box bg-white">
+                                        <a href="{{ route('details', $item->id) }}">
+                                            <div class="car-image">
+                                                @php
+                                                    $images = json_decode($item->images, true);
+                                                @endphp
+                                                @if (count($images) > 0)
+                                                <img src="{{ url('images/'.$images[0]) }}" alt="car-photo" width="100%" height="250px">
+                                                @else
+                                                <img src="#" alt="car-photo" width="100%" height="250px">
+                                                @endif
+                                                <div class="tag">Best Deal</div>
+                                            </div>
+                                        </a>
+                                        <div class="detail">
+                                            <div class="location">
+                                                <p class="text-black">
+                                                    <i class="fa-solid fa-engine"></i>Model:
+                                                    {{ $item->carmodel->car_model_name ?? '' }}
+                                                </p>
+                                            </div>
+                                            <div class="location">
+                                                <p class="text-black">
+                                                    <i class="fa-solid fa-engine"></i>Make:
+                                                    {{ $item->carmake->car_make_name ?? '' }}
+                                                </p>
+                                            </div>
+                                            <div class="location">
+                                                <p class="text-black">
+                                                    <i class="fa-solid fa-engine"></i>Fuel: {{ $item->fuel_type }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="footer clearfix">
+                                            <a href="{{ route('details', $item->id) }}" class="btn btn-primary"> <i
+                                                    class="fa fa-eye"></i> More
+                                                Details
+                                            </a>
+                                            <a href="{{ route('dealer.editcar', $item->id) }}" class="btn btn-warning"> <i
+                                                    class="fa fa-edit"></i> Edit
+                                                Details
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
                                 <!-- use this for slideshow -->
-                                <div class="col-sm-12 col-md-4  " style="padding-bottom: 15px;">
+                                {{-- <div class="col-sm-12 col-md-4  " style="padding-bottom: 15px;">
                                     <div class="card" style="color: #000">
                                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                                             <img src="{{ $vehicle->cover_photo !=null ? asset('images/'.$vehicle->cover_photo) : url('images/' . json_decode($vehicle->images, true)[0]) }}"
-                                                style="" class="img-fluide" width="100%" height="300px" />
+                                                style="" width="100%" height="300px" />
                                             <a href="{{ route('details', $vehicle->id) }}">
                                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);">
                                                 </div>
@@ -173,7 +207,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             @endforeach
                         @else
                             <div class="alert alert-success" role="alert">
@@ -198,9 +232,9 @@
 
         <!-- user profile end -->
 
-        
-        
-        
+
+
+
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>

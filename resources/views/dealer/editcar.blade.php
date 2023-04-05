@@ -1,20 +1,5 @@
 @extends('layouts.dashboard')
 @section('content')
-    <!-- show success message -->
-    @if (session('successMsg'))
-        <div class="alert alert-success" role="alert">
-            {{ session('successMsg') }}
-        </div>
-    @endif
-    <!-- show error messages -->
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger" role="alert">
-                {{ $error }}
-            </div>
-        @endforeach
-    @endif
-
     @php
         $user = session('user');
     @endphp
@@ -104,56 +89,42 @@
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-home"></i> Home</button></a>
                     </div>
-                    </br>
+                    <br>
 
                     <div class="col-md-12">
                         <a href="{{ route('dealer.mycars') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-car"></i> My Cars</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('dealer.subscriptions') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('dealer.mysales') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-money-bill"></i> My Sale</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('dealer.addcar') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-plus"></i> Add Car</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('logout') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
                                     class="fa fa-sign-out-alt"></i> Logout</button></a>
                     </div>
-                    </br>
+                    <br>
                 </div>
                 <div class="col-md-10 mt-5 pt-5">
                     <div class="col-md-12" style="padding-left : 20px; padding-right : 20px;">
-                        <!-- show success message -->
-                        @if (session('successMsg'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('successMsg') }}
-                            </div>
-                        @endif
-                        <!-- show error messages -->
-                        @if ($errors->any())
-                            @foreach ($errors->all() as $error)
-                                <div class="alert alert-danger" role="alert">
-                                    {{ $error }}
-                                </div>
-                            @endforeach
-                        @endif
-                        <!--upload form here -->
+                        @include('partials.alert')
                         <div class="pageLoader" id="pageLoader"></div>
                         <form action="{{ route('updatecar', $details->id) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
@@ -168,7 +139,7 @@
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
                                         <option value="-1" selected="selected">Country</option>
                                         <option class="level-0" value="Kenya" selected data-value="41">Kenya</option>
-                                       
+
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-1">
@@ -364,40 +335,62 @@
 
                                 </div>
                                 <div class="col-md-4">
-                                
-                                <label>Year of Manufacture</label>
-                                <select name="year" id="year" tabindex="4" data-value="" required
-                                style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
-                                <option value="-1">Select Year of Manufacture</option>
-                                <option value="2021" {{ $details->year == '2021' ? 'selected' : '' }}>2021</option>
-                                <option value="2020" {{ $details->year == '2020' ? 'selected' : '' }}>2020</option>
-                                <option value="2019" {{ $details->year == '2019' ? 'selected' : '' }}>2019</option>
-                                <option value="2018" {{ $details->year == '2018' ? 'selected' : '' }}>2018</option>
-                                <option value="2017" {{ $details->year == '2017' ? 'selected' : '' }}>2017</option>
-                                <option value="2016" {{ $details->year == '2016' ? 'selected' : '' }}>2016</option>
-                                <option value="2015" {{ $details->year == '2015' ? 'selected' : '' }}>2015</option>
-                                <option value="2014" {{ $details->year == '2014' ? 'selected' : '' }}>2014</option>
-                                <option value="2013" {{ $details->year == '2013' ? 'selected' : '' }}>2013</option>
-                                <option value="2012" {{ $details->year == '2012' ? 'selected' : '' }}>2012</option>
-                                <option value="2011" {{ $details->year == '2011' ? 'selected' : '' }}>2011</option>
-                                <option value="2010" {{ $details->year == '2010' ? 'selected' : '' }}>2010</option>
-                                <option value="2009" {{ $details->year == '2009' ? 'selected' : '' }}>2009</option>
-                                <option value="2008" {{ $details->year == '2008' ? 'selected' : '' }}>2008</option>
-                                <option value="2007" {{ $details->year == '2007' ? 'selected' : '' }}>2007</option>
-                                <option value="2006" {{ $details->year == '2006' ? 'selected' : '' }}>2006</option>
-                                <option value="2005" {{ $details->year == '2005' ? 'selected' : '' }}>2005</option>
-                                <option value="2004" {{ $details->year == '2004' ? 'selected' : '' }}>2004</option>
-                                <option value="2003" {{ $details->year == '2003' ? 'selected' : '' }}>2003</option>
-                                <option value="2002" {{ $details->year == '2002' ? 'selected' : '' }}>2002</option>
-                                <option value="2001" {{ $details->year == '2001' ? 'selected' : '' }}>2001</option>
-                                <option value="2000" {{ $details->year == '2000' ? 'selected' : '' }}>2000</option>
-                            </select>
-                            </div>
-                                </div>
-                             
 
-                                
-                            
+                                    <label>Year of Manufacture</label>
+                                    <select name="year" id="year" tabindex="4" data-value="" required
+                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
+                                        <option value="-1">Select Year of Manufacture</option>
+                                        <option value="2021" {{ $details->year == '2021' ? 'selected' : '' }}>2021
+                                        </option>
+                                        <option value="2020" {{ $details->year == '2020' ? 'selected' : '' }}>2020
+                                        </option>
+                                        <option value="2019" {{ $details->year == '2019' ? 'selected' : '' }}>2019
+                                        </option>
+                                        <option value="2018" {{ $details->year == '2018' ? 'selected' : '' }}>2018
+                                        </option>
+                                        <option value="2017" {{ $details->year == '2017' ? 'selected' : '' }}>2017
+                                        </option>
+                                        <option value="2016" {{ $details->year == '2016' ? 'selected' : '' }}>2016
+                                        </option>
+                                        <option value="2015" {{ $details->year == '2015' ? 'selected' : '' }}>2015
+                                        </option>
+                                        <option value="2014" {{ $details->year == '2014' ? 'selected' : '' }}>2014
+                                        </option>
+                                        <option value="2013" {{ $details->year == '2013' ? 'selected' : '' }}>2013
+                                        </option>
+                                        <option value="2012" {{ $details->year == '2012' ? 'selected' : '' }}>2012
+                                        </option>
+                                        <option value="2011" {{ $details->year == '2011' ? 'selected' : '' }}>2011
+                                        </option>
+                                        <option value="2010" {{ $details->year == '2010' ? 'selected' : '' }}>2010
+                                        </option>
+                                        <option value="2009" {{ $details->year == '2009' ? 'selected' : '' }}>2009
+                                        </option>
+                                        <option value="2008" {{ $details->year == '2008' ? 'selected' : '' }}>2008
+                                        </option>
+                                        <option value="2007" {{ $details->year == '2007' ? 'selected' : '' }}>2007
+                                        </option>
+                                        <option value="2006" {{ $details->year == '2006' ? 'selected' : '' }}>2006
+                                        </option>
+                                        <option value="2005" {{ $details->year == '2005' ? 'selected' : '' }}>2005
+                                        </option>
+                                        <option value="2004" {{ $details->year == '2004' ? 'selected' : '' }}>2004
+                                        </option>
+                                        <option value="2003" {{ $details->year == '2003' ? 'selected' : '' }}>2003
+                                        </option>
+                                        <option value="2002" {{ $details->year == '2002' ? 'selected' : '' }}>2002
+                                        </option>
+                                        <option value="2001" {{ $details->year == '2001' ? 'selected' : '' }}>2001
+                                        </option>
+                                        <option value="2000" {{ $details->year == '2000' ? 'selected' : '' }}>2000
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+
                             <div class="row" style="padding-top:10px;">
                                 <div class="col-md-4">
                                     <input class="form-control" type="number" id="price" name="price"
@@ -411,7 +404,7 @@
                                     <input class="form-control" type="number" id="enginecc" name="enginecc"
                                         placeholder="mileage (Kms)" required value="{{ $details->enginecc }}">
                                 </div>
-                                
+
                             </div>
 
                             <div class="row" style="padding-top:10px; padding-bottom:10px;">
@@ -462,7 +455,7 @@
                                         style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
                                         <option value="-1">Vehicle Usage</option>
                                         <option value="New" {{ $details->usage == 'New' ? 'selected' : '' }}>
-                                         New   </option>
+                                            New </option>
                                         <option value="Local" {{ $details->usage == 'Local' ? 'selected' : '' }}>
                                             Locally Used</option>
                                         <option value="Foreign" {{ $details->usage == 'Foreign' ? 'selected' : '' }}>
@@ -675,7 +668,7 @@
                                             None</option>
                                     </select>
                                 </div>
-                               
+
                             </div>
                             <div class="form-outline" style="padding-top:10px; padding-bottom:15px;">
                                 <textarea class="form-control" required placeholder="Enter vehicle listing description." id="description"
@@ -702,8 +695,8 @@
                                 <div class="col-md-12">
                                     <div class="mt-1">
                                         <div class="images-preview-div1" style="margin:10px;width:20px;">
-                                            <img src="{{ asset('images/' . $details->cover_photo) }}" width="200"
-                                                alt="">
+                                            <img src="{{ asset('images/' . $details->cover_photo) }}" width="300px"
+                                                height="200px" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -730,16 +723,26 @@
                                         <div class="images-preview-div" style="margin:1%"> </div>
                                     </div>
                                 </div>
-                                @foreach (json_decode($details->images, true) as $item)
-                                    <div class="col-md-3">
-                                        <div class="mt-1">
-                                            <div class="">
-                                                <img src="{{ asset('images/' . $item) }}" width="300"
+
+                                <div class="row">
+                                    @php
+                                        $images = json_decode($details->images, true);
+                                    @endphp
+                                    @if (count($images) > 0)
+                                        @foreach ($images as $item)
+                                            <div class="col-md-4" id="carImageDel">
+                                                <img src="{{ asset('images/' . $item) }}" width="100%" height="200px"
                                                     alt="">
+                                                <div class="text-center">
+                                                    <button id="deleteImage" data-carid="{{ $details->id }}"
+                                                        data-imagename="{{ $item }}"><i
+                                                            class="fa fa-trash text-danger"></i></button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                                        @endforeach
+                                    @endif
+                                </div>
+
                             </div>
                             <h2 class="form-title" style="color: #00472F">Personal Information</h2>
                             <div class="row">
@@ -795,9 +798,9 @@
 
         <!-- user profile end -->
 
-        
-        
-        
+
+
+
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -882,7 +885,35 @@
     <script>
         $(function() {
             // Multiple images preview with JavaScript
-
+            $('body').on('click', '#deleteImage', function(event) {
+                event.preventDefault();
+                let $this = $(this);
+                let data = {
+                    'id': $this.data('carid'),
+                    'image': $this.data('imagename')
+                }
+                let token = $("input[name='_token']").val();
+                $.ajaxSetup({
+                    headers: {
+                        "X-CSRF-TOKEN": token,
+                    }
+                });
+                $.ajax({
+                    type: 'POST',
+                    url: '/deletevehicleimage',
+                    data: data,
+                    success: function(params) {
+                        console.log(params)
+                        let result = JSON.parse(params);
+                        if (result.status === "success") {
+                            $this.parents().find("#carImageDel").remove();
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                })
+            });
             var previewImages = function(input, imgPreviewPlaceholder) {
                 if (input.files) {
                     var noFiles = input.files.length;
@@ -929,20 +960,4 @@
             }
         });
     </script>
-    <script>
-        // @if (session('loader'))
-        //     $(window).on('load', function() {
-
-        //         const myTimeout = setTimeout(myGreeting, 5000);
-
-        //         function myGreeting() {
-        //             $('#loading').hide();
-        //         }
-
-        //         function myStopFunction() {
-        //             clearTimeout(myTimeout);
-        //         }
-        //     })
-        // @endif
-    </script>>
 @endsection

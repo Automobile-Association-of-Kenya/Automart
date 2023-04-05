@@ -12,7 +12,7 @@ use App\Models\CarModel;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
 
-class sellController extends Controller
+class SellController extends Controller
 {
 
 
@@ -24,6 +24,7 @@ class sellController extends Controller
 
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'title' => 'required',
             'country'  => 'required',
@@ -49,41 +50,43 @@ class sellController extends Controller
             'email' => 'required',
             'phone' => 'required'
         ]);
+
         if (count($request->images) > 10) {
             return redirect()->back()->with('errorMsg', 'Images must not be more than 10');
         }
- 
+
         if ($request->has('cover_photo')) {
             $image = $request->cover_photo;
+            $size = filesize($image) / 1024;
             $name = time() . $image->getClientOriginalName();
             $img = Image::make($image);
-            $img->resize(480, 293, function ($constraint) {
+            $img->resize(600, 450, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
             $img->save(public_path('images/' . $name));
-
-    
         }
+
+
         if ($request->hasfile('images')) {
 
             foreach ($request->file('images') as $image) {
                 $name = time() . $image->getClientOriginalName();
                 $img = Image::make($image);
-                $img->resize(480, 293, function ($constraint) {
+                $img->resize(600, 450, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
                 $img->save(public_path('images/' . $name));
                 $data[] = $name;
-
-             
             }
         }
+
         $prefix = "GWAAK";
         $carID = $prefix . rand();
 
         $carOnSell = new Caronsells;
+        $carOnSell->user_id = auth()->id();
         $carOnSell->title = $request->title;
         $carOnSell->country = $request->country;
         $carOnSell->county = $request->county;
@@ -101,6 +104,8 @@ class sellController extends Controller
         $carOnSell->transmission = $request->transmission;
         $carOnSell->description = $request->description;
         $carOnSell->images = json_encode($data);
+        $carOnSell->carId = $carID;
+        $carOnSell->cover_photo = $name;
         $carOnSell->firstname = $request->firstname;
         $carOnSell->lastname = $request->lastname;
         $carOnSell->email = $request->email;
@@ -108,10 +113,20 @@ class sellController extends Controller
         $carOnSell->carId = $carID;
         $carOnSell->cover_photo = $name;
         $carOnSell->save();
-        $message = 'Vehicle uploaded successfully';
-        Session::flash('loader', 'Load');
-        return redirect('/dealer/mycars')->with(['successMsg' => $message, 'carID' => $carID]);
+        return redirect()->back()->with('success', "Vehicle added successfully");
     }
+
+    public function formatPhone($phone)
+    {
+        $country_code = "+254";
+        $phone = preg_replace("/[^0-9]/", "", $phone);
+        if (substr($phone, 0, 1) === '0') {
+            $phone = substr($phone, 1);
+        }
+        $phone = $country_code . $phone;
+        return $phone;
+    }
+
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -129,7 +144,7 @@ class sellController extends Controller
             'fuel_type' => 'required',
             'usage' => 'required',
             'transmission' => 'required',
-           
+
             'description' => 'required',
             'cover_photo' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'images' => 'nullable|max:10|min:1',
@@ -145,35 +160,34 @@ class sellController extends Controller
             }
         }
 
-     
+
         $carOnSell = Caronsells::find($id);
+        $images = json_decode($carOnSell, true);
+
         $name = $carOnSell->cover_photo;
         $data = json_decode($carOnSell->images);
         if ($request->has('cover_photo')) {
             $image = $request->cover_photo;
             $name = time() . $image->getClientOriginalName();
             $img = Image::make($image);
-            $img->resize(480, 293, function ($constraint) {
+            $img->resize(600, 450, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
             $img->save(public_path('images/' . $name));
-
-
         }
-        if ($request->hasfile('images')) {
 
+        if ($request->hasfile('images')) {
             foreach ($request->file('images') as $image) {
                 $name = time() . $image->getClientOriginalName();
                 $img = Image::make($image);
-                $img->resize(480, 293, function ($constraint) {
+                $img->resize(600, 450, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
                 $img->save(public_path('images/' . $name));
-                $data[] = $name;
-
-
+                array_push($images, $name);
+                
             }
         }
         $prefix = "GWAAK";
@@ -192,12 +206,12 @@ class sellController extends Controller
         $carOnSell->exterior = $request->exterior;
         $carOnSell->interior = $request->interior;
         $carOnSell->fuel_type = $request->fuel_type;
-    
+
         $carOnSell['features'] = json_encode($request->input('features'));
         $carOnSell->transmission = $request->transmission;
         $carOnSell->enginecc = $request->enginecc;
         $carOnSell->description = $request->description;
-        $carOnSell->images = json_encode($data);
+        $carOnSell->images = json_encode($images);
         $carOnSell->firstname = $request->firstname;
         $carOnSell->lastname = $request->lastname;
         $carOnSell->email = $request->email;
@@ -205,9 +219,7 @@ class sellController extends Controller
         $carOnSell->carId = $carID;
         $carOnSell->cover_photo = $name;
         $carOnSell->save();
-        $message = 'Vehicle details updated successfully';
-        Session::flash('loader', 'Load');
-        return redirect('/dealer/mycars')->with(['successMsg' => $message, 'carID' => $carID]);
+        return redirect('/dealer/mycars')->with('success', 'Vehicle updated successfully');
     }
     public function pay()
     {
