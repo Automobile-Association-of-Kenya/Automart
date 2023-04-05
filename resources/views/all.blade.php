@@ -1,4 +1,9 @@
 @extends('layouts.new')
+
+@section('title')
+All Listings | @parent
+@endsection
+
 @section('content')
     <!-- Sub banner start -->
     <div class="sub-banner">
@@ -30,8 +35,16 @@
 
                                             <span>Ksh. {{ number_format("$vehicle->price") }}</span>
                                         </div>
-                                        <img src="{{ url('images/' . json_decode($vehicle->images, true)[0]) }}"
-                                            width="100%" height="230px" alt="car">
+                                        @php
+                                            $images = json_decode($vehicle->images, true);
+                                        @endphp
+                                        @if (count($images) > 0)
+                                        <img src="{{ url('images/'.$images[0]) }}" alt="car-photo" width="100%" height="250px">
+                                        @else
+                                        <img src="#" alt="car-photo" width="100%" height="250px">
+                                        @endif
+                                        {{-- <img src="{{ url('images/' . json_decode($->images, true)[0]) }}"
+                                            width="100%" height="230px" alt="car"> --}}
                                     </div>
                                     <div class="detail">
                                         <h4 class="title">

@@ -129,9 +129,14 @@
                                     <div class="car-box bg-white">
                                         <a href="{{ route('details', $item->id) }}">
                                             <div class="car-image">
-                                                <img
-                                                    src="{{ url('images/' . json_decode($item->images)[0]) }}"
-                                                    alt="car-photo" width="100%" height="250px">
+                                                @php
+                                                    $images = json_decode($item->images, true);
+                                                @endphp
+                                                @if (count($images) > 0)
+                                                <img src="{{ url('images/'.$images[0]) }}" alt="car-photo" width="100%" height="250px">
+                                                @else
+                                                <img src="#" alt="car-photo" width="100%" height="250px">
+                                                @endif
                                                 <div class="tag">Best Deal</div>
                                             </div>
                                         </a>
