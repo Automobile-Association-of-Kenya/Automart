@@ -106,6 +106,12 @@ class SellController extends Controller
         $carOnSell->images = json_encode($data);
         $carOnSell->carId = $carID;
         $carOnSell->cover_photo = $name;
+        $carOnSell->firstname = $request->firstname;
+        $carOnSell->lastname = $request->lastname;
+        $carOnSell->email = $request->email;
+        $carOnSell->phone = $request->phone;
+        $carOnSell->carId = $carID;
+        $carOnSell->cover_photo = $name;
         $carOnSell->save();
         return redirect()->back()->with('success', "Vehicle added successfully");
     }
@@ -214,9 +220,7 @@ class SellController extends Controller
         $carOnSell->carId = $carID;
         $carOnSell->cover_photo = $name;
         $carOnSell->save();
-        $message = 'Vehicle details updated successfully';
-        Session::flash('loader', 'Load');
-        return redirect('/dealer/mycars')->with(['successMsg' => $message, 'carID' => $carID]);
+        return redirect('/dealer/mycars')->with('success', 'Vehicle updated successfully');
     }
     public function pay()
     {

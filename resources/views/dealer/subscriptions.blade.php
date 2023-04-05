@@ -103,45 +103,45 @@
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
                                     class="fa fa-home"></i> Home</button></a>
                     </div>
-                    </br>
+                    <br>
 
                     <div class="col-md-12">
                         <a href="{{route('dealer.mycars')}}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-car"></i> My Cars</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{route('dealer.subscriptions')}}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{route('dealer.mysales')}}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-money-bill"></i> My Sale</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{route('dealer.addcar')}}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-plus"></i> Add Car</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('logout') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
                                     class="fa fa-sign-out-alt"></i> Logout</button></a>
                     </div>
-                    </br>
+                    <br>
                 </div>
                 <div class="col-md-10 mt-5 pt-5" style="color:#000">
                     Hello
-                    </br>
-                    </br>
-                    </br>
-                    </br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     We'll keep this payments updated.
                 </div>
             </div>
@@ -153,7 +153,7 @@
                 </div>
                 <!-- Copyright -->
             </footer>
-        </div>  
+        </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -176,7 +176,7 @@
                         document.querySelector('#car_model').innerHTML+='<option value="' + model
                                                     .id + '">' + model.name +
                                                     '</option>';
-                    
+
                     });
                     }
                 });

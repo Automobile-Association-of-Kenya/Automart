@@ -1069,7 +1069,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
             <!-- Deal of the week start -->
             <div class="card">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                    <img src="{{ url('public/images/photo_2021-08-27_11-16-30.jpg') }}" class="img-fluid" />
+                    <img src="{{ url('public/images/photo_2021-08-27_11-16-30.jpg') }}" />
                     <a href="#">
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                     </a>
@@ -1100,7 +1100,7 @@ padding-bottom:10px; background-color: rgba(254,217,37, 0.8) !Important;">DEAL
                             <div class="card" style="color: #000">
                                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                                     <img src="{{ url('public/images/' . json_decode($vehicle->images, true)[0]) }}"
-                                        style="" class="img-fluid" />
+                                        style="" />
                                     <a href="{{ route('details', $vehicle->id) }}">
                                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                                     </a>

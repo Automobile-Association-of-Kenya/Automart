@@ -38,7 +38,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
-    
+
     @yield('header_styles')
 
     <style>
@@ -255,25 +255,25 @@
 
         .text-gray-200 {
             --text-opacity: 1;
-            color: #edf2f7;
+            /* color: #edf2f7; */
             color: rgba(237, 242, 247, var(--text-opacity))
         }
 
         .text-gray-300 {
             --text-opacity: 1;
-            color: #e2e8f0;
+            /* color: #e2e8f0; */
             color: rgba(226, 232, 240, var(--text-opacity))
         }
 
         .text-gray-400 {
             --text-opacity: 1;
-            color: #cbd5e0;
+            /* color: #cbd5e0; */
             color: rgba(203, 213, 224, var(--text-opacity))
         }
 
         .text-gray-500 {
             --text-opacity: 1;
-            color: #a0aec0;
+            /* color: #a0aec0; */
             color: rgba(160, 174, 192, var(--text-opacity))
         }
 
@@ -409,13 +409,13 @@
 
             .dark\:text-white {
                 --text-opacity: 1;
-                color: #fff;
+                /* color: #fff; */
                 color: rgba(255, 255, 255, var(--text-opacity))
             }
 
             .dark\:text-gray-400 {
                 --text-opacity: 1;
-                color: #cbd5e0;
+                /* color: #cbd5e0; */
                 color: rgba(203, 213, 224, var(--text-opacity))
             }
 
@@ -487,7 +487,7 @@
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
                                     class="fa fa-home"></i> View All</button></a>
                     </li>
-                    
+
                     <li>
                     <a href="{{ route('home') }}"> <button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
@@ -503,7 +503,7 @@
                         <a href="{{ route('dealer.mycars') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                 class="fa fa-car"></i> My Cars</button></a>
-                        </li>         
+                        </li>
 
                         <!-- <li class="nav-item">
                             <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="#0">My Cars</a>
@@ -517,7 +517,7 @@
                         <!-- <li class="nav-item">
                             <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="#2">Sales</a>
                         </li> -->
-                        
+
                         <!-- <li class="nav-item">
                             <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="#3">Add Car</a>
                         </li> -->

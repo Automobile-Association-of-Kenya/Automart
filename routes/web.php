@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\dealersController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
@@ -37,9 +38,11 @@ Route::post('/Contact Us', 'App\Http\Controllers\contactController@store')->name
 Route::get('/DealersPage/Dashboard', 'App\Http\Controllers\dealersController@index')->name('dealerHome');
 Route::get('/BuyerPage/Dashboard', 'App\Http\Controllers\buyerController@show_reg')->name('userreg');
 Route::post('/BuyerPage/Register', 'App\Http\Controllers\buyerController@user1')->name('user');
-Route::get('/Available', 'App\Http\Controllers\carController@index')->name('all_cars');
-Route::post('/Available/Results', 'App\Http\Controllers\carController@search')->name('search');
-Route::get('/Available/Details{id}', 'App\Http\Controllers\carController@show')->name('details');
+Route::get('/Available', 'App\Http\Controllers\CarController@index')->name('all_cars');
+Route::post('/Available/Results', 'App\Http\Controllers\CarController@search')->name('search');
+Route::get('/Available/Details{id}', 'App\Http\Controllers\CarController@show')->name('details');
+
+Route::post('deletevehicleimage', [CarController::class, 'deleteImage']);
 //admin
 Route::get('/Admin@AAIT/Panel', 'App\Http\Controllers\adminController@index')->name('admin');
 Route::post('/Admin@AAIT/Panel/Login', 'App\Http\Controllers\adminController@log')->name('alogin');
@@ -68,9 +71,6 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/reset-password', [AuthController::class, 'passwordReset'])->name('reset.password');
     Route::get('/email-verify/{token}', [AuthController::class, 'verify']);
 });
-
-
-
 
 Route::get('/getmodel/{id}','SellController@getmodel')-> name('getmodel');
 

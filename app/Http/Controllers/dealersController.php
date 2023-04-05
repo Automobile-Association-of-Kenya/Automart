@@ -81,6 +81,8 @@ class DealersController extends Controller
         $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);
         $makes = CarMake::orderBy('car_make_name','ASC')->get();
         $details = Caronsells::findOrFail($id);
+        // return $details->images;
+        // die();
        // dd($details);
         return view('dealer.editcar',compact('makes','vehicles','details'));
     }

@@ -70,37 +70,37 @@
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
                                     class="fa fa-home"></i> Home</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#0"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-car"></i> My Cars</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#1"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#2"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-money-bill"></i> My Sells</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#3"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-plus"></i> Add Car</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('logout') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
                                     class="fa fa-sign-out-alt"></i> Logout</button></a>
                     </div>
-                    </br>
+                    <br>
                 </div>
                 <div class="col-md-10  mt-5 pt-5">
                     <div class="row">
@@ -186,38 +186,38 @@
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
                                     class="fa fa-home"></i> Home</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#0"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-car"></i> My Cars</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#1"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#2"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-money-bill"></i> My Sells</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#3"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                     class="fa fa-plus"></i> Add Car</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('logout') }}"><button type="submit" class="btn  btn-block"
                                 style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
                                     class="fa fa-sign-out-alt"></i> Logout</button></a>
                     </div>
-                    </br>
-                    </br>
+                    <br>
+                    <br>
                 </div>
                 <div class="col-md-10">
                     <div class="row">
@@ -287,36 +287,36 @@
                     <div class="col-md-12">
                         <a href="#5"> <button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"> <i class="fa fa-home"></i> Home</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#0"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-car"></i> My Cars</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#1"><button type="submit"
                                 class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#2"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-money-bill"></i> My Sells</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#3"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-plus"></i> Add Car</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('logout') }}"><button type="submit"
                                 class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"> <i class="fa fa-sign-out-alt"></i> Logout</button></a>
                     </div>
-                    </br>
+                    <br>
                 </div>
                 <div class="col-md-10">
                     Hello
-                    </br>
-                    </br>
-                    </br>
-                    </br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     We'll keep this payments updated.
                 </div>
             </div>
@@ -328,8 +328,8 @@
                 </div>
                 <!-- Copyright -->
             </footer>
-            
-            
+
+
         </div>
         <!-- Subscriptions tab end -->
 
@@ -345,36 +345,36 @@
                     <div class="col-md-12">
                         <a href="#5"> <button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"> <i class="fa fa-home"></i> Home</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#0"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-car"></i> My Cars</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#1"><button type="submit"
                                 class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#2"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-money-bill"></i> My Sells</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#3"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-plus"></i> Add Car</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('logout') }}"><button type="submit"
                                 class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"> <i class="fa fa-sign-out-alt"></i> Logout</button></a>
                     </div>
-                    </br>
+                    <br>
                 </div>
                 <div class="col-md-10">
                     Hello
-                    </br>
-                    </br>
-                    </br>
-                    </br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     We'll keep this updated.
                 </div>
             </div>
@@ -401,29 +401,29 @@
                     <div class="col-md-12">
                         <a href="#5"> <button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"> <i class="fa fa-home"></i> Home</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#0"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-car"></i> My Cars</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#1"><button type="submit"
                                 class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-credit-card"></i> Subscriptions</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#2"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-money-bill"></i> My Sells</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="#3"><button type="submit" class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"><i class="fa fa-plus"></i> Add Car</button></a>
                     </div>
-                    </br>
+                    <br>
                     <div class="col-md-12">
                         <a href="{{ route('logout') }}"><button type="submit"
                                 class="btn  btn-block"  style="background: #00472F;color:white;font-size:120%;text-align:left"> <i class="fa fa-sign-out-alt"></i> Logout</button></a>
                     </div>
-                    </br>
+                    <br>
                 </div>
                 <div class="col-md-10">
                     <div class="col-md-12" style="padding-left : 20px; padding-right : 20px;">
@@ -895,7 +895,7 @@
                         document.querySelector('#car_model').innerHTML+='<option value="' + model
                                                     .id + '">' + model.name +
                                                     '</option>';
-                    
+
                     });
                     }
                 });
