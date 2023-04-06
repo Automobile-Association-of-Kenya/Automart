@@ -655,15 +655,15 @@
             <div class="featured-slider row slide-box-btn slider ">
                 @foreach ($vehicles as $item)
                     @php
-                        $images = json_decode($item->images);
+                        $images = json_decode($item->images, true);
                     @endphp
                     <div class="slide slide-box">
                         <div class="car-box bg-white">
                             <a href="{{ route('details', $item->id) }}">
                                 <div class="car-image">
                                     @if (count($images) > 0)
-                                        <img src="{{ url('images/' . $images[0], true) }}" alt="car-photo"
-                                            width="100%" height="250px">
+                                        <img src="{{ asset('images/'.$images[0]) }}"
+                                            width="100%" height="280px">
                                     @else
                                         <img src="#" alt="car-photo" width="100%" height="250px">
                                     @endif
