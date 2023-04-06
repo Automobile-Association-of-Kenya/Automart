@@ -650,8 +650,55 @@
                     type: mime
                 });
             }
-
         });
+
+
+        var previewImages = function(input, imgPreviewPlaceholder) {
+                if (input.files) {
+                    var noFiles = input.files.length;
+                    for (let i = 0; i < noFiles; i++) {
+                        if (input.files[i].size > 5000000) {
+                            alert(input.files[i].name + ' is greater than 5mb');
+                            input.value = ''
+                            break;
+                        }
+                        var reader = new FileReader();
+                        reader.onload = function(event) {
+                            const div = document.createElement('span');
+                            div.classList.add('img_' + i)
+                            div.style.cssText = 'position:relative'
+                            const img = document.createElement('img');
+                            img.setAttribute('src', event.target.result);
+                            const deleter = document.createElement('span');
+                            deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
+                            deleter.style.cssText =
+                                'cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
+                            deleter.addEventListener('click', e => {
+                                removeImage(input, imgPreviewPlaceholder, i);
+                            })
+                            div.appendChild(img);
+                            div.appendChild(deleter);
+                            document.querySelector(imgPreviewPlaceholder).appendChild(div)
+
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            };
+
+            $('#multiImagesUpload').on('change', function() {
+                document.querySelector('.removedImgs').value = ''
+                previewImages(this, 'div.images-preview-div');
+            });
+
+            const removeImage = (input, imgPreviewPlaceholder, index) => {
+                let removedImages = document.querySelector('.removedImgs').value;
+                removedImages = removedImages += index + ',';
+                document.querySelector('.removedImgs').value = removedImages
+                const el = document.querySelector('.img_' + index);
+                el.parentElement.removeChild(el)
+            }
+
     </script>
 @endsection
 
