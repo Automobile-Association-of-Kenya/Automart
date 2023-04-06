@@ -82,7 +82,6 @@ class SellController extends Controller
                 $data[] = $name;
             }
         }
-        die();
 
         $prefix = "GWAAK";
         $carID = $prefix . rand();
