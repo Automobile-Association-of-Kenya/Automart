@@ -58,14 +58,13 @@ class SellController extends Controller
         if ($request->has('cover_photo')) {
             $image = $request->cover_photo;
             $size = filesize($image) / 1024;
-            var_dump($size);
-            // $name = time() . $image->getClientOriginalName();
-            // $img = Image::make($image);
-            // $img->resize(600, 450, function ($constraint) {
-            //     $constraint->aspectRatio();
-            //     $constraint->upsize();
-            // });
-            // $img->save(public_path('images/' . $name));
+            $name = time() . $image->getClientOriginalName();
+            $img = Image::make($image);
+            $img->resize(600, 450, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
+            $img->save(public_path('images/' . $name));
         }
 
 
@@ -74,14 +73,13 @@ class SellController extends Controller
             foreach ($request->file('images') as $image) {
                 $name = time() . $image->getClientOriginalName();
                 $size = filesize($image) / 1024;
-                var_dump($size);
-                // $img = Image::make($image);
-                // $img->resize(600, 450, function ($constraint) {
-                //     $constraint->aspectRatio();
-                //     $constraint->upsize();
-                // });
-                // $img->save(public_path('images/' . $name));
-                // $data[] = $name;
+                $img = Image::make($image);
+                $img->resize(600, 450, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                $img->save(public_path('images/' . $name));
+                $data[] = $name;
             }
         }
         die();
