@@ -12,43 +12,43 @@
 
     <style>
         /* .show-when-target {
-                    visibility: hidden;
-                }
+                                            visibility: hidden;
+                                        }
 
-                .show-when-target:target {
-                    visibility: visible;
-                }
+                                        .show-when-target:target {
+                                            visibility: visible;
+                                        }
 
-                .show-when-target:target {
-                    position: absolute;
-                    max-width: 94%;
-                    line-height: 2em;
-                    font-size: 1em;
-                    font-weight: bold;
-                    /* color: #FFF; */
+                                        .show-when-target:target {
+                                            position: absolute;
+                                            max-width: 94%;
+                                            line-height: 2em;
+                                            font-size: 1em;
+                                            font-weight: bold;
+                                            /* color: #FFF; */
         /* border-radius: .4em;
-                    background: rgba(0, 0, 0, .5);
-                }
+                                            background: rgba(0, 0, 0, .5);
+                                        }
 
-                .show-when-target {
-                    cursor: pointer
-                }
+                                        .show-when-target {
+                                            cursor: pointer
+                                        }
 
-                .show-when-target {
-                    display: inline-block;
-                    max-width: 94%;
-                    line-height: 2em;
-                    font-size: 1em;
-                    font-weight: bold;
+                                        .show-when-target {
+                                            display: inline-block;
+                                            max-width: 94%;
+                                            line-height: 2em;
+                                            font-size: 1em;
+                                            font-weight: bold;
 
-                    margin: auto;
-                    color: #FFF;
-                    border-radius: .4em;
-                    -webkit-box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
-                    box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
-                    text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
-                    background: #749A02;
-                } */
+                                            margin: auto;
+                                            color: #FFF;
+                                            border-radius: .4em;
+                                            -webkit-box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
+                                            box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
+                                            text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+                                            background: #749A02;
+                                        } */
 
         .images-preview-div img {
             padding: 0px;
@@ -459,7 +459,7 @@
                                     Upload Photos
                                     {{-- <input type="hidden" name="removedImages" value=''> --}}
                                 </label>
-                                <input id="fileupload" type="file" name="images[]" placeholder="Upload Photos"
+                                <input type="file" name="images[]" placeholder="Upload Photos" id="multiImagesUpload"
                                     multiple=""><br>
                             </div>
 
@@ -518,7 +518,8 @@
                             </div>
                         </div>
 
-                        <button style="background: #00472F;color:white;" type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+                        <button style="background: #00472F;color:white;" type="submit"
+                            class="btn btn-primary btn-block mb-4">Submit</button>
                     </form>
                 </div>
             </div>
@@ -538,6 +539,8 @@
 @section('footer_scripts')
     <script>
         $(document).ready(function() {
+
+
             $('#car_make').on('change', function() {
                 var carmake_id = this.value;
                 $("#car_model").html('');
@@ -562,128 +565,95 @@
                     }
                 });
             })
+
+            $('#multiImagesUpload').on('change', function() {
+                cropSelectedImages();
+            });
+
+            function cropSelectedImages() {
+                var input = document.getElementById('multiImagesUpload');
+                var files = input.files;
+                var croppedImages = [];
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    if (file.type.match('image.*')) {
+                        var reader = new FileReader();
+                        reader.onload = (function(theFile) {
+                            return function(e) {
+                                var img = new Image();
+                                img.src = e.target.result;
+
+                                img.onload = function() {
+                                    var canvas = document.createElement('canvas');
+                                    var cropWidth = 600;
+                                    var cropHeight = 450;
+                                    canvas.height = cropHeight;
+                                    canvas.width = cropWidth;
+
+                                    var ctx = canvas.getContext('2d');
+                                    ctx.drawImage(img, 0, 0, cropWidth, cropHeight);
+                                    canvas.toBlob(function(blob) {
+                                        croppedImages.push(blob);
+
+                                        if (croppedImages.length == files.length) {
+                                            var croppedFiles = new FileList(croppedImages);
+                                            input.files = croppedFiles;
+                                        }
+                                    }, file.type);
+                                };
+                            };
+                        })(file);
+                        reader.readAsDataURL(file);
+                    }
+                }
+            }
+
+            $('#fileupload1').change(function() {
+                let $this = $(this);
+                var reader = new FileReader();
+                var file = this.files[0];
+                reader.readAsDataURL(file);
+                reader.onload = function(e) {
+                    var img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function() {
+                        var width = 600;
+                        var height = 450;
+                        var canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        var context = canvas.getContext('2d');
+                        context.drawImage(img, 0, 0, width, height);
+                        var dataURL = canvas.toDataURL();
+                        var blob = dataURLToBlob(dataURL);
+                        var croppedFile = new File([blob], 'cropped-image.jpg', {
+                            type: 'image/jpg'
+                        });
+
+                        $this.prop('file', croppedFile);
+                    };
+                };
+            });
+
+            function dataURLToBlob(dataURL) {
+                var arr = dataURL.split(',');
+                var mime = arr[0].match(/:(.*?);/)[1];
+                var bstr = atob(arr[1]);
+                var n = bstr.length;
+                var u8arr = new Uint8Array(n);
+
+                while (n--) {
+                    u8arr[n] = bstr.charCodeAt(n);
+                }
+
+                return new Blob([u8arr], {
+                    type: mime
+                });
+            }
+
         });
     </script>
 @endsection
 
-
-{{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
-{{-- <script>
-        $(function() {
-            // Multiple images preview with JavaScript
-
-            var previewImages = function(input, imgPreviewPlaceholder) {
-                if (input.files) {
-                    var noFiles = input.files.length;
-                    for (let i = 0; i < noFiles; i++) {
-                        if (input.files[i].size > 5000000) {
-                            alert(input.files[i].name + ' is greater than 5mb');
-                            input.value = ''
-                            break;
-                        }
-                        var reader = new FileReader();
-                        reader.onload = function(event) {
-                            const div = document.createElement('span');
-                            div.classList.add('img_' + i)
-                            div.style.cssText = 'position:relative'
-                            const img = document.createElement('img');
-                            img.setAttribute('src', event.target.result);
-                            const deleter = document.createElement('span');
-                            deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
-                            deleter.style.cssText =
-                                'cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
-                            deleter.addEventListener('click', e => {
-                                removeImage(input, imgPreviewPlaceholder, i);
-                            })
-                            div.appendChild(img);
-                            div.appendChild(deleter);
-                            document.querySelector(imgPreviewPlaceholder).appendChild(div)
-
-                        }
-                        reader.readAsDataURL(input.files[i]);
-                    }
-                }
-            };
-            $('#fileupload').on('change', function() {
-                document.querySelector('.removedImgs').value = ''
-                previewImages(this, 'div.images-preview-div');
-            });
-
-            const removeImage = (input, imgPreviewPlaceholder, index) => {
-                let removedImages = document.querySelector('.removedImgs').value;
-                removedImages = removedImages += index + ',';
-                document.querySelector('.removedImgs').value = removedImages
-                const el = document.querySelector('.img_' + index);
-                el.parentElement.removeChild(el)
-            }
-        });
-    </script> --}}
-
-{{-- <script>
-        $(function() {
-            // Multiple images preview with JavaScript
-
-            var previewImages = function(input, imgPreviewPlaceholder) {
-                if (input.files) {
-                    var noFiles = input.files.length;
-                    for (let i = 0; i < noFiles; i++) {
-                        if (input.files[i].size > 5000000) {
-                            alert(input.files[i].name + ' is greater than 5mb');
-                            input.value = ''
-                            break;
-                        }
-                        var reader = new FileReader();
-                        reader.onload = function(event) {
-                            const div = document.createElement('span');
-                            div.classList.add('img_' + i)
-                            div.style.cssText = 'position:relative'
-                            const img = document.createElement('img');
-                            img.setAttribute('src', event.target.result);
-                            const deleter = document.createElement('span');
-                            deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
-                            deleter.style.cssText =
-                                'cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
-                            deleter.addEventListener('click', e => {
-                                removeImage(input, imgPreviewPlaceholder, i);
-                            })
-                            div.appendChild(img);
-                            div.appendChild(deleter);
-                            document.querySelector(imgPreviewPlaceholder).appendChild(div)
-
-                        }
-                        reader.readAsDataURL(input.files[i]);
-                    }
-                }
-            };
-            $('#fileupload1').on('change', function() {
-                document.querySelector('.removedImgs').value = ''
-                previewImages(this, 'div.images-preview-div1');
-            });
-
-            const removeImage = (input, imgPreviewPlaceholder, index) => {
-                let removedImages = document.querySelector('.removedImgs').value;
-                removedImages = removedImages += index + ',';
-                document.querySelector('.removedImgs').value = removedImages
-                const el = document.querySelector('.img_' + index);
-                el.parentElement.removeChild(el)
-            }
-        });
-    </script>
-    <script>
-        @if (session('loader'))
-            $(window).on('load', function() {
-
-                const myTimeout = setTimeout(myGreeting, 5000);
-
-                function myGreeting() {
-                    $('#loading').hide();
-                }
-
-                function myStopFunction() {
-                    clearTimeout(myTimeout);
-                }
-            })
-        @endif
-    </script> --}}
 
 @endsection

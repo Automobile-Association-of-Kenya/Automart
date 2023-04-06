@@ -41,7 +41,7 @@ All Listings | @parent
                                         @if (count($images) > 0)
                                         <img src="{{ url('images/'.$images[0]) }}" alt="car-photo" width="100%" height="250px">
                                         @else
-                                        <img src="#" alt="car-photo" width="100%" height="250px">
+                                        <img src="#" alt="car-photo" width="100%" height="300px">
                                         @endif
                                         {{-- <img src="{{ url('images/' . json_decode($->images, true)[0]) }}"
                                             width="100%" height="230px" alt="car"> --}}

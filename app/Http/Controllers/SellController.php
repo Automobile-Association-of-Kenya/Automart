@@ -72,6 +72,7 @@ class SellController extends Controller
 
             foreach ($request->file('images') as $image) {
                 $name = time() . $image->getClientOriginalName();
+                $size = filesize($image) / 1024;
                 $img = Image::make($image);
                 $img->resize(600, 450, function ($constraint) {
                     $constraint->aspectRatio();
@@ -187,7 +188,7 @@ class SellController extends Controller
                 });
                 $img->save(public_path('images/' . $name));
                 array_push($images, $name);
-                
+
             }
         }
         $prefix = "GWAAK";
