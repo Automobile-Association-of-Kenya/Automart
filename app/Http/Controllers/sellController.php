@@ -44,7 +44,7 @@ class SellController extends Controller
             'description' => 'required',
             'cover_photo' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'images' => 'required|max:10|min:1',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:15360',
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'required',
