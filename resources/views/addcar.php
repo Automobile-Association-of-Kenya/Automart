@@ -12,43 +12,43 @@
 
     <style>
         /* .show-when-target {
-                                                                                                                            visibility: hidden;
-                                                                                                                        }
+                                                                                                    visibility: hidden;
+                                                                                                }
 
-                                                                                                                        .show-when-target:target {
-                                                                                                                            visibility: visible;
-                                                                                                                        }
+                                                                                                .show-when-target:target {
+                                                                                                    visibility: visible;
+                                                                                                }
 
-                                                                                                                        .show-when-target:target {
-                                                                                                                            position: absolute;
-                                                                                                                            max-width: 94%;
-                                                                                                                            line-height: 2em;
-                                                                                                                            font-size: 1em;
-                                                                                                                            font-weight: bold;
-                                                                                                                            /* color: #FFF; */
+                                                                                                .show-when-target:target {
+                                                                                                    position: absolute;
+                                                                                                    max-width: 94%;
+                                                                                                    line-height: 2em;
+                                                                                                    font-size: 1em;
+                                                                                                    font-weight: bold;
+                                                                                                    /* color: #FFF; */
         /* border-radius: .4em;
-                                                                                                                            background: rgba(0, 0, 0, .5);
-                                                                                                                        }
+                                                                                                    background: rgba(0, 0, 0, .5);
+                                                                                                }
 
-                                                                                                                        .show-when-target {
-                                                                                                                            cursor: pointer
-                                                                                                                        }
+                                                                                                .show-when-target {
+                                                                                                    cursor: pointer
+                                                                                                }
 
-                                                                                                                        .show-when-target {
-                                                                                                                            display: inline-block;
-                                                                                                                            max-width: 94%;
-                                                                                                                            line-height: 2em;
-                                                                                                                            font-size: 1em;
-                                                                                                                            font-weight: bold;
+                                                                                                .show-when-target {
+                                                                                                    display: inline-block;
+                                                                                                    max-width: 94%;
+                                                                                                    line-height: 2em;
+                                                                                                    font-size: 1em;
+                                                                                                    font-weight: bold;
 
-                                                                                                                            margin: auto;
-                                                                                                                            color: #FFF;
-                                                                                                                            border-radius: .4em;
-                                                                                                                            -webkit-box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
-                                                                                                                            box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
-                                                                                                                            text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
-                                                                                                                            background: #749A02;
-                                                                                                                        } */
+                                                                                                    margin: auto;
+                                                                                                    color: #FFF;
+                                                                                                    border-radius: .4em;
+                                                                                                    -webkit-box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
+                                                                                                    box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
+                                                                                                    text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+                                                                                                    background: #749A02;
+                                                                                                } */
 
         .images-preview-div img {
             padding: 0px;
@@ -477,7 +477,7 @@
                             </div>
 
                             <div class="col-md-12">
-                                <div class="mt-1 mb-2">
+                                <div class="mt-1">
                                     <div class="images-preview-div" style="margin:1%"> </div>
                                 </div>
                             </div>
@@ -567,43 +567,7 @@
                         });
                     }
                 });
-            });
-
-
-            var previewImages = function(input, imgPreviewPlaceholder) {
-                if (input.files) {
-                    var noFiles = input.files.length;
-                    for (let i = 0; i < noFiles; i++) {
-                        // if (input.files[i].size > 5000000) {
-                        //     alert(input.files[i].name + ' is greater than 5mb');
-                        //     input.value = ''
-                        //     break;
-                        // }
-                        var reader = new FileReader();
-                        reader.onload = function(event) {
-                            const div = document.createElement('span');
-                            div.classList.add('img_' + i)
-                            div.style.cssText = 'position:relative'
-                            const img = document.createElement('img');
-                            img.setAttribute('src', event.target.result);
-                            img.style.width = '450px';
-                            img.style.height = '250px';
-                            const deleter = document.createElement('span');
-                            deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
-                            deleter.style.cssText =
-                                'cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
-                            deleter.addEventListener('click', e => {
-                                removeImage(input, imgPreviewPlaceholder, i);
-                            })
-                            div.appendChild(img);
-                            div.appendChild(deleter);
-                            document.querySelector(imgPreviewPlaceholder).appendChild(div)
-
-                        }
-                        reader.readAsDataURL(input.files[i]);
-                    }
-                }
-            };
+            })
 
             /** compress cover photo*/
             var input = document.getElementById('fileupload1');
@@ -628,9 +592,7 @@
                             var compressedFile = new File([blob], file.name, {
                                 type: file.type
                             });
-                            // localStorage.setItem('cover_photo', JSON.stringify(
-                            //     compressedFile));
-                            // input.files[0] = compressedFile;
+                            input.files[0] = compressedFile;
                         }, file.type, 0.5);
                     };
                     img.src = reader.result;
@@ -638,47 +600,103 @@
                 reader.readAsDataURL(file);
             });
             /* end compress cover photo*/
-            const removeImage = (input, imgPreviewPlaceholder, index) => {
-                let removedImages = document.querySelector('.removedImgs').value;
-                removedImages = removedImages += index + ',';
-                document.querySelector('.removedImgs').value = removedImages
-                const el = document.querySelector('.img_' + index);
-                el.parentElement.removeChild(el)
-            }
 
+            // function compressMultipleImages() {
+            //     var multiInput = document.getElementById('multiImagesUpload');
+            //     let files = multiInput.files;
+            //     let croppedImages = [];
+            //     for (let i = 0; i < files.length; i++) {
+            //         const element = files[i];
+            //         console.log(element);
+            //         let reader2 = new FileReader();
+            //         reader2.onload = function() {
+            //             var image = new Image();
+            //             image.onload = function() {
+            //                 var width = 600;
+            //                 var height = 450;
+            //                 var canvas1 = document.createElement('canvas');
+            //                 canvas1.width = width;
+            //                 canvas1.height = height;
+            //                 canvas1.getContext('2d').drawImage(img, 0, 0, width, height);
+            //                 canvas1.toBlob(function(blob) {
+            //                     var compressedFile = new File([blob], file[i].name, {
+            //                         type: file[i].type
+            //                     });
+            //                     console.log(compressedFile);
+            //                     console.log("compressedFile");
+            //                     croppedImages.push(compressedFile)
+            //                 }, file[i].type, 0.5);
+            //             };
+            //             img.src = reader.result;
+            //         }
+            //     }
+            // }
 
+            var previewImages = function(input, imgPreviewPlaceholder) {
+                if (input.files) {
+                    var noFiles = input.files.length;
+                    for (let i = 0; i < noFiles; i++) {
+                        // if (input.files[i].size > 5000000) {
+                        //     alert(input.files[i].name + ' is greater than 5mb');
+                        //     input.value = ''
+                        //     break;
+                        // }
+                        var reader = new FileReader();
+                        reader.onload = function(event) {
+                            const div = document.createElement('span');
+                            div.classList.add('img_' + i)
+                            div.style.cssText = 'position:relative'
+                            const img = document.createElement('img');
+                            img.setAttribute('src', event.target.result);
+                            img.style.width = '400px';
+                            img.style.height = '250px';
+                            const deleter = document.createElement('span');
+                            deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
+                            deleter.style.cssText =
+                                'cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
+                            deleter.addEventListener('click', e => {
+                                removeImage(input, imgPreviewPlaceholder, i);
+                            })
+                            div.appendChild(img);
+                            div.appendChild(deleter);
+                            document.querySelector(imgPreviewPlaceholder).appendChild(div)
+
+                        }
+                        reader.readAsDataURL(input.files[i]);
+                    }
+                }
+            };
+
+            // 10259760
+            // 7524332
 
             $('#multiImagesUpload').change(function() {
+                var croppedImages = [];
+
+                var files = $(this).prop('files');
+                for (var i = 0; i < files.length; i++) {
+                    console.log(files[i]);
+                    var image = new Image();
+                    image.src = URL.createObjectURL(files[i]);
+                    image.onload = function() {
+                        var canvas = document.createElement('canvas');
+                        canvas.width = 600;
+                        canvas.height = 450;
+                        var context = canvas.getContext('2d');
+                        context.drawImage(this, 0, 0);
+                        var croppedImageData = canvas.toDataURL('image/jpeg');
+                        console.log(croppedImageData);
+                        croppedImages.push(croppedImageData);
+                        localStorage.setItem('croppedImages', JSON.stringify(croppedImages));
+                    };
+                    document.body.appendChild(image);
+                }
                 document.querySelector('.removedImgs').value = ''
-                let $this = $(this);
-                // previewImages(this, 'div.images-preview-div');
-
-                window.setTimeout(() => {
-                    var croppedImages = [];
-                    var files = $(this).prop('files');
-                    for (var i = 0; i < files.length; i++) {
-                        var image = new Image();
-                        image.src = URL.createObjectURL(files[i]);
-                        image.onload = function() {
-                            var canvas = document.createElement('canvas');
-                            canvas.width = 600;
-                            canvas.height = 450;
-                            var context = canvas.getContext('2d');
-                            context.drawImage(this, 0, 0);
-                            var croppedImageData = canvas.toDataURL('image/jpeg');
-                            croppedImages.push(croppedImageData);
-                            localStorage.setItem('croppedImages', JSON.stringify(
-                            croppedImages));
-                        };
-                        document.body.appendChild(image);
-                    }
-                }, 2000);
-
+                previewImages(this, 'div.images-preview-div');
             });
 
-            $('#vehicleAdditionForm').on('submit', function() {
+            $('#vehicleAdditionForm').on('submit',function() {
                 var croppedImages = JSON.parse(localStorage.getItem('croppedImages'));
-                let coverph = JSON.parse(localStorage.getItem('cover_photo'));
 
                 var files = [];
                 for (var i = 0; i < croppedImages.length; i++) {
@@ -688,12 +706,6 @@
                     });
                     files.push(file);
                 }
-
-                var cover = dataURItoBlob(coverph);
-                let cover_photo = new File([cover], 'cp' + generateRandomString(7) + '.jpg', {
-                    type: 'image/jpeg'
-                });
-                $('#fileupload1').prop('files', cover_photo);
                 $('#multiImagesUpload').prop('files', files);
             });
 
@@ -715,19 +727,133 @@
                 previewImages(this, 'div.images-preview-div1');
             });
 
-
-
-            function generateRandomString(length) {
-                let result = '';
-                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                const charactersLength = characters.length;
-
-                for (let i = 0; i < length; i++) {
-                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-                }
-
-                return result;
+            const removeImage = (input, imgPreviewPlaceholder, index) => {
+                let removedImages = document.querySelector('.removedImgs').value;
+                removedImages = removedImages += index + ',';
+                document.querySelector('.removedImgs').value = removedImages
+                const el = document.querySelector('.img_' + index);
+                el.parentElement.removeChild(el)
             }
+
+            $('#vehicleAdditionForm').on('submit', function(event) {
+                event.preventDefault();
+                let $this = $(this);
+                var DformData = new FormData();
+                let title = $("input[name='title']").val(),
+                    country = $("input[name='country']").val(),
+                    county = $("input[name='county']").val(),
+                    make = $("input[name='make']").val(),
+                    model = $("input[name='model']").val(),
+                    year = $("input[name='year']").val(),
+                    price = $("input[name='price']").val(),
+                    miles = $("input[name='miles']").val(),
+                    enginecc = $("input[name='enginecc']").val(),
+                    exterior = $("input[name='exterior']").val(),
+                    interior = $("input[name='interior']").val(),
+                    usage = $("input[name='usage']").val(),
+                    fuel_type = $("input[name='fuel_type']").val(),
+                    transmission = $("input[name='transmission']").val(),
+                    description = $("input[name='description']").val(),
+                    firstname = $("input[name='firstname']").val(),
+                    lastname = $("input[name='lastname']").val(),
+                    email = $("input[name='email']").val(),
+                    phone = $("input[name='phone']").val();
+
+                DformData.append('title', title);
+                DformData.append('country', country);
+                DformData.append('county', county);
+                DformData.append('make', make);
+                DformData.append('model', model);
+                DformData.append('year', year);
+                DformData.append('price', price);
+                DformData.append('miles', miles);
+                DformData.append('enginecc', enginecc);
+                DformData.append('exterior', exterior);
+                DformData.append('interior', interior);
+                DformData.append('usage', usage);
+                DformData.append('fuel_type', fuel_type);
+                DformData.append('transmission', transmission);
+                DformData.append('description', description);
+                DformData.append('firstname', firstname);
+                DformData.append('lastname', lastname)
+                DformData.append('email', email);
+                DformData.append('phone', phone);
+
+                var input = document.getElementById('fileupload1');
+                var file = input.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function() {
+                    var img = new Image();
+                    img.onload = function() {
+                        var width = 800;
+                        var height = 600;
+                        var canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+                        canvas.toBlob(function(blob) {
+                            var compressedFile = new File([blob], file.name, {
+                                type: file.type
+                            });
+                            DformData.append('cover_photo', compressedFile);
+                            // input.files[0] = compressedFile;
+                        }, file.type, 0.5);
+                    };
+                    img.src = reader.result;
+                };
+                reader.readAsDataURL(file);
+
+                var multiInput = document.getElementById('multiImagesUpload');
+                let files = multiInput.files;
+                let croppedImages = [];
+                for (let i = 0; i < files.length; i++) {
+                    const element = files[i];
+                    let reader2 = new FileReader();
+                    reader2.onload = function() {
+                        var image = new Image();
+                        image.onload = function() {
+                            var width = 600;
+                            var height = 450;
+                            var canvas1 = document.createElement('canvas');
+                            canvas1.width = width;
+                            canvas1.height = height;
+                            canvas1.getContext('2d').drawImage(img, 0, 0, width, height);
+                            canvas1.toBlob(function(blob) {
+                                var compressedFile = new File([blob], file.name, {
+                                    type: file.type
+                                });
+                                croppedImages.push(compressedFile)
+                            }, file.type, 0.5);
+                        };
+                        img.src = reader.result;
+                    }
+                }
+                DformData.append('images', croppedImages);
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $this.find("input[name='_token']").val(),
+                    }
+                });
+                $.ajax({
+                    url: '/SellYourCar',
+                    type: 'POST',
+                    data: DformData,
+                    processData: false,
+                    contentType: false,
+                    // headers: {
+                    //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    // },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                });
+            });
+
         });
     </script>
 @endsection

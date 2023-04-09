@@ -24,6 +24,7 @@ class SellController extends Controller
 
     public function store(Request $request)
     {
+        return json_encode($request->all());
 
         $this->validate($request, [
             'title' => 'required',
