@@ -172,4 +172,10 @@ class VehicleController extends Controller
         $models = CarModel::where('car_make_id',$request->car_make_id)->orderBy('car_model_name','ASC')->get();
         return CarModelResource::collection($models);
     }
+
+    public function get($id)
+    {
+        $vehicle = Caronsells::find($id);
+        return json_encode($vehicle);
+    }
 }

@@ -31,6 +31,7 @@ class CreateCarsTable extends Migration
             $table->string('fuel_type');
             $table->longText('features');
             $table->string('transmission');
+            $table->string('carId');
             $table->string('vehicle_type')->nullable();
             $table->longText('description');
             $table->longText('images');

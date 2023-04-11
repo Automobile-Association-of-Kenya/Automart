@@ -114,7 +114,6 @@ class SellController extends Controller
         $carOnSell->lastname = $request->lastname;
         $carOnSell->email = $request->email;
         $carOnSell->phone = $request->phone;
-        $carOnSell->carId = $carID;
         $carOnSell->cover_photo = $cover_photo;
         $carOnSell->save();
         return json_encode(['status'=>'success', 'message'=> 'Vehicle added successfully']);

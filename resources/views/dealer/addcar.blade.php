@@ -136,7 +136,7 @@
                     @include('partials.alert')
 
                     <div class="feedback"></div>
-                    
+
                     <form action="{{ route('savecar') }}" method="POST" enctype="multipart/form-data"
                         id="vehicleAdditionForm">
                         {{ csrf_field() }}
@@ -226,10 +226,32 @@
                                 <input class="form-control form-control-sm" type="number" id="miles" name="miles"
                                     placeholder="mileage (Kms)" required>
                             </div>
-                            <div class=" col-md-4 form-group">
+                            <div class="col-md-4 form-group">
                                 <label for="">Engine CC</label>
                                 <input class="form-control form-control-sm" type="number" id="enginecc"
                                     name="enginecc" placeholder="Engine CC" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>Vehicle Type</label>
+                                <select id="vehicle_type" name="vehicle_type" class="form-control form-control-sm" tabindex="14" required>
+                                    <option value="-1" selected="selected">Vehicle Type</option>
+                                    <option value="Convertibles">Convertibles</option>
+                                    <option value="Hatchbacks">Hatchbacks</option>
+                                    <option value="SUVs">SUVs</option>
+                                    <option value="Saloon Car">Saloon Car</option>
+                                    <option value="Station Wagons">Station Wagons</option>
+                                    <option value="Pickup Trucks">Pickup Trucks</option>
+                                    <option value="Buses, Taxis and Vans">Buses, Taxis and Vans</option>
+                                    <option value="Motorbikes">Motorbikes</option>
+                                    <option value="Trucks">Trucks</option>
+                                    <option value="Machinery and Tractors">Machinery and Tractors</option>
+                                    <option value="Trailers">Trailers</option>
+                                    <option value="Minis">Minis</option>
+                                    <option value="Coupes">Coupes</option>
+                                    <option value="Quad Bikes">Quad Bikes</option>
+                                    <option value="Other">Other</option>
+                                </select>
                             </div>
 
                             <div class="col-md-4 form-group">
@@ -645,7 +667,6 @@
                         }).fail(function(error) {
                             console.log(error);
                         });
-                        // localStorage.setItem("cover_photo", JSON.stringify(compressedFile));
                     };
                     img.src = reader.result;
                 };
@@ -682,13 +703,6 @@
                             }).fail(function(error) {
                                 console.log(error);
                             });
-
-                            // compressedImages.push({leet: JSON.stringify(compressedDataUrl)});
-
-                            // localStorage.setItem("compressedImages", compressedImages);
-                            // var compressedImg = new Image();
-                            // compressedImg.src = compressedDataUrl;
-                            // $("#output").append(compressedImg);
                         };
                     };
                     reader.readAsDataURL(file);
@@ -706,6 +720,9 @@
             $('#vehicleAdditionForm').on('submit', function(event) {
                 event.preventDefault();
                 let $this = $(this);
+                $this.find("#vehicleSubmit").prop({
+                            disabled: true
+                        });
                 var DformData = new FormData();
                 let title = $("input[name='title']").val(),
                     country = $("#country").val(),
@@ -726,8 +743,10 @@
                     lastname = $("#gt-lastname").val(),
                     email = $("#email").val(),
                     phone = $("#phone").val(),
-                    features = $("input[name='features[]']").serializeArray();
-                let featuresf = [];
+                    features = $("input[name='features[]']").serializeArray(),
+                    vehicle_type = $('#vehicle_type').val(),
+                    featuresf = [];
+
                 $.each(features, (key, value) => {
                     featuresf.push(value.value)
                 });
@@ -742,6 +761,7 @@
                 DformData.append('year', year);
                 DformData.append('price', price);
                 DformData.append('miles', miles);
+                DformData.append('vehicle_type', vehicle_type);
                 DformData.append('enginecc', enginecc);
                 DformData.append('exterior', exterior);
                 DformData.append('interior', interior);
@@ -753,7 +773,6 @@
                 DformData.append('lastname', lastname)
                 DformData.append('email', email);
                 DformData.append('phone', phone);
-
 
                 $.ajaxSetup({
                     headers: {
@@ -768,15 +787,22 @@
                     contentType: false,
                     success: function(response) {
                         console.log(response);
-                        var result = JSON.parse(response),;
+                        var result = JSON.parse(response);
                         if (result.status === "success") {
+                            // removeImage(document.getElementById('fileupload1'), 'div.images-preview-div1', i);
+                            // removeImage(document.getElementById('multiImagesUpload'), 'div.images-preview-div', i);
                             $this.trigger('reset');
-                            $this.find(".feedback").html("<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Success!       </strong>" + result.message + "!</div>");
+                            $(".feedback").html(
+                                "<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Success!       </strong>" +
+                                result.message + "!</div>");
                         } else if (result.status === "error") {
-                            $this.find(".feedback").html(
+                            $(".feedback").html(
                                 "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>Error occured during processing!</div>"
-                                );
+                            );
                         }
+                        $this.find("#vehicleSubmit").prop({
+                            disabled: false
+                        });
                     },
                     error: function(error) {
                         console.log(error);
@@ -788,10 +814,10 @@
                         } else {
                             p += "Error occured during processing!";
                         }
-                        $this.find(".feedback").html(
+                        $(".feedback").html(
                             "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>" +
                             p + "</div>");
-                        $this.find("#vehicleSubmit").prop({
+                        $("#vehicleSubmit").prop({
                             disabled: false
                         });
                     }

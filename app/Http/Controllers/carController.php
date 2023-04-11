@@ -25,8 +25,9 @@ class CarController extends Controller
 
     public function show($id){
         $vehicle = Caronsells::find($id);
-        
-        return view('details', compact('vehicle'));
+        $vehicle->updateviews();
+        $features = explode(',',json_decode($vehicle->features));
+        return view('details', compact('vehicle','features'));
     }
 
     public function search(Request $request){

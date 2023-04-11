@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VehicleRequest;
+use App\Models\CarMake;
 use App\Models\Caronsells;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -10,6 +11,15 @@ use Intervention\Image\Facades\Image;
 
 class ApplicationController extends Controller
 {
+
+    public function welcome()
+    {
+        $vehicles = Caronsells::orderBy('id', 'desc')->paginate(6);
+        $makes = CarMake::all();
+        // $images = json_decode($vehicles[0]->images,true);
+        // return $images[0];
+        return view('index', compact('vehicles', 'makes'));
+    }
     /**
      * Display a listing of the resource.
      *
@@ -33,17 +43,16 @@ class ApplicationController extends Controller
     public function handleImages(Request $request)
     {
         $imageString = explode(',', $request->image);
-        $image = base64_decode($imageString[1]);
+        // $image = base64_decode($imageString[1]);
         // $fileName = 'img' . auth()->id() . strtotime(now()) . '.jpg'; // or any other desired file name
-        $img = Image::make($image);
-        if (isset($_SESSION["$request->str_id"])) {
-            array_push($_SESSION["$request->str_id"],$img);
-        }else {
-            $_SESSION["$request->str_id"] = [$img];
-            // session($request->str_id,[]);
+        // $img = Image::make($image);
+        // $path = $img->store('temp', 'public');
+        if (session()->has(["$request->str_id"])) {
+            session()->push("$request->str_id", $imageString[1]);
+        } else {
+            session()->put("$request->str_id", [$imageString[1]]);
         }
         return 'success';
-        // return session($request->str_id);
     }
 
     /**
@@ -56,19 +65,22 @@ class ApplicationController extends Controller
     {
         $images = [];
         $strkey = $request->str_id;
-        if ($_SESSION["$strkey"]) {
-            return "there";
-            foreach ($_SESSION["$strkey"] as $key => $value) {
+        if (session()->has("$strkey")) {
+            foreach (session("$strkey") as $key => $value) {
+                $image = base64_decode($value);
                 $fileName = 'img' . auth()->id() .$key. strtotime(now()) . '.jpg'; // or any other desired file name
-                $value->save(public_path('images/' . $fileName));
-                array_push($images,$fileName);
+                $img = Image::make($image);
+                $img->save(public_path('images/' . $fileName));
+                array_push($images, $fileName);
             }
         }
-        return "here";
+
         $validated = $request->validated();
         $validated["features"] = json_encode($validated["features"]);
-        $vehicle = Caronsells::create(['user_id'=>auth()->id,'images'=>json_encode($images)]+$validated);
-        return json_encode(['status'=>'success', 'message'=>"Vehicle added successfully"]);
+        Caronsells::create(['user_id' => auth()->id(), 'carId'=>$strkey, 'cover_photo'=>$images[0], 'images' => json_encode($images)] + $validated);
+        session()->forget("$strkey");
+
+        return json_encode(['status' => 'success', 'message' => "Vehicle added successfully"]);
     }
 
     /**
