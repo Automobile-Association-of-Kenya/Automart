@@ -829,6 +829,7 @@
                         img.src = reader.result;
                     }
                 }
+                console.log();
                 DformData.append('images', croppedImages);
 
                 $.ajaxSetup({

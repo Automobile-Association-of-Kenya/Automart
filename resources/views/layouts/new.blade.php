@@ -16,7 +16,7 @@
     <meta charset="utf-8">
 
     <!-- External CSS libraries -->
-    <link rel="stylesheet" type="text/css" href="{{ url('css/components.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/animate.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap-submenu.css') }}">
 
@@ -197,7 +197,7 @@
             <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
                 <a class="nav-link" href="{{ route('all_cars') }}" style="color: #fff;">All Cars</a>
             </li>
-            
+
             <li class="nav-item" style="padding:5px; width:90%; margin:auto; background:#013f2a;margin-bottom:3px">
                 <a class="nav-link" href="/terms" style="color: #fff;">Terms</a>
             </li>
@@ -219,7 +219,7 @@
             @endauth
         </ul>
     </nav>
-    
+
     <!-- Sidenav end -->
     @yield('content')
     <!-- Footer start -->

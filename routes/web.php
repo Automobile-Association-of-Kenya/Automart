@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\dealersController;
@@ -98,6 +99,9 @@ Route::controller(DealersController::class)->group(function(){
         Route::get('subscriptions','subscriptions')->name('dealer.subscriptions');
     });
 });
+
+Route::resource('application', ApplicationController::class);
+Route::post('application-images', [ApplicationController::class, 'handleImages']);
 
 
 
