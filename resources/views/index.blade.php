@@ -767,9 +767,9 @@
         </div>
     </div> --}}
 
-    <div class="featured-car content-area" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+    <div class="featured-car content-area">
         <div class="container">
-            <div class="featured-slider row slide-box-btn slider ">
+            <div class="featured-slider row slide-box-btn slider" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
                 @foreach ($vehicles as $item)
                     @php
                         $images = json_decode($item->images, true);
