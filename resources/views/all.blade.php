@@ -30,7 +30,9 @@ All Listings | @parent
                                 <div class="car-box-3">
                                     <div class="car-thumbnail">
 
-                                        <div class="for">For Sale</div>
+                                        @if ($vehicle->approved)
+                                        <div class="for bg-warning"><h4 class="text-white">AA Approved</h4></div>
+                                        @endif
                                         <div class="price-box">
 
                                             <span>Ksh. {{ number_format("$vehicle->price") }}</span>
@@ -71,6 +73,10 @@ All Listings | @parent
                                             </li>
                                             <li>
                                                 <i class="flaticon-calendar-1"></i>{{ $vehicle->year }}
+                                            </li>
+
+                                            <li>
+                                                <i class="fa fa-eye"></i>{{ $vehicle->views ?? 0 .' views' }}
                                             </li>
                                         </ul>
                                     </div>
