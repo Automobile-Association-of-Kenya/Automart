@@ -76,7 +76,7 @@ All Listings | @parent
                                             </li>
 
                                             <li>
-                                                <i class="fa fa-eye"></i>{{ $vehicle->views ?? 0 .' views' }}
+                                                <i class="fa fa-eye"></i>{{ $vehicle->views ?? 0 }} Views
                                             </li>
                                         </ul>
                                     </div>
