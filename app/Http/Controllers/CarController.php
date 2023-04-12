@@ -27,7 +27,7 @@ class CarController extends Controller
         $vehicle = Caronsells::find($id);
         $vehicle->updateviews();
         if (is_array($vehicle->features)) {
-            $features = $vehicles->features;
+            $features = $vehicle->features;
         }else {
             $features = json_decode($vehicle->features);
             if (is_array($features)) {
