@@ -72,6 +72,8 @@ Car Details @parent
                                 <i class="fa fa-chevron-right"></i>
                             </a>
 
+                            
+
                             <a data-target="#pic-{{ count(json_decode($vehicle->images)) - 1 }}" data-toggle="tab"
                                 class="prev-image"
                                 style="position: absolute;left:0;top:40%;padding:15px;background:#00472F;color:white;cursor:pointer;">
@@ -250,7 +252,7 @@ Car Details @parent
                 &nbsp;
                 <div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
                     <h4 style="font-family:Garamond; color: ghostblack;"><b>Vehicle Features</b></h4>
-                    @foreach (json_decode($vehicle->features, true) as $feature)
+                    @foreach ($features as $feature)
                         <i class='fa fa-check' style='color: #006544;'></i>
                         |&nbsp;{{ $feature }}&nbsp;|&nbsp;&nbsp;
                     @endforeach

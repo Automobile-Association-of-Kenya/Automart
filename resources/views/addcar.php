@@ -5,49 +5,50 @@
 @endsection
 
 @section('content')
+
     @php
         $user = session('user');
     @endphp
 
     <style>
-        .show-when-target {
-            visibility: hidden;
-        }
+        /* .show-when-target {
+                                                                                                    visibility: hidden;
+                                                                                                }
 
-        .show-when-target:target {
-            visibility: visible;
-        }
+                                                                                                .show-when-target:target {
+                                                                                                    visibility: visible;
+                                                                                                }
 
-        .show-when-target:target {
-            position: absolute;
-            max-width: 94%;
-            line-height: 2em;
-            font-size: 1em;
-            font-weight: bold;
-            /* color: #FFF; */
-            border-radius: .4em;
-            background: rgba(0, 0, 0, .5);
-        }
+                                                                                                .show-when-target:target {
+                                                                                                    position: absolute;
+                                                                                                    max-width: 94%;
+                                                                                                    line-height: 2em;
+                                                                                                    font-size: 1em;
+                                                                                                    font-weight: bold;
+                                                                                                    /* color: #FFF; */
+        /* border-radius: .4em;
+                                                                                                    background: rgba(0, 0, 0, .5);
+                                                                                                }
 
-        .show-when-target {
-            cursor: pointer
-        }
+                                                                                                .show-when-target {
+                                                                                                    cursor: pointer
+                                                                                                }
 
-        .show-when-target {
-            display: inline-block;
-            max-width: 94%;
-            line-height: 2em;
-            font-size: 1em;
-            font-weight: bold;
+                                                                                                .show-when-target {
+                                                                                                    display: inline-block;
+                                                                                                    max-width: 94%;
+                                                                                                    line-height: 2em;
+                                                                                                    font-size: 1em;
+                                                                                                    font-weight: bold;
 
-            margin: auto;
-            color: #FFF;
-            border-radius: .4em;
-            -webkit-box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
-            box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
-            text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
-            background: #749A02;
-        }
+                                                                                                    margin: auto;
+                                                                                                    color: #FFF;
+                                                                                                    border-radius: .4em;
+                                                                                                    -webkit-box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
+                                                                                                    box-shadow: hsl(75, 80%, 15%) 0 .38em .08em;
+                                                                                                    text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+                                                                                                    background: #749A02;
+                                                                                                } */
 
         .images-preview-div img {
             padding: 0px;
@@ -135,8 +136,6 @@
                     <div class="pageLoader" id="pageLoader"></div>
                     @include('partials.alert')
 
-                    <div class="feedback"></div>
-
                     <form action="{{ route('savecar') }}" method="POST" enctype="multipart/form-data"
                         id="vehicleAdditionForm">
                         {{ csrf_field() }}
@@ -148,8 +147,6 @@
                                 <label for="">Enter listing title</label>
                                 <input class="form-control form-control-sm" type="text" name="title" required>
                             </div>
-
-                            <input type="hidden" name="str_id" id="str_id" value="{{ $str_id }}">
 
                             <div class="col-md-6 form-group">
                                 <label for="">Country</label>
@@ -226,32 +223,10 @@
                                 <input class="form-control form-control-sm" type="number" id="miles" name="miles"
                                     placeholder="mileage (Kms)" required>
                             </div>
-                            <div class="col-md-4 form-group">
+                            <div class=" col-md-4 form-group">
                                 <label for="">Engine CC</label>
                                 <input class="form-control form-control-sm" type="number" id="enginecc"
                                     name="enginecc" placeholder="Engine CC" required>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label>Vehicle Type</label>
-                                <select id="vehicle_type" name="vehicle_type" class="form-control form-control-sm" tabindex="14" required>
-                                    <option value="-1" selected="selected">Vehicle Type</option>
-                                    <option value="Convertibles">Convertibles</option>
-                                    <option value="Hatchbacks">Hatchbacks</option>
-                                    <option value="SUVs">SUVs</option>
-                                    <option value="Saloon Car">Saloon Car</option>
-                                    <option value="Station Wagons">Station Wagons</option>
-                                    <option value="Pickup Trucks">Pickup Trucks</option>
-                                    <option value="Buses, Taxis and Vans">Buses, Taxis and Vans</option>
-                                    <option value="Motorbikes">Motorbikes</option>
-                                    <option value="Trucks">Trucks</option>
-                                    <option value="Machinery and Tractors">Machinery and Tractors</option>
-                                    <option value="Trailers">Trailers</option>
-                                    <option value="Minis">Minis</option>
-                                    <option value="Coupes">Coupes</option>
-                                    <option value="Quad Bikes">Quad Bikes</option>
-                                    <option value="Other">Other</option>
-                                </select>
                             </div>
 
                             <div class="col-md-4 form-group">
@@ -502,11 +477,10 @@
                             </div>
 
                             <div class="col-md-12">
-                                <div class="mt-1 mb-2">
+                                <div class="mt-1">
                                     <div class="images-preview-div" style="margin:1%"> </div>
                                 </div>
                             </div>
-                            <div id="output"></div>
 
                         </div>
 
@@ -549,7 +523,7 @@
                             </div>
                         </div>
 
-                        <button style="background: #00472F;color:white;" type="submit" id="vehicleSubmit"
+                        <button style="background: #00472F;color:white;" type="submit"
                             class="btn btn-primary btn-block mb-4">Submit</button>
                     </form>
                 </div>
@@ -568,8 +542,6 @@
     </div>
 
 @section('footer_scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.1.1/compressor.min.js"></script>
-
     <script>
         $(document).ready(function() {
             $('#car_make').on('change', function() {
@@ -595,8 +567,70 @@
                         });
                     }
                 });
-            });
+            })
 
+            /** compress cover photo*/
+            var input = document.getElementById('fileupload1');
+            input.addEventListener('change', function() {
+                let $this = $(this);
+
+                var file = input.files[0];
+                console.log(file);
+
+                var reader = new FileReader();
+
+                reader.onload = function() {
+                    var img = new Image();
+                    img.onload = function() {
+                        var width = 800;
+                        var height = 600;
+                        var canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+                        canvas.toBlob(function(blob) {
+                            var compressedFile = new File([blob], file.name, {
+                                type: file.type
+                            });
+                            input.files[0] = compressedFile;
+                        }, file.type, 0.5);
+                    };
+                    img.src = reader.result;
+                };
+                reader.readAsDataURL(file);
+            });
+            /* end compress cover photo*/
+
+            // function compressMultipleImages() {
+            //     var multiInput = document.getElementById('multiImagesUpload');
+            //     let files = multiInput.files;
+            //     let croppedImages = [];
+            //     for (let i = 0; i < files.length; i++) {
+            //         const element = files[i];
+            //         console.log(element);
+            //         let reader2 = new FileReader();
+            //         reader2.onload = function() {
+            //             var image = new Image();
+            //             image.onload = function() {
+            //                 var width = 600;
+            //                 var height = 450;
+            //                 var canvas1 = document.createElement('canvas');
+            //                 canvas1.width = width;
+            //                 canvas1.height = height;
+            //                 canvas1.getContext('2d').drawImage(img, 0, 0, width, height);
+            //                 canvas1.toBlob(function(blob) {
+            //                     var compressedFile = new File([blob], file[i].name, {
+            //                         type: file[i].type
+            //                     });
+            //                     console.log(compressedFile);
+            //                     console.log("compressedFile");
+            //                     croppedImages.push(compressedFile)
+            //                 }, file[i].type, 0.5);
+            //             };
+            //             img.src = reader.result;
+            //         }
+            //     }
+            // }
 
             var previewImages = function(input, imgPreviewPlaceholder) {
                 if (input.files) {
@@ -615,7 +649,7 @@
                             const img = document.createElement('img');
                             img.setAttribute('src', event.target.result);
                             img.style.width = '400px';
-                            img.style.height = '200px';
+                            img.style.height = '250px';
                             const deleter = document.createElement('span');
                             deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
                             deleter.style.cssText =
@@ -633,80 +667,64 @@
                 }
             };
 
+            // 10259760
+            // 7524332
+
+            $('#multiImagesUpload').change(function() {
+                var croppedImages = [];
+
+                var files = $(this).prop('files');
+                for (var i = 0; i < files.length; i++) {
+                    console.log(files[i]);
+                    var image = new Image();
+                    image.src = URL.createObjectURL(files[i]);
+                    image.onload = function() {
+                        var canvas = document.createElement('canvas');
+                        canvas.width = 600;
+                        canvas.height = 450;
+                        var context = canvas.getContext('2d');
+                        context.drawImage(this, 0, 0);
+                        var croppedImageData = canvas.toDataURL('image/jpeg');
+                        console.log(croppedImageData);
+                        croppedImages.push(croppedImageData);
+                        localStorage.setItem('croppedImages', JSON.stringify(croppedImages));
+                    };
+                    document.body.appendChild(image);
+                }
+                document.querySelector('.removedImgs').value = ''
+                previewImages(this, 'div.images-preview-div');
+            });
+
+            $('#vehicleAdditionForm').on('submit',function() {
+                var croppedImages = JSON.parse(localStorage.getItem('croppedImages'));
+
+                var files = [];
+                for (var i = 0; i < croppedImages.length; i++) {
+                    var blob = dataURItoBlob(croppedImages[i]);
+                    var file = new File([blob], 'image' + i + '.jpg', {
+                        type: 'image/jpeg'
+                    });
+                    files.push(file);
+                }
+                $('#multiImagesUpload').prop('files', files);
+            });
+
+            function dataURItoBlob(dataURI) {
+                var byteString = atob(dataURI.split(',')[1]);
+                var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+                var ab = new ArrayBuffer(byteString.length);
+                var ia = new Uint8Array(ab);
+                for (var i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+                return new Blob([ab], {
+                    type: mimeString
+                });
+            }
+
             $('#fileupload1').on('change', function() {
                 document.querySelector('.removedImgs1').value = ''
                 previewImages(this, 'div.images-preview-div1');
-            });
-
-            const str_id = $('#str_id').val(),
-                token = $("input[name='_token']").val();
-
-            /** compress cover photo*/
-            var input = document.getElementById('fileupload1');
-            input.addEventListener('change', function() {
-                let $this = $(this);
-                localStorage.removeItem('cover_photo');
-                var file = input.files[0];
-                var reader = new FileReader();
-                reader.onload = function() {
-                    var img = new Image();
-                    img.onload = function() {
-                        var width = 800;
-                        var height = 600;
-                        var canvas = document.createElement('canvas');
-                        canvas.width = width;
-                        canvas.height = height;
-                        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-                        var compressedFile = canvas.toDataURL("image/jpeg", 0.8);
-                        $.post('/application-images', {
-                            _token: token,
-                            str_id: str_id,
-                            image: compressedFile
-                        }).done(function(params) {
-                            console.log(params);
-                        }).fail(function(error) {
-                            console.log(error);
-                        });
-                    };
-                    img.src = reader.result;
-                };
-                reader.readAsDataURL(file);
-            });
-
-            var compressedImages = [];
-
-            $("#multiImagesUpload").on("change", function(e) {
-                var files = e.target.files;
-                previewImages(document.getElementById('multiImagesUpload'), 'div.images-preview-div')
-                localStorage.removeItem('compressedImages');
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        var img = new Image();
-                        img.src = e.target.result;
-                        img.onload = function() {
-                            var canvas = document.createElement("canvas");
-                            var ctx = canvas.getContext("2d");
-                            canvas.width = 600;
-                            canvas.height = 450;
-                            let leet = 'image_' + i;
-                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                            var compressedDataUrl = canvas.toDataURL("image/jpeg", 0.5);
-
-                            $.post('/application-images', {
-                                _token: token,
-                                str_id: str_id,
-                                image: compressedDataUrl
-                            }).done(function(params) {
-                                console.log(params);
-                            }).fail(function(error) {
-                                console.log(error);
-                            });
-                        };
-                    };
-                    reader.readAsDataURL(file);
-                }
             });
 
             const removeImage = (input, imgPreviewPlaceholder, index) => {
@@ -720,39 +738,27 @@
             $('#vehicleAdditionForm').on('submit', function(event) {
                 event.preventDefault();
                 let $this = $(this);
-                $this.find("#vehicleSubmit").prop({
-                            disabled: true
-                        });
                 var DformData = new FormData();
                 let title = $("input[name='title']").val(),
-                    country = $("#country").val(),
-                    county = $("#county").val(),
-                    make = $("#car_make").val(),
-                    model = $("#car_model").val(),
-                    year = $("#year").val(),
-                    price = $("#price").val(),
-                    miles = $("#miles").val(),
-                    enginecc = $("#enginecc").val(),
-                    exterior = $("#exterior").val(),
-                    interior = $("#interior").val(),
-                    usage = $("#usage").val(),
-                    fuel_type = $("#fuel_type").val(),
-                    transmission = $("#transmission").val(),
-                    description = $("#description").val(),
-                    firstname = $("#firstname").val(),
-                    lastname = $("#gt-lastname").val(),
-                    email = $("#email").val(),
-                    phone = $("#phone").val(),
-                    features = $("input[name='features[]']").serializeArray(),
-                    vehicle_type = $('#vehicle_type').val(),
-                    featuresf = [];
+                    country = $("input[name='country']").val(),
+                    county = $("input[name='county']").val(),
+                    make = $("input[name='make']").val(),
+                    model = $("input[name='model']").val(),
+                    year = $("input[name='year']").val(),
+                    price = $("input[name='price']").val(),
+                    miles = $("input[name='miles']").val(),
+                    enginecc = $("input[name='enginecc']").val(),
+                    exterior = $("input[name='exterior']").val(),
+                    interior = $("input[name='interior']").val(),
+                    usage = $("input[name='usage']").val(),
+                    fuel_type = $("input[name='fuel_type']").val(),
+                    transmission = $("input[name='transmission']").val(),
+                    description = $("input[name='description']").val(),
+                    firstname = $("input[name='firstname']").val(),
+                    lastname = $("input[name='lastname']").val(),
+                    email = $("input[name='email']").val(),
+                    phone = $("input[name='phone']").val();
 
-                $.each(features, (key, value) => {
-                    featuresf.push(value.value)
-                });
-
-                DformData.append('str_id', str_id);
-                DformData.append('features', featuresf);
                 DformData.append('title', title);
                 DformData.append('country', country);
                 DformData.append('county', county);
@@ -761,7 +767,6 @@
                 DformData.append('year', year);
                 DformData.append('price', price);
                 DformData.append('miles', miles);
-                DformData.append('vehicle_type', vehicle_type);
                 DformData.append('enginecc', enginecc);
                 DformData.append('exterior', exterior);
                 DformData.append('interior', interior);
@@ -774,52 +779,78 @@
                 DformData.append('email', email);
                 DformData.append('phone', phone);
 
+                var input = document.getElementById('fileupload1');
+                var file = input.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function() {
+                    var img = new Image();
+                    img.onload = function() {
+                        var width = 800;
+                        var height = 600;
+                        var canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+                        canvas.toBlob(function(blob) {
+                            var compressedFile = new File([blob], file.name, {
+                                type: file.type
+                            });
+                            DformData.append('cover_photo', compressedFile);
+                            // input.files[0] = compressedFile;
+                        }, file.type, 0.5);
+                    };
+                    img.src = reader.result;
+                };
+                reader.readAsDataURL(file);
+
+                var multiInput = document.getElementById('multiImagesUpload');
+                let files = multiInput.files;
+                let croppedImages = [];
+                for (let i = 0; i < files.length; i++) {
+                    const element = files[i];
+                    let reader2 = new FileReader();
+                    reader2.onload = function() {
+                        var image = new Image();
+                        image.onload = function() {
+                            var width = 600;
+                            var height = 450;
+                            var canvas1 = document.createElement('canvas');
+                            canvas1.width = width;
+                            canvas1.height = height;
+                            canvas1.getContext('2d').drawImage(img, 0, 0, width, height);
+                            canvas1.toBlob(function(blob) {
+                                var compressedFile = new File([blob], file.name, {
+                                    type: file.type
+                                });
+                                croppedImages.push(compressedFile)
+                            }, file.type, 0.5);
+                        };
+                        img.src = reader.result;
+                    }
+                }
+                console.log();
+                DformData.append('images', croppedImages);
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $this.find("input[name='_token']").val(),
                     }
                 });
                 $.ajax({
-                    url: '/application',
+                    url: '/SellYourCar',
                     type: 'POST',
                     data: DformData,
                     processData: false,
                     contentType: false,
+                    // headers: {
+                    //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    // },
                     success: function(response) {
                         console.log(response);
-                        var result = JSON.parse(response);
-                        if (result.status === "success") {
-                            // removeImage(document.getElementById('fileupload1'), 'div.images-preview-div1', i);
-                            // removeImage(document.getElementById('multiImagesUpload'), 'div.images-preview-div', i);
-                            $this.trigger('reset');
-                            $(".feedback").html(
-                                "<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Success!       </strong>" +
-                                result.message + "!</div>");
-                        } else if (result.status === "error") {
-                            $(".feedback").html(
-                                "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>Error occured during processing!</div>"
-                            );
-                        }
-                        $this.find("#vehicleSubmit").prop({
-                            disabled: false
-                        });
                     },
-                    error: function(error) {
+                    error: function(xhr, status, error) {
                         console.log(error);
-                        if (error.status == 422) {
-                            var p = "";
-                            $.each(error.responseJSON.errors, function(key, value) {
-                                p += value + "!";
-                            });
-                        } else {
-                            p += "Error occured during processing!";
-                        }
-                        $(".feedback").html(
-                            "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>" +
-                            p + "</div>");
-                        $("#vehicleSubmit").prop({
-                            disabled: false
-                        });
                     }
                 });
             });
@@ -827,4 +858,6 @@
         });
     </script>
 @endsection
+
+
 @endsection

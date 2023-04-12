@@ -26,7 +26,7 @@
     <!-- Custom stylesheet -->
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/sidebar.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/style.css') }}">
-    <link rel="stylesheet" type="text/css" id="style_sheet" href="{{ url('assets/css/skins/#CBBC27.css') }}">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="{{ url('assets/css/skins/yellow.css') }}">
 
     <!-- Favicon icon -->
     <link rel="shortcut icon" href="{{ url('assets/img/favicon.ico') }}" type="image/x-icon">
@@ -647,11 +647,128 @@
             <h1 style="color: black !important;padding:7%;font-size:250%">TOP PICKS</h1>
         </div>
     </div> --}}
-    <div class="featured-car content-area">
 
+    {{-- <div class="featured-car content-area-21" >
         <div class="container">
             <!-- Main title -->
+            <div class="section-header d-flex">
+                <h2 data-title="Types of car"> New Cars</h2>
+            </div>
+            <div class="row">
+                @foreach ($vehicles as $item)
+                    @php
+                        $images = json_decode($item->images, true);
+                    @endphp
+                    <div class="col-lg-4 col-md-6">
+                        <div class="car-box-3">
+                            <div class="car-thumbnail">
+                                <a href="car-details.html" class="car-img">
+                                    <div class="for">{{ $item->title }}</div>
+                                    <div class="price-box">
+                                        <span class="del"><del>$950.00</del></span>
+                                    <br>
+                                        <span>Ksh: {{ $item->price }}</span>
+                                    </div>
+                                    @if (!empty($images))
+                                        <img class="d-block w-100" src="{{ asset('images/'. $images[0]) }}"
+                                        alt="car">                                        
+                                    @endif
+                                </a>
 
+                                <div class="carbox-overlap-wrapper">
+                                    <div class="overlap-box">
+                                        <div class="overlap-btns-area">
+                                            <a class="overlap-btn" data-bs-toggle="modal"
+                                                data-bs-target="#carOverviewModal" data-id="{{ $item->id }}" id="vehiclePreview">
+                                                <i class="fa fa-eye-slash"></i>
+                                            </a>
+                                            <a class="overlap-btn wishlist-btn">
+                                                <i class="fa fa-heart-o"></i>
+                                            </a>
+                                            <a class="overlap-btn compare-btn">
+                                                <i class="fa fa-balance-scale"></i>
+                                            </a>
+                                            <div class="car-magnify-gallery">
+
+                                                @if (!empty($images))
+                                                    <a href="img/car/car-1.jpg" class="overlap-btn"
+                                                    data-sub-html="<h4>Lamborghini</h4><p>{{ $item->description }}</p>">
+                                                    <i class="fa fa-expand"></i>
+                                                    <img class="hidden" src="{{ asset('images/' . $images[0]) }}"
+                                                        alt="hidden-img">
+                                                </a>
+                                                @foreach ($images as $image)
+                                                    <a href="img/car/car-2.jpg" class="hidden"
+                                                        data-sub-html="<h4>{{ $item->description }}</p>">
+                                                        <img class="hidden" src="{{ asset('images/' . $image) }}"
+                                                            alt="hidden-img">
+                                                    </a>
+                                                    </a>
+                                                @endforeach
+                                                @else
+                                                    
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <h1 class="title">
+                                    <a href="{{ route('details', $item->id) }}"></a>
+                                </h1>
+                                <ul class="custom-list">
+                                    <li>
+                                        <a href="#">{{ $item->title }}</a> /
+                                    </li>
+                                    <li>
+                                        <a href="#">{{ $item->transmission }}</a> /
+                                    </li>
+                                    <li>
+                                        <a href="#">{{ $item->vehicle_type }}</a>
+                                    </li>
+                                </ul>
+                                
+                                <ul class="facilities-list clearfix">
+                                    <li>
+                                        <i class="flaticon-fuel"></i> {{ $item->fuel_type }}
+                                    </li>
+                                    <li>
+                                        <i class="flaticon-way"></i> {{ $item->miles }}
+                                    </li>
+                                    <li>
+                                        <i class="flaticon-manual-transmission"></i> {{ $item->transmission }}
+                                    </li>
+                                    <li>
+                                        <i class="flaticon-car"></i> {{ $item->vehicle_type }}
+                                    </li>
+                                    <li>
+                                        <i class="flaticon-gear"></i> {{ $item->color }}
+                                    </li>
+                                    <li>
+                                        <i class="flaticon-calendar-1"></i> {{ $item->year }}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="footer clearfix">
+                                {{-- <div class="pull-left ratings">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <span>(65 Reviews)</span>
+                            </div> 
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div> --}}
+
+    <div class="featured-car content-area" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+        <div class="container">
             <div class="featured-slider row slide-box-btn slider ">
                 @foreach ($vehicles as $item)
                     @php
@@ -662,12 +779,12 @@
                             <a href="{{ route('details', $item->id) }}">
                                 <div class="car-image">
                                     @if (count($images) > 0)
-                                        <img src="{{ asset('images/'.$images[0]) }}"
-                                            width="100%" height="280px">
+                                        <img src="{{ asset('images/' . $images[0]) }}" width="100%"
+                                            height="280px">
                                     @else
                                         <img src="#" alt="car-photo" width="100%" height="250px">
                                     @endif
-                                    <div class="tag">Best Deal</div>
+                                    <div class="tag">{{ $item->title }}</div>
                                 </div>
                             </a>
                             <div class="detail">
@@ -762,83 +879,8 @@
     <div class="car-model-2">
         <div class="modal fade" id="carOverviewModal" tabindex="-1" role="dialog"
             aria-labelledby="carOverviewModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="modal-title" id="carOverviewModalLabel">
-                            <h4>Find Your Dream Car</h4>
-                            <h5><i class="flaticon-pin"></i> 123 Kathal St. Tampa City,</h5>
-                        </div>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row modal-raw">
-                            <div class="col-lg-6 modal-left">
-                                <div class="item active">
-                                    <img src="{{ url('assets/img/car-11.jpg') }}" alt="best-car" class="img-fluid">
-                                    <div class="sobuz">
-                                        <div class="price-box">
-                                            <span class="del"><del>$950.00</del></span>
-                                            <br>
-                                            <span class="del-2">$1050.00</span>
-                                        </div>
-                                        <div class="ratings-2">
-                                            <span class="ratings-box">4.5/5</span>
-                                            <i class="fa fa-star text-success"></i>
-                                            <i class="fa fa-star text-success"></i>
-                                            <i class="fa fa-star text-success"></i>
-                                            <i class="fa fa-star text-success"></i>
-                                            <i class="fa fa-star-o text-success"></i>
-                                            ( 7 Reviews )
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 modal-right">
-                                <div class="modal-right-content">
-                                    <section>
-                                        <h3>Features</h3>
-                                        <div class="features">
-                                            <ul class="bullets">
-                                                <li>Cruise Control</li>
-                                                <li>Airbags</li>
-                                                <li>Air Conditioning</li>
-                                                <li>Alarm System</li>
-                                                <li>Audio Interface</li>
-                                                <li>CDR Audio</li>
-                                                <li>Seat Heating</li>
-                                                <li>ParkAssist</li>
-                                            </ul>
-                                        </div>
-                                    </section>
-                                    <section>
-                                        <h3>Overview</h3>
-                                        <ul class="bullets">
-                                            <li>Model</li>
-                                            <li>Year</li>
-                                            <li>Condition</li>
-                                            <li>Price</li>
-                                            <li>Audi</li>
-                                            <li>2020</li>
-                                            <li>Brand New</li>
-                                            <li>$178,000</li>
-                                        </ul>
-                                    </section>
-                                    <div class="description">
-                                        <h3>Description</h3>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard.</p>
-                                        <a href="{{ route('details', 1) }}"
-                                            class="btn btn-md btn-round btn-theme">Show
-                                            Detail</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="modal-dialog modal-lg" role="document" id="vehiclePreviewModel">
+
             </div>
         </div>
     </div>
@@ -897,7 +939,23 @@
                         });
                     }
                 });
-            })
+            });
+
+            // $('body').on('click', '#vehiclePreview', function() {
+            //     let vehicle_id = $(this).data('id');
+            //     // console.log(vehicle_id);
+            //     $.getJSON('vehicle/'+vehicle_id).done(function(vehicle) {
+            //         console.log(vehicle);
+            //         var features = "";
+
+            //         $.each(vehicle.features, function(key, value) {
+            //             features += "<li>"+value+"</li>"
+            //         });
+
+            //         let content = "<div class=\"modal-content\"><div class=\"modal-header\"><div class=\"modal-title\" id=\"carOverviewModalLabel\"><h4>Find Your Vehicle</h4><h5><i class=\"flaticon-pin\"></i> 123 Kathal St. Tampa City,</h5></div><button type=\"button\" class=\"close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button></div><div class=\"modal-body\"><div class=\"row modal-raw\"><div class=\"col-lg-6 modal-left\"><div class=\"item active\"><img src=\"{{ url('assets/img/car-11.jpg') }}\" alt=\"best-car\" class=\"img-fluid\"><div class=\"sobuz\"><div class=\"price-box\"><span class=\"del-2\">"+vehicle.price+"</span></div><div class=\"ratings-2\"><span class=\"ratings-box\">4.5/5</span><i class=\"fa fa-star text-success\"></i><i class=\"fa fa-star text-success\"></i><i class=\"fa fa-star text-success\"></i><i class=\"fa fa-star text-success\"></i><i class=\"fa fa-star-o text-success\"></i></div></div></div></div><div class=\"col-lg-6 modal-right\"><div class=\"modal-right-content\"><section><h3>Features</h3><div class=\"features\"><ul class=\"bullets\">"+features+"</ul></div></section><section><h3>Overview</h3><ul class="bullets"><li>"+vehicle.model+"</li><li>"+vehicle.year+"</li><li>"+vehicle.title+"</li><li>"+vehicle.usage+"</li><li>"+vehicle.make+"</li><li>"+vehicle.year+"</li><li>"+vehicle.title+"</li><li>Ksh "+vehicle.price+"</li></ul></section><div class=\"description\"> <h3>Description</h3> <p>"+vehicle.description+"</p> <a href=\"Available/Details+vehicle"+vehicle.id+"\" class=\"btn btn-md btn-round btn-theme\">Show Detail</a></div></div></div></div></div></div>"
+            //         $('#vehiclePreviewModel').html(content);
+            //     });
+            // });
         });
     </script>
 </body>

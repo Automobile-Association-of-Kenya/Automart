@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\dealersController;
@@ -24,7 +25,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
  });
 
-Route::get('/', 'App\Http\Controllers\Controller@index')->name('home');
+Route::get('/', [ApplicationController::class, 'welcome'])->name('home');
+
 Route::get('/landing',function(){
     return view('index');
 });
@@ -98,6 +100,11 @@ Route::controller(DealersController::class)->group(function(){
         Route::get('subscriptions','subscriptions')->name('dealer.subscriptions');
     });
 });
+
+Route::resource('application', ApplicationController::class);
+Route::post('application-images', [ApplicationController::class, 'handleImages']);
+
+Route::get('vehicle/{id}', [VehicleController::class, 'get']);
 
 
 

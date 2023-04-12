@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Passwords\PasswordBroker;
+use Illuminate\Support\Str;
 
 class DealersController extends Controller
 {
@@ -71,8 +72,8 @@ class DealersController extends Controller
     {
         $counties = County::all();
         $makes = CarMake::orderBy('car_make_name','ASC')->get();
-
-        return view('dealer.addcar',compact('makes','counties'));
+        $str_id = Str::random(8);
+        return view('dealer.addcar',compact('makes','counties','str_id'));
     }
     public function editcar($id)
     {

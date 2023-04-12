@@ -15,71 +15,74 @@ use Intervention\Image\Facades\Image;
 class SellController extends Controller
 {
 
-
     public function index()
     {
         $make = CarMake::all();
+        
         return view('sell', compact('make'));
     }
 
     public function store(Request $request)
     {
+        return $request;
+        // return $request->cover_photo;
+        // $this->validate($request, [
+        //     'title' => 'required',
+        //     'country'  => 'required',
+        //     'county' => 'required',
+        //     'make' => 'required',
+        //     'model' => 'required',
+        //     'year' => 'required',
+        //     'price' => 'required',
+        //     'miles' => 'required',
+        //     'enginecc' => 'required',
+        //     'exterior' => 'required',
+        //     'interior' => 'required',
+        //     'fuel_type' => 'required',
+        //     // 'features' => 'required',
+        //     'transmission' => 'required',
+        //     'usage' => 'required',
+        //     'description' => 'required',
+        //     'cover_photo' => 'max:2048',
+        //     'images' => 'required|max:10|min:1',
+        //     'images.*' => 'max:2048',
+        //     'firstname' => 'required',
+        //     'lastname' => 'required',
+        //     'email' => 'required',
+        //     'phone' => 'required'
+        // ]);
 
-        $this->validate($request, [
-            'title' => 'required',
-            'country'  => 'required',
-            'county' => 'required',
-            'make' => 'required',
-            'model' => 'required',
-            'year' => 'required',
-            'price' => 'required',
-            'miles' => 'required',
-            'enginecc' => 'required',
-            'exterior' => 'required',
-            'interior' => 'required',
-            'fuel_type' => 'required',
-            // 'features' => 'required',
-            'transmission' => 'required',
-             'usage' => 'required',
-            'description' => 'required',
-            'cover_photo' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'images' => 'required|max:10|min:1',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'required',
-            'phone' => 'required'
-        ]);
+
+        $cover_photo = '';
+        if ($request->hasFile('cover_photo')) {
+            $image = $request->cover_photo;
+            $name = 'cv'.auth()->id().strtotime(now()).'.jpg';
+            $img = Image::make($image);
+            // $img->resize(600, 450, function ($constraint) {
+            //     $constraint->aspectRatio();
+            //     $constraint->upsize();
+            // });
+            $img->save(public_path('images/' . $name));
+            $cover_photo += $name;
+        }
 
         if (count($request->images) > 10) {
             return redirect()->back()->with('errorMsg', 'Images must not be more than 10');
         }
 
-        if ($request->has('cover_photo')) {
-            $image = $request->cover_photo;
-            $size = filesize($image) / 1024;
-            $name = time() . $image->getClientOriginalName();
-            $img = Image::make($image);
-            $img->resize(600, 450, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            });
-            $img->save(public_path('images/' . $name));
-        }
-
+        $imagenames = [];
 
         if ($request->hasfile('images')) {
-
-            foreach ($request->file('images') as $image) {
-                $name = time() . $image->getClientOriginalName();
-                $size = filesize($image) / 1024;
-                $img = Image::make($image);
-                $img->resize(600, 450, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-                $img->save(public_path('images/' . $name));
-                $data[] = $name;
+            // return "hre";
+            foreach ($request->images as $key => $value) {
+                $fileName = 'img' .auth()->id(). strtotime(now()) . $key . '.jpg'; // or any other desired file name
+                $img = Image::make($value);
+                // $img->resize(600, 450, function ($constraint) {
+                //     $constraint->aspectRatio();
+                //     $constraint->upsize();
+                // });
+                $img->save(public_path('images/' . $fileName));
+                $imagenames[] = $fileName;
             }
         }
 
@@ -104,17 +107,16 @@ class SellController extends Controller
         $carOnSell['features'] = json_encode($request->input('features'));
         $carOnSell->transmission = $request->transmission;
         $carOnSell->description = $request->description;
-        $carOnSell->images = json_encode($data);
+        $carOnSell->images = json_encode($imagenames);
         $carOnSell->carId = $carID;
-        $carOnSell->cover_photo = $name;
+        $carOnSell->cover_photo = $cover_photo;
         $carOnSell->firstname = $request->firstname;
         $carOnSell->lastname = $request->lastname;
         $carOnSell->email = $request->email;
         $carOnSell->phone = $request->phone;
-        $carOnSell->carId = $carID;
-        $carOnSell->cover_photo = $name;
+        $carOnSell->cover_photo = $cover_photo;
         $carOnSell->save();
-        return redirect()->back()->with('success', "Vehicle added successfully");
+        return json_encode(['status'=>'success', 'message'=> 'Vehicle added successfully']);
     }
 
     public function formatPhone($phone)

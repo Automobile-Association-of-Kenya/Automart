@@ -135,8 +135,6 @@
                     <div class="pageLoader" id="pageLoader"></div>
                     @include('partials.alert')
 
-                    <div class="feedback"></div>
-
                     <form action="{{ route('savecar') }}" method="POST" enctype="multipart/form-data"
                         id="vehicleAdditionForm">
                         {{ csrf_field() }}
@@ -148,8 +146,6 @@
                                 <label for="">Enter listing title</label>
                                 <input class="form-control form-control-sm" type="text" name="title" required>
                             </div>
-
-                            <input type="hidden" name="str_id" id="str_id" value="{{ $str_id }}">
 
                             <div class="col-md-6 form-group">
                                 <label for="">Country</label>
@@ -226,32 +222,10 @@
                                 <input class="form-control form-control-sm" type="number" id="miles" name="miles"
                                     placeholder="mileage (Kms)" required>
                             </div>
-                            <div class="col-md-4 form-group">
+                            <div class=" col-md-4 form-group">
                                 <label for="">Engine CC</label>
                                 <input class="form-control form-control-sm" type="number" id="enginecc"
                                     name="enginecc" placeholder="Engine CC" required>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label>Vehicle Type</label>
-                                <select id="vehicle_type" name="vehicle_type" class="form-control form-control-sm" tabindex="14" required>
-                                    <option value="-1" selected="selected">Vehicle Type</option>
-                                    <option value="Convertibles">Convertibles</option>
-                                    <option value="Hatchbacks">Hatchbacks</option>
-                                    <option value="SUVs">SUVs</option>
-                                    <option value="Saloon Car">Saloon Car</option>
-                                    <option value="Station Wagons">Station Wagons</option>
-                                    <option value="Pickup Trucks">Pickup Trucks</option>
-                                    <option value="Buses, Taxis and Vans">Buses, Taxis and Vans</option>
-                                    <option value="Motorbikes">Motorbikes</option>
-                                    <option value="Trucks">Trucks</option>
-                                    <option value="Machinery and Tractors">Machinery and Tractors</option>
-                                    <option value="Trailers">Trailers</option>
-                                    <option value="Minis">Minis</option>
-                                    <option value="Coupes">Coupes</option>
-                                    <option value="Quad Bikes">Quad Bikes</option>
-                                    <option value="Other">Other</option>
-                                </select>
                             </div>
 
                             <div class="col-md-4 form-group">
@@ -549,7 +523,7 @@
                             </div>
                         </div>
 
-                        <button style="background: #00472F;color:white;" type="submit" id="vehicleSubmit"
+                        <button style="background: #00472F;color:white;" type="submit"
                             class="btn btn-primary btn-block mb-4">Submit</button>
                     </form>
                 </div>
@@ -572,259 +546,435 @@
 
     <script>
         $(document).ready(function() {
-            $('#car_make').on('change', function() {
-                var carmake_id = this.value;
-                $("#car_model").html('');
-                $.ajax({
-                    url: "{{ url('fetch/car-models') }}",
-                    type: "POST",
-                    data: {
-                        car_make_id: carmake_id,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    dataType: 'json',
-                    success: function(result) {
-                        $('#car_model').html(
-                            '<option value="">Select Car Model</option>');
-                        result.data.forEach(model => {
-                            document.querySelector('#car_model').innerHTML +=
-                                '<option value="' + model
-                                .id + '">' + model.name +
-                                '</option>';
+                    $('#car_make').on('change', function() {
+                        var carmake_id = this.value;
+                        $("#car_model").html('');
+                        $.ajax({
+                            url: "{{ url('fetch/car-models') }}",
+                            type: "POST",
+                            data: {
+                                car_make_id: carmake_id,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            dataType: 'json',
+                            success: function(result) {
+                                $('#car_model').html(
+                                    '<option value="">Select Car Model</option>');
+                                result.data.forEach(model => {
+                                    document.querySelector('#car_model').innerHTML +=
+                                        '<option value="' + model
+                                        .id + '">' + model.name +
+                                        '</option>';
 
+                                });
+                            }
                         });
-                    }
-                });
-            });
+                    });
 
 
-            var previewImages = function(input, imgPreviewPlaceholder) {
-                if (input.files) {
-                    var noFiles = input.files.length;
-                    for (let i = 0; i < noFiles; i++) {
-                        // if (input.files[i].size > 5000000) {
-                        //     alert(input.files[i].name + ' is greater than 5mb');
-                        //     input.value = ''
-                        //     break;
-                        // }
+                    var previewImages = function(input, imgPreviewPlaceholder) {
+                        if (input.files) {
+                            var noFiles = input.files.length;
+                            for (let i = 0; i < noFiles; i++) {
+                                // if (input.files[i].size > 5000000) {
+                                //     alert(input.files[i].name + ' is greater than 5mb');
+                                //     input.value = ''
+                                //     break;
+                                // }
+                                var reader = new FileReader();
+                                reader.onload = function(event) {
+                                    const div = document.createElement('span');
+                                    div.classList.add('img_' + i)
+                                    div.style.cssText = 'position:relative'
+                                    const img = document.createElement('img');
+                                    img.setAttribute('src', event.target.result);
+                                    img.style.width = '400px';
+                                    img.style.height = '200px';
+                                    const deleter = document.createElement('span');
+                                    deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
+                                    deleter.style.cssText =
+                                        'cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
+                                    deleter.addEventListener('click', e => {
+                                        removeImage(input, imgPreviewPlaceholder, i);
+                                    })
+                                    div.appendChild(img);
+                                    div.appendChild(deleter);
+                                    document.querySelector(imgPreviewPlaceholder).appendChild(div)
+
+                                }
+                                reader.readAsDataURL(input.files[i]);
+                            }
+                        }
+                    };
+
+                    $('#fileupload1').on('change', function() {
+                        document.querySelector('.removedImgs1').value = ''
+                        previewImages(this, 'div.images-preview-div1');
+                    });
+
+                    /** compress cover photo*/
+                    var input = document.getElementById('fileupload1');
+                    input.addEventListener('change', function() {
+                        let $this = $(this);
+
+                        var file = input.files[0];
+                        console.log(file);
+
                         var reader = new FileReader();
-                        reader.onload = function(event) {
-                            const div = document.createElement('span');
-                            div.classList.add('img_' + i)
-                            div.style.cssText = 'position:relative'
-                            const img = document.createElement('img');
-                            img.setAttribute('src', event.target.result);
-                            img.style.width = '400px';
-                            img.style.height = '200px';
-                            const deleter = document.createElement('span');
-                            deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
-                            deleter.style.cssText =
-                                'cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
-                            deleter.addEventListener('click', e => {
-                                removeImage(input, imgPreviewPlaceholder, i);
-                            })
-                            div.appendChild(img);
-                            div.appendChild(deleter);
-                            document.querySelector(imgPreviewPlaceholder).appendChild(div)
 
-                        }
-                        reader.readAsDataURL(input.files[i]);
-                    }
-                }
-            };
-
-            $('#fileupload1').on('change', function() {
-                document.querySelector('.removedImgs1').value = ''
-                previewImages(this, 'div.images-preview-div1');
-            });
-
-            const str_id = $('#str_id').val(),
-                token = $("input[name='_token']").val();
-
-            /** compress cover photo*/
-            var input = document.getElementById('fileupload1');
-            input.addEventListener('change', function() {
-                let $this = $(this);
-                localStorage.removeItem('cover_photo');
-                var file = input.files[0];
-                var reader = new FileReader();
-                reader.onload = function() {
-                    var img = new Image();
-                    img.onload = function() {
-                        var width = 800;
-                        var height = 600;
-                        var canvas = document.createElement('canvas');
-                        canvas.width = width;
-                        canvas.height = height;
-                        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-                        var compressedFile = canvas.toDataURL("image/jpeg", 0.8);
-                        $.post('/application-images', {
-                            _token: token,
-                            str_id: str_id,
-                            image: compressedFile
-                        }).done(function(params) {
-                            console.log(params);
-                        }).fail(function(error) {
-                            console.log(error);
-                        });
-                    };
-                    img.src = reader.result;
-                };
-                reader.readAsDataURL(file);
-            });
-
-            var compressedImages = [];
-
-            $("#multiImagesUpload").on("change", function(e) {
-                var files = e.target.files;
-                previewImages(document.getElementById('multiImagesUpload'), 'div.images-preview-div')
-                localStorage.removeItem('compressedImages');
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        var img = new Image();
-                        img.src = e.target.result;
-                        img.onload = function() {
-                            var canvas = document.createElement("canvas");
-                            var ctx = canvas.getContext("2d");
-                            canvas.width = 600;
-                            canvas.height = 450;
-                            let leet = 'image_' + i;
-                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                            var compressedDataUrl = canvas.toDataURL("image/jpeg", 0.5);
-
-                            $.post('/application-images', {
-                                _token: token,
-                                str_id: str_id,
-                                image: compressedDataUrl
-                            }).done(function(params) {
-                                console.log(params);
-                            }).fail(function(error) {
-                                console.log(error);
-                            });
+                        reader.onload = function() {
+                            var img = new Image();
+                            img.onload = function() {
+                                var width = 800;
+                                var height = 600;
+                                var canvas = document.createElement('canvas');
+                                canvas.width = width;
+                                canvas.height = height;
+                                canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+                                canvas.toBlob(function(blob) {
+                                    var compressedFile = new File([blob], file.name, {
+                                        type: file.type
+                                    });
+                                    // localStorage.setItem('cover_photo', JSON.stringify(
+                                    //     compressedFile));
+                                    // input.files[0] = compressedFile;
+                                }, file.type, 0.5);
+                            };
+                            img.src = reader.result;
                         };
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
+                        reader.readAsDataURL(file);
+                    });
+                    
+                    // /* end compress cover photo*/
+                    // const removeImage = (input, imgPreviewPlaceholder, index) => {
+                    //     let removedImages = document.querySelector('.removedImgs').value;
+                    //     removedImages = removedImages += index + ',';
+                    //     document.querySelector('.removedImgs').value = removedImages
+                    //     const el = document.querySelector('.img_' + index);
+                    //     el.parentElement.removeChild(el)
+                    // }
 
-            const removeImage = (input, imgPreviewPlaceholder, index) => {
-                let removedImages = document.querySelector('.removedImgs').value;
-                removedImages = removedImages += index + ',';
-                document.querySelector('.removedImgs').value = removedImages
-                const el = document.querySelector('.img_' + index);
-                el.parentElement.removeChild(el)
-            }
 
-            $('#vehicleAdditionForm').on('submit', function(event) {
-                event.preventDefault();
-                let $this = $(this);
-                $this.find("#vehicleSubmit").prop({
-                            disabled: true
-                        });
-                var DformData = new FormData();
-                let title = $("input[name='title']").val(),
-                    country = $("#country").val(),
-                    county = $("#county").val(),
-                    make = $("#car_make").val(),
-                    model = $("#car_model").val(),
-                    year = $("#year").val(),
-                    price = $("#price").val(),
-                    miles = $("#miles").val(),
-                    enginecc = $("#enginecc").val(),
-                    exterior = $("#exterior").val(),
-                    interior = $("#interior").val(),
-                    usage = $("#usage").val(),
-                    fuel_type = $("#fuel_type").val(),
-                    transmission = $("#transmission").val(),
-                    description = $("#description").val(),
-                    firstname = $("#firstname").val(),
-                    lastname = $("#gt-lastname").val(),
-                    email = $("#email").val(),
-                    phone = $("#phone").val(),
-                    features = $("input[name='features[]']").serializeArray(),
-                    vehicle_type = $('#vehicle_type').val(),
-                    featuresf = [];
 
-                $.each(features, (key, value) => {
-                    featuresf.push(value.value)
-                });
 
-                DformData.append('str_id', str_id);
-                DformData.append('features', featuresf);
-                DformData.append('title', title);
-                DformData.append('country', country);
-                DformData.append('county', county);
-                DformData.append('make', make);
-                DformData.append('model', model);
-                DformData.append('year', year);
-                DformData.append('price', price);
-                DformData.append('miles', miles);
-                DformData.append('vehicle_type', vehicle_type);
-                DformData.append('enginecc', enginecc);
-                DformData.append('exterior', exterior);
-                DformData.append('interior', interior);
-                DformData.append('usage', usage);
-                DformData.append('fuel_type', fuel_type);
-                DformData.append('transmission', transmission);
-                DformData.append('description', description);
-                DformData.append('firstname', firstname);
-                DformData.append('lastname', lastname)
-                DformData.append('email', email);
-                DformData.append('phone', phone);
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $this.find("input[name='_token']").val(),
-                    }
-                });
-                $.ajax({
-                    url: '/application',
-                    type: 'POST',
-                    data: DformData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        console.log(response);
-                        var result = JSON.parse(response);
-                        if (result.status === "success") {
-                            // removeImage(document.getElementById('fileupload1'), 'div.images-preview-div1', i);
-                            // removeImage(document.getElementById('multiImagesUpload'), 'div.images-preview-div', i);
-                            $this.trigger('reset');
-                            $(".feedback").html(
-                                "<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Success!       </strong>" +
-                                result.message + "!</div>");
-                        } else if (result.status === "error") {
-                            $(".feedback").html(
-                                "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>Error occured during processing!</div>"
-                            );
+                    // $('#vehicleAdditionForm').on('submit', function(event) {
+                    //     console.log('submitted');
+                    //     var croppedImages = JSON.parse(localStorage.getItem('croppedImages'));
+                    //     let coverph = JSON.parse(localStorage.getItem('cover_photo'));
+                    //     // console.log(coverph);
+                    //     // console.log(croppedImages);
+                    //     var files = [];
+                    //     for (var i = 0; i < croppedImages.length; i++) {
+                    //         console.log(typeof(croppedImages[i]));
+                    //         var blob = dataURItoBlob(croppedImages[i]);
+                    //         var file = new File([blob], 'image' + i + '.jpg', {
+                    //             type: 'image/jpeg'
+                    //         });
+                    //         files.push(file);
+                    //     }
+
+                    //     var cover = dataURItoBlob(coverph);
+                    //     let cover_photo = new File([cover], 'cp' + generateRandomString(7) + '.jpg', {
+                    //         type: 'image/jpeg'
+                    //     });
+                    //     $('#fileupload1').prop('files', cover_photo);
+                    //     $('#multiImagesUpload').prop('files', files);
+                    //     console.log($('#fileupload1'));
+                    //     console.log($('#multiImagesUpload'));
+                    //     event.preventDefault();
+
+                    // });
+
+                    // function dataURItoBlob(dataURI) {
+                    //     var byteString = atob(dataURI.split(',')[1]);
+                    //     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+                    //     var ab = new ArrayBuffer(byteString.length);
+                    //     var ia = new Uint8Array(ab);
+                    //     for (var i = 0; i < byteString.length; i++) {
+                    //         ia[i] = byteString.charCodeAt(i);
+                    //     }
+                    //     return new Blob([ab], {
+                    //         type: mimeString
+                    //     });
+                    // }
+
+                    // function generateRandomString(length) {
+                    //     let result = '';
+                    //     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                    //     const charactersLength = characters.length;
+
+                    //     for (let i = 0; i < length; i++) {
+                    //         result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                    //     }
+
+                    //     return result;
+                    // }
+
+                    // $('#vehicleAdditionForm').on('submit', function(event) {
+                    //     event.preventDefault();
+                    //     let $this = $(this);
+                    //     var DformData = new FormData();
+                    //     console.log(DformData);
+                    //     let title = $("input[name='title']").val(),
+                    //         country = $("input[name='country']").val(),
+                    //         county = $("input[name='county']").val(),
+                    //         make = $("input[name='make']").val(),
+                    //         model = $("input[name='model']").val(),
+                    //         year = $("input[name='year']").val(),
+                    //         price = $("input[name='price']").val(),
+                    //         miles = $("input[name='miles']").val(),
+                    //         enginecc = $("input[name='enginecc']").val(),
+                    //         exterior = $("input[name='exterior']").val(),
+                    //         interior = $("input[name='interior']").val(),
+                    //         usage = $("input[name='usage']").val(),
+                    //         fuel_type = $("input[name='fuel_type']").val(),
+                    //         transmission = $("input[name='transmission']").val(),
+                    //         description = $("input[name='description']").val(),
+                    //         firstname = $("input[name='firstname']").val(),
+                    //         lastname = $("input[name='lastname']").val(),
+                    //         email = $("input[name='email']").val(),
+                    //         phone = $("input[name='phone']").val();
+
+                    //     DformData.append('title', title);
+                    //     DformData.append('country', country);
+                    //     DformData.append('county', county);
+                    //     DformData.append('make', make);
+                    //     DformData.append('model', model);
+                    //     DformData.append('year', year);
+                    //     DformData.append('price', price);
+                    //     DformData.append('miles', miles);
+                    //     DformData.append('enginecc', enginecc);
+                    //     DformData.append('exterior', exterior);
+                    //     DformData.append('interior', interior);
+                    //     DformData.append('usage', usage);
+                    //     DformData.append('fuel_type', fuel_type);
+                    //     DformData.append('transmission', transmission);
+                    //     DformData.append('description', description);
+                    //     DformData.append('firstname', firstname);
+                    //     DformData.append('lastname', lastname)
+                    //     DformData.append('email', email);
+                    //     DformData.append('phone', phone);
+
+                    //     var input = document.getElementById('fileupload1');
+                    //     var file = input.files[0];
+                    //     var reader = new FileReader();
+                    //     let croppedImages = [];
+
+                    //     $.when(function() {
+                    //         reader.onload = function() {
+                    //             var img = new Image();
+                    //             img.onload = function() {
+                    //                 var width = 800;
+                    //                 var height = 600;
+                    //                 var canvas = document.createElement('canvas');
+                    //                 canvas.width = width;
+                    //                 canvas.height = height;
+                    //                 canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+                    //                 canvas.toBlob(function(blob) {
+                    //                     var compressedFile = new File([blob], file.name, {
+                    //                         type: file.type
+                    //                     });
+                    //                     DformData.append('cover_photo', compressedFile);
+                    //                 }, file.type, 0.5);
+                    //             };
+                    //             img.src = reader.result;
+                    //         };
+
+                    //         reader.readAsDataURL(file);
+
+                    //         var multiInput = document.getElementById('multiImagesUpload');
+                    //         let files = multiInput.files;
+                    //         console.log(files);
+                    //         for (let i = 0; i < files.length; i++) {
+                    //             const element = files[i];
+                    //             let reader2 = new FileReader();
+                    //             reader2.onload = function() {
+                    //                 var image = new Image();
+                    //                 image.onload = function() {
+                    //                     var width = 600;
+                    //                     var height = 450;
+                    //                     var canvas1 = document.createElement('canvas');
+                    //                     canvas1.width = width;
+                    //                     canvas1.height = height;
+                    //                     canvas1.getContext('2d').drawImage(img, 0, 0, width,
+                    //                     height);
+                    //                     canvas1.toBlob(function(blob) {
+                    //                         var compressedFile = new File([blob], file
+                    //                         .name, {
+                    //                             type: file.type
+                    //                         });
+                    //                         croppedImages.push(compressedFile)
+                    //                     }, file.type, 0.5);
+                    //                 };
+                    //                 img.src = reader.result;
+                    //             }
+                    //         }
+                    //     }).done(function() {
+                    //         DformData.append('images', croppedImages);
+                    //         // console.log(DformData.entries());
+                    //         $.ajaxSetup({
+                    //             headers: {
+                    //                 'X-CSRF-TOKEN': $this.find("input[name='_token']").val(),
+                    //             }
+                    //         });
+                    //         $.ajax({
+                    //             url: '/SellYourCar',
+                    //             type: 'POST',
+                    //             data: DformData,
+                    //             processData: false,
+                    //             contentType: false,
+                    //             success: function(response) {
+                    //                 console.log(response);
+                    //             },
+                    //             error: function(xhr, status, error) {
+                    //                 console.log(error);
+                    //             }
+                    //         });
+                    //     });
+                    // });
+                    // var multiInput = $('#multiImagesUpload');
+                    // multiInput.on('change', function() {
+                    //     console.log('tehers');
+                    //     let files = multiInput.prop('files');
+                    //     console.log(files);
+                    //     let croppedImages = [];
+                    //     for (let i = 0; i < files.length; i++) {
+                    //         const element = files[i];
+                    //         let reader2 = new FileReader();
+                    //         reader2.onload = function() {
+                    //             var image = new Image();
+                    //             image.onload = function() {
+                    //                 var width = 600;
+                    //                 var height = 450;
+                    //                 var canvas1 = document.createElement('canvas');
+                    //                 canvas1.width = width;
+                    //                 canvas1.height = height;
+                    //                 canvas1.getContext('2d').drawImage(img, 0, 0, width,
+                    //                     height);
+                    //                 canvas1.toBlob(function(blob) {
+                    //                     var compressedFile = new File([blob], element
+                    //                         .name, {
+                    //                             type: element.type
+                    //                         });
+                    //                         console.log(compressedFile);
+                    //                     croppedImages.push(compressedFile)
+                    //                 }, file.type, 0.5);
+                    //             };
+                    //             img.src = reader.result;
+                    //         }
+                    //         // console.log(croppedImages);
+                    //     }
+
+                    // })
+
+
+                    var compressedImages = []; // Array to store compressed images
+
+                    // When input elements with id "imageInput" are changed
+                    $("#multiImagesUpload").on("change", function(e) {
+                        // Get the files selected
+                        var files = e.target.files;
+
+                        // Loop through each file
+                        for (var i = 0; i < files.length; i++) {
+                            var file = files[i];
+                            var reader = new FileReader();
+
+                            // Read the file as an image
+                            reader.onload = function(e) {
+                                var img = new Image();
+                                img.src = e.target.result;
+
+                                // Wait for the image to load
+                                img.onload = function() {
+                                    // Create a canvas element
+                                    var canvas = document.createElement("canvas");
+                                    var ctx = canvas.getContext("2d");
+
+                                    // Set the canvas dimensions to the image dimensions
+                                    canvas.width = 600;
+                                    canvas.height = 450;
+
+                                    // Draw the image on the canvas
+                                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                                    // Get the compressed data URL of the canvas
+                                    var compressedDataUrl = canvas.toDataURL("image/jpeg", 0.8);
+
+                                    // Push the compressed data URL to the compressed images array
+                                    compressedImages.push(compressedDataUrl);
+
+                                    // Store the compressed images array to local storage
+                                    localStorage.setItem("compressedImages", JSON.stringify(
+                                        compressedImages));
+
+                                    // Create an image element to display the compressed image
+                                    var compressedImg = new Image();
+                                    compressedImg.src = compressedDataUrl;
+
+                                    // Append the compressed image to the output div
+                                    $("#output").append(compressedImg);
+                                };
+                            };
+                            // Read the file as a data URL
+                            reader.readAsDataURL(file);
                         }
-                        $this.find("#vehicleSubmit").prop({
-                            disabled: false
-                        });
-                    },
-                    error: function(error) {
-                        console.log(error);
-                        if (error.status == 422) {
-                            var p = "";
-                            $.each(error.responseJSON.errors, function(key, value) {
-                                p += value + "!";
+                    });
+
+                        $('#vehicleAdditionForm').on('submit', function(e) {
+                            e.preventDefault();
+                            var form = $(this);
+                            var formData = new FormData(form[0]);
+                            // Compress image files
+                            formData.set('images', localStorage.getItem('compressedImages'));
+                            
+                            var files = formData.getAll('images');
+                            let croppedImages = [];
+                            $.when.apply($, $.map(files, function(file) {
+                                var deferred = $.Deferred();
+                                // new Compressor(file, {
+                                //     quality: 0.6,
+                                //     success: function(compressedFile) {
+                                //         formData.delete('images[]');
+                                //         formData.append('images[]', compressedFile);
+                                //         deferred.resolve();
+                                //     },
+                                //     error: function() {
+                                //         deferred.reject();
+                                //     }
+                                // });
+                                return deferred.promise();
+                            })).then(function() {
+                                // Send form data via AJAX
+                                console.log(formData.entries());
+                                console.log(croppedImages);
+                                // $.ajaxSetup({
+                                //     headers: {
+                                //         'X-CSRF-TOKEN': form.find("input[name='_token']").val(),
+                                //     }
+                                // });
+
+                                // $.ajax({
+                                //     url: '/SellYourCar',
+                                //     type: 'POST',
+                                //     data: formData,
+                                //     cache: false,
+                                //     contentType: false,
+                                //     processData: false,
+                                //     success: function(response) {
+                                //         console.log(response);
+                                //         // Handle response from Laravel routes
+                                //     },
+                                //     error: function(jqXHR, textStatus, errorThrown) {
+                                //         console.log(textStatus);
+                                //         // Handle AJAX error
+                                //     }
+                                // });
                             });
-                        } else {
-                            p += "Error occured during processing!";
-                        }
-                        $(".feedback").html(
-                            "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>" +
-                            p + "</div>");
-                        $("#vehicleSubmit").prop({
-                            disabled: false
                         });
-                    }
-                });
-            });
 
-        });
+                    });
     </script>
 @endsection
 @endsection
