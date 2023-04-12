@@ -1,8 +1,7 @@
-
 @extends('layouts.new')
 
 @section('title')
-Register : @parent
+    Register : @parent
 @endsection
 
 @section('content')
@@ -35,55 +34,79 @@ Register : @parent
                         @csrf
                         <div class="row">
 
-                            <div class="col-md-6 form-group">
-                                <input type="text" class="form-control" placeholder="Name"aria-label="First Name" name="name" value="{{ old('name') }}">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">First Name</label>
+                                    <input type="text" class="form-control"name="name" value="{{ old('name') }}">
                                     @if ($errors->has('name'))
                                         <span class="text-danger">{{ $errors->first('name') }}</span>
                                     @endif
+                                </div>
+
                             </div>
 
-                            <div class="col-md-6 form-group">
-                                <input type="text" class="form-control" placeholder="Email" aria-label="Last Name" name="email" value="{{ old('email') }}">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Last Name</label>
+                                    <input type="text" class="form-control" name="email" value="{{ old('email') }}">
                                     @if ($errors->has('email'))
                                         <span class="text-danger">{{ $errors->first('email') }}</span>
                                     @endif
+                                </div>
                             </div>
 
-                            <div class="col-md-6 form-group">
-                                <input type="text" class="form-control" placeholder="Phone Number" aria-label="Phone Number" name="phone" value="{{ old('phone') }}">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Phone Number</label>
+                                    <input type="text" class="form-control" name="phone" value="{{ old('phone') }}">
                                     @if ($errors->has('phone'))
                                         <span class="text-danger">{{ $errors->first('phone') }}</span>
                                     @endif
+                                </div>
+
                             </div>
 
-                            <div class="col-md-6 form-group">
-                                <input type="text" class="form-control" placeholder="Alternative Phone" aria-label="Alternative Phone" name="alt_phone" value="{{ old('phone') }}">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Alternative Phone</label>
+                                    <input type="text" class="form-control" name="alt_phone" value="{{ old('phone') }}">
                                     @if ($errors->has('alt_phone'))
                                         <span class="text-danger">{{ $errors->first('alt_phone') }}</span>
                                     @endif
+                                </div>
+
                             </div>
 
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control" placeholder="Password" aria-label="Password" name="password">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Password</label>
+                                    <input type="password" class="form-control" name="password">
                                     @if ($errors->has('password'))
                                         <span class="text-danger">{{ $errors->first('password') }}</span>
                                     @endif
+                                </div>
                             </div>
 
-                            <div class="col-md-6 form-group">
-                                <input type="password" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" name="password_confirmation">
-                                 @if ($errors->has('password_confirmation'))
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Confirm Password</label>
+                                    <input type="password" class="form-control" name="password_confirmation">
+                                    @if ($errors->has('password_confirmation'))
                                         <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                                     @endif
+                                </div>
+
                             </div>
 
                         </div>
+                        <br>
 
                         <div class="form-group text-center">
                             <button class="btn btn-sm bg-success" type="submit">Sign Up</button>
                         </div>
                     </form>
-                    <p><span class="bolder"> Already have an Account? <a href="{{ route('login') }}" class="text-success"> Login Here</a></span></p>
+                    <p><span class="bolder"> Already have an Account? <a href="{{ route('login') }}" class="text-success">
+                                Login Here</a></span></p>
                 </div>
             </div>
         </div>

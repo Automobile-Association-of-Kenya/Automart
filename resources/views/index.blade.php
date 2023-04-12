@@ -160,9 +160,12 @@
 
                 </ul>
 
-                <a href="{{ route('login') }}" style="margin: 10px;text-align:left;">
-                    <button class="btn btn-outline-warning"> Sign in</button>
-                </a>
+                @guest
+                    <a href="{{ route('login') }}" style="margin: 10px;text-align:left;">
+                        <button class="btn btn-outline-warning"> Sign in</button>
+                    </a>
+                @endguest
+
             </div>
             <!-- {{-- <div class="sidebar-navigation"> -->
                 <!-- <h3 class="heading">Pages</h3>
@@ -340,9 +343,11 @@
                                         <a href="{{ route('dealer.home') }}" class="btn btn-warning">Sell a Car</a>
                                     </div>
 
-                                    <a href="{{ route('login') }}" class="btn btn-warning rounded ">
-                                        <h4 style="color: #00472F"> </h4>Sign In
-                                    </a>
+                                    @guest
+                                        <a href="{{ route('login') }}" class="btn btn-warning rounded ">
+                                            <h4 style="color: #00472F"> </h4>Sign In
+                                        </a>
+                                    @endguest
                                 </div>
                                 <div class="form-group ">
                                     <h3 style="color:#CBBC27">Quick Search</h3>
@@ -769,7 +774,8 @@
 
     <div class="featured-car content-area">
         <div class="container">
-            <div class="featured-slider row slide-box-btn slider" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+            <div class="featured-slider row slide-box-btn slider"
+                data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
                 @foreach ($vehicles as $item)
                     @php
                         $images = json_decode($item->images, true);
