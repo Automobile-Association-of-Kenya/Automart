@@ -10,7 +10,7 @@ class Caronsells extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'title', 'country', 'county', 'make', 'model', 'year', 'price', 'miles', 'enginecc', 'exterior', 'interior', 'fuel_type', 'features', 'transmission', 'vehicle_type', 'description', 'images', 'carId', 'trans_id', 'package', 'first_name', 'last_name', 'email', 'phone', 'deal_slideshow', 'cover_photo', 'usage', 'views', 'approved'
+        'user_id', 'title', 'country', 'county', 'make', 'model', 'year', 'price', 'miles', 'enginecc', 'exterior', 'interior', 'fuel_type', 'features', 'transmission', 'vehicle_type', 'description', 'images', 'carId', 'trans_id', 'package', 'firstname', 'lastname', 'email', 'phone', 'deal_slideshow', 'cover_photo', 'usage', 'views', 'approved'
     ];
 
     public function getImagePathAttribute()
