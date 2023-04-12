@@ -648,7 +648,7 @@
         </div>
     </div> --}}
 
-    {{-- <div class="featured-car content-area-21">
+    {{-- <div class="featured-car content-area-21" >
         <div class="container">
             <!-- Main title -->
             <div class="section-header d-flex">
@@ -767,7 +767,7 @@
         </div>
     </div> --}}
 
-    <div class="featured-car content-area">
+    <div class="featured-car content-area" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
         <div class="container">
             <div class="featured-slider row slide-box-btn slider ">
                 @foreach ($vehicles as $item)
