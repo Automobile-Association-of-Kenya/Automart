@@ -44,6 +44,7 @@ class VehicleRequest extends FormRequest
             'lastname' => ['required'],
             'email' => ['required'],
             'phone' => ['required'],
+            'usage' => ['required','max:255'],
             'trans_id' => ['nullable','max:255'],
             'package' => ['nullable','max:255'],
             'deal_slideshow' => ['nullable','max:255'],
