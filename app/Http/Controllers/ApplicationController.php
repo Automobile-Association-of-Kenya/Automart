@@ -77,7 +77,7 @@ class ApplicationController extends Controller
 
         $validated = $request->validated();
         $validated["features"] = json_encode($validated["features"]);
-        Caronsells::create(['user_id' => auth()->id(), 'carId'=>$strkey, 'cover_photo'=>$images[0], 'images' => json_encode($images)] + $validated);
+        Caronsells::create(['user_id' => auth()->id(), 'carId'=>$strkey, 'cover_photo'=>$images[0], 'images' => json_encode($images), 'views'=>0] + $validated);
         session()->forget("$strkey");
 
         return json_encode(['status' => 'success', 'message' => "Vehicle added successfully"]);
