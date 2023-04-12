@@ -158,7 +158,7 @@
                             </li> -->
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link" href="{{ route('login') }}" button type="submit"
+                                <a class="nav-link" href="{{ route('dealer.home') }}" button type="submit"
                                     class="btn  btn-block"
                                     style="background: #00472F;color:white;font-size:120%;text-align:left; padding-top:45px">
                                     <i>{{ Auth::user()->name }}</a>
