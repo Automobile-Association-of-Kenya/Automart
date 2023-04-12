@@ -676,7 +676,7 @@
                                     </div>
                                     @if (!empty($images))
                                         <img class="d-block w-100" src="{{ asset('images/'. $images[0]) }}"
-                                        alt="car">                                        
+                                        alt="car">
                                     @endif
                                 </a>
 
@@ -711,7 +711,7 @@
                                                     </a>
                                                 @endforeach
                                                 @else
-                                                    
+
                                                 @endif
                                             </div>
                                         </div>
@@ -733,7 +733,7 @@
                                         <a href="#">{{ $item->vehicle_type }}</a>
                                     </li>
                                 </ul>
-                                
+
                                 <ul class="facilities-list clearfix">
                                     <li>
                                         <i class="flaticon-fuel"></i> {{ $item->fuel_type }}
@@ -763,7 +763,7 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star-o"></i>
                                 <span>(65 Reviews)</span>
-                            </div> 
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -791,6 +791,9 @@
                                         <img src="#" alt="car-photo" width="100%" height="250px">
                                     @endif
                                     <div class="tag">{{ $item->title }}</div>
+                                    @if ($item->approved)
+                                    <div class="tag bg-warning"><h4 class="text-white">AA Approved</h4></div>
+                                    @endif
                                 </div>
                             </a>
                             <div class="detail">
@@ -806,6 +809,13 @@
                                     <a href="{{ route('details', $item->id) }}">
                                         <i class="fa-solid fa-engine"></i>Model:
                                         {{ $item->carmodel->car_model_name ?? '' }}
+                                    </a>
+                                </div>
+
+                                <div class="location">
+                                    <a href="#">
+                                        <i class="fa fa-eye text-warning"></i>
+                                        {{ $item->views ?? 0  }} Views
                                     </a>
                                 </div>
                                 <div class="location">
