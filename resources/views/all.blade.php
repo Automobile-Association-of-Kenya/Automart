@@ -11,7 +11,7 @@ All Listings | @parent
             <div class="breadcrumb-areas">
                 <h1>All Cars</h1>
                 <ul class="breadcrumbs">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{{ url('/') }}">Home</a></li>
                     <li class="active">All Cars</li>
                 </ul>
             </div>

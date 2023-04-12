@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -7,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Automart | AAKenya</title>
+    <title>@yield('title') | Automart AA Kenya Limited</title>
     <!-- favicon -->
     <link rel="shortcut icon" href="{{ url('favicon/favicon.ico') }}">
     <link rel="apple-touch-icon" sizes="57x57" href="{{ url('favicon/apple-icon-57x57.png') }}">
@@ -424,6 +422,9 @@
                 color: #6b7280;
                 color: rgba(107, 114, 128, var(--tw-text-opacity))
             }
+        }
+        .dropdown {
+            list-style: none;
         }
     </style>
 
