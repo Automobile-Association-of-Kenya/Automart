@@ -1,4 +1,8 @@
 @extends('layouts.dashboard')
+
+@section('title')
+    Edit Car @parent
+@endsection
 @section('content')
     @php
         $user = session('user');
@@ -83,13 +87,14 @@
                     Phone: {{ $user->number }}
                 </div>
                 @include('layouts.sidebar')
-                <div class="col-md-10 mt-5 pt-5">
+                <div class="col-md-10">
                     <div class="col-md-12" style="padding-left : 20px; padding-right : 20px;">
                         @include('partials.alert')
                         <div class="pageLoader" id="pageLoader"></div>
                         <h2 class="form-title" style="color: #00472F">Edit Vehicle Information » </h2>
 
-                        <form action="{{ route('updatecar', $details->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('updatecar', $details->id) }}" method="POST" enctype="multipart/form-data"
+                            id="vehicleEditForm">
                             {{ csrf_field() }}
 
                             <label class="gt-title" for="gt-title">Your listing title</label>
@@ -98,14 +103,16 @@
                                 value="{{ $details->title }}">
                             <div class="row" style="padding-top: 10px; padding-bottom: 1px;">
                                 <div class="col-md-12">
-                                    <select name="country" id="country" class="gt-select" tabindex="3" required class="form-control form-control-md">
+                                    <select name="country" id="country" tabindex="3" required
+                                        class="form-control form-control-md">
                                         <option value="-1" selected="selected">Country</option>
                                         <option class="level-0" value="Kenya" selected data-value="41">Kenya</option>
                                     </select>
                                 </div>
                                 <input type="hidden" name="vehicle_id" id="vehicleID" value="{{ $details->id }}">
                                 <div class="col-md-12 mt-1">
-                                    <select  class="form-control form-control-md" name="county" id="county" data-value="" required>
+                                    <select class="form-control form-control-md" name="county" id="county"
+                                        data-value="" required>
                                         <option value="" data-value="-1" selected="selected">County
                                         </option>
                                         <option class="level-0" value="Other"
@@ -269,8 +276,8 @@
                                 <div class="col-md-4 ">
                                     <label>Make</label>
                                     <!-- <input class="form-control" type="text" name="make" placeholder="Enter Vehicle Make" style="text-transform:uppercase" required> -->
-                                    <select  class="form-control form-control-md" id="car_make" name="make" aria-hidden="true"
-                                        required>
+                                    <select class="form-control form-control-md" id="car_make" name="make"
+                                        aria-hidden="true" required>
                                         <option value="Any Make" selected="false">Make</option>
                                         @foreach ($makes as $item)
                                             <option value="{{ $item->car_make_id }}"
@@ -282,7 +289,8 @@
                                 </div>
                                 <div class="col-md-4 ">
                                     <label>Model</label>
-                                    <select  class="form-control form-control-md" name="model" id="car_model" required aria-hidden="true" required>
+                                    <select class="form-control form-control-md" name="model" id="car_model" required
+                                        aria-hidden="true" required>
                                         <option value="Any Make" selected="false">Model</option>
                                         @if ($details->carmodel != null)
                                             <option value="{{ $details->carmodel->car_model_id }}" selected>
@@ -295,7 +303,8 @@
                                 <div class="col-md-4">
 
                                     <label>Year of Manufacture</label>
-                                    <select name="year" id="year"  class="form-control form-control-md" data-value="" required>
+                                    <select name="year" id="year" class="form-control form-control-md"
+                                        data-value="" required>
                                         <option value="-1">Select Year of Manufacture</option>
                                         <option value="2021" {{ $details->year == '2021' ? 'selected' : '' }}>2021
                                         </option>
@@ -366,7 +375,7 @@
 
                             <div class="row" style="padding-top:10px; padding-bottom:10px;">
                                 <div class="col-md-4 mt-1">
-                                    <select id="exterior"  class="form-control form-control-md" name="exterior" required>
+                                    <select id="exterior" class="form-control form-control-md" name="exterior" required>
                                         <option value="-1">Color</option>
                                         <option value="White" {{ $details->exterior == 'White' ? 'selected' : '' }}>White
                                         </option>
@@ -394,7 +403,8 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4 mt-1">
-                                    <select id="interior" value=""  class="form-control form-control-md" name="interior" required>
+                                    <select id="interior" value="" class="form-control form-control-md"
+                                        name="interior" required>
                                         <option value="-1">Interior Type</option>
                                         <option value="Leather" {{ $details->interior == 'Leather' ? 'selected' : '' }}>
                                             Leather</option>
@@ -406,7 +416,8 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4 mt-1">
-                                    <select id="usage" value=""  class="form-control form-control-md" name="usage" required>
+                                    <select id="usage" value="" class="form-control form-control-md"
+                                        name="usage" required>
                                         <option value="-1">Vehicle Usage</option>
                                         <option value="New" {{ $details->usage == 'New' ? 'selected' : '' }}>
                                             New </option>
@@ -418,7 +429,8 @@
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-1">
-                                    <select id="fuel_type"  class="form-control form-control-md" name="fuel_type" required>
+                                    <select id="fuel_type" class="form-control form-control-md" name="fuel_type"
+                                        required>
                                         <option value="-1">Fuel Type</option>
                                         <option value="Petrol" {{ $details->fuel_type == 'Petrol' ? 'selected' : '' }}>
                                             Petrol</option>
@@ -603,10 +615,10 @@
                                 </div>
                             </div>
                             <div class="row" style="padding-top:10px; padding-bottom:15px;">
-                                <div class=" col-md-12">
-                                    <label>Transmission</label>
-                                    <select id="transmission" name="transmission" tabindex="13" required
-                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="form-label">Transmission</label>
+                                    <select class="form-control form-control-sm" id="transmission" name="transmission"
+                                        tabindex="13" required>
                                         <option value="" s>Transmission Type</option>
                                         <option value="Automatic"
                                             {{ $details->transmission == 'Automatic' ? 'selected' : '' }}>Automatic
@@ -621,13 +633,12 @@
                                             None</option>
                                     </select>
                                 </div>
+                                <div class="col-md-12 form-group" style="padding-top:10px; padding-bottom:15px;">
+                                    <label class="form-label" for="description">Vehicle Description</label>
+                                    <textarea class="form-control form-control-lg" required id="description" name="description">{{ $details->description }}</textarea>
+                                </div>
+                            </div>
 
-                            </div>
-                            <div class="form-outline" style="padding-top:10px; padding-bottom:15px;">
-                                <textarea  class="form-control form-control-md" required placeholder="Enter vehicle listing description." id="description"
-                                    name="description">{{ $details->description }}</textarea>
-                                <label class="form-label" for="description">Vehicle Description</label>
-                            </div>
                             <div class="row">
                                 <div class="col-6 col-lg-4">
                                     <label class="btn btn-success btn-file"><br>
@@ -659,8 +670,8 @@
                                     <label class="btn btn-success btn-file"><br>
                                         Upload Photos
                                         <input type="hidden" name="removedImages" value=''>
-                                        <input class="form-control" id="fileupload" type="file" name="images[]"
-                                            tabindex="21" style="display:none" value="Upload Photos"
+                                        <input class="form-control" id="multiImagesUpload" type="file"
+                                            name="images[]" tabindex="21" style="display:none" value="Upload Photos"
                                             multiple=""><br>
                                     </label>
                                 </div>
@@ -696,7 +707,6 @@
                                         @endforeach
                                     @endif
                                 </div>
-
                             </div>
                             <h2 class="form-title" style="color: #00472F">Personal Information</h2>
                             <div class="row">
@@ -788,57 +798,7 @@
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
     <script>
         $(function() {
-            // Multiple images preview with JavaScript
 
-            var previewImages = function(input, imgPreviewPlaceholder) {
-                if (input.files) {
-                    var noFiles = input.files.length;
-                    for (let i = 0; i < noFiles; i++) {
-                        if (input.files[i].size > 5000000) {
-                            alert(input.files[i].name + ' is greater than 5mb');
-                            input.value = ''
-                            break;
-                        }
-                        var reader = new FileReader();
-                        reader.onload = function(event) {
-                            const div = document.createElement('span');
-                            div.classList.add('img_' + i)
-                            div.style.cssText = 'position:relative'
-                            const img = document.createElement('img');
-                            img.setAttribute('src', event.target.result);
-                            const deleter = document.createElement('span');
-                            deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
-                            deleter.style.cssText =
-                                'cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
-                            deleter.addEventListener('click', e => {
-                                removeImage(input, imgPreviewPlaceholder, i);
-                            })
-                            div.appendChild(img);
-                            div.appendChild(deleter);
-                            document.querySelector(imgPreviewPlaceholder).appendChild(div)
-
-                        }
-                        reader.readAsDataURL(input.files[i]);
-                    }
-                }
-            };
-            $('#fileupload').on('change', function() {
-                document.querySelector('.removedImgs').value = ''
-                previewImages(this, 'div.images-preview-div');
-            });
-
-            const removeImage = (input, imgPreviewPlaceholder, index) => {
-                let removedImages = document.querySelector('.removedImgs').value;
-                removedImages = removedImages += index + ',';
-                document.querySelector('.removedImgs').value = removedImages
-                const el = document.querySelector('.img_' + index);
-                el.parentElement.removeChild(el)
-            }
-        });
-    </script>
-    <script>
-        $(function() {
-            // Multiple images preview with JavaScript
             $('body').on('click', '#deleteImage', function(event) {
                 event.preventDefault();
                 let $this = $(this);
@@ -868,15 +828,16 @@
                     }
                 })
             });
+
             var previewImages = function(input, imgPreviewPlaceholder) {
                 if (input.files) {
                     var noFiles = input.files.length;
                     for (let i = 0; i < noFiles; i++) {
-                        if (input.files[i].size > 5000000) {
-                            alert(input.files[i].name + ' is greater than 5mb');
-                            input.value = ''
-                            break;
-                        }
+                        // if (input.files[i].size > 5000000) {
+                        //     alert(input.files[i].name + ' is greater than 5mb');
+                        //     input.value = ''
+                        //     break;
+                        // }
                         var reader = new FileReader();
                         reader.onload = function(event) {
                             const div = document.createElement('span');
@@ -900,6 +861,7 @@
                     }
                 }
             };
+
             $('#fileupload1').on('change', function() {
                 document.querySelector('.removedImgs').value = ''
                 previewImages(this, 'div.images-preview-div1');
@@ -915,8 +877,6 @@
 
             const vehicle_id = $('#vehicleID').val(),
                 token = $("input[name='_token']").val();
-fileupload1
-fileupload
             /** compress cover photo*/
             var input = document.getElementById('fileupload1');
             input.addEventListener('change', function() {
@@ -934,9 +894,9 @@ fileupload
                         canvas.height = height;
                         canvas.getContext('2d').drawImage(img, 0, 0, width, height);
                         var compressedFile = canvas.toDataURL("image/jpeg", 0.8);
-                        $.post('/application-images', {
+                        $.post('/application-images-update', {
                             _token: token,
-                            str_id: str_id,
+                            vehicle_id: vehicle_id,
                             image: compressedFile
                         }).done(function(params) {
                             console.log(params);
@@ -950,6 +910,7 @@ fileupload
             });
 
             var compressedImages = [];
+            let multiInput = document.getElementById('fileupload');
 
             $("#multiImagesUpload").on("change", function(e) {
                 var files = e.target.files;
@@ -972,7 +933,7 @@ fileupload
 
                             $.post('/application-images', {
                                 _token: token,
-                                str_id: str_id,
+                                vehicle_id: vehicle_id,
                                 image: compressedDataUrl
                             }).done(function(params) {
                                 console.log(params);
@@ -985,13 +946,12 @@ fileupload
                 }
             });
 
-            
-            $('#vehicleAdditionForm').on('submit', function(event) {
+            $('#vehicleEditForm').on('submit', function(event) {
                 event.preventDefault();
                 let $this = $(this);
                 $this.find("#vehicleSubmit").prop({
-                            disabled: true
-                        });
+                    disabled: true
+                });
                 var DformData = new FormData();
                 let title = $("input[name='title']").val(),
                     country = $("#country").val(),
@@ -1020,7 +980,6 @@ fileupload
                     featuresf.push(value.value)
                 });
 
-                DformData.append('str_id', str_id);
                 DformData.append('features', featuresf);
                 DformData.append('title', title);
                 DformData.append('country', country);
@@ -1043,38 +1002,42 @@ fileupload
                 DformData.append('email', email);
                 DformData.append('phone', phone);
 
+                for (var pair of DformData.entries()) {
+                    console.log(pair[0] + ' - ' + pair[1]);
+                }
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $this.find("input[name='_token']").val(),
                     }
                 });
                 $.ajax({
-                    url: '/application',
-                    type: 'POST',
+                    type: 'PATCH',
+                    url: '/application/' + vehicle_id,
                     data: DformData,
                     processData: false,
                     contentType: false,
                     success: function(response) {
                         console.log(response);
-                        var result = JSON.parse(response);
-                        if (result.status === "success") {
-                            // removeImage(document.getElementById('fileupload1'), 'div.images-preview-div1', i);
-                            // removeImage(document.getElementById('multiImagesUpload'), 'div.images-preview-div', i);
-                            $this.trigger('reset');
-                            $(".feedback").html(
-                                "<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Success!       </strong>" +
-                                result.message + "!</div>");
-                        } else if (result.status === "error") {
-                            $(".feedback").html(
-                                "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>Error occured during processing!</div>"
-                            );
-                        }
-                        
-                        window.location.href = '/Available';
+                        // var result = JSON.parse(response);
+                        // if (result.status === "success") {
+                        //     // removeImage(document.getElementById('fileupload1'), 'div.images-preview-div1', i);
+                        //     // removeImage(document.getElementById('multiImagesUpload'), 'div.images-preview-div', i);
+                        //     $this.trigger('reset');
+                        //     $(".feedback").html(
+                        //         "<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Success!       </strong>" +
+                        //         result.message + "!</div>");
+                        // } else if (result.status === "error") {
+                        //     $(".feedback").html(
+                        //         "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>Error occured during processing!</div>"
+                        //     );
+                        // }
 
-                        $this.find("#vehicleSubmit").prop({
-                            disabled: false
-                        });
+                        // window.location.href = '/Available';
+
+                        // $this.find("#vehicleSubmit").prop({
+                        //     disabled: false
+                        // });
                     },
                     error: function(error) {
                         console.log(error);

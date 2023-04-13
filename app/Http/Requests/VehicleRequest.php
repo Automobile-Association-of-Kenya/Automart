@@ -38,7 +38,7 @@ class VehicleRequest extends FormRequest
             'fuel_type' => ['required','max:255'],
             'features' => ['required'],
             'transmission' => ['required','max:255'],
-            'vehicle_type' => ['required','max:255'],
+            'vehicle_type' => ['nullable','max:255'],
             'description' => ['required',],
             'firstname' => ['required'],
             'lastname' => ['required'],

@@ -104,6 +104,7 @@ Route::controller(DealersController::class)->group(function(){
 
 Route::resource('application', ApplicationController::class);
 Route::post('application-images', [ApplicationController::class, 'handleImages']);
+Route::post('application-images-update', [ApplicationController::class, 'updateImages']);
 
 Route::get('vehicle/{id}', [VehicleController::class, 'get']);
 

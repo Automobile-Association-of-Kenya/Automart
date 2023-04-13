@@ -91,6 +91,9 @@ class DealersController extends Controller
                 $features = explode(',', $features);
             }
         }
+        if (session()->has("$details->id._vehicle_images")) {
+            session()->forget("$details->id._vehicle_images");
+        }
         
         return view('dealer.editcar',compact('makes','vehicles','details', 'features'));
     }
