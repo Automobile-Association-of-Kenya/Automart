@@ -597,6 +597,15 @@
                 }
             };
 
+            const removeImage = (input, imgPreviewPlaceholder, index) => {
+                let removedImages = document.querySelector('.removedImgs').value;
+                removedImages = removedImages += index + ',';
+                document.querySelector('.removedImgs').value = removedImages
+                const el = document.querySelector('.img_' + index);
+                el.parentElement.removeChild(el)
+            }
+
+
             $('#fileupload1').on('change', function() {
                 document.querySelector('.removedImgs1').value = ''
                 previewImages(this, 'div.images-preview-div1');
@@ -673,14 +682,7 @@
                 }
             });
 
-            const removeImage = (input, imgPreviewPlaceholder, index) => {
-                let removedImages = document.querySelector('.removedImgs').value;
-                removedImages = removedImages += index + ',';
-                document.querySelector('.removedImgs').value = removedImages
-                const el = document.querySelector('.img_' + index);
-                el.parentElement.removeChild(el)
-            }
-
+            
             $('#vehicleAdditionForm').on('submit', function(event) {
                 event.preventDefault();
                 let $this = $(this);
