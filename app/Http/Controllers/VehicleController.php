@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Validator;
 
 class VehicleController extends Controller
 {
+
+    public function index()
+    {
+        $vehicles = Caronsells::latest()->get();
+        return view('admin.vehicles', compact('vehicles'));
+    }
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -55,6 +61,7 @@ class VehicleController extends Controller
 
         return CaronsellResource::collection($cars);
     }
+
     function add(Request $req)
     {
         $validator = Validator::make($req->all(),[
@@ -177,5 +184,13 @@ class VehicleController extends Controller
     {
         $vehicle = Caronsells::find($id);
         return json_encode($vehicle);
+    }
+
+    public function approve($id)
+    {
+        $vehicle = Caronsells::find($id);
+        $vehicle->approved = 1;
+        $vehicle->update();
+        return redirect()->back()->with('success', 'Vehicle approved successfully');
     }
 }

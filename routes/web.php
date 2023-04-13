@@ -4,6 +4,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\dealersController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
@@ -106,6 +107,8 @@ Route::post('application-images', [ApplicationController::class, 'handleImages']
 
 Route::get('vehicle/{id}', [VehicleController::class, 'get']);
 
+Route::resource('users', UserController::class);
 
 
-
+Route::get('vehicles', [VehicleController::class, 'index'])->name('vehicles');
+Route::get('vehicle/approve/{id}', [VehicleController::class, 'approve'])->name('vehicle.approve');
