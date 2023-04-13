@@ -48,7 +48,7 @@
                     @auth
                         @if (auth()->user()->role === 'admin')
                             <div class="col-md-12">
-                                <a href="#"><button type="submit" class="btn  btn-block"
+                                <a href="{{ route('users.index') }}"><button type="submit" class="btn  btn-block"
                                         style="background: #00472F;color:white;font-size:120%;text-align:left"><i
                                             class="fa fa-plus"></i> Users</button></a>
                             </div>
