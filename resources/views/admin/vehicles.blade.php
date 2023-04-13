@@ -95,7 +95,7 @@
                 @include('layouts.sidebar')
 
                 <div class="col-md-10">
-
+                    <h4 class="text">Users</h4>
                     @include('partials.alert')
 
                     <table class="table table-bordered table-striped table-sm dataTable">
