@@ -75,16 +75,18 @@ class DealersController extends Controller
         $str_id = Str::random(8);
         return view('dealer.addcar',compact('makes','counties','str_id'));
     }
+    
     public function editcar($id)
     {
         $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);
         $makes = CarMake::orderBy('car_make_name','ASC')->get();
         $details = Caronsells::findOrFail($id);
-        // return $details->images;
+        return $details->features;
         // die();
        // dd($details);
         return view('dealer.editcar',compact('makes','vehicles','details'));
     }
+
     public function home()
     {
         $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);

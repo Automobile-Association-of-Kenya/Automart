@@ -87,9 +87,11 @@
                     <div class="col-md-12" style="padding-left : 20px; padding-right : 20px;">
                         @include('partials.alert')
                         <div class="pageLoader" id="pageLoader"></div>
+                        <h2 class="form-title" style="color: #00472F">Edit Vehicle Information » </h2>
+
                         <form action="{{ route('updatecar', $details->id) }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            <h2 class="form-title" style="color: #00472F">Edit Vehicle Information » </h2>
+
                             <label class="gt-title" for="gt-title">Your listing title</label>
                             <input class="form-control" type="text" id="gt-title" tabindex="2" name="title"
                                 placeholder="Enter listing title" required style="text-transform:uppercase"
