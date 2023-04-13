@@ -119,8 +119,8 @@
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>{{ $item->title }}</td>
-                                    <td>{{ $item->carmake->car_make_name }}</td>
-                                    <td>{{ $item->carmodel->car_model_name }}</td>
+                                    <td>{{ @$item->carmake->car_make_name }}</td>
+                                    <td>{{ @$item->carmodel->car_model_name }}</td>
                                     <td>{{ $item->year }}</td>
                                     <td>{{ $item->price }}</td>
                                     <td>{{ ($item->approved) ? "Approved" : False }}</td>
