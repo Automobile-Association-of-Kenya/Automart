@@ -97,6 +97,7 @@ class AuthController extends Controller
         } else {
             return back()->withErrors('email', 'User with that email address does not exist');
         }
+        return redirect()->back()->with('success', 'Password reset link has been sent to your email. Click on the link and create a new password');
     }
 
     public function reset($token)

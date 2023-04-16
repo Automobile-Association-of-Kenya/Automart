@@ -51,13 +51,13 @@ class CarController extends Controller
             'max_engine' => 'nullable',
             'min_price' => 'nullable',
             'max_price' => 'nullable',
-        ]);  
+        ]);
         $vehicles = Caronsells::where('make', $request->make)
         ->where('model', $request->model)
         ->paginate(9);
 
         return view('search', compact('vehicles'));
-               
+
     }
 
     public function deleteImage(Request $request)
@@ -79,4 +79,4 @@ class CarController extends Controller
     }
 
 }
-    
+

@@ -23,6 +23,16 @@ All Listings | @parent
     <div class="featured-car content-area">
         <div class="container">
             <div class="row">
+                @php
+                    function formatNumber($number)
+                    {
+                        if (strlen($number) <= 10) {
+                            return "+254".intval($number);
+                        }else {
+                            return $number;
+                        }
+                    }
+                @endphp
                 @if (!empty($vehicles) && $vehicles->count())
                     @foreach ($vehicles as $vehicle)
                         <div class="col-lg-4">
@@ -85,7 +95,7 @@ All Listings | @parent
                                             <i class="fa fa-phone"></i>
                                             <span style="color:white">Call or Chat with the owner</span>
                                             <i class="fa fa-envelope"></i>
-                                            <a href="https://wa.me/{{ $vehicle->phone }}" target="_blank"
+                                            <a href="https://wa.me/{{ formatNumber($vehicle->phone) }}" target="_blank"
                                                 style="color: #00472F; margin-left:5px">
                                                 <i class="fa fa-whatsapp"></i>
                                             </a>

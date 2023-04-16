@@ -66,6 +66,16 @@
 </head>
 
 <body>
+    @php
+        function formatNumber($number)
+        {
+            if (strlen($number) <= 10) {
+                return '+254' . intval($number);
+            } else {
+                return $number;
+            }
+        }
+    @endphp
 
     <!-- Top header start -->
     <header class="top-header top-header-bg bg-warning">
@@ -490,24 +500,11 @@
     </div>
     <!-- Search box 3 end --> --}}
     <!-- Search box 2 start -->
-    <div class="search-box-2" id="search">
+    <div class="search-box-2 bg-warning" id="search">
         <div class="container">
             <div class="row">
                 <form action="{{ route('search') }}" method="POST">
-                    <!-- show success message -->
-                    @if (session('successMsg'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('successMsg') }}
-                        </div>
-                    @endif
-                    <!-- show error messages -->
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger" role="alert">
-                                {{ $error }}
-                            </div>
-                        @endforeach
-                    @endif
+
                     {{ csrf_field() }}
                     <div class="col-lg-12">
                         <div class="inline-search-area">
@@ -792,7 +789,9 @@
                                     @endif
                                     <div class="tag">{{ $item->title }}</div>
                                     @if ($item->approved)
-                                    <div class="tag bg-warning"><h4 class="text-white">AA Approved</h4></div>
+                                        <div class="tag bg-warning">
+                                            <h4 class="text-white">AA Approved</h4>
+                                        </div>
                                     @endif
                                 </div>
                             </a>
@@ -815,7 +814,7 @@
                                 <div class="location">
                                     <a href="#">
                                         <i class="fa fa-eye text-warning"></i>
-                                        {{ $item->views ?? 0  }} Views
+                                        {{ $item->views ?? 0 }} Views
                                     </a>
                                 </div>
                                 <div class="location">
@@ -836,7 +835,7 @@
                                 <div class="w-100 ratings">
                                     <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i
                                         class="fa fa-envelope text-success"></i>
-                                    <a href="https://wa.me/{{ $item->phone }}"
+                                    <a href="https://wa.me/{{ formatNumber($item->phone) }}"
                                         style="color: #00472F; margin-left:5px">
                                         <i class="fa fa-whatsapp"></i>
                                     </a>
@@ -849,7 +848,6 @@
             </div>
         </div>
     </div>
-    <!-- Featured car end -->
 
 
 

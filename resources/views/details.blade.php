@@ -27,6 +27,15 @@ Car Details @parent
             </div>
         </div>
     </div>
+    @php
+        function formatNumber($number){
+            if (strlen($number) <= 10) {
+                return "+254".$number;
+            } else {
+                return $number;
+            }
+        }
+    @endphp
     <!-- Sub Banner end -->
 
     <!-- Car details page start -->
@@ -72,7 +81,7 @@ Car Details @parent
                                 <i class="fa fa-chevron-right"></i>
                             </a>
 
-                            
+
 
                             <a data-target="#pic-{{ count(json_decode($vehicle->images)) - 1 }}" data-toggle="tab"
                                 class="prev-image"
@@ -152,7 +161,7 @@ Car Details @parent
                                 <li>Check all documentation and only pay if you're satisfied.</li>
                             </ol>
                         </div>
-                        <a target="blank" href="https://wa.me/{{ $vehicle->phone }}"
+                        <a target="blank" href="https://wa.me/{{ formatNumber($vehicle->phone) }}"
                             style="color: #00472F; margin-left:5px">
 
                             <button class="btn btn-success">
