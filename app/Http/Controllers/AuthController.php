@@ -30,10 +30,15 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
+    public function registerseller()
+    {
+        return view('auth.register1');
+    }
+
 
     public function registerUser(UserRequest $request)
     {
-        $user = $this->user->register($request->name, $request->email, $request->phone, $request->password);
+        $user = $this->user->register($request->name, $request->email, $request->phone,$request->role, $request->password);
         $this->user->emailAccountVerification($request->email);
         return redirect('login')->with('success', 'Account created successfully and an email has been sent to you for confirmation');
     }
@@ -97,6 +102,7 @@ class AuthController extends Controller
         } else {
             return back()->withErrors('email', 'User with that email address does not exist');
         }
+        return redirect()->back()->with('success', 'Password reset link has been sent to your email. Click on the link and create a new password');
     }
 
     public function reset($token)

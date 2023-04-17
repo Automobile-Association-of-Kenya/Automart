@@ -1446,13 +1446,13 @@ input[type=checkbox]:checked + label:before {
 }
 
 .main-header .navbar-expand-lg .navbar-nav .nav-link {
-    color: #636060;
+    color: #fff;
 }
 
 .main-header .navbar-expand-lg .navbar-nav .nav-link {
     padding: 35px 15px;
     line-height: 20px;
-    color: #515151;
+    color: #fff;
     opacity: 1;
     font-size: 15px;
     letter-spacing: 0.5px;
@@ -1487,7 +1487,7 @@ input[type=checkbox]:checked + label:before {
 }
 
 .main-header .navbar-expand-lg .user-account li a {
-    color: #212121;
+    color: #fff;
 }
 
 .main-header .navbar {
@@ -1507,7 +1507,7 @@ input[type=checkbox]:checked + label:before {
     padding: 0;
     margin: 0;
     font-size: 13px;
-    color: #212529;
+    color: #fff;
     border: none;
     -webkit-transition: opacity .4s ease 0s, visibility .4s linear 0s, -webkit-transform .4s ease 0s;
     transition: opacity .4s ease 0s, visibility .4s linear 0s, -webkit-transform .4s ease 0s;
@@ -1531,7 +1531,7 @@ input[type=checkbox]:checked + label:before {
 
 .main-header .dropdown-menu a {
     padding: 12px 20px;
-    color: #000;
+    color: #fff;
     transition: all .3s ease-in-out;
     text-transform: none;
     font-weight: 500;

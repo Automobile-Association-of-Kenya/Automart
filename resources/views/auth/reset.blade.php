@@ -1,8 +1,8 @@
 
-@extends('layouts.new')
+@extends('layouts.app')
 
 @section('title')
-Password reset : @parent
+Password reset  @parent
 @endsection
 
 @section('content')
@@ -21,7 +21,7 @@ Password reset : @parent
     <!-- Sub Banner end -->
 
     <!-- Shop checkout start -->
-    <div class="" style="margin-bottom: 15em;">
+    <div style="margin-bottom: 15em;">
         <div class="container d-flex justify-content-center">
             <div class="card bg-white" style="width: 43em; position: absolute; top:13em; margin-bottom: 10em;">
                 <div class="card-header bg-white">
@@ -36,7 +36,8 @@ Password reset : @parent
                         <div class="row">
                             <input type="hidden" name="email" value="{{ $reset->email }}">
                             <input type="hidden" name="_token" value="{{ $reset->token }}">
-                            <div class="col-md-12 form-group">
+
+                            <div class="form-group col-md-12 ">
                                 <input type="password" class="form-control" placeholder="Password" aria-label="Password" name="password">
 
                                     @if ($errors->has('password'))
@@ -44,7 +45,7 @@ Password reset : @parent
                                     @endif
                             </div>
 
-                            <div class="col-md-12 form-group">
+                            <div class="form-group col-md-12">
                                 <input type="password" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" name="password_confirmation">
 
                                 @if ($errors->has('password_confirmation'))

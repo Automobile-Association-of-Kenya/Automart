@@ -1,11 +1,9 @@
-@extends('layouts.new')
+@extends('layouts.app')
+
 @section('title')
 Car Details @parent
 @endsection
-{{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="{{ asset('assets/magnific-popup/magnific-popup.css') }}">
+
 <style>
     .center {
         position: absolute;
@@ -27,6 +25,15 @@ Car Details @parent
             </div>
         </div>
     </div>
+    @php
+        function formatNumber($number){
+            if (strlen($number) <= 10) {
+                return "+254".$number;
+            } else {
+                return $number;
+            }
+        }
+    @endphp
     <!-- Sub Banner end -->
 
     <!-- Car details page start -->
@@ -72,7 +79,7 @@ Car Details @parent
                                 <i class="fa fa-chevron-right"></i>
                             </a>
 
-                            
+
 
                             <a data-target="#pic-{{ count(json_decode($vehicle->images)) - 1 }}" data-toggle="tab"
                                 class="prev-image"
@@ -152,7 +159,7 @@ Car Details @parent
                                 <li>Check all documentation and only pay if you're satisfied.</li>
                             </ol>
                         </div>
-                        <a target="blank" href="https://wa.me/{{ $vehicle->phone }}"
+                        <a target="blank" href="https://wa.me/{{ formatNumber($vehicle->phone) }}"
                             style="color: #00472F; margin-left:5px">
 
                             <button class="btn btn-success">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Register @parent
+    Register  @parent
 @endsection
 
 @section('content')
@@ -35,7 +35,7 @@
                         <div class="row">
 
                             <div class="col-md-6 form-group">
-                                <label for="">Name</label>
+                                <label for="">First Name</label>
                                 <input type="text" class="form-control"name="name" value="{{ old('name') }}">
                                 @if ($errors->has('name'))
                                     <span class="text-danger">{{ $errors->first('name') }}</span>
@@ -50,7 +50,7 @@
                                 @endif
                             </div>
 
-                            <input type="hidden" name="role" id="role" value="buyer">
+                            <input type="hidden" name="role" id="role" value="seller">
 
                             <div class="col-md-6 form-group">
                                 <label for="">Phone Number</label>

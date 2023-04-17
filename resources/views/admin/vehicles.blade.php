@@ -96,6 +96,8 @@
 
                 <div class="col-md-10">
 
+                    <h4 class="text text-black">Vehicles</h4>
+
                     @include('partials.alert')
 
                     <table class="table table-bordered table-striped table-sm dataTable">
@@ -123,17 +125,23 @@
                                     <td>{{ @$item->carmodel->car_model_name }}</td>
                                     <td>{{ $item->year }}</td>
                                     <td>{{ $item->price }}</td>
-                                    <td>{{ ($item->approved) ? "Approved" : False }}</td>
-                                    <td>{{ $item->firstname.' '.$item->lastname }}</td>
+                                    <td>{{ $item->approved ? 'Approved' : false }}</td>
+                                    <td>{{ $item->firstname . ' ' . $item->lastname }}</td>
                                     <td>{{ date('j M Y', strtotime($item->created_at)) }}</td>
                                     <td>
                                         <li class="dropdown">
                                             <a href="#" data-toggle="dropdown"
                                                 class="btn btn-success btn-sm">Action</a>
                                             <ul class="dropdown-menu">
-                                                <li class="dropdown-item"><a href="{{ route('vehicle.approve',$item->id) }}"><i
-                                                            class="fa fa-check text-warning"></i>&nbsp;Approve</a></li>
-                                                </ul>
+                                                <li class="dropdown-item">
+                                                    <a href="{{ route('vehicle.approve', $item->id) }}"><i
+                                                            class="fa fa-check text-warning"></i>&nbsp;Approve</a>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <a href="{{ route('dealer.editcar', $item->id) }}"><i
+                                                            class="fa fa-edit text-warning"></i>&nbsp;Edit</a>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </td>
                                 </tr>

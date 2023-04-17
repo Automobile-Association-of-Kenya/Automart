@@ -28,6 +28,7 @@ class User extends Authenticatable
         'number2',
         'county',
         'dName',
+        'role',
         'remember_token',
         'email_verified_at',
         'password',
@@ -52,12 +53,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function register($name, $email, $phone, $password)
+    public function register($name, $email, $phone, $role, $password)
     {
         return $this->create([
             'name' => $name,
             'email' => $email,
             'phone' => $phone,
+            'role' => $role,
             'password' => Hash::make($password),
             'remember_token' => Str::random(26),
         ]);

@@ -1,4 +1,8 @@
 @extends('layouts.dashboard')
+
+@section('title')
+    Edit Car @parent
+@endsection
 @section('content')
     @php
         $user = session('user');
@@ -83,29 +87,32 @@
                     Phone: {{ $user->number }}
                 </div>
                 @include('layouts.sidebar')
-                <div class="col-md-10 mt-5 pt-5">
+                <div class="col-md-10">
                     <div class="col-md-12" style="padding-left : 20px; padding-right : 20px;">
                         @include('partials.alert')
                         <div class="pageLoader" id="pageLoader"></div>
-                        <form action="{{ route('updatecar', $details->id) }}" method="POST" enctype="multipart/form-data">
+                        <h2 class="form-title" style="color: #00472F">Edit Vehicle Information » </h2>
+
+                        <form action="{{ route('updatecar', $details->id) }}" method="POST" enctype="multipart/form-data"
+                            id="vehicleEditForm">
                             {{ csrf_field() }}
-                            <h2 class="form-title" style="color: #00472F">Edit Vehicle Information » </h2>
+
                             <label class="gt-title" for="gt-title">Your listing title</label>
                             <input class="form-control" type="text" id="gt-title" tabindex="2" name="title"
                                 placeholder="Enter listing title" required style="text-transform:uppercase"
                                 value="{{ $details->title }}">
                             <div class="row" style="padding-top: 10px; padding-bottom: 1px;">
                                 <div class="col-md-12">
-                                    <select name="country" id="country" class="gt-select" tabindex="3" required
-                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
+                                    <select name="country" id="country" tabindex="3" required
+                                        class="form-control form-control-md">
                                         <option value="-1" selected="selected">Country</option>
                                         <option class="level-0" value="Kenya" selected data-value="41">Kenya</option>
-
                                     </select>
                                 </div>
+                                <input type="hidden" name="vehicle_id" id="vehicleID" value="{{ $details->id }}">
                                 <div class="col-md-12 mt-1">
-                                    <select name="county" id="county" tabindex="4" data-value="" required
-                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
+                                    <select class="form-control form-control-md" name="county" id="county"
+                                        data-value="" required>
                                         <option value="" data-value="-1" selected="selected">County
                                         </option>
                                         <option class="level-0" value="Other"
@@ -269,9 +276,8 @@
                                 <div class="col-md-4 ">
                                     <label>Make</label>
                                     <!-- <input class="form-control" type="text" name="make" placeholder="Enter Vehicle Make" style="text-transform:uppercase" required> -->
-                                    <select class="form-control" id="car_make" name="make" aria-hidden="true"
-                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;"
-                                        required>
+                                    <select class="form-control form-control-md" id="car_make" name="make"
+                                        aria-hidden="true" required>
                                         <option value="Any Make" selected="false">Make</option>
                                         @foreach ($makes as $item)
                                             <option value="{{ $item->car_make_id }}"
@@ -283,9 +289,8 @@
                                 </div>
                                 <div class="col-md-4 ">
                                     <label>Model</label>
-                                    <select class="" name="model" id="car_model" required aria-hidden="true"
-                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;"
-                                        required>
+                                    <select class="form-control form-control-md" name="model" id="car_model" required
+                                        aria-hidden="true" required>
                                         <option value="Any Make" selected="false">Model</option>
                                         @if ($details->carmodel != null)
                                             <option value="{{ $details->carmodel->car_model_id }}" selected>
@@ -298,8 +303,8 @@
                                 <div class="col-md-4">
 
                                     <label>Year of Manufacture</label>
-                                    <select name="year" id="year" tabindex="4" data-value="" required
-                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
+                                    <select name="year" id="year" class="form-control form-control-md"
+                                        data-value="" required>
                                         <option value="-1">Select Year of Manufacture</option>
                                         <option value="2021" {{ $details->year == '2021' ? 'selected' : '' }}>2021
                                         </option>
@@ -370,8 +375,7 @@
 
                             <div class="row" style="padding-top:10px; padding-bottom:10px;">
                                 <div class="col-md-4 mt-1">
-                                    <select id="exterior" tabindex="8" name="exterior" required
-                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
+                                    <select id="exterior" class="form-control form-control-md" name="exterior" required>
                                         <option value="-1">Color</option>
                                         <option value="White" {{ $details->exterior == 'White' ? 'selected' : '' }}>White
                                         </option>
@@ -399,8 +403,8 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4 mt-1">
-                                    <select id="interior" value="" tabindex="4" name="interior" required
-                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
+                                    <select id="interior" value="" class="form-control form-control-md"
+                                        name="interior" required>
                                         <option value="-1">Interior Type</option>
                                         <option value="Leather" {{ $details->interior == 'Leather' ? 'selected' : '' }}>
                                             Leather</option>
@@ -412,8 +416,8 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4 mt-1">
-                                    <select id="usage" value="" tabindex="4" name="usage" required
-                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
+                                    <select id="usage" value="" class="form-control form-control-md"
+                                        name="usage" required>
                                         <option value="-1">Vehicle Usage</option>
                                         <option value="New" {{ $details->usage == 'New' ? 'selected' : '' }}>
                                             New </option>
@@ -425,8 +429,8 @@
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-1">
-                                    <select id="fuel_type" tabindex="5" name="fuel_type" required
-                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
+                                    <select id="fuel_type" class="form-control form-control-md" name="fuel_type"
+                                        required>
                                         <option value="-1">Fuel Type</option>
                                         <option value="Petrol" {{ $details->fuel_type == 'Petrol' ? 'selected' : '' }}>
                                             Petrol</option>
@@ -448,68 +452,68 @@
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
                                     <input type="checkbox" value="4WD/AWD" id="4WD/AWD" name="features[]"
-                                        {{ in_array('4WD/AWD', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;4WD/AWD
+                                        {{ in_array('4WD/AWD', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;4WD/AWD
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="ABS Brakes" id="ABS Brakes" name="features[]"
-                                        {{ in_array('ABS Brakes', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;ABS
+                                        {{ in_array('ABS Brakes', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;ABS
                                     Brakes
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Air Conditioning" id="Air Conditioning"
                                         name="features[]"
-                                        {{ in_array('Air Conditioning', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Air
+                                        {{ in_array('Air Conditioning', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Air
                                     Conditioning
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Alloy Wheels" id="Alloy Wheels" name="features[]"
-                                        {{ in_array('Alloy Wheels', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Alloy
+                                        {{ in_array('Alloy Wheels', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Alloy
                                     Wheels
                                 </div>
                             </div>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
                                     <input type="checkbox" value="AM/FM Stereo" id="AM/FM Stereo" name="features[]"
-                                        {{ in_array('AM/FM Stereo', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;AM/FM
+                                        {{ in_array('AM/FM Stereo', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;AM/FM
                                     Stereo
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Roof Racks" id="Roof Racks" name="features[]"
-                                        {{ in_array('Roof Racks', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Roof
+                                        {{ in_array('Roof Racks', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Roof
                                     Racks
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Auxiliary Audio Input" id="Auxiliary Audio Input"
                                         name="features[]"
-                                        {{ in_array('Auxiliary Audio Input', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Auxiliary
+                                        {{ in_array('Auxiliary Audio Input', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Auxiliary
                                     Audio Input
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="CD Audio" id="CD Audio" name="features[]"
-                                        {{ in_array('CD Audio', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;CD
+                                        {{ in_array('CD Audio', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;CD
                                     Audio
                                 </div>
                             </div>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Cruise Control" id="Cruise Control" name="features[]"
-                                        {{ in_array('Cruise Control', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Cruise
+                                        {{ in_array('Cruise Control', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Cruise
                                     Control
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Front Seat Heaters" id="Front Seat Heaters"
                                         name="features[]"
-                                        {{ in_array('Front Seat Heaters', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Front
+                                        {{ in_array('Front Seat Heaters', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Front
                                     Seat Heaters
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Leather Seats" id="Leather Seats" name="features[]"
-                                        {{ in_array('Leather Seats', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Leather
+                                        {{ in_array('Leather Seats', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Leather
                                     Seats
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Memory Seat(s)" id="Memory Seat(s)" name="features[]"
-                                        {{ in_array('Memory Seat(s)', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Memory
+                                        {{ in_array('Memory Seat(s)', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Memory
                                     Seat(s)
                                 </div>
                             </div>
@@ -517,47 +521,47 @@
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Navigation System" id=" Navigation System"
                                         name="features[]"
-                                        {{ in_array('Navigation System', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Navigation
+                                        {{ in_array('Navigation System', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Navigation
                                     System
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Overhead Airbags" id="Overhead Airbags"
                                         name="features[]"
-                                        {{ in_array('Overhead Airbags', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Overhead
+                                        {{ in_array('Overhead Airbags', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Overhead
                                     Airbags
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Panoramic Sunroof" id="Panoramic Sunroof"
                                         name="features[]"
-                                        {{ in_array('Panoramic Sunroof', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Panoramic
+                                        {{ in_array('Panoramic Sunroof', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Panoramic
                                     Sunroof
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Parking Sensors" id="Parking Sensors"
                                         name="features[]"
-                                        {{ in_array('Parking Sensors', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Parking
+                                        {{ in_array('Parking Sensors', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Parking
                                     Sensors
                                 </div>
                             </div>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Power Locks" id="Power Locks" name="features[]"
-                                        {{ in_array('Power Locks', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Power
+                                        {{ in_array('Power Locks', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Power
                                     Locks
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Power Mirrors" id="Power Mirrors" name="features[]"
-                                        {{ in_array('Power Mirrors', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Power
+                                        {{ in_array('Power Mirrors', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Power
                                     Mirrors
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Power Seat(s)" id="Power Seat(s)" name="features[]"
-                                        {{ in_array('Power Seat(s)', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Power
+                                        {{ in_array('Power Seat(s)', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Power
                                     Seat(s)
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Power Windows" id="Power Windows" name="features[]"
-                                        {{ in_array('Power Windows', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Power
+                                        {{ in_array('Power Windows', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Power
                                     Windows
                                 </div>
                             </div>
@@ -565,56 +569,56 @@
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Premium Package" id="Premium Package"
                                         name="features[]"
-                                        {{ in_array('Premium Package', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Premium
+                                        {{ in_array('Premium Package', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Premium
                                     Package
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Rear Defroster" id="Rear Defroster" name="features[]"
-                                        {{ in_array('Rear Defroster', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Rear
+                                        {{ in_array('Rear Defroster', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Rear
                                     Defroster
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Rear View Camera" id="Rear View Camera"
                                         name="features[]"
-                                        {{ in_array('Rear View Camera', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Rear
+                                        {{ in_array('Rear View Camera', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Rear
                                     View Camera
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Satellite Radio Ready" id="Satellite Radio Ready"
                                         name="features[]"
-                                        {{ in_array('Satellite Radio Ready', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Satellite
+                                        {{ in_array('Satellite Radio Ready', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Satellite
                                     Radio Ready
                                 </div>
                             </div>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Side Airbags" id="Side Airbags" name="features[]"
-                                        {{ in_array('Side Airbags', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Airbags
+                                        {{ in_array('Side Airbags', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Airbags
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="SiriusXM Trial Avail" id="SiriusXM Trial Avail"
                                         name="features[]"
-                                        {{ in_array('SiriusXM Trial Avail', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;SiriusXM
+                                        {{ in_array('SiriusXM Trial Avail', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;SiriusXM
                                     Trial Avail
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Technology Package" id="Technology Package"
                                         name="features[]"
-                                        {{ in_array('Technology Package', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Technology
+                                        {{ in_array('Technology Package', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Technology
                                     Package
                                 </div>
                                 <div class="col-md-3">
                                     <input type="checkbox" value="Traction Control" id="Traction Control"
                                         name="features[]"
-                                        {{ in_array('Traction Control', json_decode($details->features)) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Traction
+                                        {{ in_array('Traction Control', $features) ? 'checked' : '' }}>&nbsp;&nbsp;&nbsp;Traction
                                     Control
                                 </div>
                             </div>
                             <div class="row" style="padding-top:10px; padding-bottom:15px;">
-                                <div class=" col-md-12">
-                                    <label>Transmission</label>
-                                    <select id="transmission" name="transmission" tabindex="13" required
-                                        style="width: 100%; background-color: rgba(0,0,0, 0.6); color: #fff; border-radius:8px;padding-top:10px;padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="form-label">Transmission</label>
+                                    <select class="form-control form-control-sm" id="transmission" name="transmission"
+                                        tabindex="13" required>
                                         <option value="" s>Transmission Type</option>
                                         <option value="Automatic"
                                             {{ $details->transmission == 'Automatic' ? 'selected' : '' }}>Automatic
@@ -629,13 +633,12 @@
                                             None</option>
                                     </select>
                                 </div>
+                                <div class="col-md-12 form-group" style="padding-top:10px; padding-bottom:15px;">
+                                    <label class="form-label" for="description">Vehicle Description</label>
+                                    <textarea class="form-control form-control-lg" required id="description" name="description">{{ $details->description }}</textarea>
+                                </div>
+                            </div>
 
-                            </div>
-                            <div class="form-outline" style="padding-top:10px; padding-bottom:15px;">
-                                <textarea class="form-control" required placeholder="Enter vehicle listing description." id="description"
-                                    name="description" rows="4" style="background: #fff;" required>{{ $details->description }}</textarea>
-                                <label class="form-label" for="description">Vehicle Description</label>
-                            </div>
                             <div class="row">
                                 <div class="col-6 col-lg-4">
                                     <label class="btn btn-success btn-file"><br>
@@ -643,7 +646,7 @@
                                         <input type="hidden" name="removedImages1" class="removedImgs1" value=''>
                                         <input class="form-control" type="file" id="fileupload1" name="cover_photo"
                                             tabindex="21" style="display:none" value="Upload Photos"><br>
-                                    </label></p>
+                                    </label>
                                 </div>
                                 <div class="col-sm-6 col-lg-8" style="color:#000;">
                                     <span class="instructions">This is the image that will appear on the top.</span>
@@ -667,11 +670,12 @@
                                     <label class="btn btn-success btn-file"><br>
                                         Upload Photos
                                         <input type="hidden" name="removedImages" value=''>
-                                        <input class="form-control" id="fileupload" type="file" name="images[]"
-                                            tabindex="21" style="display:none" value="Upload Photos"
+                                        <input class="form-control" id="multiImagesUpload" type="file"
+                                            name="images[]" tabindex="21" style="display:none" value="Upload Photos"
                                             multiple=""><br>
-                                    </label></p>
+                                    </label>
                                 </div>
+
                                 <div class="col-sm-6 col-lg-8" style="color:#000;">
                                     <span class="instructions">Images will be automatically resized to fit
                                         the listing layout. We recommend that you upload photos in full
@@ -703,7 +707,6 @@
                                         @endforeach
                                     @endif
                                 </div>
-
                             </div>
                             <h2 class="form-title" style="color: #00472F">Personal Information</h2>
                             <div class="row">
@@ -795,57 +798,7 @@
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
     <script>
         $(function() {
-            // Multiple images preview with JavaScript
 
-            var previewImages = function(input, imgPreviewPlaceholder) {
-                if (input.files) {
-                    var noFiles = input.files.length;
-                    for (let i = 0; i < noFiles; i++) {
-                        if (input.files[i].size > 5000000) {
-                            alert(input.files[i].name + ' is greater than 5mb');
-                            input.value = ''
-                            break;
-                        }
-                        var reader = new FileReader();
-                        reader.onload = function(event) {
-                            const div = document.createElement('span');
-                            div.classList.add('img_' + i)
-                            div.style.cssText = 'position:relative'
-                            const img = document.createElement('img');
-                            img.setAttribute('src', event.target.result);
-                            const deleter = document.createElement('span');
-                            deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
-                            deleter.style.cssText =
-                                'cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
-                            deleter.addEventListener('click', e => {
-                                removeImage(input, imgPreviewPlaceholder, i);
-                            })
-                            div.appendChild(img);
-                            div.appendChild(deleter);
-                            document.querySelector(imgPreviewPlaceholder).appendChild(div)
-
-                        }
-                        reader.readAsDataURL(input.files[i]);
-                    }
-                }
-            };
-            $('#fileupload').on('change', function() {
-                document.querySelector('.removedImgs').value = ''
-                previewImages(this, 'div.images-preview-div');
-            });
-
-            const removeImage = (input, imgPreviewPlaceholder, index) => {
-                let removedImages = document.querySelector('.removedImgs').value;
-                removedImages = removedImages += index + ',';
-                document.querySelector('.removedImgs').value = removedImages
-                const el = document.querySelector('.img_' + index);
-                el.parentElement.removeChild(el)
-            }
-        });
-    </script>
-    <script>
-        $(function() {
-            // Multiple images preview with JavaScript
             $('body').on('click', '#deleteImage', function(event) {
                 event.preventDefault();
                 let $this = $(this);
@@ -875,15 +828,16 @@
                     }
                 })
             });
+
             var previewImages = function(input, imgPreviewPlaceholder) {
                 if (input.files) {
                     var noFiles = input.files.length;
                     for (let i = 0; i < noFiles; i++) {
-                        if (input.files[i].size > 5000000) {
-                            alert(input.files[i].name + ' is greater than 5mb');
-                            input.value = ''
-                            break;
-                        }
+                        // if (input.files[i].size > 5000000) {
+                        //     alert(input.files[i].name + ' is greater than 5mb');
+                        //     input.value = ''
+                        //     break;
+                        // }
                         var reader = new FileReader();
                         reader.onload = function(event) {
                             const div = document.createElement('span');
@@ -907,6 +861,7 @@
                     }
                 }
             };
+
             $('#fileupload1').on('change', function() {
                 document.querySelector('.removedImgs').value = ''
                 previewImages(this, 'div.images-preview-div1');
@@ -919,6 +874,190 @@
                 const el = document.querySelector('.img_' + index);
                 el.parentElement.removeChild(el)
             }
+
+            const vehicle_id = $('#vehicleID').val(),
+                token = $("input[name='_token']").val();
+            /** compress cover photo*/
+            var input = document.getElementById('fileupload1');
+            input.addEventListener('change', function() {
+                let $this = $(this);
+                localStorage.removeItem('cover_photo');
+                var file = input.files[0];
+                var reader = new FileReader();
+                reader.onload = function() {
+                    var img = new Image();
+                    img.onload = function() {
+                        var width = 800;
+                        var height = 600;
+                        var canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+                        var compressedFile = canvas.toDataURL("image/jpeg", 0.8);
+                        $.post('/application-images-update', {
+                            _token: token,
+                            vehicle_id: vehicle_id,
+                            image: compressedFile
+                        }).done(function(params) {
+                            console.log(params);
+                        }).fail(function(error) {
+                            console.log(error);
+                        });
+                    };
+                    img.src = reader.result;
+                };
+                reader.readAsDataURL(file);
+            });
+
+            var compressedImages = [];
+            let multiInput = document.getElementById('fileupload');
+
+            $("#multiImagesUpload").on("change", function(e) {
+                var files = e.target.files;
+                previewImages(document.getElementById('multiImagesUpload'), 'div.images-preview-div')
+                localStorage.removeItem('compressedImages');
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var img = new Image();
+                        img.src = e.target.result;
+                        img.onload = function() {
+                            var canvas = document.createElement("canvas");
+                            var ctx = canvas.getContext("2d");
+                            canvas.width = 600;
+                            canvas.height = 450;
+                            let leet = 'image_' + i;
+                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                            var compressedDataUrl = canvas.toDataURL("image/jpeg", 0.5);
+
+                            $.post('/application-images', {
+                                _token: token,
+                                vehicle_id: vehicle_id,
+                                image: compressedDataUrl
+                            }).done(function(params) {
+                                console.log(params);
+                            }).fail(function(error) {
+                                console.log(error);
+                            });
+                        };
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            $('#vehicleEditForm').on('submit', function(event) {
+                event.preventDefault();
+                let $this = $(this);
+                $this.find("#vehicleSubmit").prop({
+                    disabled: true
+                });
+                var DformData = new FormData();
+                let title = $("input[name='title']").val(),
+                    country = $("#country").val(),
+                    county = $("#county").val(),
+                    make = $("#car_make").val(),
+                    model = $("#car_model").val(),
+                    year = $("#year").val(),
+                    price = $("#price").val(),
+                    miles = $("#miles").val(),
+                    enginecc = $("#enginecc").val(),
+                    exterior = $("#exterior").val(),
+                    interior = $("#interior").val(),
+                    usage = $("#usage").val(),
+                    fuel_type = $("#fuel_type").val(),
+                    transmission = $("#transmission").val(),
+                    description = $("#description").val(),
+                    firstname = $("#firstname").val(),
+                    lastname = $("#gt-lastname").val(),
+                    email = $("#email").val(),
+                    phone = $("#phone").val(),
+                    features = $("input[name='features[]']").serializeArray(),
+                    vehicle_type = $('#vehicle_type').val(),
+                    featuresf = [];
+
+                $.each(features, (key, value) => {
+                    featuresf.push(value.value)
+                });
+
+                DformData.append('features', featuresf);
+                DformData.append('title', title);
+                DformData.append('country', country);
+                DformData.append('county', county);
+                DformData.append('make', make);
+                DformData.append('model', model);
+                DformData.append('year', year);
+                DformData.append('price', price);
+                DformData.append('miles', miles);
+                DformData.append('vehicle_type', vehicle_type);
+                DformData.append('enginecc', enginecc);
+                DformData.append('exterior', exterior);
+                DformData.append('interior', interior);
+                DformData.append('usage', usage);
+                DformData.append('fuel_type', fuel_type);
+                DformData.append('transmission', transmission);
+                DformData.append('description', description);
+                DformData.append('firstname', firstname);
+                DformData.append('lastname', lastname)
+                DformData.append('email', email);
+                DformData.append('phone', phone);
+
+                for (var pair of DformData.entries()) {
+                    console.log(pair[0] + ' - ' + pair[1]);
+                }
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $this.find("input[name='_token']").val(),
+                    }
+                });
+                $.ajax({
+                    type: 'PATCH',
+                    url: '/application/' + vehicle_id,
+                    data: DformData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log(response);
+                        // var result = JSON.parse(response);
+                        // if (result.status === "success") {
+                        //     // removeImage(document.getElementById('fileupload1'), 'div.images-preview-div1', i);
+                        //     // removeImage(document.getElementById('multiImagesUpload'), 'div.images-preview-div', i);
+                        //     $this.trigger('reset');
+                        //     $(".feedback").html(
+                        //         "<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Success!       </strong>" +
+                        //         result.message + "!</div>");
+                        // } else if (result.status === "error") {
+                        //     $(".feedback").html(
+                        //         "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>Error occured during processing!</div>"
+                        //     );
+                        // }
+
+                        // window.location.href = '/Available';
+
+                        // $this.find("#vehicleSubmit").prop({
+                        //     disabled: false
+                        // });
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        if (error.status == 422) {
+                            var p = "";
+                            $.each(error.responseJSON.errors, function(key, value) {
+                                p += value + "!";
+                            });
+                        } else {
+                            p += "Error occured during processing!";
+                        }
+                        $(".feedback").html(
+                            "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>" +
+                            p + "</div>");
+                        $("#vehicleSubmit").prop({
+                            disabled: false
+                        });
+                    }
+                });
+            });
         });
     </script>
 @endsection
