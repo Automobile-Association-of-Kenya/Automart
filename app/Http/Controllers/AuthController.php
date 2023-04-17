@@ -30,10 +30,15 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
+    public function registerseller()
+    {
+        return view('auth.register1');
+    }
+
 
     public function registerUser(UserRequest $request)
     {
-        $user = $this->user->register($request->name, $request->email, $request->phone, $request->password);
+        $user = $this->user->register($request->name, $request->email, $request->phone,$request->role, $request->password);
         $this->user->emailAccountVerification($request->email);
         return redirect('login')->with('success', 'Account created successfully and an email has been sent to you for confirmation');
     }

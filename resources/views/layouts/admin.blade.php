@@ -1,4 +1,3 @@
-<?php?> ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -501,7 +500,7 @@
                     <!-- Notifications -->
 
                     <!-- Avatar -->
-                
+
                     <div class="dropdown">
                         <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
                             id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown"
@@ -520,7 +519,7 @@
                             </li>
                         </ul>
                     </div>
-                   
+
                 </div>
                 <!-- Right elements -->
             </div>

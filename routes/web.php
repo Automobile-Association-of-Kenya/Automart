@@ -73,6 +73,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/password-reset/{token}', [AuthController::class, 'reset'])->name('password.reset');
     Route::post('/reset-password', [AuthController::class, 'passwordReset'])->name('reset.password');
     Route::get('/email-verify/{token}', [AuthController::class, 'verify']);
+    Route::get('seller/register', [AuthController::class, 'registerseller'])->name('seller.create');
 });
 
 Route::get('/getmodel/{id}','SellController@getmodel')-> name('getmodel');
@@ -109,7 +110,7 @@ Route::post('application-images-update', [ApplicationController::class, 'updateI
 Route::get('vehicle/{id}', [VehicleController::class, 'get']);
 
 Route::resource('users', UserController::class);
-
+Route::get('about', [ApplicationController::class, 'about'])->name('about');
 
 Route::get('vehicles', [VehicleController::class, 'index'])->name('vehicles');
 Route::get('vehicle/approve/{id}', [VehicleController::class, 'approve'])->name('vehicle.approve');

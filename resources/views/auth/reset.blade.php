@@ -1,8 +1,8 @@
 
-@extends('layouts.new')
+@extends('layouts.app')
 
 @section('title')
-Password reset : @parent
+Password reset  @parent
 @endsection
 
 @section('content')
