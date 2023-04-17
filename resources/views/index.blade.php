@@ -56,7 +56,7 @@
                     <div class="inline-search-area">
                         <div class="row row-3">
                             <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
-                                <select class="selectpicker search-fields" name="select-brand">
+                                <select class="selectpicker search-fields" name="searchmodel" id="searchmodel">
                                     <option> Select Make</option>
                                     @foreach ($makes as $item)
                                         <option value="{{ $item->car_make_id }}">{{ $item->car_make_name }}
@@ -119,7 +119,7 @@
                             <a href="{{ route('details', $item->id) }}">
                                 <div class="car-image">
                                     @if (count($images) > 0)
-                                        <img src="{{ asset('images/' . $images[0]) }}" width="100%"
+                                        <img src="{{ asset('images/' . @$images[0]) }}" width="100%"
                                             height="280px">
                                     @else
                                         <img src="#" alt="car-photo" width="100%" height="250px">
@@ -185,5 +185,7 @@
             </div>
         </div>
     </div>
+@section('footer_scripts')
 
+@endsection
 @endsection

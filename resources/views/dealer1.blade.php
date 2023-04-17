@@ -57,7 +57,6 @@
         }
     </style>
     <div class="row" style="padding-right:10px">
-
         <!-- user profile start -->
         <div id="5" class="show-when-target:target">
             <div class="row">

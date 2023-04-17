@@ -294,36 +294,6 @@
     <script src="{{ url('assets/js/sidebar.js') }}"></script>
     <script src="{{ url('assets/js/app.js') }}"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#car_make').on('change', function() {
-                var carmake_id = this.value;
-                $("#car_model").html('');
-                $.ajax({
-                    url: "{{ url('fetch/car-models') }}",
-                    type: "POST",
-                    data: {
-                        car_make_id: carmake_id,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    dataType: 'json',
-                    success: function(result) {
-
-                        $('#car_model').html(
-                            '<option value="">Select Car Model</option>');
-
-                        result.data.forEach(model => {
-                            document.querySelector('#car_model').innerHTML +=
-                                '<option value="' + model
-                                .id + '">' + model.name +
-                                '</option>';
-
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 
     @yield('footer_scripts')
 </body>

@@ -100,13 +100,13 @@ class VehicleController extends Controller
 
                 //add watermark
                 $img = Image::make(public_path('images/'.$name));
-                $img->text(' '.$req->firstname.' '.$req->lastname, 150, 120, function($font) {  
-                    $font->file(public_path('assets/fonts/font.ttf'));  
-                    $font->size(30);  
-                    $font->color('#CECECE');  
-                    $font->align('center');  
-                    $font->valign('center');  
-                    $font->angle(0);  
+                $img->text(' '.$req->firstname.' '.$req->lastname, 150, 120, function($font) {
+                    $font->file(public_path('assets/fonts/font.ttf'));
+                    $font->size(30);
+                    $font->color('#CECECE');
+                    $font->align('center');
+                    $font->valign('center');
+                    $font->angle(0);
                 });
                 $img->save(public_path('images/'.$name));
             }
@@ -174,6 +174,7 @@ class VehicleController extends Controller
        $makes = CarMake::all();
        return CarMakeResource::collection($makes);
     }
+    
     public function getModels(Request $request)
     {
         $models = CarModel::where('car_make_id',$request->car_make_id)->orderBy('car_model_name','ASC')->get();
