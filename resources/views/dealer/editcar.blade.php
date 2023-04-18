@@ -306,15 +306,12 @@
                                     <select name="year" id="year" class="form-control form-control-md"
                                         data-value="" required>
                                         <option value="-1">Select Year of Manufacture</option>
-                                        @for ($i = 2022; $i <= 2000; $i--)
-                                            <option value="2021" {{ $details->year == $i ? 'selected' : '' }}>$i</option>
+                                        @for ($i = date('Y',strtotime(now())); $i >= 2000; $i--)
+                                            <option value="2021" {{ $details->year == $i ? 'selected' : '' }}>{{ $i }}</option>
                                         @endfor
                                     </select>
                                 </div>
                             </div>
-
-
-
 
                             <div class="row" style="padding-top:10px;">
                                 <div class="col-md-4">

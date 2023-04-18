@@ -153,7 +153,7 @@
                                 <label>Year of Manufacture</label>
                                 <select class="form-control form-control-sm" name="year" id="year" required>
                                     <option value="">Select One</option>
-                                    @for ($i = date('Y',strtotime(now())); $i <= 2000; $i++)
+                                    @for ($i = date('Y',strtotime(now())); $i >= 2000; $i--)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
                                 </select>
