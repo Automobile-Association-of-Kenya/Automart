@@ -157,9 +157,9 @@
                                         <span>Ksh: {{ $item->price }}</span>
                                     </div>
                                     @if (count($images) > 0)
-                                        <img src="{{ asset('images/' . @$images[0]) }}" width="100%" height="280px">
+                                        <img class="d-block w-100" src="{{ asset('images/' . @$images[0]) }}">
                                     @else
-                                        <img src="#" alt="car-photo" width="100%" height="250px">
+                                        <img class="d-block w-100"  src="#" alt="car-photo">
                                     @endif
                                     <div class="tag">{{ $item->title }}</div>
                                     @if ($item->approved)
