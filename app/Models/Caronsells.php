@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Caronsells extends Model
 {
@@ -22,6 +23,26 @@ class Caronsells extends Model
         return $this->belongsTo(CarMake::class, 'make', 'car_make_id');
     }
     public function carmodel()
+    {
+        return $this->belongsTo(CarModel::class, 'model', 'car_model_id');
+    }
+
+    /**
+     * Get the make that owns the Caronsells
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function make(): BelongsTo
+    {
+        return $this->belongsTo(Make::class, 'make', 'car_make_id');
+    }
+
+    /**
+     * Get the model that owns the Caronsells
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function model(): BelongsTo
     {
         return $this->belongsTo(CarModel::class, 'model', 'car_model_id');
     }

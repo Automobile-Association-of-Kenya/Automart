@@ -7,7 +7,7 @@
     @php
         function formatNumber($number)
         {
-            if (strlen($number) <= 10) {
+            if (!is_null($number) && strlen($number) <= 10) {
                 return '+254' . intval($number);
             } else {
                 return $number;
@@ -54,60 +54,95 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inline-search-area">
-                        <div class="row row-3">
-                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
-                                <select class="selectpicker search-fields" name="searchmodel" id="searchmodel">
-                                    <option> Select Make</option>
-                                    @foreach ($makes as $item)
-                                        <option value="{{ $item->car_make_id }}">{{ $item->car_make_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
 
-                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
-                                <select class="selectpicker search-fields" name="selectModel">
-                                    <option>Select Model</option>
-                                </select>
-                            </div>
+                        <form action="{{ route('vehicle.search') }}" method="post" id="vehicleSearchForm">
+                            <div class="row row-3">
+                                @csrf
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
+                                    <select class="form-control form-control-lg" name="searchmake" id="searchMake">
+                                        <option> Select Make</option>
+                                        @foreach ($makes as $item)
+                                            <option value="{{ $item->car_make_id }}">{{ $item->car_make_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
-                                <select class="selectpicker search-fields" name="select-location">
-                                    <option>Select Location</option>
-                                    <option>United States</option>
-                                    <option>United Kingdom</option>
-                                </select>
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
+                                    <select class="form-control form-control-lg" name="selectmodel" id="selectModel">
+
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
+                                    <select class="form-control form-control-lg" name="searchyear" id="searchYear">
+                                        <option value="">Select Year</option>
+                                        @for ($i = date('Y', strtotime(now())); $i <= 2003; $i--)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
+                                    <select class="form-control form-control-lg" name="searchtype" id="searchType">
+                                        <option value="">Vehicle Type</option>
+                                        <option value="Convertibles">Convertibles</option>
+                                        <option value="Hatchbacks">Hatchbacks</option>
+                                        <option value="SUVs">SUVs</option>
+                                        <option value="Saloon Car">Saloon Car</option>
+                                        <option value="Station Wagons">Station Wagons</option>
+                                        <option value="Pickup Trucks">Pickup Trucks</option>
+                                        <option value="Buses">Buses</option>
+                                        <option value="Taxis">Taxis</option>
+                                        <option value="Vans">Vans</option>
+                                        <option value="Motorbikes">Motorbikes</option>
+                                        <option value="Trucks">Trucks</option>
+                                        <option value="Machinery">Machinery</option>
+                                        <option value="Tractors">Tractors</option>
+                                        <option value="Trailers">Trailers</option>
+                                        <option value="Minis">Minis</option>
+                                        <option value="Coupes">Coupes</option>
+                                        <option value="Quad Bikes">Quad Bikes</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
+                                    <select class="form-control form-control-lg" name="searchprice" id="searchPrice">
+                                        <option value="">Select Price</option>
+                                        <option value="100000">From Ksh. 100000</option>
+                                        <option value="500000">From Ksh. 500000</option>
+                                        <option value="1000000">From Ksh. 1000000</option>
+                                        <option value="1500000">From Ksh. 1500000</option>
+                                        <option value="2000000">From Ksh. 2000000</option>
+                                        <option value="2500000">From Ksh. 200000</option>
+                                        <option value="3000000">From Ksh. 3000000</option>
+                                        <option value="3500000">From Ksh. 3500000 and Above</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
+                                    <button type="submit" class="btn white-btn btn-search w-100"
+                                        style="background-color: #00472F;" id="searchSubmit">
+                                        <i class="fa fa-search text-white"></i><strong>Find</strong>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
-                                <select class="selectpicker search-fields" name="select-year">
-                                    <option>Select Year</option>
-                                    <option>2016</option>
-                                    <option>2017</option>
-                                    <option>2018</option>
-                                    <option>2021</option>
-                                </select>
-                            </div>
-                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
-                                <select class="selectpicker search-fields" name="select-type">
-                                    <option>Select Type Of Car</option>
-                                    <option>New Car</option>
-                                    <option>Used Car</option>
-                                </select>
-                            </div>
-                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
-                                <button class="btn white-btn btn-search w-100" style="background-color: #00472F;">
-                                    <i class="fa fa-search text-white"></i><strong>Find</strong>
-                                </button>
-                            </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="searchArea"></div>
+
     <div class="featured-car content-area">
         <div class="container">
+            <div class="section-header d-flex">
+                <h2>Newly Added</h2>
+            </div>
             <div class="featured-slider row slide-box-btn slider"
                 data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
                 @foreach ($vehicles as $item)
@@ -118,9 +153,11 @@
                         <div class="car-box bg-white">
                             <a href="{{ route('details', $item->id) }}">
                                 <div class="car-image">
+                                    <div class="price-box">
+                                        <span>Ksh: {{ $item->price }}</span>
+                                    </div>
                                     @if (count($images) > 0)
-                                        <img src="{{ asset('images/' . @$images[0]) }}" width="100%"
-                                            height="280px">
+                                        <img src="{{ asset('images/' . @$images[0]) }}" width="100%" height="280px">
                                     @else
                                         <img src="#" alt="car-photo" width="100%" height="250px">
                                     @endif
@@ -167,8 +204,7 @@
                                 </div>
                             </div>
 
-                            <div class="footer clearfix"
-                                style="text-align: center; width:100%; height=30%; background:rgb(190, 186, 186)">
+                            <div class="footer clearfix bg-grey">
                                 <div class="w-100 ratings">
                                     <i class="fa fa-phone text-success"></i> Call or Chat with the owner <i
                                         class="fa fa-envelope text-success"></i>
@@ -185,7 +221,27 @@
             </div>
         </div>
     </div>
-@section('footer_scripts')
 
+
+    {{-- <div class="featured-car content-area-21">
+    <div class="container">
+        <!-- Main title -->
+        <div class="section-header d-flex">
+            <h2 data-title="Types of car"> Featured Car</h2>
+        </div>
+        <div class="row">
+
+
+
+            <div class=\"col-lg-4 col-md-6\"><div class=\"car-box-3\"><div class=\"car-thumbnail\"><a href=\"{{ route('details', "+value.id+") }}\" class=\"car-img\"><div class=\"for\">"+value.title+"</div><div class=\"price-box\"><span>"+value.price+"</span></div><img class=\"d-block w-100\" src=\"{{ asset('images/'."+images[0]+") }}\" alt=\"car\"></a></div><div class=\"detail\"><h1 class=\"title\"><a href=\"{{ route('details', "+value.id+") }}\">"+values.makes.car_make_name+"</a></h1><ul class=\"custom-list\"><li><a href=\"#\">"+value.vehicle_type+"</a></li></ul><ul class=\"facilities-list clearfix\"><li><i class=\"flaticon-fuel\"></i> "+value.fuel_type+"</li><li><i class=\"flaticon-way\"></i> "+value.miles+"</li><li><i class=\"flaticon-manual-transmission\"></i> "+value.transmission+"</li><li><i class=\"flaticon-gear\"></i> "+value.exterior+"</li><li><i class=\"flaticon-calendar-1\"></i> "+value.year+"</li></ul></div><div class=\"footer clearfix\"></div></div></div>
+
+
+
+        </div>
+    </div>
+    </div> --}}
+
+    
+@section('footer_scripts')
 @endsection
 @endsection

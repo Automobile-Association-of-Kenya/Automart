@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/animate.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap-submenu.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap-select.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/magnific-popup.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/fonts/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/fonts/flaticon/font/flaticon.css') }}">
@@ -68,7 +67,7 @@
 
     <!-- Main header start -->
 
-    <header class="main-header sticky-header sh-2" style="background-color: #00472F; color: #fff;">
+    <header class="main-header sticky-header sh-2 bg-main">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand company-logo-2" href="{{ url('/') }}">
@@ -270,16 +269,12 @@
             </div>
         </div>
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url('assets/js/jquery.min.js') }}"></script>
     <script src="{{ url('assets/js/popper.min.js') }}"></script>
-    <script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url('assets/js/bootstrap-submenu.js') }}"></script>
     <script src="{{ url('assets/js/rangeslider.js') }}"></script>
     <script src="{{ url('assets/js/jquery.mb.YTPlayer.js') }}"></script>
-    <script src="{{ url('assets/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ url('assets/js/jquery.easing.1.3.js') }}"></script>
     <script src="{{ url('assets/js/jquery.scrollUp.js') }}"></script>
     <script src="{{ url('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>

@@ -206,10 +206,13 @@
                                     <option value="Saloon Car">Saloon Car</option>
                                     <option value="Station Wagons">Station Wagons</option>
                                     <option value="Pickup Trucks">Pickup Trucks</option>
-                                    <option value="Buses, Taxis and Vans">Buses, Taxis and Vans</option>
+                                    <option value="Buses">Buses</option>
+                                    <option value="Taxis">Taxis</option>
+                                    <option value="Vans">Vans</option>
                                     <option value="Motorbikes">Motorbikes</option>
                                     <option value="Trucks">Trucks</option>
-                                    <option value="Machinery and Tractors">Machinery and Tractors</option>
+                                    <option value="Machinery">Machinery</option>
+                                    <option value="Tractors">Tractors</option>
                                     <option value="Trailers">Trailers</option>
                                     <option value="Minis">Minis</option>
                                     <option value="Coupes">Coupes</option>
@@ -682,7 +685,7 @@
                 }
             });
 
-            
+
             $('#vehicleAdditionForm').on('submit', function(event) {
                 event.preventDefault();
                 let $this = $(this);
@@ -766,7 +769,7 @@
                                 "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>Error occured during processing!</div>"
                             );
                         }
-                        
+
                         window.location.href = '/Available';
 
                         $this.find("#vehicleSubmit").prop({
