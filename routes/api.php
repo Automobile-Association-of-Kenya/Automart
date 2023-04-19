@@ -30,10 +30,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get("list", [VehicleController::class, 'list']);
     Route::post("add", [VehicleController::class, 'add']);
     Route::get("search/{make}", [VehicleController::class, 'search']);
-
-
-
-
 });
 
 Route::post('login', [VehicleController::class, 'login']);
