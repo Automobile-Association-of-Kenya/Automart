@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/autocar-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 05 Apr 2023 11:27:23 GMT -->
+<head>
+    <title>@yield('title') | AA Kenya Limited</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <!-- External CSS libraries -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-submenu.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/magnific-popup.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/flaticon/font/flaticon.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/linearicons/style.css') }}">
+    <link rel="stylesheet" type="text/css"  href="{{ asset('css/jquery.mCustomScrollbar.css') }}">
+    <link rel="stylesheet" type="text/css"  href="{{ asset('css/dropzone.css') }}">
+    <link rel="stylesheet" type="text/css"  href="{{ asset('css/slick.css') }}">
+    <link rel="stylesheet" type="text/css"  href="{{ asset('css/lightbox.min.css') }}">
+    <link rel="stylesheet" type="text/css"  href="{{ asset('css/jnoty.css') }}">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/sidebar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="{{ asset('css/skins/yellow.css') }}">
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon" >
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+
+<header class="top-header bg-active" id="top-header-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-7">
+                <div class="list-inline">
+                    <a href="tel:1-8X0-666-8X88"><i class="fa fa-phone"></i>Need Support? 1-8X0-666-8X88</a>
+                    <a href="tel:info@themevessel.com"><i class="fa fa-envelope"></i>info@themevessel.com</a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-4 col-sm-5">
+                <ul class="top-social-media pull-right">
+                    <li>
+                        <a href="{{ route('login') }}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('register') }}" class="sign-in"><i class="fa fa-user"></i> Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Top header end -->
+
+<!-- Main header start -->
+<header class="main-header sticky-header sh-2">
+    @include('layouts.header')
+</header>
+<!-- Main header end -->
+
+<!-- Sidenav start -->
+@include('sidebar')
+
+<!-- Sidenav end -->
+@yield('main')
+<!-- Footer start -->
+
+<footer class="footer">
+    <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div o>
+    <div class="subscribe-newsletter">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <h3>Subscribe Newsletter</h3>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="Subscribe-box">
+                        <div class="newsletter-content-wrap">
+                            <form class="newsletter-form d-flex" action="#">
+                                <input class="form-control" type="email" id="email" placeholder="Email Address...">
+                                <button class="btn btn-theme" type="submit"><i class="fa fa-paper-plane"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="footer-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-4 col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer-item clearfix">
+                        <img src="{{ asset('images/logo.png') }}" alt="logo" class="f-logo">
+                        <div class="s-border"></div>
+                        <div class="m-border"></div>
+                        <div class="text">
+                            <P class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat.</P>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer-item clearfix">
+                        <h4>
+                            Contact Info
+                        </h4>
+                        <div class="s-border"></div>
+                        <div class="m-border"></div>
+                        <ul class="contact-info">
+                            <li>
+                                <i class="flaticon-pin"></i>Address: 44 New Design Street,
+                            </li>
+                            <li>
+                                <i class="flaticon-mail"></i><a href="mailto:sales@hotelempire.com">info@themevessel.com</a>
+                            </li>
+                            <li>
+                                <i class="flaticon-phone"></i><a href="tel:+55-417-634-7071">+0477 85X6 552</a>
+                            </li>
+                            <li>
+                                <i class="flaticon-fax"></i>+0477 85X6 552
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
+                    <div class="footer-item">
+                        <h4>
+                            Useful Links
+                        </h4>
+                        <div class="s-border"></div>
+                        <div class="m-border"></div>
+                        <ul class="links">
+                            <li>
+                                <a href="#"><i class="fa fa-angle-right"></i>Home</a>
+                            </li>
+                            <li>
+                                <a href="about.html"><i class="fa fa-angle-right"></i>About Us</a>
+                            </li>
+                            <li>
+                                <a href="services.html"><i class="fa fa-angle-right"></i>Services</a>
+                            </li>
+                            <li>
+                                <a href="car-list-rightside.html"><i class="fa fa-angle-right"></i>Car Listing</a>
+                            </li>
+                            <li>
+                                <a href="blog-details.html"><i class="fa fa-angle-right"></i>Blog</a>
+                            </li>
+                            <li>
+                                <a href="contact.html"><i class="fa fa-angle-right"></i>Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="elements.html"><i class="fa fa-angle-right"></i>Elements</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                    <div class="footer-item clearfix">
+                        <div class="footer-gallery clearfix">
+                            <h4>Our Gallery</h4>
+                            <div class="s-border"></div>
+                            <div class="m-border"></div>
+                            <ul>
+                                <li>
+                                    <img src="img/car/small-car-1.jpg" alt="small-img">
+                                </li>
+                                <li>
+                                    <img src="img/car/small-car-2.jpg" alt="small-img">
+                                </li>
+                                <li>
+                                    <img src="img/car/small-car-3.jpg" alt="small-img">
+                                </li>
+                                <li>
+                                    <img src="img/car/small-car-4.jpg" alt="small-img">
+                                </li>
+                                <li>
+                                    <img src="img/car/small-car-5.jpg" alt="small-img">
+                                </li>
+                                <li>
+                                    <img src="img/car/small-car-6.jpg" alt="small-img">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sub-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <p class="copy">© 2022 <a href="#">Automart AA Kenya Limited</a> All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="social-media clearfix">
+                        <div class="social-list">
+                            <div class="icon facebook">
+                                <div class="tooltip">Facebook</div>
+                                <span><i class="fa fa-facebook"></i></span>
+                            </div>
+                            <div class="icon twitter">
+                                <div class="tooltip">Twitter</div>
+                                <span><i class="fa fa-twitter"></i></span>
+                            </div>
+                            <div class="icon instagram">
+                                <div class="tooltip">Instagram</div>
+                                <span><i class="fa fa-instagram"></i></span>
+                            </div>
+                            <div class="icon github">
+                                <div class="tooltip">Github</div>
+                                <span><i class="fa fa-github"></i></span>
+                            </div>
+                            <div class="icon youtube mr-0">
+                                <div class="tooltip">Youtube</div>
+                                <span><i class="fa fa-youtube"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer end -->
+
+<!-- Full Page Search -->
+<div id="full-page-search">
+    <button type="button" class="close">×</button>
+    <form action="https://storage.googleapis.com/theme-vessel-items/checking-sites/autocar-html/HTML/main/index.html#" class="full-page-search-inner">
+        <input type="search" value="" placeholder="type keyword(s) here" />
+        <button type="submit" class="btn btn-sm button-theme">Search</button>
+    </form>
+</div>
+
+<!-- Car Overview Modal -->
+<div class="car-model-2">
+    <div class="modal fade" id="carOverviewModal" tabindex="-1" role="dialog" aria-labelledby="carOverviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title" id="carOverviewModalLabel">
+                        <h4>Find Your Dream Car</h4>
+                        <h5><i class="flaticon-pin"></i> 123 Kathal St. Tampa City,</h5>
+                    </div>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row modal-raw">
+                        <div class="col-lg-6 modal-left">
+                            <div class="item active">
+                                <img src="img/car-11.jpg" alt="best-car" class="img-fluid">
+                                <div class="sobuz">
+                                    <div class="price-box">
+                                        <span class="del"><del>$950.00</del></span>
+                                        <br>
+                                        <span class="del-2">$1050.00</span>
+                                    </div>
+                                    <div class="ratings-2">
+                                        <span class="ratings-box">4.5/5</span>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        ( 7 Reviews )
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 modal-right">
+                            <div class="modal-right-content">
+                                <section>
+                                    <h3>Features</h3>
+                                    <div class="features">
+                                        <ul class="bullets">
+                                            <li>Cruise Control</li>
+                                            <li>Airbags</li>
+                                            <li>Air Conditioning</li>
+                                            <li>Alarm System</li>
+                                            <li>Audio Interface</li>
+                                            <li>CDR Audio</li>
+                                            <li>Seat Heating</li>
+                                            <li>ParkAssist</li>
+                                        </ul>
+                                    </div>
+                                </section>
+                                <section>
+                                    <h3>Overview</h3>
+                                    <ul class="bullets">
+                                        <li>Model</li>
+                                        <li>Year</li>
+                                        <li>Condition</li>
+                                        <li>Price</li>
+                                        <li>Audi</li>
+                                        <li>2020</li>
+                                        <li>Brand New</li>
+                                        <li>$178,000</li>
+                                    </ul>
+                                </section>
+                                <div class="description">
+                                    <h3>Description</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.</p>
+                                    <a href="car-details.html" class="btn btn-md btn-round btn-theme">Show Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script  src="{{ asset('js/bootstrap-submenu.js') }}"></script>
+<script  src="{{ asset('js/rangeslider.js') }}"></script>
+<script  src="{{ asset('js/jquery.mb.YTPlayer.js') }}"></script>
+<script  src="{{ asset('js/bootstrap-select.min.js') }}"></script>
+<script  src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
+<script  src="{{ asset('js/jquery.scrollUp.js') }}"></script>
+<script  src="{{ asset('js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+<script  src="{{ asset('js/dropzone.js') }}"></script>
+<script  src="{{ asset('js/slick.min.js') }}"></script>
+<script  src="{{ asset('js/jquery.filterizr.js') }}"></script>
+<script  src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+<script  src="{{ asset('js/jquery.countdown.js') }}"></script>
+<script  src="{{ asset('js/jquery.mousewheel.min.js') }}"></script>
+<script  src="{{ asset('js/lightgallery-all.js') }}"></script>
+<script  src="{{ asset('js/jnoty.js') }}"></script>
+<script  src="{{ asset('js/sidebar.js') }}"></script>
+<script  src="{{ asset('js/app.js') }}"></script>
+
+</body>
+</html>
