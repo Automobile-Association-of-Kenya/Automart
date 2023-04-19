@@ -114,3 +114,4 @@ Route::get('about', [ApplicationController::class, 'about'])->name('about');
 
 Route::get('vehicles', [VehicleController::class, 'index'])->name('vehicles');
 Route::get('vehicle/approve/{id}', [VehicleController::class, 'approve'])->name('vehicle.approve');
+Route::post('vehicle/search', [VehicleController::class, 'search'])->name('vehicle.search');

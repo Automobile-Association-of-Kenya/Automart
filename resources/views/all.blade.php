@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-All Listings | @parent
+Vehicles | @parent
 @endsection
 
 @section('content')
@@ -12,72 +12,107 @@ All Listings | @parent
                 <h1>All Cars</h1>
                 <ul class="breadcrumbs">
                     <li><a href="{{ url('/') }}">Home</a></li>
-                    <li class="active">All Cars</li>
+                    <li class="active">All Vehicles</li>
                 </ul>
             </div>
         </div>
     </div>
 
-     <div class="search-box-2 bg-warning">
+    <div class="search-box-2 bg-warning">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="inline-search-area">
-                        <div class="row row-3">
-                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
-                                <select class="selectpicker search-fields" name="select-brand">
-                                    <option> Select Make</option>
-                                    @foreach ($makes as $item)
-                                        <option value="{{ $item->car_make_id }}">{{ $item->car_make_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
 
-                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
-                                <select class="selectpicker search-fields" name="selectModel">
-                                    <option>Select Model</option>
-                                </select>
-                            </div>
+                        <form action="{{ route('vehicle.search') }}" method="post" id="vehicleSearchForm">
+                            <div class="row row-3">
+                                @csrf
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
+                                    <select class="form-control form-control-lg" name="searchmake" id="searchMake">
+                                        <option> Select Make</option>
+                                        @foreach ($makes as $item)
+                                            <option value="{{ $item->car_make_id }}">{{ $item->car_make_name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
-                                <select class="selectpicker search-fields" name="select-location">
-                                    <option>Select Location</option>
-                                    <option>United States</option>
-                                    <option>United Kingdom</option>
-                                </select>
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
+                                    <select class="form-control form-control-lg" name="selectmodel" id="selectModel">
+
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
+                                    <select class="form-control form-control-lg" name="searchyear" id="searchYear">
+                                        <option value="">Select Year</option>
+                                        @for ($i = date('Y', strtotime(now())); $i <= 2003; $i--)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
+                                    <select class="form-control form-control-lg" name="searchtype" id="searchType">
+                                        <option value="">Vehicle Type</option>
+                                        <option value="Convertibles">Convertibles</option>
+                                        <option value="Hatchbacks">Hatchbacks</option>
+                                        <option value="SUVs">SUVs</option>
+                                        <option value="Saloon Car">Saloon Car</option>
+                                        <option value="Station Wagons">Station Wagons</option>
+                                        <option value="Pickup Trucks">Pickup Trucks</option>
+                                        <option value="Buses">Buses</option>
+                                        <option value="Taxis">Taxis</option>
+                                        <option value="Vans">Vans</option>
+                                        <option value="Motorbikes">Motorbikes</option>
+                                        <option value="Trucks">Trucks</option>
+                                        <option value="Machinery">Machinery</option>
+                                        <option value="Tractors">Tractors</option>
+                                        <option value="Trailers">Trailers</option>
+                                        <option value="Minis">Minis</option>
+                                        <option value="Coupes">Coupes</option>
+                                        <option value="Quad Bikes">Quad Bikes</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
+                                    <select class="form-control form-control-lg" name="searchprice" id="searchPrice">
+                                        <option value="">Select Price</option>
+                                        <option value="100000">From Ksh. 100000</option>
+                                        <option value="500000">From Ksh. 500000</option>
+                                        <option value="1000000">From Ksh. 1000000</option>
+                                        <option value="1500000">From Ksh. 1500000</option>
+                                        <option value="2000000">From Ksh. 2000000</option>
+                                        <option value="2500000">From Ksh. 200000</option>
+                                        <option value="3000000">From Ksh. 3000000</option>
+                                        <option value="3500000">From Ksh. 3500000 and Above</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
+                                    <button type="submit" class="btn white-btn btn-search w-100"
+                                        style="background-color: #00472F;" id="searchSubmit">
+                                        <i class="fa fa-search text-white"></i><strong>Find</strong>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
-                                <select class="selectpicker search-fields" name="select-year">
-                                    <option>Select Year</option>
-                                    <option>2016</option>
-                                    <option>2017</option>
-                                    <option>2018</option>
-                                    <option>2021</option>
-                                </select>
-                            </div>
-                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
-                                <select class="selectpicker search-fields" name="select-type">
-                                    <option>Select Type Of Car</option>
-                                    <option>New Car</option>
-                                    <option>Used Car</option>
-                                </select>
-                            </div>
-                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
-                                <button class="btn white-btn btn-search w-100" style="background-color: #00472F;">
-                                    <i class="fa fa-search text-white"></i><strong>Find</strong>
-                                </button>
-                            </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="searchArea"></div>
+
     <!-- Featured car start -->
     <div class="featured-car content-area">
         <div class="container">
+            <div class="section-header d-flex">
+            <h2> Available Vehicles</h2>
+        </div>
             <div class="row">
                 @php
                     function formatNumber($number)
@@ -100,16 +135,15 @@ All Listings | @parent
                                         <div class="for bg-warning"><h4 class="text-white">AA Approved</h4></div>
                                         @endif
                                         <div class="price-box">
-
                                             <span>Ksh. {{ number_format("$vehicle->price") }}</span>
                                         </div>
                                         @php
                                             $images = json_decode($vehicle->images, true);
                                         @endphp
                                         @if (count($images) > 0)
-                                        <img src="{{ url('images/'.@$images[0]) }}" alt="car-photo" width="100%" height="250px">
+                                        <img class="d-block w-100" src="{{ url('images/'.@$images[0]) }}" alt="car-photo">
                                         @else
-                                        <img src="#" alt="car-photo" width="100%" height="300px">
+                                        <img class="d-block w-100" src="#" alt="car-photo">
                                         @endif
                                         {{-- <img src="{{ url('images/' . json_decode($->images, true)[0]) }}"
                                             width="100%" height="230px" alt="car"> --}}
@@ -146,6 +180,7 @@ All Listings | @parent
                                             </li>
                                         </ul>
                                     </div>
+
                                     <div class="footer clearfix" style="background-color:#00472F">
                                         <div class="pull-left ratings">
                                             <i class="fa fa-phone"></i>

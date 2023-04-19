@@ -31,9 +31,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post("add", [VehicleController::class, 'add']);
     Route::get("search/{make}", [VehicleController::class, 'search']);
 
-   
-    
-    
+
+
+
 });
 
 Route::post('login', [VehicleController::class, 'login']);
@@ -45,4 +45,9 @@ Route::post('resizeImagePost', [ImageController::class, 'store'])->name('resizeI
 Route:: post('register',[buyerController::class, 'register']);
 Route::get('models', [VehicleController::class, 'fetchmodels']);
 Route::get('makes', [VehicleController::class, 'fetchmakes']);
+
+/** Pass data encoded string of compressed image to this route the data format should {unique_string:value, image:'data:image/jpg, image data encoded string'} the images should be sent one by one*/
+Route::post('imagecompress', [api\VehicleControlller::class, 'handleImages']);
+/** Send vehicle information here including id of authenticated user, and the unique string in the above route in the format {user_id:value,str_id:value,....} */
+Route::post('vehicle/store', [api\VehicleControlller::class, 'store']);
 

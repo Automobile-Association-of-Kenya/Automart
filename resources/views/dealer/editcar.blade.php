@@ -306,56 +306,12 @@
                                     <select name="year" id="year" class="form-control form-control-md"
                                         data-value="" required>
                                         <option value="-1">Select Year of Manufacture</option>
-                                        <option value="2021" {{ $details->year == '2021' ? 'selected' : '' }}>2021
-                                        </option>
-                                        <option value="2020" {{ $details->year == '2020' ? 'selected' : '' }}>2020
-                                        </option>
-                                        <option value="2019" {{ $details->year == '2019' ? 'selected' : '' }}>2019
-                                        </option>
-                                        <option value="2018" {{ $details->year == '2018' ? 'selected' : '' }}>2018
-                                        </option>
-                                        <option value="2017" {{ $details->year == '2017' ? 'selected' : '' }}>2017
-                                        </option>
-                                        <option value="2016" {{ $details->year == '2016' ? 'selected' : '' }}>2016
-                                        </option>
-                                        <option value="2015" {{ $details->year == '2015' ? 'selected' : '' }}>2015
-                                        </option>
-                                        <option value="2014" {{ $details->year == '2014' ? 'selected' : '' }}>2014
-                                        </option>
-                                        <option value="2013" {{ $details->year == '2013' ? 'selected' : '' }}>2013
-                                        </option>
-                                        <option value="2012" {{ $details->year == '2012' ? 'selected' : '' }}>2012
-                                        </option>
-                                        <option value="2011" {{ $details->year == '2011' ? 'selected' : '' }}>2011
-                                        </option>
-                                        <option value="2010" {{ $details->year == '2010' ? 'selected' : '' }}>2010
-                                        </option>
-                                        <option value="2009" {{ $details->year == '2009' ? 'selected' : '' }}>2009
-                                        </option>
-                                        <option value="2008" {{ $details->year == '2008' ? 'selected' : '' }}>2008
-                                        </option>
-                                        <option value="2007" {{ $details->year == '2007' ? 'selected' : '' }}>2007
-                                        </option>
-                                        <option value="2006" {{ $details->year == '2006' ? 'selected' : '' }}>2006
-                                        </option>
-                                        <option value="2005" {{ $details->year == '2005' ? 'selected' : '' }}>2005
-                                        </option>
-                                        <option value="2004" {{ $details->year == '2004' ? 'selected' : '' }}>2004
-                                        </option>
-                                        <option value="2003" {{ $details->year == '2003' ? 'selected' : '' }}>2003
-                                        </option>
-                                        <option value="2002" {{ $details->year == '2002' ? 'selected' : '' }}>2002
-                                        </option>
-                                        <option value="2001" {{ $details->year == '2001' ? 'selected' : '' }}>2001
-                                        </option>
-                                        <option value="2000" {{ $details->year == '2000' ? 'selected' : '' }}>2000
-                                        </option>
+                                        @for ($i = date('Y',strtotime(now())); $i >= 2000; $i--)
+                                            <option value="2021" {{ $details->year == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                        @endfor
                                     </select>
                                 </div>
                             </div>
-
-
-
 
                             <div class="row" style="padding-top:10px;">
                                 <div class="col-md-4">

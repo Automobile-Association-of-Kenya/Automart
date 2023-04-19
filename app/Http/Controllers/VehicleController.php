@@ -158,12 +158,44 @@ class VehicleController extends Controller
             ]);
         }
     }
-    function search($make)
-    {
-        $cars = Caronsells::where('make',$make)->get();
 
-        return CaronsellResource::collection($cars);
+    function search(Request $request)
+    {
+        $make = $request->make;
+        $model = $request->model;
+        $year = $request->year;
+        $type = $request->type;
+        $price = $request->price;
+
+        $query = Caronsells::query();
+
+        if ($make !== "" && !is_null($make)) {
+            $query->where('make', $make);
+        }
+        if ($model !== "" && !is_null($model)) {
+            $query->where('model', $model);
+        }
+        if ($year !== "" && !is_null($year)) {
+            $query->where('year', $year);
+        }
+        if ($type !== "" && !is_null($type)) {
+            $query->where('vehicle_type', $type);
+        }
+        if ($price !== "" && !is_null($price)) {
+            $query->where('price','>=', $price);
+        }
+        $vehicles = $query->latest()->with(['make'=>function($sql){
+            return $sql->select('car_make_id', 'car_make_name');
+        },'model'=>function ($sqs)
+        {
+            return $sqs->select('car_model_id', 'car_model_name');
+        }])->get();
+
+        return json_encode($vehicles);
     }
+
+    
+
     public function fetchModels(Request $request)
     {
        $models = CarModel::all()->paginate(10);
@@ -174,11 +206,11 @@ class VehicleController extends Controller
        $makes = CarMake::all();
        return CarMakeResource::collection($makes);
     }
-    
+
     public function getModels(Request $request)
     {
-        $models = CarModel::where('car_make_id',$request->car_make_id)->orderBy('car_model_name','ASC')->get();
-        return CarModelResource::collection($models);
+        $models = CarModel::where('car_make_id',$request->car_make_id)->select('car_model_id','car_model_name')->orderBy('car_model_name','ASC')->get();
+        return json_encode($models);
     }
 
     public function get($id)

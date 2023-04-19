@@ -153,28 +153,9 @@
                                 <label>Year of Manufacture</label>
                                 <select class="form-control form-control-sm" name="year" id="year" required>
                                     <option value="">Select One</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2020">2020</option>
-                                    <option value="2019">2019</option>
-                                    <option value="2018">2018</option>
-                                    <option value="2017">2017</option>
-                                    <option value="2016">2016</option>
-                                    <option value="2015">2015</option>
-                                    <option value="2014">2014</option>
-                                    <option value="2013">2013</option>
-                                    <option value="2012">2012</option>
-                                    <option value="2011">2011</option>
-                                    <option value="2010">2010</option>
-                                    <option value="2009">2009</option>
-                                    <option value="2008">2008</option>
-                                    <option value="2007">2007</option>
-                                    <option value="2006">2006</option>
-                                    <option value="2005">2005</option>
-                                    <option value="2004">2004</option>
-                                    <option value="2003">2003</option>
-                                    <option value="2002">2002</option>
-                                    <option value="2001">2001</option>
-                                    <option value="2000">2000</option>
+                                    @for ($i = date('Y',strtotime(now())); $i >= 2000; $i--)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
                                 </select>
                             </div>
                         </div>
@@ -206,10 +187,13 @@
                                     <option value="Saloon Car">Saloon Car</option>
                                     <option value="Station Wagons">Station Wagons</option>
                                     <option value="Pickup Trucks">Pickup Trucks</option>
-                                    <option value="Buses, Taxis and Vans">Buses, Taxis and Vans</option>
+                                    <option value="Buses">Buses</option>
+                                    <option value="Taxis">Taxis</option>
+                                    <option value="Vans">Vans</option>
                                     <option value="Motorbikes">Motorbikes</option>
                                     <option value="Trucks">Trucks</option>
-                                    <option value="Machinery and Tractors">Machinery and Tractors</option>
+                                    <option value="Machinery">Machinery</option>
+                                    <option value="Tractors">Tractors</option>
                                     <option value="Trailers">Trailers</option>
                                     <option value="Minis">Minis</option>
                                     <option value="Coupes">Coupes</option>
@@ -682,7 +666,7 @@
                 }
             });
 
-            
+
             $('#vehicleAdditionForm').on('submit', function(event) {
                 event.preventDefault();
                 let $this = $(this);
@@ -766,7 +750,7 @@
                                 "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>Error occured during processing!</div>"
                             );
                         }
-                        
+
                         window.location.href = '/Available';
 
                         $this.find("#vehicleSubmit").prop({
