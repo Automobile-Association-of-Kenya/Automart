@@ -764,9 +764,9 @@ $(function () {
                         $.each(vehicles, function (key, value) {
                             let images = JSON.parse(value.images);
                             car +=
-                                '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="{{ route(\'details\', ' +
+                                '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="Available/Details' +
                                 value.id +
-                                ') }}" class="car-img"><div class="for">' +
+                                '" class="car-img"><div class="for">' +
                                 value.title +
                                 '</div><div class="price-box"><span>' +
                                 value.price +
@@ -774,11 +774,11 @@ $(function () {
                                 images[0] +
                                 '" alt="car"></a></div><div class="detail"><span style="font-size:15px;">' +
                                 value.make.car_make_name +
-                                '</span><h1 class="title"><a href="{{ route(\'details\', ' +
+                                '</span><h1 class="title"><a href="Available/Details' +
                                 value.id +
-                                ') }}">' +
+                                '">' +
                                 value.model.car_model_name +
-                                '</a></h1><ul class="custom-list"><li><a href="#">' +
+                                '</a></h1><ul class="custom-list"><li><a href="Available/Details'+value.id+'">' +
                                 value.vehicle_type +
                                 '</a></li></ul><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i> ' +
                                 value.fuel_type +
