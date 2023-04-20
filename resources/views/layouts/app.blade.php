@@ -283,8 +283,9 @@
             </div>
         </div>
     </div>
-    <script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url('assets/js/jquery.min.js') }}"></script>
+
+    <script src="{{asset('js/components.js')}}"></script>
+
     <script src="{{ url('assets/js/popper.min.js') }}"></script>
     <script src="{{ url('assets/js/bootstrap-submenu.js') }}"></script>
     <script src="{{ url('assets/js/rangeslider.js') }}"></script>
