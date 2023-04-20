@@ -112,12 +112,11 @@ class ApplicationController extends Controller
     public function trendingVehicles()
     {
         // $vehicles = Caronsells::inRandomOrder()->limit(50)->with(['model','make'=>])
-        $vehicles = Caronsells::inRandomOrder()->limit(50)->latest()->with(['make' => function ($sql) {
+        $vehicles = Caronsells::inRandomOrder()->limit(12)->latest()->with(['make' => function ($sql) {
             return $sql->select('car_make_id', 'car_make_name');
         }, 'model' => function ($sqs) {
             return $sqs->select('car_model_id', 'car_model_name');
         }])->get();
         return json_encode($vehicles);
-        
     }
 }

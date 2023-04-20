@@ -777,7 +777,9 @@ $(function () {
                                 value.id +
                                 '">' +
                                 value.model.car_model_name +
-                                '</a></h1><ul class="custom-list"><li><a href="Available/Details'+value.id+'">' +
+                                '</a></h1><ul class="custom-list"><li><a href="Available/Details' +
+                                value.id +
+                                '">' +
                                 value.vehicle_type +
                                 '</a></li></ul><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i> ' +
                                 value.fuel_type +
@@ -809,9 +811,45 @@ $(function () {
     });
 
     function getTrendingVehicles() {
-        $.getJSON('trending', function(params) {
-            console.log(params);
+        $.getJSON("trending", function (vehicles) {
+            let car = "";
+            $.each(vehicles, function (key, value) {
+                let images = JSON.parse(value.images);
+                car +=
+                    '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="Available/Details' +
+                    value.id +
+                    '" class="car-img"><div class="for">' +
+                    value.title +
+                    '</div><div class="price-box"><span>' +
+                    value.price +
+                    '</span></div><img class="d-block w-100" src="/images/' +
+                    images[0] +
+                    '" alt="car"></a></div><div class="detail"><span style="font-size:15px;">' +
+                    value.make.car_make_name +
+                    '</span><h1 class="title"><a href="Available/Details' +
+                    value.id +
+                    '">' +
+                    value.model.car_model_name +
+                    '</a></h1><ul class="custom-list"><li><a href="Available/Details' +
+                    value.id +
+                    '">' +
+                    value.vehicle_type +
+                    '</a></li></ul><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i> ' +
+                    value.fuel_type +
+                    '</li><li><i class="flaticon-way"></i> ' +
+                    value.miles +
+                    ' kms</li><li><i class="flaticon-manual-transmission"></i> ' +
+                    value.transmission +
+                    '</li><li><i class="flaticon-gear"></i> ' +
+                    value.exterior +
+                    '</li><li><i class="flaticon-calendar-1"></i> ' +
+                    value.year +
+                    '</li></ul></div><div class="footer clearfix bg-main row" style = "padding: .8em 0; background:#00472F;"><div class="col-md-6"><span class="text-white">WhatsApp the owner</span></div><div class="col-md-6 text-center"><a href="https://wa.me/' +
+                    formatNumber(value.phone) +
+                    '" target="_blank" class="text-right"><i class="fa fa-whatsapp text-warning"></i></a></div></div></div></div>';
+            });
+            $("#trendingCarsSection").html(car);
         });
     }
-    getTrendingVehicles();;
+    getTrendingVehicles();
 })(jQuery);
