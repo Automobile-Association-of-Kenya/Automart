@@ -739,10 +739,10 @@
                     success: function(result) {
                         $('#car_model').html(
                             '<option value="">Select Car Model</option>');
-                        result.data.forEach(model => {
+                        result.forEach(model => {
                             document.querySelector('#car_model').innerHTML +=
                                 '<option value="' + model
-                                .id + '">' + model.name +
+                                .car_model_id + '">' + model.car_model_name +
                                 '</option>';
 
                         });
