@@ -165,12 +165,10 @@ Vehicles | @parent
                                                 {{ $vehicle->county }}
                                             </li>
                                             <li>
-                                                <i class="flaticon-phone"></i> {{ $vehicle->phone }}
-                                            </li>
-                                            <li>
                                                 <i class="flaticon-money"></i> Ksh.
                                                 {{ number_format("$vehicle->price") }}
                                             </li>
+
                                             <li>
                                                 <i class="flaticon-calendar-1"></i>{{ $vehicle->year }}
                                             </li>

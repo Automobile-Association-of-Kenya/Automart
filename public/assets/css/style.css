@@ -12124,7 +12124,7 @@ table {
         border-radius: 0;
         border: none;
         font-size: 14px;
-        background: #f9f9f9!important;
+        background: #00472F!important;
         border: transparent !important;
         margin: 0;
         color: #515151!important;
@@ -12275,11 +12275,11 @@ table {
 
     .main-header .navbar-expand-lg .navbar-nav .nav-link {
         padding: 10px 15px;
-        background: #f9f9f9;
+        background: #00472F;
     }
 
     .main-header .navbar-expand-lg .navbar-nav .link-color:hover {
-        background: #f9f9f9;
+        background: #00472F;
     }
 
     .main-header .dropdown-menu a {
