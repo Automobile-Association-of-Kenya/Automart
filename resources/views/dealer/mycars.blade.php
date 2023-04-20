@@ -1,4 +1,9 @@
 @extends('layouts.dashboard')
+
+@section('title')
+    My cars @parent
+@endsection
+
 @section('content')
 
     @php
@@ -86,7 +91,7 @@
 
                 @include('layouts.sidebar')
 
-                <div class="col-md-10 mt-5 pt-5">
+                <div class="col-md-10">
                     <div class="row">
                         @include('partials.alert')
                         @if (!empty($vehicles) && $vehicles->count())

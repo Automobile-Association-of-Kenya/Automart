@@ -306,8 +306,9 @@
                                     <select name="year" id="year" class="form-control form-control-md"
                                         data-value="" required>
                                         <option value="-1">Select Year of Manufacture</option>
-                                        @for ($i = date('Y',strtotime(now())); $i >= 2000; $i--)
-                                            <option value="2021" {{ $details->year == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                        @for ($i = date('Y', strtotime(now())); $i >= 2000; $i--)
+                                            <option value="2021" {{ $details->year == $i ? 'selected' : '' }}>
+                                                {{ $i }}</option>
                                         @endfor
                                     </select>
                                 </div>
@@ -397,8 +398,7 @@
                                         <option value="Diesel-Hybrid"
                                             {{ $details->fuel_type == 'Diesel-Hybrid' ? 'selected' : '' }}>Diesel-Hybrid
                                         </option>
-                                        <option value="Electic"
-                                            {{ $details->fuel_type == 'Electric' ? 'selected' : '' }}>
+                                        <option value="Electic" {{ $details->fuel_type == 'Electric' ? 'selected' : '' }}>
                                             Electic</option>
                                         <option value="Other">Other</option>
                                     </select>
@@ -644,6 +644,12 @@
                                         <div class="images-preview-div" style="margin:1%"> </div>
                                     </div>
                                 </div>
+                                <div id="output">
+                                    <div class="uploadAlert"></div>
+                                    <button type="submit" class="btn btn-md btn-primary" id="vehicleImagesUpload"><i
+                                            class="fa fa-arrow-up"></i>&nbsp;&nbsp;Upload Images</button>
+                                </div>
+                                <div class="uploadfeedback"></div>
 
                                 <div class="row">
                                     @php
@@ -677,6 +683,7 @@
                                         required style="text-transform:uppercase">
                                 </div>
                             </div>
+
                             <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
                                 <div class="col-6">
                                     <input class="form-control" type="email" id="email" tabindex="24"
@@ -688,6 +695,7 @@
                                         name="phone" value="{{ $details->phone }}" placeholder="Enter phone number"
                                         required>
                                 </div>
+
                                 <div class="col-md-8">
                                     <input type="checkbox" value="Rear View Camera" id="Rear View Camera"
                                         name="features[]" required checked>&nbsp;&nbsp;&nbsp;
@@ -698,6 +706,7 @@
                                         By clicking this, you have agreed to terms and conditions
                                     </div>
                                 </div>
+
                             </div>
                             <button style="background: #00472F;color:white;" type="submit"
                                 class="btn btn-primary btn-block mb-4">Submit</button>
@@ -801,6 +810,8 @@
                             div.style.cssText = 'position:relative'
                             const img = document.createElement('img');
                             img.setAttribute('src', event.target.result);
+                            img.style.width = '400px';
+                            img.style.height = '250px';
                             const deleter = document.createElement('span');
                             deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
                             deleter.style.cssText =
@@ -819,7 +830,7 @@
             };
 
             $('#fileupload1').on('change', function() {
-                document.querySelector('.removedImgs').value = ''
+                // document.querySelector('.removedImgs').empty()
                 previewImages(this, 'div.images-preview-div1');
             });
 
@@ -834,72 +845,86 @@
             const vehicle_id = $('#vehicleID').val(),
                 token = $("input[name='_token']").val();
             /** compress cover photo*/
-            var input = document.getElementById('fileupload1');
-            input.addEventListener('change', function() {
+            var input = document.getElementById('fileupload1'),
+                vehicleImagesUpload = document.getElementById('vehicleImagesUpload'),
+                multiImagesUpload = document.getElementById('multiImagesUpload');
+
+            vehicleImagesUpload.addEventListener('click', function(event) {
                 let $this = $(this);
-                localStorage.removeItem('cover_photo');
+                event.preventDefault();
+
                 var file = input.files[0];
-                var reader = new FileReader();
-                reader.onload = function() {
-                    var img = new Image();
-                    img.onload = function() {
-                        var width = 800;
-                        var height = 600;
-                        var canvas = document.createElement('canvas');
-                        canvas.width = width;
-                        canvas.height = height;
-                        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-                        var compressedFile = canvas.toDataURL("image/jpeg", 0.8);
-                        $.post('/application-images-update', {
-                            _token: token,
-                            vehicle_id: vehicle_id,
-                            image: compressedFile
-                        }).done(function(params) {
-                            console.log(params);
-                        }).fail(function(error) {
-                            console.log(error);
-                        });
-                    };
-                    img.src = reader.result;
-                };
-                reader.readAsDataURL(file);
-            });
-
-            var compressedImages = [];
-            let multiInput = document.getElementById('fileupload');
-
-            $("#multiImagesUpload").on("change", function(e) {
-                var files = e.target.files;
-                previewImages(document.getElementById('multiImagesUpload'), 'div.images-preview-div')
-                localStorage.removeItem('compressedImages');
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
+                if (file !== null && file !== undefined) {
                     var reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = function() {
                         var img = new Image();
-                        img.src = e.target.result;
                         img.onload = function() {
-                            var canvas = document.createElement("canvas");
-                            var ctx = canvas.getContext("2d");
-                            canvas.width = 600;
-                            canvas.height = 450;
-                            let leet = 'image_' + i;
-                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                            var compressedDataUrl = canvas.toDataURL("image/jpeg", 0.5);
-
-                            $.post('/application-images', {
+                            var width = 800;
+                            var height = 600;
+                            var canvas = document.createElement('canvas');
+                            canvas.width = width;
+                            canvas.height = height;
+                            canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+                            var compressedFile = canvas.toDataURL("image/jpeg", 0.8);
+                            $.post('/application-images-update', {
                                 _token: token,
                                 vehicle_id: vehicle_id,
-                                image: compressedDataUrl
+                                image: compressedFile
                             }).done(function(params) {
                                 console.log(params);
                             }).fail(function(error) {
                                 console.log(error);
                             });
                         };
+                        img.src = reader.result;
                     };
                     reader.readAsDataURL(file);
                 }
+
+                var files = multiImagesUpload.files;
+
+                if (files !== null && files !== undefined) {
+                    for (var i = 0; i < files.length; i++) {
+                        var file = files[i];
+                        var read = new FileReader();
+                        read.onload = function(e) {
+                            var img = new Image();
+                            img.src = e.target.result;
+                            img.onload = function() {
+                                var canvas = document.createElement("canvas");
+                                var ctx = canvas.getContext("2d");
+                                canvas.width = 600;
+                                canvas.height = 450;
+                                let leet = 'image_' + i;
+                                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                                var compressedDataUrl = canvas.toDataURL("image/jpeg", 0.5);
+
+                                $.post('/application-images-update', {
+                                    _token: token,
+                                    vehicle_id: vehicle_id,
+                                    image: compressedDataUrl
+                                }).done(function(params) {
+                                    console.log(params);
+                                }).fail(function(error) {
+                                    console.log(error);
+                                });
+                            };
+                        };
+                        read.readAsDataURL(file);
+                    }
+                }
+
+                $('.images-preview-div').empty();
+                $('.images-preview-div1').empty();
+                console.log($('.images-preview-div1'));;
+                $(".uploadfeedback").html(
+                    "<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Success!</strong>Files uploaded successfully. Please fill the form and submit!</div>"
+                );
+            });
+
+            $("#multiImagesUpload").on("change", function(e) {
+                var files = e.target.files;
+                previewImages(document.getElementById('multiImagesUpload'), 'div.images-preview-div')
             });
 
             $('#vehicleEditForm').on('submit', function(event) {
@@ -958,9 +983,9 @@
                 DformData.append('email', email);
                 DformData.append('phone', phone);
 
-                for (var pair of DformData.entries()) {
-                    console.log(pair[0] + ' - ' + pair[1]);
-                }
+                // for (var pair of DformData.entries()) {
+                //     console.log(pair[0] + ' - ' + pair[1]);
+                // }
 
                 $.ajaxSetup({
                     headers: {
@@ -968,8 +993,8 @@
                     }
                 });
                 $.ajax({
-                    type: 'PATCH',
-                    url: '/application/' + vehicle_id,
+                    type: 'post',
+                    url: '/application-update/' + vehicle_id,
                     data: DformData,
                     processData: false,
                     contentType: false,
