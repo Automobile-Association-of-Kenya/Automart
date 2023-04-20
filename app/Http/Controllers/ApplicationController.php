@@ -25,25 +25,10 @@ class ApplicationController extends Controller
     {
         return redirect()->back();
     }
-    
-    public function index()
-    {
-        //
-    }
-
-    
-    public function create()
-    {
-        //
-    }
 
     public function handleImages(Request $request)
     {
         $imageString = explode(',', $request->image);
-        // $image = base64_decode($imageString[1]);
-        // $fileName = 'img' . auth()->id() . strtotime(now()) . '.jpg'; // or any other desired file name
-        // $img = Image::make($image);
-        // $path = $img->store('temp', 'public');
         if (session()->has(["$request->str_id"])) {
             session()->push("$request->str_id", $imageString[1]);
         } else {
@@ -52,7 +37,6 @@ class ApplicationController extends Controller
         return 'success';
     }
 
-    
     public function store(VehicleRequest $request)
     {
         $images = [];
@@ -62,6 +46,16 @@ class ApplicationController extends Controller
                 $image = base64_decode($value);
                 $fileName = 'img' . auth()->id() . $key . strtotime(now()) . '.jpg'; // or any other desired file name
                 $img = Image::make($image);
+
+                $img->text(' ' . $request->firstname . ' ' . $request->lastname, 150, 120, function ($font) {
+                    $font->file(public_path('assets/fonts/font.ttf'));
+                    $font->size(18);
+                    $font->color('#CECECE');
+                    $font->align('center');
+                    $font->valign('center');
+                    $font->angle(0);
+                });
+
                 $img->save(public_path('images/' . $fileName));
                 array_push($images, $fileName);
             }
@@ -75,18 +69,6 @@ class ApplicationController extends Controller
         return json_encode(['status' => 'success', 'message' => "Vehicle added successfully"]);
     }
 
-    
-    public function show($id)
-    {
-        //
-    }
-
-   
-    public function edit($id)
-    {
-        //
-    }
-
     public function updateVehicle(VehicleRequest $request, $id)
     {
         $validated = $request->validated();
@@ -97,34 +79,45 @@ class ApplicationController extends Controller
                 $image = base64_decode($value);
                 $fileName = 'img' . auth()->id() . $key . strtotime(now()) . '.jpg'; // or any other desired file name
                 $img = Image::make($image);
+                $img->text(' ' . $request->firstname . ' ' . $request->lastname, 150, 120, function ($font) {
+                    $font->file(public_path('assets/fonts/font.ttf'));
+                    $font->size(18);
+                    $font->color('#CECECE');
+                    $font->align('center');
+                    $font->valign('center');
+                    $font->angle(0);
+                });
                 $img->save(public_path('images/' . $fileName));
                 array_push($images, $fileName);
             }
         }
+
         $validated["features"]= json_encode(explode(',', $validated["features"]));
         $vehicle->update(['images'=>json_encode($images)]+$validated);
         session()->forget($id . "_vehicle_images");
-        return json_encode(['status' => 'success', 'message' => "Vehicle updated successfully"]);        
-    }
-
-    public function destroy($id)
-    {
-        //
+        return json_encode(['status' => 'success', 'message' => "Vehicle updated successfully"]);
     }
 
     public function updateImages(Request $request)
     {
         $imageString = explode(',', $request->image);
-        // $image = base64_decode($imageString[1]);
-        // $fileName = 'img' . auth()->id() . strtotime(now()) . '.jpg'; // or any other desired file name
-        // $img = Image::make($image);
-        // $path = $img->store('temp', 'public');
-
         if (session()->has($request->vehicle_id."_vehicle_images")) {
             session()->push($request->vehicle_id."_vehicle_images", $imageString[1]);
         } else {
             session()->put($request->vehicle_id."_vehicle_images", [$imageString[1]]);
         }
         return 'success';
+    }
+
+    public function trendingVehicles()
+    {
+        // $vehicles = Caronsells::inRandomOrder()->limit(50)->with(['model','make'=>])
+        $vehicles = Caronsells::inRandomOrder()->limit(50)->latest()->with(['make' => function ($sql) {
+            return $sql->select('car_make_id', 'car_make_name');
+        }, 'model' => function ($sqs) {
+            return $sqs->select('car_model_id', 'car_model_name');
+        }])->get();
+        return json_encode($vehicles);
+        
     }
 }

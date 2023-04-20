@@ -10,7 +10,9 @@ use Intervention\Image\Facades\Image;
 
 class VehicleControlller extends Controller
 {
-
+    /**
+     * @urlencoded image, @unique 10 character string
+     */
     public function handleImages(Request $request)
     {
         $imageString = explode(',', $request->image);
@@ -19,30 +21,11 @@ class VehicleControlller extends Controller
         } else {
             session()->put("$request->str_id", [$imageString[1]]);
         }
-        return json_encode(['status'=>"success"]);
-    }
-
-
-    public function index()
-    {
-        //
+        return json_encode(['status' => "success", "message" => 'Photo added successfully. Please fill the form and submit']);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @request containing @str_id used above
      */
     public function store(VehicleRequest $request)
     {
@@ -51,63 +34,75 @@ class VehicleControlller extends Controller
         if (session()->has("$strkey")) {
             foreach (session("$strkey") as $key => $value) {
                 $image = base64_decode($value);
-                $fileName = 'img' . $request->user_id . $key . strtotime(now()) . '.jpg'; // or any other desired file name
+                $fileName = 'img' . auth()->id() . $key . strtotime(now()) . '.jpg'; // or any other desired file name
                 $img = Image::make($image);
+
+                $img->text(' ' . $request->firstname . ' ' . $request->lastname, 150, 120, function ($font) {
+                    $font->file(public_path('assets/fonts/font.ttf'));
+                    $font->size(18);
+                    $font->color('#CECECE');
+                    $font->align('center');
+                    $font->valign('center');
+                    $font->angle(0);
+                });
+
                 $img->save(public_path('images/' . $fileName));
                 array_push($images, $fileName);
             }
         }
 
         $validated = $request->validated();
-        $validated["features"] = json_encode($validated["features"]);
-        Caronsells::create(['user_id' => $request->user_id, 'carId' => $strkey, 'cover_photo' => $images[0], 'images' => json_encode($images), 'views' => 0] + $validated);
+        $validated["features"] = json_encode(explode(',', $validated["features"]));
+        Caronsells::create(['user_id' => auth()->id(), 'carId' => $strkey, 'cover_photo' => $images[0], 'images' => json_encode($images), 'views' => 0] + $validated);
         session()->forget("$strkey");
-
         return json_encode(['status' => 'success', 'message' => "Vehicle added successfully"]);
     }
 
     /**
-     * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @request, $id is vehicle_id
      */
-    public function show($id)
+    public function addVehicleImages(VehicleRequest $request, $id)
     {
-        //
+        $validated = $request->validated();
+        $vehicle = Caronsells::findOrFail($id);
+        $images = json_decode($vehicle->images);
+        if (session()->has($id . "_vehicle_images")) {
+            foreach (session($id . "_vehicle_images") as $key => $value) {
+                $image = base64_decode($value);
+                $fileName = 'img' . auth()->id() . $key . strtotime(now()) . '.jpg'; // or any other desired file name
+                $img = Image::make($image);
+                $img->text(' ' . $request->firstname . ' ' . $request->lastname, 150, 120, function ($font) {
+                    $font->file(public_path('assets/fonts/font.ttf'));
+                    $font->size(18);
+                    $font->color('#CECECE');
+                    $font->align('center');
+                    $font->valign('center');
+                    $font->angle(0);
+                });
+                $img->save(public_path('images/' . $fileName));
+                array_push($images, $fileName);
+            }
+        }
+
+        $validated["features"] = json_encode(explode(',', $validated["features"]));
+        $vehicle->update(['images' => json_encode($images)] + $validated);
+        session()->forget($id . "_vehicle_images");
+        return json_encode(['status' => 'success', 'message' => "Vehicle updated successfully"]);
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @urlencoded image, $vehicle_id
      */
-    public function edit($id)
+    public function updateImages(Request $request)
     {
-        //
+        $imageString = explode(',', $request->image);
+        if (session()->has($request->vehicle_id . "_vehicle_images")) {
+            session()->push($request->vehicle_id . "_vehicle_images", $imageString[1]);
+        } else {
+            session()->put($request->vehicle_id . "_vehicle_images", [$imageString[1]]);
+        }
+        return json_encode(['status'=> "success", "message"=>'Photo added successfully. Please fill the form and submit']);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

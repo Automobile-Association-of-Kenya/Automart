@@ -556,11 +556,6 @@
                 if (input.files) {
                     var noFiles = input.files.length;
                     for (let i = 0; i < noFiles; i++) {
-                        // if (input.files[i].size > 5000000) {
-                        //     alert(input.files[i].name + ' is greater than 5mb');
-                        //     input.value = ''
-                        //     break;
-                        // }
                         var reader = new FileReader();
                         reader.onload = function(event) {
                             const div = document.createElement('span');
@@ -688,6 +683,7 @@
                 $this.find("#vehicleSubmit").prop({
                     disabled: true
                 });
+                
                 var DformData = new FormData();
                 let title = $("input[name='title']").val(),
                     country = $("#country").val(),
@@ -768,10 +764,7 @@
                                 "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>Error occured during processing!</div>"
                             );
                         }
-
                         window.location.href = '/Available';
-
-
                     },
                     error: function(error) {
                         console.log(error);

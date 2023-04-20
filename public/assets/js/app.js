@@ -731,7 +731,6 @@ $(function () {
             type: type,
             price: price,
         };
-        console.log(data);
         if (
             make == "" &&
             model == "" &&
@@ -808,4 +807,11 @@ $(function () {
             });
         }
     });
+
+    function getTrendingVehicles() {
+        $.getJSON('trending', function(params) {
+            console.log(params);
+        });
+    }
+    getTrendingVehicles();;
 })(jQuery);

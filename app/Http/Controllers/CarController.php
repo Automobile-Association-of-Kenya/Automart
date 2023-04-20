@@ -78,5 +78,10 @@ class CarController extends Controller
         return json_encode(['status'=>'success', 'message'=>'Deleted successfully']);
     }
 
+    // public function (Type $var = null)
+    // {
+    //     # code...
+    // }
+
 }
 

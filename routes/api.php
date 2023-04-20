@@ -47,3 +47,6 @@ Route::post('imagecompress', [api\VehicleControlller::class, 'handleImages']);
 /** Send vehicle information here including id of authenticated user, and the unique string in the above route in the format {user_id:value,str_id:value,....} */
 Route::post('vehicle/store', [api\VehicleControlller::class, 'store']);
 
+/** Vehicle images update/addition */
+
+

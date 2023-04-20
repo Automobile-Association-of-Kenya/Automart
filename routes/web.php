@@ -107,6 +107,7 @@ Route::resource('application', ApplicationController::class);
 Route::post('application-images', [ApplicationController::class, 'handleImages']);
 Route::post('application-images-update', [ApplicationController::class, 'updateImages']);
 Route::post('application-update/{id}', [ApplicationController::class, 'updateVehicle']);
+Route::get('trending', [ApplicationController::class, 'trendingVehicles']);
 
 Route::get('vehicle/{id}', [VehicleController::class, 'get']);
 

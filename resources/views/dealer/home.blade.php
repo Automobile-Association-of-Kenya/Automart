@@ -103,7 +103,7 @@
                 </div>
                 @include('layouts.sidebar')
 
-                <div class="col-md-10  mt-5 pt-5">
+                <div class="col-md-10">
                     @include('partials.alert')
                     <div class="row">
                         <div class="col-md-4" style="padding-bottom:20px; color:#000;">
@@ -173,11 +173,6 @@
                 <!-- Copyright -->
             </footer>
         </div>
-
-        <!-- user profile end -->
-
-
-
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -200,7 +195,7 @@
                         result.data.forEach(model => {
                             document.querySelector('#car_model').innerHTML +=
                                 '<option value="' + model
-                                .id + '">' + model.name +
+                                .car_model_id + '">' + model.car_model_name +
                                 '</option>';
 
                         });
@@ -210,27 +205,7 @@
         });
     </script>
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
-    <script>
-        $(function() {
-            // Multiple images preview with JavaScript
-            var previewImages = function(input, imgPreviewPlaceholder) {
-                if (input.files) {
-                    var filesAmount = input.files.length;
-                    for (i = 0; i < filesAmount; i++) {
-                        var reader = new FileReader();
-                        reader.onload = function(event) {
-                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(
-                                imgPreviewPlaceholder);
-                        }
-                        reader.readAsDataURL(input.files[i]);
-                    }
-                }
-            };
-            $('#fileupload').on('change', function() {
-                previewImages(this, 'div.images-preview-div');
-            });
-        });
-    </script>
+
     <script>
         // @if (session('loader'))
         //     $(window).on('load', function() {
