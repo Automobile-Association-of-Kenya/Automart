@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    Add Car | @parent
+    Add Car @parent
 @endsection
 
 @section('content')
@@ -153,7 +153,7 @@
                                 <label>Year of Manufacture</label>
                                 <select class="form-control form-control-sm" name="year" id="year" required>
                                     <option value="">Select One</option>
-                                    @for ($i = date('Y',strtotime(now())); $i >= 2000; $i--)
+                                    @for ($i = date('Y', strtotime(now())); $i >= 2000; $i--)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
                                 </select>
@@ -173,13 +173,14 @@
                             </div>
                             <div class="col-md-4 form-group">
                                 <label for="">Engine CC</label>
-                                <input class="form-control form-control-sm" type="number" id="enginecc"
-                                    name="enginecc" placeholder="Engine CC" required>
+                                <input class="form-control form-control-sm" type="number" id="enginecc" name="enginecc"
+                                    placeholder="Engine CC" required>
                             </div>
 
                             <div class="col-md-4">
                                 <label>Vehicle Type</label>
-                                <select id="vehicle_type" name="vehicle_type" class="form-control form-control-sm" tabindex="14" required>
+                                <select id="vehicle_type" name="vehicle_type" class="form-control form-control-sm"
+                                    tabindex="14" required>
                                     <option value="-1" selected="selected">Vehicle Type</option>
                                     <option value="Convertibles">Convertibles</option>
                                     <option value="Hatchbacks">Hatchbacks</option>
@@ -454,7 +455,12 @@
                                     <div class="images-preview-div" style="margin:1%"> </div>
                                 </div>
                             </div>
-                            <div id="output"></div>
+                            <div id="output">
+                                <div class="uploadAlert"></div>
+                                <button type="submit" class="btn btn-md btn-primary" id="vehicleImagesUpload"><i
+                                        class="fa fa-arrow-up"></i>&nbsp;&nbsp;Upload Images</button>
+                            </div>
+                            <div class="uploadfeedback"></div>
 
                         </div>
 
@@ -532,12 +538,12 @@
                     },
                     dataType: 'json',
                     success: function(result) {
-                        $('#car_model').html(
-                            '<option value="">Select Car Model</option>');
-                        result.data.forEach(model => {
+                        $('#car_model').html('<option value="">Select Car Model</option>');
+                        result.forEach(model => {
+                            console.log(model);
                             document.querySelector('#car_model').innerHTML +=
                                 '<option value="' + model
-                                .id + '">' + model.name +
+                                .car_model_id + '">' + model.car_model_name +
                                 '</option>';
 
                         });
@@ -563,7 +569,7 @@
                             const img = document.createElement('img');
                             img.setAttribute('src', event.target.result);
                             img.style.width = '400px';
-                            img.style.height = '200px';
+                            img.style.height = '250px';
                             const deleter = document.createElement('span');
                             deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
                             deleter.style.cssText =
@@ -599,10 +605,13 @@
                 token = $("input[name='_token']").val();
 
             /** compress cover photo*/
-            var input = document.getElementById('fileupload1');
-            input.addEventListener('change', function() {
+            var input = document.getElementById('fileupload1'),
+                vehicleImagesUpload = document.getElementById('vehicleImagesUpload'),
+                multiImagesUpload = document.getElementById('multiImagesUpload');
+
+            vehicleImagesUpload.addEventListener('click', function(event) {
+                event.preventDefault();
                 let $this = $(this);
-                localStorage.removeItem('cover_photo');
                 var file = input.files[0];
                 var reader = new FileReader();
                 reader.onload = function() {
@@ -628,18 +637,12 @@
                     img.src = reader.result;
                 };
                 reader.readAsDataURL(file);
-            });
 
-            var compressedImages = [];
-
-            $("#multiImagesUpload").on("change", function(e) {
-                var files = e.target.files;
-                previewImages(document.getElementById('multiImagesUpload'), 'div.images-preview-div')
-                localStorage.removeItem('compressedImages');
+                var files = multiImagesUpload.files;
                 for (var i = 0; i < files.length; i++) {
                     var file = files[i];
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
+                    var read = new FileReader();
+                    read.onload = function(e) {
                         var img = new Image();
                         img.src = e.target.result;
                         img.onload = function() {
@@ -650,7 +653,6 @@
                             let leet = 'image_' + i;
                             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                             var compressedDataUrl = canvas.toDataURL("image/jpeg", 0.5);
-
                             $.post('/application-images', {
                                 _token: token,
                                 str_id: str_id,
@@ -662,8 +664,21 @@
                             });
                         };
                     };
-                    reader.readAsDataURL(file);
+                    read.readAsDataURL(file);
                 }
+                $('.images-preview-div').empty();
+                $('.images-preview-div1').empty();
+                console.log($('.images-preview-div1'));;
+                $(".uploadfeedback").html(
+                    "<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Success!</strong>Files uploaded successfully. Please fill the form and submit!</div>"
+                    );
+            });
+
+            var compressedImages = [];
+
+            $("#multiImagesUpload").on("change", function(e) {
+                var files = e.target.files;
+                previewImages(document.getElementById('multiImagesUpload'), 'div.images-preview-div')
             });
 
 
@@ -671,8 +686,8 @@
                 event.preventDefault();
                 let $this = $(this);
                 $this.find("#vehicleSubmit").prop({
-                            disabled: true
-                        });
+                    disabled: true
+                });
                 var DformData = new FormData();
                 let title = $("input[name='title']").val(),
                     country = $("#country").val(),
@@ -737,6 +752,9 @@
                     contentType: false,
                     success: function(response) {
                         console.log(response);
+                        $this.find("#vehicleSubmit").prop({
+                            disabled: false
+                        });
                         var result = JSON.parse(response);
                         if (result.status === "success") {
                             // removeImage(document.getElementById('fileupload1'), 'div.images-preview-div1', i);
@@ -753,9 +771,7 @@
 
                         window.location.href = '/Available';
 
-                        $this.find("#vehicleSubmit").prop({
-                            disabled: false
-                        });
+                        
                     },
                     error: function(error) {
                         console.log(error);

@@ -1,4 +1,9 @@
 @extends('layouts.dashboard')
+
+@section('title')
+    My cars @parent
+@endsection
+
 @section('content')
 
     @php
@@ -86,7 +91,7 @@
 
                 @include('layouts.sidebar')
 
-                <div class="col-md-10 mt-5 pt-5">
+                <div class="col-md-10">
                     <div class="row">
                         @include('partials.alert')
                         @if (!empty($vehicles) && $vehicles->count())
@@ -222,7 +227,7 @@
                         result.data.forEach(model => {
                             document.querySelector('#car_model').innerHTML +=
                                 '<option value="' + model
-                                .id + '">' + model.name +
+                                .car_model_id + '">' + model.car_model_name +
                                 '</option>';
 
                         });

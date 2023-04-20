@@ -168,17 +168,31 @@
                         <a href="{{ route('contact') }}">Contact</a>
                     </li>
 
-                    <li>
-                        <a href="{{ route('register') }}">
-                            Register
-                        </a>
-                    </li>
+                    @guest
+                            <li>
+                                <a href="{{ route('register') }}">
+                                    Register
+                                </a>
+                            </li>
 
-                    <li>
-                        <a href="{{ route('login') }}">
-                            Login
-                        </a>
-                    </li>
+                            <li>
+                                <a href="{{ route('login') }}">
+                                    Login
+                                </a>
+                            </li>
+                        @else
+                            <li>
+                                <a href="{{ route('dealer.home') }}">
+                                    {{ auth()->user()->name }}
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('logout') }}">
+                                    Logout
+                                </a>
+                            </li>
+                        @endguest
                 </ul>
             </div>
             <div class="get-in-touch">
@@ -292,7 +306,5 @@
 
     @yield('footer_scripts')
 </body>
-
-<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/autocar-2-html/HTML/main/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 Sep 2022 18:44:30 GMT -->
 
 </html>

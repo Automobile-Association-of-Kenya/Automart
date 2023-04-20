@@ -1,4 +1,9 @@
 @extends('layouts.dashboard')
+
+@section('title')
+    Dashboard @parent
+@endsection
+
 @section('content')
     <!-- show success message -->
     @if (session('successMsg'))

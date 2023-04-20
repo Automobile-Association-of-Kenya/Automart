@@ -117,6 +117,10 @@ Car Details @parent
                         </div>
 
                         <ul class="preview-thumbnail nav nav-tabs">
+                            {{-- @php
+                                var_dump(json_decode($vehicle->images));
+                                die();
+                            @endphp --}}
                             @foreach (json_decode($vehicle->images) as $key => $item)
                                     @if ($loop->index == 0)
                                         <li class="active"><a data-target="#pict-{{ $loop->index }}"
