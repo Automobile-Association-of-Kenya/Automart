@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\VehicleRequest;
 use App\Models\Dealer;
+use App\Models\Feature;
 use App\Models\Make;
+use App\Models\Type;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class VehicleController extends Controller
@@ -17,23 +20,62 @@ class VehicleController extends Controller
         $this->make = new Make();
         $this->model = new VehicleModel();
         $this->dealer = new Dealer();
+        $this->type = new Type();
+        $this->feature = new Feature();
     }
 
-    public function index()
+    public function index(): View
     {
         return view('vehicles.index');
     }
 
     public function makes()
     {
-        $makes = $this->make->select('id', 'name')->get();
+        $makes = $this->make->select('id', 'make')->get();
         return json_encode($makes);
     }
 
-    public function models($make_id)
+    public function makeCreate(Request $request, $id=null)
     {
-        $models = $this->model->where('make_id', $make_id)->select('id', 'name')->get();
+        $validated = $request->validate(['make'=>['required','max:80']]);
+        if (!is_null($id)) {
+            $make = $this->make->find($id);
+            $make->update($validated);
+            return json_encode(['status'=>'success', 'message'=>'Make updated successfully']);
+        }else {
+            $this->make->create($validated);
+            return json_encode(['status' => 'success', 'message' => 'Make added successfully']);
+        }
+    }
+
+    public function models($make_id=null)
+    {
+        $query = $this->model->query();
+        if (!is_null($make_id)) {
+            $query->where('make_id', $make_id);
+        }
+        $models = $query->with('make')->get();
+
         return json_encode($models);
+    }
+
+    public function modelCreate(Request $request, $id=null)
+    {
+        $validated = $request->validate(['make_id'=>['required','exists:makes,id'],'model'=>['required','max:60']]);
+        if (!is_null($id)) {
+            $model = $this->model->find($id);
+            $model->update($validated);
+            return json_encode(['status' => 'success', 'message' => 'Model updated successfully']);
+        }else {
+            $this->model->create($validated);
+            return json_encode(['status' => 'success', 'message' => 'Model added successfully']);
+        }
+    }
+
+    public function types()
+    {
+        $types = $this->type->select('id', 'name')->get();
+        return json_encode($types);
     }
 
     public function dealers()
@@ -44,19 +86,31 @@ class VehicleController extends Controller
 
     public function features()
     {
-        $features = $this->feature->select('id','name')->get();
+        $features = $this->feature->select('id','feature')->get();
         return json_encode($features);
     }
 
+    public function featureCreate(Request $request, $id=null)
+    {
+        $validated = $request->validate(['feature'=>['required','max:80'], 'description'=>['nullable','max:255']]);
+        if (!is_null($id)) {
+            $feature = $this->feature->find($id);
+            $feature->update($validated);
+            return json_encode(['status' => 'success', 'message' => 'Feature updated successfully']);
+        }else {
+            $this->feature->create($validated);
+            return json_encode(['status' => 'success', 'message' => 'Feature added successfully']);
+        }
+    }
 
     public function store(VehicleRequest $request)
     {
-        
+        $validated = $request->validated();
+
+        Vehicle::create($validated);
     }
 
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(string $id)
     {
         //

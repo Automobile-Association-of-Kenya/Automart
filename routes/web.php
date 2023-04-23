@@ -51,10 +51,12 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 Route::resource('vehicles', VehicleController::class);
 
-Route::prefix('vehicles')->group(function(){
-    Route::get('makes',[VehicleController::class, 'makes']);
-    Route::get('models/{make_id}', [VehicleController::class, 'models']);
-    Route::get('features', [VehicleController::class]);
+Route::controller(VehicleController::class)->group(function(){
+    Route::get('makes', 'makes');
+    Route::get('make-create/{id?}', 'makeCreate');
+    Route::get('models/{make_id?}', 'models');
+    Route::get('types', 'types');
+    Route::get('features', 'features');
 });
 
 Route::get('countries', [ApplicationController::class, 'countries']);

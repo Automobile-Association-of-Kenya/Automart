@@ -1,5 +1,5 @@
 INSERT INTO
-    makes (make)
+    `makes` (`name`)
 VALUES
     ('Toyota'),
     ('Honda'),

@@ -11,7 +11,30 @@ $(document).ready(function () {
         }
     });
 
-    $(".show-passwordRe").click(function () {
+    $(".show-passwordRe").on('click',function () {
+        var passwordField = $("#passwordRe");
+        var passwordCField = $("#passwordConfirmationRe");
+        var passwordCType = passwordCField.attr("type");
+        var passwordFieldType = passwordField.attr("type");
+        if (passwordFieldType == "password") {
+            passwordField.attr("type", "text");
+            $(".show-passwordRe").html('<i class="fa fa-eye-slash"></i>');
+        } else {
+            passwordField.attr("type", "password");
+            $(".show-passwordRe").html('<i class="fa fa-eye"></i>');
+        }
+
+        if (passwordCType == "password") {
+            passwordCField.attr("type", "text");
+            $(".show-passwordRe").html('<i class="fa fa-eye-slash"></i>');
+        } else {
+            passwordCField.attr("type", "password");
+            $(".show-passwordRe").html('<i class="fa fa-eye"></i>');
+        }
+    });
+
+    $("body").on("click", ".show-passwordReset", function () {
+        console.log("hredes");
         var passwordField = $("#passwordRe");
         var passwordCField = $("#passwordConfirmationRe");
         var passwordCType = passwordCField.attr("type");
@@ -209,8 +232,9 @@ $(document).ready(function () {
 
     $("#passwordSetForm").on("submit", function (event) {
         event.preventDefault();
+        console.log("there");
         let $this = $(this),
-            passwordRE = $("#passwordRE").val(),
+            passwordRE = $("#passwordRe").val(),
             passwordConfirmationRe = $("#passwordConfirmationRe").val(),
             token = $this.find("input[name='_token']").val(),
             submitReset = $("#submitReset");
@@ -225,7 +249,7 @@ $(document).ready(function () {
             });
             $.ajax({
                 type: "POST",
-                url: "password-store",
+                url: "/password-store",
                 data: {
                     password: passwordRE,
                     password_confirmation: passwordConfirmationRe,

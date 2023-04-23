@@ -14,25 +14,32 @@
                     <h3>Reset Password</h3>
                 </div>
                 <div class="card-body">
+                    <div class="feedback" id="feedback"></div>
                     <form action="{{ route('password.store') }}" method="POST" id="passwordSetForm">
                         @csrf
                         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
                         <div class="form-group">
-                            <label for="password" class="float-left">Password</label>
-                            <input type="password" name="password" id="passwordRE" class="form-control" autocomplete="off"
-                                required>
+                            <label class="float-left" for="password">Password</label>
+                            <div class="input-group">
+                                <input type="password" name="password" id="passwordRe" class="form-control">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" class="show-passwordReset"><i class="fa fa-eye"></i></span>
+                                </div>
+                            </div>
                             @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                             @endif
                         </div>
 
                         <div class="form-group">
-                            <label for="password_confirmation" class="float-left">Confirm Password</label>
-
-                            <input id="password_confirmation" class="form-control" type="password"
-                                name="password_confirmation" id="passwordConfirmationRe" required
-                                autocomplete="new-password" />
+                            <label class="float-left" for="password_confirmation">Confirm Password</label>
+                            <div class="input-group">
+                                <input type="password" name="password_confirmation" id="passwordConfirmationRe" class="form-control">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" class="show-passwordReset"><i class="fa fa-eye"></i></span>
+                                </div>
+                            </div>
                             @if ($errors->has('password_confirmation'))
                                 <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                             @endif
@@ -52,4 +59,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer_scripts')
+    <script src="{{ asset('js/main/auth.js') }}"></script>
 @endsection

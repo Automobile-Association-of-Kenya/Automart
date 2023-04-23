@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('dealers', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 100);
+            $table->string('email', 100)->nullable()->unique();
+            $table->string('phone',16)->nullable();
+            $table->string('alt_phone',16)->nullable();
+            $table->string('address',100)->nullable();
             $table->timestamps();
         });
     }

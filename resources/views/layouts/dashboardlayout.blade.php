@@ -13,6 +13,7 @@
     <link rel="icon" href="{{ asset('images/logo.png') }}" />
 
     <title>@yield('title') | AA Kenya Limited</title>
+    @yield('header_styles')
 </head>
 
 <body>
@@ -109,7 +110,7 @@
                 <label for="nav-toggle">
                     <i class="fas fa-bars"></i>
                 </label>
-                Dashboard
+                @yield('page')
             </h2>
 
             <div class="search-wrapper">

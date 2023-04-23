@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dealer;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -9,11 +10,12 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->dealer = new Dealer();
     }
 
     public function index()
     {
-        //
+        return view('users.index');
     }
 
     /**
@@ -22,6 +24,11 @@ class UsersController extends Controller
     public function create()
     {
         //
+    }
+
+    public function dealers()
+    {
+        $dealers = $this->dealer->get();
     }
 
     /**

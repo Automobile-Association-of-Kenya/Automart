@@ -26,7 +26,7 @@ class ApplicationController extends Controller
 
     public function countries()
     {
-        $countries = $this->country->select('id', 'code', 'phone_code')->get();
+        $countries = $this->country->get();
         return json_encode($countries);
     }
 
