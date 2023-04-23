@@ -33,12 +33,12 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('login', [VehicleController::class, 'login']);
-Route::post('upload',[FileController::class,'upload']);
-Route::post('addmodel', [AddmodelController::class,'add']);
+Route::post('upload', [FileController::class, 'upload']);
+Route::post('addmodel', [AddmodelController::class, 'add']);
 
 Route::get('resizeImage', [ImageController::class, 'resizeImage']);
 Route::post('resizeImagePost', [ImageController::class, 'store'])->name('resizeImagePost');
-Route:: post('register',[buyerController::class, 'register']);
+Route::post('register', [buyerController::class, 'register']);
 Route::get('models', [VehicleController::class, 'fetchmodels']);
 Route::get('makes', [VehicleController::class, 'fetchmakes']);
 
@@ -47,3 +47,4 @@ Route::post('imagecompress', [api\VehicleControlller::class, 'handleImages']);
 /** Send vehicle information here including id of authenticated user, and the unique string in the above route in the format {user_id:value,str_id:value,....} */
 Route::post('vehicle/store', [api\VehicleControlller::class, 'store']);
 
+/** Vehicle images update/addition */

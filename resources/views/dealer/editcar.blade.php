@@ -830,7 +830,7 @@
             };
 
             $('#fileupload1').on('change', function() {
-                // document.querySelector('.removedImgs').empty()
+                document.querySelector('.removedImgs')
                 previewImages(this, 'div.images-preview-div1');
             });
 

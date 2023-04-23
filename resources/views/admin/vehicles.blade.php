@@ -99,7 +99,7 @@
                     <h4 class="text text-black">Vehicles</h4>
 
                     @include('partials.alert')
-
+                    <a href="#" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#addModelModal"><i class="fa fa-plus"></i>&nbsp;Add Model</a>
                     <table class="table table-bordered table-striped table-sm dataTable">
                         <thead>
                             <th>#</th>
@@ -151,26 +151,81 @@
                 </div>
             </div>
             <footer class="mt-5 w-100 ">
-                <!-- Copyright -->
                 <div class="text-center p-3" style="background-color: #CBBC27 ; border-radius: 10px;">
                     © {{ now()->year }} Copyright:
                     <a class="text-center p-3" href="https://www.aakenya.co.ke/">Automobile Association of Kenya</a>
                 </div>
-                <!-- Copyright -->
             </footer>
         </div>
-
-        <!-- user profile end -->
-
-
-
     </div>
+
+
+
+<div class="modal fade" id="addModelModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-blue" style="display: inline-block;">
+                <h4 class="modal-title float-left text-white" id="modalLabel"><strong class="text-black">Create Model</strong></h4>
+                <button type="button" class="close float-right text-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form action="{{ route('model.create') }}" method="post" id="customerCreateForm">
+                    @csrf
+                    <div class="feedback"></div>
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <label class="text-black">Make <sup style="color:red">*</sup></label>
+                            <div class="input-group input-group-prepend">
+                                <select name="car_make_id" id="carMakeID" class="form-control form-control-sm @error('car_make_id') is-invalid @enderror" value="{{old('car_make_id')}}">
+                                <option value="">Select One</option>
+                                @foreach ($makes as $item)
+                                    <option value="{{ $item->car_make_id }}">{{ $item->car_make_name }}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label class="text-black">Name <sup style="color:red">*</sup></label>
+                            <div class="input-group input-group-prepend">
+                                <input type="text" name="name" id="name" maxlength="100" class="form-control form-control-sm @error('name') is-invalid @enderror" value="{{old('name')}}" required>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="col-lg-12 text-center">
+                        <button class="btn btn-success btn-sm" type="submit" id="createNewCustomer">
+                            <i class="fa fa-plus"></i>
+                            Submit
+                        </button>
+                        <button class="btn btn-warning btn-sm" type="reset">
+                            <i class="fa fa-refresh"></i>
+                            reset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section('footer_scripts')
     <script src="{{ asset('js/dataTables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
         (function() {
-            $('.dataTable').DataTable();
+            $('.dataTable').DataTable({
+                 dom: 'Blfrtip',
+                buttons: [
+                    'copy', 'csv', 'print'
+                ]
+            });
         })()
     </script>
 @endsection
