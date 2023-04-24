@@ -18,16 +18,20 @@ class VehicleController extends Controller
     {
         $imageString = explode(',', $request->image);
         if (isset($request->cover_image) && $request->cover_image == true) {
+
             if (session()->has($request->str_id . 'cover')) {
                 session()->forget($request->str_id . 'cover');
             }
             session()->put($request->str_id . 'cover', $imageString[1]);
+
         } else {
+
             if (session()->has(["$request->str_id"])) {
                 session()->push("$request->str_id", $imageString[1]);
             } else {
                 session()->put("$request->str_id", [$imageString[1]]);
             }
+
         }
         return json_encode(['status' => "success", "message" => 'Photo added successfully. Please fill the form and submit']);
     }

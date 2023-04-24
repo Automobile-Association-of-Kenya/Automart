@@ -276,6 +276,7 @@
 @section('footer_scripts')
     <script src="{{ asset('js/dataTables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.tableTools.js') }}"></script>
     <script>
         (function() {
             $('.dataTable').DataTable({
