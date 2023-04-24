@@ -754,7 +754,7 @@ $(function () {
             });
             $.ajax({
                 type: "POST",
-                url: "vehicle/search",
+                url: "/vehicle/search",
                 data: data,
                 success: function (params) {
                     let vehicles = JSON.parse(params);
@@ -812,7 +812,7 @@ $(function () {
     });
 
     function getTrendingVehicles() {
-        $.getJSON("trending", function (vehicles) {
+        $.getJSON("/trending", function (vehicles) {
             let car = "";
             $.each(vehicles, function (key, value) {
                 car +=
