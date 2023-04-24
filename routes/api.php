@@ -22,6 +22,7 @@ use App\Http\Controllers\api\VehicleController;
 Route::post('vehicle-images-upload', [VehicleController::class, 'uploadImages']);
 
 /**
+ * https://automart.aakenya.co.ke/images/+$vehicle.cover_photo
  * @param @base64 encoded individual image with @cover_image:true, @image and @vehicle_id
  */
 Route::post('vehicle-images-update', [VehicleController::class, 'imagesUpdate']);
