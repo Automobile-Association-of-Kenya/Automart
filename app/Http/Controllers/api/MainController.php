@@ -14,6 +14,7 @@ class MainController extends Controller
     {
         $this->make = new CarMake();
         $this->model = new CarModel();
+        $this->vehicle = new Caronsells();
     }
 
     public function search(Request $request)
@@ -51,25 +52,25 @@ class MainController extends Controller
 
     public function makes()
     {
-        $makes = $this->make->paginate(10)->get();
+        $makes = $this->make->get();
         return json_encode($makes);
     }
 
     public function models()
     {
-        $models = $this->model->with('make')->paginate(10)->get();
+        $models = $this->model->with('make')->get();
         return json_encode($models);
     }
 
     public function vehicles()
     {
-        $vehicles = $this->vehicle->paginate(10)->get();
+        $vehicles = $this->vehicle->get();
         return json_encode($vehicles);
     }
 
     public function vehiclesByUserEmail($email)
     {
-        $vehicles = $this->vehicle->where('email',$email)->paginate(10)->get();
+        $vehicles = $this->vehicle->where('email',$email)->get();
         return json_encode($vehicles);
     }
 }
