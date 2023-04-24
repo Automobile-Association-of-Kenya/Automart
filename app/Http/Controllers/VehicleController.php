@@ -234,6 +234,15 @@ class VehicleController extends Controller
         return back()->with('success', 'Model created successfully');
     }
 
+    public function createMake(Request $request)
+    {
+        $make = new CarMake();
+        $make->car_make_name = $request->name;
+        $make->save();
+
+        return back()->with('success', 'Make created successfully');
+    }
+
     public function approve($id)
     {
         $vehicle = Caronsells::find($id);

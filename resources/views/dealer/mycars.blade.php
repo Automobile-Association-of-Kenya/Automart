@@ -104,9 +104,9 @@
                                                     $images = json_decode($item->images, true);
                                                 @endphp
                                                 @if (count($images) > 0)
-                                                <img src="{{ url('images/'.$images[0]) }}" alt="car-photo" width="100%" height="250px">
+                                                <img src="{{ url('images/'.$item->cover_photo) }}" alt="car-photo" class="d-block w-100">
                                                 @else
-                                                <img src="#" alt="car-photo" width="100%" height="250px">
+                                                <img src="#" alt="car-photo">
                                                 @endif
                                                 <div class="tag">Best Deal</div>
                                             </div>

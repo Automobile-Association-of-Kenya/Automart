@@ -50,7 +50,7 @@
                                 @endif
                             </div>
 
-                            <input type="hidden" name="role" id="role" value="seller">
+                            <input type="hidden" name="role" id="role" value="dealer">
 
                             <div class="col-md-6 form-group">
                                 <label for="">Phone Number</label>

@@ -79,14 +79,14 @@ Vehicles | @parent
                                 <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
                                     <select class="form-control form-control-lg" name="searchprice" id="searchPrice">
                                         <option value="">Select Price</option>
-                                        <option value="100000">From Ksh. 100000</option>
-                                        <option value="500000">From Ksh. 500000</option>
-                                        <option value="1000000">From Ksh. 1000000</option>
-                                        <option value="1500000">From Ksh. 1500000</option>
-                                        <option value="2000000">From Ksh. 2000000</option>
-                                        <option value="2500000">From Ksh. 200000</option>
-                                        <option value="3000000">From Ksh. 3000000</option>
-                                        <option value="3500000">From Ksh. 3500000 and Above</option>
+                                        <option value="100000">From Ksh. {{ number_format(100000,2) }}</option>
+                                        <option value="500000">From Ksh. {{ number_format(500000,2) }}</option>
+                                        <option value="1000000">From Ksh. {{ number_format(1000000,2) }}</option>
+                                        <option value="1500000">From Ksh. {{ number_format(1500000,2) }}</option>
+                                        <option value="2000000">From Ksh. {{ number_format(2000000,2) }}</option>
+                                        <option value="2500000">From Ksh. {{ number_format(200000,2) }}</option>
+                                        <option value="3000000">From Ksh. {{ number_format(3000000,2) }}</option>
+                                        <option value="3500000">From Ksh. {{ number_format(3500000,2) }} and Above</option>
                                     </select>
                                 </div>
 
@@ -135,7 +135,7 @@ Vehicles | @parent
                                         <div class="for bg-warning"><h4 class="text-white">AA Approved</h4></div>
                                         @endif
                                         <div class="price-box">
-                                            <span>Ksh. {{ number_format("$vehicle->price") }}</span>
+                                            <span>Ksh. {{ number_format($vehicle->price,2) }}</span>
                                         </div>
                                         @php
                                             $images = json_decode($vehicle->images, true);
@@ -166,7 +166,7 @@ Vehicles | @parent
                                             </li>
                                             <li>
                                                 <i class="flaticon-money"></i> Ksh.
-                                                {{ number_format("$vehicle->price") }}
+                                                {{ number_format($vehicle->price,2) }}
                                             </li>
 
                                             <li>

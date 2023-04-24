@@ -47,10 +47,18 @@
                 <div class="col-lg-6 col-md-4 col-sm-5">
                     <ul class="top-social-media pull-right">
                         @auth
-                            <li>
-                                <a href="{{ route('dealer.home') }}" class="sign-in"><i class="fa fa-user"></i>
-                                    {{ auth()->user()->name }}</a>
-                            </li>
+                            @if (auth()->user()->role === "admin")
+                                <li>
+                                    <a href="{{ route('admin') }}"><i
+                                            class="fa fa-user"></i>Dashboard</a>
+                                </li>
+                            @endif
+                            @if (auth()->user()->role === "dealer")
+                                <li>
+                                    <a href="{{ route('dealer.home') }}"><i
+                                            class="fa fa-user"></i>Dashboard</a>
+                                </li>
+                            @endif
                         @else
                             <li>
                                 <a href="{{ route('login') }}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
@@ -117,11 +125,17 @@
                                 </a>
                             </li>
                         @else
-                            <li class="nav-item">
-                                <a href="{{ route('dealer.home') }}" class="nav-link text-white">
-                                    {{ auth()->user()->name }}
-                                </a>
-                            </li>
+                            @if (auth()->user()->role == 'admin')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin') }}" class="nav-link text-white">Dashboard</a>
+                                </li>
+                            @endif
+
+                            @if (auth()->user()->role === 'dealer')
+                                <li class="nav-item">
+                                    <a href="{{ route('dealer.home') }}" class="nav-link text-white">Dashboard</a>
+                                </li>
+                            @endif
 
                             <li class="nav-item">
                                 <a href="{{ route('logout') }}" class="nav-link text-white">
@@ -169,30 +183,39 @@
                     </li>
 
                     @guest
-                            <li>
-                                <a href="{{ route('register') }}">
-                                    Register
-                                </a>
-                            </li>
+                        <li>
+                            <a href="{{ route('register') }}">
+                                Register
+                            </a>
+                        </li>
 
-                            <li>
-                                <a href="{{ route('login') }}">
-                                    Login
-                                </a>
-                            </li>
-                        @else
-                            <li>
-                                <a href="{{ route('dealer.home') }}">
-                                    {{ auth()->user()->name }}
-                                </a>
-                            </li>
+                        <li>
+                            <a href="{{ route('login') }}">
+                                Login
+                            </a>
+                        </li>
+                    @endguest
 
+                    @auth
+                        @if (auth()->user()->role == 'admin')
                             <li>
-                                <a href="{{ route('logout') }}">
-                                    Logout
-                                </a>
+                                <a href="{{ route('admin') }}">Dashboard</a>
                             </li>
-                        @endguest
+                        @endif
+
+                        <li>
+                            <a href="{{ route('dealer.home') }}">
+                                {{ auth()->user()->name }}
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('logout') }}">
+                                Logout
+                            </a>
+                        </li>
+                    @endauth
+
                 </ul>
             </div>
             <div class="get-in-touch">
@@ -237,21 +260,20 @@
 
 
     <!-- Footer start -->
-    <footer class="main-footer-2" style="background: #CBBC27;max-height: 20%">
+    <footer class="main-footer-2" style="background: #fed925;">
         <div class="container2">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <img src="{{ url('images/iphone.png') }}" alt="iphone"> <br>
                     <img src="{{ url('images/playstore.png') }}" alt="iphone">
                 </div>
-                <div class="col-lg-3">
+
+                <div class="col-lg-4">
                     <h1 style="color: #00472F;font-size:400%">DOWNLOAD </h1>
                     <p style="color: #00472F">Automart APP on Google Play & App Store</p>
                 </div>
-                <div class="col-lg-3">
 
-                </div>
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <h2 style="color: #00472F">
                         Automart powered by <br>
                         Automobile Association of Kenya
@@ -261,30 +283,12 @@
         </div>
 
     </footer>
-    <!-- Footer end -->
 
-    <!-- Full Page Search -->
-    <div id="full-page-search">
-        <button type="button" class="close">×</button>
-        <form
-            action="https://storage.googleapis.com/theme-vessel-items/checking-sites/autocar-2-html/HTML/main/index.html#"
-            class="full-page-search-inner">
-            <input type="search" value="" placeholder="type keyword(s) here" />
-            <button type="submit" class="btn btn-sm button-theme">Search</button>
-        </form>
-    </div>
 
-    <!-- Car Overview Modal -->
-    <div class="car-model-2">
-        <div class="modal fade" id="carOverviewModal" tabindex="-1" role="dialog"
-            aria-labelledby="carOverviewModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document" id="vehiclePreviewModel">
 
-            </div>
-        </div>
-    </div>
 
-    <script src="{{asset('js/components.js')}}"></script>
+
+    <script src="{{ asset('js/components.js') }}"></script>
 
     <script src="{{ url('assets/js/popper.min.js') }}"></script>
     <script src="{{ url('assets/js/bootstrap-submenu.js') }}"></script>

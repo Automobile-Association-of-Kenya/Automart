@@ -476,17 +476,12 @@
                             <a class="nav-link" href="#0">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#1">Listed Cars</a>
+                            <a class="nav-link" href="{{ route('vehicles') }}">Vehicles</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('packages', $admin->id) }}">Packages</a>
+                            <a class="nav-link" href="{{ route('users.index') }}">Users</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admins1', $admin->id) }}">Users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#4">Adverts</a>
-                        </li>
+                       
 
                     </ul>
                     <!-- Left links -->

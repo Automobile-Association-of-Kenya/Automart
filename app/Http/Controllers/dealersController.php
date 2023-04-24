@@ -73,6 +73,12 @@ class DealersController extends Controller
         $counties = County::all();
         $makes = CarMake::orderBy('car_make_name','ASC')->get();
         $str_id = Str::random(8);
+        if (session()->has("$str_id")) {
+            session()->forget("$str_id");
+        }
+        if (session()->has($str_id."cover")) {
+            session()->forget($str_id. "cover");
+        }
         return view('dealer.addcar',compact('makes','counties','str_id'));
     }
 
@@ -92,8 +98,11 @@ class DealersController extends Controller
             }
         }
         
-        if (session()->has("$details->id._vehicle_images")) {
-            session()->forget("$details->id._vehicle_images");
+        if (session()->has($details->id."_vehicle_images")) {
+            session()->forget($details->id."_vehicle_images");
+        }
+        if (session()->has($details->id. "_vehicle_cover")) {
+            session()->forget($details->id."_vehicle_cover");
         }
         return view('dealer.editcar',compact('makes','vehicles','details', 'features'));
     }

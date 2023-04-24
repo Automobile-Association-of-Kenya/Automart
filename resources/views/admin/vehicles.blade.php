@@ -94,12 +94,19 @@
 
                 @include('layouts.sidebar')
 
-                <div class="col-md-10">
+                <div class="col-md-10 row">
 
                     <h4 class="text text-black">Vehicles</h4>
 
                     @include('partials.alert')
-                    <a href="#" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#addModelModal"><i class="fa fa-plus"></i>&nbsp;Add Model</a>
+                    <div class="col-md-8"></div>
+                    <div class="col-md-4 mb-2">
+                        <a href="#" class="btn btn-success btn-sm float-left" data-toggle="modal"
+                            data-target="#addMakeModal"><i class="fa fa-plus"></i>&nbsp;Add Make</a>
+                        <a href="#" class="btn btn-success btn-sm float-right" data-toggle="modal"
+                            data-target="#addModelModal"><i class="fa fa-plus"></i>&nbsp;Add Model</a> &nbsp;&nbsp;
+                    </div>
+
                     <table class="table table-bordered table-striped table-sm dataTable">
                         <thead>
                             <th>#</th>
@@ -161,58 +168,109 @@
 
 
 
-<div class="modal fade" id="addModelModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-blue" style="display: inline-block;">
-                <h4 class="modal-title float-left text-white" id="modalLabel"><strong class="text-black">Create Model</strong></h4>
-                <button type="button" class="close float-right text-danger" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
+    <div class="modal fade" id="addMakeModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-blue" style="display: inline-block;">
+                    <h4 class="modal-title float-left text-white" id="modalLabel"><strong class="text-black">Create
+                            Make</strong></h4>
+                    <button type="button" class="close float-right text-danger" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
 
-            <div class="modal-body">
-                <form action="{{ route('model.create') }}" method="post" id="customerCreateForm">
-                    @csrf
-                    <div class="feedback"></div>
-                    <div class="row">
+                <div class="modal-body">
+                    <form action="{{ route('make.create') }}" method="post" id="customerCreateForm">
+                        @csrf
+                        <div class="feedback"></div>
+                        <div class="row">
 
-                        <div class="col-lg-6">
-                            <label class="text-black">Make <sup style="color:red">*</sup></label>
-                            <div class="input-group input-group-prepend">
-                                <select name="car_make_id" id="carMakeID" class="form-control form-control-sm @error('car_make_id') is-invalid @enderror" value="{{old('car_make_id')}}">
-                                <option value="">Select One</option>
-                                @foreach ($makes as $item)
-                                    <option value="{{ $item->car_make_id }}">{{ $item->car_make_name }}</option>
-                                @endforeach
-                                </select>
+                            <div class="col-lg-6">
+                                <label class="text-black">Make <sup style="color:red">*</sup></label>
+                                <div class="input-group input-group-prepend">
+                                    <input type="text" name="name" id="name" maxlength="100"
+                                        class="form-control form-control-sm @error('name') is-invalid @enderror"
+                                        value="{{ old('name') }}" required>
+                                </div>
                             </div>
                         </div>
+                        <br>
 
-                        <div class="col-lg-6">
-                            <label class="text-black">Name <sup style="color:red">*</sup></label>
-                            <div class="input-group input-group-prepend">
-                                <input type="text" name="name" id="name" maxlength="100" class="form-control form-control-sm @error('name') is-invalid @enderror" value="{{old('name')}}" required>
-                            </div>
+                        <div class="col-lg-12 text-center">
+                            <button class="btn btn-success btn-sm" type="submit">
+                                <i class="fa fa-plus"></i>
+                                Submit
+                            </button>
+                            <button class="btn btn-warning btn-sm" type="reset">
+                                <i class="fa fa-refresh"></i>
+                                reset
+                            </button>
                         </div>
-                    </div>
-                    <br>
-
-                    <div class="col-lg-12 text-center">
-                        <button class="btn btn-success btn-sm" type="submit" id="createNewCustomer">
-                            <i class="fa fa-plus"></i>
-                            Submit
-                        </button>
-                        <button class="btn btn-warning btn-sm" type="reset">
-                            <i class="fa fa-refresh"></i>
-                            reset
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="modal fade" id="addModelModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-blue" style="display: inline-block;">
+                    <h4 class="modal-title float-left text-white" id="modalLabel"><strong class="text-black">Create
+                            Model</strong></h4>
+                    <button type="button" class="close float-right text-danger" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="{{ route('model.create') }}" method="post" id="customerCreateForm">
+                        @csrf
+                        <div class="feedback"></div>
+                        <div class="row">
+
+                            <div class="col-lg-6">
+                                <label class="text-black">Make <sup style="color:red">*</sup></label>
+                                <div class="input-group input-group-prepend">
+                                    <select name="car_make_id" id="carMakeID"
+                                        class="form-control form-control-sm @error('car_make_id') is-invalid @enderror"
+                                        value="{{ old('car_make_id') }}">
+                                        <option value="">Select One</option>
+                                        @foreach ($makes as $item)
+                                            <option value="{{ $item->car_make_id }}">{{ $item->car_make_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <label class="text-black">Name <sup style="color:red">*</sup></label>
+                                <div class="input-group input-group-prepend">
+                                    <input type="text" name="name" id="name" maxlength="100"
+                                        class="form-control form-control-sm @error('name') is-invalid @enderror"
+                                        value="{{ old('name') }}" required>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="col-lg-12 text-center">
+                            <button class="btn btn-success btn-sm" type="submit">
+                                <i class="fa fa-plus"></i>
+                                Submit
+                            </button>
+                            <button class="btn btn-warning btn-sm" type="reset">
+                                <i class="fa fa-refresh"></i>
+                                reset
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 @section('footer_scripts')
@@ -221,7 +279,7 @@
     <script>
         (function() {
             $('.dataTable').DataTable({
-                 dom: 'Blfrtip',
+                dom: 'Blfrtip',
                 buttons: [
                     'copy', 'csv', 'print'
                 ]

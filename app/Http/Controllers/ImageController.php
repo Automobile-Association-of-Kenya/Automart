@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Storage;
-use Image;
+use Intervention\Image\Facades\Image;
 
 class ImageController extends Controller
 {
@@ -70,7 +70,6 @@ class ImageController extends Controller
                 $filenametostore = $filename.'_'.uniqid().'.'.$extension;
                 Storage::put('public/profile_images/'. $filenametostore, fopen($file, 'r+'));
                 Storage::put('public/profile_images/thumbnail/'. $filenametostore, fopen($file, 'r+'));
-                //Resize image here
                 $thumbnailpath = public_path('storage/profile_images/thumbnail/'.$filenametostore);
                 $img = Image::make($thumbnailpath)->resize(400, 150, function($constraint) {
                     $constraint->aspectRatio();

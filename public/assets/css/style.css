@@ -1205,27 +1205,27 @@ input[type=checkbox]:checked + label:before {
 
 
 .btn-9{
-    color: #ffb606;
+    color: #fed925;
 }
 
 .btn-9:hover{
-    background: #ffb606;
+    background: #fed925;
 }
 
 .btn-9 span:nth-child(1){
-    background: linear-gradient(90deg,transparent,#ffb606);
+    background: linear-gradient(90deg,transparent,#fed925);
 }
 
 .btn-9 span:nth-child(2){
-    background: linear-gradient(180deg,transparent,#ffb606);
+    background: linear-gradient(180deg,transparent,#fed925);
 }
 
 .btn-9 span:nth-child(3){
-    background: linear-gradient(270deg,transparent,#ffb606);
+    background: linear-gradient(270deg,transparent,#fed925);
 }
 
 .btn-9 span:nth-child(4){
-    background: linear-gradient(360deg,transparent,#ffb606);
+    background: linear-gradient(360deg,transparent,#fed925);
 }
 
 /** Border buttons colors **/
@@ -4970,7 +4970,7 @@ input[type=checkbox]:checked + label:before {
 
 /* Animated text 1 area start*/
 .banner-3 .animated-text-1 .animate-charcter {
-    background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fff800 100%);
+    background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fed925 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -11439,7 +11439,7 @@ table {
     }
 
     .header-shrink {
-        background: #00472F;
+        background: #006544;
         -webkit-transition: 0.5s;
         -moz-transition: 0.5s;
         -ms-transition: 0.5s;
@@ -12124,7 +12124,7 @@ table {
         border-radius: 0;
         border: none;
         font-size: 14px;
-        background: #00472F!important;
+        background: #006544!important;
         border: transparent !important;
         margin: 0;
         color: #515151!important;
@@ -12275,11 +12275,11 @@ table {
 
     .main-header .navbar-expand-lg .navbar-nav .nav-link {
         padding: 10px 15px;
-        background: #00472F;
+        background: #006544;
     }
 
     .main-header .navbar-expand-lg .navbar-nav .link-color:hover {
-        background: #00472F;
+        background: #006544;
     }
 
     .main-header .dropdown-menu a {
@@ -12436,7 +12436,7 @@ table {
     }
 
     .section-header {
-        margin: 17px 0 35px;
+        margin: 10px 0 25px;
     }
 
     .best-used-car h3 {
@@ -13304,7 +13304,7 @@ table {
 
 @media (min-width: 180px){
     .header-shrink {
-        background: #00472F!important;
+        background: #006544!important;
         -webkit-transition: 0.5s;
         -moz-transition: 0.5s;
         -ms-transition: 0.5s;
@@ -13316,7 +13316,7 @@ table {
 }
 
 .bg-main {
-    background-color: #00472F;
+    background-color: #006544;
     color: #fff;
 }
 

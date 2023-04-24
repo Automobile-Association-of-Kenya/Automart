@@ -709,6 +709,11 @@ $(function () {
         }
     }
 
+    function asMoney(number) {
+        let amount = parseFloat(number);
+        return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+    }
+
     let searchMake = $("#searchMake"),
         selectModel = $("#selectModel"),
         searchYear = $("#searchYear"),
@@ -767,21 +772,17 @@ $(function () {
                                 value.id +
                                 '" class="car-img"><div class="for">' +
                                 value.title +
-                                '</div><div class="price-box"><span>' +
-                                value.price +
+                                '</div><div class="price-box"><span>Ksh. ' +
+                                asMoney(value.price) +
                                 '</span></div><img class="d-block w-100" src="/images/' +
-                                images[0] +
-                                '" alt="car"></a></div><div class="detail"><span style="font-size:15px;">' +
+                                value.cover_photo +
+                                '" alt="car"></a></div><div class="detail"><h1 class="title"><a href="Available/Details' +
+                                value.id +
+                                '"><span style="font-size:18px;">' +
                                 value.make.car_make_name +
-                                '</span><h1 class="title"><a href="Available/Details' +
-                                value.id +
-                                '">' +
+                                "</span>" +
                                 value.model.car_model_name +
-                                '</a></h1><ul class="custom-list"><li><a href="Available/Details' +
-                                value.id +
-                                '">' +
-                                value.vehicle_type +
-                                '</a></li></ul><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i> ' +
+                                '</a></h1><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i> ' +
                                 value.fuel_type +
                                 '</li><li><i class="flaticon-way"></i> ' +
                                 value.miles +
@@ -814,27 +815,22 @@ $(function () {
         $.getJSON("trending", function (vehicles) {
             let car = "";
             $.each(vehicles, function (key, value) {
-                let images = JSON.parse(value.images);
                 car +=
                     '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="Available/Details' +
                     value.id +
                     '" class="car-img"><div class="for">' +
                     value.title +
-                    '</div><div class="price-box"><span>' +
-                    value.price +
+                    '</div><div class="price-box"><span>Ksh. ' +
+                    asMoney(value.price) +
                     '</span></div><img class="d-block w-100" src="/images/' +
-                    images[0] +
-                    '" alt="car"></a></div><div class="detail"><span style="font-size:15px;">' +
+                    value.cover_photo +
+                    '" alt="car"></a></div><div class="detail"><span style="font-size:15px;"></span><h1 class="title"><a href="Available/Details' +
+                    value.id +
+                    '"><span style="font-size:20px;">' +
                     value.make.car_make_name +
-                    '</span><h1 class="title"><a href="Available/Details' +
-                    value.id +
-                    '">' +
+                    "&nbsp;</span>" +
                     value.model.car_model_name +
-                    '</a></h1><ul class="custom-list"><li><a href="Available/Details' +
-                    value.id +
-                    '">' +
-                    value.vehicle_type +
-                    '</a></li></ul><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i> ' +
+                    '</a></h1><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i> ' +
                     value.fuel_type +
                     '</li><li><i class="flaticon-way"></i> ' +
                     value.miles +

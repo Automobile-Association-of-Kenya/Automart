@@ -114,8 +114,9 @@ Route::get('vehicle/{id}', [VehicleController::class, 'get']);
 Route::resource('users', UserController::class);
 Route::get('about', [ApplicationController::class, 'about'])->name('about');
 
-Route::get('vehicles', [VehicleController::class, 'index'])->name('vehicles');
+Route::get('vehicles', [VehicleController::class, 'index'])->name('vehicles')->middleware('auth');
 Route::get('vehicle/approve/{id}', [VehicleController::class, 'approve'])->name('vehicle.approve');
 Route::post('vehicle/search', [VehicleController::class, 'search'])->name('vehicle.search');
 
 Route::post('model-create', [VehicleController::class, 'createModel'])->name('model.create');
+Route::post('make-create', [VehicleController::class, 'createMake'])->name('make.create');

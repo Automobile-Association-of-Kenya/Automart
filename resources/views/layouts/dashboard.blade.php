@@ -13,7 +13,7 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/components.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
     <!-- Styles -->
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
@@ -408,6 +408,7 @@
                 color: rgba(107, 114, 128, var(--tw-text-opacity))
             }
         }
+
         .dropdown {
             list-style: none;
         }
@@ -444,8 +445,7 @@
         </div> --}}
 
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light"
-            style="background-color: #00472F;; border-radius:10px;">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #00472F;; border-radius:10px;">
             <!-- Container wrapper -->
             <div class="container-fluid">
                 <!-- Toggle button -->
@@ -462,33 +462,33 @@
                         <h1 style="font-family:Garamond;color:white">Automart | Home</h1>
                     </a>
                     <!-- Left links -->
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0"  style="margin-left: 29% !important">
-                    <li>
-                    <a href="{{ route('dealer.home') }}"> <button type="submit" class="btn  btn-block"
-                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
-                                    class="fa fa-home"></i> Home</button></a>
-                    </li>
-                    <li>
-                    <a href="{{ route('all_cars') }}"> <button type="submit" class="btn  btn-block"
-                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
-                                    class="fa fa-home"></i> View All</button></a>
-                    </li>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 29% !important">
+                        <li>
+                            <a href="{{ route('dealer.home') }}"> <button type="submit" class="btn  btn-block"
+                                    style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                        class="fa fa-home"></i> Home</button></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('all_cars') }}"> <button type="submit" class="btn  btn-block"
+                                    style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                        class="fa fa-home"></i> View All</button></a>
+                        </li>
 
-                    <li>
-                    <a href="{{ route('home') }}"> <button type="submit" class="btn  btn-block"
-                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
-                                    class="fa fa-home"></i> Search</button></a>
-                    </li>
-                    <!-- <li class="nav-item">
+                        <li>
+                            <a href="{{ route('home') }}"> <button type="submit" class="btn  btn-block"
+                                    style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                        class="fa fa-home"></i> Search</button></a>
+                        </li>
+                        <!-- <li class="nav-item">
                         <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="{{ route('all_cars') }}">View All</a>
                         </li> -->
                         <!-- <li class="nav-item">
                         <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="{{ route('home') }}">Search</a>
                         </li> -->
                         <li>
-                        <a href="{{ route('dealer.mycars') }}"><button type="submit" class="btn  btn-block"
-                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
-                                class="fa fa-car"></i> My Cars</button></a>
+                            <a href="{{ route('dealer.mycars') }}"><button type="submit" class="btn  btn-block"
+                                    style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                        class="fa fa-car"></i> My Cars</button></a>
                         </li>
 
                         <!-- <li class="nav-item">
@@ -536,9 +536,11 @@
                             <li>
                                 <a class="dropdown-item" href="/terms">Terms</a>
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
-                            </li>
+                            @auth
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                                </li>
+                            @endauth
                         </ul>
                     </div>
                 </div>

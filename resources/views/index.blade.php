@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('title')
     Home @parent
 @endsection
@@ -141,7 +142,7 @@
     <div class="featured-car content-area">
         <div class="container">
             <div class="section-header d-flex">
-                <h2>Newly Added</h2>
+                <h3>Newly Added</h3>
             </div>
             <div class="featured-slider row slide-box-btn slider"
                 data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
@@ -154,10 +155,10 @@
                             <a href="{{ route('details', $item->id) }}">
                                 <div class="car-image">
                                     <div class="price-box">
-                                        <span>Ksh: {{ $item->price }}</span>
+                                        <span>Ksh: {{ number_format($item->price,2) }}</span>
                                     </div>
                                     @if (count($images) > 0)
-                                        <img class="d-block w-100" src="{{ asset('images/' . @$images[0]) }}">
+                                        <img class="d-block w-100" src="{{ asset('images/' . $item->cover_photo) }}">
                                     @else
                                         <img class="d-block w-100" src="#" alt="car-photo">
                                     @endif
@@ -225,7 +226,7 @@
     <div class="featured-car content-area">
         <div class="container">
             <div class="section-header d-flex">
-                <h2> Trending Vehicles</h2>
+                <h3> Most Viewed</h3>
             </div>
             <div class="row" id="trendingCarsSection">
 

@@ -15,43 +15,32 @@ class buyerController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest')->except(['show','mycars']);
+        $this->middleware('guest')->except(['show', 'mycars']);
     }
     public function index()
     {
         return view('login');
     }
-    public function register(Request $req){
 
+    public function register(Request $req)
+    {
 
-
-        $validator = $this->validate($req,[
+        $validator = $this->validate($req, [
             'name' => 'required',
             'email'  => 'required',
             'number'  => 'required',
             'password' => 'required|confirmed|min:8',
             'password' => 'required|same:password',
         ]);
-
-        if (!$validator) {
-            # code...
-            // return response->json([
-            //     'errors'=>$validate->errors()
-            // ],422);
-        }
-            else
-            {
-                 $encpass = Hash::make($req->password);
-                 $register= new User;
-                 $register->name = $req->name;
-                 $register->number = $req->number;
-                 $register->email = $req->email;
-                 $register->password = $encpass;
-                 $register->save();
-                return response()->json([
-                    'message' => 'Account created'
-                ]);
-            }
+        $encpass = Hash::make($req->password);
+        $register = new User;
+        $register->name = $req->name;
+        $register->number = $req->number;
+        $register->email = $req->email;
+        $register->role = 'dealer';
+        $register->password = $encpass;
+        $register->save();
+        return response()->json(['status'=>"success",'message' => 'Account created']);
     }
 
 
@@ -85,6 +74,7 @@ class buyerController extends Controller
             return redirect(route('login'))->with('successMsg', 'Buyer Registered Successfully. Login');
         }
     }
+    
     public function login(Request $request)
     {
         // $this->validate($request, [
@@ -144,6 +134,4 @@ class buyerController extends Controller
     {
         return view('dealer');
     }
-
-
 }

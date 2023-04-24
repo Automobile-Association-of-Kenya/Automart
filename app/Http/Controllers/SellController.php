@@ -5,11 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Caronsells;
 use App\Models\Payment;
-use App\Models\car_make;
-use App\Models\car_model;
 use App\Models\CarMake;
 use App\Models\CarModel;
-use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
 
 class SellController extends Controller
@@ -18,7 +15,7 @@ class SellController extends Controller
     public function index()
     {
         $make = CarMake::all();
-        
+
         return view('sell', compact('make'));
     }
 
