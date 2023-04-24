@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    protected $user;
-
     public function __construct()
     {
         $this->user = new User();

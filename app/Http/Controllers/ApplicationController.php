@@ -13,7 +13,7 @@ class ApplicationController extends Controller
 {
 
     public function welcome()
-    {        
+    {
         $vehicles = Caronsells::orderBy('id', 'desc')->paginate(6);
         $makes = CarMake::all();
         // $images = json_decode($vehicles[0]->images,true);
@@ -159,7 +159,7 @@ class ApplicationController extends Controller
     public function trendingVehicles()
     {
         // $vehicles = Caronsells::inRandomOrder()->limit(50)->with(['model','make'=>])
-        $vehicles = Caronsells::inRandomOrder()->limit(12)->with(['make' => function ($sql) {
+        $vehicles = Caronsells::inRandomOrder()->limit(12)->where('cover_photo','!=', "")->with(['make' => function ($sql) {
             return $sql->select('car_make_id', 'car_make_name');
         }, 'model' => function ($sqs) {
             return $sqs->select('car_model_id', 'car_model_name');

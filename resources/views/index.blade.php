@@ -171,14 +171,6 @@
                                 </div>
                             </a>
                             <div class="detail">
-
-                                <div class="location ratings" style="margin-left: -5%">
-                                    <i class="fa fa-star text-success"></i>
-                                    <i class="fa fa-star text-success"></i>
-                                    <i class="fa fa-star text-success"></i>
-                                    <i class="fa fa-star text-success"></i>
-                                    <i class="fa fa-star-o text-success"></i>
-                                </div>
                                 <div class="location">
                                     <a href="{{ route('details', $item->id) }}">
                                         <i class="fa-solid fa-engine"></i>Model:
