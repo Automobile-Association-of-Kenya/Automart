@@ -11485,6 +11485,7 @@ table {
 
     .car-box-5 .w-100{
         width: auto!important;
+        height: 260px !important;
     }
 
     .widget{
@@ -11798,6 +11799,7 @@ table {
 
     .banner .d-block.w-100 {
         width: auto!important;
+        height: 260px!important;
     }
 
     .sorting-options2 h5{
