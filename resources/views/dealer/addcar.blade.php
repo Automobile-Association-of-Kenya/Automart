@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    Add Car | @parent
+    Add Car @parent
 @endsection
 
 @section('content')
@@ -153,7 +153,7 @@
                                 <label>Year of Manufacture</label>
                                 <select class="form-control form-control-sm" name="year" id="year" required>
                                     <option value="">Select One</option>
-                                    @for ($i = date('Y',strtotime(now())); $i >= 2000; $i--)
+                                    @for ($i = date('Y', strtotime(now())); $i >= 2000; $i--)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
                                 </select>
@@ -173,14 +173,16 @@
                             </div>
                             <div class="col-md-4 form-group">
                                 <label for="">Engine CC</label>
-                                <input class="form-control form-control-sm" type="number" id="enginecc"
-                                    name="enginecc" placeholder="Engine CC" required>
+                                <input class="form-control form-control-sm" type="number" id="enginecc" name="enginecc"
+                                    placeholder="Engine CC" required>
                             </div>
 
                             <div class="col-md-4">
                                 <label>Vehicle Type</label>
-                                <select id="vehicle_type" name="vehicle_type" class="form-control form-control-sm" tabindex="14" required>
-                                    <option value="-1" selected="selected">Vehicle Type</option>
+                                <select id="vehicle_type" name="vehicle_type" class="form-control form-control-sm"
+                                    tabindex="14">
+
+                                    <option value="" selected="selected">Vehicle Type</option>
                                     <option value="Convertibles">Convertibles</option>
                                     <option value="Hatchbacks">Hatchbacks</option>
                                     <option value="SUVs">SUVs</option>
@@ -454,7 +456,12 @@
                                     <div class="images-preview-div" style="margin:1%"> </div>
                                 </div>
                             </div>
-                            <div id="output"></div>
+                            <div id="output">
+                                <div class="uploadAlert"></div>
+                                <button type="submit" class="btn btn-md btn-primary" id="vehicleImagesUpload"><i
+                                        class="fa fa-arrow-up"></i>&nbsp;&nbsp;Upload Images</button>
+                            </div>
+                            <div class="uploadfeedback"></div>
 
                         </div>
 
@@ -516,268 +523,7 @@
     </div>
 
 @section('footer_scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.1.1/compressor.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('#car_make').on('change', function() {
-                var carmake_id = this.value;
-                $("#car_model").html('');
-                $.ajax({
-                    url: "{{ url('fetch/car-models') }}",
-                    type: "POST",
-                    data: {
-                        car_make_id: carmake_id,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    dataType: 'json',
-                    success: function(result) {
-                        $('#car_model').html(
-                            '<option value="">Select Car Model</option>');
-                        result.forEach(model => {
-                            document.querySelector('#car_model').innerHTML +=
-                                '<option value="' + model
-                                .car_model_id + '">' + model.car_model_name +
-                                '</option>';
-
-                        });
-                    }
-                });
-            });
-
-
-            var previewImages = function(input, imgPreviewPlaceholder) {
-                if (input.files) {
-                    var noFiles = input.files.length;
-                    for (let i = 0; i < noFiles; i++) {
-                        // if (input.files[i].size > 5000000) {
-                        //     alert(input.files[i].name + ' is greater than 5mb');
-                        //     input.value = ''
-                        //     break;
-                        // }
-                        var reader = new FileReader();
-                        reader.onload = function(event) {
-                            const div = document.createElement('span');
-                            div.classList.add('img_' + i)
-                            div.style.cssText = 'position:relative'
-                            const img = document.createElement('img');
-                            img.setAttribute('src', event.target.result);
-                            img.style.width = '400px';
-                            img.style.height = '200px';
-                            const deleter = document.createElement('span');
-                            deleter.innerHTML = '<i class="fa fa-times-circle"></i>'
-                            deleter.style.cssText =
-                                'cursor:pointer;position:absolute;font-size: 1.3em;right:-3px;color:red;padding:6px;clip-path:circle()';
-                            deleter.addEventListener('click', e => {
-                                removeImage(input, imgPreviewPlaceholder, i);
-                            })
-                            div.appendChild(img);
-                            div.appendChild(deleter);
-                            document.querySelector(imgPreviewPlaceholder).appendChild(div)
-
-                        }
-                        reader.readAsDataURL(input.files[i]);
-                    }
-                }
-            };
-
-            const removeImage = (input, imgPreviewPlaceholder, index) => {
-                let removedImages = document.querySelector('.removedImgs').value;
-                removedImages = removedImages += index + ',';
-                document.querySelector('.removedImgs').value = removedImages
-                const el = document.querySelector('.img_' + index);
-                el.parentElement.removeChild(el)
-            }
-
-
-            $('#fileupload1').on('change', function() {
-                document.querySelector('.removedImgs1').value = ''
-                previewImages(this, 'div.images-preview-div1');
-            });
-
-            const str_id = $('#str_id').val(),
-                token = $("input[name='_token']").val();
-
-            /** compress cover photo*/
-            var input = document.getElementById('fileupload1');
-            input.addEventListener('change', function() {
-                let $this = $(this);
-                localStorage.removeItem('cover_photo');
-                var file = input.files[0];
-                var reader = new FileReader();
-                reader.onload = function() {
-                    var img = new Image();
-                    img.onload = function() {
-                        var width = 800;
-                        var height = 600;
-                        var canvas = document.createElement('canvas');
-                        canvas.width = width;
-                        canvas.height = height;
-                        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-                        var compressedFile = canvas.toDataURL("image/jpeg", 0.8);
-                        $.post('/application-images', {
-                            _token: token,
-                            str_id: str_id,
-                            image: compressedFile
-                        }).done(function(params) {
-                            console.log(params);
-                        }).fail(function(error) {
-                            console.log(error);
-                        });
-                    };
-                    img.src = reader.result;
-                };
-                reader.readAsDataURL(file);
-            });
-
-            var compressedImages = [];
-
-            $("#multiImagesUpload").on("change", function(e) {
-                var files = e.target.files;
-                previewImages(document.getElementById('multiImagesUpload'), 'div.images-preview-div')
-                localStorage.removeItem('compressedImages');
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        var img = new Image();
-                        img.src = e.target.result;
-                        img.onload = function() {
-                            var canvas = document.createElement("canvas");
-                            var ctx = canvas.getContext("2d");
-                            canvas.width = 600;
-                            canvas.height = 450;
-                            let leet = 'image_' + i;
-                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                            var compressedDataUrl = canvas.toDataURL("image/jpeg", 0.5);
-
-                            $.post('/application-images', {
-                                _token: token,
-                                str_id: str_id,
-                                image: compressedDataUrl
-                            }).done(function(params) {
-                                console.log(params);
-                            }).fail(function(error) {
-                                console.log(error);
-                            });
-                        };
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-
-            $('#vehicleAdditionForm').on('submit', function(event) {
-                event.preventDefault();
-                let $this = $(this);
-                $this.find("#vehicleSubmit").prop({
-                            disabled: true
-                        });
-                var DformData = new FormData();
-                let title = $("input[name='title']").val(),
-                    country = $("#country").val(),
-                    county = $("#county").val(),
-                    make = $("#car_make").val(),
-                    model = $("#car_model").val(),
-                    year = $("#year").val(),
-                    price = $("#price").val(),
-                    miles = $("#miles").val(),
-                    enginecc = $("#enginecc").val(),
-                    exterior = $("#exterior").val(),
-                    interior = $("#interior").val(),
-                    usage = $("#usage").val(),
-                    fuel_type = $("#fuel_type").val(),
-                    transmission = $("#transmission").val(),
-                    description = $("#description").val(),
-                    firstname = $("#firstname").val(),
-                    lastname = $("#gt-lastname").val(),
-                    email = $("#email").val(),
-                    phone = $("#phone").val(),
-                    features = $("input[name='features[]']").serializeArray(),
-                    vehicle_type = $('#vehicle_type').val(),
-                    featuresf = [];
-
-                $.each(features, (key, value) => {
-                    featuresf.push(value.value)
-                });
-
-                DformData.append('str_id', str_id);
-                DformData.append('features', featuresf);
-                DformData.append('title', title);
-                DformData.append('country', country);
-                DformData.append('county', county);
-                DformData.append('make', make);
-                DformData.append('model', model);
-                DformData.append('year', year);
-                DformData.append('price', price);
-                DformData.append('miles', miles);
-                DformData.append('vehicle_type', vehicle_type);
-                DformData.append('enginecc', enginecc);
-                DformData.append('exterior', exterior);
-                DformData.append('interior', interior);
-                DformData.append('usage', usage);
-                DformData.append('fuel_type', fuel_type);
-                DformData.append('transmission', transmission);
-                DformData.append('description', description);
-                DformData.append('firstname', firstname);
-                DformData.append('lastname', lastname)
-                DformData.append('email', email);
-                DformData.append('phone', phone);
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $this.find("input[name='_token']").val(),
-                    }
-                });
-                $.ajax({
-                    url: '/application',
-                    type: 'POST',
-                    data: DformData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        console.log(response);
-                        var result = JSON.parse(response);
-                        if (result.status === "success") {
-                            // removeImage(document.getElementById('fileupload1'), 'div.images-preview-div1', i);
-                            // removeImage(document.getElementById('multiImagesUpload'), 'div.images-preview-div', i);
-                            $this.trigger('reset');
-                            $(".feedback").html(
-                                "<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Success!       </strong>" +
-                                result.message + "!</div>");
-                        } else if (result.status === "error") {
-                            $(".feedback").html(
-                                "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>Error occured during processing!</div>"
-                            );
-                        }
-
-                        window.location.href = '/Available';
-
-                        $this.find("#vehicleSubmit").prop({
-                            disabled: false
-                        });
-                    },
-                    error: function(error) {
-                        console.log(error);
-                        if (error.status == 422) {
-                            var p = "";
-                            $.each(error.responseJSON.errors, function(key, value) {
-                                p += value + "!";
-                            });
-                        } else {
-                            p += "Error occured during processing!";
-                        }
-                        $(".feedback").html(
-                            "<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button><strong>Oops!      </strong>" +
-                            p + "</div>");
-                        $("#vehicleSubmit").prop({
-                            disabled: false
-                        });
-                    }
-                });
-            });
-
-        });
-    </script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.1.1/compressor.min.js"></script> --}}
+    <script src="{{ asset('js/create.js') }}"></script>
 @endsection
 @endsection

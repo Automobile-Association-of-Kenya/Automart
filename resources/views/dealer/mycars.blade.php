@@ -1,4 +1,9 @@
 @extends('layouts.dashboard')
+
+@section('title')
+    My cars @parent
+@endsection
+
 @section('content')
 
     @php
@@ -86,7 +91,7 @@
 
                 @include('layouts.sidebar')
 
-                <div class="col-md-10 mt-5 pt-5">
+                <div class="col-md-10">
                     <div class="row">
                         @include('partials.alert')
                         @if (!empty($vehicles) && $vehicles->count())
@@ -99,9 +104,9 @@
                                                     $images = json_decode($item->images, true);
                                                 @endphp
                                                 @if (count($images) > 0)
-                                                <img src="{{ url('images/'.$images[0]) }}" alt="car-photo" width="100%" height="250px">
+                                                <img src="{{ url('images/'.$item->cover_photo) }}" alt="car-photo" class="d-block w-100">
                                                 @else
-                                                <img src="#" alt="car-photo" width="100%" height="250px">
+                                                <img src="#" alt="car-photo">
                                                 @endif
                                                 <div class="tag">Best Deal</div>
                                             </div>

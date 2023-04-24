@@ -22,8 +22,12 @@ class VehicleController extends Controller
     public function index()
     {
         $vehicles = Caronsells::latest()->get();
-        return view('admin.vehicles', compact('vehicles'));
+        $makes = CarMake::get();
+        
+        return view('admin.vehicles', compact('vehicles', 'makes'));
     }
+
+
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -159,6 +163,7 @@ class VehicleController extends Controller
         }
     }
 
+
     function search(Request $request)
     {
         $make = $request->make;
@@ -194,13 +199,13 @@ class VehicleController extends Controller
         return json_encode($vehicles);
     }
 
-    
-
     public function fetchModels(Request $request)
     {
        $models = CarModel::all()->paginate(10);
        return CarModelResource::collection($models);
     }
+
+
     public function fetchMakes(Request $request)
     {
        $makes = CarMake::all();
@@ -217,6 +222,25 @@ class VehicleController extends Controller
     {
         $vehicle = Caronsells::find($id);
         return json_encode($vehicle);
+    }
+
+    public function createModel(Request $request)
+    {
+        $model = new CarModel();
+        $model->car_make_id = $request->car_make_id;
+        $model->car_model_name = $request->name;
+        $model->save();
+
+        return back()->with('success', 'Model created successfully');
+    }
+
+    public function createMake(Request $request)
+    {
+        $make = new CarMake();
+        $make->car_make_name = $request->name;
+        $make->save();
+
+        return back()->with('success', 'Make created successfully');
     }
 
     public function approve($id)

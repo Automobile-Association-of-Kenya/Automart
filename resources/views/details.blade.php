@@ -3,7 +3,6 @@
 @section('title')
 Car Details @parent
 @endsection
-
 <style>
     .center {
         position: absolute;
@@ -117,6 +116,10 @@ Car Details @parent
                         </div>
 
                         <ul class="preview-thumbnail nav nav-tabs">
+                            {{-- @php
+                                var_dump(json_decode($vehicle->images));
+                                die();
+                            @endphp --}}
                             @foreach (json_decode($vehicle->images) as $key => $item)
                                     @if ($loop->index == 0)
                                         <li class="active"><a data-target="#pict-{{ $loop->index }}"
@@ -324,7 +327,7 @@ Car Details @parent
                         $("#exampleModalCenter").modal("hide");
                     }
                 </script> -->
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
                 <script src="{{ asset('assets/magnific-popup/jquery.magnific-popup.js') }}"></script>
                 <script>
                     $(document).ready(function() {
@@ -332,5 +335,5 @@ Car Details @parent
                             type: 'image'
                         });
                     });
-                </script>
+                </script> --}}
             @endsection

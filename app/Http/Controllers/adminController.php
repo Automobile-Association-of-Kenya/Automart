@@ -4,16 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Caronsells;
 use App\Models\Payment;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Passwords\PasswordBroker;
 
 class adminController extends Controller
 {
-    public function index(){
-        return view('adminDash');
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
+    
+    public function index(){
+        $vehiclecount = Caronsells::where('approved',1)->count();
+        $uvehiclecount = Caronsells::where('approved',0)->count();
+        $dealercount = User::where('role','dealer')->count();
+        $buyercount = User::where('role',null)->orWhere('role','buyer')->count();
+
+        return view('admin', compact('vehiclecount', 'uvehiclecount', 'dealercount', 'buyercount'));
+    }
+
     public function reg($id){
         $admin = Admin::where('id', $id)->first();
         return view('adm', compact('admin'));
@@ -50,7 +63,7 @@ class adminController extends Controller
     public function rm_admin($id, $adm){
         if($id == $adm){
             $message = 'You Cannot Delete Your Account';
-            return redirect(route('admins1', $adm))->with(['errorMsg'=> $message]);  
+            return redirect(route('admins1', $adm))->with(['errorMsg'=> $message]);
         }
         $del = Admin::where('id', $id)->delete();
         if($del == true){
@@ -91,16 +104,16 @@ class adminController extends Controller
             'pass' => 'required|confirmed|min:8',
             'pass' => 'required|same:pass'
         ]);
-       
+
         $encpass = Hash::make($request->pass);
         $user = new Admin;
         $user->email = $request->email;
         $user->uName = $request->uName;
         $user->password = $encpass;
         $user->save();
-        
+
         return redirect(route('admins1', $id))->with('successMsg', 'Admin Registered Successfully');
-        
+
     }
 
     public function update($id, $adm, Request $request){
@@ -113,7 +126,7 @@ class adminController extends Controller
         ]);
 
         $poste = Admin::where('id', $id)->first();
-        
+
         $update = Payment::where('id', $id)
                 ->update([
                     'name' => $request->name,
@@ -124,11 +137,11 @@ class adminController extends Controller
                 ]);
         if($update == true){
             $message = 'Package Updated Successfully';
-            return redirect(route('packages', $adm))->with(['successMsg'=> $message]); 
+            return redirect(route('packages', $adm))->with(['successMsg'=> $message]);
         }else{
             $message = 'Package Update Failed. Try Again';
             return redirect(route('packages', $adm))->with(['errorMsg'=> $message]);
-        }        
+        }
     }
 
     public function log(Request $request){
@@ -142,7 +155,7 @@ class adminController extends Controller
                 // check usertype and redirect
                 return view('admin', compact('admin'));
             }else{
-                return redirect(route('admin'))->with('errorMsg', 'Password is incorrect. Try Again.'); 
+                return redirect(route('admin'))->with('errorMsg', 'Password is incorrect. Try Again.');
             }
         }else{
             return redirect(route('admin'))->with('errorMsg', 'User does not exist.');

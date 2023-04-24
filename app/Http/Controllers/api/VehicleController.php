@@ -1,32 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\VehicleRequest;
-use App\Models\CarMake;
 use App\Models\Caronsells;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
-
-class ApplicationController extends Controller
+class VehicleController extends Controller
 {
-
-    public function welcome()
-    {        
-        $vehicles = Caronsells::orderBy('id', 'desc')->paginate(6);
-        $makes = CarMake::all();
-        // $images = json_decode($vehicles[0]->images,true);
-        // return $images[0];
-        return view('index', compact('vehicles', 'makes'));
-    }
-
-    public function about()
-    {
-        return redirect()->back();
-    }
-
-    public function handleImages(Request $request)
+    /**
+     * @urlencoded image, @unique 10 character string
+     */
+    public function uploadImages(Request $request)
     {
         $imageString = explode(',', $request->image);
         if (isset($request->cover_image) && $request->cover_image == true) {
@@ -34,16 +22,19 @@ class ApplicationController extends Controller
                 session()->forget($request->str_id . 'cover');
             }
             session()->put($request->str_id . 'cover', $imageString[1]);
-        }else{
+        } else {
             if (session()->has(["$request->str_id"])) {
                 session()->push("$request->str_id", $imageString[1]);
             } else {
                 session()->put("$request->str_id", [$imageString[1]]);
             }
         }
-        return 'success';
+        return json_encode(['status' => "success", "message" => 'Photo added successfully. Please fill the form and submit']);
     }
 
+    /**
+     * @request containing @str_id used above
+     */
     public function store(VehicleRequest $request)
     {
         $images = [];
@@ -51,7 +42,7 @@ class ApplicationController extends Controller
         if (session()->has("$strkey")) {
             foreach (session("$strkey") as $key => $value) {
                 $image = base64_decode($value);
-                $fileName = 'img' . auth()->id() . $key . strtotime(now()) . '.jpg'; // or any other desired file name
+                $fileName = 'img' . Str::random(3) . $key . strtotime(now()) . '.jpg'; // or any other desired file name
                 $img = Image::make($image);
 
                 $img->text(' ' . $request->firstname . ' ' . $request->lastname, 150, 120, function ($font) {
@@ -67,10 +58,10 @@ class ApplicationController extends Controller
                 array_push($images, $fileName);
             }
         }
-        if (session()->has($strkey.'cover')) {
-            $jsone = session($strkey.'cover');
+        if (session()->has($strkey . 'cover')) {
+            $jsone = session($strkey . 'cover');
             $image = base64_decode($jsone);
-            $coverImage = 'img' . auth()->id() .'cover'. strtotime(now()) . '.jpg'; // or any other desired file name
+            $coverImage = 'img' . Str::random(3) . 'cover' . strtotime(now()) . '.jpg'; // or any other desired file name
             $img = Image::make($image);
             $img->text(' ' . $request->firstname . ' ' . $request->lastname, 150, 120, function ($font) {
                 $font->file(public_path('assets/fonts/font.ttf'));
@@ -91,7 +82,11 @@ class ApplicationController extends Controller
         return json_encode(['status' => 'success', 'message' => "Vehicle added successfully"]);
     }
 
-    public function updateVehicle(VehicleRequest $request, $id)
+    /**
+     *
+     * @request, $id is vehicle_id
+     */
+    public function update(VehicleRequest $request, $id)
     {
         $validated = $request->validated();
         $vehicle = Caronsells::findOrFail($id);
@@ -99,7 +94,7 @@ class ApplicationController extends Controller
         if (session()->has($id . "_vehicle_cover")) {
             $string = session($id . "_vehicle_cover");
             $image = base64_decode($string);
-            $coverImage = 'img' . auth()->id() . "cover" . strtotime(now()) . '.jpg'; // or any other desired file name
+            $coverImage = 'img' . Str::random(3) . "cover" . strtotime(now()) . '.jpg'; // or any other desired file name
             $img = Image::make($image);
             $img->text(' ' . $request->firstname . ' ' . $request->lastname, 150, 120, function ($font) {
                 $font->file(public_path('assets/fonts/font.ttf'));
@@ -116,7 +111,7 @@ class ApplicationController extends Controller
         if (session()->has($id . "_vehicle_images")) {
             foreach (session($id . "_vehicle_images") as $key => $value) {
                 $image = base64_decode($value);
-                $fileName = 'img' . auth()->id() . $key . strtotime(now()) . '.jpg'; // or any other desired file name
+                $fileName = 'img' . Str::random(3) . $key . strtotime(now()) . '.jpg'; // or any other desired file name
                 $img = Image::make($image);
                 $img->text(' ' . $request->firstname . ' ' . $request->lastname, 150, 120, function ($font) {
                     $font->file(public_path('assets/fonts/font.ttf'));
@@ -132,12 +127,15 @@ class ApplicationController extends Controller
         }
 
         $validated["features"] = json_encode(explode(',', $validated["features"]));
-        $vehicle->update(['images' => json_encode($images), 'cover_photo'=>(isset($coverImage) ? $coverImage : $vehicle->cover_photo)] + $validated);
+        $vehicle->update(['images' => json_encode($images), 'cover_photo' => (isset($coverImage) ? $coverImage : $vehicle->cover_photo)] + $validated);
         session()->forget($id . "_vehicle_images");
         session()->forget($id . "_vehicle_cover");
         return json_encode(['status' => 'success', 'message' => "Vehicle updated successfully"]);
     }
 
+    /**
+     * @urlencoded image, $vehicle_id
+     */
     public function updateImages(Request $request)
     {
         $imageString = explode(',', $request->image);
@@ -153,17 +151,7 @@ class ApplicationController extends Controller
                 session()->put($request->vehicle_id . "_vehicle_images", [$imageString[1]]);
             }
         }
-        return 'success';
+        return json_encode(['status'=> "success", "message"=>'Photo added successfully. Please fill the form and submit']);
     }
 
-    public function trendingVehicles()
-    {
-        // $vehicles = Caronsells::inRandomOrder()->limit(50)->with(['model','make'=>])
-        $vehicles = Caronsells::inRandomOrder()->limit(12)->with(['make' => function ($sql) {
-            return $sql->select('car_make_id', 'car_make_name');
-        }, 'model' => function ($sqs) {
-            return $sqs->select('car_model_id', 'car_model_name');
-        }])->orderBy('views', 'DESC')->get();
-        return json_encode($vehicles);
-    }
 }

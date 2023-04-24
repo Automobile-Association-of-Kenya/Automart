@@ -16,7 +16,6 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    protected $user;
     protected $mailer;
 
     public function __construct()

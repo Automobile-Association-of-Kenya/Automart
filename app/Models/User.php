@@ -53,7 +53,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function register($name, $email, $phone, $role, $password)
+    public function register($name, $email, $phone, $role = null, $password)
     {
         return $this->create([
             'name' => $name,

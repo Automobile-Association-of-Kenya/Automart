@@ -53,10 +53,10 @@
       </div>
     </div>
 
-    <div class="col">
+    {{-- <div class="col">
       <!-- Simple link -->
       <a href="{{ route('forget.admin') }}">Forgot password?</a>
-    </div>
+    </div> --}}
   </div>
 
   <!-- Submit button -->

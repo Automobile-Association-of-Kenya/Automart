@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('title')
     Home @parent
 @endsection
@@ -30,7 +31,7 @@
                                     plartform to advertise vehicles, buyers to get their dream vehicles and financial
                                     instution to provide financing to buyers who cannot meet the price of vehicles they
                                     would like to purchase. </p>
-                                <a href="{{ route('register') }}" class="btn-8">
+                                <a href="{{ route('all_cars') }}" class="btn-8">
                                     <span>Get Started as Buyer</span>
                                 </a>
 
@@ -141,7 +142,7 @@
     <div class="featured-car content-area">
         <div class="container">
             <div class="section-header d-flex">
-                <h2>Newly Added</h2>
+                <h3>Newly Added</h3>
             </div>
             <div class="featured-slider row slide-box-btn slider"
                 data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
@@ -154,12 +155,12 @@
                             <a href="{{ route('details', $item->id) }}">
                                 <div class="car-image">
                                     <div class="price-box">
-                                        <span>Ksh: {{ $item->price }}</span>
+                                        <span>Ksh: {{ number_format($item->price,2) }}</span>
                                     </div>
                                     @if (count($images) > 0)
-                                        <img class="d-block w-100" src="{{ asset('images/' . @$images[0]) }}">
+                                        <img class="d-block w-100" src="{{ asset('images/' . $item->cover_photo) }}">
                                     @else
-                                        <img class="d-block w-100"  src="#" alt="car-photo">
+                                        <img class="d-block w-100" src="#" alt="car-photo">
                                     @endif
                                     <div class="tag">{{ $item->title }}</div>
                                     @if ($item->approved)
@@ -222,26 +223,18 @@
         </div>
     </div>
 
+    <div class="featured-car content-area">
+        <div class="container">
+            <div class="section-header d-flex">
+                <h3> Most Viewed</h3>
+            </div>
+            <div class="row" id="trendingCarsSection">
 
-    {{-- <div class="featured-car content-area-21">
-    <div class="container">
-        <!-- Main title -->
-        <div class="section-header d-flex">
-            <h2 data-title="Types of car"> Featured Car</h2>
+            </div>
         </div>
-        <div class="row">
 
-
-
-            <div class=\"col-lg-4 col-md-6\"><div class=\"car-box-3\"><div class=\"car-thumbnail\"><a href=\"{{ route('details', "+value.id+") }}\" class=\"car-img\"><div class=\"for\">"+value.title+"</div><div class=\"price-box\"><span>"+value.price+"</span></div><img class=\"d-block w-100\" src=\"{{ asset('images/'."+images[0]+") }}\" alt=\"car\"></a></div><div class=\"detail\"><h1 class=\"title\"><a href=\"{{ route('details', "+value.id+") }}\">"+values.makes.car_make_name+"</a></h1><ul class=\"custom-list\"><li><a href=\"#\">"+value.vehicle_type+"</a></li></ul><ul class=\"facilities-list clearfix\"><li><i class=\"flaticon-fuel\"></i> "+value.fuel_type+"</li><li><i class=\"flaticon-way\"></i> "+value.miles+"</li><li><i class=\"flaticon-manual-transmission\"></i> "+value.transmission+"</li><li><i class=\"flaticon-gear\"></i> "+value.exterior+"</li><li><i class=\"flaticon-calendar-1\"></i> "+value.year+"</li></ul></div><div class=\"footer clearfix\"></div></div></div>
-
-
-
-        </div>
     </div>
-    </div> --}}
 
-    
 @section('footer_scripts')
 @endsection
 @endsection

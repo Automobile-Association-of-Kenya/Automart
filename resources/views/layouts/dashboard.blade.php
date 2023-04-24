@@ -7,28 +7,13 @@
 
     <title>@yield('title') | Automart AA Kenya Limited</title>
     <!-- favicon -->
-    <link rel="shortcut icon" href="{{ url('favicon/favicon.ico') }}">
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ url('favicon/apple-icon-57x57.png') }}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ url('favicon/apple-icon-60x60.png') }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ url('favicon/apple-icon-72x72.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ url('favicon/apple-icon-76x76.png') }}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ url('favicon/apple-icon-114x114.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ url('favicon/apple-icon-120x120.png') }}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ url('favicon/apple-icon-144x144.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ url('favicon/apple-icon-152x152.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url('favicon/apple-icon-180x180.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ url('favicon/android-icon-192x192.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url('favicon/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ url('favicon/favicon-96x96.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url('favicon/favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ url('favicon/manifest.json') }}">
-    <meta name="msapplication-TileColor" content="#fed925">
-    <meta name="msapplication-TileImage" content="{{ url('favicon/ms-icon-144x144.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
+
     <meta name="theme-color" content="#fed925">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
     <!-- Styles -->
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
@@ -423,6 +408,7 @@
                 color: rgba(107, 114, 128, var(--tw-text-opacity))
             }
         }
+
         .dropdown {
             list-style: none;
         }
@@ -459,8 +445,7 @@
         </div> --}}
 
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light"
-            style="background-color: #00472F;; border-radius:10px;">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #00472F;; border-radius:10px;">
             <!-- Container wrapper -->
             <div class="container-fluid">
                 <!-- Toggle button -->
@@ -477,33 +462,33 @@
                         <h1 style="font-family:Garamond;color:white">Automart | Home</h1>
                     </a>
                     <!-- Left links -->
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0"  style="margin-left: 29% !important">
-                    <li>
-                    <a href="{{ route('dealer.home') }}"> <button type="submit" class="btn  btn-block"
-                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
-                                    class="fa fa-home"></i> Home</button></a>
-                    </li>
-                    <li>
-                    <a href="{{ route('all_cars') }}"> <button type="submit" class="btn  btn-block"
-                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
-                                    class="fa fa-home"></i> View All</button></a>
-                    </li>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 29% !important">
+                        <li>
+                            <a href="{{ route('dealer.home') }}"> <button type="submit" class="btn  btn-block"
+                                    style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                        class="fa fa-home"></i> Home</button></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('all_cars') }}"> <button type="submit" class="btn  btn-block"
+                                    style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                        class="fa fa-home"></i> View All</button></a>
+                        </li>
 
-                    <li>
-                    <a href="{{ route('home') }}"> <button type="submit" class="btn  btn-block"
-                                style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
-                                    class="fa fa-home"></i> Search</button></a>
-                    </li>
-                    <!-- <li class="nav-item">
+                        <li>
+                            <a href="{{ route('home') }}"> <button type="submit" class="btn  btn-block"
+                                    style="background: #00472F;color:white;font-size:120%;text-align:left"> <i
+                                        class="fa fa-home"></i> Search</button></a>
+                        </li>
+                        <!-- <li class="nav-item">
                         <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="{{ route('all_cars') }}">View All</a>
                         </li> -->
                         <!-- <li class="nav-item">
                         <a class="nav-link" style="font-size: 20px;color:#CBBC27" href="{{ route('home') }}">Search</a>
                         </li> -->
                         <li>
-                        <a href="{{ route('dealer.mycars') }}"><button type="submit" class="btn  btn-block"
-                                style="background: #00472F;color:white;font-size:120%;text-align:left"><i
-                                class="fa fa-car"></i> My Cars</button></a>
+                            <a href="{{ route('dealer.mycars') }}"><button type="submit" class="btn  btn-block"
+                                    style="background: #00472F;color:white;font-size:120%;text-align:left"><i
+                                        class="fa fa-car"></i> My Cars</button></a>
                         </li>
 
                         <!-- <li class="nav-item">
@@ -551,9 +536,11 @@
                             <li>
                                 <a class="dropdown-item" href="/terms">Terms</a>
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
-                            </li>
+                            @auth
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                                </li>
+                            @endauth
                         </ul>
                     </div>
                 </div>

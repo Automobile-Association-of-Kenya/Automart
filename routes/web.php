@@ -4,6 +4,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\dealersController;
+use App\Http\Controllers\SellController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
@@ -32,10 +33,10 @@ Route::get('/landing',function(){
     return view('index');
 });
 
-Route::get('/SellYourCar', 'App\Http\Controllers\SellController@index')->name('sellcar');
-Route::post('/SellYourCar', 'App\Http\Controllers\SellController@store')->name('savecar');
-Route::post('/updateCar/{id}', 'App\Http\Controllers\SellController@update')->name('updatecar');
-Route::get('/SellYourCar/Payment', 'App\Http\Controllers\SellController@pay')->name('payment');
+Route::get('/SellYourCar', [SellController::class, 'index'])->name('sellcar');
+Route::post('/SellYourCar', [SellController::class, 'store'])->name('savecar');
+Route::post('/updateCar/{id}', [SellController::class, 'update'])->name('updatecar');
+Route::get('/SellYourCar/Payment', [SellController::class, 'pay'])->name('payment');
 Route::get('/Contact Us', 'App\Http\Controllers\contactController@index')->name('contact');
 Route::post('/Contact Us', 'App\Http\Controllers\contactController@store')->name('store');
 Route::get('/DealersPage/Dashboard', 'App\Http\Controllers\dealersController@index')->name('dealerHome');
@@ -76,7 +77,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('seller/register', [AuthController::class, 'registerseller'])->name('seller.create');
 });
 
-Route::get('/getmodel/{id}','SellController@getmodel')-> name('getmodel');
+Route::get('/getmodel/{id}',[SellController::class, 'getmodel'])-> name('getmodel');
 
 Route::get('/getCarMakes',[VehicleController::class, 'getCarMakes']) -> name('getCarMakes');
 
@@ -106,12 +107,17 @@ Route::controller(DealersController::class)->group(function(){
 Route::resource('application', ApplicationController::class);
 Route::post('application-images', [ApplicationController::class, 'handleImages']);
 Route::post('application-images-update', [ApplicationController::class, 'updateImages']);
+Route::post('application-update/{id}', [ApplicationController::class, 'updateVehicle']);
+Route::get('trending', [ApplicationController::class, 'trendingVehicles']);
 
 Route::get('vehicle/{id}', [VehicleController::class, 'get']);
 
 Route::resource('users', UserController::class);
 Route::get('about', [ApplicationController::class, 'about'])->name('about');
 
-Route::get('vehicles', [VehicleController::class, 'index'])->name('vehicles');
+Route::get('vehicles', [VehicleController::class, 'index'])->name('vehicles')->middleware('auth');
 Route::get('vehicle/approve/{id}', [VehicleController::class, 'approve'])->name('vehicle.approve');
 Route::post('vehicle/search', [VehicleController::class, 'search'])->name('vehicle.search');
+
+Route::post('model-create', [VehicleController::class, 'createModel'])->name('model.create');
+Route::post('make-create', [VehicleController::class, 'createMake'])->name('make.create');
