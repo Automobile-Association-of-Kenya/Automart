@@ -774,7 +774,7 @@ $(function () {
                                 value.title +
                                 '</div><div class="price-box"><span>Ksh. ' +
                                 asMoney(value.price) +
-                                '</span></div><img class="d-block w-100" src="/images/' +
+                                '</span></div><img class="d-block w-100" style="max-height:270px;" src="/images/' +
                                 value.cover_photo +
                                 '" alt="car"></a></div><div class="detail"><h1 class="title"><a href="Available/Details' +
                                 value.id +
@@ -822,7 +822,7 @@ $(function () {
                     value.title +
                     '</div><div class="price-box"><span>Ksh. ' +
                     asMoney(value.price) +
-                    '</span></div><img class="d-block w-100" src="/images/' +
+                    '</span></div><img class="d-block w-100" style="max-height:270px;" src="/images/' +
                     value.cover_photo +
                     '" alt="car"></a></div><div class="detail"><span style="font-size:15px;"></span><h1 class="title"><a href="Available/Details' +
                     value.id +
