@@ -64,7 +64,7 @@
                                 <a href="{{ route('login') }}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
                             </li>
                             <li>
-                                <a href="{{ route('register') }}" class="sign-in"><i class="fa fa-user"></i> Register</a>
+                                <a href="{{ route('seller.create') }}" class="sign-in"><i class="fa fa-user"></i> Register</a>
                             </li>
                         @endauth
                     </ul>
@@ -114,7 +114,7 @@
 
                         @guest
                             <li class="nav-item">
-                                <a href="{{ route('register') }}" class="nav-link text-white">
+                                <a href="{{ route('seller.create') }}" class="nav-link text-white">
                                     Register
                                 </a>
                             </li>
@@ -184,7 +184,7 @@
 
                     @guest
                         <li>
-                            <a href="{{ route('register') }}">
+                            <a href="{{ route('seller.create') }}">
                                 Register
                             </a>
                         </li>
