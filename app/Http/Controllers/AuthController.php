@@ -38,7 +38,7 @@ class AuthController extends Controller
     public function registerUser(UserRequest $request)
     {
         $user = $this->user->register($request->name, $request->email, $request->phone,$request->role, $request->password);
-        return $this->user->emailAccountVerification($request->email);
+        $this->user->emailAccountVerification($request->email);
         return redirect('login')->with('success', 'Account created successfully and an email has been sent to you for confirmation');
     }
 
