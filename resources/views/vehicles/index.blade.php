@@ -50,7 +50,7 @@
                                                 </div>
                                             </form>
 
-                                            <select name="vehicleslist" id="vehicleslist" class="customerslisttreeview mt-2"
+                                            <select name="vehicleslist" id="vehicleslist" class="vehicleslisttreeview mt-2"
                                                 multiple></select>
 
                                             <p class='bg-secondary p-1  mt-1 text-white text-center'><span
@@ -126,7 +126,7 @@
                                 <a class="nav-item nav-link" id="makes-tab" data-toggle="tab" href="#makesTab"
                                     role="tab" aria-controls="pop2" aria-selected="false">Makes</a>
 
-                                <a class="nav-item nav-link" id="models-tab" data-toggle="tab" href="#modelsTab"
+                                <a class="nav-item nav-link" id="models-tab" data-toggle="tab" href="#vehicleModelsTab"
                                     role="tab" aria-controls="pop5" aria-selected="false">Models</a>
 
                                 <a class="nav-item nav-link" id="features-tab" data-toggle="tab" href="#featuresTab"
@@ -411,35 +411,113 @@
 
                             <div class="tab-pane fade" id="makesTab" role="tabpanel" aria-labelledby="pop2-tab">
                                 <div class="row">
-                                    <div class="col-md-8" id="MakesTableSectiontion">
+                                    <div class="col-md-8" id="makesTableSection">
 
                                     </div>
 
                                     <div class="col-md-4">
-                                        <form action="{{ route('make-create') }}" method="post" id="makeCreateForm">
-                                            <div id="makefeedback"></div>
-                                            <div class="col-md-12 form-group">
-                                                <label for="make">Make:</label>
-                                                <div class="input-group">
-                                                    <input type="number" name="make" id="makeName"
-                                                        class="form-control form-control-md">
-                                                </div>
-                                            </div>
+                                        <div class="make-create-section mt-2">
+                                            <h4 class="text text-center mb-2">Makes Form</h4>
 
-                                            <button type="submit" class="btn btn-sm btn-success"
-                                                id="submitMake">save</button>
-                                        </form>
+                                            <form action="#" method="post" id="makeCreateForm">
+                                                <div id="makefeedback"></div>
+                                                @csrf
+                                                <div class="row">
+                                                    <input type="hidden" name="make_id" id="makeCreateID"
+                                                        value="">
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="make">Make:</label>
+                                                        <div class="input-group">
+                                                            <input type="text" name="make" id="makeName"
+                                                                class="form-control form-control-md">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <button type="submit" class="btn btn-sm btn-success"
+                                                            id="submitMake">save</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade" id="vehicleModelsTab" role="tabpanel" aria-labelledby="pop2-tab">
+                                <div class="row">
+                                    <div class="col-md-8" id="modelsTableSection">
 
+                                    </div>
 
+                                    <div class="col-md-4">
+                                        <div class="model-create-section mt-2">
+                                            <h4 class="text text-center mb-2">Model Form</h4>
+
+                                            <form action="#" method="post" id="modelCreateForm">
+                                                @csrf
+                                                <div id="modelfeedback"></div>
+                                                <div class="row">
+                                                    <input type="hidden" name="model_id" id="modelID" value="">
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="make_id">Make:</label>
+                                                        <div class="input-group">
+                                                            <select name="make_id" id="modelMakeID"
+                                                                class="form-control form-control-md"></select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="make">Model:</label>
+                                                        <div class="input-group">
+                                                            <input type="text" name="model" id="modelName"
+                                                                class="form-control form-control-md">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <button type="submit" class="btn btn-sm btn-success"
+                                                            id="submitModel">save</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="tab-pane fade" id="featuresTab" role="tabpanel" aria-labelledby="pop2-tab">
+                                <div class="row">
+                                    <div class="col-md-8" id="featureseSection"></div>
+                                    <div class="col-md-4">
+                                        <div class="make-create-section mt-2">
+                                            <h4 class="text text-center mb-2">Features Form</h4>
 
+                                            <form action="#" method="post" id="featureCreateForm">
+                                                <div id="featurefeedback"></div>
+                                                @csrf
+                                                <div class="row">
+                                                    <input type="hidden" name="feature_id" id="featureCreateID"
+                                                        value="">
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="make">Feature:</label>
+                                                        <div class="input-group">
+                                                            <input type="text" name="feature" id="featureName"
+                                                                class="form-control form-control-md">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-success">save</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -22,6 +22,7 @@ class VehicleController extends Controller
         $this->dealer = new Dealer();
         $this->type = new Type();
         $this->feature = new Feature();
+        $this->auth = auth()->user();
     }
 
     public function index(): View
@@ -35,38 +36,38 @@ class VehicleController extends Controller
         return json_encode($makes);
     }
 
-    public function makeCreate(Request $request, $id=null)
+    public function makeCreate(Request $request)
     {
-        $validated = $request->validate(['make'=>['required','max:80']]);
-        if (!is_null($id)) {
-            $make = $this->make->find($id);
+        $validated = $request->validate(['make' => ['required', 'max:80']]);
+        if (!is_null($request->make_id)) {
+            $make = $this->make->find($request->make_id);
             $make->update($validated);
-            return json_encode(['status'=>'success', 'message'=>'Make updated successfully']);
-        }else {
+            return json_encode(['status' => 'success', 'message' => 'Make updated successfully']);
+        } else {
             $this->make->create($validated);
             return json_encode(['status' => 'success', 'message' => 'Make added successfully']);
         }
     }
 
-    public function models($make_id=null)
+    public function models($make_id = null)
     {
-        $query = $this->model->query();
-        if (!is_null($make_id)) {
+        $query = VehicleModel::query();
+        if ($make_id !== "null" && $make_id !== null) {
             $query->where('make_id', $make_id);
         }
-        $models = $query->with('make')->get();
+        $models = $query->with('make')->latest('id')->get();
 
         return json_encode($models);
     }
 
-    public function modelCreate(Request $request, $id=null)
+    public function modelCreate(Request $request)
     {
-        $validated = $request->validate(['make_id'=>['required','exists:makes,id'],'model'=>['required','max:60']]);
-        if (!is_null($id)) {
-            $model = $this->model->find($id);
+        $validated = $request->validate(['make_id' => ['required', 'exists:makes,id'], 'model' => ['required', 'max:60']]);
+        if (!is_null($request->model_id)) {
+            $model = $this->model->find($request->model_id);
             $model->update($validated);
             return json_encode(['status' => 'success', 'message' => 'Model updated successfully']);
-        }else {
+        } else {
             $this->model->create($validated);
             return json_encode(['status' => 'success', 'message' => 'Model added successfully']);
         }
@@ -86,18 +87,18 @@ class VehicleController extends Controller
 
     public function features()
     {
-        $features = $this->feature->select('id','feature')->get();
+        $features = $this->feature->select('id', 'feature')->get();
         return json_encode($features);
     }
 
-    public function featureCreate(Request $request, $id=null)
+    public function featureCreate(Request $request)
     {
-        $validated = $request->validate(['feature'=>['required','max:80'], 'description'=>['nullable','max:255']]);
-        if (!is_null($id)) {
-            $feature = $this->feature->find($id);
+        $validated = $request->validate(['feature' => ['required', 'max:80'], 'description' => ['nullable', 'max:255']]);
+        if (!is_null($request->feature_id)) {
+            $feature = $this->feature->find($request->feature_id);
             $feature->update($validated);
             return json_encode(['status' => 'success', 'message' => 'Feature updated successfully']);
-        }else {
+        } else {
             $this->feature->create($validated);
             return json_encode(['status' => 'success', 'message' => 'Feature added successfully']);
         }
@@ -110,7 +111,34 @@ class VehicleController extends Controller
         Vehicle::create($validated);
     }
 
-    
+    public function list()
+    {
+        $vehicles = $this->vehicle->with(['make', 'model'])->latest()->get();
+        return json_encode($vehicles);
+    }
+
+    public function listVehicles()
+    {
+        $vehicles = $this->vehicle
+            ->with(['dealer', 'make', 'model', 'prices' => function ($query) {
+                return $query->latest()->limit(1);
+            }])->latest()->get();
+        // if ($this->auth->role === "dealer") {
+        //     $vehicles = $this->vehicle->where('dealer_id', $this->auth->dealer_id)
+        //         ->with(['dealer', 'make', 'model', 'prices' => function ($query) {
+        //             return $query->latest()->limit(1);
+        //         }])->latest()->get();
+        // } else {
+        //     $vehicles = $this->vehicle
+        //         ->with(['dealer', 'make', 'model', 'prices' => function ($query) {
+        //             return $query->latest()->limit(1);
+        //         }])->latest()->get();
+        // }
+
+        return json_encode($vehicles);
+    }
+
+
     public function show(string $id)
     {
         //

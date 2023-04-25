@@ -53,11 +53,16 @@ Route::resource('vehicles', VehicleController::class);
 
 Route::controller(VehicleController::class)->group(function(){
     Route::get('makes', 'makes');
-    Route::get('make-create/{id?}', 'makeCreate');
-    Route::get('models/{make_id?}', 'models');
+    Route::post('makes', 'makeCreate');
+    Route::get('models/{model_id?}', 'models');
+    Route::post('models', 'modelCreate');
     Route::get('types', 'types');
     Route::get('features', 'features');
+    Route::post('features', 'featuresCreate');
+    Route::get('list-vehicles', 'listVehicles');
 });
+
+Route::resource('vehicles', VehicleController::class);
 
 Route::get('countries', [ApplicationController::class, 'countries']);
 Route::get('counties/{country_id}', [ApplicationController::class, 'counties']);

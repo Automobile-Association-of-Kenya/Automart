@@ -16,6 +16,26 @@ class Vehicle extends Model
     ];
 
     /**
+     * Get the dealer that owns the Vehicle
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function dealer(): BelongsTo
+    {
+        return $this->belongsTo(Dealer::class, 'dealer_id');
+    }
+
+    /**
+     * Get the yard that owns the Vehicle
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function yard(): BelongsTo
+    {
+        return $this->belongsTo(Yard::class, 'yard_id');
+    }
+
+    /**
      * Get all of the features for the Vehicle
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -43,5 +63,15 @@ class Vehicle extends Model
     public function model(): BelongsTo
     {
         return $this->belongsTo(VehicleModel::class, 'vehicle_model_id');
+    }
+
+    /**
+     * Get all of the prices for the Vehicle
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function prices(): HasMany
+    {
+        return $this->hasMany(Price::class, 'vehicle_id', 'id');
     }
 }

@@ -9,14 +9,17 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
-    protected $make;
-    protected $model;
-    protected $country;
-    protected $county;
-    protected $dealer;
-    protected $feature;
-    protected $type;
-    protected $vehicle;
-    protected $role;
-    protected $user;
+    public $make;
+    public $model;
+    public $country;
+    public $county;
+    public $dealer;
+    public $feature;
+    public $type;
+    public $vehicle;
+    public $role;
+    public $user;
+    public $auth;
+    public $yard;
+    public $price;
 }
