@@ -101,13 +101,13 @@ class Mailer extends Notification
         try {
             $mail->SMTPDebug = 0;
             $mail->isSMTP();
-            $mail->Host = ENV('MAIL_HOST');
+            $mail->Host = "smtppro.zoho.com";
             $mail->SMTPAuth = true;
-            $mail->Username = ENV('MAIL_USERNAME');
-            $mail->Password = ENV('MAIL_PASSWORD');
-            $mail->SMTPSecure = ENV('MAIL_ENCRYPTION');
-            $mail->Port = ENV('MAIL_PORT');
-            $mail->setFrom(ENV("MAIL_FROM_ADDRESS"), ENV("MAIL_FROM_NAME"));
+            $mail->Username = "edereva@aakenya.co.ke";
+            $mail->Password = "fH5a&ksz";
+            $mail->SMTPSecure = "ssl";
+            $mail->Port = 465;
+            $mail->setFrom("edereva@aakenya.co.ke", "Automart AA Kenya Limited");
             $mail->addAddress($recipient);
 
             // if (isset($_FILES['emailAttachments'])) {
