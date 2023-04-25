@@ -2,7 +2,6 @@
     $("#car_make").on("change", function () {
         var carmake_id = this.value;
         $("#car_model").html("");
-        console.log("here");
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $("input[name='_token']").val()
