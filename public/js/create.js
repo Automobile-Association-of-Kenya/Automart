@@ -3,7 +3,7 @@
         var carmake_id = this.value;
         $("#car_model").html("");
         $.ajax({
-            url: "{{ url('fetch/car-models') }}",
+            url: "/fetch/car-models",
             type: "POST",
             data: {
                 car_make_id: carmake_id,
