@@ -47,7 +47,7 @@
                                     <a href="{{ route('seller.create') }}" class="btn-8">
                                         <span>Get Started as Seller</span>
                                     </a>
-                                    
+
                                 @endif
                                 @else
                                 <a href="{{ route('seller.create') }}" class="btn-8">
