@@ -35,9 +35,25 @@
                                     <span>Get Started as Buyer</span>
                                 </a>
 
+                                @auth
+                                    @if (auth()->user()->role === 'dealer')
+
+                                    <a href="{{ route('dealer.home') }}" class="btn-8">
+                                        <span>Your dashboard</span>
+                                    </a>
+
+                                @else
+
+                                    <a href="{{ route('seller.create') }}" class="btn-8">
+                                        <span>Get Started as Seller</span>
+                                    </a>
+                                    
+                                @endif
+                                @else
                                 <a href="{{ route('seller.create') }}" class="btn-8">
-                                    <span>Get Started as Seller</span>
-                                </a>
+                                        <span>Get Started as Seller</span>
+                                    </a>
+                                @endauth
 
                             </div>
                         </div>
@@ -155,7 +171,7 @@
                             <a href="{{ route('details', $item->id) }}">
                                 <div class="car-image">
                                     <div class="price-box">
-                                        <span>Ksh: {{ number_format($item->price,2) }}</span>
+                                        <span>Ksh: {{ number_format($item->price, 2) }}</span>
                                     </div>
                                     @if (count($images) > 0)
                                         <img class="d-block w-100" src="{{ asset('images/' . $item->cover_photo) }}">
