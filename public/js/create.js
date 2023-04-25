@@ -2,12 +2,17 @@
     $("#car_make").on("change", function () {
         var carmake_id = this.value;
         $("#car_model").html("");
+        console.log("here");
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $("input[name='_token']").val()
+            }
+        })
         $.ajax({
-            url: "/fetch/car-models",
             type: "POST",
+            url: "/fetch/car-models",
             data: {
                 car_make_id: carmake_id,
-                _token: "{{ csrf_token() }}",
             },
             dataType: "json",
             success: function (result) {
