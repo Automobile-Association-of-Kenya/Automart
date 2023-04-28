@@ -9010,11 +9010,11 @@ input[type=checkbox]:checked + label:before {
 }
 
 .search-box-2{
-    padding: 30px 0;
+    padding: 20px 0;
 }
 
 .search-box-3{
-    padding: 30px 0 10px;
+    padding: 20px 0 10px;
     background: #fff;
     box-shadow: 0 0 35px rgba(0, 0, 0, 0.1);
 }
@@ -10531,7 +10531,7 @@ table {
 
 /** Section header start **/
 .section-header {
-    margin:32px 0 50px;
+    margin:22px 0 20px;
     position: relative;
     z-index: 1;
     text-transform: uppercase;
@@ -11654,7 +11654,7 @@ table {
     }
 
     .section-header {
-        margin: 17px 0 40px;
+        margin: 17px 0 20px;
     }
 
     .section-header h2 {
