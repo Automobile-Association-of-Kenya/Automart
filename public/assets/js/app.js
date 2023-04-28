@@ -815,6 +815,8 @@ $(function () {
         $.getJSON("/trending", function (vehicles) {
             let car = "";
             $.each(vehicles, function (key, value) {
+                let model = (value.model !== null) ? value.model.car_model_name : "";
+                let make = (value.make !== null) ? value.make.car_make_name : "";
                 car +=
                     '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="Available/Details' +
                     value.id +
@@ -827,9 +829,9 @@ $(function () {
                     '" alt="car"></a></div><div class="detail"><span style="font-size:15px;"></span><h1 class="title"><a href="Available/Details' +
                     value.id +
                     '"><span style="font-size:20px;">' +
-                    value.make.car_make_name +
+                    make +
                     "&nbsp;</span>" +
-                    value.model.car_model_name +
+                     model +
                     '</a></h1><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i> ' +
                     value.fuel_type +
                     '</li><li><i class="flaticon-way"></i> ' +

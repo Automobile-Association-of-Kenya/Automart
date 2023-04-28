@@ -462,7 +462,6 @@
                                         class="fa fa-arrow-up"></i>&nbsp;&nbsp;Upload Images</button>
                             </div>
                             <div class="uploadfeedback"></div>
-
                         </div>
 
                         <div class="row">
@@ -479,6 +478,7 @@
                                         required style="text-transform:uppercase">
                                 </div>
                             </div>
+
                             <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
                                 <div class="col-6">
                                     <input class="form-control" type="email" id="email" tabindex="24"
@@ -491,6 +491,7 @@
                                         required>
                                 </div>
                             </div>
+
                             <div class="col-md-12">
                                 <input type="checkbox" value="Rear View Camera" id="Rear View Camera" name="features[]"
                                     required>&nbsp;&nbsp;&nbsp;
@@ -502,6 +503,7 @@
                             <div class="col-md-12" style="color:#000;">
                                 By clicking this, you have agreed to terms and conditions
                             </div>
+                            
                         </div>
 
                         <button style="background: #00472F;color:white;" type="submit" id="vehicleSubmit"
