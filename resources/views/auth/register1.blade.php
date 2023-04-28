@@ -35,7 +35,7 @@
                         <div class="row">
 
                             <div class="col-md-6 form-group">
-                                <label for="">First Name</label>
+                                <label for="">Name</label>
                                 <input type="text" class="form-control"name="name" value="{{ old('name') }}">
                                 @if ($errors->has('name'))
                                     <span class="text-danger">{{ $errors->first('name') }}</span>
