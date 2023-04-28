@@ -133,7 +133,7 @@
 
                             @if (auth()->user()->role === 'dealer')
                                 <li class="nav-item">
-                                    <a href="{{ route('dealer.home') }}" class="nav-link text-white">Dashboard</a>
+                                    <a href="{{ route('dealer.home') }}" class="nav-link text-white">Dealer Dashboard</a>
                                 </li>
                             @endif
 
@@ -204,8 +204,7 @@
                         @endif
 
                         <li>
-                            <a href="{{ route('dealer.home') }}">
-                                {{ auth()->user()->name }}
+                            <a href="{{ route('dealer.home') }}">Dealer Dashboard
                             </a>
                         </li>
 

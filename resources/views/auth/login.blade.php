@@ -60,7 +60,7 @@
                             </div>
                         </form>
                         <div class="d-flex justify-space-between">
-                            <div class="col-md-6 text-left"><a href="{{ route('register') }}" class="text-success"> Register
+                            <div class="col-md-6 text-left"><a href="{{ route('seller.create') }}" class="text-success"> Register
                                     Here</a></div>
 
                             <div class="col-md-6  text-right"><a href="{{ route('forget.password') }}" class="text-success">

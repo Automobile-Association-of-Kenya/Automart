@@ -7,9 +7,10 @@
 @section('header_styles')
     <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}">
+
 @endsection
 @section('content')
-
     @php
         $user = session('user');
     @endphp
@@ -151,14 +152,28 @@
 
 
     </div>
+@endsection
+
 @section('footer_scripts')
     <script src="{{ asset('js/dataTables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('js/jszip.min.js') }}"></script>
+    <script src="{{ asset('js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('js/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+
     <script>
         (function() {
-            $('.dataTable').DataTable();
+            $('.dataTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+            });
         })()
     </script>
-@endsection
-
 @endsection

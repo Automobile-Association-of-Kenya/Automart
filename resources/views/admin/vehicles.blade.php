@@ -7,6 +7,7 @@
 @section('header_styles')
     <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}">
 @endsection
 @section('content')
 
@@ -168,8 +169,7 @@
 
 
 
-    <div class="modal fade" id="addMakeModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addMakeModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-blue" style="display: inline-block;">
@@ -220,7 +220,8 @@
                 <div class="modal-header bg-blue" style="display: inline-block;">
                     <h4 class="modal-title float-left text-white" id="modalLabel"><strong class="text-black">Create
                             Model</strong></h4>
-                    <button type="button" class="close float-right text-danger" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close float-right text-danger" data-dismiss="modal"
+                        aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
@@ -276,17 +277,26 @@
 @section('footer_scripts')
     <script src="{{ asset('js/dataTables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('js/dataTables.tableTools.js') }}"></script>
+    <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('js/jszip.min.js') }}"></script>
+    <script src="{{ asset('js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('js/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+
     <script>
         (function() {
             $('.dataTable').DataTable({
-                dom: 'Blfrtip',
+                dom: 'Bfrtip',
                 buttons: [
-                    'copy', 'csv', 'print'
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
                 ]
             });
         })()
     </script>
+    
 @endsection
 
 @endsection
