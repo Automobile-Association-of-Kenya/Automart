@@ -24,6 +24,12 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
+
+    public function dealerCreate()
+    {
+        return view('dealers.create');
+    }
+
     /**
      * Handle an incoming registration request.
      *
@@ -31,26 +37,25 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
-            'phone' => ['required', 'string', 'max:14','unique:'.User::class],
-            'email' => ['required', 'string', 'email', 'max:60', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email' => ['required', 'string', 'email', 'max:60', 'unique:' . User::class],
+            'phone' => ['nullable', 'string', 'max:18', 'unique:' . User::class],
+            'alt_phone' => ['nullable', 'string', 'max:18'],
+            'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
+            'alt_phone' => $request->alt_phone,
             'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($user));
-
-        Auth::login($user);
         SendEmailVerificationNotification::dispatch($user)->onQueue('emails');
 
-        return json_encode(['status'=>'success', 'message'=> 'Account created successfully and a verification email has been sent to your email.']);
+        return json_encode(['status' => 'success', 'message' => 'Account created successfully and a verification email has been sent to your email.']);
     }
 }

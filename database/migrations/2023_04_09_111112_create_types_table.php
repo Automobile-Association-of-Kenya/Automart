@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('types', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->nullable()->constrained();
-            $table->string('name');
+            $table->string('type');
         });
     }
 

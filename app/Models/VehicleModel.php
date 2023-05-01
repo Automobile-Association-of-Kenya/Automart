@@ -12,6 +12,8 @@ class VehicleModel extends Model
     use HasFactory;
 
     protected $fillable = ['user_id','make_id', 'model'];
+    
+    public $timestamps = false;
 
     /**
      * Get the make that owns the VehicleModel
@@ -32,5 +34,5 @@ class VehicleModel extends Model
     {
         return $this->hasMany(Vehicle::class, 'make_id', 'id');
     }
-    
+
 }

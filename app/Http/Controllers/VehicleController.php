@@ -30,9 +30,14 @@ class VehicleController extends Controller
         return view('vehicles.index');
     }
 
-    public function makes()
+    public function makes($id = null)
     {
-        $makes = $this->make->select('id', 'make')->get();
+        $query = $this->make->query();
+        if (!is_null($id)) {
+            $query->where('id', $id);
+        }
+        $makes = $query->select('id', 'make')->get();
+
         return json_encode($makes);
     }
 
@@ -60,6 +65,12 @@ class VehicleController extends Controller
         return json_encode($models);
     }
 
+    public function model($id)
+    {
+        $model = $this->model->with('make')->find($id);
+        return json_encode($model);
+    }
+
     public function modelCreate(Request $request)
     {
         $validated = $request->validate(['make_id' => ['required', 'exists:makes,id'], 'model' => ['required', 'max:60']]);
@@ -73,21 +84,37 @@ class VehicleController extends Controller
         }
     }
 
-    public function types()
+    public function types($id = null)
     {
-        $types = $this->type->select('id', 'name')->get();
+        $query = $this->type->query();
+        if (!is_null($id)) {
+            $query->where('id', $id);
+        }
+        $types = $query->select('id', 'type')->get();
+
         return json_encode($types);
     }
 
-    public function dealers()
+    public function typeCreate(Request $request)
     {
-        $dealers = $this->dealer->get();
-        return json_encode($dealers);
+        $validated = $request->validate(['type' => ['required']]);
+        if (!is_null($request->type_id)) {
+            $type = $this->type->find($request->type_id);
+            $type->update($validated);
+        } else {
+            $this->type->create($validated);
+        }
+        return json_encode(['status' => 'success', 'message' => 'Vehicle type added successfully']);
     }
 
-    public function features()
+    public function features($id = null)
     {
-        $features = $this->feature->select('id', 'feature')->get();
+        $query = $this->feature->query();
+        if (!is_null($id) && $id !== "null") {
+            $query->where('id', $id);
+        }
+        $features = $query->select('id', 'feature', 'description')->get();
+
         return json_encode($features);
     }
 

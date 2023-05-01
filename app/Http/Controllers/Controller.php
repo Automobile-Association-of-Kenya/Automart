@@ -22,4 +22,5 @@ class Controller extends BaseController
     public $auth;
     public $yard;
     public $price;
+    public $partner;
 }

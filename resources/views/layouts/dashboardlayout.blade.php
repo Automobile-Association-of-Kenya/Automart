@@ -11,6 +11,7 @@
     <link href="{{ asset('css/master.css') }}" rel="stylesheet" id="master-css">
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />
     <link rel="icon" href="{{ asset('images/logo.png') }}" />
+    <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
 
     <title>@yield('title') | AA Kenya Limited</title>
     @yield('header_styles')
@@ -136,6 +137,8 @@
 </body>
 
 <script src="js/components.js"></script>
+    <script src="{{ asset('js/iziToast.min.js') }}"></script>
+
 @yield('footer_scrips')
 
 </html>

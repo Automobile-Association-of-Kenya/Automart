@@ -49,6 +49,6 @@
 
 </body>
 <script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/iziToast.min.js') }}"></script>
+    <script src="{{ asset('js/iziToast.min.js') }}"></script>
 @yield('footer_scripts')
 </html>

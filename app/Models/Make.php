@@ -10,8 +10,8 @@ class Make extends Model
 {
     use HasFactory;
 
-    protected $fillable = [''];
-
+    protected $fillable = ['make'];
+    public $timestamps = false;
     /**
      * Get all of the models for the Make
      *

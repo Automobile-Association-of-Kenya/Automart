@@ -5,6 +5,13 @@
 @endsection
 
 
+@section('header_styles')
+    <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}">
+@endsection
+
+
 @section('page')
     Vehicles
 @endsection
@@ -131,6 +138,12 @@
 
                                 <a class="nav-item nav-link" id="features-tab" data-toggle="tab" href="#featuresTab"
                                     role="tab" aria-controls="pop2" aria-selected="false">Features</a>
+
+                                <a class="nav-item nav-link" id="types-tab" data-toggle="tab" href="#vehicleTypesTab"
+                                    role="tab" aria-controls="pop2" aria-selected="false">Vehicle Types</a>
+
+                                <a class="nav-item nav-link" id="yards-tab" data-toggle="tab" href="#yardsTab"
+                                    role="tab" aria-controls="pop2" aria-selected="false">Yards</a>
                             </div>
                         </nav>
 
@@ -395,7 +408,7 @@
                                             <div class="col">
                                                 <button class='btn btn-success btn-md' id='savevehicle'><i
                                                         class="fal fa-save fa-lg fa-fw"></i> Save vehicle</button>
-                                                <button class='btn btn-outline-danger btn-sm' id='clearvehicle'><i
+                                                <button class='btn btn-outline-warning btn-sm' id='clearvehicle'><i
                                                         class="fal fa-broom fa-lg fa-fw"></i> Clear Fields</button>
 
                                             </div>
@@ -405,11 +418,12 @@
 
                             </div>
 
-                            <div class="tab-pane fade" id="vehicleListTab" role="tabpanel" aria-labelledby="pop2-tab">
+                            <div class="tab-pane fade mb-3" id="vehicleListTab" role="tabpanel"
+                                aria-labelledby="pop2-tab">
 
                             </div>
 
-                            <div class="tab-pane fade" id="makesTab" role="tabpanel" aria-labelledby="pop2-tab">
+                            <div class="tab-pane fade mb-3" id="makesTab" role="tabpanel" aria-labelledby="pop2-tab">
                                 <div class="row">
                                     <div class="col-md-8" id="makesTableSection">
 
@@ -436,6 +450,8 @@
                                                     <div class="col-md-12 form-group">
                                                         <button type="submit" class="btn btn-sm btn-success"
                                                             id="submitMake">save</button>
+                                                        <button class='btn btn-outline-warning btn-sm' id='clearMake'><i
+                                                                class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -445,7 +461,8 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="vehicleModelsTab" role="tabpanel" aria-labelledby="pop2-tab">
+                            <div class="tab-pane fade mb-3" id="vehicleModelsTab" role="tabpanel"
+                                aria-labelledby="pop2-tab">
                                 <div class="row">
                                     <div class="col-md-8" id="modelsTableSection">
 
@@ -479,6 +496,8 @@
                                                     <div class="col-md-12 form-group">
                                                         <button type="submit" class="btn btn-sm btn-success"
                                                             id="submitModel">save</button>
+                                                        <button class='btn btn-outline-warning btn-sm' id='clearModel'><i
+                                                                class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -488,7 +507,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="featuresTab" role="tabpanel" aria-labelledby="pop2-tab">
+                            <div class="tab-pane fade mb-3" id="featuresTab" role="tabpanel" aria-labelledby="pop2-tab">
                                 <div class="row">
                                     <div class="col-md-8" id="featureseSection"></div>
                                     <div class="col-md-4">
@@ -498,9 +517,10 @@
                                             <form action="#" method="post" id="featureCreateForm">
                                                 <div id="featurefeedback"></div>
                                                 @csrf
+                                                <input type="hidden" name="feature_id" id="featureCreateID"
+                                                    value="">
                                                 <div class="row">
-                                                    <input type="hidden" name="feature_id" id="featureCreateID"
-                                                        value="">
+
                                                     <div class="col-md-12 form-group">
                                                         <label for="make">Feature:</label>
                                                         <div class="input-group">
@@ -510,8 +530,18 @@
                                                     </div>
 
                                                     <div class="col-md-12 form-group">
+                                                        <label for="make">Description:</label>
+                                                        <div class="input-group">
+                                                            <textarea name="description" id="featureDescription" class="form-control form-control-md"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
                                                         <button type="submit"
                                                             class="btn btn-sm btn-success">save</button>
+                                                        <button class='btn btn-outline-warning btn-sm'
+                                                            id='clearFeature'><i class="fal fa-broom fa-lg fa-fw"></i>
+                                                            Reset</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -519,6 +549,86 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <div class="tab-pane fade mb-3" id="vehicleTypesTab" role="tabpanel"
+                                aria-labelledby="pop2-tab">
+                                <div class="row">
+                                    <div class="col-md-8" id="typesSection"></div>
+                                    <div class="col-md-4">
+                                        <div class="make-create-section mt-2">
+                                            <h4 class="text text-center mb-2">Vehicle Types Form</h4>
+
+                                            <form action="#" method="post" id="typeCreateForm">
+                                                <div id="typefeedback"></div>
+                                                @csrf
+                                                <input type="hidden" name="type_id" id="typeCreateID" value="">
+                                                <div class="row">
+
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="make">Name:</label>
+                                                        <div class="input-group">
+                                                            <input type="text" name="feature" id="typeName"
+                                                                class="form-control form-control-md">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-success">save</button>
+                                                        <button class='btn btn-outline-warning btn-sm' id='clearType'><i
+                                                                class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade mb-3" id="yardsTab" role="tabpanel" aria-labelledby="pop2-tab">
+                                <div class="row">
+                                    <div class="col-md-8" id="yardsSection"></div>
+                                    <div class="col-md-4">
+                                        <div class="make-create-section mt-2">
+                                            <h4 class="text text-center mb-2">Vehicle yards Form</h4>
+
+                                            <form action="#" method="post" id="yardCreateForm">
+                                                <div id="yardfeedback"></div>
+                                                @csrf
+                                                <input type="hidden" name="yard_id" id="yardCreateID" value="">
+                                                <div class="row">
+
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="make">Dealer:</label>
+                                                        <div class="input-group">
+                                                            <select type="text" name="dealer_id" id="dealerYardID"
+                                                                class="form-control form-control-md"></select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="make">Name:</label>
+                                                        <div class="input-group">
+                                                            <input type="text" name="yard" id="yardName"
+                                                                class="form-control form-control-md">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-success">save</button>
+                                                        <button class='btn btn-outline-warning btn-sm' id='clearYard'><i
+                                                                class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -594,5 +704,12 @@
 
 
 @section('footer_scrips')
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/main/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('js/main/jszip.min.js') }}"></script>
+    <script src="{{ asset('js/main/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
+
     <script src="{{ asset('js/main/vehicle.js') }}"></script>
 @endsection

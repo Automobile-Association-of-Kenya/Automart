@@ -10,6 +10,8 @@ class Yard extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     /**
      * Get all of the vehicles for the Yard
      *

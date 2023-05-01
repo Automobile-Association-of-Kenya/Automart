@@ -7,7 +7,7 @@
                     <h2>Find your Dream Car</h2>
                 </div>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-                <a href="#" class="btn-8">
+                <a href="#" class="btn-8" target=".search-box-2">
                     <span>Get Started Now</span>
                 </a>
             </div>
@@ -18,20 +18,21 @@
                 <div class="typing">
                     <h2>Welcome to Auto Car</h2>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-                <a href="#" class="btn-8">
-                    <span>Get Started Now</span>
+                <p>We provide a plartform that brings together vehicle buyers, sellers and vehicle financing providers under one plartform to do business in vehicle market hermoniously. </p>
+                <a href="{{ route('about') }}" class="btn-8">
+                    <span>Learn more</span>
                 </a>
             </div>
         </div>
+
         <div class="carousel-item item-bg">
             <img class="d-block w-100 h-100" src="img/banner/img-5.jpg" alt="banner">
             <div class="carousel-content prl-30 container banner-info-2 bi-2 text-start">
                 <div class="typing">
                     <h2>Best place for sell car!</h2>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-                <a href="#" class="btn-8">
+                <p>This plartform rovides the best marketplace to find customers globally for your vehicles. </p>
+                <a href="{{ route('dealer.create') }}" class="btn-8">
                     <span>Get Started Now</span>
                 </a>
             </div>

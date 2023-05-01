@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
@@ -20,9 +21,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'dealer_id',
+        'partner_id',
         'name',
-        'phone',
         'email',
+        'phone',
+        'alt_phone',
+        'role',
         'password',
     ];
 
@@ -66,4 +71,15 @@ class User extends Authenticatable
             'created_at' => Carbon::now()
         ]);
     }
+
+    /**
+     * Get the dealer that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function dealer(): BelongsTo
+    {
+        return $this->belongsTo(Dealer::class, 'dealer_id');
+    }
+
 }

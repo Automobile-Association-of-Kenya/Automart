@@ -10,6 +10,14 @@ class Dealer extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        "name",
+        "email",
+        "phone",
+        "alt_phone",
+        "address",
+    ];
+
     /**
      * Get all of the vehicles for the Dealer
      *
@@ -18,5 +26,15 @@ class Dealer extends Model
     public function vehicles(): HasMany
     {
         return $this->hasMany(Vehicle::class, 'dealer_id', 'id');
+    }
+
+    /**
+     * Get all of the users for the Dealer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class, 'dealer_id', 'id');
     }
 }

@@ -11,6 +11,8 @@ class Feature extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'feature', 'description'];
+    
+    public $timestamps = false;
 
     /**
      * The vehicles that belong to the Feature
