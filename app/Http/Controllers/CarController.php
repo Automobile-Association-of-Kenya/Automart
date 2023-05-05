@@ -36,6 +36,8 @@ class CarController extends Controller
                 $features = explode(',', $features);
             }
         }
+        // return $vehicle;
+        // return $vehicle->images;
         return view('details', compact('vehicle','features'));
     }
 
@@ -68,6 +70,7 @@ class CarController extends Controller
             $car->cover_photo = "";
         }else {
             $images = json_decode($car->images);
+            $images = (is_array($images)) ? $images : [];
             $images1 = array_filter($images, function ($value) use ($request) {
                 return $value !== $request->image;
             });

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-Car Details @parent
+    Car Details @parent
 @endsection
 <style>
     .center {
@@ -25,9 +25,10 @@ Car Details @parent
         </div>
     </div>
     @php
-        function formatNumber($number){
+        function formatNumber($number)
+        {
             if (strlen($number) <= 10) {
-                return "+254".$number;
+                return '+254' . $number;
             } else {
                 return $number;
             }
@@ -78,8 +79,6 @@ Car Details @parent
                                 <i class="fa fa-chevron-right"></i>
                             </a>
 
-
-
                             <a data-target="#pic-{{ count(json_decode($vehicle->images)) - 1 }}" data-toggle="tab"
                                 class="prev-image"
                                 style="position: absolute;left:0;top:40%;padding:15px;background:#00472F;color:white;cursor:pointer;">
@@ -120,16 +119,18 @@ Car Details @parent
                                 var_dump(json_decode($vehicle->images));
                                 die();
                             @endphp --}}
+                            
                             @foreach (json_decode($vehicle->images) as $key => $item)
-                                    @if ($loop->index == 0)
-                                        <li class="active"><a data-target="#pict-{{ $loop->index }}"
-                                                data-toggle="tab"><img
-                                                    src="{{ url('images/' . $item) }}" width="300px" height="80px"/></a></li>
-                                    @else
-                                        <li><a data-target="#pict-{{ $loop->index }}" data-toggle="tab"><img
-                                                    src="{{ url('images/' . $item) }}" width="300px" height="80px"/></a></li>
-                                    @endif
-                                @endforeach
+                                @if ($loop->index == 0)
+                                    <li class="active"><a data-target="#pict-{{ $loop->index }}" data-toggle="tab"><img
+                                                src="{{ url('images/' . $item) }}" width="300px" height="80px" /></a>
+                                    </li>
+                                @else
+                                    <li><a data-target="#pict-{{ $loop->index }}" data-toggle="tab"><img
+                                                src="{{ url('images/' . $item) }}" width="300px" height="80px" /></a>
+                                    </li>
+                                @endif
+                            @endforeach
                         </ul>
 
                     </div>
@@ -174,50 +175,53 @@ Car Details @parent
                 </div>
             </div>
 
-        <div class="col-md-12">
-            <div class="card">
-                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
 
-                    <a href="#">
-                        <div class="mask " style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </a>
-                </div>
-                <div class="card-body" style="color: #000; background-color:#00472F;">
-                    <h5 class="card-title text-center" style="color:white">More Details.</h5>
+                        <a href="#">
+                            <div class="mask " style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                    </div>
+                    <div class="card-body" style="color: #000; background-color:#00472F;">
+                        <h5 class="card-title text-center" style="color:white">More Details.</h5>
 
+                    </div>
                 </div>
+                <!-- Deal of the week end -->
             </div>
-            <!-- Deal of the week end -->
-        </div>
-        <div class="col-md-12">
-            <div class="row" style="color:#000; padding-bottom:10px;">
-                <div class="col-md-3 col-sm-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Price:</h5>
-                            <h5><b>Ksh.{{ number_format("$vehicle->price") }}</b></h5>
+            <div class="col-md-12">
+                <div class="row" style="color:#000; padding-bottom:10px;">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Price:</h5>
+                                <h5><b>Ksh.{{ number_format("$vehicle->price") }}</b></h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Mileage:</h5>
-                            <h5><b>{{ number_format("$vehicle->miles") }} Kms</b></h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Location:</h5>
-                            <h5><b><i class="fas fa-map-marker-alt fa-1x"></i>&nbsp;{{ $vehicle->county }}
-                                    {{ $vehicle->country }}&nbsp</b></h5>
 
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Mileage:</h5>
+                                <h5><b>{{ number_format("$vehicle->miles") }} Kms</b></h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
+
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Location:</h5>
+                                <h5><b><i class="fas fa-map-marker-alt fa-1x"></i>&nbsp;{{ $vehicle->county }}
+                                        {{ $vehicle->country }}&nbsp</b></h5>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="col-md-3 col-sm-6">
                     <div class="card">
                         <h5 class="card-title">Contacts:</h5>
                         <div class="card-body">
@@ -225,57 +229,57 @@ Car Details @parent
 
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
-                    <h4 style="font-family:Garamond;color:ghostblack;"><b>Vehicle Details</b></h4>
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            Make/Model:&nbsp;<b>{{ strtoupper($vehicle->carmake->car_make_name) }}
-                                {{ strtoupper($vehicle->carmodel->car_model_name) }}</b>
+                    <div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
+                        <h4 style="font-family:Garamond;color:ghostblack;"><b>Vehicle Details</b></h4>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6">
+                                Make/Model:&nbsp;<b>{{ strtoupper($vehicle->carmake->car_make_name) }}
+                                    {{ strtoupper($vehicle->carmodel->car_model_name) }}</b>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6">
+                                Year of Manufacture:&nbsp;<b>{{ $vehicle->year }}</b>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6">
+                                Transmission:&nbsp;<b>{{ strtoupper($vehicle->transmission) }}</b>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6">
+                                Fuel:&nbsp;<b>{{ strtoupper($vehicle->fuel_type) }}</b>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                Color:&nbsp;<b>{{ strtoupper($vehicle->exterior) }}</b>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                Vehicle Type:&nbsp;<b>{{ strtoupper($vehicle->vehicle_type) }}</b>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6">
+                                Vehicle Registration No.&nbsp;:&nbsp;<b>{{ strtoupper($vehicle->vin) }}</b>
+                            </div>
                         </div>
 
-                        <div class="col-md-3 col-sm-6">
-                            Year of Manufacture:&nbsp;<b>{{ $vehicle->year }}</b>
-                        </div>
-
-                        <div class="col-md-3 col-sm-6">
-                            Transmission:&nbsp;<b>{{ strtoupper($vehicle->transmission) }}</b>
-                        </div>
-
-                        <div class="col-md-3 col-sm-6">
-                            Fuel:&nbsp;<b>{{ strtoupper($vehicle->fuel_type) }}</b>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            Color:&nbsp;<b>{{ strtoupper($vehicle->exterior) }}</b>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            Vehicle Type:&nbsp;<b>{{ strtoupper($vehicle->vehicle_type) }}</b>
-                        </div>
-
-                        <div class="col-md-3 col-sm-6">
-                            Vehicle Registration No.&nbsp;:&nbsp;<b>{{ strtoupper($vehicle->vin) }}</b>
-                        </div>
                     </div>
-
-                </div>
-                &nbsp;
-                <div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
-                    <h4 style="font-family:Garamond; color: ghostblack;"><b>Vehicle Features</b></h4>
-                    @foreach ($features as $feature)
-                        <i class='fa fa-check' style='color: #006544;'></i>
-                        |&nbsp;{{ $feature }}&nbsp;|&nbsp;&nbsp;
-                    @endforeach
-                    <table class="table" style="color:#fff;">
-                        <tbody>
-                            <tr>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                &nbsp;
-                {{-- <div class="container-fluid" style="!Important; border-radius:5px; padding-bottom:5px;">
+                    &nbsp;
+                    <div class="container-fluid" style=" !Important; border-radius:5px; padding-bottom:5px;">
+                        <h4 style="font-family:Garamond; color: ghostblack;"><b>Vehicle Features</b></h4>
+                        @foreach ($features as $feature)
+                            <i class='fa fa-check' style='color: #006544;'></i>
+                            |&nbsp;{{ $feature }}&nbsp;|&nbsp;&nbsp;
+                        @endforeach
+                        <table class="table" style="color:#fff;">
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    &nbsp;
+                    {{-- <div class="container-fluid" style="!Important; border-radius:5px; padding-bottom:5px;">
                             <h4 style="font-family:Garamond;color: ghostblack;"><b>Description</b></h4>
                             {{ $vehicle->description }}
                             <table class="table" style="color:#fff;">
@@ -288,38 +292,38 @@ Car Details @parent
                         </div> --}}
 
 
-                <!-- Car details page end -->
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header" style="background-color:yellow">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">Safety Tips</h5>
-                                <button type="button" onclick="closeModal()" class="close" style="background-color:"
-                                    data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <!-- <div class="modal-body">
-                                                    <h5 class="card-title"> Beware of cons, please take note of the following;</h5>
-                                                    <div class="text-center">
+                    <!-- Car details page end -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color:yellow">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Safety Tips</h5>
+                                    <button type="button" onclick="closeModal()" class="close"
+                                        style="background-color:" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <!-- <div class="modal-body">
+                                                        <h5 class="card-title"> Beware of cons, please take note of the following;</h5>
+                                                        <div class="text-center">
 
-                                                        <p> 1. Inspect the vehicle to make sure they meet your needs.</p><br>
-                                                        <p style="margin-top:-30px; margin-right:130px"> 2.Meet the seller at a safe public
-                                                            place.</p><br>
-                                                        <p style="margin-top:-30px;margin-right:178px"> 3.Don't send any pre-payments.</p></br>
-                                                        <p style="margin-top:-30px; margin-right:-10px"> 4.Check all documentation and only pay
-                                                            if you're satisfied.</p></br>
-                                                    </div>
-                                                </div> -->
-                            <!-- <div class="modal-footer" >
-                                                  <button type="button" onclick="closeModal()" class="btn btn-secondary" style="background-color:green" data-dismiss="modal">Close</button>
-                                                </div> -->
+                                                            <p> 1. Inspect the vehicle to make sure they meet your needs.</p><br>
+                                                            <p style="margin-top:-30px; margin-right:130px"> 2.Meet the seller at a safe public
+                                                                place.</p><br>
+                                                            <p style="margin-top:-30px;margin-right:178px"> 3.Don't send any pre-payments.</p></br>
+                                                            <p style="margin-top:-30px; margin-right:-10px"> 4.Check all documentation and only pay
+                                                                if you're satisfied.</p></br>
+                                                        </div>
+                                                    </div> -->
+                                <!-- <div class="modal-footer" >
+                                                      <button type="button" onclick="closeModal()" class="btn btn-secondary" style="background-color:green" data-dismiss="modal">Close</button>
+                                                    </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
         </div>
     </div>
-            @endsection
+@endsection

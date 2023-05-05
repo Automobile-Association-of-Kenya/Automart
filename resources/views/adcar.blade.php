@@ -10,6 +10,9 @@
     @endphp
 
     <style>
+        label sup{
+            color: red;
+        }
         .show-when-target {
             visibility: hidden;
         }
@@ -134,9 +137,11 @@
                 <div class="col-md-10">
                     <div class="pageLoader" id="pageLoader"></div>
                     @include('partials.alert')
+                    <p class="text text-red">All fields marked with * are mandatory. </p>
 
                     <form action="{{ route('savecar') }}" method="POST" enctype="multipart/form-data"
                         id="vehicleAdditionForm">
+
                         {{ csrf_field() }}
                         <h2 class="form-title" style="color: #00472F">Enter Vehicle Information » </h2>
 
@@ -156,15 +161,15 @@
 
                             <div class="col-md-6 form-group">
                                 <label for="">County</label>
-                                <select name="county" id="county" class="form-control form-control-sm" required>
+                                <select name="county" id="county" class="form-control form-control-sm">
                                     @foreach ($counties as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        <option value="{{ $item->name }}">{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="col-md-4 form-group">
-                                <label>Make</label>
+                                <label>Make <sup>*</sup></label>
                                 <select class="form-control form-control-sm" id="car_make" name="make" required>
                                     <option value="Any Make" selected="false">Make</option>
                                     @foreach ($makes as $item)
@@ -174,7 +179,7 @@
                             </div>
 
                             <div class="col-md-4 form-group">
-                                <label>Model</label>
+                                <label>Model <sup>*</sup></label>
                                 <select class="form-control form-control-sm" name="model" id="car_model" required
                                     aria-hidden="true" required>
                                     <option value="">Select One </option>
@@ -182,7 +187,7 @@
                             </div>
 
                             <div class="col-md-4 form-group">
-                                <label>Year of Manufacture</label>
+                                <label>Year of Manufacture <sup>*</sup></label>
                                 <select class="form-control form-control-sm" name="year" id="year" required>
                                     <option value="">Select One</option>
                                     <option value="2021">2021</option>
@@ -213,17 +218,17 @@
 
                         <div class="row" style="padding-top:10px;">
                             <div class="col-md-4 form-group">
-                                <label for="">Price</label>
+                                <label for="">Price <sup>*</sup></label>
                                 <input class="form-control form-control-sm" type="number" id="price" name="price"
                                     placeholder="selling Price (Ksh)" required>
                             </div>
                             <div class=" col-md-4 form-group">
                                 <label for="">Mileage</label>
                                 <input class="form-control form-control-sm" type="number" id="miles" name="miles"
-                                    placeholder="mileage (Kms)" required>
+                                    placeholder="mileage (Kms)">
                             </div>
                             <div class=" col-md-4 form-group">
-                                <label for="">Engine CC</label>
+                                <label for="">Engine CC <sup>*</sup></label>
                                 <input class="form-control form-control-sm" type="number" id="enginecc"
                                     name="enginecc" placeholder="Engine CC" required>
                             </div>
@@ -644,7 +649,7 @@
                         };
                         reader.readAsDataURL(file);
                     });
-                    
+
                     // /* end compress cover photo*/
                     // const removeImage = (input, imgPreviewPlaceholder, index) => {
                     //     let removedImages = document.querySelector('.removedImgs').value;
@@ -928,7 +933,7 @@
                             var formData = new FormData(form[0]);
                             // Compress image files
                             formData.set('images', localStorage.getItem('compressedImages'));
-                            
+
                             var files = formData.getAll('images');
                             let croppedImages = [];
                             $.when.apply($, $.map(files, function(file) {
