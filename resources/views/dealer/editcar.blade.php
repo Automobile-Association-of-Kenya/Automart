@@ -9,6 +9,9 @@
     @endphp
 
     <style>
+        label sup{
+            color: red;
+        }
         .show-when-target {
             visibility: hidden;
         }
@@ -71,6 +74,9 @@
         #loading-image {
             z-index: 100;
         }
+        label {
+            color: #333;
+        }
     </style>
     @if (session('loader'))
         <div id="loading">
@@ -102,7 +108,8 @@
                                 placeholder="Enter listing title" required style="text-transform:uppercase"
                                 value="{{ $details->title }}">
                             <div class="row" style="padding-top: 10px; padding-bottom: 1px;">
-                                <div class="col-md-12">
+                                <div class="col-md-6 form-group">
+                                    <label for="">Country</label>
                                     <select name="country" id="country" tabindex="3" required
                                         class="form-control form-control-md">
                                         <option value="-1" selected="selected">Country</option>
@@ -110,7 +117,8 @@
                                     </select>
                                 </div>
                                 <input type="hidden" name="vehicle_id" id="vehicleID" value="{{ $details->id }}">
-                                <div class="col-md-12 mt-1">
+                                <div class="col-md-6 form-group">
+                                    <label for="">County</label>
                                     <select class="form-control form-control-md" name="county" id="county"
                                         data-value="" required>
                                         <option value="" data-value="-1" selected="selected">County
@@ -274,7 +282,7 @@
                             </div>
                             <div class="row" style="padding-bottom: 10px;">
                                 <div class="col-md-4 ">
-                                    <label>Make</label>
+                                    <label>Make <sup>*</sup></label>
                                     <!-- <input class="form-control" type="text" name="make" placeholder="Enter Vehicle Make" style="text-transform:uppercase" required> -->
                                     <select class="form-control form-control-md" id="car_make" name="make"
                                         aria-hidden="true" required>
@@ -287,8 +295,9 @@
 
                                     </select>
                                 </div>
+
                                 <div class="col-md-4 ">
-                                    <label>Model</label>
+                                    <label>Model <sup>*</sup></label>
                                     <select class="form-control form-control-md" name="model" id="car_model" required
                                         aria-hidden="true" required>
                                         <option value="Any Make" selected="false">Model</option>
@@ -298,40 +307,44 @@
                                             </option>
                                         @endif
                                     </select>
-
                                 </div>
-                                <div class="col-md-4">
 
-                                    <label>Year of Manufacture</label>
+                                <div class="col-md-4">
+                                    <label>Year of Manufacture <sup>*</sup></label>
                                     <select name="year" id="year" class="form-control form-control-md"
                                         data-value="" required>
                                         <option value="-1">Select Year of Manufacture</option>
-                                        @for ($i = date('Y', strtotime(now())); $i >= 2000; $i--)
+                                        @for ($i = date('Y', strtotime(now())); $i >= 1995; $i--)
                                             <option value="2021" {{ $details->year == $i ? 'selected' : '' }}>
                                                 {{ $i }}</option>
                                         @endfor
                                     </select>
                                 </div>
+
                             </div>
 
-                            <div class="row" style="padding-top:10px;">
-                                <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label for="">Price <sup>*</sup></label>
                                     <input class="form-control" type="number" id="price" name="price"
                                         placeholder="selling Price (Ksh)" required value="{{ $details->price }}">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 form-group">
+                                    <label for="">Mileage</label>
                                     <input class="form-control" type="number" id="miles" name="miles"
                                         placeholder="mileage (Kms)" required value="{{ $details->miles }}">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 form-group">
+                                    <label for="">Engine CC</label>
                                     <input class="form-control" type="number" id="enginecc" name="enginecc"
                                         placeholder="mileage (Kms)" required value="{{ $details->enginecc }}">
                                 </div>
 
                             </div>
 
-                            <div class="row" style="padding-top:10px; padding-bottom:10px;">
-                                <div class="col-md-4 mt-1">
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Color</label>
                                     <select id="exterior" class="form-control form-control-md" name="exterior" required>
                                         <option value="-1">Color</option>
                                         <option value="White" {{ $details->exterior == 'White' ? 'selected' : '' }}>White
@@ -354,12 +367,21 @@
                                         </option>
                                         <option value="Yellow" {{ $details->exterior == 'Yellow' ? 'selected' : '' }}>
                                             Yellow</option>
+                                        <option value="Bronze" {{ $details->exterior == 'Bronze' ? 'selected' : '' }}>
+                                            Bronze</option>
+                                        <option value="Orange" {{ $details->exterior == 'Orange' ? 'selected' : '' }}>
+                                            Orange</option>
+                                        <option value="Maroon" {{ $details->exterior == 'Maroon' ? 'selected' : '' }}>
+                                            Maroon</option>
+                                        <option value="Purple" {{ $details->exterior == 'Purple' ? 'selected' : '' }}>
+                                            Purple</option>
                                         <option value="Other" {{ $details->exterior == 'Other' ? 'selected' : '' }}>
                                             Other
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-4 mt-1">
+                                <div class="col-md-4 form-group">
+                                    <label >Interior Type</label>
                                     <select id="interior" value="" class="form-control form-control-md"
                                         name="interior" required>
                                         <option value="-1">Interior Type</option>
@@ -372,7 +394,8 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-4 mt-1">
+                                <div class="col-md-4 form-group">
+                                    <label for="">Vehicle Usage</label>
                                     <select id="usage" value="" class="form-control form-control-md"
                                         name="usage" required>
                                         <option value="-1">Vehicle Usage</option>
@@ -385,7 +408,8 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-md-12 mt-1">
+                                <div class="col-md-4 form-group">
+                                    <label for="">Fuel Type</label>
                                     <select id="fuel_type" class="form-control form-control-md" name="fuel_type"
                                         required>
                                         <option value="-1">Fuel Type</option>
@@ -403,7 +427,32 @@
                                         <option value="Other">Other</option>
                                     </select>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <label>Transmission</label>
+                                    <select class="form-control form-control-md" id="transmission" name="transmission"
+                                        tabindex="13" required>
+                                        <option value="" s>Transmission Type</option>
+                                        <option value="Automatic"
+                                            {{ $details->transmission == 'Automatic' ? 'selected' : '' }}>Automatic
+                                        </option>
+                                        <option value="Manual"
+                                            {{ $details->transmission == 'Manual' ? 'selected' : '' }}>
+                                            Manual</option>
+                                        <option value="Semi-Auto"
+                                            {{ $details->transmission == 'Semi-Auto' ? 'selected' : '' }}>Semi-Auto
+                                        </option>
+                                        <option value="None" {{ $details->transmission == 'None' ? 'selected' : '' }}>
+                                            None</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12 form-group" style="padding-top:10px; padding-bottom:15px;">
+                                    <label for="description">Vehicle Description</label>
+                                    <textarea class="form-control form-control-lg" required id="description" name="description">{{ $details->description }}</textarea>
+                                </div>
                             </div>
+
                             <h2 class="form-title" style="color: #000000">Select Vehicle Features » </h2>
                             <div class="row" style="color:#000;">
                                 <div class="col-md-3">
@@ -570,30 +619,7 @@
                                     Control
                                 </div>
                             </div>
-                            <div class="row" style="padding-top:10px; padding-bottom:15px;">
-                                <div class="col-md-12">
-                                    <label class="form-label">Transmission</label>
-                                    <select class="form-control form-control-sm" id="transmission" name="transmission"
-                                        tabindex="13" required>
-                                        <option value="" s>Transmission Type</option>
-                                        <option value="Automatic"
-                                            {{ $details->transmission == 'Automatic' ? 'selected' : '' }}>Automatic
-                                        </option>
-                                        <option value="Manual"
-                                            {{ $details->transmission == 'Manual' ? 'selected' : '' }}>
-                                            Manual</option>
-                                        <option value="Semi-Auto"
-                                            {{ $details->transmission == 'Semi-Auto' ? 'selected' : '' }}>Semi-Auto
-                                        </option>
-                                        <option value="None" {{ $details->transmission == 'None' ? 'selected' : '' }}>
-                                            None</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-12 form-group" style="padding-top:10px; padding-bottom:15px;">
-                                    <label class="form-label" for="description">Vehicle Description</label>
-                                    <textarea class="form-control form-control-lg" required id="description" name="description">{{ $details->description }}</textarea>
-                                </div>
-                            </div>
+
 
                             <div class="row">
                                 <div class="col-6 col-lg-4">

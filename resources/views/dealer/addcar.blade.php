@@ -10,6 +10,9 @@
     @endphp
 
     <style>
+        label sup{
+            color: red;
+        }
         .show-when-target {
             visibility: hidden;
         }
@@ -100,6 +103,7 @@
                     @include('partials.alert')
 
                     <div class="feedback"></div>
+                    <p class="text text-red">All fields marked with * are mandatory. </p>
 
                     <form action="{{ route('savecar') }}" method="POST" enctype="multipart/form-data"
                         id="vehicleAdditionForm">
@@ -132,7 +136,7 @@
                             </div>
 
                             <div class="col-md-4 form-group">
-                                <label>Make</label>
+                                <label>Make <sup>*</sup></label>
                                 <select class="form-control form-control-sm" id="car_make" name="make" required>
                                     <option value="Any Make" selected="false">Make</option>
                                     @foreach ($makes as $item)
@@ -142,7 +146,7 @@
                             </div>
 
                             <div class="col-md-4 form-group">
-                                <label>Model</label>
+                                <label>Model <sup>*</sup></label>
                                 <select class="form-control form-control-sm" name="model" id="car_model" required
                                     aria-hidden="true" required>
                                     <option value="">Select One </option>
@@ -150,7 +154,7 @@
                             </div>
 
                             <div class="col-md-4 form-group">
-                                <label>Year of Manufacture</label>
+                                <label>Year of Manufacture <sup>*</sup></label>
                                 <select class="form-control form-control-sm" name="year" id="year" required>
                                     <option value="">Select One</option>
                                     @for ($i = date('Y', strtotime(now())); $i >= 2000; $i--)
@@ -162,17 +166,17 @@
 
                         <div class="row" style="padding-top:10px;">
                             <div class="col-md-4 form-group">
-                                <label for="">Price</label>
+                                <label for="">Price <sup>*</sup></label>
                                 <input class="form-control form-control-sm" type="number" id="price" name="price"
                                     placeholder="selling Price (Ksh)" required>
                             </div>
                             <div class=" col-md-4 form-group">
                                 <label for="">Mileage</label>
                                 <input class="form-control form-control-sm" type="number" id="miles" name="miles"
-                                    placeholder="mileage (Kms)" required>
+                                    placeholder="mileage (Kms)">
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="">Engine CC</label>
+                                <label for="">Engine CC <sup>*</sup></label>
                                 <input class="form-control form-control-sm" type="number" id="enginecc" name="enginecc"
                                     placeholder="Engine CC" required>
                             </div>
@@ -207,7 +211,7 @@
                             <div class="col-md-4 form-group">
                                 <label for="">Color</label>
 
-                                <select class="form-control form-control-sm" id="exterior" name="exterior" required>
+                                <select class="form-control form-control-sm" id="exterior" name="exterior">
                                     <option value="">Select One</option>
                                     <option value="Black">Black</option>
                                     <option value="Blue">Blue</option>
@@ -231,10 +235,14 @@
 
                             <div class="col-md-4 form-group">
                                 <label for="">Interior Type</label>
-                                <select class="form-control form-control-sm" id="interior" name="interior" required>
+                                <select class="form-control form-control-sm" id="interior" name="interior">
                                     <option value="">Select One</option>
                                     <option value="Leather">Leather</option>
                                     <option value="Fabric">Fabric</option>
+                                    <option value="Bronze">Bronze</option>
+                                    <option value="Orange">Orange</option>
+                                    <option value="Maroon">Maroon</option>
+                                    <option value="Purple">Purple</option>
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
@@ -249,7 +257,7 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-12 form-group">
+                            <div class="col-md-4 form-group">
                                 <label for="">Fuel Type</label>
                                 <select class="form-control form-control-sm" id="fuel_type" name="fuel_type" required>
                                     <option value="">Select One</option>
@@ -261,7 +269,24 @@
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
+
+                            <div class="col-md-4 form-group">
+                            <label>Transmission</label>
+                            <select class="form-control form-control-sm" id="transmission" name="transmission" required>
+                                <option value="">Select One</option>
+                                <option value="Automatic">Automatic</option>
+                                <option value="Manual">Manual</option>
+                                <option value="Semi-Auto">Semi-Auto</option>
+                                <option value="None">None</option>
+                            </select>
                         </div>
+
+                        <div class="col-md-12 form-group">
+                            <label>Vehicle Description</label>
+                            <textarea class="form-control form-control-sm" required id="description" name="description" required></textarea>
+                        </div>
+                        </div>
+                        
 
                         <h2 class="form-title" style="color: #000000">Select Vehicle Features » </h2>
 
@@ -396,21 +421,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12 form-group">
-                            <label>Transmission</label>
-                            <select class="form-control form-control-sm" id="transmission" name="transmission" required>
-                                <option value="">Select One</option>
-                                <option value="Automatic">Automatic</option>
-                                <option value="Manual">Manual</option>
-                                <option value="Semi-Auto">Semi-Auto</option>
-                                <option value="None">None</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-12 form-group" style="padding-top:10px; padding-bottom:15px;">
-                            <label class="form-label">Vehicle Description</label>
-                            <textarea class="form-control form-control-sm" required id="description" name="description" required></textarea>
-                        </div>
+                        
 
                         <div class="row">
                             <div class="col-md-4 form-group">

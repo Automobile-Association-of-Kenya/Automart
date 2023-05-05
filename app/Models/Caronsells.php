@@ -52,4 +52,14 @@ class Caronsells extends Model
         $this->views++;
         $this->update();
     }
+
+    // /**
+    //  * Get the county that owns the Caronsells
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    //  */
+    // public function county(): BelongsTo
+    // {
+    //     return $this->belongsTo(County::class, 'county');
+    // }
 }

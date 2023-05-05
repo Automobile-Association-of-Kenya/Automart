@@ -768,9 +768,9 @@ $(function () {
                         $.each(vehicles, function (key, value) {
                             let images = JSON.parse(value.images);
                             car +=
-                                '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="Available/Details' +
+                                '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="{{ url("Available/Details"' +
                                 value.id +
-                                '" class="car-img"><div class="for">' +
+                                ') }}"><div class="for">' +
                                 value.title +
                                 '</div><div class="price-box"><span>Ksh. ' +
                                 asMoney(value.price) +
@@ -788,9 +788,7 @@ $(function () {
                                 value.miles +
                                 ' kms</li><li><i class="flaticon-manual-transmission"></i> ' +
                                 value.transmission +
-                                '</li><li><i class="flaticon-gear"></i> ' +
-                                value.exterior +
-                                '</li><li><i class="flaticon-calendar-1"></i> ' +
+                                '</li><li><i class="flaticon-calendar-1"></i> YOM &nbsp;&nbsp;' +
                                 value.year +
                                 '</li></ul></div><div class="footer clearfix bg-main row" style = "padding: .8em 0; background:#00472F;"><div class="col-md-6"><span class="text-white">WhatsApp the owner</span></div><div class="col-md-6 text-center"><a href="https://wa.me/' +
                                 formatNumber(value.phone) +
@@ -820,18 +818,18 @@ $(function () {
                 car +=
                     '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="Available/Details' +
                     value.id +
-                    '" class="car-img"><div class="for">' +
+                    '"><div class="car-image">' +
                     value.title +
                     '</div><div class="price-box"><span>Ksh. ' +
                     asMoney(value.price) +
                     '</span></div><img class="d-block w-100" style="height:270px;" src="/images/' +
                     value.cover_photo +
-                    '" alt="car"></a></div><div class="detail"><span style="font-size:15px;"></span><h1 class="title"><a href="Available/Details' +
+                    '"></a></div><div class="detail"><span style="font-size:15px;"></span><h1 class="title"><a href="Available/Details' +
                     value.id +
                     '"><span style="font-size:20px;">' +
                     make +
                     "&nbsp;</span>" +
-                     model +
+                    model +
                     '</a></h1><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i> ' +
                     value.fuel_type +
                     '</li><li><i class="flaticon-way"></i> ' +

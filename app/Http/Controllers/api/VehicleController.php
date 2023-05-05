@@ -49,7 +49,7 @@ class VehicleController extends Controller
                 $fileName = 'img' . Str::random(3) . $key . strtotime(now()) . '.jpg'; // or any other desired file name
                 $img = Image::make($image);
 
-                $img->text(' ' . $request->firstname, 150, 120, function ($font) {
+                $img->text(' ' . $request->firstname . ' via AA Kenya', 150, 120, function ($font) {
                     $font->file(public_path('assets/fonts/font.ttf'));
                     $font->size(18);
                     $font->color('#CECECE');
@@ -67,7 +67,7 @@ class VehicleController extends Controller
             $image = base64_decode($jsone);
             $coverImage = 'img' . Str::random(3) . 'cover' . strtotime(now()) . '.jpg'; // or any other desired file name
             $img = Image::make($image);
-            $img->text(' ' . $request->firstname, 150, 120, function ($font) {
+            $img->text(' ' . $request->firstname . ' via AA Kenya', 150, 120, function ($font) {
                 $font->file(public_path('assets/fonts/font.ttf'));
                 $font->size(18);
                 $font->color('#CECECE');
@@ -95,12 +95,13 @@ class VehicleController extends Controller
         $validated = $request->validated();
         $vehicle = Caronsells::findOrFail($id);
         $images = json_decode($vehicle->images);
+        $images = (is_array($images)) ? $images : [];
         if (session()->has($id . "_vehicle_cover")) {
             $string = session($id . "_vehicle_cover");
             $image = base64_decode($string);
             $coverImage = 'img' . Str::random(3) . "cover" . strtotime(now()) . '.jpg'; // or any other desired file name
             $img = Image::make($image);
-            $img->text(' ' . $request->firstname, 150, 120, function ($font) {
+            $img->text(' ' . $request->firstname . ' via AA Kenya', 150, 120, function ($font) {
                 $font->file(public_path('assets/fonts/font.ttf'));
                 $font->size(18);
                 $font->color('#CECECE');
@@ -117,7 +118,7 @@ class VehicleController extends Controller
                 $image = base64_decode($value);
                 $fileName = 'img' . Str::random(3) . $key . strtotime(now()) . '.jpg'; // or any other desired file name
                 $img = Image::make($image);
-                $img->text(' ' . $request->firstname, 150, 120, function ($font) {
+                $img->text(' ' . $request->firstname . ' via AA Kenya', 150, 120, function ($font) {
                     $font->file(public_path('assets/fonts/font.ttf'));
                     $font->size(18);
                     $font->color('#CECECE');

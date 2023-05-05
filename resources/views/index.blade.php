@@ -27,10 +27,7 @@
                                 <div class="typing">
                                     <h2 class="text-white"><b>Buying or Selling cars?</b></h2>
                                 </div>
-                                <p class="text text-white">You are at the right place. We provide sellers with a
-                                    plartform to advertise vehicles, buyers to get their dream vehicles and financial
-                                    instution to provide financing to buyers who cannot meet the price of vehicles they
-                                    would like to purchase. </p>
+                                <p class="text text-white">You are at the right place. Our platform offers a wide selection of vehicles from trusted dealers across the country, ensuring we match buyers with the perfect fit for their needs and budget. We also provide financing options to our clients to enable them acquire or sell their dream cars with ease.</p>
                                 <a href="{{ route('all_cars') }}" class="btn-8">
                                     <span>Get Started as Buyer</span>
                                 </a>
@@ -94,7 +91,7 @@
                                 <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 search-col">
                                     <select class="form-control form-control-lg" name="searchyear" id="searchYear">
                                         <option value="">Select Year</option>
-                                        @for ($i = date('Y', strtotime(now())); $i <= 2003; $i--)
+                                        @for ($i = date('Y', strtotime(now())); $i <= 1995; $i--)
                                             <option value="{{ $i }}">{{ $i }}</option>
                                         @endfor
                                     </select>
