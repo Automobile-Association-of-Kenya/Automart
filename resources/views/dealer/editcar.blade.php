@@ -380,6 +380,8 @@
                                         </option>
                                     </select>
                                 </div>
+
+
                                 <div class="col-md-4 form-group">
                                     <label >Interior Type</label>
                                     <select id="interior" value="" class="form-control form-control-md"
@@ -394,6 +396,7 @@
                                         </option>
                                     </select>
                                 </div>
+                                
                                 <div class="col-md-4 form-group">
                                     <label for="">Vehicle Usage</label>
                                     <select id="usage" value="" class="form-control form-control-md"
@@ -747,7 +750,7 @@
                         </form>
                     </div>
                 </div>
-                
+
                 <footer class="mt-5 w-100 pt-5">
                     <!-- Copyright -->
                     <div class="text-center p-3" style="background-color: #CBBC27 ; border-radius: 10px;">

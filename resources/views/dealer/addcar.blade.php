@@ -230,6 +230,10 @@
                                     <option value="White">White</option>
                                     <option value="Yellow">Yellow</option>
                                     <option value="Other">Other</option>
+                                    <option value="Bronze">Bronze</option>
+                                    <option value="Orange">Orange</option>
+                                    <option value="Maroon">Maroon</option>
+                                    <option value="Purple">Purple</option>
                                 </select>
                             </div>
 
@@ -239,10 +243,6 @@
                                     <option value="">Select One</option>
                                     <option value="Leather">Leather</option>
                                     <option value="Fabric">Fabric</option>
-                                    <option value="Bronze">Bronze</option>
-                                    <option value="Orange">Orange</option>
-                                    <option value="Maroon">Maroon</option>
-                                    <option value="Purple">Purple</option>
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
@@ -286,7 +286,7 @@
                             <textarea class="form-control form-control-sm" required id="description" name="description" required></textarea>
                         </div>
                         </div>
-                        
+
 
                         <h2 class="form-title" style="color: #000000">Select Vehicle Features » </h2>
 
@@ -421,7 +421,7 @@
                             </div>
                         </div>
 
-                        
+
 
                         <div class="row">
                             <div class="col-md-4 form-group">
@@ -514,7 +514,7 @@
                             <div class="col-md-12" style="color:#000;">
                                 By clicking this, you have agreed to terms and conditions
                             </div>
-                            
+
                         </div>
 
                         <button style="background: #00472F;color:white;" type="submit" id="vehicleSubmit"
