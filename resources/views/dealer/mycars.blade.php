@@ -134,11 +134,14 @@
                                         <div class="footer clearfix">
                                             <a href="{{ route('details', $item->id) }}" class="btn btn-primary"> <i
                                                     class="fa fa-eye"></i> More
-                                                Details
+
                                             </a>
                                             <a href="{{ route('dealer.editcar', $item->id) }}" class="btn btn-warning"> <i
                                                     class="fa fa-edit"></i> Edit
-                                                Details
+
+                                            </a>
+                                            <a href="{{ route('dealer.delete', $item->id) }}" class="btn btn-danger"> <i
+                                                    class="fa fa-trash"></i> Delete
                                             </a>
                                         </div>
 

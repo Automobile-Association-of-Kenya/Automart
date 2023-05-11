@@ -170,7 +170,7 @@ Vehicles | @parent
                                             </li>
 
                                             <li>
-                                                <i class="flaticon-calendar-1"></i>{{ $vehicle->year }}
+                                                YOM &nbsp;&nbsp;<i class="flaticon-calendar-1"></i>&nbsp;&nbsp;{{ $vehicle->year }}
                                             </li>
 
                                             <li>

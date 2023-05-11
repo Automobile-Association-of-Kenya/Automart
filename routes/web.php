@@ -97,6 +97,7 @@ Route::controller(DealersController::class)->group(function(){
     Route::prefix('dealer')->group(function(){
         Route::get('addcar','addCar')->name('dealer.addcar');
         Route::get('editcar/{id}','editCar')->name('dealer.editcar');
+        Route::get('delete/{id}','destroy')->name('dealer.delete');
         Route::get('home','home')->name('dealer.home');
         Route::get('mycars','mycars')->name('dealer.mycars');
         Route::get('mysales','mysales')->name('dealer.mysales');

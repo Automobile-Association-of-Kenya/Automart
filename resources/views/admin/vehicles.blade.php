@@ -149,6 +149,10 @@
                                                     <a href="{{ route('dealer.editcar', $item->id) }}"><i
                                                             class="fa fa-edit text-warning"></i>&nbsp;Edit</a>
                                                 </li>
+                                                <li class="dropdown-item">
+                                                    <a href="{{ route('dealer.delete', $item->id) }}"><i
+                                                            class="fa fa-trash text-danger"></i>&nbsp;Delete</a>
+                                                </li>
                                             </ul>
                                         </li>
                                     </td>
@@ -296,7 +300,7 @@
             });
         })()
     </script>
-    
+
 @endsection
 
 @endsection

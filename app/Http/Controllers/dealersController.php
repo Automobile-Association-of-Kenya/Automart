@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class DealersController extends Controller
 {
@@ -97,7 +98,7 @@ class DealersController extends Controller
                 $features = explode(',', $features);
             }
         }
-        
+
         if (session()->has($details->id."_vehicle_images")) {
             session()->forget($details->id."_vehicle_images");
         }
@@ -130,5 +131,25 @@ class DealersController extends Controller
         $vehicles = Caronsells::where('email', Auth::user()->email) ->orderBy('created_at', 'desc')->paginate(9);
         $makes = CarMake::all();
         return view('dealer.subscriptions',compact('makes','vehicles'));
+    }
+
+    public function destroy($id)
+    {
+        $vehicle = Caronsells::find($id);
+
+        if ($vehicle->cover_photo !== null) {
+            if (File::exists('images/' . $vehicle->cover_photo)) {
+                File::delete('images/' . $vehicle->cover_photo);
+            }
+        }
+        if ($vehicle->images !== []) {
+            foreach (json_decode($vehicle->images,true) as $key => $value) {
+                if (File::exists('images/' . $value)) {
+                    File::delete('images/' . $value);
+                }
+            }
+        }
+        $vehicle->delete();
+        return back()->with('success', 'Vehicle deleted successfully');
     }
 }

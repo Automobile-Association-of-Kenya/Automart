@@ -768,27 +768,31 @@ $(function () {
                         $.each(vehicles, function (key, value) {
                             let images = JSON.parse(value.images);
                             car +=
-                                '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="{{ url("Available/Details"' +
+                                '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="Available/Details' +
                                 value.id +
-                                ') }}"><div class="for">' +
+                                '" class="car-img"><div class="for">' +
                                 value.title +
-                                '</div><div class="price-box"><span>Ksh. ' +
-                                asMoney(value.price) +
-                                '</span></div><img class="d-block w-100" style="height:270px;" src="/images/' +
+                                '</div><div class="price-box"><span>' +
+                                value.price +
+                                '</span></div><img class="d-block w-100" src="/images/' +
                                 value.cover_photo +
-                                '" alt="car"></a></div><div class="detail"><h1 class="title"><a href="Available/Details' +
-                                value.id +
-                                '"><span style="font-size:18px;">' +
+                                '" alt="car"></a></div><div class="detail"><span style="font-size:15px;">' +
                                 value.make.car_make_name +
-                                "</span>" +
+                                '</span><h1 class="title"><a href="Available/Details' +
+                                value.id +
+                                '">' +
                                 value.model.car_model_name +
-                                '</a></h1><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i> ' +
+                                '</a></h1><ul class="custom-list"><li><a href="Available/Details' +
+                                value.id +
+                                '">' +
+                                value.vehicle_type +
+                                '</a></li></ul><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i> ' +
                                 value.fuel_type +
                                 '</li><li><i class="flaticon-way"></i> ' +
                                 value.miles +
                                 ' kms</li><li><i class="flaticon-manual-transmission"></i> ' +
                                 value.transmission +
-                                '</li><li><i class="flaticon-calendar-1"></i> YOM &nbsp;&nbsp;' +
+                                '</li><li>YOM &nbsp;&nbsp;<i class="flaticon-calendar-1"></i>&nbsp;&nbsp; ' +
                                 value.year +
                                 '</li></ul></div><div class="footer clearfix bg-main row" style = "padding: .8em 0; background:#00472F;"><div class="col-md-6"><span class="text-white">WhatsApp the owner</span></div><div class="col-md-6 text-center"><a href="https://wa.me/' +
                                 formatNumber(value.phone) +
@@ -818,31 +822,34 @@ $(function () {
                 car +=
                     '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="Available/Details' +
                     value.id +
-                    '"><div class="car-image">' +
+                    '" class="car-img"><div class="for">' +
                     value.title +
-                    '</div><div class="price-box"><span>Ksh. ' +
-                    asMoney(value.price) +
-                    '</span></div><img class="d-block w-100" style="height:270px;" src="/images/' +
+                    '</div><div class="price-box"><span>' +
+                    value.price +
+                    '</span></div><img class="d-block w-100" src="/images/' +
                     value.cover_photo +
-                    '"></a></div><div class="detail"><span style="font-size:15px;"></span><h1 class="title"><a href="Available/Details' +
+                    '" alt="car"></a></div><div class="detail"><span style="font-size:15px;">' +
+                    value.make.car_make_name +
+                    '</span><h1 class="title"><a href="Available/Details' +
                     value.id +
-                    '"><span style="font-size:20px;">' +
-                    make +
-                    "&nbsp;</span>" +
-                    model +
-                    '</a></h1><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i> ' +
+                    '">' +
+                    value.model.car_model_name +
+                    '</a></h1><ul class="custom-list"><li><a href="Available/Details' +
+                    value.id +
+                    '">' +
+                    value.vehicle_type +
+                    '</a></li></ul><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i> ' +
                     value.fuel_type +
                     '</li><li><i class="flaticon-way"></i> ' +
                     value.miles +
                     ' kms</li><li><i class="flaticon-manual-transmission"></i> ' +
                     value.transmission +
-                    '</li><li><i class="flaticon-gear"></i> ' +
-                    value.exterior +
-                    '</li><li><i class="flaticon-calendar-1"></i> ' +
+                    '</li><li>YOM &nbsp;&nbsp;<i class="flaticon-calendar-1"></i>&nbsp;&nbsp; ' +
                     value.year +
                     '</li></ul></div><div class="footer clearfix bg-main row" style = "padding: .8em 0; background:#00472F;"><div class="col-md-6"><span class="text-white">WhatsApp the owner</span></div><div class="col-md-6 text-center"><a href="https://wa.me/' +
                     formatNumber(value.phone) +
                     '" target="_blank" class="text-right"><i class="fa fa-whatsapp text-warning"></i></a></div></div></div></div>';
+
             });
             $("#trendingCarsSection").html(car);
         });
