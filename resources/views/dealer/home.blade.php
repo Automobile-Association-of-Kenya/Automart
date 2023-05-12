@@ -93,6 +93,7 @@
             <img id="loading-image" src="{{ asset('loader.gif') }}" alt="Loading..." />
         </div>
     @endif
+
     <div class="row" style="padding-right:10px; background: #FFFFFF;">
 
         <!-- user profile start -->
@@ -114,9 +115,10 @@
                                     <h5 class="card-title"><b>User Details</b></h5>
                                     <p class="card-text"><b>Dealer Name:</b> {{ $user->dName }}</p>
                                     <p class="card-text"><b>Email:</b> {{ $user->email }}</p>
-                                    <p class="card-text"><b>Phone:</b> {{ $user->number }}</p>
-                                    <p class="card-text"><b>Sec Phone:</b> {{ $user->number2 }}</p>
-                                    <a href="#!" class="btn btn-primary">Update</a>
+                                    <p class="card-text"><b>Phone:</b> {{ $user->phone }}</p>
+                                    <p class="card-text"><b>Sec Phone:</b> {{ $user->alt_phone }}</p>
+                                    <a href="#!" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#updateUserDetailsModal">Update</a>
                                 </div>
                             </div>
                         </div>
@@ -204,22 +206,66 @@
             })
         });
     </script>
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
 
-    <script>
-        // @if (session('loader'))
-        //     $(window).on('load', function() {
+    <div class="modal" tabindex="-1" role="dialog" id="updateUserDetailsModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('user.update', auth()->id()) }}" method="POST">
 
-        //         const myTimeout = setTimeout(myGreeting, 5000);
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="name" style="color: #333">Name</label>
+                                <input type="text" class="form-control"name="name"
+                                    value="{{ auth()->user()->name }}">
+                                @if ($errors->has('name'))
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
+                            </div>
 
-        //         function myGreeting() {
-        //             $('#loading').hide();
-        //         }
+                            <div class="col-md-6 form-group">
+                                <label for="email" style="color: #333">Email</label>
+                                <input type="text" class="form-control" name="email"
+                                    value="{{ auth()->user()->email }}">
+                                @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                @endif
+                            </div>
 
-        //         function myStopFunction() {
-        //             clearTimeout(myTimeout);
-        //         }
-        //     })
-        // @endif
-    </script>
+                            <div class="col-md-6 form-group">
+                                <label for="phone" style="color: #333">Phone Number</label>
+                                <input type="text" class="form-control" name="phone"
+                                    value="{{ auth()->user()->phone }}">
+                                @if ($errors->has('phone'))
+                                    <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="alt_phone" style="color: #333;">Alternative Phone</label>
+                                <input type="text" class="form-control" name="alt_phone"
+                                    value="{{ auth()->user()->alt_phone }}">
+                                @if ($errors->has('alt_phone'))
+                                    <span class="text-danger">{{ $errors->first('alt_phone') }}</span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-sm"> Save</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"
+                            id="updateUserDetailsModal">Close</button>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
 @endsection

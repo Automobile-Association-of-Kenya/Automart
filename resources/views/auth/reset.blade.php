@@ -1,8 +1,7 @@
-
 @extends('layouts.app')
 
 @section('title')
-Password reset  @parent
+    Password reset @parent
 @endsection
 
 @section('content')
@@ -37,17 +36,30 @@ Password reset  @parent
                             <input type="hidden" name="email" value="{{ $reset->email }}">
                             <input type="hidden" name="_token" value="{{ $reset->token }}">
 
-                            <div class="form-group col-md-12 ">
-                                <input type="password" class="form-control" placeholder="Password" aria-label="Password" name="password">
-
-                                    @if ($errors->has('password'))
-                                        <span class="text-danger">{{ $errors->first('password') }}</span>
-                                    @endif
+                            <div class="form-group">
+                                <label class="float-left" for="password">Password</label>
+                                <div class="input-group">
+                                    <input type="password" name="password" id="passwordRe" class="form-control">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" class="show-passwordReset"><i
+                                                class="fa fa-eye"></i></span>
+                                    </div>
+                                </div>
+                                @if ($errors->has('password'))
+                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
                             </div>
 
-                            <div class="form-group col-md-12">
-                                <input type="password" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" name="password_confirmation">
-
+                            <div class="form-group mt-2">
+                                <label class="float-left" for="password_confirmation">Confirm Password</label>
+                                <div class="input-group">
+                                    <input type="password" name="password_confirmation" id="passwordConfirmationRe"
+                                        class="form-control">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" class="show-passwordReset"><i
+                                                class="fa fa-eye"></i></span>
+                                    </div>
+                                </div>
                                 @if ($errors->has('password_confirmation'))
                                     <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                                 @endif
@@ -63,5 +75,8 @@ Password reset  @parent
             </div>
         </div>
     </div>
-    <!-- Shop checkout end -->
+
+@section('footer_scripts')
+    <script src="{{ asset('js/auth.js') }}"></script>
+@endsection
 @endsection

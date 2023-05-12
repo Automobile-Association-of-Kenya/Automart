@@ -17,13 +17,12 @@ class adminController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index(){
         $vehiclecount = Caronsells::where('approved',1)->count();
         $uvehiclecount = Caronsells::where('approved',0)->count();
         $dealercount = User::where('role','dealer')->count();
         $buyercount = User::where('role',null)->orWhere('role','buyer')->count();
-
         return view('admin', compact('vehiclecount', 'uvehiclecount', 'dealercount', 'buyercount'));
     }
 

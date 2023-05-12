@@ -8,7 +8,7 @@
     <meta charset="utf-8">
 
     <!-- External CSS libraries -->
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('css/components.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/animate.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap-submenu.css') }}">
 

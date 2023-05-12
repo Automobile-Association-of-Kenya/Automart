@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Register  @parent
+    Register @parent
 @endsection
 
 @section('content')
@@ -68,7 +68,7 @@
                                 @endif
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            {{-- <div class="col-md-6 form-group">
                                 <label for="">Password</label>
                                 <input type="password" class="form-control" name="password">
                                 @if ($errors->has('password'))
@@ -79,6 +79,33 @@
                             <div class="col-md-6 form-group">
                                 <label for="">Confirm Password</label>
                                 <input type="password" class="form-control" name="password_confirmation">
+                                @if ($errors->has('password_confirmation'))
+                                    <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                                @endif
+                            </div> --}}
+
+                            <div class="col-md-6 form-group mt-1 mb-2">
+                                <label class="float-left">Password</label>
+                                <div class="input-group">
+                                    <input type="password" name="password" id="passwordRe" class="form-control">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text show-passwordRe"><i class="fa fa-eye"></i></span>
+                                    </div>
+                                </div>
+                                @if ($errors->has('password'))
+                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="col-md-6 form-group mt-1 mb-2">
+                                <label class="float-left">Password Confirmation</label>
+                                <div class="input-group">
+                                    <input type="password" name="password_confirmation" id="passwordConfirmationRe"
+                                        class="form-control">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text show-passwordRe"><i class="fa fa-eye"></i></span>
+                                    </div>
+                                </div>
                                 @if ($errors->has('password_confirmation'))
                                     <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                                 @endif
@@ -98,5 +125,8 @@
             </div>
         </div>
     </div>
-    <!-- Shop checkout end -->
+
+@section('footer_scripts')
+    <script src="{{ asset('js/auth.js') }}"></script>
+@endsection
 @endsection
