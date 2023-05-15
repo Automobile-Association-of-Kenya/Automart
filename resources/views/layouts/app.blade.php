@@ -44,6 +44,7 @@
                                 class="fa fa-envelope"></i>customercare@aakenya.co.ke</a>
                     </div>
                 </div>
+                
                 <div class="col-lg-6 col-md-4 col-sm-5">
                     <ul class="top-social-media pull-right">
                         @auth
