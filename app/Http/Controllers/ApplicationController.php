@@ -30,15 +30,15 @@ class ApplicationController extends Controller
     {
         $imageString = explode(',', $request->image);
         if (isset($request->cover_image) && $request->cover_image == true) {
-            if (session()->has($request->str_id . 'cover')) {
-                session()->forget($request->str_id . 'cover');
+            if (session()->has($request->str_id . '_vehicle_cover')) {
+                session()->forget($request->str_id . '_vehicle_cover');
             }
-            session()->put($request->str_id . 'cover', $imageString[1]);
+            session()->put($request->str_id . '_vehicle_cover', $imageString[1]);
         }else{
-            if (session()->has(["$request->str_id"])) {
-                session()->push("$request->str_id", $imageString[1]);
+            if (session()->has([$request->str_id. "_vehicle_images"])) {
+                session()->push($request->str_id. "_vehicle_images", $imageString[1]);
             } else {
-                session()->put("$request->str_id", [$imageString[1]]);
+                session()->put($request->str_id. "_vehicle_images", [$imageString[1]]);
             }
         }
         return 'success';
@@ -48,12 +48,11 @@ class ApplicationController extends Controller
     {
         $images = [];
         $strkey = $request->str_id;
-        if (session()->has("$strkey")) {
-            foreach (session("$strkey") as $key => $value) {
+        if (session()->has($strkey. "_vehicle_images")) {
+            foreach (session($strkey . "_vehicle_images") as $key => $value) {
                 $image = base64_decode($value);
                 $fileName = 'img' . auth()->id() . $key . strtotime(now()) . '.jpg'; // or any other desired file name
                 $img = Image::make($image);
-
                 $img->text(' ' . $request->firstname . ' via AA Kenya', 150, 120, function ($font) {
                     $font->file(public_path('assets/fonts/font.ttf'));
                     $font->size(18);
@@ -62,13 +61,13 @@ class ApplicationController extends Controller
                     $font->valign('center');
                     $font->angle(0);
                 });
-
                 $img->save(public_path('images/' . $fileName));
                 array_push($images, $fileName);
             }
         }
-        if (session()->has($strkey.'cover')) {
-            $jsone = session($strkey.'cover');
+
+        if (session()->has($strkey. '_vehicle_cover')) {
+            $jsone = session($strkey. '_vehicle_cover');
             $image = base64_decode($jsone);
             $coverImage = 'img' . auth()->id() .'cover'. strtotime(now()) . '.jpg'; // or any other desired file name
             $img = Image::make($image);
@@ -86,8 +85,8 @@ class ApplicationController extends Controller
         $validated = $request->validated();
         $validated["features"] = json_encode(explode(',', $validated["features"]));
         Caronsells::create(['user_id' => auth()->id(), 'carId' => $strkey, 'cover_photo' => (isset($coverImage) ? $coverImage : $images[0]), 'images' => json_encode($images), 'views' => 0] + $validated);
-        session()->forget("$strkey");
-
+        session()->forget($strkey. "_vehicle_images");
+        session()->forget($strkey . '_vehicle_cover');
         return json_encode(['status' => 'success', 'message' => "Vehicle added successfully"]);
     }
 

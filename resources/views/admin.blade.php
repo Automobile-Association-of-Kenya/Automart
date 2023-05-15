@@ -83,7 +83,8 @@
                                     <h5 class="card-title"><b>User Details</b></h5>
                                     <p class="card-text"><b>Admin Name:</b> {{ $admin->uName }}</p>
                                     <p class="card-text"><b>Email:</b> {{ $admin->email }}</p>
-                                    <a href="#!" class="btn btn-primary">Update</a>
+                                    <button class="btn btn-primary btn-md" data-toggle="modal"
+                                        data-target="#updateUserDetailsModal">Update</button>
                                 </div>
                             </div>
                         </div>
@@ -147,15 +148,80 @@
                 </div>
             </div>
         </div>
-        <footer class="">
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(0,0,0, 0.5); border-radius: 10px;">
-                © 2022 Copyright:
-                <a class="text-center p-3" href="https://www.aakenya.co.ke/">Automobile Association of Kenya</a>
+
+        <div class="modal" tabindex="-1" role="dialog" id="updateUserDetailsModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Update Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('user.update', auth()->id()) }}" method="POST">
+
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="name" style="color: #333">Name</label>
+                                    <input type="text" class="form-control"name="name"
+                                        value="{{ auth()->user()->name }}">
+                                    @if ($errors->has('name'))
+                                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="col-md-6 form-group">
+                                    <label for="email" style="color: #333">Email</label>
+                                    <input type="text" class="form-control" name="email"
+                                        value="{{ auth()->user()->email }}">
+                                    @if ($errors->has('email'))
+                                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="col-md-6 form-group">
+                                    <label for="phone" style="color: #333">Phone Number</label>
+                                    <input type="text" class="form-control" name="phone"
+                                        value="{{ auth()->user()->phone }}">
+                                    @if ($errors->has('phone'))
+                                        <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="col-md-6 form-group">
+                                    <label for="alt_phone" style="color: #333;">Alternative Phone</label>
+                                    <input type="text" class="form-control" name="alt_phone"
+                                        value="{{ auth()->user()->alt_phone }}">
+                                    @if ($errors->has('alt_phone'))
+                                        <span class="text-danger">{{ $errors->first('alt_phone') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                                <button type="submit" class="btn btn-success btn-sm"> Save</button>
+                                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"
+                                    id="updateUserDetailsModal">Close</button>
+                        </form>
+                    </div>
+
+
+                </div>
             </div>
-            <!-- Copyright -->
-        </footer>
+        </div>
+
+
     </div>
+
+    <footer class="col-md-12" style="margin:4em 0 0 0">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0,0,0, 0.5); border-radius: 10px;">
+            © 2022 Copyright:
+            <a class="text-center p-3" href="https://www.aakenya.co.ke/">Automobile Association of Kenya</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
     <!-- end dash -->
 
 @endsection

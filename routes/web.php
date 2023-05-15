@@ -114,6 +114,8 @@ Route::get('trending', [ApplicationController::class, 'trendingVehicles']);
 Route::get('vehicle/{id}', [VehicleController::class, 'get']);
 
 Route::resource('users', UserController::class);
+Route::post('user-update/{id}', [UserController::class, 'update'])->name('user.update');
+
 Route::get('about', [ApplicationController::class, 'about'])->name('about');
 
 Route::get('vehicles', [VehicleController::class, 'index'])->name('vehicles')->middleware('auth');

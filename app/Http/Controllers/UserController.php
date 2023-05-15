@@ -74,7 +74,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = $this->user->find($id);
+        $validated = $request->validate([
+            'name' => ['required', 'string'],
+            'email' => ['required', 'string', 'unique:users,email,'.$id],
+            'phone' => ['required', 'string', 'unique:users,phone,'.$id],
+            'alt_phone' => ['required', 'string'],
+        ]);
+        $user->update($validated);
+
+        return redirect()->back()->with('success', 'Details updated successfully');
     }
 
     /**

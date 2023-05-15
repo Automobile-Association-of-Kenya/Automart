@@ -24,8 +24,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'number',
-        'number2',
+        'phone',
+        'alt_phone',
         'county',
         'dName',
         'role',
@@ -53,12 +53,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function register($name, $email, $phone, $role = null, $password)
+    public function register($name, $email, $phone, $alt_phone=null, $role = null, $password)
     {
         return $this->create([
             'name' => $name,
             'email' => $email,
             'phone' => $phone,
+            'alt_phone' => $alt_phone,
             'role' => $role,
             'password' => Hash::make($password),
             'remember_token' => Str::random(26),

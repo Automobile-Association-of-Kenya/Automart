@@ -35,8 +35,8 @@
                         <form action="{{ route('userlogin') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-md-12 form-group">
-                                    <label for="">Email</label>
+                                <div class="col-md-12 form-group mb-1">
+                                    <label for="email">Email</label>
                                     <input type="text" class="form-control form-control-md" placeholder="Email"
                                         aria-label="Email" name="email">
                                     @if ($errors->has('email'))
@@ -44,14 +44,29 @@
                                     @endif
                                 </div>
 
-                                <div class="col-md-12 form-group">
-                                    <label for="">Password</label>
+                                {{-- <div class="col-md-12 form-group mt-1 mb-2">
+                                    <label for="password">Password</label>
                                     <input type="password" class="form-control form-control-md" placeholder="Password"
                                         aria-label="Password" name="password">
                                     @if ($errors->has('password'))
                                         <span class="text-danger">{{ $errors->first('password') }}</span>
                                     @endif
+                                </div> --}}
+
+                                <div class="col-md-12 form-group mt-1 mb-2">
+                                    <label class="float-left" for="password">Password</label>
+                                    <div class="input-group">
+                                        <input type="password" name="password" id="passwordLo" class="form-control">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="show-password"><i
+                                                    class="fa fa-eye"></i></span>
+                                        </div>
+                                    </div>
+                                    @if ($errors->has('password'))
+                                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                                    @endif
                                 </div>
+
                             </div>
                             <br>
 
@@ -60,7 +75,8 @@
                             </div>
                         </form>
                         <div class="d-flex justify-space-between">
-                            <div class="col-md-6 text-left"><a href="{{ route('seller.create') }}" class="text-success"> Register
+                            <div class="col-md-6 text-left"><a href="{{ route('seller.create') }}" class="text-success">
+                                    Register
                                     Here</a></div>
 
                             <div class="col-md-6  text-right"><a href="{{ route('forget.password') }}" class="text-success">
@@ -72,5 +88,8 @@
             </div>
         </div>
     </div>
-    <!-- Shop checkout end -->
+
+@section('footer_scripts')
+    <script src="{{ asset('js/auth.js') }}"></script>
+@endsection
 @endsection
