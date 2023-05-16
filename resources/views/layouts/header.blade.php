@@ -49,11 +49,11 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-md-4 col-lg-4">
                                         <div class="megamenu-section">
-                                            <h6 class="megamenu-title">Pages</h6>
-                                            <a class="dropdown-item" href="about.html">About Us</a>
-                                            <a class="dropdown-item" href="team.html">Team</a>
-                                            <a class="dropdown-item" href="team-detail.html">Team Details</a>
-                                            <a class="dropdown-item" href="services.html">Services</a>
+                                            <h6 class="megamenu-title">Vehicle Categories</h6>
+                                            <a class="dropdown-item" href="#">New Arrivals</a>
+                                            <a class="dropdown-item" href="#">Discounted</a>
+                                            <a class="dropdown-item" href="#">Premium</a>
+                                            <a class="dropdown-item" href="#">Vehicle Types</a>
                                             <a class="dropdown-item" href="services-2.html">Services 2</a>
                                             <a class="dropdown-item" href="car-comparison.html">Car Compare</a>
                                         </div>

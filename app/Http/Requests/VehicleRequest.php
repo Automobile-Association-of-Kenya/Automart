@@ -11,7 +11,7 @@ class VehicleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,24 +22,27 @@ class VehicleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'dealer_id'=>['nullable', 'exists:dealers,id'], 
+            'vehicle_id'=>['nullable', 'exists:vehicles,id'],
+            'dealer_id'=>['nullable', 'exists:dealers,id'],
             'type_id' => ['required', 'exists:types,id'],
             'make_id'=>['required','exists:makes,id'],
             'vehicle_model_id'=>['required', 'exists:vehicle_models,id'],
-            'contry_of_origin' => ['nullable', 'exists:countries,id'], 
+            'country_of_origin' => ['nullable', 'exists:countries,id'],
             'country_located'=>['nullable','exists:countries,id'],
             'county_id' => ['nullable', 'exists:counties,id'],
             'shipping_to'=>['nullable'],
-            'year'=>['required','max:5','integer'],
-            'price'=>['required', 'max:12', 'float'],
-            'color'=>['required', 'max:30','string'],
-            'miles'=>['required','max:10','string'],
+            'year'=>['required','max:10'],
+            'price'=>['required', 'max:12'],
+            'color'=>['nullable', 'max:30','string'],
+            'mileage'=>['nullable','max:10','string'],
             'enginecc'=>['required','max:6'],
-            'interior'=>['required', 'max:30','string'],
-            'fuel_type'=>['required','max:30'], 
-            'transmission'=>['required','max:30','string'],
-            'description'=>['max:255', 'nullable', 'string'], 
-            'tags'=>['max:255', 'nullable', 'string']
+            'interior'=>['nullable', 'max:30','string'],
+            'fuel_type'=>['nullable','max:30'],
+            'transmission'=>['nullable','max:30','string'],
+            'description'=>['max:255', 'nullable', 'string'],
+            'tags'=>['max:255', 'nullable', 'array'],
+            'features'=>['nullable', 'array'],
+            'str_id' => ['required','max:20']
         ];
     }
 }

@@ -125,7 +125,7 @@ class UsersController extends Controller
             $query->where('id', $id);
         }
 
-        $partners = $query->latest()->get();
+        $partners = $query->with('users')->latest()->get();
 
         return json_encode($partners);
     }

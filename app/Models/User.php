@@ -29,6 +29,7 @@ class User extends Authenticatable
         'alt_phone',
         'role',
         'password',
+        'google_id'
     ];
 
     /**
@@ -80,6 +81,16 @@ class User extends Authenticatable
     public function dealer(): BelongsTo
     {
         return $this->belongsTo(Dealer::class, 'dealer_id');
+    }
+
+    /**
+     * Get the partner that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function partner(): BelongsTo
+    {
+        return $this->belongsTo(Partner::class, 'partner_id');
     }
 
 }

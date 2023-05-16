@@ -34,7 +34,6 @@ $(document).ready(function () {
     });
 
     $("body").on("click", ".show-passwordReset", function () {
-        console.log("hredes");
         var passwordField = $("#passwordRe");
         var passwordCField = $("#passwordConfirmationRe");
         var passwordCType = passwordCField.attr("type");

@@ -3,6 +3,7 @@
 // use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
@@ -22,7 +23,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', [ApplicationController::class, 'welcome']);
 
 Route::get('/dashboard', [ApplicationController::class, 'dashboard'])->name('dashboard');
@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('dealer-join', [RegisteredUserController::class, 'dealerCreate']);
+Route::get('dealer-join', [RegisteredUserController::class, 'dealerCreate'])->name('dealer.create');
 
 // Route::get('/email/verify', function () {
 //     return view('auth.verify-email');
@@ -65,6 +65,12 @@ Route::controller(VehicleController::class)->group(function(){
     Route::get('features/{id?}', 'features');
     Route::post('features', 'featureCreate');
     Route::get('list-vehicles', 'listVehicles');
+    Route::get('yards/{id?}', 'yards');
+    Route::get('dealer-yards/{dealer_id?}', 'dealerYards');
+    Route::post('yards', 'yardsCreate');
+    Route::post('upload', 'uploadImages');
+    Route::post('upload-update', 'uploadUpdateImages');
+    Route::post('image-delete', 'imageDelete');
 });
 
 Route::resource('users', UsersController::class);
@@ -83,8 +89,15 @@ Route::get('counties/{country_id}', [ApplicationController::class, 'counties']);
 
 Route::resource('settings', SettingsController::class);
 
-Route::get('about')->name("about");
-Route::get('contact')->name("contact");
-Route::get('contact')->name("dealer.create");
+Route::get('about', [ApplicationController::class, 'about'])->name("about");
+Route::get('contact', [ApplicationController::class, 'contact'])->name("contact");
+Route::get('privacy',[ApplicationController::class, 'privacy']);
+
+Route::get('auth/facebook', [AuthenticatedSessionController::class, 'redirectToFacebook']);
+Route::get('auth/facebook/callback',[AuthenticatedSessionController::class, 'handleFacebookCallback']);
+
+Route::get('auth/google', [AuthenticatedSessionController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [AuthenticatedSessionController::class, 'handleGoogleCallback']);
+
 
 require __DIR__.'/auth.php';

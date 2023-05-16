@@ -30,7 +30,7 @@
                     </a>
                     <h3>Sign in</h3>
                 </div>
-                
+
                 <div class="card-body">
                     <form action="{{ route('login') }}" method="POST" id="loginForm">
                         <div class="feedback" id="feedback"></div>
@@ -73,6 +73,15 @@
                         </div>
 
                     </form>
+                </div>
+                <div class="col-md-12 col-md-12 row mb-4">
+                    <div class="col-md-6">
+                        <a href="{{ url('auth/facebook') }}" class="btn btn-primary">Login with Facebook</a>
+                    </div>
+
+                    <div class="col-md-6">
+                        <a href="{{ url('auth/google') }}" class="btn btn-danger">Login with Google</a>
+                    </div>
                 </div>
                 <div class="col-md-12 col-md-12 row mb-4">
                     <div class="col-md-6">

@@ -478,17 +478,18 @@
         let partner_id = $(this).data("id");
 
         if (partner_id !== "" && partner_id !== null) {
-            $.getJSON("/dealers/"+partner_id, function (partners) {
+            $.getJSON("/partners/"+partner_id, function (partners) {
                 console.log(partners);
                 let partner = partners[0];
                 if (partner !== null) {
-                    partnerCreateID.val(partner.id);
-                    partnerName.val(partner.name);
-                    partnerEmail.val(partner.email);
-                    partnerPhone.val(partner.phone);
-                    altPartnePhone.val(partner.alt_phone);
-                    partnerAddress.val(partner.address);
-                    let user = dealer.users[0];
+                    let { id, name, email, phone, alt_phone, address, users } = partner;
+                    partnerCreateID.val(id);
+                    partnerName.val(name);
+                    partnerEmail.val(email);
+                    partnerPhone.val(phone);
+                    altPartnerPhone.val(alt_phone);
+                    partnerAddress.val(address);
+                    let user = users[0];
                     if (user !== null && user !== undefined) {
                         $("#partnerUserID option[value=" + user.id + "]").prop(
                             "selected",

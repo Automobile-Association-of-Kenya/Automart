@@ -5,11 +5,11 @@
 @endsection
 
 @section('header_styles')
-    
+
 @endsection
 
-@section('content')
-    
+@section('main')
+
 <!-- Sub banner start -->
 <div class="sub-banner">
     <div class="container breadcrumb-area">
@@ -159,5 +159,5 @@
 @endsection
 
 @section('footer_scripts')
-    
+
 @endsection

@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('yards', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Dealer::class);
-            $table->string('name');
+            $table->string('yard');
             $table->string('address')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();

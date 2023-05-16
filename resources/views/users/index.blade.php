@@ -259,7 +259,7 @@
                                                                 <select name="dealer_user_id" id="dealerUserID" class="form-control"></select>
                                                             </div>
 
-                                                            <div class="col-md-12 text-center mt-3">
+                                                            <div class="col-md-12 mt-3">
                                                                 <button class='btn btn-success btn-sm' id='savedealer'><i
                                                                         class="fal fa-save fa-lg fa-fw"></i> Save
                                                                     </button>
@@ -332,7 +332,7 @@
                                                                 <select name="partner_user_id" id="partnerUserID" class="form-control"></select>
                                                             </div>
 
-                                                            <div class="col-md-12 text-center mt-3">
+                                                            <div class="col-md-12 mt-3">
                                                                 <button class='btn btn-success btn-sm' id='savepartner'><i
                                                                         class="fal fa-save fa-lg fa-fw"></i> Save
                                                                 </button>

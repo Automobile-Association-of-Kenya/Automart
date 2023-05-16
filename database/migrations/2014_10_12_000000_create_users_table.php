@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('phone', 14)->nullable();
             $table->string('alt_phone', 14)->nullable();
             $table->string('role', 60)->nullable()->default('user');
+            $table->string('google_id')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

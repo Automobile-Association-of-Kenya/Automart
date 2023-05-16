@@ -39,14 +39,14 @@
 
                 <li>
                     <a href="{{ route('vehicles.index') }}" class='validation' data-id=2 id="membership">
-                        <span><i class="fal fa-users-crown"></i></span>
+                        <span><i class="fal fa-cars"></i></span>
                         <span>Vehicles</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('users.index') }}" class='validation' data-id=49 id="loans">
-                        <span><i class="fal fa-money-check-edit-alt"></i></span>
+                        <span><i class="fal fa-users-crown"></i></span>
                         <span>Users</span>
                     </a>
                 </li>
@@ -59,37 +59,9 @@
                 </li>
 
                 <li>
-                    <a href="communication.php" id="communication" class='validation' data-id=52>
-                        <span><i class="fal fa-comments-alt"></i></span>
-                        <span>Communication</span>
-                    </a>
-                </li>
-
-                <li>
                     <a href="reports.php" id="reports" class='validation' data-id=56>
                         <span><i class="fal fa-chart-line"></i></span>
                         <span>Reports</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="users.php" id="users" class='validation' data-id=6>
-                        <span><i class="fal fa-users-cog"></i></span>
-                        <span>Users</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="finance.php" id="finance" class='validation' data-id=57>
-                        <span><i class="fal fa-donate"></i></span>
-                        <span>Finance</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="deliveries.php" id="deliveries" class='validation' data-id=58>
-                        <span><i class="fal fa-inbox-in"></i></span>
-                        <span>Deliveries</span>
                     </a>
                 </li>
 
@@ -137,8 +109,8 @@
 </body>
 
 <script src="js/components.js"></script>
-    <script src="{{ asset('js/iziToast.min.js') }}"></script>
-
+<script src="{{ asset('js/iziToast.min.js') }}"></script>
+<script src="{{ asset('js/main/moment.js') }}"></script>
 @yield('footer_scrips')
 
 </html>

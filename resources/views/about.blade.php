@@ -8,7 +8,7 @@ About us @parent
 
 @endsection
 
-@section('content')
+@section('main')
 
 <!-- Sub banner start -->
 <div class="sub-banner">

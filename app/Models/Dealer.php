@@ -37,4 +37,14 @@ class Dealer extends Model
     {
         return $this->hasMany(User::class, 'dealer_id', 'id');
     }
+
+    /**
+     * Get all of the yards for the Dealer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function yards(): HasMany
+    {
+        return $this->hasMany(Yard::class, 'dealer_id', 'id');
+    }
 }

@@ -10,6 +10,8 @@ class VehiclePrice extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id','vehicle_id','price'];
+
     /**
      * Get the vehicle that owns the VehiclePrice
      *
@@ -17,6 +19,6 @@ class VehiclePrice extends Model
      */
     public function vehicle(): BelongsTo
     {
-        return $this->belongsTo(Vehicle::class, 'vehicle');
+        return $this->belongsTo(Vehicle::class, 'vehicle_id');
     }
 }

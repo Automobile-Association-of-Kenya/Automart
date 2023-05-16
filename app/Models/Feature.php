@@ -11,7 +11,7 @@ class Feature extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'feature', 'description'];
-    
+
     public $timestamps = false;
 
     /**
@@ -21,6 +21,6 @@ class Feature extends Model
      */
     public function vehicles(): BelongsToMany
     {
-        return $this->belongsToMany(Vehicle::class, 'vehicle_features', 'vehicle_id', 'feature_id');
+        return $this->belongsToMany(Vehicle::class, 'vehicle_feature', 'vehicle_id', 'feature_id');
     }
 }

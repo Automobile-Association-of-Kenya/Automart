@@ -9,8 +9,14 @@ use App\Models\Make;
 use App\Models\Type;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
+use App\Models\VehiclePrice;
+use App\Models\Yard;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class VehicleController extends Controller
 {
@@ -23,11 +29,13 @@ class VehicleController extends Controller
         $this->type = new Type();
         $this->feature = new Feature();
         $this->auth = auth()->user();
+        $this->yard = new Yard();
     }
 
     public function index(): View
     {
-        return view('vehicles.index');
+        $str = strtotime(date('Y-m-d H:i:s')) . auth()->id();
+        return view('vehicles.index', compact('str'));
     }
 
     public function makes($id = null)
@@ -124,18 +132,10 @@ class VehicleController extends Controller
         if (!is_null($request->feature_id)) {
             $feature = $this->feature->find($request->feature_id);
             $feature->update($validated);
-            return json_encode(['status' => 'success', 'message' => 'Feature updated successfully']);
         } else {
             $this->feature->create($validated);
-            return json_encode(['status' => 'success', 'message' => 'Feature added successfully']);
         }
-    }
-
-    public function store(VehicleRequest $request)
-    {
-        $validated = $request->validated();
-
-        Vehicle::create($validated);
+        return json_encode(['status' => 'success', 'message' => 'Feature added successfully']);
     }
 
     public function list()
@@ -147,8 +147,14 @@ class VehicleController extends Controller
     public function listVehicles()
     {
         $vehicles = $this->vehicle
-            ->with(['dealer', 'make', 'model', 'prices' => function ($query) {
-                return $query->latest()->limit(1);
+            ->with(['dealer' => function ($dealer) {
+                return $dealer->select('id', 'name');
+            }, 'make' => function ($make) {
+                return $make->select('id', 'make');
+            }, 'model' => function ($model) {
+                return $model->select('id', 'model');
+            }, 'prices' => function ($query) {
+                return $query->latest()->limit(2)->select('price');
             }])->latest()->get();
         // if ($this->auth->role === "dealer") {
         //     $vehicles = $this->vehicle->where('dealer_id', $this->auth->dealer_id)
@@ -165,33 +171,195 @@ class VehicleController extends Controller
         return json_encode($vehicles);
     }
 
-
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $vehicle = $this->vehicle
+            ->with(['dealer' => function ($dealer) {
+                return $dealer->select('id', 'name');
+            }, 'type' => function ($type) {
+                return $type->select('id', 'type');
+            }, 'make' => function ($make) {
+                return $make->select('id', 'make');
+            }, 'model' => function ($model) {
+                return $model->select('id', 'model');
+            }, 'prices' => function ($query) {
+                return $query->select('id', 'price');
+            }, 'yard' => function ($yard) {
+                return $yard->select('id', 'yard');
+            }, 'features' => function ($fea) {
+                return $fea->select('features.id', 'features.feature');
+            }])->find($id);
+
+        return json_encode($vehicle);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+
+    public function yards($id = null)
     {
-        //
+        $query = $this->yard->query();
+        if (!is_null($id)) {
+            $query->where('id', $id);
+        }
+        $yards = $query->with('dealer')->get();
+        return json_encode($yards);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function dealerYards($dealer_id)
     {
-        //
+        $yards = $this->yard->where('dealer_id', $dealer_id)->get();
+        return json_encode($yards);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    public function yardsCreate(Request $request)
+    {
+        $validated = $request->validate(['yard_id' => ['nullable', 'exists:yards,id', 'integer'], 'yard' => ['required', 'max:80'], 'address' => ['string', 'max:200', 'nullable'], 'email' => ['email', 'max:60', 'string'], 'phone' => ['string', 'max:18', 'nullable']]);
+        $dealer_id = $request->dealer_id ?? $this->user->dealer_id;
+        if (!is_null($request->yard_id)) {
+            $yard = $this->yard->find($request->yard_id);
+            $yard->update(['dealer_id' => $dealer_id] + $validated);
+        } else {
+            $this->yard->create(['dealer_id' => $dealer_id] + $validated);
+        }
+        return json_encode(['status' => 'success', 'message' => 'Yard added successfully']);
+    }
+
+    public function uploadImages(Request $request)
+    {
+        $imageString = explode(',', $request->image);
+        if (isset($request->vehicle_id) && $request->vehicle_id !== null) {
+            $vehicle = $this->vehicle->find($request->vehicle_id);
+            $str_id = $vehicle->vehicle_no;
+        } else {
+            $str_id = $request->str_id;
+        }
+
+        if (isset($request->cover_image) && $request->cover_image == true) {
+            if (session()->has($str_id . 'cover')) {
+                session()->forget($str_id . 'cover');
+            }
+            session()->put($str_id . 'cover', $imageString[1]);
+        } else {
+            if (session()->has([$str_id . 'images'])) {
+                session()->push($str_id . 'images', $imageString[1]);
+            } else {
+                session()->put($str_id . 'images', [$imageString[1]]);
+            }
+        }
+
+        return 'success';
+    }
+
+    public function store(VehicleRequest $request)
+    {
+        $validated = $request->validated();
+        $dealer = (isset($validated['dealer_id'])) ? $this->dealer->find($validated["dealer_id"]) : $this->auth->dealer();
+        if (isset($request->vehicle_id) && $request->vehicle_id !== null) {
+            $vehicle = $this->vehicle->find($request->vehicle_id);
+            $strkey = $vehicle->vehicle_no;
+            $images = json_decode($vehicle->images, true);
+            $images =  is_array($images) ? $images : [];
+        } else {
+            $strkey = $request->str_id;
+            $images = [];
+        }
+
+        if (session()->has($strkey . 'images')) {
+            foreach (session($strkey . 'images') as $key => $value) {
+                $image = base64_decode($value);
+                $fileName = 'img' . auth()->id() . $key . strtotime(now()) . '.jpg'; // or any other desired file name
+                $img = Image::make($image);
+                $img->text(' ' . $dealer->name . ' via AA Kenya', 150, 120, function ($font) {
+                    $font->file(public_path('fonts/font.ttf'));
+                    $font->size(18);
+                    $font->color('#CECECE');
+                    $font->align('center');
+                    $font->valign('center');
+                    $font->angle(0);
+                });
+                $img->save(public_path('vehicleimages/' . $fileName));
+                array_push($images, $fileName);
+            }
+        }
+        if (session()->has($strkey . 'cover')) {
+            $jsone = session($strkey . 'cover');
+            $image = base64_decode($jsone);
+            $coverImage = 'img' . auth()->id() . 'cover' . strtotime(now()) . '.jpg'; // or any other desired file name
+            $img = Image::make($image);
+            $img->text(' ' . $dealer->name . ' via AA Kenya', 150, 120, function ($font) {
+                $font->file(public_path('fonts/font.ttf'));
+                $font->size(18);
+                $font->color('#CECECE');
+                $font->align('center');
+                $font->valign('center');
+                $font->angle(0);
+            });
+            $img->save(public_path('vehicleimages/' . $coverImage));
+        }
+
+        $validated['tags'] = (isset($validated['tags'])) ? json_encode($validated['tags']) : null;
+
+        DB::beginTransaction();
+        if (isset($request->vehicle_id) && $request->vehicle_id !== null) {
+            $vehicle->update(['vehicle_no' => $strkey, 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images)] + $validated);
+            $this->vehicle->updatefeatures($vehicle->id, $validated["features"]);
+            VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
+        }else {
+            $vehicle = Vehicle::create(['vehicle_no' => $strkey, 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images), 'views' => 0] + $validated);
+            $this->vehicle->addfeatures($vehicle->id, $validated["features"]);
+            VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
+        }
+        DB::commit();
+
+        session()->forget($strkey . "images");
+        session()->forget($strkey . 'cover');
+
+        return json_encode(['status' => 'success', 'message' => "Vehicle added successfully"]);
+    }
+
+    public function addImage(Request $request)
+    {
+        $imageString = explode(',', $request->image);
+        if (isset($request->cover_image) && $request->cover_image == true) {
+            if (session()->has($request->vehicle_id . "_vehicle_cover")) {
+                session()->forget($request->vehicle_id . "_vehicle_cover");
+            }
+            session()->put($request->vehicle_id . "_vehicle_cover", $imageString[1]);
+        } else {
+            if (session()->has($request->vehicle_id . "_vehicle_images")) {
+                session()->push($request->vehicle_id . "_vehicle_images", $imageString[1]);
+            } else {
+                session()->put($request->vehicle_id . "_vehicle_images", [$imageString[1]]);
+            }
+        }
+        return 'success';
+    }
+
+    public function imageDelete(Request $request)
+    {
+        $vehicle = $this->vehicle->find($request->vehicle_id);
+        if (isset($request->cover_photo_delete) && $request->cover_photo_delete == true) {
+            if (File::exists('vehicleimages/' . $vehicle->cover_photo)) {
+                File::delete('vehicleimages/' . $vehicle->cover_photo);
+            }
+            $vehicle->cover_photo = null;
+            $vehicle->update();
+        } elseif (isset($request->photo_delete) && $request->photo_delete) {
+            $image = $request->image;
+            $images = array_filter(json_decode($vehicle->images, true), function ($value) use ($image) {
+                return $value !== $image;
+            });
+            if (File::exists('vehicleimages/' . $vehicle->image)) {
+                File::delete('vehicleimages/' . $vehicle->image);
+            }
+            $vehicle->images = json_encode($images);
+            $vehicle->update();
+        }
+        return json_encode(['status' => 'success', 'message' => 'Image deleted successfully']);
+    }
+
     public function destroy(string $id)
     {
-        //
+        $this->vehicle->find($id)->destroy();
+        return json_encode(['status' => "success", 'message' => "Vehicle deleted successfully"]);
     }
 }

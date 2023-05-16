@@ -1,4 +1,11 @@
 (function () {
+    $(".chzn-select").select2({ allowClear: true });
+
+    $("#vehicleTags").select2({
+        tags: true,
+        tokenSeparators: [",", " "],
+        maximumSelectionLength: 4,
+    });
     let addNewVehicle = $("#addNewVehicle"),
         newVehicleForm = $("#newVehicleForm"),
         vehicleDealer = $("#vehicleDealer"),
@@ -24,7 +31,8 @@
         modelID = $("#modelID"),
         featureCreateID = $("#featureCreateID"),
         featureName = $("#featureName"),
-        featureDescription = $("#featureDescription");
+        featureDescription = $("#featureDescription"),
+        vehicleTags = $("#vehicleTags");
 
     yardInput.hide();
 
@@ -88,7 +96,7 @@
             });
             vehicleType.html(option);
             let table =
-                '<table class="hover typesDataTable"><thead><th>#</th><th>Type</th><th>Action</th></thead><tbody>' +
+                '<table class="table table-bordered table-sm hover typesDataTable"><thead><th>#</th><th>Type</th><th>Action</th></thead><tbody>' +
                 tr +
                 "</tbody></table>";
             $("#typesSection").html(table);
@@ -118,6 +126,62 @@
     }
     getVehicleTypes();
 
+    function getVehicleYards() {
+        $.getJSON("/yards", function (types) {
+            var option = '<option value="0">Select One</option>';
+            let tr = "",
+                i = 1;
+            $.each(types, (key, value) => {
+                let { id, yard, address, email, phone } = value;
+                tr +=
+                    "<tr><td>" +
+                    i++ +
+                    "</td><td>" +
+                    yard +
+                    "</td><td>" +
+                    address +
+                    "</td><td>" +
+                    email +
+                    "</td><td>" +
+                    phone +
+                    '</td><td><a href="#" id="editYardToggle" data-id=' +
+                    id +
+                    '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteYardToggle" data-id=' +
+                    id +
+                    '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+            });
+            let table =
+                '<table class="table table-bordered table-sm hover yardsDataTable"><thead><th>#</th><th>Name</th><th>Address</th><th>Email</th><th>Phone</th><th>Action</th></thead><tbody>' +
+                tr +
+                "</tbody></table>";
+            $("#yardsSection").html(table);
+            if ($.fn.DataTable.isDataTable(".yardsDataTable")) {
+                $(".yardsDataTable").destroy();
+                $(".yardsDataTable").DataTable({
+                    dom: "Bfrtip",
+                    buttons: [
+                        "copyHtml5",
+                        "excelHtml5",
+                        "csvHtml5",
+                        "pdfHtml5",
+                    ],
+                });
+            } else {
+                $(".yardsDataTable").DataTable({
+                    dom: "Bfrtip",
+                    buttons: [
+                        "copyHtml5",
+                        "excelHtml5",
+                        "csvHtml5",
+                        "pdfHtml5",
+                    ],
+                });
+            }
+        });
+    }
+
+    getVehicleYards();
+
     function getVehicleMakes() {
         $.getJSON("/makes", function (makes) {
             var option = '<option value="0">Select One</option>',
@@ -141,7 +205,7 @@
             filterlistmake.html(option);
             modelMakeID.html(option);
             let table =
-                '<table class="hover  makesDataTable"><thead><th>#</th><th>Make</th><th>Action</th></thead><tbody>' +
+                '<table class="table table-bordered table-sm hover makesDataTable"><thead><th>#</th><th>Make</th><th>Action</th></thead><tbody>' +
                 tr +
                 "</tbody></table>";
             $("#makesTableSection").html(table);
@@ -182,6 +246,7 @@
                 option1 += "<option value=" + id + ">" + name + "</option>";
             });
             countryofOrigin.html(option);
+            shippingTo.html(option1);
         });
     }
 
@@ -190,72 +255,75 @@
     function getCounties(country_id) {
         $.getJSON("/counties/" + country_id, function (counties) {
             var option = '<option value="0">Select One</option>';
+            var option1 = '<option value="Global">Global</option>';
             $.each(counties, (key, value) => {
                 let { id, name } = value;
                 option += "<option value=" + id + ">" + name + "</option>";
+                option1 += "<option value=" + id + ">" + name + "</option>";
             });
             countyID.html(option);
         });
     }
 
     function getVehicleModels(make_id = null) {
-        $.getJSON("/models/" + make_id, function (models) {
-            var option = '<option value="0">Select One</option>',
-                tr = "",
-                i = "";
-            $.each(models, (key, value) => {
-                let { id, make, model } = value;
-                option += "<option value=" + id + ">" + model + "</option>";
+        if (make_id !== null) {
+            $.getJSON("/models/" + make_id, function (models) {
+                var option = '<option value="0">Select One</option>',
+                    tr = "",
+                    i = "";
+                $.each(models, (key, value) => {
+                    let { id, make, model } = value;
+                    option += "<option value=" + id + ">" + model + "</option>";
 
+                    if (make_id == null) {
+                        tr +=
+                            "<tr><td>" +
+                            i++ +
+                            "</td><td>" +
+                            make.make +
+                            "</td><td>" +
+                            model +
+                            '</td><td><a href="#" id="editModelToggle" data-id=' +
+                            id +
+                            '><i class="fas fa-edit text-warning" id="editVehicleModelToggle" data-id=' +
+                            id +
+                            '></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteModelToggle" data-id=' +
+                            id +
+                            '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+                    }
+                });
+                vehicleModel.html(option);
                 if (make_id == null) {
-                    tr +=
-                        "<tr><td>" +
-                        i++ +
-                        "</td><td>" +
-                        make.make +
-                        "</td><td>" +
-                        model +
-                        '</td><td><a href="#" id="editModelToggle" data-id=' +
-                        id +
-                        '><i class="fas fa-edit text-warning" id="editVehicleModelToggle" data-id=' +
-                        id +
-                        '></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteModelToggle" data-id=' +
-                        id +
-                        '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+                    let table =
+                        "<table class='table table-bordered table-sm hover modelsDataTable'><thead><th>#</th><th>Make</th><th>Model</th><th>Action</th></thead><tbody>" +
+                        tr +
+                        "</tbody></table>";
+                    $("#modelsTableSection").html(table);
+                    if ($.fn.DataTable.isDataTable(".modelsDataTable")) {
+                        $(".modelsDataTable").destroy();
+                        $(".modelsDataTable").DataTable({
+                            dom: "Bfrtip",
+                            buttons: [
+                                "copyHtml5",
+                                "excelHtml5",
+                                "csvHtml5",
+                                "pdfHtml5",
+                            ],
+                        });
+                    } else {
+                        $(".modelsDataTable").DataTable({
+                            dom: "Bfrtip",
+                            buttons: [
+                                "copyHtml5",
+                                "excelHtml5",
+                                "csvHtml5",
+                                "pdfHtml5",
+                            ],
+                        });
+                    }
                 }
             });
-            vehicleModel.html(option);
-            if (make_id == null) {
-                let table =
-                    "<table class='hover  modelsDataTable'><thead><th>#</th><th>Make</th><th>Model</th><th>Action</th></thead><tbody>" +
-                    tr +
-                    "</tbody></table>";
-                $("#modelsTableSection").html(table);
-                if ($.fn.DataTable.isDataTable(".modelsDataTable")) {
-                    $(".modelsDataTable").destroy();
-                    $(".modelsDataTable").DataTable({
-                        dom: "Bfrtip",
-                        buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
-                        ],
-                    });
-                } else {
-                    $(".modelsDataTable").DataTable({
-                        dom: "Bfrtip",
-                        buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
-                        ],
-                    });
-                }
-                // $("#Section").DataTable();
-            }
-        });
+        }
     }
 
     getVehicleModels();
@@ -283,11 +351,11 @@
                         ? description
                         : "";
                 label +=
-                    '<div class="col-md-3"><label for=""><input type="checkbox" value=' +
+                    '<div class="col-md-3"><label class="custom-control custom-radio"><input type="checkbox" value=' +
                     id +
-                    ' class="vehicleFeatures" name="vehiclefeatures">&nbsp;&nbsp;&nbsp;' +
+                    ' class="vehicleFeatures" name="vehiclefeatures"><span>&nbsp;&nbsp;&nbsp;' +
                     feature +
-                    "</label></div>";
+                    "</span></label></div>";
                 tr +=
                     "<tr><td>" +
                     i++ +
@@ -304,7 +372,7 @@
 
             $("#featuresSection").html(label);
             let table =
-                '<table class="hover  featuresDataTable"><thead><th>#</th><th>Feature</th><th>Description</th><th>Action</th></thead><tbody>' +
+                '<table class="table table-bordered table-sm hover featuresDataTable"><thead><th>#</th><th>Feature</th><th>Description</th><th>Action</th></thead><tbody>' +
                 tr +
                 "</tbody></table>";
 
@@ -339,14 +407,14 @@
     getVehicleFeatures();
 
     function getDealerYards(dealer_id) {
-        $.getJSON("dealer-yards/" + dealer_id, function (yards) {
+        $.getJSON("/dealer-yards/" + dealer_id, function (yards) {
             let option = '<option value="">Select One</option>';
             $.each(yards, function (key, value) {
                 option +=
                     "<option value=" +
                     value.id +
                     ">" +
-                    value.name +
+                    value.yard +
                     "</option>";
             });
             $("#yardID").html(option);
@@ -364,7 +432,9 @@
         $.getJSON("/list-vehicles", function (vehicles) {
             let tr = "",
                 option = "",
+                li = "",
                 i = 1;
+            $("#listcount").text(vehicles.length);
             $.each(vehicles, function (key, value) {
                 let {
                     id,
@@ -377,18 +447,29 @@
                     enginecc,
                     color,
                     interior,
-                    miles,
+                    mileage,
                     fuel_type,
                     transmission,
                     status,
+                    created_at,
                 } = value;
-                option =
-                    +"<option value=" +
+
+                option +=
+                    '<option value="' +
                     id +
-                    ">" +
+                    '">' +
                     vehicle_no +
-                    make.make.model.model +
+                    " -" +
+                    model.model +
                     "</option>";
+                li +=
+                    '<label class="custom-control custom-radio"><input type="checkbox" value=' +
+                    id +
+                    ' class="vehicleoptionid" name="vehicleoptionid"><span>&nbsp;&nbsp;&nbsp;' +
+                    vehicle_no +
+                    " - " +
+                    model.model +
+                    "</span></label>";
                 tr +=
                     "<tr><td>" +
                     i++ +
@@ -403,7 +484,7 @@
                     "</td><td>" +
                     year +
                     "</td><td>" +
-                    prices.price +
+                    prices[0]?.price +
                     "</td><td>" +
                     enginecc +
                     "</td><td>" +
@@ -411,7 +492,7 @@
                     "</td><td>" +
                     interior +
                     "</td><td>" +
-                    miles +
+                    mileage +
                     "</td><td>" +
                     fuel_type +
                     "</td><td>" +
@@ -419,14 +500,15 @@
                     "</td><td>" +
                     status +
                     "</td><td>" +
-                    created_at +
+                    moment(new Date(created_at)).format("DD-MM-YYYY") +
                     "</td><td></td></tr>";
             });
+            // console.log($("#vehicleslist"));
+            $(".vehicleslisttreeview").html(option);
             let table =
-                '<table class="hover vehicleDataTable "><thead><th>#</th><th>NO</th><th>Dealer</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>CC</th><th>Color</th><th>Interior</th><th>Mileage</th><th>F Type</th><th>Transmission</th><th>Status</th><th>Added at</th><th>Action</th></thead><tbody' +
+                '<table class="table table-bordered hover vehicleDataTable "><thead><th>#</th><th>NO</th><th>Dealer</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>CC</th><th>Color</th><th>Interior</th><th>Mileage</th><th>Fuel</th><th>Trans</th><th>Status</th><th>created</th><th>Action</th></thead><tbody' +
                 tr +
                 "</tbody></table>";
-            $("#vehicleslist").html(option);
             $("#vehicleListTab").html(table);
             if ($.fn.DataTable.isDataTable(".vehicleDataTable")) {
                 $(".vehicleDataTable").destroy();
@@ -477,7 +559,6 @@
     });
 
     yardToggle.on("change", function () {
-        console.log("thssrs");
         if ($(this).is(":checked")) {
             locationInput.hide();
             yardInput.show();
@@ -843,7 +924,11 @@
     let yardCreateForm = $("#yardCreateForm"),
         yardCreateID = $("#yardCreateID"),
         dealerYardID = $("#dealerYardID"),
-        yardName = $("#yardName");
+        yardName = $("#yardName"),
+        yardAddress = $("#yardAddress"),
+        yardEmail = $("#yardEmail"),
+        yardPhone = $("#yardPhone");
+
     yardCreateForm.on("submit", function (event) {
         event.preventDefault();
         let $this = $(this),
@@ -851,10 +936,20 @@
             yard_id = yardCreateID.val(),
             dealer_id = dealerYardID.val(),
             yard = yardName.val(),
+            address = yardAddress.val(),
+            email = yardEmail.val(),
+            phone = yardPhone.val(),
             submit = $this.find("button[type='submit']");
         submit.prop({ disabled: true });
 
-        let data = { yard_id: yard_id, dealer_id: dealer_id, yard: yard };
+        let data = {
+            yard_id: yard_id,
+            dealer_id: dealer_id,
+            yard: yard,
+            address: address,
+            email: email,
+            phone: phone,
+        };
 
         if (data.yard !== "" && data.yard !== null && data.yard !== undefined) {
             $.ajaxSetup({
@@ -867,12 +962,13 @@
                 url: "/yards",
                 data: data,
                 success: function (params) {
+                    console.log(params);
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#yardfeedback");
                         yardCreateID.val("");
                         $this.trigger("reset");
-                        getVehicleMakes();
+                        getVehicleYards();
                     } else {
                         showError(result.error, "#yardfeedback");
                     }
@@ -897,6 +993,36 @@
                     }
                     submit.prop({ disabled: false });
                 },
+            });
+        }
+    });
+
+    $("body").on("click", "#editYardToggle", function (event) {
+        event.preventDefault();
+        let yard_id = $(this).data("id");
+        if (yard_id !== "" && yard_id !== undefined) {
+            $.getJSON("/yards/" + yard_id, function (yards) {
+                let yard = yards[0];
+                if (yard !== null) {
+                    showSuccess(
+                        "Yard accepted for editing. Make changes then save.",
+                        "#yardfeedback"
+                    );
+
+                    yardCreateID.val(yard.id);
+                    $(
+                        "#dealerYardID option[value=" + yard.dealer.id + "]"
+                    ).prop("selected", true);
+                    yardName.val(yard.yard);
+                    yardAddress.val(yard.address);
+                    yardEmail.val(yard.email);
+                    yardPhone.val(yard.phone);
+                } else {
+                    showError(
+                        "Error occured during processing. Ensure you have internet connection then retry.",
+                        "#yardfeedback"
+                    );
+                }
             });
         }
     });
@@ -935,4 +1061,578 @@
         yardCreateID.val("");
         yardName.val("");
     });
+
+    $("#coverPhoto").on("change", function () {
+        var input = $(this)[0];
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#coverPhotoPreview").html(
+                    '<img src="' +
+                        e.target.result +
+                        '" width="100%" height="150px" alt="Image Preview">'
+                );
+                $("#coverPhotoPreview").append(
+                    '<i class="fal fa-trash btn-danger" id="coverPhotoRemve"></i>'
+                );
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
+
+    // addionalImages;
+
+    $(document).on("click", "#coverPhotoRemve", function () {
+        $("#coverPhoto").val("");
+        $("#coverPhotoPreview").html("");
+    });
+
+    $("#addionalImages").on("change", function () {
+        const previewContainer = $("#image-preview");
+        var vehicleID = $("#vehicleID").val();
+        console.log(vehicleID);
+        if (vehicleID == undefined && vehicleID == null) {
+            previewContainer.empty();
+        }
+        const $this = $(this),
+            files = Array.from($this[0].files);
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = $("<img>")
+                    .attr("src", e.target.result)
+                    .attr("width", "100%")
+                    .attr("height", "150px");
+                const preview = $("<div>")
+                    .addClass("image-preview")
+                    .append(img);
+                previewContainer.append(preview);
+                const removeButton = $(
+                    "<button class='btn btn-outline-danger'>"
+                ).html("<i class='fal fa-trash btn-danger'></i>");
+                removeButton.on("click", function () {
+                    preview.remove();
+                    files.splice(i, 1);
+                    const remainingFiles = new DataTransfer();
+                    for (let j = 0; j < files.length; j++) {
+                        remainingFiles.items.add(files[j]);
+                    }
+                    $("#addionalImages").prop("files", remainingFiles.files);
+                });
+                preview.append(removeButton);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        previewContainer.sortable({
+            containment: "parent",
+            axis: "y",
+            update: function (event, ui) {
+                const newOrder = previewContainer.sortable();
+                const newFiles = new DataTransfer();
+                // for (let i = 0; i < newOrder.length; i++) {
+                //     const index = parseInt(newOrder[i].split("-")[1]);
+                //     newFiles.items.add(files[index]);
+                // }
+
+                // const newFileList = new DataTransfer();
+                // for (let i = 0; i < newFiles.length; i++) {
+                //     console.log(newFiles[i]);
+                //     newFileList.items.add(newFiles[i]);
+                // }
+                // $("#addionalImages").prop("files", newFiles.files);
+            },
+        });
+    });
+
+    let vehicleImagesUpload = $("#vehicleImagesUpload");
+    var input = document.getElementById("coverPhoto"),
+        token = $("input[name='_token']").val(),
+        multiImagesUpload = document.getElementById("addionalImages"),
+        str_id = $("#uniqueStrID").val(),
+        vehicle_id = $("#vehicleID");
+
+    vehicleImagesUpload.on("click", function (event) {
+        event.preventDefault();
+        var file = input.files[0];
+        var reader = new FileReader();
+        reader.onload = function () {
+            var img = new Image();
+            img.onload = function () {
+                var width = 800;
+                var height = 600;
+                var canvas = document.createElement("canvas");
+                canvas.width = width;
+                canvas.height = height;
+                canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+                var compressedFile = canvas.toDataURL("image/jpeg", 0.8);
+                $.post("/upload", {
+                    _token: token,
+                    str_id: str_id,
+                    image: compressedFile,
+                    vehicle_id: vehicle_id.val(),
+                    cover_image: true,
+                })
+                    .done(function (params) {
+                        console.log(params);
+                        if (params == "success") {
+                            $("#coverPhotoPreview").children().remove();
+                        }
+                    })
+                    .fail(function (error) {
+                        console.log(error);
+                        console.log(error);
+                    });
+            };
+            img.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+
+        var files = multiImagesUpload.files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var read = new FileReader();
+            read.onload = function (e) {
+                var img = new Image();
+                img.src = e.target.result;
+                img.onload = function () {
+                    var canvas = document.createElement("canvas");
+                    var ctx = canvas.getContext("2d");
+                    canvas.width = 600;
+                    canvas.height = 450;
+                    let leet = "image_" + i;
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    var compressedDataUrl = canvas.toDataURL("image/jpeg", 0.5);
+                    $.post("/upload", {
+                        _token: token,
+                        str_id: str_id,
+                        vehicle_id: vehicle_id.val(),
+                        image: compressedDataUrl,
+                    })
+                        .done(function (params) {
+                            console.log(params);
+
+                            if (params == "success") {
+                                $('img[src="' + img.src + '"]')
+                                    .parent()
+                                    .remove();
+                                if (
+                                    $("#image-preview").children().length ==
+                                        0 &&
+                                    $("#coverPhotoPreview").children().length ==
+                                        0
+                                ) {
+                                    showSuccess(
+                                        "Images uploaded successfully. Complete filling this form and click on save. ",
+                                        "#imageFeedback"
+                                    );
+                                }
+                            }
+                        })
+                        .fail(function (error) {
+                            console.log(error);
+
+                            console.log(error);
+                        });
+                };
+            };
+            read.readAsDataURL(file);
+        }
+    });
+
+    let vehicleID = $("#vehicleID"),
+        vehicleCreateForm = $("#vehicleCreateForm"),
+        uniqueStrID = $("#uniqueStrID"),
+        locationHtm = $("#location"),
+        yardID = $("#yardID"),
+        yearOfManufacture = $("#yearOfManufacture"),
+        mileAge = $("#mileAge"),
+        vehicleColor = $("#vehicleColor"),
+        vehiclePrice = $("#vehiclePrice"),
+        engineCC = $("#engineCC"),
+        interiorHtm = $("#interior"),
+        fuelType = $("#fuelType"),
+        transmissionHtm = $("#transmission"),
+        descriptionHtm = $("#description"),
+        savevehicle = $("#savevehicle"),
+        clearvehicle = $("#clearvehicle");
+
+    vehicleCreateForm.on("submit", function (event) {
+        event.preventDefault();
+        savevehicle.prop("disabled", true);
+        let features = [];
+
+        $(".vehicleFeatures").each(function (key, input) {
+            if ($(input).is(":checked")) {
+                features.push($(input).val());
+            }
+        });
+
+        let $this = $(this),
+            vehicle_id = vehicleID.val(),
+            dealer_id = vehicleDealer.val(),
+            type = vehicleType.val(),
+            make = vehicleMake.val(),
+            model = vehicleModel.val(),
+            country_of_origin = countryofOrigin.val(),
+            shipping_to = shippingTo.val(),
+            str_id = uniqueStrID.val(),
+            location = locationHtm.val(),
+            yard_id = yardID.val(),
+            year = yearOfManufacture.val(),
+            mileage = mileAge.val(),
+            color = vehicleColor.val(),
+            price = vehiclePrice.val(),
+            enginecc = engineCC.val(),
+            interior = interiorHtm.val(),
+            fuel_type = fuelType.val(),
+            transmission = transmissionHtm.val(),
+            tags = vehicleTags.val(),
+            description = descriptionHtm.val(),
+            errors = [];
+        savevehicle.prop("disabled", true);
+
+        let data = {
+            vehicle_id: vehicle_id,
+            dealer_id: dealer_id,
+            type_id: type,
+            make_id: make,
+            vehicle_model_id: model,
+            country_of_origin: country_of_origin,
+            shipping_to: shipping_to,
+            str_id: str_id,
+            location: location,
+            yard_id: yard_id,
+            year: year,
+            mileage: mileage,
+            color: color,
+            price: price,
+            enginecc: enginecc,
+            interior: interior,
+            fuel_type: fuel_type,
+            transmission: transmission,
+            tags: tags,
+            description: description,
+            features: features,
+        };
+
+        if (make == "" && make == undefined) {
+            errors.push("Make is required");
+        }
+        if (model == "" && model == undefined) {
+            errors.push("Model is required");
+        }
+
+        if (year == "" && year == undefined) {
+            errors.push("Year of manufacture is required");
+        }
+
+        if (color == "" && color == undefined) {
+            errors.push("Vehicle color is required");
+        }
+        if (price == "" && price == undefined) {
+            errors.push("Vehicle price is required");
+        }
+
+        if (errors.length > 0) {
+            p = "";
+            $.each(errors, (key, value) => {
+                p += value + "\n";
+            });
+            showError("" + p + "", "#vehiclefeedback");
+        } else {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": token,
+                },
+            });
+
+            $.ajax({
+                method: "POST",
+                url: "/vehicles",
+                data: data,
+                success: function (params) {
+                    console.log(params);
+                    savevehicle.prop("disabled", false);
+
+                    let result = JSON.parse(params);
+                    if (result.status == "success") {
+                        showSuccess(result.message, "#vehiclefeedback");
+                        yardCreateID.val("");
+                        $this.trigger("reset");
+                        getVehicles();
+                        $(".chzn-select").select2({
+                            allowClear: true,
+                        });
+                    } else {
+                        showError(result.error, "#vehiclefeedback");
+                    }
+                },
+
+                error: function (error) {
+                    console.log(error);
+                    savevehicle.prop("disabled", false);
+
+                    if (error.status == 422) {
+                        var errors = "";
+                        $.each(
+                            error.responseJSON.errors,
+                            function (key, value) {
+                                errors += value + "!";
+                            }
+                        );
+                        showError(errors, "#vehiclefeedback");
+                    } else {
+                        showError(
+                            "Error occurred during processing",
+                            "#vehiclefeedback"
+                        );
+                    }
+                },
+            });
+        }
+    });
+
+    /** Toggle vehicle for editing */
+
+    $(".vehicleslisttreeview").on("change", function () {
+        let vehicle_id = $(this).val()[0];
+        if (vehicle_id !== null) {
+            $("#image-preview").children().remove();
+            $("#coverPhotoPreview").children().remove();
+
+            $.getJSON("/vehicles/" + vehicle_id, function (vehicle) {
+                console.log(vehicle);
+                if (vehicle !== null && vehicle !== []) {
+                    showSuccess(
+                        "Vehicle accepted for editing, You can make changes and click save to save changes",
+                        "#vehiclefeedback"
+                    );
+
+                    $(
+                        "#vehicleDealer option[value='" +
+                            vehicle.dealer.id +
+                            "']"
+                    ).prop("selected", true);
+
+                    $(
+                        "#vehicleType option[value='" + vehicle.type.id + "']"
+                    ).prop("selected", true);
+
+                    $(
+                        "#vehicleMake option[value='" + vehicle.make.id + "']"
+                    ).prop("selected", true);
+
+                    $("#vehicleModel").html(
+                        "<option value='" +
+                            vehicle.model.id +
+                            "'>" +
+                            vehicle.model.model +
+                            "</option>"
+                    );
+                    $(
+                        "#countryofOrigin option[value='" +
+                            vehicle.country_of_origin +
+                            "']"
+                    ).prop("selected", true);
+
+                    $(
+                        "#shippingTo option[value='" +
+                            vehicle.shipping_to +
+                            "']"
+                    ).prop("selected", true);
+
+                    vehicleID.val(vehicle.id);
+                    uniqueStrID.val(vehicle.vehicle_no);
+                    locationHtm.val(vehicle.location);
+                    mileAge.val(vehicle.mileage);
+                    vehiclePrice.val(vehicle.price);
+                    engineCC.val(vehicle.enginecc);
+                    descriptionHtm.val(vehicle.description);
+
+                    if (vehicle.yard !== null) {
+                        yardID.html(
+                            "<option value='" +
+                                vehicle.yard.id +
+                                "'>" +
+                                vehicle.yard.yard +
+                                "</option>"
+                        );
+                    }
+                    $(
+                        "#yearOfManufacture option[value='" +
+                            vehicle.year +
+                            "']"
+                    ).prop("selected", true);
+
+                    $(
+                        "#vehicleColor option[value='" + vehicle.color + "']"
+                    ).prop("selected", true);
+
+                    $(
+                        "#interiorHtm option[value='" + vehicle.interior + "']"
+                    ).prop("selected", true);
+                    $(
+                        "#fuelType option[value='" + vehicle.fuel_type + "']"
+                    ).prop("selected", true);
+                    $(
+                        "#transmissionHtm option[value='" +
+                            vehicle.transmission +
+                            "']"
+                    ).prop("selected", true);
+
+                    $.each(JSON.parse(vehicle.tags), function (key, value) {
+                        if (value !== null) {
+                            $(
+                                "#vehicleTags option[value='" + value + "']"
+                            ).prop("selected", true);
+                        }
+                    });
+
+                    $(".chzn-select").select2({ allowClear: true });
+
+                    $("#vehicleTags").select2({
+                        tags: true,
+                        tokenSeparators: [",", " "],
+                        maximumSelectionLength: 4,
+                    });
+
+                    let featuressss = [];
+
+                    if (vehicle.features !== null && vehicle.features !== []) {
+                        $.each(vehicle.features, function (key, value) {
+                            featuressss.push(value.id);
+                        });
+                    }
+
+                    $(".vehicleFeatures").each(function (key, input) {
+                        let value = parseInt($(input).val());
+                        if ($.inArray(value, featuressss) !== -1) {
+                            $(input).prop("checked", true);
+                        }
+                    });
+
+                    /** Preview Images on edit */
+                    if (
+                        vehicle.cover_photo !== "" &&
+                        vehicle.cover_photo !== null
+                    ) {
+                        const coverImage = $("<img>")
+                            .attr("src", "vehicleimages/" + vehicle.cover_photo)
+                            .attr("width", "100%")
+                            .attr("height", "150px");
+                        const preview = $("<div>")
+                            .addClass("image-preview")
+                            .append(coverImage);
+                        $("#coverPhotoPreview").append(preview);
+                        const removeButton = $(
+                            "<button class='btn btn-outline-danger' id='coverPhotoDelete' data-id='" +
+                                vehicle.id +
+                                "'>"
+                        )
+                            .html("<i class='fal fa-trash btn-danger'></i>")
+                            .on("click", function (event) {
+                                let $this = $(this),
+                                    data = {
+                                        _token: token,
+                                        vehicle_id: vehicle.id,
+                                        cover_photo_delete: true,
+                                    };
+                                $.post("/image-delete", data).done(function (
+                                    params
+                                ) {
+                                    let result = JSON.parse(params);
+                                    if (result.status == "success") {
+                                        preview.remove();
+                                    }
+                                });
+                            });
+                        preview.append(removeButton);
+                    }
+
+                    if (vehicle.images !== "[]" && vehicle.images !== null) {
+                        let previewContainer = $("#image-preview");
+                        $.each(
+                            JSON.parse(vehicle.images),
+                            function (key, value) {
+                                let image = $("<img>")
+                                    .attr("src", "vehicleimages/" + value)
+                                    .attr("width", "100%")
+                                    .attr("height", "150px");
+                                let imgpreview = $("<div>")
+                                    .addClass("image-preview")
+                                    .append(image);
+                                previewContainer.append(imgpreview);
+                                const removeButton = $(
+                                    "<button class='btn btn-outline-danger' id='imgDeleteBtn' data-id='" +
+                                        vehicle.id +
+                                        "' data-image='" +
+                                        value +
+                                        "'>"
+                                )
+                                    .html(
+                                        "<i class='fal fa-trash btn-danger'></i>"
+                                    )
+                                    .on("click", function (event) {
+                                        let $this = $(this),
+                                            data = {
+                                                _token: token,
+                                                vehicle_id: vehicle.id,
+                                                image: value,
+                                                photo_delete: true,
+                                            };
+                                        $.post("/image-delete", data).done(
+                                            function (params) {
+                                                console.log(params);
+                                                let result = JSON.parse(params);
+                                                if (
+                                                    result.status == "success"
+                                                ) {
+                                                    imgpreview.remove();
+                                                }
+                                            }
+                                        );
+                                    });
+                                imgpreview.append(removeButton);
+                            }
+                        );
+
+                        previewContainer.sortable({
+                            containment: "parent",
+                            axis: "y",
+                            update: function (event, ui) {
+                                const newOrder = previewContainer.sortable();
+                                const newFiles = new DataTransfer();
+                            },
+                        });
+                    } else {
+                        console.log("here we are");
+                    }
+                } else {
+                    showError(
+                        "Error occured when fetching data. Ensure you have internet connection then try agaain.",
+                        "#vehiclefeedback"
+                    );
+                }
+            });
+        }
+    });
+
+    /** Clear form fields */
+    clearvehicle.on("click", function (event) {
+        event.preventDefault();
+        vehicleCreateForm.trigger("reset");
+        $(".chzn-select").select2({ allowClear: true });
+        $("#image-preview").children().remove();
+        $("#coverPhotoPreview").children().remove();
+
+        $("#vehicleTags").select2({
+            tags: true,
+            tokenSeparators: [",", " "],
+            maximumSelectionLength: 4,
+        });
+    });
+    /** Filter Images */
 })();
