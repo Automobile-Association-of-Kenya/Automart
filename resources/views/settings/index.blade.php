@@ -28,11 +28,11 @@
                                 <a class="nav-item nav-link active" id="pop1-tab" data-toggle="tab" href="#subscriptionTab"
                                     role="tab" aria-controls="pop1" aria-selected="true">Subscription Packages</a>
 
-                                <a class="nav-item nav-link" id="vehicles-list-tab" data-toggle="tab" href="#dealersTab"
-                                    role="tab" aria-controls="pop1" aria-selected="true">Dealers</a>
+                                <a class="nav-item nav-link" id="vehicles-list-tab" data-toggle="tab" href="#accountsTab"
+                                    role="tab" aria-controls="pop1" aria-selected="true">Account Lists</a>
 
-                                <a class="nav-item nav-link" id="makes-tab" data-toggle="tab" href="#partnersTab"
-                                    role="tab" aria-controls="pop2" aria-selected="false">Partners</a>
+                                <a class="nav-item nav-link" id="makes-tab" data-toggle="tab" href="#emailsTab"
+                                    role="tab" aria-controls="pop2" aria-selected="false">Email Lists</a>
                             </div>
                         </nav>
 
@@ -43,27 +43,42 @@
                                     <div class="card containergroup">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-md-9 mt-2" id="subscriptionsTableSection">
+                                                <div class="col-md-8 mt-2" id="subscriptionsTableSection">
+                                                    <table class="table table-bordered table-sm">
+                                                        <thead>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Priority</th>
+                                                            <th>Cost</th>
+                                                            <th>Billing Cycle</th>
+                                                            <th>Properties</th>
+                                                            <th>Action</th>
+                                                        </thead>
 
+                                                        <tbody id="subscriptionTable">
+
+                                                        </tbody>
+                                                    </table>
                                                 </div>
 
-                                                <div class="col-md-3 user-create-section">
+                                                <div class="col-md-4 user-create-section">
                                                     <h4 class="text text-center mb-2">Subscription Form</h4>
-                                                    <div id="usersfeedback"></div>
+                                                    <div id="subscriptionfeedback"></div>
 
                                                     <form action="" method="post" id="createSubscriptionForm">
                                                         @csrf
                                                         <input type="hidden" name="subscription_id" id="subscriptionID">
                                                         <div class="row">
-                                                            <div class="col-md-12">
+                                                            <div class="col-md-12 form-group">
                                                                 <label>Name</label>
                                                                 <input type="text" name="name" id="subscriptionName"
                                                                     class="form-control" required>
                                                             </div>
 
-                                                            <div class="col-md-12">
+                                                            <div class="col-md-12 form-group">
                                                                 <label>Priority</label>
-                                                                <select name="priority" id="subPriority" class="form-control form-control-sm">
+                                                                <select name="priority" id="subPriority"
+                                                                    class="form-control form-control-md" required>
                                                                     <option value="">Select One</option>
                                                                     <option value="High">High</option>
                                                                     <option value="Moderate">Moderate</option>
@@ -71,24 +86,46 @@
                                                                 </select>
                                                             </div>
 
-                                                            <div class="col-md-12">
+                                                            <div class="col-md-12 form-group">
                                                                 <label>Cost</label>
                                                                 <input type="number" name="cost" id="subCost"
-                                                                    class="form-control">
+                                                                    class="form-control" required>
                                                             </div>
 
-                                                            <div class="col-md-12">
+                                                            <div class="col-md-12 form-group">
                                                                 <label>Billing Cycle</label>
-                                                                <select name="bilingcycle" id="bilingCycle" class="form-control form-control-sm">
+                                                                <select name="billingcycle" id="billingCycle"
+                                                                    class="form-control form-control-md" required>
                                                                     <option value="">Select One</option>
                                                                     <option value="Monthly">Monthly</option>
                                                                     <option value="Quarterly">Quarterly</option>
                                                                     <option value="Annually">Annually</option>
+                                                                    <option value="onetime">one Time</option>
                                                                 </select>
                                                             </div>
 
-                                                            <div class="col-md-12" id="subscriptionFeatures">
+                                                            <div class="col-md-12 form-group row">
+                                                                <div class="col-md-12">
+                                                                    <label for="subscriptionprops">Subscription
+                                                                        Properties</label>
+                                                                    <ul class="list-group" id="subscriptionPropertiesList">
 
+                                                                    </ul>
+                                                                </div>
+
+                                                                <div class="col-md-11">
+                                                                    <input type="text"
+                                                                        class="form-control form-control-sm"
+                                                                        name="subscriptionname" id="subsPropInput">
+                                                                </div>
+
+
+
+                                                                <div class="col-md-1">
+                                                                    <button class="btn btn-sm btn-success" type="button"
+                                                                        id="subsPropsAdd"><i
+                                                                            class="fal fa-plus"></i></button>
+                                                                </div>
                                                             </div>
 
                                                             <div class="col-md-12 text-center mt-3">
@@ -96,7 +133,8 @@
                                                                         class="fal fa-save fa-lg fa-fw"></i> Save
                                                                 </button>
                                                                 <button class='btn btn-outline-warning btn-sm'
-                                                                    id='clearuser'><i class="fal fa-broom fa-lg fa-fw"></i>
+                                                                    id='clearuser'><i
+                                                                        class="fal fa-broom fa-lg fa-fw"></i>
                                                                     Clear
                                                                     Fields</button>
 
@@ -113,26 +151,32 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade mb-3" id="dealersTab" role="tabpanel" aria-labelledby="pop2-tab">
+                            <div class="tab-pane fade mb-3" id="accountsTab" role="tabpanel" aria-labelledby="pop2-tab">
                                 <div id="userdetails" class="mt-2">
                                     <div class="card containergroup">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-md-9 mt-2" id="dealersTableSection">
+                                                <div class="col-md-9 mt-2" id="accountsTableSection">
                                                 </div>
 
                                                 <div class="col-md-3 dealer-create-section">
-                                                    <h4 class="text text-center mb-2">Dealers Form</h4>
-                                                    <div id="dealersfeedback"></div>
+                                                    <h4 class="text text-center mb-2">Account Form</h4>
+                                                    <div id="accountsfeedback"></div>
 
-                                                    <form action="#" method="post" id="createDealerForm">
+                                                    <form action="#" method="post" id="createAccountForm">
                                                         @csrf
                                                         <input type="hidden" name="user_id" id="dealerCreateID">
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <label for="name">Dealer Name</label>
-                                                                <input type="text" name="name" id="dealerName"
-                                                                    class="form-control" required>
+                                                                <label for="name">Account Type</label>
+                                                                <select name="account_type" id="accountType"
+                                                                    class="form-control form-control-sm">
+                                                                    <option value="">Select One</option>
+                                                                    <option value="Mpesa">Mpesa</option>
+                                                                    <option value="Bank">Bank</option>
+                                                                    <option value="Paypal">Paypal</option>
+                                                                    <option value=""></option>
+                                                                </select>
                                                             </div>
 
                                                             <div class="col-md-12">
@@ -188,65 +232,85 @@
                             </div>
 
 
-                            <div class="tab-pane fade mb-3" id="partnersTab" role="tabpanel" aria-labelledby="pop2-tab">
+                            <div class="tab-pane fade mb-3" id="emailsTab" role="tabpanel" aria-labelledby="pop2-tab">
                                 <div class="row">
-                                    <div class="col-md-9 mt-2" id="partnerTableSection">
+                                    <div class="col-md-9 mt-2" id="emailsTableSection">
+                                        <table>
+                                            <thead>
+                                                <th>Usage</th>
+                                                <th>Host</th>
+                                                <th>Address</th>
+                                                <th>Password</th>
+                                                <th>Protocol</th>
+                                                <th>Port</th>
+                                                <th>Status</th>
+                                                <th>Active</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody id="mailsTable">
 
+                                            </tbody>
+                                        </table>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="make-create-section mt-2">
-                                            <h4 class="text text-center mb-2">Partners Form</h4>
-                                            <div id="partnersfeedback"></div>
+                                            <h4 class="text text-center mb-2">Emails Form</h4>
+                                            <div id="mailsfeedback"></div>
 
-                                            <form action="#" method="post" id="createPartnerForm">
+                                            <form action="#" method="post" id="createMailForm">
                                                 @csrf
-                                                <input type="hidden" name="user_id" id="partnerCreateID">
+                                                <input type="hidden" name="mail_id" id="mailCreateID">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <label for="name">Name</label>
-                                                        <input type="text" name="name" id="partnerName"
+                                                        <label for="usage">Email use</label>
+                                                        <select name="usage" id="mailUsage"
+                                                            class="form-control form-control-md" required>
+                                                            <option value="">Select one</option>
+                                                            <option value="Authentication">Authentication / User accounts
+                                                            </option>
+                                                            <option value="Marketing">Marketing</option>
+                                                            <option value="Subscription">Subscription Reminders</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <label for="mailhost">Host</label>
+                                                        <input type="text" name="host" id="mailHost"
                                                             class="form-control" required>
                                                     </div>
 
                                                     <div class="col-md-12">
-                                                        <label for="email">Email</label>
-                                                        <input type="email" name="email" id="partnerEmail"
+                                                        <label for="email">Username/Email</label>
+                                                        <input type="email" name="email" id="mailEmail"
                                                             class="form-control" required>
                                                     </div>
 
                                                     <div class="col-md-12">
-                                                        <label for="phone">Phone</label>
-                                                        <input type="text" name="phone" id="partnerPhone"
-                                                            class="form-control">
+                                                        <label for="password">Password</label>
+                                                        <input type="text" name="password" id="mailPassword"
+                                                            class="form-control" required>
                                                     </div>
 
                                                     <div class="col-md-12">
-                                                        <label for="alt_phone">Alt Phone</label>
-                                                        <input type="text" name="alt_phone" id="altPartnerPhone"
-                                                            class="form-control">
+                                                        <label for="secureprotocol">Secure protocol</label>
+                                                        <input type="text" name="secureprotocol" id="secureProtocol"
+                                                            class="form-control" required>
                                                     </div>
 
                                                     <div class="col-md-12">
-                                                        <label for="address">Address</label>
-                                                        <textarea name="address" id="partnerAddress" class="form-control"></textarea>
+                                                        <label for="port">Port</label>
+                                                        <input type="text" name="port" id="mailPort"
+                                                            class="form-control" required>
                                                     </div>
 
-                                                    <div class="col-md-12">
-                                                        <label for="address">Contact person</label>
-                                                        <select name="partner_user_id" id="partnerUserID"
-                                                            class="form-control"></select>
-                                                    </div>
-
-                                                    <div class="col-md-12 text-center mt-3">
-                                                        <button class='btn btn-success btn-sm' id='savepartner'><i
+                                                    <div class="col-md-12 form-group">
+                                                        <button class='btn btn-success btn-sm' id='savemail'><i
                                                                 class="fal fa-save fa-lg fa-fw"></i> Save
                                                         </button>
                                                         <button class='btn btn-outline-warning btn-sm'
-                                                            id='clearpartner'><i class="fal fa-broom fa-lg fa-fw"></i>
-                                                            Clear
-                                                            Fields</button>
-
+                                                            id='clearmailform'><i class="fal fa-broom fa-lg fa-fw"></i>
+                                                            Reset</button>
                                                     </div>
                                                 </div>
 

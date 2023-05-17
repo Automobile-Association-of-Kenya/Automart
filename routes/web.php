@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/', [ApplicationController::class, 'welcome']);
 
 Route::get('/dashboard', [ApplicationController::class, 'dashboard'])->name('dashboard');
@@ -54,7 +56,7 @@ Route::get('dealer-join', [RegisteredUserController::class, 'dealerCreate'])->na
 
 Route::resource('vehicles', VehicleController::class);
 
-Route::controller(VehicleController::class)->group(function(){
+Route::controller(VehicleController::class)->group(function () {
     Route::get('makes/{make_id?}', 'makes');
     Route::post('makes', 'makeCreate');
     Route::get('models/{make_id?}', 'models');
@@ -75,8 +77,7 @@ Route::controller(VehicleController::class)->group(function(){
 
 Route::resource('users', UsersController::class);
 
-Route::controller(UsersController::class)->group(function ()
-{
+Route::controller(UsersController::class)->group(function () {
     Route::get('list/{id?}', 'list');
     Route::get('dealers/{id?}', 'dealers');
     Route::post('dealers', 'dealerCreate');
@@ -91,13 +92,25 @@ Route::resource('settings', SettingsController::class);
 
 Route::get('about', [ApplicationController::class, 'about'])->name("about");
 Route::get('contact', [ApplicationController::class, 'contact'])->name("contact");
-Route::get('privacy',[ApplicationController::class, 'privacy']);
+Route::get('privacy', [ApplicationController::class, 'privacy']);
 
 Route::get('auth/facebook', [AuthenticatedSessionController::class, 'redirectToFacebook']);
-Route::get('auth/facebook/callback',[AuthenticatedSessionController::class, 'handleFacebookCallback']);
+Route::get('auth/facebook/callback', [AuthenticatedSessionController::class, 'handleFacebookCallback']);
 
 Route::get('auth/google', [AuthenticatedSessionController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [AuthenticatedSessionController::class, 'handleGoogleCallback']);
 
+Route::controller(SubscriptionController::class)->group(function () {
+    Route::post('subscription-prop-create', 'createSubsProp');
+    Route::get('get-subs-props', 'getSubsProperties');
+});
 
-require __DIR__.'/auth.php';
+Route::resource('subscriptions', SubscriptionController::class);
+
+Route::controller(SettingsController::class)->group(function ()
+{
+    Route::get('mails','mails');
+    Route::post('mails', 'mailCreate');
+});
+
+require __DIR__ . '/auth.php';

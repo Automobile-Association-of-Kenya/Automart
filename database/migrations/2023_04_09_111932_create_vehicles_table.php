@@ -47,6 +47,7 @@ return new class extends Migration
             $table->string('likes')->default(0);
             $table->string('dislikes')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

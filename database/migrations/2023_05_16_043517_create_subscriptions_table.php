@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\Feature;
 use App\Models\User;
-use App\Models\Vehicle;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,11 +12,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vehicle_feature', function (Blueprint $table) {
+        Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->nullable()->constrained();
-            $table->foreignIdFor(Vehicle::class)->constrained()->onDelete('cascade');
-            $table->foreignIdFor(Feature::class)->constrained();
+            $table->string('name','80');
+            $table->string('priority','30');
+            $table->string('cost','30');
+            $table->string('billingcycle','30');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehicle_feature');
+        Schema::dropIfExists('subscriptions');
     }
 };

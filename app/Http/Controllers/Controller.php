@@ -23,4 +23,7 @@ class Controller extends BaseController
     public $yard;
     public $price;
     public $partner;
+    protected $subscription;
+    protected $subsprop;
+    protected $maillist;
 }

@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MailRequest;
+use App\Models\Maillist;
+use App\Models\Subscription;
+use App\Models\Subsproperty;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
     public function __construct()
     {
-        
+        $this->maillist = new Maillist();
     }
     /**
      * Display a listing of the resource.
@@ -63,6 +67,33 @@ class SettingsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        
+    }
+
+    public function mails($id=null)
+    {
+        $query = $this->maillist->query();
+        if (!is_null($id)) {
+            $query->where('id',$id);
+        }
+        $mails = $query->get();
+
+        return json_encode($mails);
+    }
+
+    public function mailCreate(MailRequest $request)
+    {
+        $validated = $request->validated();
+
+        if (!is_null($validated["mail_id"])) {
+            $mail = $this->maillist->find($validated["mail_id"]);
+            $mail->update($validated);
+            $message = "Mail updated successfully";
+        }else {
+            $mail = $this->maillist->create($validated);
+            $message = "Mail added successfully";
+        }
+
+        return json_encode(['status'=>"success", "message"=>$message]);
     }
 }

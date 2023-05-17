@@ -2,8 +2,11 @@
 /node_modules
 /public/build
 /public/hot
+/public/vehicleimages
 /public/storage
 /storage/*.key
+/storage/views/
+/storage/cache
 /vendor
 .env
 .env.backup
