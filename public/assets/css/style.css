@@ -8249,11 +8249,11 @@ input[type=checkbox]:checked + label:before {
 
 /** Content area srart **/
 .content-area {
-    padding: 60px 0 40px;
+    padding: 30px 0 20px;
 }
 
 .content-area-2 {
-    margin-bottom: 100px;
+    margin-bottom: 40px;
 }
 
 .content-area-3 {
@@ -12434,7 +12434,7 @@ table {
     }
 
     .content-area-21 {
-        padding: 80px 0 50px;
+        padding: 40px 0 20px;
     }
 
     .section-header {
@@ -12457,7 +12457,7 @@ table {
     }
 
     .content-area-20 {
-        padding-top: 60px;
+        padding-top: 30px;
     }
 
     .content-area-22{

@@ -170,9 +170,8 @@ Vehicles | @parent
                                             </li>
 
                                             <li>
-                                                YOM &nbsp;&nbsp;<i class="flaticon-calendar-1"></i>&nbsp;&nbsp;{{ $vehicle->year }}
+                                            <i class="flaticon-calendar-1"></i> YOM&nbsp;&nbsp;{{ $vehicle->year }}
                                             </li>
-
                                             <li>
                                                 <i class="fa fa-eye"></i>{{ $vehicle->views ?? 0 }} Views
                                             </li>
