@@ -8467,16 +8467,16 @@ input[type=checkbox]:checked+label:before {
 }
 
 .contact-section .bg-img {
-    background: url(../img/banner/img-4.jpg) top left repeat;
+    /* background: url(../img/banner/img-4.jpg) top left repeat; */
     background-size: cover;
     top: 0;
     bottom: 0;
     min-height: 100vh;
-    text-align: left;
+    /* text-align: center; */
     z-index: 10;
     opacity: 1;
     position: relative;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     padding: 30px 30px 0;
@@ -8490,7 +8490,7 @@ input[type=checkbox]:checked+label:before {
     height: 100%;
     content: "";
     z-index: -1;
-    background: url(../img/img-51.png) top left repeat;
+    /* background: url(../img/img-51.png) top left repeat; */
     min-height: 100vh;
 }
 
@@ -8501,7 +8501,7 @@ input[type=checkbox]:checked+label:before {
 .contact-section .form-section {
     min-height: 100vh;
     position: relative;
-    text-align: center;
+    /* text-align: center; */
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -8595,13 +8595,13 @@ input[type=radio] {
 }
 
 .contact-section .informeson {
-    color: #fff;
+    color: #333;
     max-width: 450px;
     margin: 0 auto 0 150px;
 }
 
 .contact-section .informeson h1 {
-    color: #fff;
+    color: #333;
     margin-bottom: 20px;
     font-size: 35px;
     font-weight: 600;

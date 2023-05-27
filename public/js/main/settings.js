@@ -125,11 +125,12 @@
             cost = subCost.val(),
             billingcycle = billingCycle.val(),
             submit = $(this).find("button[type='submit']"),
-            properties = [];
+            properties = [],
+            $this = $(this);
         submit.prop("disabled", true);
         $(".subsproperty").each(function (input) {
             if ($(this).is(":checked")) {
-                properties.push($(this).val());
+                properties.push(parseInt($(this).val()));
             }
         });
 
@@ -141,7 +142,7 @@
             billingcycle: billingcycle,
             properties: properties,
         };
-        // console.log(data);
+        console.log(data);
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": _token,
@@ -158,6 +159,7 @@
                 if (result.status == "success") {
                     createSubscriptionForm.trigger("reset");
                     showSuccess(result.message, "#subscriptionfeedback");
+                    $this.trigger("reset");
                     getSubscriptions();
                 } else {
                     showError(
@@ -169,7 +171,6 @@
             error: function (error) {
                 console.log(error);
                 submit.prop("disabled", false);
-
                 if (error.status == 422) {
                     var errors = "";
                     $.each(error.responseJSON.errors, function (key, value) {
@@ -315,7 +316,9 @@
                 console.log(params);
                 let result = JSON.parse(params);
                 if (result.status == "success") {
+                    $this.trigger("reset");
                     showSuccess(result.message, "#mailsfeedback");
+                    getMailLists();
                 } else {
                     showError(
                         "Error occured during processing",
@@ -339,5 +342,182 @@
                 }
             },
         });
+    });
+
+    $("body").on("click", "#editMailToggle", function (event) {
+        event.preventDefault();
+        let mail_id = $(this).data("id");
+        if (mail_id !== null && mail_id !== undefined) {
+            $.getJSON("/mails/" + mail_id, function (mail) {
+                let {
+                    usage,
+                    host,
+                    address,
+                    password,
+                    protocol,
+                    port,
+                    status,
+                    active,
+                    id,
+                } = mail[0];
+                $("#mailUsage option[value=" + usage + "]").prop(
+                    "selected",
+                    true
+                );
+                mailHost.val(host);
+                mailEmail.val(address);
+                mailPassword.val(password);
+                secureProtocol.val(protocol);
+                mailPort.val(port);
+                mailCreateID.val(id);
+            });
+        }
+    });
+
+    let servicesTable = $("#servicesTable"),
+        createServiceForm = $("#createServiceForm"),
+        serviceCreateID = $("#serviceCreateID"),
+        serviceName = $("#serviceName"),
+        serviceDescription = $("#serviceDescription"),
+        serviceCaret = $("#serviceCaret"),
+        saveservice = $("#saveservice"),
+        clearserviceform = $("#clearserviceform");
+
+    createServiceForm.on("submit", function (event) {
+        event.preventDefault();
+        let service_id = serviceCreateID.val(),
+            service = serviceName.val(),
+            description = serviceDescription.val(),
+            caret = serviceCaret.val(),
+            errors = [],
+            $this = $(this),
+            _token = $this.find("input[name='_token']").val();
+
+        saveservice.prop("disabled", true);
+
+        if (service == null || service == "") {
+            errors.push("Service name is required");
+        }
+        if (description == null || description == "") {
+            errors.push("Description is required");
+        }
+
+        if (errors.length > 0) {
+            let p = "";
+            $.each(errors, (key, value) => {
+                p == "<p>" + value + "</p>";
+            });
+            showError(p, "#servicesfeedback");
+        } else {
+            let data = {
+                service_id: service_id,
+                service: service,
+                description: description,
+                caret: caret,
+            };
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": _token,
+                },
+            });
+            console.log(data);
+            $.ajax({
+                type: "POST",
+                url: "/services",
+                data: data,
+                success: function (params) {
+                    console.log(params);
+                    saveservice.prop("disabled", false);
+                    let result = JSON.parse(params);
+                    if (result.status == "success") {
+                        serviceCreateID.val("");
+                        $this.trigger("reset");
+                        showSuccess(result.message, "#servicesfeedback");
+                        getServices();
+                    } else {
+                        showError(
+                            "Error occured during processing",
+                            "#servicesfeedback"
+                        );
+                    }
+                },
+                error: function (error) {
+                    saveservice.prop("disabled", false);
+                    console.log(error);
+                    if (error.status == 422) {
+                        var errors = "";
+                        $.each(
+                            error.responseJSON.errors,
+                            function (key, value) {
+                                errors += value + "!";
+                            }
+                        );
+                        showError(errors, "#servicesfeedback");
+                    } else {
+                        showError(
+                            "Error occurred during processing",
+                            "#servicesfeedback"
+                        );
+                    }
+                },
+            });
+        }
+    });
+
+    function getServices() {
+        $.getJSON("/services-get", function (services) {
+            let tr = "",
+                i = 1;
+            $.each(services, function (key, value) {
+                let { id, service, description, caret } = value;
+                console.log(caret);
+                tr +=
+                    "<tr><td>" +
+                    i++ +
+                    "</td><td>" +
+                    service +
+                    "</td><td>" +
+                    description +
+                    "</td><td>" +
+                    caret +
+                    '</td><td><a href="#" id="editServiceToggle" data-id=' +
+                    id +
+                    '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteServiceToggle" data-id=' +
+                    id +
+                    '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+            });
+            servicesTable.html(tr);
+        });
+    }
+    getServices();
+
+    clearserviceform.on("click", function (event) {
+        event.preventDefault();
+        createServiceForm.trigger("reset");
+        serviceCreateID.val("");
+    });
+
+    $("body").on("click", "#editServiceToggle", function (event) {
+        let service_id = $(this).data("id");
+        console.log(service_id);
+        if (service_id !== null && service_id !== undefined) {
+            $.getJSON("/services-get/" + service_id, function (service) {
+                if (service.length > 0) {
+                    serviceCreateID.val(service[0].id);
+                    serviceName.val(service[0].service);
+                    serviceDescription.val(service[0].description);
+                    serviceCaret.val(service[0].caret);
+                    showSuccess(
+                        "Service accepted for processing",
+                        "#servicesfeedback"
+                    );
+                } else {
+                    showError(
+                        "Error occured, endure you have internet connection, then retry",
+                        "#servicesfeedback"
+                    );
+                }
+            });
+        }
     });
 })();

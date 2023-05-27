@@ -11,7 +11,19 @@ $(document).ready(function () {
         }
     });
 
-    $(".show-passwordRe").on('click',function () {
+    $(".show-passwordAdmin").on("click", function () {
+        var passwordField = $("#adminPassword");
+        var passwordCType = passwordField.attr("type");
+        if (passwordCType == "password") {
+            passwordField.attr("type", "text");
+            $(".show-passwordAdmin").html('<i class="fa fa-eye-slash"></i>');
+        } else {
+            passwordField.attr("type", "password");
+            $(".show-passwordAdmin").html('<i class="fa fa-eye"></i>');
+        }
+    });
+
+    $(".show-passwordRe").on("click", function () {
         var passwordField = $("#passwordRe");
         var passwordCField = $("#passwordConfirmationRe");
         var passwordCType = passwordCField.attr("type");
@@ -54,6 +66,23 @@ $(document).ready(function () {
             $(".show-passwordRe").html('<i class="fa fa-eye"></i>');
         }
     });
+
+    function getCounties() {
+        $.getJSON("/counties/110", function (counties) {
+            let option = "<option value='' disabled>Selct One</option>";
+            $.each(counties, function (key, value) {
+                option +=
+                    "<option value=" +
+                    value.id +
+                    ">" +
+                    value.name +
+                    "</option>";
+            });
+            $("#countyID").html(option);
+            $(".chzn-select").select2();
+        });
+    }
+    getCounties();
 
     let nameRe = $("#nameRe"),
         phoneRe = $("#phoneRe"),
@@ -196,7 +225,6 @@ $(document).ready(function () {
                 url: "/forgot-password",
                 data: { email: email },
                 success: function (params) {
-                    console.log(params);
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message);
@@ -305,4 +333,77 @@ $(document).ready(function () {
             target: "#feedback",
         });
     }
+    let dealerCreateForm = $("#dealerCreateForm"),
+        dealerName = $("#dealerName"),
+        dealerPhone = $("#dealerPhone"),
+        dealerEmail = $("#dealerEmail"),
+        dealerAddress = $("#address"),
+        countyID = $("#countyID"),
+        dealerCity = $("#dealerCity"),
+        adminName = $("#adminName"),
+        adminPhone = $("#adminPhone"),
+        adminEmail = $("#adminEmail"),
+        adminPassword = $("#adminPassword");
+
+    dealerCreateForm.on("submit", function (event) {
+        event.preventDefault();
+        let name = dealerName.val(),
+            phone = dealerPhone.val(),
+            email = dealerEmail.val(),
+            address = dealerAddress.val(),
+            county_id = countyID.val(),
+            city = dealerCity.val(),
+            adminname = adminName.val(),
+            adminphone = adminPhone.val(),
+            adminemail = adminEmail.val(),
+            password = adminPassword.val(),
+            $this = $(this);
+        let data = {
+            name: name,
+            phone: phone,
+            email: email,
+            address: address,
+            county_id: county_id,
+            city: city,
+            adminname: adminname,
+            adminphone: adminphone,
+            adminemail: adminemail,
+            password: password,
+        };
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $this.find("input[name='_token']").val(),
+            },
+        });
+        $.ajax({
+            method: "POST",
+            url: "/dealers",
+            data: data,
+            success: function (params) {
+                let result = JSON.parse(params);
+                $this.find("button[type='submit']").prop({ disabled: false });
+                if (result.status == "success") {
+                    showSuccess(result.message);
+                } else {
+                    showError(result.error);
+                }
+                window.setTimeout(function () {
+                    window.location.href = "/login";
+                }, 7000);
+            },
+            error: function(error) {
+                console.error(error);
+                $this.find("button[type='submit']").prop({ disabled: false });
+                 if (error.status == 422) {
+                     var errors = "";
+                     $.each(error.responseJSON.errors, function (key, value) {
+                         errors += value + "!";
+                     });
+                     showError(errors);
+                 } else {
+                     showError("Error occurred during processing");
+                 }
+            }
+        });
+    });
 });

@@ -1,7 +1,7 @@
 @extends('layouts.dashboardlayout')
 
 @section('title')
-    Settings @parent
+    Accounts @parent
 @endsection
 
 
@@ -13,7 +13,7 @@
 
 
 @section('page')
-    System settings
+    Accounts
 @endsection
 
 @section('main')
@@ -25,19 +25,16 @@
                     <div class="col-md-12">
                         <nav class="nav-justified ">
                             <div class="nav nav-tabs " id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="pop1-tab" data-toggle="tab" href="#subscriptionTab"
-                                    role="tab" aria-controls="pop1" aria-selected="true">Subscription Packages</a>
-                                <a class="nav-item nav-link" id="makes-tab" data-toggle="tab" href="#emailsTab"
-                                    role="tab" aria-controls="pop2" aria-selected="false">Email Lists</a>
-
-                                <a class="nav-item nav-link" id="makes-tab" data-toggle="tab" href="#servicesTab"
-                                    role="tab" aria-controls="pop2" aria-selected="false">Services</a>
+                                <a class="nav-item nav-link active" id="pop1-tab" data-toggle="tab" href="#chartsTab"
+                                    role="tab" aria-controls="pop1" aria-selected="true">Chart of accounts</a>
+                                <a class="nav-item nav-link" id="makes-tab" data-toggle="tab" href="#transactionsTab"
+                                    role="tab" aria-controls="pop2" aria-selected="false">Transactions</a>
                             </div>
                         </nav>
 
                         <div class="tab-content text-left" id="nav-tabContent">
 
-                            <div class="tab-pane fade show active" id="subscriptionTab" role="tabpanel">
+                            <div class="tab-pane fade show active" id="chartsTab" role="tabpanel">
                                 <div id="userdetails" class="mt-2">
                                     <div class="card containergroup">
                                         <div class="card-body">
@@ -150,7 +147,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade mb-3" id="accountsTab" role="tabpanel" aria-labelledby="pop2-tab">
+                            <div class="tab-pane fade mb-3" id="transactionsTab" role="tabpanel" aria-labelledby="pop2-tab">
                                 <div id="userdetails" class="mt-2">
                                     <div class="card containergroup">
                                         <div class="card-body">
@@ -401,5 +398,5 @@
     <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('js/main/moment.js') }}"></script>
-    <script src="{{ asset('js/main/settings.js') }}"></script>
+    <script src="{{ asset('js/main/accounts.js') }}"></script>
 @endsection

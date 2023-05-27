@@ -4,10 +4,10 @@
             <img class="d-block w-100 h-100" src="img/banner/img-6.jpg" alt="banner">
             <div class="carousel-content prl-30 container banner-info-2 bi-2 text-start">
                 <div class="typing">
-                    <h2>Find your Dream Car</h2>
+                    <h3>Find your Dream Car</h3>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-                <a href="#" class="btn-8" target=".search-box-2">
+                <p>This platform provides a wide selection of vehicles from trusted dealers across the country. We ensure a perfect match between buyers and with perfect vehicle that fits their needs and budget. </p>
+                <a href="{{ route('new.arrivals') }}" class="btn-8">
                     <span>Get Started Now</span>
                 </a>
             </div>
@@ -16,10 +16,11 @@
             <img class="d-block w-100 h-100" src="img/banner/img-4.jpg" alt="banner">
             <div class="carousel-content prl-30 container banner-info-2 bi-2 text-start">
                 <div class="typing">
-                    <h2>Welcome to Auto Car</h2>
+                    <h3>Are you a Vehicle Dealer?</h3>
                 </div>
-                <p>We provide a plartform that brings together vehicle buyers, sellers and vehicle financing providers under one plartform to do business in vehicle market hermoniously. </p>
-                <a href="{{ route('about') }}" class="btn-8">
+                {{-- <p>We provide a plartform that brings together vehicle buyers, sellers and vehicle financing providers under one plartform to do business in vehicle market hermoniously. </p> --}}
+                <p>Are you searching for a platform with expansive reach that will advertise your vehicles to potential customer accross the country? We are here to do the advertisement work for and let you focus on your core business of selling cars.</p>
+                <a href="{{ route('dealers.create') }}" class="btn-8">
                     <span>Learn more</span>
                 </a>
             </div>
@@ -29,10 +30,10 @@
             <img class="d-block w-100 h-100" src="img/banner/img-5.jpg" alt="banner">
             <div class="carousel-content prl-30 container banner-info-2 bi-2 text-start">
                 <div class="typing">
-                    <h2>Best place for sell car!</h2>
+                    <h3>Best place for sell car!</h3>
                 </div>
                 <p>This plartform rovides the best marketplace to find customers globally for your vehicles. </p>
-                <a href="{{ route('dealer.create') }}" class="btn-8">
+                <a href="{{ route('dealers.create') }}" class="btn-8">
                     <span>Get Started Now</span>
                 </a>
             </div>

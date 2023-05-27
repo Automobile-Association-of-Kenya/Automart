@@ -26,4 +26,6 @@ class Controller extends BaseController
     protected $subscription;
     protected $subsprop;
     protected $maillist;
+    protected $service;
+
 }

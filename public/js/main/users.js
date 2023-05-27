@@ -396,7 +396,7 @@
         });
         $.ajax({
             type: "POST",
-            url: "/dealers",
+            url: "/admin-dealers",
             data: data,
             success: function (params) {
                 console.log(params);
@@ -442,7 +442,7 @@
         let dealer_id = $(this).data("id");
         console.log("there");
         if (dealer_id !== "" && dealer_id !== null) {
-            $.getJSON("/dealers/" + dealer_id, function (dealers) {
+            $.getJSON("/admin-dealers/" + dealer_id, function (dealers) {
                 console.log(dealers);
                 let dealer = dealers[0];
                 if (dealer !== null) {

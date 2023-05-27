@@ -303,7 +303,7 @@ class VehicleController extends Controller
             $vehicle->update(['vehicle_no' => $strkey, 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images)] + $validated);
             $this->vehicle->updatefeatures($vehicle->id, $validated["features"]);
             VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
-        }else {
+        } else {
             $vehicle = Vehicle::create(['vehicle_no' => $strkey, 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images), 'views' => 0] + $validated);
             $this->vehicle->addfeatures($vehicle->id, $validated["features"]);
             VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
@@ -361,5 +361,38 @@ class VehicleController extends Controller
     {
         $this->vehicle->find($id)->destroy();
         return json_encode(['status' => "success", 'message' => "Vehicle deleted successfully"]);
+    }
+
+    public function filterVehicles(Request $request)
+    {
+        $query = Vehicle::query();
+        if (isset($request->dealer_id) && !is_null($request->dealer_id)) {
+            $query->where('dealer_id', $request->dealer_id);
+        }
+        if (isset($request->yard_id) && !is_null($request->yard_id)) {
+            $query->where('yard_id', $request->yard_id);
+        }
+        if (isset($request->make_id) && !is_null($request->make_id)) {
+            $query->where('make_id', $request->make_id);
+        }
+        if (isset($request->model_id) && !is_null($request->model_id)) {
+            $query->where('vehicle_model_id', $request->model_id);
+        }
+
+        // $vehicles = $query->join('dealers', 'vehicles.dealer_id', '=', 'dealers.id')
+        //     ->join('makes', 'vehicles.make_id', '=', 'makes.id')
+        //     ->join('vehicle_models', 'vehicles.vehicle_model_id', '=', 'vehicle_models.id')
+        //     ->select('dealers.id as dealer_id', 'dealers.name as dealer','makes.id as make_id','makes.make as make', 'vehicle_models.id as model_id', 'vehicle_models.model as model', 'vehicles.id', 'vehicles.vehicle_no', 'vehicles.year', 'vehicles.price', 'vehicles.color', 'vehicles.mileage', 'vehicles.enginecc', 'vehicles.fuel_type', 'vehicles.transmission', 'vehicles.status', 'vehicles.created_at')->get();
+        $vehicles = $query->latest()
+            ->with(['dealer' => function ($dealer) {
+                return $dealer->select('id', 'name');
+            }, 'make' => function ($make) {
+                return $make->select('id', 'make');
+            }, 'model' => function ($model) {
+                return $model->select('id', 'model');
+            }, 'prices'])->get();
+            // ->select('id', 'vehicle_no', 'year', 'price', 'color', 'mileage', 'enginecc', 'fuel_type', 'transmission', 'status', 'created_at')->get();
+
+        return json_encode($vehicles);
     }
 }

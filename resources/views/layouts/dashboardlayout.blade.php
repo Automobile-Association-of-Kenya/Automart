@@ -52,6 +52,13 @@
                 </li>
 
                 <li>
+                    <a href="{{ route('accounts.index') }}" id="accounts" class='validation' data-id=14>
+                        <span><i class="fal fa-cog"></i></span>
+                        <span>Accounting</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="{{ route('settings.index') }}" id="settings" class='validation' data-id=14>
                         <span><i class="fal fa-cog"></i></span>
                         <span>Settings</span>

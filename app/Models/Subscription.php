@@ -35,13 +35,13 @@ class Subscription extends Model
     public function updateProperties($id, $properties)
     {
         $props = DB::table('subscription_property')->where('subscription_id', $id)->pluck('subsproperty_id');
-        foreach ($props as $key => $value) {
-            if (!in_array($value, $properties)) {
-                DB::table('subscription_property')->where('subscription_id', $id)->where('subsproperty_id')->delete();
+        foreach ($props as $value) {
+            if (!in_array($value, array_map('intval', $properties))) {
+                DB::table('subscription_property')->where('subscription_id', $id)->where('subsproperty_id',$value)->delete();
             }
         }
 
-        foreach ($properties as $key => $value) {
+        foreach ($properties as $value) {
             $prop = DB::table('subscription_property')->where('subscription_id', $id)->where('subsproperty_id', $value)->first();
             if (empty($prop) || is_null($prop)) {
                 DB::table('subscription_property')->insert([

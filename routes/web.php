@@ -2,10 +2,13 @@
 
 // use App\Http\Controllers\ProfileController;
 
+use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\DealerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UsersController;
@@ -36,7 +39,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('dealer-join', [RegisteredUserController::class, 'dealerCreate'])->name('dealer.create');
 
 // Route::get('/email/verify', function () {
 //     return view('auth.verify-email');
@@ -75,24 +77,26 @@ Route::controller(VehicleController::class)->group(function () {
     Route::post('image-delete', 'imageDelete');
 });
 
+Route::post('vehicles-filter', [VehicleController::class, 'filterVehicles']);
+
 Route::resource('users', UsersController::class);
 
 Route::controller(UsersController::class)->group(function () {
     Route::get('list/{id?}', 'list');
-    Route::get('dealers/{id?}', 'dealers');
-    Route::post('dealers', 'dealerCreate');
+    Route::get('admin-dealers/{id?}', 'dealers');
+    Route::post('admin-dealers', 'dealerCreate');
     Route::get('partners/{id?}', 'partners');
     Route::post('partners', 'partnerCreate');
 });
 
 Route::get('countries', [ApplicationController::class, 'countries']);
-Route::get('counties/{country_id}', [ApplicationController::class, 'counties']);
+Route::get('counties/{country_id?}', [ApplicationController::class, 'counties']);
 
 Route::resource('settings', SettingsController::class);
 
-Route::get('about', [ApplicationController::class, 'about'])->name("about");
-Route::get('contact', [ApplicationController::class, 'contact'])->name("contact");
-Route::get('privacy', [ApplicationController::class, 'privacy']);
+Route::view('about',  'about')->name("about");
+Route::view('contact','contact')->name("contact");
+Route::view('privacy', 'privacy')->name('privacy');
 
 Route::get('auth/facebook', [AuthenticatedSessionController::class, 'redirectToFacebook']);
 Route::get('auth/facebook/callback', [AuthenticatedSessionController::class, 'handleFacebookCallback']);
@@ -109,8 +113,20 @@ Route::resource('subscriptions', SubscriptionController::class);
 
 Route::controller(SettingsController::class)->group(function ()
 {
-    Route::get('mails','mails');
+    Route::get('mails/{id?}','mails');
     Route::post('mails', 'mailCreate');
 });
+
+Route::resource('services', ServicesController::class);
+Route::get('services-get/{id?}', [ServicesController::class,'services']);
+
+Route::resource('accounts', AccountsController::class);
+
+
+Route::resource('dealers', DealerController::class);
+
+Route::view('terms', 'terms')->name('terms');
+Route::get('new-arrivals', [ApplicationController::class, 'newArrivals'])->name('new.arrivals');
+
 
 require __DIR__ . '/auth.php';

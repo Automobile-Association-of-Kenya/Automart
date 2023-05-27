@@ -4,19 +4,17 @@
     Vehicles @parent
 @endsection
 
-
 @section('header_styles')
     <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <style>
-        .chzn-select{
+        .chzn-select {
             widows: 100%;
         }
     </style>
 @endsection
-
 
 @section('page')
     Vehicles
@@ -119,59 +117,55 @@
                         <div class="tab-content text-left" id="nav-tabContent">
 
                             <div class="tab-pane fade show active" id="vehicledetails" role="tabpanel">
-                                <div class="pt-3"></div>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="card col-md-12" style="padding: 0;">
-                                            <div class="card-header">
-                                                <h5>Filter Options</h5>
-                                            </div>
-
-                                            <form id="filtervehiclesform">
-                                                <div class="col-12">
-                                                    <label>Dealer</label>
-                                                    <select name="filterlistdealer" id="filterlistdealer"
-                                                        class="form-control form-control-sm chzn-select" style="width: 100%;">
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <label>Make</label>
-                                                    <select name="filterlistmake" id="filterlistmake"
-                                                        class="form-control form-control-sm chzn-select" style="width: 100%;">
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <label for="filterliststatus">Model</label>
-                                                    <select name="filterlistmodel" id="filterlistmodel"
-                                                        class="form-control form-control-sm chzn-select" style="width: 100%;">
-
-                                                    </select>
-                                                </div>
-                                            </form>
-
-                                            <div class="col-md-12">
-                                                <label for="vehicles">Vehicles</label>
-                                                <select name="vehicleslist" id="vehiclesList" class="vehicleslisttreeview mt-2 form-control"
-                                                multiple>
+                                <div class="bg-primary pb-3 pt-3 pl-2 pr-1 border-rounded" style="border-radius: 6px;">
+                                    <form id="filterVehiclesForm" class="form-row">
+                                        @csrf
+                                        {{-- @if (auth()->user()->role === 'dealer')
+                                            <div class="col-md-3">
+                                                <label>Yard</label>
+                                                <select name="filterlistyard_id" id="filterVehicleYardID"
+                                                    class="form-control form-control-sm chzn-select" style="width: 100%;">
                                                 </select>
                                             </div>
+                                        @endif --}}
 
-                                            <p class='bg-secondary p-1  mt-1 text-white text-center'><span
-                                                    id="listcount">No</span></p>
+                                        <div class="col-md-3">
+                                            <label>Dealer</label>
+                                            <select name="filterlistdealer_id"
+                                                class="form-control form-control-sm chzn-select" id="filterDealerID" style="width: 100%;">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Make</label>
+                                            <select name="filterlistmake_id"
+                                                class="form-control form-control-sm chzn-select" id="filterMakeID" style="width: 100%;">
+                                            </select>
                                         </div>
 
-                                        <div class="col-md-12">
-                                            <div id="coverPhotoPreview"></div>
-                                            <div id="image-preview"></div>
-                                            <button type="submit" class="btn btn-md btn-primary"
-                                                id="vehicleImagesUpload"><i class="fal fa-arrow-up"></i>&nbsp;&nbsp;Upload
-                                                Images</button>
-                                                <div id="imageFeedback"></div>
+                                        <div class="col-md-2">
+                                            <label for="filterliststatus">Model</label>
+                                            <select name="filterlistmodel_id"
+                                                class="form-control form-control-sm chzn-select" id="filterModelID" style="width: 100%;">
+
+                                            </select>
                                         </div>
-                                    </div>
-                                    <div class="col-md-10">
+
+                                        <div class="col-md-3">
+                                            <label for="vehicles">Vehicles</label>
+                                            <select name="vehicleslist_id" style="width: 100%;"
+                                                class="form-control form-control-sm chzn-select" id="filterVehiclesID"  style="width: 100%;">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button type="submit" class="btn btn-success btn-md mt-4"><i
+                                                    class="fas fa-search"></i>&nbsp;Find</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <input type="hidden" name="unique_str" id="uniqueStrID"
                                             value="{{ $str }}">
                                         <input type="hidden" name="vehicle_id" id="vehicleID" value="">
@@ -182,10 +176,11 @@
                                                     <div class="row">
 
                                                         <div class="col-md-4 form-group">
-                                                            <label for="type">Dealer:</label>
+                                                            <label for="type">Dealer: </label>
                                                             <div class="input-group">
                                                                 <select class="form-control form-control-sm chzn-select"
-                                                                    name="dealer_id" id="vehicleDealer" style="width: 100%;"></select>
+                                                                    name="dealer_id" id="vehicleDealer"
+                                                                    style="width: 100%;"></select>
                                                             </div>
                                                         </div>
 
@@ -193,23 +188,26 @@
                                                             <label for="type">Vehicle Type:</label>
                                                             <div class="input-group">
                                                                 <select class="form-control form-control-sm chzn-select"
-                                                                    name="type" id="vehicleType" style="width: 100%;"></select>
+                                                                    name="type" id="vehicleType"
+                                                                    style="width: 100%;"></select>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-4 form-group">
-                                                            <label for="make">Vehicle Make:</label>
+                                                            <label for="make">Vehicle Make: <sup class="text-danger">*</sup></label>
                                                             <div class="input-group">
                                                                 <select class="form-control form-control-sm chzn-select"
-                                                                    name="make" id="vehicleMake" required style="width: 100%;"></select>
+                                                                    name="make" id="vehicleMake" required
+                                                                    style="width: 100%;"></select>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-4 form-group">
-                                                            <label for="firstname">Vehicle Model:</label>
+                                                            <label for="firstname">Vehicle Model: <sup class="text-danger">*</sup></label>
                                                             <div class="input-group">
                                                                 <select name="model" id="vehicleModel"
-                                                                    class="form-control form-control-sm chzn-select" required style="width: 100%;"></select>
+                                                                    class="form-control form-control-sm chzn-select"
+                                                                    required style="width: 100%;"></select>
                                                             </div>
                                                         </div>
 
@@ -217,7 +215,8 @@
                                                             <label for="middlename">Country of origin:</label>
                                                             <div class="input-group">
                                                                 <select name="country_of_origin" id="countryofOrigin"
-                                                                    class="form-control form-control-sm chzn-select" style="width: 100%;"></select>
+                                                                    class="form-control form-control-sm chzn-select"
+                                                                    style="width: 100%;"></select>
                                                             </div>
                                                         </div>
 
@@ -225,14 +224,16 @@
                                                             <label for="shipping_to">Shipping to:</label>
                                                             <div class="input-group">
                                                                 <select name="shipping_to" id="shippingTo"
-                                                                    class="form-control form-control-sm chzn-select" style="width: 100%;"></select>
+                                                                    class="form-control form-control-sm chzn-select"
+                                                                    style="width: 100%;"></select>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-4 form-group">
-                                                            <label>Location </label><span for="yard" class="float-right"><input
-                                                                        type="checkbox" name="yard_check"
-                                                                        id="yardToggle">&nbsp;&nbsp;Yard</span>
+                                                            <label>Location </label><span for="yard"
+                                                                class="float-right"><input type="checkbox"
+                                                                    name="yard_check"
+                                                                    id="yardToggle">&nbsp;&nbsp;Yard</span>
 
                                                             <div class="input-group locationInput">
                                                                 <input type="text"
@@ -242,15 +243,17 @@
 
                                                             <div class="input-group yardInput">
                                                                 <select name="yard_id"
-                                                                    id="yardID"class="form-control form-control-sm location chzn-select" style="width: 100%;"></select>
+                                                                    id="yardID"class="form-control form-control-sm location chzn-select"
+                                                                    style="width: 100%;"></select>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-4 form-group">
-                                                            <label for="company">Year of manufacture:</label>
+                                                            <label for="company">Year of manufacture: <sup class="text-danger">*</sup></label>
                                                             <div class="input-group">
                                                                 <select name="year" id="yearOfManufacture"
-                                                                    class="form-control form-control-sm chzn-select" required>
+                                                                    class="form-control form-control-sm chzn-select"
+                                                                    required  style="width: 100%;">
                                                                     <option value="">Select One</option>
                                                                     @for ($i = date('Y', strtotime(now())); $i >= 2000; $i--)
                                                                         <option value="{{ $i }}">
@@ -262,14 +265,14 @@
                                                         </div>
 
                                                         <div class="col-md-4 form-group">
-                                                            <label for="company">Mileage:</label>
+                                                            <label for="company">Mileage: <sup class="text-danger">*</sup></label>
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text"><i
                                                                             class="fal fa-calender-alt  fa-sm fa-fw"></i></span>
                                                                 </div>
                                                                 <input type="number" name="mileage" id="mileAge"
-                                                                    class="form-control form-control-sm">
+                                                                    class="form-control form-control-sm" required>
                                                             </div>
                                                         </div>
 
@@ -277,7 +280,8 @@
                                                         <div class="col-md-4 form-group">
                                                             <label for="company">Color:</label>
                                                             <select name="color" id="vehicleColor"
-                                                                class="form-control  form-control-sm chzn-select" style="width: 100%;">
+                                                                class="form-control  form-control-sm chzn-select"
+                                                                style="width: 100%;">
                                                                 <option value="">Select One</option>
                                                                 <option value="Black">Black</option>
                                                                 <option value="Blue">Blue</option>
@@ -303,18 +307,18 @@
                                                         </div>
 
                                                         <div class="col-md-4 form-group">
-                                                            <label for="company">Price:</label>
+                                                            <label for="company">Price: <sup class="text-danger">*</sup></label>
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text">Ksh</span>
                                                                 </div>
                                                                 <input type="text" name="price" id="vehiclePrice"
-                                                                    class="form-control form-control-sm">
+                                                                    class="form-control form-control-sm" required>
                                                             </div>
                                                         </div>
 
                                                         <div class="col-md-4 form-group">
-                                                            <label for="company">Engine CC:</label>
+                                                            <label for="company">Engine CC: <sup class="text-danger">*</sup></label>
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text">cc</span>
@@ -329,7 +333,7 @@
                                                             <div class="input-group">
                                                                 <select name="inetrior" id="interior"
                                                                     class="form-control form-control-sm chzn-select"
-                                                                     style="width: 100%;">
+                                                                    style="width: 100%;">
                                                                     <option value="">Select One</option>
                                                                     <option value="Leather">Leather</option>
                                                                     <option value="Fabric">Fabric</option>
@@ -342,7 +346,8 @@
                                                             <label for="company">Fuel Type:</label>
                                                             <div class="input-group">
                                                                 <select name="fuel_type" id="fuelType"
-                                                                    class="form-control form-control-sm chzn-select" style="width: 100%;">
+                                                                    class="form-control form-control-sm chzn-select"
+                                                                    style="width: 100%;">
                                                                     <option value="">Select One</option>
                                                                     <option value="Petrol">Petrol</option>
                                                                     <option value="Diesel">Diesel</option>
@@ -360,7 +365,8 @@
                                                             <div class="input-group">
 
                                                                 <select name="transmission" id="transmission"
-                                                                    class="form-control form-control-sm chzn-select" style="width: 100%;">
+                                                                    class="form-control form-control-sm chzn-select"
+                                                                    style="width: 100%;">
                                                                     <option value="">Select One</option>
                                                                     <option value="Automatic">Automatic</option>
                                                                     <option value="Manual">Manual</option>
@@ -375,7 +381,7 @@
                                                             <div class="input-group">
                                                                 <select name="tags" id="vehicleTags"
                                                                     class="form-control form-control-sm"
-                                                                    multiple="multiple">
+                                                                    multiple="multiple" style="width: 100%;">
                                                                     <option value="#Best deals">#Best deals</option>
                                                                     <option value="#Cars on sale">#Cars on sale</option>
                                                                     <option value="#New Arrivals">#New Arrivals</option>
@@ -405,7 +411,9 @@
 
                                                     <div class="card containergroup mt-2">
                                                         <div class="card-header ">
-                                                            <h4 class="text text-success">Select vehicle images and then click upload button to the left before submitting this form.</h4>
+                                                            <h4 class="text text-success">Select vehicle images and then
+                                                                click upload button to the left before submitting this form.
+                                                            </h4>
                                                         </div>
                                                         <div class="card-body">
 
@@ -426,6 +434,18 @@
                                                                         <input type="file" name="images"
                                                                             id="addionalImages" multiple>
                                                                     </div>
+                                                                </div>
+
+                                                                <div class="form-group col-md-12">
+                                                                    <div class="row" id="image-preview">
+                                                                    <div class="col-md-3" id="coverPhotoPreview"></div>
+
+                                                                    </div>
+                                                                    <button type="submit" class="btn btn-md btn-primary"
+                                                                        id="vehicleImagesUpload"><i
+                                                                            class="fal fa-arrow-up"></i>&nbsp;&nbsp;Upload
+                                                                        Images</button>
+                                                                    <div id="imageFeedback"></div>
                                                                 </div>
 
                                                             </div>
@@ -455,6 +475,50 @@
 
                             <div class="tab-pane fade mb-3" id="vehicleListTab" role="tabpanel"
                                 aria-labelledby="pop2-tab">
+                                <div class="bg-primary pb-3 pt-3 pl-2 pr-1 border-rounded" style="border-radius: 6px;">
+                                    <form id="filterVehiclesListForm" class="form-row">
+                                        @csrf
+                                        {{-- @if (auth()->user()->role === 'dealer')
+                                            <div class="col-md-3">
+                                                <label>Yard</label>
+                                                <select name="filterlistyard_id" id="filterListVehicleYardID"
+                                                    class="form-control form-control-sm chzn-select" style="width: 100%;">
+                                                </select>
+                                            </div>
+                                        @endif --}}
+
+                                        <div class="col-md-4">
+                                            <label>Dealer</label>
+                                            <select name="filterlistdealer_id"
+                                                class="form-control form-control-sm chzn-select" id="filterListDealerID" style="width: 100%;">
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Make</label>
+                                            <select name="filterlistmake_id"
+                                                class="form-control form-control-sm chzn-select" id="filterListMakeID" style="width: 100%;">
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="filterliststatus">Model</label>
+                                            <select name="filterlistmodel_id"
+                                                class="form-control form-control-sm chzn-select" id="filterListModelID" style="width: 100%;">
+
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-1">
+                                            <button type="submit" class="btn btn-success btn-md mt-4"><i
+                                                    class="fas fa-search"></i>&nbsp;Find</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="vehicledatasection">
+
+                                </div>
 
                             </div>
 

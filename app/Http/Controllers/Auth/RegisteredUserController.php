@@ -24,12 +24,6 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
-
-    public function dealerCreate()
-    {
-        return view('dealers.create');
-    }
-
     /**
      * Handle an incoming registration request.
      *

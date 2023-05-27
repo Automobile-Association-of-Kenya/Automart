@@ -113,7 +113,7 @@ class Vehicle extends Model
         $vehiclefeatures = DB::table('vehicle_feature')->where('vehicle_id', $id)->pluck('feature_id');
         if (!empty($vehiclefeatures)) {
             foreach ($vehiclefeatures as $value) {
-                if (!in_array($value, $features)) {
+                if (!in_array($value, array_map('intval', $features))) {
                     DB::table('vehicle_feature')->where('vehicle_id', $id)->where('feature_id', $value)->delete();
                 }
             }

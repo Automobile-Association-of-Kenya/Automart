@@ -30,9 +30,14 @@ class ApplicationController extends Controller
         return json_encode($countries);
     }
 
-    public function counties($country_id)
+    public function counties($country_id = null)
     {
-        $counties = $this->county->select('id','name')->where('country_id',$country_id)->get();
+        $query = $this->county->query();
+        if (!is_null($country_id)) {
+            $query->where('country_id', $country_id);
+        }
+        $counties = $query->select('id','name')->get();
+
         return json_encode($counties);
     }
 

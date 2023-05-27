@@ -24,7 +24,7 @@ class VehicleRequest extends FormRequest
         return [
             'vehicle_id'=>['nullable', 'exists:vehicles,id'],
             'dealer_id'=>['nullable', 'exists:dealers,id'],
-            'type_id' => ['required', 'exists:types,id'],
+            'type_id' => ['nullable', 'exists:types,id'],
             'make_id'=>['required','exists:makes,id'],
             'vehicle_model_id'=>['required', 'exists:vehicle_models,id'],
             'country_of_origin' => ['nullable', 'exists:countries,id'],
