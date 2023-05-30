@@ -23,7 +23,7 @@ class VehicleController extends Controller
     {
         $vehicles = Caronsells::latest()->get();
         $makes = CarMake::get();
-        
+
         return view('admin.vehicles', compact('vehicles', 'makes'));
     }
 

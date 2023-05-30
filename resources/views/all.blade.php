@@ -167,7 +167,7 @@ Vehicles | @parent
                                             </li>
                                             <li>
                                                 <i class="flaticon-money"></i> Ksh.
-                                                {{ number_format(($vehicle->price !== "" || $vehicle->price !== null) ? $vehicle->price : 0,2) }}
+                                                {{ number_format(($vehicle->price !== "" || $vehicle->price !== null) ? floatval($vehicle->price) : 0,2) }}
                                             </li>
 
                                             <li>
