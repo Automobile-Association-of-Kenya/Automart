@@ -766,6 +766,7 @@ $(function () {
                         );
                     } else {
                         $.each(vehicles, function (key, value) {
+                            console.log(value);
                             let images = JSON.parse(value.images);
                             car +=
                                 '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="Available/Details' +
@@ -815,6 +816,7 @@ $(function () {
         $.getJSON("/trending", function (vehicles) {
             let car = "";
             $.each(vehicles, function (key, value) {
+
                 let model = (value.model !== null) ? value.model.car_model_name : "";
                 let make = (value.make !== null) ? value.make.car_make_name : "";
                 car +=
