@@ -160,13 +160,14 @@ Vehicles | @parent
                                                 <i class="flaticon-way"></i>
                                                 {{ number_format("$vehicle->miles") }} Kms
                                             </li>
+
                                             <li>
                                                 <i class="fa fa-map-marker"></i>
                                                 {{ $vehicle->county }}
                                             </li>
                                             <li>
                                                 <i class="flaticon-money"></i> Ksh.
-                                                {{ number_format($vehicle->price,2) }}
+                                                {{ number_format(($vehicle->price !== "" || $vehicle->price !== null) ? $vehicle->price : 0,2) }}
                                             </li>
 
                                             <li>
