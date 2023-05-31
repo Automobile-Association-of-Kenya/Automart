@@ -158,7 +158,7 @@ Vehicles | @parent
                                             </li>
                                             <li>
                                                 <i class="flaticon-way"></i>
-                                                {{ number_format("$vehicle->miles") }} Kms
+                                                {{ $vehicle->miles }} Kms
                                             </li>
 
                                             <li>
