@@ -22,6 +22,7 @@ class VehicleController extends Controller
 {
     public function __construct()
     {
+        // $this->middleware('auth');
         $this->vehicle = new Vehicle();
         $this->make = new Make();
         $this->model = new VehicleModel();
@@ -252,7 +253,7 @@ class VehicleController extends Controller
     public function store(VehicleRequest $request)
     {
         $validated = $request->validated();
-        $dealer = (isset($validated['dealer_id'])) ? $this->dealer->find($validated["dealer_id"]) : $this->auth->dealer();
+        $dealer = (isset($validated['dealer_id'])) && !is_null($validated["dealer_id"]) ? $this->dealer->find($validated["dealer_id"]) : $this->auth->dealer();
         if (isset($request->vehicle_id) && $request->vehicle_id !== null) {
             $vehicle = $this->vehicle->find($request->vehicle_id);
             $strkey = $vehicle->vehicle_no;
@@ -303,17 +304,19 @@ class VehicleController extends Controller
             $vehicle->update(['vehicle_no' => $strkey, 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images)] + $validated);
             $this->vehicle->updatefeatures($vehicle->id, $validated["features"]);
             VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
+            $message = "Vehicle updated successfully";
         } else {
             $vehicle = Vehicle::create(['vehicle_no' => $strkey, 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images), 'views' => 0] + $validated);
             $this->vehicle->addfeatures($vehicle->id, $validated["features"]);
             VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
+            $message = "Vehicle added successfully";
         }
         DB::commit();
 
         session()->forget($strkey . "images");
         session()->forget($strkey . 'cover');
 
-        return json_encode(['status' => 'success', 'message' => "Vehicle added successfully"]);
+        return json_encode(['status' => 'success', 'message' => $message]);
     }
 
     public function addImage(Request $request)

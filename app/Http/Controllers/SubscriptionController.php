@@ -12,6 +12,7 @@ class SubscriptionController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
         $this->subscription = new Subscription();
         $this->subsprop = new Subsproperty();
     }
@@ -21,8 +22,22 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        $subscriptions = $this->subscription->with('properties:id,name')->get();
+        $subscriptions = $this->subscription->with('properties:id,name')->orderBy('cost','ASC')->get();
         return json_encode($subscriptions);
+    }
+
+    /** Subscription Features */
+    public function features()
+    {
+        $features = $this->subsprop->get();
+
+        return json_encode($features);
+    }
+
+    public function plans()
+    {
+        $title = "Subscription Plans";
+        return view('subscriptions.plans', compact('title'));
     }
 
     /**
@@ -39,6 +54,7 @@ class SubscriptionController extends Controller
     public function store(SubscriptionRequest $request)
     {
         $validated = $request->validated();
+
         DB::beginTransaction();
         if (!is_null($validated['subscription_id'])) {
             $subscription = $this->subscription->find($validated["subscription_id"]);
@@ -51,6 +67,7 @@ class SubscriptionController extends Controller
             $message = "Subscription created successfully";
         }
         DB::commit();
+
         return json_encode(['status'=>'success','message'=>$message]);
     }
 

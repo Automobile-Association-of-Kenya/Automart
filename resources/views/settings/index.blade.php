@@ -11,6 +11,17 @@
     <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}">
 @endsection
 
+@section('header_styles')
+    <style>
+        .onetime {
+            display: none;
+        }
+
+        .repetetive {
+            display: none;
+        }
+    </style>
+@endsection
 
 @section('page')
     System settings
@@ -27,11 +38,17 @@
                             <div class="nav nav-tabs " id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="pop1-tab" data-toggle="tab" href="#subscriptionTab"
                                     role="tab" aria-controls="pop1" aria-selected="true">Subscription Packages</a>
-                                <a class="nav-item nav-link" id="makes-tab" data-toggle="tab" href="#emailsTab"
+                                <a class="nav-item nav-link" id="emails-tab" data-toggle="tab" href="#emailsTab"
                                     role="tab" aria-controls="pop2" aria-selected="false">Email Lists</a>
+
+                                <a class="nav-item nav-link" id="mails-tab" data-toggle="tab" href="#mailingsTab"
+                                    role="tab" aria-controls="pop2" aria-selected="false">Mailings</a>
 
                                 <a class="nav-item nav-link" id="makes-tab" data-toggle="tab" href="#servicesTab"
                                     role="tab" aria-controls="pop2" aria-selected="false">Services</a>
+
+                                <a class="nav-item nav-link" id="social-tab" data-toggle="tab" href="#socialTabs"
+                                    role="tab" aria-controls="pop2" aria-selected="false">Socials</a>
                             </div>
                         </nav>
 
@@ -47,6 +64,7 @@
                                                         <thead>
                                                             <th>#</th>
                                                             <th>Name</th>
+                                                            <th>Type</th>
                                                             <th>Priority</th>
                                                             <th>Cost</th>
                                                             <th>Billing Cycle</th>
@@ -75,6 +93,16 @@
                                                             </div>
 
                                                             <div class="col-md-12 form-group">
+                                                                <label>Type</label>
+                                                                <select name="type" id="subscriptionType"
+                                                                    class="form-control">
+                                                                    <option value="">Select One</option>
+                                                                    <option value="onetime">One time</option>
+                                                                    <option value="repetetive">Repetetive</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-12 form-group repetetive">
                                                                 <label>Priority</label>
                                                                 <select name="priority" id="subPriority"
                                                                     class="form-control form-control-md" required>
@@ -107,7 +135,8 @@
                                                                 <div class="col-md-12">
                                                                     <label for="subscriptionprops">Subscription
                                                                         Properties</label>
-                                                                    <ul class="list-group" id="subscriptionPropertiesList">
+                                                                    <ul class="list-group"
+                                                                        id="subscriptionPropertiesList">
 
                                                                     </ul>
                                                                 </div>
@@ -125,6 +154,11 @@
                                                                         id="subsPropsAdd"><i
                                                                             class="fal fa-plus"></i></button>
                                                                 </div>
+                                                            </div>
+
+                                                            <div class="col-md-12 form-group">
+                                                                <label>Description</label>
+                                                                <textarea name="description" id="subsDescription" class="form-control"></textarea>
                                                             </div>
 
                                                             <div class="col-md-12 text-center mt-3">
@@ -213,6 +247,93 @@
                                                                 </button>
                                                                 <button class='btn btn-outline-warning btn-sm'
                                                                     id='cleardealer'><i
+                                                                        class="fal fa-broom fa-lg fa-fw"></i>
+                                                                    Clear
+                                                                    Fields</button>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade mb-3" id="mailingsTab" role="tabpanel" aria-labelledby="pop2-tab">
+                                <div id="userdetails" class="mt-2">
+                                    <div class="card containergroup">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-7 mt-2" id="mailingSections">
+                                                </div>
+
+                                                <div class="col-md-5 mail-create-section">
+                                                    <h4 class="text text-center mb-2">Notification Form</h4>
+                                                    <div id="mailsfeedback"></div>
+
+                                                    <form action="#" method="post" id="sendMailForm">
+                                                        @csrf
+                                                        <div class="row">
+
+                                                            <div class="col-md-12 form-group">
+                                                                <label for="usage">Notification Type</label>
+                                                                <select name="usage" id="mailUsage"
+                                                                    class="form-control form-control-md" required>
+                                                                    <option value="">Select one</option>
+                                                                    <option value="mail">Mail</option>
+                                                                    <option value="sms">SMS</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-12 mail">
+                                                                <label for="name">Email Type</label>
+                                                                <select name="account_type" id="accountType"
+                                                                    class="form-control form-control-sm">
+                                                                    <option value="">Select one</option>
+                                                                    <option value="Authentication">Authentication / User
+                                                                        accounts
+                                                                    </option>
+                                                                    <option value="Marketing">Marketing</option>
+                                                                    <option value="Subscription">Subscription Reminders
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <label for="name">Recepients Type</label>
+                                                                <select name="account_type" id="accountType"
+                                                                    class="form-control form-control-sm">
+                                                                    <option value="">Select One</option>
+                                                                    <option value="buyers">Buyers</option>
+                                                                    <option value="dealers">Dealers</option>
+                                                                    <option value="partners">Partners</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <label for="email">Range</label>
+                                                                <select name="sendrange" id="sendRange"
+                                                                    class="form-control">
+                                                                    <option value="">All</option>
+                                                                    <option value="manual">Manually Select</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <label for="phone">Message</label>
+                                                                <textarea name="message" id="message" class="form-control form-control-md"></textarea>
+                                                            </div>
+
+                                                            <div class="col-md-12 text-center mt-3">
+                                                                <button class='btn btn-success btn-sm' id='sendmail'><i
+                                                                        class="fal fa-save fa-lg fa-fw"></i> Send
+                                                                </button>
+                                                                <button class='btn btn-outline-warning btn-sm'
+                                                                    id='clearm'><i
                                                                         class="fal fa-broom fa-lg fa-fw"></i>
                                                                     Clear
                                                                     Fields</button>
@@ -321,6 +442,70 @@
                                 </div>
                             </div>
 
+                            <div class="tab-pane fade mb-3" id="socialTabs" role="tabpanel" aria-labelledby="pop2-tab">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <table class="table table-bordered table-sm table-striped">
+                                            <thead>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Link</th>
+                                            </thead>
+                                            <tbody id="socialTable">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="make-create-section mt-2">
+                                            <h4 class="text text-center mb-2"><b>Socials Form</b></h4>
+                                            <div id="socialfeedback"></div>
+
+                                            <form action="{{ route('social.store') }}" method="post"
+                                                id="createSocialForm">
+                                                @csrf
+                                                <input type="hidden" name="social_id" id="socialCreateID">
+
+                                                <div class="row">
+                                                    
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="type">Type</label>
+                                                        <select id="socialType" name="type" class="form-control">
+                                                            <option value="">Select One</option>
+                                                            <option value="social">Social</option>
+                                                            <option value="address">Adrress</option>
+                                                            <option value="address">Adrress</option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="socialname">Name</label>
+                                                        <input type="text" class="form-control form-control-md"
+                                                            id="socialName" name="name" required>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="social Link">Link</label>
+                                                        <input type="text" class="form-control" name="link" id="socialLink" >
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <button class='btn btn-success btn-sm' id='savesocial'><i
+                                                                class="fal fa-save fa-lg fa-fw"></i> Save
+                                                        </button>
+                                                        <button class='btn btn-outline-warning btn-sm'
+                                                            id='clearsocial'><i class="fal fa-broom fa-lg fa-fw"></i>
+                                                            Reset</button>
+                                                    </div>
+
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="tab-pane fade mb-3" id="servicesTab" role="tabpanel" aria-labelledby="pop2-tab">
                                 <div class="row">
                                     <div class="col-md-9 mt-2" id="servicesTableSection">
@@ -339,11 +524,13 @@
                                     </div>
 
                                     <div class="col-md-3">
+
                                         <div class="make-create-section mt-2">
                                             <h4 class="text text-center mb-2">Services Form</h4>
                                             <div id="servicesfeedback"></div>
 
-                                            <form action="{{ route('services.store') }}" method="post" id="createServiceForm">
+                                            <form action="{{ route('services.store') }}" method="post"
+                                                id="createServiceForm">
                                                 @csrf
                                                 <input type="hidden" name="service_id" id="serviceCreateID">
 
@@ -351,7 +538,8 @@
 
                                                     <div class="col-md-12 form-group">
                                                         <label for="service">Service</label>
-                                                        <input type="text" class="form-control form-control-md" id="serviceName" name="service" required>
+                                                        <input type="text" class="form-control form-control-md"
+                                                            id="serviceName" name="service" required>
                                                     </div>
 
                                                     <div class="col-md-12 form-group">
@@ -394,12 +582,27 @@
 
 
 @section('footer_scrips')
+    <script>
+        (function() {
+            $('#subscriptionType').on('change', function() {
+                let value = $(this).val();
+                if (value === "onetime") {
+                    $('.onetime').show();
+                    $('.repetetive').hide();
+                }
+                if (value === "repetetive") {
+                    $('.repetetive').show();
+                    $('.onetime').hide();
+                }
+            });
+        })()
+    </script>
+
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/main/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('js/main/jszip.min.js') }}"></script>
     <script src="{{ asset('js/main/pdfmake.min.js') }}"></script>
     <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('js/main/moment.js') }}"></script>
     <script src="{{ asset('js/main/settings.js') }}"></script>
 @endsection

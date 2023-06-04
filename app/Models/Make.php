@@ -22,5 +22,15 @@ class Make extends Model
         return $this->hasMany(VehicleModel::class, 'make_id', 'id');
     }
 
+    /**
+     * Get all of the vehicles for the Make
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function vehicles(): HasMany
+    {
+        return $this->hasMany(Vehicle::class, 'make_id', 'id');
+    }
+
 
 }

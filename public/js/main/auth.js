@@ -69,7 +69,7 @@ $(document).ready(function () {
 
     function getCounties() {
         $.getJSON("/counties/110", function (counties) {
-            let option = "<option value='' disabled>Selct One</option>";
+            let option = "<option value=''>Selct One</option>";
             $.each(counties, function (key, value) {
                 option +=
                     "<option value=" +
@@ -79,7 +79,9 @@ $(document).ready(function () {
                     "</option>";
             });
             $("#countyID").html(option);
-            $(".chzn-select").select2();
+            $(".chzn-select").select2({
+                allowClear: true,
+            });
         });
     }
     getCounties();
@@ -126,29 +128,30 @@ $(document).ready(function () {
             data: data,
             success: function (params) {
                 console.log(params);
+                registerSubmit.prop({ disabled: false });
                 let result = JSON.parse(params);
                 if (result.status == "success") {
-                    showSuccess(result.message);
+                    showSuccess(result.message, "#registerfeedback");
                     window.setTimeout(function () {
                         window.location.href = "/login";
                     }, 3000);
                 } else {
-                    showError(result.error);
+                    showError(result.error, "#registerfeedback");
                 }
-                registerSubmit.prop({ disabled: false });
             },
+
             error: function (error) {
                 console.error(error);
+                registerSubmit.prop({ disabled: false });
                 if (error.status == 422) {
                     var errors = "";
                     $.each(error.responseJSON.errors, function (key, value) {
                         errors += value + "!";
                     });
-                    showError(errors);
+                    showError(errors, "#registerfeedback");
                 } else {
-                    showError("Error occurred during processing");
+                    showError("Error occurred during processing", "#registerfeedback");
                 }
-                registerSubmit.prop({ disabled: false });
             },
         });
     });
@@ -176,33 +179,35 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "POST",
-            url: "login",
+            url: "/login",
             data: data,
             success: function (params) {
                 console.log(params);
+                loginUser.prop({ disabled: false });
                 let result = JSON.parse(params);
                 if (result.status == "success") {
-                    showSuccess(result.success);
+                    showSuccess(result.success, "#feedback");
                     window.setTimeout(function () {
                         window.location.href = result.url;
                     }, 7000);
                 } else {
-                    showError(result.error);
+                    showError(result.error, "#feedback");
                 }
-                loginUser.prop({ disabled: false });
             },
+
             error: function (error) {
                 console.log(error);
+                loginUser.prop({ disabled: false });
+
                 if (error.status == 422) {
                     var errors = "";
                     $.each(error.responseJSON.errors, function (key, value) {
                         errors += value + "!";
                     });
-                    showError(errors);
+                    showError(errors, "#feedback");
                 } else {
-                    showError("Error occurred during processing");
+                    showError("Error occurred during processing", "#feedback");
                 }
-                loginUser.prop({ disabled: false });
             },
         });
     });
@@ -225,16 +230,17 @@ $(document).ready(function () {
                 url: "/forgot-password",
                 data: { email: email },
                 success: function (params) {
+                    submitEmail.prop({ disabled: false });
                     let result = JSON.parse(params);
                     if (result.status == "success") {
-                        showSuccess(result.message);
+                        showSuccess(result.message, "#feedback");
                     } else {
-                        showError(result.error);
+                        showError(result.error, "#feedback");
                     }
-                    submitEmail.prop({ disabled: false });
                 },
                 error: function (error) {
                     console.log(error);
+                    submitEmail.prop({ disabled: false });
                     if (error.status == 422) {
                         var errors = "";
                         $.each(
@@ -243,13 +249,13 @@ $(document).ready(function () {
                                 errors += value + "!";
                             }
                         );
-                        showError(errors);
+                        showError(errors, "#feedback");
                     } else {
-                        showError("Error occurred during processing");
+                        showError(
+                            "Error occurred during processing",
+                            "#feedback"
+                        );
                     }
-                    submitEmail.prop({ disabled: false });
-
-                    $this.find("#loginUser").prop({ disabled: false });
                 },
             });
         } else {
@@ -285,9 +291,9 @@ $(document).ready(function () {
                     console.log(params);
                     let result = JSON.parse(params);
                     if (result.status == "success") {
-                        showSuccess(result.message);
+                        showSuccess(result.message, "#feedback");
                     } else {
-                        showError(result.error);
+                        showError(result.error, "#feedback");
                     }
                     submitReset.prop({ disabled: false });
                     window.setTimeout(function () {
@@ -304,9 +310,12 @@ $(document).ready(function () {
                                 errors += value + "!";
                             }
                         );
-                        showError(errors);
+                        showError(errors, "#feedback");
                     } else {
-                        showError("Error occurred during processing");
+                        showError(
+                            "Error occurred during processing",
+                            "#feedback"
+                        );
                     }
                     submitReset.prop({ disabled: false });
                 },
@@ -314,25 +323,26 @@ $(document).ready(function () {
         }
     });
 
-    function showSuccess(message) {
+    function showSuccess(message, target) {
         iziToast.success({
             title: "OK",
             message: message,
             position: "center",
             timeout: 7000,
-            target: "#feedback",
+            target: target,
         });
     }
 
-    function showError(message) {
+    function showError(message,target) {
         iziToast.error({
             title: "Error",
             message: message,
             position: "center",
             timeout: 7000,
-            target: "#feedback",
+            target: target,
         });
     }
+
     let dealerCreateForm = $("#dealerCreateForm"),
         dealerName = $("#dealerName"),
         dealerPhone = $("#dealerPhone"),
@@ -383,27 +393,30 @@ $(document).ready(function () {
                 let result = JSON.parse(params);
                 $this.find("button[type='submit']").prop({ disabled: false });
                 if (result.status == "success") {
-                    showSuccess(result.message);
+                    showSuccess(result.message, ".dealersfeedback");
+                    window.setTimeout(function () {
+                        window.location.href = "/login";
+                    }, 7000);
                 } else {
-                    showError(result.error);
+                    showError(result.error, ".dealersfeedback");
                 }
-                window.setTimeout(function () {
-                    window.location.href = "/login";
-                }, 7000);
             },
-            error: function(error) {
+            error: function (error) {
                 console.error(error);
                 $this.find("button[type='submit']").prop({ disabled: false });
-                 if (error.status == 422) {
-                     var errors = "";
-                     $.each(error.responseJSON.errors, function (key, value) {
-                         errors += value + "!";
-                     });
-                     showError(errors);
-                 } else {
-                     showError("Error occurred during processing");
-                 }
-            }
+                if (error.status == 422) {
+                    var errors = "";
+                    $.each(error.responseJSON.errors, function (key, value) {
+                        errors += value + "!";
+                    });
+                    showError(errors, ".dealersfeedback");
+                } else {
+                    showError(
+                        "Error occurred during processing",
+                        ".dealersfeedback"
+                    );
+                }
+            },
         });
     });
 });

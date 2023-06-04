@@ -26,6 +26,7 @@
         subCost = $("#subCost"),
         billingCycle = $("#billingCycle"),
         createSubscriptionForm = $("#createSubscriptionForm"),
+        subsDescription = $("#subsDescription"),
         _token = $("input[name=_token]").val();
 
     let subscriptionPropertiesList = $("#subscriptionPropertiesList"),
@@ -126,6 +127,7 @@
             billingcycle = billingCycle.val(),
             submit = $(this).find("button[type='submit']"),
             properties = [],
+            description = subsDescription.val(),
             $this = $(this);
         submit.prop("disabled", true);
         $(".subsproperty").each(function (input) {
@@ -141,8 +143,11 @@
             cost: cost,
             billingcycle: billingcycle,
             properties: properties,
+            description:description,
         };
+
         console.log(data);
+
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": _token,
@@ -160,6 +165,7 @@
                     createSubscriptionForm.trigger("reset");
                     showSuccess(result.message, "#subscriptionfeedback");
                     $this.trigger("reset");
+                    subscriptionID.val("");
                     getSubscriptions();
                 } else {
                     showError(
@@ -499,7 +505,6 @@
 
     $("body").on("click", "#editServiceToggle", function (event) {
         let service_id = $(this).data("id");
-        console.log(service_id);
         if (service_id !== null && service_id !== undefined) {
             $.getJSON("/services-get/" + service_id, function (service) {
                 if (service.length > 0) {
@@ -519,5 +524,92 @@
                 }
             });
         }
+    });
+
+    let socialName = $("#socialName"),
+        socialLink = $("#socialLink"),
+        socialCreateID = $("#socialCreateID"),
+        createSocialForm = $("#createSocialForm"),
+        socialType = $("#socialType");
+    createSocialForm.on("submit", function (event) {
+        event.preventDefault();
+        let name = socialName.val(),
+            link = socialLink.val(),
+            type = socialType.val(),
+            social_id = socialCreateID.val(),
+            $this = $(this);
+        $.post("/socials", {
+            _token: _token,
+            social_id: social_id,
+            name: name,
+            type:type,
+            link: link,
+        })
+            .done(function (params) {
+                console.log(params);
+                let result = JSON.parse(params);
+                if (result.status === "success") {
+                    getSocials();
+                    socialCreateID.val('');
+                    $this.trigger('reset');
+                    showSuccess(result.message, "#socialfeedback");
+                } else {
+                    showError(
+                        "Error occured during processing",
+                        "#socialfeedback"
+                    );
+                }
+            })
+            .fail(function (error) {
+                console.error(error);
+                showError("Error occured during processing", "#socialfeedback");
+            });
+    });
+
+    function getSocials() {
+        $.getJSON('/socials', function (socials) {
+            let tr = "", i = 1;
+            $.each(socials, function (key, value) {
+                tr +=
+                    "<tr><td>" +
+                    i++ +
+                    "</td><td>" +
+                    value.type +
+                    "</td><td>" +
+                    value.name +
+                    "</td><td>" +
+                    value.link +
+                    '</td><td><a href="#" id="editSocialToggle" data-id=' +
+                    value.id +
+                    '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteSocialToggle" data-id=' +
+                    value.id +
+                    '><i class="fas fa-trash text-danger"></i></a></tr>';
+            });
+            $("#socialTable").html(tr);
+        });
+    }
+
+    getSocials();
+
+    $("body").on("click", "#editSocialToggle", function (event) {
+        event.preventDefault();
+        let id = $(this).data('id');
+        $.getJSON('/socials/' + id, function (social) {
+            if (social.length > 0) {
+                showSuccess("Request accepted for processing. Make changes then save", "#socialfeedback");
+                socialCreateID.val(social[0].id);
+                socialName.val(social[0].name);
+                socialLink.val(social[0].link);
+            } else {
+                showError("Error occured during processing. Ensure you have internet connection then retry.", "#socialfeedback");
+            }
+        });
+    });
+
+    $("#clearsocial").on('click', function(event) {
+        event.preventDefault();
+        socialCreateID.val('');
+        socialName.val('');
+        socialLink.val('');
     });
 })();

@@ -1077,27 +1077,27 @@ input[type=checkbox]:checked+label:before {
 
 
 .btn-9 {
-    color: #ffb606;
+    color: #fed945;
 }
 
 .btn-9:hover {
-    background: #ffb606;
+    background: #fed945;
 }
 
 .btn-9 span:nth-child(1) {
-    background: linear-gradient(90deg, transparent, #ffb606);
+    background: linear-gradient(90deg, transparent, #fed945);
 }
 
 .btn-9 span:nth-child(2) {
-    background: linear-gradient(180deg, transparent, #ffb606);
+    background: linear-gradient(180deg, transparent, #fed945);
 }
 
 .btn-9 span:nth-child(3) {
-    background: linear-gradient(270deg, transparent, #ffb606);
+    background: linear-gradient(270deg, transparent, #fed945);
 }
 
 .btn-9 span:nth-child(4) {
-    background: linear-gradient(360deg, transparent, #ffb606);
+    background: linear-gradient(360deg, transparent, #fed945);
 }
 
 /** Border buttons colors **/
@@ -1440,7 +1440,7 @@ input[type=checkbox]:checked+label:before {
 
 .megamenu-title {
     color: #000;
-    font-size: 14px;
+    font-size: 22px;
     font-weight: 600;
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
@@ -2602,20 +2602,20 @@ input[type=checkbox]:checked+label:before {
 
 /** Main title start **/
 .main-title {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     text-align: center;
 }
 
 .main-title h1 {
     font-size: 33px;
     font-weight: 600;
-    margin-bottom: 10px;
-    text-transform: uppercase;
+    margin-bottom: 5px;
+    /* text-transform: uppercase; */
     color: #000000;
 }
 
 .main-title h2 {
-    font-size: 28px;
+    font-size: 23px;
     font-weight: 600;
     margin-bottom: 5px;
 }
@@ -2679,7 +2679,7 @@ input[type=checkbox]:checked+label:before {
     margin-bottom: 15px;
     font-family: 'Barlow Condensed', sans-serif;
     z-index: 20;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .main-title-2 p {
@@ -2824,7 +2824,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .car-box:hover .facilities-list {
-    width: 90%;
+    width: 80%;
     margin: 0 5%;
     bottom: 10px;
     background: #fff;
@@ -2901,7 +2901,7 @@ input[type=checkbox]:checked+label:before {
 
 .car-box .detail .title {
     font-size: 22px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .car-box .detail .location {
@@ -3448,7 +3448,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .car-box-2 .detail .custom-list {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     font-family: 'Jost', sans-serif;
 }
 
@@ -3513,7 +3513,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .car-box-2 .custom-list {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .car-box-2 .custom-list li {
@@ -3570,7 +3570,7 @@ input[type=checkbox]:checked+label:before {
 /** Car box 3 **/
 .car-box-3 {
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     background: #fff;
     overflow: hidden;
     -webkit-transition: all 0.5s;
@@ -3603,11 +3603,11 @@ input[type=checkbox]:checked+label:before {
 }
 
 .car-box-3 .detail {
-    padding: 30px 25px 20px;
+    padding: 10px 10px 10px;
 }
 
 .car-box-3 .custom-list {
-    margin-bottom: 15px;
+    margin-bottom: 7px;
 }
 
 .car-box-3 .custom-list li {
@@ -3624,10 +3624,10 @@ input[type=checkbox]:checked+label:before {
 }
 
 .car-box-3 .detail .title {
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 5px;
     font-weight: 500;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .car-box-3 .detail .title a:hover {
@@ -3655,7 +3655,7 @@ input[type=checkbox]:checked+label:before {
 .car-box-3 .facilities-list li {
     list-style: none;
     float: left;
-    margin-right: 20px;
+    margin-right: 4px;
     font-weight: 400;
     line-height: 32px;
     font-size: 14px;
@@ -3968,8 +3968,8 @@ input[type=checkbox]:checked+label:before {
 
 .car-box-5 .detail h3 {
     font-weight: 600;
-    font-size: 27px;
-    margin-bottom: 20px;
+    font-size: 20px;
+    margin-bottom: 15px;
 }
 
 .car-box-5 .carousel-caption {
@@ -4409,7 +4409,7 @@ input[type=checkbox]:checked+label:before {
 
 .team-2 .detail h4 {
     margin: 0 0 5px;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
 }
 
@@ -4422,7 +4422,7 @@ input[type=checkbox]:checked+label:before {
     font-size: 12px;
     font-weight: 600;
     color: #5f5e5e;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .team-2 .detail .contact ul li {
@@ -5872,7 +5872,8 @@ input[type=checkbox]:checked+label:before {
 
 /** Footer start **/
 .footer {
-    background: url(../img/img-7.jpg);
+    /* background: url(../img/img-7.jpg); */
+    background: #046241;
     z-index: 0;
     background-position: center center;
     background-repeat: no-repeat;
@@ -5956,7 +5957,7 @@ input[type=checkbox]:checked+label:before {
     height: 45px;
     text-align: center;
     line-height: 45px;
-    background: #1b1e83;
+    background: #fed945;
     border-radius: 50px;
 }
 
@@ -5969,7 +5970,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .footer .social-media .icon {
-    background: #1b1e83;
+    background: #fed945;
     color: #fff !important;
 }
 
@@ -8186,7 +8187,7 @@ input[type=checkbox]:checked+label:before {
 
 /** Content area srart **/
 .content-area {
-    padding: 100px 0 70px;
+    padding: 30px 0 30px;
 }
 
 .content-area-2 {
@@ -8270,7 +8271,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .content-area-21 {
-    padding: 120px 0 90px;
+    padding: 30px 0 30px;
 }
 
 .content-area-22 {
@@ -8278,7 +8279,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .about-car {
-    padding: 100px 0 115px;
+    padding: 30px 0 35px;
 }
 
 .theme img {
@@ -8466,33 +8467,6 @@ input[type=checkbox]:checked+label:before {
     text-decoration: none;
 }
 
-.contact-section .bg-img {
-    /* background: url(../img/banner/img-4.jpg) top left repeat; */
-    background-size: cover;
-    top: 0;
-    bottom: 0;
-    min-height: 100vh;
-    /* text-align: center; */
-    z-index: 10;
-    opacity: 1;
-    position: relative;
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
-    padding: 30px 30px 0;
-}
-
-.contact-section .bg-img:after {
-    position: absolute;
-    right: -1px;
-    top: 0;
-    width: 288px;
-    height: 100%;
-    content: "";
-    z-index: -1;
-    /* background: url(../img/img-51.png) top left repeat; */
-    min-height: 100vh;
-}
 
 .contact-section .form-check-input:checked {
     display: none;
@@ -8517,12 +8491,13 @@ input[type=checkbox]:checked+label:before {
     position: relative;
 }
 
-.contact-section .login-inner-form {
-    max-width: 450px;
-    color: #5a5959;
-    width: 100%;
-}
 
+.contact-section .login-inner-form {
+    color: #5a5959;
+    width: 90%;
+    margin: 2em 1em;
+}
+/*
 .contact-section .login-inner-form p {
     color: #5a5959;
     font-size: 16px;
@@ -8532,18 +8507,18 @@ input[type=checkbox]:checked+label:before {
 .contact-section .login-inner-form p a {
     color: #5a5959;
     font-weight: 500;
-}
+} */
 
 .contact-section .login-inner-form img {
     margin-bottom: 5px;
-    height: 50px;
+    height: 70px;
 }
-
+/*
 .contact-section .login-inner-form h3 {
     margin: 0 0 30px;
     font-size: 22px;
     font-weight: 500;
-}
+} */
 
 /* .contact-section .login-inner-form .form-group {
     margin-bottom: 25px;
@@ -8559,15 +8534,6 @@ input[type=checkbox]:checked+label:before {
     border-radius: 3px;
     border: 1px solid #e8f806;
 } */
-
-.contact-section .login-inner-form .btn-md {
-    cursor: pointer;
-    height: 35px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    border-radius: 3px;
-}
 
 .contact-section .login-inner-form input[type=checkbox],
 input[type=radio] {
@@ -9085,7 +9051,7 @@ input[type=radio] {
 }
 
 .bi5 {
-    margin-top: 100px;
+    margin-top: 30px;
 }
 
 .banner-content3 {
@@ -9127,7 +9093,7 @@ input[type=radio] {
 .sub-banner {
     background: rgba(0, 0, 0, 0.04) url(../img/img-5.jpg) top left repeat;
     background-size: cover;
-    height: 420px;
+    height: 200px;
     background-position: center center;
     background-repeat: no-repeat;
     position: relative;
@@ -9148,7 +9114,7 @@ input[type=radio] {
 .sub-banner .breadcrumb-area h1 {
     margin: 0;
     font-weight: 600;
-    font-size: 55px;
+    font-size: 35px;
     color: #fff;
     text-transform: uppercase;
 }
@@ -10500,14 +10466,14 @@ input[type="tel"] {
     margin: 32px 0 50px;
     position: relative;
     z-index: 1;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-family: 'Barlow Condensed', sans-serif;
 }
 
 .section-header h2 {
     margin-bottom: 0;
     font-weight: 600;
-    font-size: 40px;
+    font-size: 30px;
     font-family: 'Barlow Condensed', sans-serif;
 }
 
@@ -10516,7 +10482,7 @@ input[type="tel"] {
 .section-header h3:after {
     position: absolute;
     content: attr(data-title);
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     top: 5px;
     left: 50%;
     width: 100%;
@@ -11469,7 +11435,7 @@ input[type="tel"] {
     }
 
     .car-box-2 .detail .custom-list {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 
     .banner .banner-slider-inner h1 {
@@ -11647,7 +11613,7 @@ input[type="tel"] {
         padding: 100px 0 70px;
     }
 
-    .contact-section .bg-img {
+    .contact-section .authsection {
         display: none;
     }
 
@@ -11686,7 +11652,7 @@ input[type="tel"] {
     }
 
     .car-box-5 .carousel-caption {
-        padding: 50px 20px;
+        padding: 30px 20px;
     }
 
     .car-box-5 img {
@@ -12347,7 +12313,7 @@ input[type="tel"] {
     }
 
     .sub-banner {
-        height: 370px;
+        height: 220px;
     }
 
     .sticky-header {
@@ -12392,7 +12358,7 @@ input[type="tel"] {
 
 @media (max-width: 768px) {
     .sub-banner {
-        height: 320px;
+        height: 200px;
     }
 
     .intro-text h3 {
@@ -12431,7 +12397,7 @@ input[type="tel"] {
     .section-header h1:after,
     .section-header h2:after,
     .section-header h3:after {
-        font-size: 60px;
+        font-size: 40px;
         top: 10px;
     }
 
@@ -12476,7 +12442,7 @@ input[type="tel"] {
     }
 
     .car-box-2 .detail .custom-list {
-        margin-bottom: 15px;
+        margin-bottom: 7px;
     }
 
     .banner .btn-3 {
@@ -12566,7 +12532,7 @@ input[type="tel"] {
     }
 
     .car-box-2 .detail {
-        padding: 25px 30px 20px 30px;
+        padding: 12px 15px 10px 15px;
     }
 
     .car-box-2 .detail .title {
@@ -12835,7 +12801,7 @@ input[type="tel"] {
     }
 
     .tabbing-box .nav-tabs {
-        background: transparent;
+        background: #006544;
         border-bottom: transparent;
     }
 
@@ -12907,11 +12873,11 @@ input[type="tel"] {
     }
 
     .main-title {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
 
     .main-title-2 {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
 
     .main-header {
@@ -13306,4 +13272,52 @@ input[type="tel"] {
         box-shadow: 0 0 5px rgba(0, 0, 0, .1);
         top: 0px !important;
     }
+}
+
+.login-social a.btn-facebook,
+.login-social a.btn-twitter,
+.login-social a.btn-google {
+
+    padding: 6px 20px;
+
+    color: #fff;
+
+    background: #ccc;
+
+    display: inline-block;
+
+    border: 1px solid #395899;
+}
+
+.login-social a.btn-facebook i,
+.login-social a.btn-twitter i,
+.login-social a.btn-google i {
+
+    color: #fff;
+}
+
+.login-social a.btn-facebook:hover,
+.login-social a.btn-twitter:hover,
+.login-social a.btn-google:hover {
+
+    opacity: 0.8;
+}
+
+.login-social a.btn-facebook {
+
+    background: #395899;
+}
+
+.login-social a.btn-twitter {
+
+    background: #04a9e1;
+
+    border-color: #04a9e1;
+}
+
+.login-social a.btn-google {
+
+    background: #db3236;
+
+    border-color: #db3236;
 }

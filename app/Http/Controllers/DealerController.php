@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DealerRequest;
+use App\Jobs\SendEmailVerificationNotification;
 use App\Models\Dealer;
 use App\Models\User;
+use App\Models\Vehicle;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,38 +15,59 @@ class DealerController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth')->except(['create','store']);
         $this->dealer = new Dealer();
         $this->user = new User();
-    }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+        $this->vehicle = new Vehicle();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function index()
+    {
+        return view('dealers.index');
+    }
+
     public function create()
     {
         return view('dealers.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function vehicles()
+    {
+        $vehicles = $this->vehicle
+            ->where('dealer_id', auth()->user()->dealer_id)
+            ->with(['type' => function ($type) {
+                return $type->select('id', 'type');
+            }, 'make' => function ($make) {
+                return $make->select('id', 'make');
+            }, 'model' => function ($model) {
+                return $model->select('id', 'model');
+            }, 'prices' => function ($query) {
+                return $query->select('id', 'price');
+            }, 'yard' => function ($yard) {
+                return $yard->select('id', 'yard');
+            }, 'features' => function ($fea) {
+                return $fea->select('features.id', 'features.feature');
+            }])->latest()->get();
+
+        return view('dealers.vehicles', compact('vehicles'));
+    }
+
     public function store(DealerRequest $request)
     {
         $validated = $request->validated();
         $dealer = $this->dealer->create($validated);
-        $this->user->name = $validated["adminname"];
-        $this->user->email = $validated["adminemail"];
-        $this->user->phone = $validated["adminphone"];
-        $this->user->password = Hash::make($validated["password"]);
-        $this->user->save();
-        return json_encode(['status'=>'success', 'message'=>'Dealer account created successfully. And verification link has been sent to your email. ']);
+        $user = User::create([
+            'name' => $validated["adminname"],
+            'email' => $validated["adminemail"],
+            'phone' => $validated["adminphone"],
+            'role' => "dealer",
+            'password' => Hash::make($validated["password"])
+        ]);
+
+        // event(new Registered($user));
+        // SendEmailVerificationNotification::dispatch($user)->onQueue('emails');
+
+        return json_encode(['status' => 'success', 'message' => 'Dealer account created successfully. And verification link has been sent to your email.']);
     }
 
     /**

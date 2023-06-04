@@ -28,6 +28,7 @@ class SubscriptionRequest extends FormRequest
             'cost' => ['required', 'max:30'],
             'billingcycle' => ['required', 'max:30'],
             'properties' => ['nullable','array'],
+            'description' => ['nullable','max:255'],
         ];
     }
 }

@@ -21,7 +21,6 @@
         <div class="card" id="main-content-card">
             <div class="card-body">
                 <div class="row">
-
                     <div class="col-md-12">
                         <nav class="nav-justified ">
                             <div class="nav nav-tabs " id="nav-tab" role="tablist">
@@ -43,11 +42,10 @@
                                                     <table class="table table-bordered table-sm">
                                                         <thead>
                                                             <th>#</th>
+                                                            <th>Provider</th>
+                                                            <th>ID</th>
+                                                            <th>Secret</th>
                                                             <th>Name</th>
-                                                            <th>Priority</th>
-                                                            <th>Cost</th>
-                                                            <th>Billing Cycle</th>
-                                                            <th>Properties</th>
                                                             <th>Action</th>
                                                         </thead>
 
@@ -66,62 +64,49 @@
                                                         <input type="hidden" name="subscription_id" id="subscriptionID">
                                                         <div class="row">
                                                             <div class="col-md-12 form-group">
-                                                                <label>Name</label>
-                                                                <input type="text" name="name" id="subscriptionName"
-                                                                    class="form-control" required>
-                                                            </div>
-
-                                                            <div class="col-md-12 form-group">
-                                                                <label>Priority</label>
-                                                                <select name="priority" id="subPriority"
-                                                                    class="form-control form-control-md" required>
-                                                                    <option value="">Select One</option>
-                                                                    <option value="High">High</option>
-                                                                    <option value="Moderate">Moderate</option>
-                                                                    <option value="Low">Low</option>
+                                                                <label>Service Provider</label>
+                                                                <select name="provider" id="provider" class="form-control form-control-sm">
+                                                                    <Option value="">Select One</Option>
+                                                                    <option value="Mpesa">Mpesa</option>
+                                                                    <option value="Paypal">Paypal</option>
+                                                                    <option value="Bank">Bank</option>
                                                                 </select>
                                                             </div>
-
-                                                            <div class="col-md-12 form-group">
-                                                                <label>Cost</label>
-                                                                <input type="number" name="cost" id="subCost"
-                                                                    class="form-control" required>
+                                                            
+                                                            <div class="col-md-12 form-group Paypal">
+                                                                <label>Client ID</label>
+                                                                <input type="text" name="client_id" id="clientID"
+                                                                    class="form-control form-control-sm" required>
                                                             </div>
 
-                                                            <div class="col-md-12 form-group">
-                                                                <label>Billing Cycle</label>
-                                                                <select name="billingcycle" id="billingCycle"
-                                                                    class="form-control form-control-md" required>
-                                                                    <option value="">Select One</option>
-                                                                    <option value="Monthly">Monthly</option>
-                                                                    <option value="Quarterly">Quarterly</option>
-                                                                    <option value="Annually">Annually</option>
-                                                                    <option value="onetime">one Time</option>
-                                                                </select>
+                                                            <div class="col-md-12 form-group Paypal">
+                                                                <label>Client Secret</label>
+                                                                <input type="text" name="client_secrest" id="clientSecrest"
+                                                                    class="form-control form-control-sm" required>
                                                             </div>
 
-                                                            <div class="col-md-12 form-group row">
-                                                                <div class="col-md-12">
-                                                                    <label for="subscriptionprops">Subscription
-                                                                        Properties</label>
-                                                                    <ul class="list-group" id="subscriptionPropertiesList">
+                                                            <div class="col-md-12 form-group Paypal">
+                                                                <label>Business Name</label>
+                                                                <input type="text" name="name" id="paypalName"
+                                                                    class="form-control form-control-sm" required>
+                                                            </div>
 
-                                                                    </ul>
-                                                                </div>
+                                                            <div class="col-md-12 form-group Paypal">
+                                                                <label>Card Number</label>
+                                                                <input type="text" name="name" id="paypalName"
+                                                                    class="form-control form-control-sm" required>
+                                                            </div>
 
-                                                                <div class="col-md-11">
-                                                                    <input type="text"
-                                                                        class="form-control form-control-sm"
-                                                                        name="subscriptionname" id="subsPropInput">
-                                                                </div>
-
-
-
-                                                                <div class="col-md-1">
-                                                                    <button class="btn btn-sm btn-success" type="button"
-                                                                        id="subsPropsAdd"><i
-                                                                            class="fal fa-plus"></i></button>
-                                                                </div>
+                                                            <div class="col-md-12 form-group Paypal">
+                                                                <label>Expiration</label>
+                                                                <input type="text" name="expiration" id="expirationDate"
+                                                                    class="form-control form-control-sm" required>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-12 form-group Paypal">
+                                                                <label>CW</label>
+                                                                <input type="text" name="name" id="paypalName"
+                                                                    class="form-control form-control-sm" required>
                                                             </div>
 
                                                             <div class="col-md-12 text-center mt-3">
@@ -133,7 +118,6 @@
                                                                         class="fal fa-broom fa-lg fa-fw"></i>
                                                                     Clear
                                                                     Fields</button>
-
                                                             </div>
                                                         </div>
 

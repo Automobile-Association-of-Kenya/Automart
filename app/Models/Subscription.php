@@ -18,7 +18,8 @@ class Subscription extends Model
         'name',
         'priority',
         'cost',
-        'billingcycle'
+        'billingcycle',
+        'description'
     ];
 
     public function createProperties($id, $properties)
@@ -30,7 +31,6 @@ class Subscription extends Model
             ]);
         }
     }
-
 
     public function updateProperties($id, $properties)
     {
@@ -52,19 +52,9 @@ class Subscription extends Model
         }
     }
 
-    /**
-     * Get all of the $properties for the Subscription
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    /**
-     * The properties that belong to the Subscription
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function properties(): BelongsToMany
     {
         return $this->belongsToMany(Subsproperty::class, 'subscription_property', 'subscription_id', 'subsproperty_id');
     }
-    
+
 }

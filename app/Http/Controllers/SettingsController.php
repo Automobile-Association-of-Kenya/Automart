@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MailRequest;
 use App\Models\Maillist;
+use App\Models\Services;
+use App\Models\Social;
 use App\Models\Subscription;
 use App\Models\Subsproperty;
 use Illuminate\Http\Request;
@@ -12,6 +14,8 @@ class SettingsController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
+        $this->service = new Services();
         $this->maillist = new Maillist();
     }
     /**
@@ -25,17 +29,32 @@ class SettingsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function services()
     {
-        //
+        $services = $this->service->get();
+        return json_encode($services);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function socials($id=null)
     {
-        //
+        $socials = Social::get();
+        return json_encode($socials);
+    }
+
+    public function socialStore(Request $request)
+    {
+        if (!is_null($request->social_id)) {
+            $social = Social::find($request->social_id);
+            $social->update(['name' => $request->name, 'link' => $request->link]);
+            $message = 'Social updated successfully';
+        }else {
+            $social = Social::create(['name' => $request->name, 'link' => $request->link]);
+            $message = 'Social created successfully';
+        }
+        return json_encode(['status'=>'success','message'=>$message]);
     }
 
     /**
@@ -67,7 +86,7 @@ class SettingsController extends Controller
      */
     public function destroy(string $id)
     {
-        
+
     }
 
     public function mails($id=null)

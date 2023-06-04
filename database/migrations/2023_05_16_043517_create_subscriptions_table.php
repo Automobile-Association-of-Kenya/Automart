@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('priority','30');
             $table->string('cost','30');
             $table->string('billingcycle','30');
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

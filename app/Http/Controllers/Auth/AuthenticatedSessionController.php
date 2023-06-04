@@ -9,16 +9,18 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
-
+use Illuminate\Support\Str;
 
 class AuthenticatedSessionController extends Controller
 {
     /**
      * Display the login view.
      */
+
     public function create(): View
     {
         return view('auth.login');
@@ -33,7 +35,21 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return json_encode(['status'=>'success', 'message'=>"Login successful.", 'url'=> redirect()->intended(RouteServiceProvider::HOME)]);
+        // if (auth()->user()->role === "dealer") {
+        //     $user = auth()->user();
+        //     $subscription = DB::table('dealer_subscription')->where('dealer_id',$user->dealer_id)->first();
+        //     if (!is_null($subscription)) {
+        //         $url = "subscription-plans";
+        //     }else {
+        //         $url = redirect()->intended(RouteServiceProvider::HOME);
+        //     }
+        // }else {
+        //     $url = redirect()->intended(RouteServiceProvider::HOME);
+        // }
+
+        return redirect()->intended(RouteServiceProvider::HOME);
+        
+        // return json_encode(['status' => 'success', 'message' => "Login successful.", 'url' => redirect()->intended(RouteServiceProvider::HOME)]);
     }
 
     /**

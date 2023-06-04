@@ -9,8 +9,8 @@
     <link href="{{ asset('css/all.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/components.css') }}" rel="stylesheet" id="bootstrap-css">
     <link href="{{ asset('css/master.css') }}" rel="stylesheet" id="master-css">
-    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />
-    <link rel="icon" href="{{ asset('images/logo.png') }}" />
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}" />
+    {{-- <link rel="icon" href="{{ asset('images/logo.png') }}" /> --}}
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
 
     <title>@yield('title') | AA Kenya Limited</title>
@@ -93,20 +93,36 @@
                 @yield('page')
             </h2>
 
-            <div class="search-wrapper">
+            {{-- <div class="search-wrapper">
                 <i class="fas fa-search text-white"></i>
                 <input type="text" name="search" id="search" placeholder="Search here ...">
-            </div>
+            </div> --}}
 
             @auth
-                <div class="user-wrapper">
-                    <img src="{{ asset('images/avatar.png') }}" height="40px" width="40px"alt=""
-                        class="profilephoto">
-                    <div>
-                        <h4 class="username">{{ auth()->user()->name }}</h4>
-                        <small class="role">{{ auth()->user()->role }}</small>
-                    </div>
-                </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink6" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ asset('images/avatar.png') }}" height="30px" width="30px"alt=""
+                            class="profilephoto">{{ auth()->user()->name }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
+                        @if (auth()->user()->role === 'admin' && auth()->user()->role === 'dealer')
+                            <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
+                        @endif
+                        {{-- <li><a class="dropdown-item" href="">Logout</a></li> --}}
+
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <li><a class="dropdown-item" :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </a></li>
+                        </form>
+                    </ul>
+                </li>
             @endauth
         </div>
 

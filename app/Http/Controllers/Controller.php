@@ -27,5 +27,9 @@ class Controller extends BaseController
     protected $subsprop;
     protected $maillist;
     protected $service;
+    protected $vehicleservice;
+    protected $quote;
+    protected $finance;
+    protected $tradein;
 
 }

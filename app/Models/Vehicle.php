@@ -15,7 +15,11 @@ class Vehicle extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'dealer_id', 'type_id', 'make_id', 'vehicle_model_id', 'country_of_origin', 'country_located', 'county_id', 'vehicle_no', 'shipping_to', 'year', 'price', 'color', 'mileage', 'enginecc', 'interior', 'fuel_type', 'transmission', 'description', 'cover_photo', 'images', 'tags', 'views', 'likes', 'dislikes','yard_id',
+        'user_id', 'dealer_id', 'type_id', 'make_id', 'vehicle_model_id', 'country_of_origin', 'country_located', 'county_id', 'vehicle_no', 'shipping_to', 'year', 'price', 'color', 'mileage', 'enginecc', 'interior', 'fuel_type', 'transmission', 'description', 'cover_photo', 'images', 'tags', 'usage', 'views', 'likes', 'dislikes', 'yard_id', 'gear',
+        'speed',
+        'terrain',
+        'engine',
+        'horsepower',
     ];
 
     /**
@@ -37,16 +41,6 @@ class Vehicle extends Model
     {
         return $this->belongsTo(Yard::class, 'yard_id');
     }
-
-    /**
-     * Get all of the features for the Vehicle
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    // public function features(): HasMany
-    // {
-    //     return $this->hasMany(Feature::class, 'vehicle_id', 'id');
-    // }
 
     /**
      * The features that belong to the Vehicle
@@ -83,6 +77,7 @@ class Vehicle extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+
     public function prices(): HasMany
     {
         return $this->hasMany(VehiclePrice::class, 'vehicle_id', 'id');
@@ -120,7 +115,7 @@ class Vehicle extends Model
         }
 
         foreach ($features as $key => $value) {
-            $feature = DB::table('vehicle_feature')->where('vehicle_id',$id)->where('feature_id',$value)->first();
+            $feature = DB::table('vehicle_feature')->where('vehicle_id', $id)->where('feature_id', $value)->first();
             if (empty($feature) || is_null($feature)) {
                 DB::table('vehicle_feature')->insert([
                     'vehicle_id' => $id,
@@ -130,4 +125,58 @@ class Vehicle extends Model
         }
     }
 
+    public function getRelatedVehicles($vehicle)
+    {
+        $query = $this->query();
+        $query->where('id', '!==', $vehicle->id);
+        if (!is_null($vehicle->type_id)) {
+            $query->where('type_id', $vehicle->type_id);
+        }
+        if (!is_null($vehicle->make_id)) {
+            $query->where('make_id', $vehicle->make_id);
+        }
+        if (!is_null($vehicle->vehicle_model_id)) {
+            $query->where('vehicle_model_id', $vehicle->vehicle_model_id);
+        }
+        $vehicles = $query->with(['dealer' => function ($dealer) {
+            $dealer->select('id', 'name');
+        }, 'type' => function ($type) {
+            $type->select('id', 'type');
+        }, 'make' => function ($make) {
+            $make->select('id', 'make');
+        }, 'model' => function ($model) {
+            $model->select('id', 'model');
+        }, 'prices' => function ($price) {
+            $price->select('price');
+        }])->limit(10)->get();
+
+        return $vehicles;
+    }
+
+    public function discountedVehicles()
+    {
+        $vehicles = $this->with(['dealer' => function ($dealer) {
+            $dealer->select('id', 'name');
+        }, 'type' => function ($type) {
+            $type->select('id', 'type');
+        }, 'make' => function ($make) {
+            $make->select('id', 'make');
+        }, 'model' => function ($model) {
+            $model->select('id', 'model');
+        }, 'yard'])->get();
+        $discountedvehicles = [];
+        foreach ($vehicles as $key => $value) {
+            $prices = VehiclePrice::where('vehicle_id', $value->id)->latest()->get();
+            if (!empty($prices) && $prices->count() > 1) {
+                $first = $prices->first();
+                $last = $prices[1];
+                if ($first->price < $last->price) {
+                    $value['current_price'] = $first->price;
+                    $value['initial_price'] = $last->price;
+                    array_push($discountedvehicles, $value);
+                }
+            }
+        }
+        return $discountedvehicles;
+    }
 }
