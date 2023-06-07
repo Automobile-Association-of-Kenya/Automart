@@ -120,7 +120,7 @@ Route::controller(SubscriptionController::class)->group(function () {
 Route::resource('subscriptions', SubscriptionController::class);
 Route::get('subscription-plans', [SubscriptionController::class, 'plans'])->name('subscription.plan');
 Route::get('subscription-features', [SubscriptionController::class, 'features']);
-
+Route::get('subscription/{id}', [SubscriptionController::class, 'create'])->name('subscription');
 /** Subscriptions */
 
 Route::controller(SettingsController::class)->group(function ()
@@ -138,6 +138,7 @@ Route::resource('accounts', AccountsController::class);
 
 
 Route::resource('dealers', DealerController::class);
+Route::get('dealer-add', [DealerController::class, 'add'])->name('dealer.add');
 
 Route::view('terms', 'terms')->name('terms');
 
@@ -165,7 +166,9 @@ Route::get('vehicle-details/{id}', [ApplicationController::class, 'vehicleDetail
 Route::prefix('dealer')->group(function ()
 {
     Route::get('vehicles', [DealerController::class, 'vehicles'])->name('dealer.vehicles');
+    Route::get('summary', [DealerController::class, 'summary']);
 });
+
 require __DIR__ . '/auth.php';
 
 Route::view('mail', 'mail');

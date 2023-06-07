@@ -377,7 +377,7 @@
                     <div class="sidebar-right">
                         <!-- Advanced search start -->
                         <div class="widget advanced-search d-none-992">
-                            <h3 class="sidebar-title">Refine Your Search</h3>
+                            <h3 class="sidebar-title">Vehicle details</h3>
                             <div class="s-border"></div>
                             <div class="m-border"></div>
                             <ul>
@@ -748,7 +748,7 @@
 
                             <div class="col-md-12">
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-md btn-warning">Submi</button>
+                                    <button type="submit" class="btn btn-md btn-warning">Submit</button>
                                 </div>
                             </div>
 

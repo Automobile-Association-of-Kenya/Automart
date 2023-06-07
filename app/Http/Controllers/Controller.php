@@ -32,4 +32,9 @@ class Controller extends BaseController
     protected $finance;
     protected $tradein;
 
+    public function checksubscription()
+    {
+        
+    }
+
 }

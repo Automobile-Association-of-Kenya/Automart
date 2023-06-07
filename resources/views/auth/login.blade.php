@@ -4,7 +4,7 @@
 @endsection
 
 @section('header_styles')
-    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/components.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <style>
@@ -20,6 +20,51 @@
             transform: translateY(-50%);
             cursor: pointer;
         }
+
+        /* .input-group-sm > .input-group-prepend > .form-control-plaintext.input-group-text,
+  .input-group-sm > .input-group-append > .form-control-plaintext.input-group-text,
+  .input-group-sm > .input-group-prepend > .form-control-plaintext.btn,
+  .input-group-sm > .input-group-append > .form-control-plaintext.btn, .form-control-plaintext.form-control-lg, .input-group-lg > .form-control-plaintext.form-control,
+  .input-group-lg > .input-group-prepend > .form-control-plaintext.input-group-text,
+  .input-group-lg > .input-group-append > .form-control-plaintext.input-group-text,
+  .input-group-lg > .input-group-prepend > .form-control-plaintext.btn,
+  .input-group-lg > .input-group-append > .form-control-plaintext.btn {
+    padding-right: 0;
+    padding-left: 0; }
+
+.form-control-sm, .input-group-sm > .form-control,
+.input-group-sm > .input-group-prepend > .input-group-text,
+.input-group-sm > .input-group-append > .input-group-text,
+.input-group-sm > .input-group-prepend > .btn,
+.input-group-sm > .input-group-append > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem; }
+
+select.form-control-sm:not([size]):not([multiple]), .input-group-sm > select.form-control:not([size]):not([multiple]),
+.input-group-sm > .input-group-prepend > select.input-group-text:not([size]):not([multiple]),
+.input-group-sm > .input-group-append > select.input-group-text:not([size]):not([multiple]),
+.input-group-sm > .input-group-prepend > select.btn:not([size]):not([multiple]),
+.input-group-sm > .input-group-append > select.btn:not([size]):not([multiple]) {
+  height: calc(1.8125rem + 2px); }
+
+.form-control-lg, .input-group-lg > .form-control,
+.input-group-lg > .input-group-prepend > .input-group-text,
+.input-group-lg > .input-group-append > .input-group-text,
+.input-group-lg > .input-group-prepend > .btn,
+.input-group-lg > .input-group-append > .btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem; }
+
+select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.form-control:not([size]):not([multiple]),
+.input-group-lg > .input-group-prepend > select.input-group-text:not([size]):not([multiple]),
+.input-group-lg > .input-group-append > select.input-group-text:not([size]):not([multiple]),
+.input-group-lg > .input-group-prepend > select.btn:not([size]):not([multiple]),
+.input-group-lg > .input-group-append > select.btn:not([size]):not([multiple]) {
+  height: calc(2.875rem + 2px); } */
     </style>
 @endsection
 
@@ -108,7 +153,7 @@
                                         <div class="feedback" id="feedback"></div>
 
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-md btn-warning btn-round"
+                                            <button type="submit" class="btn btn-md btn-warning"
                                                 id="loginUser">Login</button>
                                         </div>
                                     </form>
@@ -119,7 +164,7 @@
                                         <span>You can also join as a dealer by <a href="{{ route('dealers.create') }}"
                                                 class="text text-warning">clicking here</a></span>
                                     </div><br>
-                                    
+
                                     <div class="col-md-6 text-center">
                                         @if (Route::has('password.request'))
                                             <a href="{{ route('password.request') }}" class="text text-warning">Forgot
@@ -133,7 +178,6 @@
                                         @endif
                                     </div>
                                 </div>
-
 
                                 <div class="login-social border-t mt-1 pt-2 mb-1 text-center">
                                     <p class="mb-2">OR continue with</p>

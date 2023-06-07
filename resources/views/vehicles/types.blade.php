@@ -125,15 +125,15 @@
                                     <div class="detail">
                                         <h1 class="title">
                                             <a
-                                                href="{{ route('vehicles.show', $item->id) }}">{{ $item->model->model }}</a>
+                                                href="{{ url('/vehicle-details/'.$item->id) }}">{{ $item->model->model }}</a>
                                         </h1>
                                         <ul class="custom-list">
                                             <li>
-                                                <a href="{{ route('vehicles.show', $item->id) }}">{{ $item->usage }}</a>
-                                                /
+                                                <a href="{{ url('/vehicle-details/'.$item->id) }}">{{ $item->usage }}</a>
+                                                &nbsp;|&nbsp;
                                             </li>
                                             <li>
-                                                <a href="">{{ $item->transmission }}</a> /
+                                                <a href="">{{ $item->transmission }}</a> &nbsp;|&nbsp;
                                             </li>
                                             <li>
                                                 <a href="#">{{ $item->type?->type }}</a>
@@ -147,14 +147,6 @@
                                             <li>
                                                 <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km
                                             </li>
-
-                                            <li>
-                                                <i class="flaticon-manual-transmission"></i> {{ $item->transmission }}
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-car"></i> {{ $item->type?->type }}
-                                            </li>
-
                                             <li>
                                                 <i class="flaticon-gear"></i> {{ $item->color }}
                                             </li>

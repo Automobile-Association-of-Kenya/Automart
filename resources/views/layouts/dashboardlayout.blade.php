@@ -14,6 +14,13 @@
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
 
     <title>@yield('title') | AA Kenya Limited</title>
+    <style>
+        sup {
+            font-size: 16px;
+            color: #f00;
+            font-weight: 600
+        }
+    </style>
     @yield('header_styles')
 </head>
 

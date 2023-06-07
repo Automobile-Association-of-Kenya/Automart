@@ -27,12 +27,12 @@
                             KENYA - AutoMart</span></b></a>
             </h2>
         </div>
-        <br><br>
+        <br>
 
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="#" class='validation' data-id=48 id="dashboard">
+                    <a href="{{ route('dashboard') }}" class='validation' data-id=48 id="dashboard">
                         <span><i class="fal fa-tachometer"></i></span>
                         <span>Dashboard</span>
                     </a>
@@ -118,7 +118,7 @@
     </div>
 </body>
 
-<script src="js/components.js"></script>
+<script src="{{ asset('js/components.js') }}"></script>
 <script src="{{ asset('js/iziToast.min.js') }}"></script>
 <script src="{{ asset('js/main/moment.js') }}"></script>
 @yield('footer_scrips')

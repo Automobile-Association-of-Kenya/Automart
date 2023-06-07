@@ -31,25 +31,22 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        // if (auth()->user()->role === "dealer") {
-        //     $user = auth()->user();
-        //     $subscription = DB::table('dealer_subscription')->where('dealer_id',$user->dealer_id)->first();
-        //     if (!is_null($subscription)) {
-        //         $url = "subscription-plans";
-        //     }else {
-        //         $url = redirect()->intended(RouteServiceProvider::HOME);
-        //     }
-        // }else {
-        //     $url = redirect()->intended(RouteServiceProvider::HOME);
-        // }
-
-        return redirect()->intended(RouteServiceProvider::HOME);
-        
-        // return json_encode(['status' => 'success', 'message' => "Login successful.", 'url' => redirect()->intended(RouteServiceProvider::HOME)]);
+        if (auth()->user()->role === "dealer") {
+            $url = redirect()->intended(RouteServiceProvider::DEALER);
+        }elseif (auth()->user()->role === "buyer") {
+            $url = redirect()->intended(RouteServiceProvider::BUYER);
+        }elseif (auth()->user()->role === "admin") {
+            $url = redirect()->intended(RouteServiceProvider::HOME);
+        }elseif(auth()->user()->role === "partner") {
+            $url = redirect()->intended(RouteServiceProvider::PARTNER);
+        }
+        return $url;
+        // $intendedUrl = $request->input('intended_url', session('url.intended'));
+        // return json_encode(['status' => 'success', 'message' => "Login successful.", 'url' => $intendedUrl]);
     }
 
     /**

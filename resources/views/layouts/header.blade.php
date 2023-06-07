@@ -69,7 +69,7 @@
                                 <div class="col-sm-6 col-md-4 col-lg-4">
                                     <div class="megamenu-section">
                                         <h6 class="megamenu-title">Others</h6>
-                                        <a class="dropdown-item" href="{{ url('new') }}">New Arrivals</a>
+                                        <a class="dropdown-item" href="{{ route('new') }}">New Arrivals</a>
                                         <a class="dropdown-item" href="{{ url('discounted-vehicles') }}">Discounted</a>
                                         <a class="dropdown-item" href="{{ url('vehicles-list') }}">High end</a>
                                     </div>

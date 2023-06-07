@@ -421,8 +421,10 @@
 
     getVehicleFeatures();
 
-    function getDealerYards(dealer_id) {
-        $.getJSON("/dealer-yards/" + dealer_id, function (yards) {
+    function getDealerYards(dealer_id = null) {
+        $url = (dealer_id == null) ? "/dealer-yards/" : "/dealer-yards/" + dealer_id;
+        $.getJSON($url, function (yards) {
+            let option1 = '<option value="">All</option>';
             let option = '<option value="">Select One</option>';
             $.each(yards, function (key, value) {
                 option +=
@@ -433,8 +435,12 @@
                     "</option>";
             });
             $("#yardID").html(option);
+            filterVehicleYardID.html(option);
+            $("#filterListVehicleYardID").html(option1);
         });
     }
+
+    getDealerYards();
 
     // countryLocated.on("change", function () {
     //     let country_id = $(this).val();
@@ -519,7 +525,6 @@
     //                 moment(new Date(created_at)).format("DD-MM-YYYY") +
     //                 "</td><td></td></tr>";
     //         });
-    //         // console.log($("#vehicleslist"));
     //         // <th>Color</th><th>Interior</th>
     //         let table =
     //             '<table class="table table-bordered hover vehicleDataTable "><thead><th>#</th><th>NO</th><th>Dealer</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>CC</th><th>Mileage</th><th>Fuel</th><th>Trans</th><th>Status</th><th>created</th><th>Action</th></thead><tbody' +
@@ -553,6 +558,22 @@
     // }
 
     // getVehicles();
+
+    var fileInput = document.getElementById("addionalImages");
+    var maxFiles = 20; // Set the maximum file limit
+
+    fileInput.addEventListener("change", function () {
+        var selectedFiles = fileInput.files.length;
+        if (selectedFiles > maxFiles) {
+            // Reset the file input value and display an error message
+            fileInput.value = "";
+            alert(
+                "Maximum file limit exceeded. Please select up to " +
+                    maxFiles +
+                    " files."
+            );
+        }
+    });
 
     vehicleMake.on("change", function () {
         let make_id = $(this).val();
@@ -590,6 +611,7 @@
         getDealerYards(id);
     });
 
+
     makeCreateForm.on("submit", function (event) {
         event.preventDefault();
         let $this = $(this),
@@ -600,7 +622,6 @@
 
         submit.prop({ disabled: true });
         let data = { make_id: make_id, make: make };
-        console.log(data);
         if (make !== "" && make !== undefined) {
             $.ajaxSetup({
                 headers: {
@@ -612,7 +633,6 @@
                 url: "/makes",
                 data: data,
                 success: function (params) {
-                    console.log(params);
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#makefeedback");
@@ -625,7 +645,6 @@
                     submit.prop({ disabled: false });
                 },
                 error: function (error) {
-                    console.log(error);
                     if (error.status == 422) {
                         var errors = "";
                         $.each(
@@ -722,7 +741,6 @@
             description: featureDescription,
         };
 
-        console.log(data);
         if (data.feature !== null) {
             $.ajaxSetup({
                 headers: {
@@ -734,7 +752,6 @@
                 url: "/features",
                 data: data,
                 success: function (params) {
-                    console.log(params);
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#featurefeedback");
@@ -771,8 +788,6 @@
     $("body").on("click", "#editFeatureToggle", function (event) {
         event.preventDefault();
         let feature_id = $(this).data("id");
-        console.log(feature_id);
-        console.log("htsgghd");
         $.getJSON("/features/" + feature_id, function (features) {
             var feature = features[0];
             if (feature.id !== null && feature.id !== undefined) {
@@ -826,7 +841,6 @@
     // deleteMakeToggle;
     $("body").on("click", "#editMakeToggle", function (event) {
         event.preventDefault();
-        console.log("here");
         let make_id = $(this).data("id");
         if (make_id !== "" && make_id !== undefined) {
             $.getJSON("/makes/" + make_id, function name(makes) {
@@ -836,7 +850,6 @@
                         "#makefeedback"
                     );
                     let make = makes[0];
-                    console.log(make);
                     makeCreateID.val(make.id);
                     makeName.val(make.make);
                 } else {
@@ -888,7 +901,6 @@
                     submit.prop({ disabled: false });
                 },
                 error: function (error) {
-                    console.log(error);
                     if (error.status == 422) {
                         var errors = "";
                         $.each(
@@ -979,13 +991,13 @@
                 url: "/yards",
                 data: data,
                 success: function (params) {
-                    console.log(params);
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#yardfeedback");
                         yardCreateID.val("");
                         $this.trigger("reset");
                         getVehicleYards();
+                        getDealerYards();
                     } else {
                         showError(result.error, "#yardfeedback");
                     }
@@ -1085,7 +1097,6 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                console.log("hdrstts");
                 $("#coverPhotoPreview").append(
                     '<img src="' +
                         e.target.result +
@@ -1156,7 +1167,6 @@
 
                 // const newFileList = new DataTransfer();
                 // for (let i = 0; i < newFiles.length; i++) {
-                //     console.log(newFiles[i]);
                 //     newFileList.items.add(newFiles[i]);
                 // }
                 // $("#addionalImages").prop("files", newFiles.files);
@@ -1194,8 +1204,8 @@
             reader.onload = function () {
                 var img = new Image();
                 img.onload = function () {
-                    var width = 800;
-                    var height = 600;
+                    var width = 850;
+                    var height = 500;
                     var canvas = document.createElement("canvas");
                     canvas.width = width;
                     canvas.height = height;
@@ -1209,14 +1219,11 @@
                         cover_image: true,
                     })
                         .done(function (params) {
-                            console.log(params);
                             if (params == "success") {
                                 $("#coverPhotoPreview").children().remove();
                             }
                         })
                         .fail(function (error) {
-                            console.log(error);
-                            console.log(error);
                         });
                 };
                 img.src = reader.result;
@@ -1235,8 +1242,8 @@
                     img.onload = function () {
                         var canvas = document.createElement("canvas");
                         var ctx = canvas.getContext("2d");
-                        canvas.width = 600;
-                        canvas.height = 450;
+                        canvas.width = 800;
+                        canvas.height = 500;
                         let leet = "image_" + i;
                         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                         var compressedDataUrl = canvas.toDataURL(
@@ -1250,7 +1257,6 @@
                             image: compressedDataUrl,
                         })
                             .done(function (params) {
-                                console.log(params);
 
                                 if (params == "success") {
                                     $('img[src="' + img.src + '"]')
@@ -1270,9 +1276,6 @@
                                 }
                             })
                             .fail(function (error) {
-                                console.log(error);
-
-                                console.log(error);
                             });
                     };
                 };
@@ -1313,12 +1316,12 @@
             transmission = transmissionHtm.val(),
             tags = vehicleTags.val(),
             description = descriptionHtm.val(),
-            usage = usage.val(),
-            gear = gear.val(),
-            speed = speed.val(),
-            terrain = terrain.val(),
-            engine = engine.val(),
-            horsepower = horsepower.val(),
+            usage = $("#usage").val(),
+            gear = $('#gear').val(),
+            speed = $('#speed').val(),
+            terrain = $('#terrain').val(),
+            engine = $('#engine').val(),
+            horsepower = $('#horsepower').val(),
             errors = [];
 
         savevehicle.prop("disabled", true);
@@ -1387,7 +1390,6 @@
                 url: "/vehicles",
                 data: data,
                 success: function (params) {
-                    console.log(params);
                     savevehicle.prop("disabled", false);
 
                     let result = JSON.parse(params);
@@ -1407,7 +1409,6 @@
                 },
 
                 error: function (error) {
-                    console.log(error);
                     savevehicle.prop("disabled", false);
 
                     if (error.status == 422) {
@@ -1439,7 +1440,6 @@
             $("#coverPhotoPreview").children().remove();
 
             $.getJSON("/vehicles/" + vehicle_id, function (vehicle) {
-                console.log(vehicle);
                 if (vehicle !== null && vehicle !== []) {
                     showSuccess(
                         "Vehicle accepted for editing, You can make changes and click save to save changes",
@@ -1565,7 +1565,7 @@
                     ) {
                         let preview = $("#coverPhotoPreview");
                         const coverImage = $("<img>")
-                            .attr("src", "vehicleimages/" + vehicle.cover_photo)
+                            .attr("src", "/vehicleimages/" + vehicle.cover_photo)
                             .attr("width", "100%")
                             .attr("height", "200px");
                         preview.append(coverImage);
@@ -1576,6 +1576,7 @@
                         )
                             .html("<i class='fal fa-trash btn-danger'></i>")
                             .on("click", function (event) {
+                                event.preventDefault();
                                 let $this = $(this),
                                     data = {
                                         _token: token,
@@ -1600,7 +1601,7 @@
                             JSON.parse(vehicle.images),
                             function (key, value) {
                                 let image = $("<img>")
-                                    .attr("src", "vehicleimages/" + value)
+                                    .attr("src", "/vehicleimages/" + value)
                                     .attr("width", "100%")
                                     .attr("height", "200px");
                                 let imgpreview = $('<div class="col-md-3">')
@@ -1618,6 +1619,7 @@
                                         "<i class='fal fa-trash btn-danger'></i>"
                                     )
                                     .on("click", function (event) {
+                                        event.preventDefault();
                                         let $this = $(this),
                                             data = {
                                                 _token: token,
@@ -1627,7 +1629,6 @@
                                             };
                                         $.post("/image-delete", data).done(
                                             function (params) {
-                                                console.log(params);
                                                 let result = JSON.parse(params);
                                                 if (
                                                     result.status == "success"
@@ -1650,7 +1651,6 @@
                             },
                         });
                     } else {
-                        console.log("here we are");
                     }
                 } else {
                     showError(
@@ -1686,9 +1686,6 @@
             make_id = filterMakeID.val(),
             model_id = filtermodelID.val(),
             yard_id = filterVehicleYardID.val();
-
-        console.log(token);
-
         let data = {
             _token: token,
             dealer_id: dealer_id,
@@ -1696,7 +1693,6 @@
             model_id: model_id,
             yard_id: yard_id,
         };
-        console.log(data);
         $.post("/vehicles-filter", data)
             .done(function (params) {
                 let vehicles = JSON.parse(params);
@@ -1736,12 +1732,10 @@
             model_id: model_id,
             yard_id: yard_id,
         };
-        console.log(data);
         $.post("/vehicles-filter", data, function (params) {
             let vehicles = JSON.parse(params);
             let tr = "",
                 i = 1;
-            console.log(vehicles);
             $.each(vehicles, function (key, value) {
                 let {
                     id,

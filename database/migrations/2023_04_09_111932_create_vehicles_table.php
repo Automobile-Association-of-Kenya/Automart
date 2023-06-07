@@ -35,11 +35,6 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->string('color')->nullable();
             $table->string('mileage')->nullable();
-            $table->string('gear', 60)->nullable();
-            $table->string('speed', 60)->nullable();
-            $table->string('terrain', 60)->nullable();
-            $table->string('engine', 60)->nullable();
-            $table->string('horsepower', 60)->nullable();
             $table->string('enginecc')->nullable();
             $table->string('interior')->nullable();
             $table->string('fuel_type')->nullable();

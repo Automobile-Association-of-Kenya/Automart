@@ -18,12 +18,13 @@
                                 '<li><i class="fa fa-thumbs-up text-success"></i>&nbsp;' +
                                 value.name +
                                 "</li>";
-                        } else {
-                            li +=
-                                '<li><i class="fa fa-thumbs-down text-danger"></i>&nbsp;' +
-                                value.name +
-                                "</li>";
                         }
+                        // else {
+                        //     li +=
+                        //         '<li><i class="fa fa-thumbs-down text-danger"></i>&nbsp;' +
+                        //         value.name +
+                        //         "</li>";
+                        // }
                     });
                     plan +=
                         '<div class="col-xl-4 col-lg-4 col-md-12"><div class="pricing-1 plan"><div class="plan-header"><h5>' +
@@ -36,7 +37,7 @@
                         value.billingcycle +
                         '</span> </div></div><div class="plan-list"><ul>' +
                         li +
-                        '</ul><div class="plan-button text-center"><a href="#" class="btn pricing-btn">Get Started</a></div></div></div></div>';
+                        '</ul><div class="plan-button text-center"><a href="/subscription/'+value.id+'" class="btn pricing-btn">Get Started</a></div></div></div></div>';
                 });
                 $("#plansSection").html(plan);
             }

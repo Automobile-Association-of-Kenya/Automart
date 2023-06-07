@@ -79,6 +79,7 @@ $(document).ready(function () {
                     "</option>";
             });
             $("#countyID").html(option);
+            $("#countyAddID").html(option);
             $(".chzn-select").select2({
                 allowClear: true,
             });
@@ -159,58 +160,59 @@ $(document).ready(function () {
     let emailLo = $("#emailLo"),
         passwordLo = $("#passwordLo"),
         loginForm = $("#loginForm");
-    loginForm.on("submit", function (event) {
-        event.preventDefault();
-        let $this = $(this),
-            email = emailLo.val(),
-            password = passwordLo.val(),
-            token = $this.find("input[name='_token']").val(),
-            loginUser = $("#loginUser");
-        loginUser.prop({ disabled: true });
+    // loginForm.on("submit", function (event) {
+    //     // event.preventDefault();
+    //     let $this = $(this),
+    //         email = emailLo.val(),
+    //         password = passwordLo.val(),
+    //         token = $this.find("input[name='_token']").val(),
+    //         loginUser = $("#loginUser");
+    //     loginUser.prop({ disabled: true });
 
-        let data = {
-            email: email,
-            password: password,
-        };
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": token,
-            },
-        });
-        $.ajax({
-            type: "POST",
-            url: "/login",
-            data: data,
-            success: function (params) {
-                console.log(params);
-                loginUser.prop({ disabled: false });
-                let result = JSON.parse(params);
-                if (result.status == "success") {
-                    showSuccess(result.success, "#feedback");
-                    window.setTimeout(function () {
-                        window.location.href = result.url;
-                    }, 7000);
-                } else {
-                    showError(result.error, "#feedback");
-                }
-            },
+    //     let data = {
+    //         email: email,
+    //         password: password,
+    //     };
+    //     $.ajaxSetup({
+    //         headers: {
+    //             "X-CSRF-TOKEN": token,
+    //         },
+    //     });
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "/login",
+    //         data: data,
+    //         success: function (params) {
+    //             // console.log(params);
+    //             loginUser.prop({ disabled: false });
+    //             let result = JSON.parse(params);
+    //             if (result.status == "success") {
+    //                 showSuccess(result.message, "#feedback");
+    //                 window.setTimeout(function () {
+    //                     console.log(JSON.parse(result.url));
+    //                     window.location.href = result.url;
+    //                 }, 7000);
+    //             } else {
+    //                 showError(result.error, "#feedback");
+    //             }
+    //         },
 
-            error: function (error) {
-                console.log(error);
-                loginUser.prop({ disabled: false });
+    //         error: function (error) {
+    //             console.log(error);
+    //             loginUser.prop({ disabled: false });
 
-                if (error.status == 422) {
-                    var errors = "";
-                    $.each(error.responseJSON.errors, function (key, value) {
-                        errors += value + "!";
-                    });
-                    showError(errors, "#feedback");
-                } else {
-                    showError("Error occurred during processing", "#feedback");
-                }
-            },
-        });
-    });
+    //             if (error.status == 422) {
+    //                 var errors = "";
+    //                 $.each(error.responseJSON.errors, function (key, value) {
+    //                     errors += value + "!";
+    //                 });
+    //                 showError(errors, "#feedback");
+    //             } else {
+    //                 showError("Error occurred during processing", "#feedback");
+    //             }
+    //         },
+    //     });
+    // });
 
     $("#passwordResetLinkForm").on("submit", function (event) {
         event.preventDefault();
@@ -419,4 +421,75 @@ $(document).ready(function () {
             },
         });
     });
+
+
+    let addDealerForm = $("#addDealerForm"),
+        dealerAddName = $("#dealerAddName"),
+        dealerAddPhone = $("#dealerAddPhone"),
+        dealerAddEmail = $("#dealerAddEmail"),
+        dealerAddAddress = $("#dealerAddAddress"),
+        countyAddID = $("#countyAddID");
+
+    addDealerForm.on("submit", function (event) {
+        event.preventDefault();
+        let name = dealerAddName.val(),
+            phone = dealerAddPhone.val(),
+            email = dealerAddEmail.val(),
+            address = dealerAddAddress.val(),
+            county_id = countyAddID.val(),
+            city = dealerCity.val(),
+            $this = $(this);
+
+        let data = {
+            name: name,
+            phone: phone,
+            email: email,
+            address: address,
+            county_id: county_id,
+            city: city,
+        };
+        console.log(data);
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $this.find("input[name='_token']").val(),
+            },
+        });
+        $.ajax({
+            method: "POST",
+            url: "/dealers",
+            data: data,
+            success: function (params) {
+                let result = JSON.parse(params);
+                $this.find("button[type='submit']").prop({ disabled: false });
+                if (result.status == "success") {
+                    showSuccess(result.message, ".dealersfeedback");
+                    window.setTimeout(function () {
+                        window.location.href = "/login";
+                    }, 7000);
+                } else {
+                    showError(result.error, ".dealersfeedback");
+                }
+            },
+
+            error: function (error) {
+                console.error(error);
+                $this.find("button[type='submit']").prop({ disabled: false });
+                if (error.status == 422) {
+                    var errors = "";
+                    $.each(error.responseJSON.errors, function (key, value) {
+                        errors += value + "!";
+                    });
+                    showError(errors, ".dealersfeedback");
+                } else {
+                    showError(
+                        "Error occurred during processing",
+                        ".dealersfeedback"
+                    );
+                }
+            },
+        });
+    });
+
+
 });

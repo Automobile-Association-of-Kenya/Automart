@@ -203,7 +203,7 @@
 
     <!-- Partners strat -->
     <div class="partners">
-        <div class="container">
+        {{-- <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="custom-slider slide-box-btn">
@@ -219,6 +219,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection

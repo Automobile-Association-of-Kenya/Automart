@@ -201,13 +201,26 @@ class VehicleController extends Controller
         if (!is_null($id)) {
             $query->where('id', $id);
         }
+        if (auth()->user()->role === "dealer") {
+            $query->where('dealer_id', auth()->user()->dealer_id);
+        }
         $yards = $query->with('dealer')->get();
+        
         return json_encode($yards);
     }
 
-    public function dealerYards($dealer_id)
+    public function dealerYards($dealer_id = null)
     {
-        $yards = $this->yard->where('dealer_id', $dealer_id)->get();
+        $query = $this->yard->query();
+        if (!is_null($dealer_id)) {
+            $query->where('dealer_id', $dealer_id);
+        }else {
+            if (auth()->user()->role === "dealer") {
+                $query->where('dealer_id', auth()->user()->dealer_id);
+            }
+        }
+        $yards = $query->with('dealer')->get();
+
         return json_encode($yards);
     }
 

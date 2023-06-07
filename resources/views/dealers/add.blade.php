@@ -55,12 +55,12 @@
                                     <a href="{{ url('/') }}">
                                         <img src="{{ asset('images/logo.png') }}" alt="logo">
                                     </a>
-                                    <h3><b>Create dealer account </b></h3>
+                                    <h3><b>Add Dealer Information </b></h3>
                                 </div>
                                 <div class="card-body">
 
 
-                                    <form action="{{ route('dealers.store') }}" method="POST" id="dealerCreateForm">
+                                    <form action="{{ route('dealers.store') }}" method="POST" id="addDealerForm">
 
                                         @csrf
                                         <p><b>Dealer Information</b></p>
@@ -68,7 +68,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label class="float-left">Dealer Name</label>
-                                                <input type="text" name="dealername" id="dealerName"
+                                                <input type="text" name="dealername" id="dealerAddName"
                                                     value="{{ old('dealername') }}"
                                                     class="form-control @error('dealername') invalid @enderror" required>
                                                 @if ($errors->has('dealername'))
@@ -78,7 +78,7 @@
 
                                             <div class="col-md-6">
                                                 <label class="float-left">Dealer Phone</label>
-                                                <input type="text" name="dealerphone" id="dealerPhone"
+                                                <input type="text" name="dealerphone" id="dealerAddPhone"
                                                     value="{{ old('dealerphone') }}"
                                                     class="form-control @error('dealerphone') invalid @enderror" required>
                                                 @if ($errors->has('dealerphone'))
@@ -88,7 +88,7 @@
 
                                             <div class="col-md-6">
                                                 <label class="float-left">Dealer Email</label>
-                                                <input type="email" name="dealeremail" id="dealerEmail"
+                                                <input type="email" name="dealeremail" id="dealerAddEmail"
                                                     value="{{ old('dealeremail') }}"
                                                     class="form-control @error('dealeremail') invalid @enderror" required>
                                                 @if ($errors->has('dealeremail'))
@@ -98,7 +98,7 @@
 
                                             <div class="col-md-6">
                                                 <label class="float-left">Zip/Potal Address</label>
-                                                <input type="text" name="address" id="dealerAddress"
+                                                <input type="text" name="address" id="dealerAddAddress"
                                                     value="{{ old('address') }}"
                                                     class="form-control @error('address') invalid @enderror">
                                                 @if ($errors->has('address'))
@@ -108,7 +108,7 @@
 
                                             <div class="col-md-6">
                                                 <label class="float-left">County</label>
-                                                <select class="form-control form-control-md" name="county_id" id="countyID"
+                                                <select class="form-control form-control-md" name="county_id" id="countyAddID"
                                                     style="width: 100%;"></select>
                                                 {{-- <select name="county_id" id=""
                                             class="form-control form-control-md chzn-select" required></select> --}}
@@ -119,7 +119,7 @@
 
                                             <div class="col-md-6">
                                                 <label class="float-left">City/Town</label>
-                                                <input type="text" name="city" id="dealerCity"
+                                                <input type="text" name="city" id="dealerAddCity"
                                                     value="{{ old('city') }}"
                                                     class="form-control @error('city') invalid @enderror">
                                                 @if ($errors->has('city'))
@@ -129,60 +129,8 @@
 
                                         </div>
 
-                                        <hr>
-                                        <p><b>Admin Information</b></p>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label class="float-left">Name</label>
-                                                <input type="text" name="name" id="adminName"
-                                                    value="{{ old('name') }}"
-                                                    class="form-control @error('name') invalid @enderror" required>
-                                                @if ($errors->has('name'))
-                                                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                                                @endif
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="float-left">Phone</label>
-                                                <input type="text" name="phone" id="adminPhone"
-                                                    value="{{ old('phone') }}"
-                                                    class="form-control @error('phone') invalid @enderror" required>
-                                                @if ($errors->has('phone'))
-                                                    <span class="text-danger">{{ $errors->first('phone') }}</span>
-                                                @endif
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="float-left">Email</label>
-                                                <input type="email" name="email" id="adminEmail"
-                                                    value="{{ old('email') }}"
-                                                    class="form-control @error('email') invalid @enderror" required>
-                                                @if ($errors->has('email'))
-                                                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                                                @endif
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <label class="float-left">Password</label>
-                                                <div class="input-group">
-                                                    <input type="password" name="password" id="adminPassword"
-                                                        class="form-control" required autocomplete="">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text show-passwordAdmin"><i
-                                                                class="fa fa-eye"></i></span>
-                                                    </div>
-                                                </div>
-                                                @if ($errors->has('password'))
-                                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                                @endif
-                                            </div>
-
-                                        </div>
-
                                         <div class="col-md-12">
                                             <div id="feedback" class="dealersfeedback"></div>
-
                                         </div>
 
                                         <div class="col-md-12 text-left">
@@ -196,30 +144,11 @@
 
                                         <div class="col-md-12 text-center">
                                             <button type="submit" class="btn btn-md btn-warning btn-round"
-                                                id="registerSubmit">Register</button>
+                                                id="registerSubmit">Submit</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div id="feedback"></div>
-
-                                <div class="col-md-12 row mb-2">
-                                    <div class="col-md-12 col-md-12 row mb-4">
-                                        <div class="col-md-6 text-center">
-                                            @if (Route::has('login'))
-                                                <a href="{{ route('login') }}" class="text text-warning">Login</a>
-                                            @endif
-                                        </div>
-
-                                        <div class="col-md-6 text-center">
-
-                                            @if (Route::has('password.request'))
-                                                <a href="{{ route('password.request') }}"
-                                                    class="text text-warning">Forgot
-                                                    Password</a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

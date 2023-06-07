@@ -36,9 +36,9 @@ class ApplicationController extends Controller
     {
         if (auth()->user()) {
             if (auth()->user()->role === "dealer") {
-                return view('dealers.index');
+                return redirect()->route('dealers.index');
             } elseif (auth()->user()->role === "admin") {
-                return view('dashboard.index');
+                return redirect()->route('dashboard');
             } elseif (auth()->user()->role === "buyer") {
                 return redirect()->route('profile');
             } elseif (auth()->user()->role === "partner") {
@@ -118,7 +118,7 @@ class ApplicationController extends Controller
                 return $model->select('id', 'model');
             }, 'prices' => function ($price) {
                 return $price->select('price');
-            }])->paginate(20);
+            }])->latest()->paginate(20);
         // return $vehicles;
         return view('vehicles.types', compact('type', 'vehicles'));
     }
@@ -198,7 +198,7 @@ class ApplicationController extends Controller
             return $model->select('id', 'model');
         }, 'prices' => function ($price) {
             return $price->select('price');
-        }])->paginate(20);
+        }])->latest()->paginate(20);
 
         return view('vehicles.search', compact('vehicles'));
     }
@@ -238,7 +238,7 @@ class ApplicationController extends Controller
                 return $model->select('id', 'model');
             }, 'prices' => function ($price) {
                 return $price->select('price');
-            }])->paginate(20);
+            }])->latest()->paginate(20);
 
         return view('vehicles.makes', compact('vehicles', 'make'));
     }
@@ -256,7 +256,7 @@ class ApplicationController extends Controller
                 $model->select('id', 'model');
             }, 'prices' => function ($price) {
                 $price->select('price');
-            }])->paginate(6);
+            }])->latest()->paginate(6);
 
         return json_encode($vehicles);
     }
@@ -274,7 +274,7 @@ class ApplicationController extends Controller
                 $model->select('id', 'model');
             }, 'prices' => function ($price) {
                 $price->select('price');
-            }])->paginate(20);
+            }])->latest()->paginate(20);
 
         return view('vehicles.new', compact('vehicles'));
     }

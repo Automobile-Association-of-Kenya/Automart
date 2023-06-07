@@ -22,7 +22,7 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        $subscriptions = $this->subscription->with('properties:id,name')->orderBy('cost','ASC')->get();
+        $subscriptions = $this->subscription->with('properties:id,name')->orderBy('cost', 'ASC')->get();
         return json_encode($subscriptions);
     }
 
@@ -43,9 +43,16 @@ class SubscriptionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-
+        $plan = $this->subscription->with('properties')->find($id);
+        if ($plan->cost <= 0) {
+            // $subscription = $this->subscription->getDealerSubscription
+            DB::table('dealer_subscription')->insert(['dealer_id' => auth()->user()->dealer_id, 'subscription_id' => $id,'status'=>'active']);
+            return redirect()->route('dealers.index');
+        } else {
+            return view('subscriptions.create', compact('plan'));
+        }
     }
 
     /**
@@ -68,7 +75,7 @@ class SubscriptionController extends Controller
         }
         DB::commit();
 
-        return json_encode(['status'=>'success','message'=>$message]);
+        return json_encode(['status' => 'success', 'message' => $message]);
     }
 
     /**
