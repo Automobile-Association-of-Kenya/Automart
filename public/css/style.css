@@ -46,22 +46,22 @@ a {
 }
 
 a:hover {
-    color: #5a5959;
+    color: #444;
     text-decoration: none;
 }
 
 p {
-    font-size: 16px;
-    line-height: 25px;
-    color: #5a5959;
+    font-size: 14px;
+    line-height: 16px;
+    color: #333;
 }
 
 strong {
-    color: #5a5959;
+    color: #444;
 }
 
 span {
-    color: #5a5959;
+    color: #444;
 }
 
 h1,
@@ -84,7 +84,7 @@ ul {
     margin: 0;
     padding: 0;
     list-style: none;
-    color: #5a5959;
+    color: #444;
 }
 
 .btn.focus,
@@ -1163,7 +1163,7 @@ input[type=checkbox]:checked+label:before {
 .table-bordered {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    color: #5a5959;
+    color: #444;
     font-size: 15px;
 }
 
@@ -2911,7 +2911,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .car-box .detail .location a {
-    color: #5a5959;
+    color: #444;
 }
 
 .car-box .footer {
@@ -3074,7 +3074,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .car-model-2 .modal-right-content .bullets {
-    color: #5a5959;
+    color: #444;
     font-size: 14px;
     font-weight: 400;
     padding: 0px;
@@ -3133,7 +3133,7 @@ input[type=checkbox]:checked+label:before {
 .car-model-2 .modal-right-content dl {
     margin-bottom: 20px;
     font-size: 14px;
-    color: #5a5959;
+    color: #444;
 }
 
 .car-model-2 .modal-right-content dl dt {
@@ -3525,7 +3525,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .car-box-2 .custom-list li a {
-    color: #5a5959;
+    color: #444;
 }
 
 .car-box-2 .tag-2 {
@@ -3620,7 +3620,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .car-box-3 .custom-list li a {
-    color: #5a5959;
+    color: #444;
 }
 
 .car-box-3 .detail .title {
@@ -4183,7 +4183,7 @@ input[type=checkbox]:checked+label:before {
 
 .pricing-1 .plan-header .plan-price span {
     font-size: 16px;
-    color: #5a5959;
+    color: #444;
     font-weight: 500;
 }
 
@@ -4204,7 +4204,7 @@ input[type=checkbox]:checked+label:before {
     font-size: 24px;
     position: relative;
     top: -30px;
-    color: #5a5959;
+    color: #444;
     font-weight: 500;
 }
 
@@ -4220,7 +4220,7 @@ input[type=checkbox]:checked+label:before {
 
 .pricing-1 .plan-header .plan-price span {
     font-size: 16px;
-    color: #5a5959;
+    color: #444;
     font-weight: 500;
 }
 
@@ -4319,11 +4319,11 @@ input[type=checkbox]:checked+label:before {
 
 .team-1 .team-inner p a {
     font-size: 15px;
-    color: #5a5959;
+    color: #444;
 }
 
 .team-1 h6 a:hover {
-    color: #5a5959;
+    color: #444;
 }
 
 .team-1 .social {
@@ -4439,7 +4439,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .team-2 .detail .contact ul li a {
-    color: #5a5959;
+    color: #444;
 }
 
 .team-2 .photo::before {
@@ -4652,12 +4652,12 @@ input[type=checkbox]:checked+label:before {
 }
 
 .team-3 .team-info p a {
-    color: #5a5959;
+    color: #444;
     font-size: 15px;
 }
 
 .team-3 .team-info p a:hover {
-    color: #5a5959;
+    color: #444;
 }
 
 .team-3:hover .team-social .team-overlay {
@@ -5352,16 +5352,16 @@ input[type=checkbox]:checked+label:before {
 }
 
 .blog-1 .post-meta ul li strong a {
-    color: #5a5959;
+    color: #444;
 }
 
 .blog-1 .post-meta ul li a {
-    color: #5a5959;
+    color: #444;
 }
 
 .blog-1 .post-meta ul li i {
     margin-right: 5px;
-    color: #5a5959;
+    color: #444;
 }
 
 .blog-1 .post-meta ul li.float-right {
@@ -5720,7 +5720,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .blog-3 .b-btn:hover {
-    color: #5a5959;
+    color: #444;
 }
 
 /**  Product slider box start **/
@@ -5865,7 +5865,7 @@ input[type=checkbox]:checked+label:before {
 
 .table-bordered {
     font-weight: 500;
-    color: #5a5959;
+    color: #444;
     background: #fff;
     font-size: 15px;
 }
@@ -6344,7 +6344,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .posts-by-category ul li a {
-    color: #5a5959;
+    color: #444;
     font-weight: 500;
     font-size: 15px;
 }
@@ -6362,7 +6362,7 @@ input[type=checkbox]:checked+label:before {
 .tags-box ul li a {
     border: 1px solid #f3f3f3;
     background: #f3f3f3;
-    color: #5a5959;
+    color: #444;
     display: inline-block;
     font-size: 14px;
     margin: 0 0 5px;
@@ -6402,11 +6402,11 @@ input[type=checkbox]:checked+label:before {
 
 .recent-posts-box .listing-post-meta {
     font-size: 14px;
-    color: #5a5959;
+    color: #444;
 }
 
 .recent-posts-box .listing-post-meta a {
-    color: #5a5959;
+    color: #444;
 }
 
 /** Question start **/
@@ -6417,7 +6417,7 @@ input[type=checkbox]:checked+label:before {
     position: relative;
     font-size: 15px;
     margin-bottom: 15px;
-    color: #5a5959;
+    color: #444;
 }
 
 .question .contact-info li i {
@@ -6428,11 +6428,11 @@ input[type=checkbox]:checked+label:before {
 }
 
 .question .contact-info li a {
-    color: #5a5959;
+    color: #444;
 }
 
 .question .contact-info li a:hover {
-    color: #5a5959;
+    color: #444;
 }
 
 .question .social-list li {
@@ -7614,12 +7614,12 @@ input[type=checkbox]:checked+label:before {
 
 .contact-1 .contact-info .ci-box p {
     font-size: 16px;
-    color: #5a5959;
+    color: #444;
     margin-bottom: 0;
 }
 
 .contact-1 .contact-info .ci-box p a {
-    color: #5a5959;
+    color: #444;
 }
 
 .contact-1 .form-control {
@@ -7647,7 +7647,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .contact-1 .form-floating {
-    color: #5a5959;
+    color: #444;
 }
 
 .contact-1 .form-floating>.form-control:focus,
@@ -7694,7 +7694,7 @@ input[type=checkbox]:checked+label:before {
 .contact-2 .contact-info strong {
     font-weight: 500;
     font-size: 14px;
-    color: #5a5959;
+    color: #444;
 }
 
 .contact-2 .contact-info i {
@@ -8493,19 +8493,19 @@ input[type=checkbox]:checked+label:before {
 
 
 .contact-section .login-inner-form {
-    color: #5a5959;
+    color: #444;
     width: 90%;
     margin: 2em 1em;
 }
 /*
 .contact-section .login-inner-form p {
-    color: #5a5959;
+    color: #444;
     font-size: 16px;
     margin: 0;
 }
 
 .contact-section .login-inner-form p a {
-    color: #5a5959;
+    color: #444;
     font-weight: 500;
 } */
 
@@ -8530,7 +8530,7 @@ input[type=checkbox]:checked+label:before {
     font-size: 16px;
     outline: 0;
     font-weight: 400;
-    color: #5a5959;
+    color: #444;
     border-radius: 3px;
     border: 1px solid #e8f806;
 } */
@@ -8600,7 +8600,7 @@ input[type=radio] {
 }
 
 .contact-section .login-inner-form .form-check a {
-    color: #5a5959;
+    color: #444;
     float: right;
 }
 
@@ -8643,7 +8643,7 @@ input[type=radio] {
 
 .contact-section .login-inner-form .checkbox a {
     font-size: 16px;
-    color: #5a5959;
+    color: #444;
     float: right;
 }
 
@@ -9179,7 +9179,7 @@ input[type=radio] {
 .blog-tags a {
     border: 1px solid #f3f3f3;
     background: #f3f3f3;
-    color: #5a5959;
+    color: #444;
     display: inline-block;
     font-size: 14px;
     margin: 0 0 5px;
@@ -9372,7 +9372,7 @@ input[type=radio] {
     text-decoration: none;
     float: right;
     margin-left: 15px;
-    color: #5a5959;
+    color: #444;
 }
 
 .footer .listing-meta span a i {
@@ -9409,7 +9409,7 @@ input[type=radio] {
 .checkbox label {
     font-weight: 400;
     font-size: 15px;
-    color: #5a5959;
+    color: #444;
 }
 
 /** Dashboard nav start **/
@@ -9718,7 +9718,7 @@ input[type=radio] {
 .heading-car p {
     font-size: 15px;
     margin-bottom: 0;
-    color: #5a5959;
+    color: #444;
 }
 
 .heading-car h6 i {
@@ -10144,7 +10144,7 @@ input[type=radio] {
     margin-right: 5px;
     padding-right: 5px;
     border-right: solid 1px #777;
-    color: #5a5959;
+    color: #444;
 }
 
 .shop-info .reviews-box .reviews a i {
@@ -10229,7 +10229,7 @@ table {
     padding-right: 10px;
     text-transform: uppercase;
     font-size: 15px;
-    color: #5a5959;
+    color: #444;
 }
 
 .shop-table.cart .t-600 {
@@ -10266,7 +10266,7 @@ input[type="password"],
 input[type="tel"] {
     border: 1px solid #e8e8e8;
     padding: 6px 15px;
-    color: #5a5959;
+    color: #444;
     max-width: 100%;
     outline: none;
 }
@@ -10320,7 +10320,7 @@ input[type="tel"] {
     border-radius: 0;
     background: #fff;
     border: none;
-    color: #5a5959;
+    color: #444;
 }
 
 .faq-info .nav-tabs .nav-link.active {
@@ -10333,7 +10333,7 @@ input[type="tel"] {
 
 .faq-info .accordion {
     background: #fff;
-    color: #5a5959;
+    color: #444;
     cursor: pointer;
     padding: 15px 20px;
     width: 100%;
@@ -10346,7 +10346,7 @@ input[type="tel"] {
 
 .faq-info .active,
 .accordion:hover {
-    color: #5a5959;
+    color: #444;
 }
 
 .faq-info .panel {
@@ -11008,7 +11008,7 @@ input[type="tel"] {
     text-align: center;
     padding: 20px 10px;
     font-size: 16px;
-    color: #5a5959;
+    color: #444;
     margin-bottom: 20px;
 }
 

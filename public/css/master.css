@@ -559,3 +559,38 @@ td .status{
         grid-template-columns: 100%;
     }
 }
+
+
+.card1:hover {
+    background: #006544 ;
+    border: 1px solid #006544 ;
+}
+
+.card1:hover .list-group-item {
+    background: #006544  !important
+}
+
+.card2:hover {
+    background: #5cf5c2;
+    border: 1px solid #5cf5c2;
+}
+
+.card2:hover .list-group-item {
+    background: #5cf5c2 !important
+}
+
+
+.card3:hover {
+    background: #ff95e9;
+    border: 1px solid #ff95e9;
+}
+
+.card3:hover .list-group-item {
+    background: #ff95e9 !important
+}
+
+
+.card:hover .btn-outline-dark {
+    color: white;
+    background: #212529;
+}

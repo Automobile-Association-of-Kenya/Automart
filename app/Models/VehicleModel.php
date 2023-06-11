@@ -12,7 +12,7 @@ class VehicleModel extends Model
     use HasFactory;
 
     protected $fillable = ['user_id','make_id', 'model'];
-    
+
     public $timestamps = false;
 
     /**
@@ -33,6 +33,16 @@ class VehicleModel extends Model
     public function vehicles(): HasMany
     {
         return $this->hasMany(Vehicle::class, 'make_id', 'id');
+    }
+
+    /**
+     * Get all of the tradeInStore for the VehicleModel
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tradeInStore(): HasMany
+    {
+        return $this->hasMany(Tradein::class, 'vehicle_model_id', 'id');
     }
 
 }

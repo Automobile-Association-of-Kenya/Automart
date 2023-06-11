@@ -34,7 +34,6 @@ class DealerController extends Controller
                 $subscription = $this->dealer->subscription(auth()->user()->dealer_id);
                 if (!is_null($subscription)) {
                 }else {
-                    return $subscription;
                     return redirect()->route('subscription.plan');
 
                 }
@@ -65,6 +64,8 @@ class DealerController extends Controller
     {
         $str = strtotime(date('Y-m-d H:i:s')) . auth()->id();
         $vehicles = $this->dealer->dealerVehicles();
+        $subscription = $this->checksubscription();
+
         return view('dealers.vehicles', compact('vehicles','str'));
     }
 
@@ -97,18 +98,21 @@ class DealerController extends Controller
         return json_encode(['status' => 'success', 'url' => $url, 'message' => 'Dealer account created successfully. And verification link has been sent to your email.']);
     }
 
-    // public function summary()
-    // {
-    //     $vehicles = $this->dealer->dealerVehicles();
-    //     $quotes = $this->dealer->dealerQuotes();
-    // }
+    public function summary()
+    {
+        $vehicles = $this->dealer->dealerVehicles();
+        $quotes = $this->dealer->dealerQuotes();
+    }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function requests()
     {
-        //
+        $quotes = $this->dealer->quotes();
+        $finances = $this->dealer->finances();
+        $tradeins = $this->dealer->tradeins();
+        return view('dealers.requests', compact('quotes', 'finances', 'tradeins'));
     }
 
     /**

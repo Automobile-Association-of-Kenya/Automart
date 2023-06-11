@@ -28,7 +28,8 @@
         <div class="container">
             <div class="main-title text-center">
                 <h1>Subscription Plans</h1>
-                <p>To help the company meet its obligations and provide seamless services, we charge a small levy to use our platform as outlined below.</p>
+                <p>To help the company meet its obligations and provide seamless services, we charge a small levy to use our
+                    platform as outlined below.</p>
             </div>
             <div class="row" id="plansSection">
 
@@ -107,9 +108,98 @@
             </div>
         </div>
     </div>
-
 @endsection
 
+
+<div class="modal fade" id="subscriptionPaymentModal" tabindex="-1" role="dialog" aria-labelledby="financeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" id="vehiclePreviewSection">
+            <div class="modal-header">
+                <div class="modal-title" id="subscriptionOverviewModalLabel">
+                    <h4 class="text-black"></h4>
+                </div>
+                <button type="button" class="close btn btn-warning text-danger" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="subscriptiondescription"></p>
+                <div class="row">
+                    <div class="col-md-5" id="subscriptiondetails">
+
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-header">
+                                <nav class="nav-justified bg-white">
+                                    <div class="nav nav-tabs " id="nav-tab" role="tablist">
+                                        <a class="nav-item nav-link active" id="pop1-tab" data-toggle="tab"
+                                            href="#mpesaPaymentTab" role="tab" aria-controls="pop1"
+                                            aria-selected="true">MPesa Payment</a>
+                                        <a class="nav-item nav-link" id="vehicles-list-tab" data-toggle="tab"
+                                            href="#cardPaymentTab" data-target="#cardPaymentTab" role="tab"
+                                            aria-controls="pop1" aria-selected="true">Card
+                                            Payment</a>
+                                    </div>
+                                </nav>
+                            </div>
+
+                            <div class="card-body tab-content">
+                                <div id="paymentfeedbac"></div>
+                                <div class="tab-pane fade show active" id="mpesaPaymentTab" role="tabpanel">
+                                    <form action="{{ route('payments.store') }}" method="post" id="mpesaPaymentForm"
+                                        id="mpesaPaymentForm">
+                                        @csrf
+                                        <div class="form-group mb-2">
+                                            <label for="">Enter the phone number you would like to pay with for
+                                                this plan in the format indicated in the textbox below and click
+                                                process. A
+                                                popup will be sent to your phone. Accept and key in you mpesa pin to
+                                                complete. </label>
+                                        </div>
+                                        <input type="hidden" name="subscription_for_payment_id"
+                                            id="subscriptionForPaymentID">
+
+                                        <input type="hidden" name="user_id" id="subscriberID"
+                                            value="{{ auth()->id() }}">
+                                        <input type="hidden" name="dealer_id" id="dealerID"
+                                            value="{{ auth()->user()->dealer_id }}">
+
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control" name="price"
+                                                id="subscriptionPrice" disabled>
+                                        </div>
+
+                                        <div class="form-group mb-2">
+                                            <input type="text" class="form-control form-control-lg mb-2"
+                                                name="phone" id="phoneNumber" placeholder="2547xxxxxxxx"
+                                                value="{{ intval(auth()->user()->phone) }}">
+                                        </div>
+
+                                        <div class="loadersection"></div>
+                                        <div id="paymentfeedback"></div>
+
+                                        <button type="submit" class="btn btn-success"
+                                            id="mpesa-submit-button">Process</button>
+                                    </form>
+                                </div>
+
+                                <div class="tab-pane fade" id="cardPaymentTab" role="tabpanel">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- @php
+    die();
+@endphp --}}
 
 @section('footer_scripts')
     <script src="{{ asset('js/main/subscriptions.js') }}"></script>

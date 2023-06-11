@@ -22,6 +22,8 @@ class Vehicle extends Model
         'horsepower',
     ];
 
+    protected $with = ['make:id,make','model:id,model','dealer:id,name,phone,email'];
+
     /**
      * Get the dealer that owns the Vehicle
      *
@@ -91,6 +93,36 @@ class Vehicle extends Model
     public function type(): BelongsTo
     {
         return $this->belongsTo(Type::class, 'type_id');
+    }
+
+    /**
+     * Get all of the tradeins for the Vehicle
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tradeins(): HasMany
+    {
+        return $this->hasMany(Tradein::class, 'vehicle_id', 'id');
+    }
+
+    /**
+     * Get all of the quotes for the Vehicle
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function quotes(): HasMany
+    {
+        return $this->hasMany(Quote::class, 'vehicle_id', 'id');
+    }
+
+    /**
+     * Get all of the finance for the Vehicle
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function finance(): HasMany
+    {
+        return $this->hasMany(Finance::class, 'vehicle_id', 'id');
     }
 
     public function addfeatures($id, $features)

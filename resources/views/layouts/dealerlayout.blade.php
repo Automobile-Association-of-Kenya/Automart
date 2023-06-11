@@ -14,6 +14,45 @@
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
 
     <title>@yield('title') | AA Kenya Limited</title>
+    <style>
+        .pagetitle {
+            margin-bottom: 10px;
+        }
+
+        .pagetitle h1 {
+            font-size: 24px;
+            margin-bottom: 0;
+            font-weight: 600;
+            color: #006544;
+        }
+
+        .dashboard .info-card {
+            padding-bottom: 10px;
+        }
+
+        .dashboard .info-card h6 {
+            font-size: 28px;
+            color: #006544;
+            font-weight: 700;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard .sales-card .card-icon {
+            color: #006544;
+            background: #f6f6fe;
+        }
+
+        .dashboard .revenue-card .card-icon {
+            color: #006544;
+            background: #e0f8e9;
+        }
+
+        .dashboard .customers-card .card-icon {
+            color: #fed945;
+            background: #ffecdf;
+        }
+    </style>
     @yield('header_styles')
 </head>
 
@@ -46,9 +85,9 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('users.index') }}" class='validation' data-id=49 id="loans">
+                    <a href="{{ route('dealer.requests') }}" class='validation' data-id=49 id="loans">
                         <span><i class="fal fa-users-crown"></i></span>
-                        <span>Quote Requests</span>
+                        <span>Requests/Leads</span>
                     </a>
                 </li>
 
@@ -86,31 +125,31 @@
             </div> --}}
 
             @auth
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink6"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ asset('images/avatar.png') }}" height="30px" width="30px"alt=""
-                                class="profilephoto">{{ auth()->user()->name }}
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
-                            @if (auth()->user()->role === 'admin' && auth()->user()->role === 'dealer')
-                                <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
-                            @endif
-                            {{-- <li><a class="dropdown-item" href="">Logout</a></li> --}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink6" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ asset('images/avatar.png') }}" height="30px" width="30px"alt=""
+                            class="profilephoto">{{ auth()->user()->name }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
+                        @if (auth()->user()->role === 'admin' && auth()->user()->role === 'dealer')
+                            <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
+                        @endif
+                        {{-- <li><a class="dropdown-item" href="">Logout</a></li> --}}
 
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
 
-                                <li><a class="dropdown-item" :href="route('logout')"
-                                        onclick="event.preventDefault();
+                            <li><a class="dropdown-item" :href="route('logout')"
+                                    onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                        {{ __('Log Out') }}
-                                    </a></li>
-                            </form>
-                        </ul>
-                    </li>
-                @endauth
+                                    {{ __('Log Out') }}
+                                </a></li>
+                        </form>
+                    </ul>
+                </li>
+            @endauth
         </div>
 
         @yield('main')

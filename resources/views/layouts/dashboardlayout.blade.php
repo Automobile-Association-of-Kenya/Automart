@@ -20,6 +20,42 @@
             color: #f00;
             font-weight: 600
         }
+        .pagetitle {
+            margin-bottom: 10px;
+        }
+        .pagetitle h1 {
+            font-size: 24px;
+            margin-bottom: 0;
+            font-weight: 600;
+            color: #006544;
+        }
+        .dashboard .info-card {
+            padding-bottom: 10px;
+        }
+        .dashboard .info-card h6 {
+            font-size: 28px;
+            color: #006544;
+            font-weight: 700;
+            margin: 0;
+            padding: 0;
+        }
+        .dashboard .sales-card .card-icon {
+            color: #006544;
+            background: #f6f6fe;
+        }
+        .dashboard .revenue-card .card-icon {
+            color: #006544;
+            background: #e0f8e9;
+        }
+        .dashboard .customers-card .card-icon {
+            color: #fed945;
+            background: #ffecdf;
+        }
+        .sidebar-menu li.active{
+            border-bottom: 1px solid #fff;
+            border-top: 1px solid #fff;
+            background: #06ad75;
+        }
     </style>
     @yield('header_styles')
 </head>
@@ -37,42 +73,49 @@
 
         <div class="sidebar-menu">
             <ul>
-                <li>
+                <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
                     <a href="{{ route('dashboard') }}" class='validation' data-id=48 id="dashboard">
                         <span><i class="fal fa-tachometer"></i></span>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="{{ Request::is('vehicles') ? 'active' : '' }}">
                     <a href="{{ route('vehicles.index') }}" class='validation' data-id=2 id="membership">
                         <span><i class="fal fa-cars"></i></span>
                         <span>Vehicles</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="{{ Request::is('requests') ? 'active' : '' }}">
+                    <a href="{{ route('requests.index') }}" class='validation' data-id=2 id="membership">
+                        <span><i class="fal fa-hand-heart"></i></span>
+                        <span>Requests</span>
+                    </a>
+                </li>
+
+                <li class="{{ Request::is('users') ? 'active' : '' }}">
                     <a href="{{ route('users.index') }}" class='validation' data-id=49 id="loans">
                         <span><i class="fal fa-users-crown"></i></span>
                         <span>Users</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="{{ Request::is('accounts') ? 'active' : '' }}">
                     <a href="{{ route('accounts.index') }}" id="accounts" class='validation' data-id=14>
                         <span><i class="fal fa-cog"></i></span>
                         <span>Accounting</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="{{ Request::is('settings') ? 'active' : '' }}">
                     <a href="{{ route('settings.index') }}" id="settings" class='validation' data-id=14>
                         <span><i class="fal fa-cog"></i></span>
                         <span>Settings</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="{{ Request::is('reports') ? 'active' : '' }}">
                     <a href="reports.php" id="reports" class='validation' data-id=56>
                         <span><i class="fal fa-chart-line"></i></span>
                         <span>Reports</span>

@@ -10,7 +10,7 @@ class Make extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['make'];
+    protected $fillable = ['make','logo'];
     public $timestamps = false;
     /**
      * Get all of the models for the Make
@@ -32,5 +32,13 @@ class Make extends Model
         return $this->hasMany(Vehicle::class, 'make_id', 'id');
     }
 
-
+    /**
+     * Get all of the tradeins for the Make
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tradeins(): HasMany
+    {
+        return $this->hasMany(Tradein::class, 'make_id', 'id');
+    }
 }

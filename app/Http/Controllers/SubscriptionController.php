@@ -30,7 +30,6 @@ class SubscriptionController extends Controller
     public function features()
     {
         $features = $this->subsprop->get();
-
         return json_encode($features);
     }
 
@@ -43,17 +42,17 @@ class SubscriptionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id)
-    {
-        $plan = $this->subscription->with('properties')->find($id);
-        if ($plan->cost <= 0) {
-            // $subscription = $this->subscription->getDealerSubscription
-            DB::table('dealer_subscription')->insert(['dealer_id' => auth()->user()->dealer_id, 'subscription_id' => $id,'status'=>'active']);
-            return redirect()->route('dealers.index');
-        } else {
-            return view('subscriptions.create', compact('plan'));
-        }
-    }
+    // public function create($id)
+    // {
+    //     $plan = $this->subscription->with('properties')->find($id);
+    //     if ($plan->cost <= 0) {
+    //         // $subscription = $this->subscription->getDealerSubscription
+    //         DB::table('dealer_subscription')->insert(['dealer_id' => auth()->user()->dealer_id, 'subscription_id' => $id,'status'=>'active']);
+    //         return redirect()->route('dealers.index');
+    //     } else {
+    //         return view('subscriptions.create', compact('plan'));
+    //     }
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -85,6 +84,12 @@ class SubscriptionController extends Controller
     {
         $subscription = $this->subscription->with('properties')->find($id);
         return json_encode($subscription);
+    }
+
+    public function subscribe(Request $request)
+    {
+
+        return $request;
     }
 
     /**

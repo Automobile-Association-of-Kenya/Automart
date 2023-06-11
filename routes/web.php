@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DealerController;
 use App\Http\Controllers\FinanceController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\ServicesController;
@@ -120,7 +121,10 @@ Route::controller(SubscriptionController::class)->group(function () {
 Route::resource('subscriptions', SubscriptionController::class);
 Route::get('subscription-plans', [SubscriptionController::class, 'plans'])->name('subscription.plan');
 Route::get('subscription-features', [SubscriptionController::class, 'features']);
-Route::get('subscription/{id}', [SubscriptionController::class, 'create'])->name('subscription');
+
+Route::post('subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+
+Route::get('mpesaconfirm/{recc}/{checjc}', [PaymentController::class, 'mpesaconfirm']);
 /** Subscriptions */
 
 Route::controller(SettingsController::class)->group(function ()
@@ -135,7 +139,8 @@ Route::resource('services', ServicesController::class);
 Route::get('services-get/{id?}', [ServicesController::class,'services']);
 
 Route::resource('accounts', AccountsController::class);
-
+Route::get('accounts-get/{id?}', [AccountsController::class, 'get']);
+Route::post('accounts-subscribe', [AccountsController::class, 'subscribe'])->name('accounts.subscribe');
 
 Route::resource('dealers', DealerController::class);
 Route::get('dealer-add', [DealerController::class, 'add'])->name('dealer.add');
@@ -167,6 +172,7 @@ Route::prefix('dealer')->group(function ()
 {
     Route::get('vehicles', [DealerController::class, 'vehicles'])->name('dealer.vehicles');
     Route::get('summary', [DealerController::class, 'summary']);
+    Route::get('requests', [DealerController::class, 'requests'])->name('dealer.requests');
 });
 
 require __DIR__ . '/auth.php';
@@ -177,4 +183,8 @@ Route::resource('quotes', QuoteController::class);
 Route::resource('finances', FinanceController::class);
 
 Route::post('tradein-store', [FinanceController::class, 'tradeInStore'])->name('tradein.store');
+
+ Route::resource('payments', PaymentController::class);
+
+ Route::get('requests', [ApplicationController::class, 'requests'])->name('requests.index');
 

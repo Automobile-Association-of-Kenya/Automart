@@ -15,6 +15,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -33,8 +34,11 @@ class VehicleController extends Controller
         $this->yard = new Yard();
     }
 
-    public function index(): View
+    public function index()
     {
+        // if (auth()->user()->role !== "admin") {
+        //     return redirect()->route('dashboard');
+        // }
         $str = strtotime(date('Y-m-d H:i:s')) . auth()->id();
         return view('vehicles.index', compact('str'));
     }
@@ -53,6 +57,14 @@ class VehicleController extends Controller
     public function makeCreate(Request $request)
     {
         $validated = $request->validate(['make' => ['required', 'max:80']]);
+        $fileName = "";
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
+            $fileName .= uniqid() . '.' . $logo->getClientOriginalExtension();
+            $logo->move("brands/",$fileName);
+        }
+        $validated["logo"] = $fileName;
+
         if (!is_null($request->make_id)) {
             $make = $this->make->find($request->make_id);
             $make->update($validated);
@@ -205,7 +217,7 @@ class VehicleController extends Controller
             $query->where('dealer_id', auth()->user()->dealer_id);
         }
         $yards = $query->with('dealer')->get();
-        
+
         return json_encode($yards);
     }
 
@@ -214,7 +226,7 @@ class VehicleController extends Controller
         $query = $this->yard->query();
         if (!is_null($dealer_id)) {
             $query->where('dealer_id', $dealer_id);
-        }else {
+        } else {
             if (auth()->user()->role === "dealer") {
                 $query->where('dealer_id', auth()->user()->dealer_id);
             }
@@ -283,7 +295,7 @@ class VehicleController extends Controller
                 $fileName = 'img' . auth()->id() . $key . strtotime(now()) . '.jpg'; // or any other desired file name
                 $img = Image::make($image);
                 $img->text(' ' . $dealer->name . ' via AA Kenya', 150, 120, function ($font) {
-                    $font->file(public_path('fonts/font.ttf'));
+                    $font->file(public_path('fonts//font.ttf'));
                     $font->size(18);
                     $font->color('#CECECE');
                     $font->align('center');
@@ -315,12 +327,17 @@ class VehicleController extends Controller
         DB::beginTransaction();
         if (isset($request->vehicle_id) && $request->vehicle_id !== null) {
             $vehicle->update(['vehicle_no' => $strkey, 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images)] + $validated);
-            $this->vehicle->updatefeatures($vehicle->id, $validated["features"]);
+            if (isset($validated["features"]) && count($validated["features"]) > 0) {
+                $this->vehicle->updatefeatures($vehicle->id, $validated["features"]);
+            }
             VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
             $message = "Vehicle updated successfully";
         } else {
             $vehicle = Vehicle::create(['vehicle_no' => $strkey, 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images), 'views' => 0] + $validated);
-            $this->vehicle->addfeatures($vehicle->id, $validated["features"]);
+
+            if (isset($validated["features"]) && count($validated["features"]) > 0) {
+                $this->vehicle->addfeatures($vehicle->id, $validated["features"]);
+            }
             VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
             $message = "Vehicle added successfully";
         }
@@ -353,19 +370,20 @@ class VehicleController extends Controller
     public function imageDelete(Request $request)
     {
         $vehicle = $this->vehicle->find($request->vehicle_id);
-        if (isset($request->cover_photo_delete) && $request->cover_photo_delete == true) {
-            if (File::exists('vehicleimages/' . $vehicle->cover_photo)) {
-                File::delete('vehicleimages/' . $vehicle->cover_photo);
-            }
-            $vehicle->cover_photo = null;
-            $vehicle->update();
-        } elseif (isset($request->photo_delete) && $request->photo_delete) {
+        // if (isset($request->cover_photo_delete) && $request->cover_photo_delete == true) {
+        //     if (File::exists(public_path('vehicleimages/' . $vehicle->cover_photo))) {
+        //         File::delete(public_path('vehicleimages/' . $vehicle->cover_photo));
+        //     }
+        //     $vehicle->cover_photo = null;
+        //     $vehicle->update();
+        // } else
+        if (isset($request->photo_delete) && $request->photo_delete) {
             $image = $request->image;
             $images = array_filter(json_decode($vehicle->images, true), function ($value) use ($image) {
                 return $value !== $image;
             });
-            if (File::exists('vehicleimages/' . $vehicle->image)) {
-                File::delete('vehicleimages/' . $vehicle->image);
+            if (File::exists(public_path('vehicleimages/' . $request->image))) {
+                Storage::delete('vehicleimages/' . $request->image);
             }
             $vehicle->images = json_encode($images);
             $vehicle->update();
@@ -407,7 +425,7 @@ class VehicleController extends Controller
             }, 'model' => function ($model) {
                 return $model->select('id', 'model');
             }, 'prices'])->get();
-            // ->select('id', 'vehicle_no', 'year', 'price', 'color', 'mileage', 'enginecc', 'fuel_type', 'transmission', 'status', 'created_at')->get();
+        // ->select('id', 'vehicle_no', 'year', 'price', 'color', 'mileage', 'enginecc', 'fuel_type', 'transmission', 'status', 'created_at')->get();
 
         return json_encode($vehicles);
     }

@@ -5,7 +5,7 @@
 @endsection
 
 @section('header_styles')
-    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
 @endsection
@@ -59,7 +59,7 @@
                                     <form action="{{ route('register') }}" method="POST" id="registerForm">
                                         @csrf
                                         <div id="registerfeedback"></div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 mb-2">
                                             <label class="float-left">Full Name</label>
                                             <input type="text" name="name" id="nameRe" value="{{ old('name') }}"
                                                 class="form-control @error('name') invalid @enderror">
@@ -68,7 +68,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 mb-2">
                                             <label class="float-left">Phone</label>
                                             <input type="text" name="phone" id="phoneRe" value="{{ old('phone') }}"
                                                 class="form-control @error('phone') invalid @enderror">
@@ -76,7 +76,8 @@
                                                 <span class="text-danger">{{ $errors->first('phone') }}</span>
                                             @endif
                                         </div>
-                                        <div class="col-md-12">
+
+                                        <div class="col-md-12 mb-2">
                                             <label class="float-left">Email Address</label>
                                             <input type="email" name="email" id="emailRe" value="{{ old('email') }}"
                                                 class="form-control @error('email') invalid @enderror">
@@ -85,7 +86,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 mb-2">
                                             <label class="float-left">Password</label>
                                             <div class="input-group">
                                                 <input type="password" name="password" id="passwordRe" class="form-control">
@@ -99,7 +100,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 mb-2">
                                             <label class="float-left">Password Confirmation</label>
                                             <div class="input-group">
                                                 <input type="password" name="password_confirmation"
@@ -116,14 +117,14 @@
                                         </div>
 
                                         <input type="hidden" name="role" id="roleRe" value="buyer">
-                                        <div class="col-md-12 text-left">
+                                        <div class="col-md-12 text-left mb-2">
                                             <label class="">
                                                 <input type="checkbox" checked name="" id="termsOfService">I agree to
                                                 the<a href="#" class="terms">terms of service</a></label>
                                         </div>
 
                                         <div class="col-md-12 text-center">
-                                            <button type="submit" class="btn btn-md btn-warning btn-round"
+                                            <button type="submit" class="btn btn-md btn-warning"
                                                 id="registerSubmit">Register</button>
                                         </div>
 

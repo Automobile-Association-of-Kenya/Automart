@@ -1,190 +1,293 @@
 @extends('layouts.dashboardlayout')
+
 @section('title')
     Dashboard @parent
 @endsection
+
+@section('header_styles')
+@endsection
+
+@section('header_styles')
+@endsection
+
+@section('page')
+    Dashboard
+@endsection
+
 @section('main')
-    <main id="dashboard">
-        <!-- Cards -->
-        <div class="row card-list">
-            <div class="col badge blue text-left" id="innovators">
-                <div class="image" style="display: inline-block">
-                    <i class="fas fa-users fa-lg"></i>
-                </div>
+    <main id="main" class="dashboard">
 
-                <div class="heading" style="display: inline-block">
-                    Loans
-                    <p class="subheading">Loans due today</p>
-                </div>
+        <div class="pagetitle">
+            <h4>Dashboard</h4>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
 
-                <div class="number" style="display: inline-block" id='innovatorlabel'>
-                    0
-                </div>
-            </div>
+        <section class="section dashboard">
+            <div class="row">
+                <div class="col-xl-3 col-md-4">
 
-            <div class="col badge green" id="openreceivables">
-                <div class="image" style="display: inline-block">
-                    <i class="fas fa-download fa-lg"></i>
-                </div>
-
-                <div class="heading" style="display: inline-block">
-                    Shares
-                    <p class="subheading">Shares to Date</p>
-                </div>
-
-                <div class="number" style="display: inline-block" id="mentorlabel">
-                    0
-                </div>
-            </div>
-
-            <div class="col badge red" id="openpayables">
-                <div class="image" style="display: inline-block">
-                    <i class="fas fa-upload fa-lg"></i>
-                </div>
-
-                <div class="heading" style="display: inline-block">
-                    Deposits
-                    <p class="subheading">Members Deposit</p>
-                </div>
-
-                <div class="number" style="display: inline-block" id="funderlabel">
-                    0
-                </div>
-            </div>
-
-            <div class="col badge purple" id="openorders">
-                <div class="image" style="display: inline-block">
-                    <i class="fas fa-file-invoice-dollar fa-lg"></i>
-                </div>
-
-                <div class="heading" style="display: inline-block">
-                    Interest
-                    <p class="subheading">Interest due today</p>
-                </div>
-
-                <div class="number" style="display: inline-block" id="serviceproviderlabel">
-                    0
-                </div>
-            </div>
-        </div>
-
-        <!-- People Charts -->
-        <div class="row chart">
-            <div class="col">
-                <div class="card peoplebyrole">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Loans By Type</span>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="peoplebyrole"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card peoplebyindustry">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Members By Company</span>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="peoplebycategory"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card peoplebyregtrend">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Interest by Loan Type</span>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="peoplebyregtrend"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Project Charts  -->
-        <div class="row chart">
-            <div class="col">
-                <div class="card projectbyindustry">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Grade A Loans</span>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="projectbyindustry"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card projectbyneed">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Potfolio at Risk</span>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="projectsummarybyneed"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card projectbystatus">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Quantitative Analysis</span>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="projectsbystatus"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Summary Tables -->
-        <div class="row table">
-            <div class="col ml-2">
-                <div class="card recentapplications">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Qualitative Analysis</span>
-                    </div>
-                    <div class="card-body scrollable">
-                        <table id="recentinnovations">
-
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card recentmembers">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Recent Disbursements</span>
-                    </div>
-                    <div class="card-body scrollable">
-                        <table id="recentmembers">
-
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card projectbystatus">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Loan Aging Analysis</span>
-                    </div>
-                    <div class="card-body scrollable">
-                        <div>
-                            <table id="recentconnections">
-                                <tbody></tbody>
-                            </table>
+                    <div class="card info-card sales-card">
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
+                                </li>
+                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Sales <span>| Today</span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-cart"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>145</h6>
+                                    <span class="text-success small pt-1 fw-bold">12%</span> <span
+                                        class="text-muted small pt-2 ps-1">increase</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
+                <div class="col-xl-3 col-md-4">
+
+                    <div class="card info-card revenue-card">
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
+                                </li>
+                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="card-body">
+                            <h5 class="card-title">Revenue <span>| This Month</span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i>Ksh</i>
+                                </div>
+                                <div class="ps-3 pl-3">
+                                    <h6>3,264</h6>
+                                    <span class="text-success small pt-1 fw-bold">8%</span> <span
+                                        class="text-muted small pt-2 ps-1">increase</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-4">
+                    <a href="{{ route('dealer.vehicles') }}">
+                        <div class="card info-card revenue-card">
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                        class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>Filter</h6>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Today</a></li>
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">My Vehicles</h5>
+                                <div class="d-flex align-items-center">
+                                    {{-- <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i>Ksh</i>
+                                </div> --}}
+                                    <div class="ps-3 pl-3">
+                                        <h6>{{ $vehicles }}</h6>
+                                        <span class="text-success small pt-1 fw-bold">8%</span> <span
+                                            class="text-muted small pt-2 ps-1">increase</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xl-3 col-md-4">
+                    <a href="{{ route('dealer.requests') }}">
+                        <div class="card info-card revenue-card">
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                        class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>Filter</h6>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Today</a></li>
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Quotes <span>| Request</span></h5>
+                                <div class="d-flex align-items-center">
+                                    {{-- <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i>Ksh</i>
+                                </div> --}}
+                                    <div class="ps-3 pl-3">
+                                        <h6>{{ $summary['quotes'] + $summary['tradeins'] + $summary['finances'] }}</h6>
+                                        <span class="text-success small pt-1 fw-bold">8%</span> <span
+                                            class="text-muted small pt-2 ps-1">increase</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                {{-- <div class="col-xl-3 col-md-4">
+                    <a href="{{ route('dealer.requests') }}">
+                        <div class="card info-card revenue-card">
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                        class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>Filter</h6>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Today</a></li>
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Financial <span>| Requests</span></h5>
+                                <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i>Ksh</i>
+                                </div> 
+                                    <div class="ps-3 pl-3">
+                                        <h6>{{ count($quotes) }}</h6>
+                                        <span class="text-success small pt-1 fw-bold">8%</span> <span
+                                        class="text-muted small pt-2 ps-1">increase</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div> --}}
+
+                {{-- <div class="col-xl-3 col-md-4">
+                    <a href="{{ route('dealer.requests') }}">
+                        <div class="card info-card revenue-card">
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
+                                        class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <li class="dropdown-header text-start">
+                                        <h6>Filter</h6>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Today</a></li>
+                                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Trade in <span>| Requests</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i>Ksh</i>
+                                </div>
+                                    <div class="ps-3 pl-3">
+                                        <h6>{{ count($tradeins) }}</h6>
+                                        <span class="text-success small pt-1 fw-bold">8%</span> <span
+                                        class="text-muted small pt-2 ps-1">increase</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div> --}}
+
             </div>
-        </div>
+        </section>
+
+        <section class="vehicles">
+            <div class="card mt-4">
+                {{-- <div class="card-header bg-white">
+                    <h5><b>My Vehicles</b></h5>
+                    <a href="{{ route('dealer.vehicles') }}" class="btn btn-success float-right"><i
+                            class="fa fa-pl"></i>&nbsp;&nbsp;Add new</a>
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-bordered hover vehicleDataTable ">
+                        <thead>
+                            <th>#</th>
+                            <th>NO</th>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>Year</th>
+                            <th>Price</th>
+                            <th>CC</th>
+                            <th>Mileage</th>
+                            <th>Fuel</th>
+                            <th>Trans</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            @php
+                                $i = 1;
+                            @endphp
+                            @foreach ($vehicles as $item)
+                                <tr>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $item->vehicle_no }}</td>
+                                    <td>{{ $item->make->make }}</td>
+                                    <td>{{ $item->model->model }}</td>
+                                    <td>{{ $item->year }}</td>
+                                    <td>{{ number_format($item->price, 2) }}</td>
+                                    <td>{{ $item->enginecc }}</td>
+                                    <td>{{ $item->mileage }}</td>
+                                    <td>{{ $item->fuel_type }}</td>
+                                    <td>{{ $item->transmission }}</td>
+                                    <td>{{ $item-> }}</td>
+                                    <td>
+                                        <li class="dropdown">
+                                            <a href="#" data-toggle="dropdown"
+                                                class="btn btn-success btn-sm">Action</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown-item"><a href="#"><i
+                                                            class="fa fa-list text-success\"></i>&nbsp;View</a></li><li class="dropdown-item"><a
+                                                                href="#" id="editProduct" data-id=" + id + "><i
+                                                                    class="fa fa-edit text-warning"></i>&nbsp;Edit</a></li>
+                                            </ul>
+                                        </li>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div> --}}
+
+            </div>
+        </section>
     </main>
+@endsection
+
+
+
+@section('footer_scrips')
+    <script src="{{ asset('js/main/dealer.js') }}"></script>
 @endsection

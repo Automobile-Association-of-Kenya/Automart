@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use App\Models\County;
+use App\Models\Finance;
 use App\Models\Make;
+use App\Models\Quote;
+use App\Models\Tradein;
 use App\Models\Type;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
@@ -23,6 +26,10 @@ class ApplicationController extends Controller
         $this->make = new Make();
         $this->model = new VehicleModel();
         $this->price = new VehiclePrice();
+        $this->quote = new Quote();
+        $this->tradein = new Tradein();
+        $this->finance = new Finance();
+
         // $this->vehicleservice = new VehicleSevice();
     }
 
@@ -38,7 +45,9 @@ class ApplicationController extends Controller
             if (auth()->user()->role === "dealer") {
                 return redirect()->route('dealers.index');
             } elseif (auth()->user()->role === "admin") {
-                return redirect()->route('dashboard');
+                $vehicles = $this->vehicle->count();
+                $summary = $this->getRequests();
+                return view('dashboard.index', compact('vehicles', 'summary'));
             } elseif (auth()->user()->role === "buyer") {
                 return redirect()->route('profile');
             } elseif (auth()->user()->role === "partner") {
@@ -344,5 +353,21 @@ class ApplicationController extends Controller
     public function privacy()
     {
         return view('privacy');
+    }
+
+    public function getRequests()
+    {
+        $tradeins = $this->tradein->count();
+        $quotes = $this->quote->count();
+        $finances = $this->finance->count();
+        return ['tradeins'=>$tradeins, 'quotes' => $quotes, 'finances'=>$finances];
+    }
+
+    public function requests()
+    {
+        $quotes = $this->quote->with('vehicle')->latest()->get();
+        $tradeins = $this->tradein->with('vehicle')->latest()->get();
+        $finances = $this->finance->with('vehicle')->latest()->get();
+        return view('admin.requests', compact('quotes', 'tradeins', 'finances'));
     }
 }

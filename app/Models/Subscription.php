@@ -57,4 +57,9 @@ class Subscription extends Model
         return $this->belongsToMany(Subsproperty::class, 'subscription_property', 'subscription_id', 'subsproperty_id');
     }
 
+    public function subscribe()
+    {
+        # code...
+    }
+
 }

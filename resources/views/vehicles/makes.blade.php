@@ -63,20 +63,21 @@
                         @foreach ($vehicles as $item)
                             @php
                                 $images = json_decode($item['images']);
-                                $tags = json_decode($item['tags']);
+                                // $tags = json_decode($item['tags']);
+                                // dd($images[0]);
                             @endphp
                             <div class="col-lg-4 col-md-4">
                                 <div class="car-box-3">
                                     <div class="car-thumbnail">
                                         <a href="#" class="car-img">
-                                            <div class="for">{{ $tags[0] }}</div>
+                                            <div class="for">{{ $item->usage }}</div>
                                             <div class="price-box">
                                                 {{-- <span class="del"><del>$950.00</del></span> --}}
                                                 {{-- <br> --}}
                                                 <span>Kes: {{ number_format($item->price, 2) }}</span>
                                             </div>
                                             <img class="d-block w-100"
-                                                src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
+                                                src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                                 alt="car">
                                         </a>
                                         <div class="carbox-overlap-wrapper">
@@ -94,12 +95,12 @@
                                                         <i class="fa fa-balance-scale"></i>
                                                     </a> --}}
                                                     <div class="car-magnify-gallery">
-                                                        <a href="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
+                                                        <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                                             class="overlap-btn"
                                                             data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                             <i class="fa fa-expand"></i>
                                                             <img class="hidden"
-                                                                src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
+                                                                src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                                                 alt="hidden-img">
                                                         </a>
                                                         @foreach ($images as $image)

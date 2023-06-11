@@ -26,7 +26,7 @@ class DealerRequest extends FormRequest
             'phone' => ['required','max:18','unique:dealers'],
             'email' => ['required','max:60','unique:dealers,email'],
             'address' => ['nullable','max:100'],
-            'county_id' => ['required','max:20','exists:counties,id'],
+            'county_id' => ['nullable','max:20','exists:counties,id'],
             'city' => ['nullable','max:80'],
 
             'adminname' => ['nullable','max:80'],

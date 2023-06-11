@@ -66,8 +66,8 @@
                                         <p><b>Dealer Information</b></p>
 
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label class="float-left">Dealer Name</label>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="float-left">Dealer Name <sup>*</sup></label>
                                                 <input type="text" name="dealername" id="dealerName"
                                                     value="{{ old('dealername') }}"
                                                     class="form-control @error('dealername') invalid @enderror" required>
@@ -76,8 +76,8 @@
                                                 @endif
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <label class="float-left">Dealer Phone</label>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="float-left">Dealer Phone <sup>*</sup></label>
                                                 <input type="text" name="dealerphone" id="dealerPhone"
                                                     value="{{ old('dealerphone') }}"
                                                     class="form-control @error('dealerphone') invalid @enderror" required>
@@ -86,8 +86,8 @@
                                                 @endif
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <label class="float-left">Dealer Email</label>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="float-left">Dealer Email <sup>*</sup></label>
                                                 <input type="email" name="dealeremail" id="dealerEmail"
                                                     value="{{ old('dealeremail') }}"
                                                     class="form-control @error('dealeremail') invalid @enderror" required>
@@ -96,7 +96,7 @@
                                                 @endif
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 mb-2">
                                                 <label class="float-left">Zip/Potal Address</label>
                                                 <input type="text" name="address" id="dealerAddress"
                                                     value="{{ old('address') }}"
@@ -106,7 +106,7 @@
                                                 @endif
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 mb-2">
                                                 <label class="float-left">County</label>
                                                 <select class="form-control form-control-md" name="county_id" id="countyID"
                                                     style="width: 100%;"></select>
@@ -117,7 +117,7 @@
                                                 @endif
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 mb-2">
                                                 <label class="float-left">City/Town</label>
                                                 <input type="text" name="city" id="dealerCity"
                                                     value="{{ old('city') }}"
@@ -133,8 +133,8 @@
                                         <p><b>Admin Information</b></p>
                                         <hr>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label class="float-left">Name</label>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="float-left">Name <sup>*</sup></label>
                                                 <input type="text" name="name" id="adminName"
                                                     value="{{ old('name') }}"
                                                     class="form-control @error('name') invalid @enderror" required>
@@ -143,8 +143,8 @@
                                                 @endif
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <label class="float-left">Phone</label>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="float-left">Phone <sup>*</sup></label>
                                                 <input type="text" name="phone" id="adminPhone"
                                                     value="{{ old('phone') }}"
                                                     class="form-control @error('phone') invalid @enderror" required>
@@ -153,8 +153,8 @@
                                                 @endif
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <label class="float-left">Email</label>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="float-left">Email <sup>*</sup></label>
                                                 <input type="email" name="email" id="adminEmail"
                                                     value="{{ old('email') }}"
                                                     class="form-control @error('email') invalid @enderror" required>
@@ -163,8 +163,8 @@
                                                 @endif
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <label class="float-left">Password</label>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="float-left">Password <sup>*</sup></label>
                                                 <div class="input-group">
                                                     <input type="password" name="password" id="adminPassword"
                                                         class="form-control" required autocomplete="">
@@ -185,17 +185,18 @@
 
                                         </div>
 
-                                        <div class="col-md-12 text-left">
+                                        <div class="col-md-12 text-left mb-2">
                                             <label class="terms">
                                                 <input type="checkbox" checked name="terms" id="termsOfService"
                                                     required> I
                                                 agree to the<a href="{{ route('terms') }}" class="terms">terms of
                                                     service</a></label>
                                         </div>
+
                                         <div id="feedback" class="dealersfeedback"></div>
 
                                         <div class="col-md-12 text-center">
-                                            <button type="submit" class="btn btn-md btn-warning btn-round"
+                                            <button type="submit" class="btn btn-md btn-warning"
                                                 id="registerSubmit">Register</button>
                                         </div>
                                     </form>

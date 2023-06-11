@@ -55,20 +55,20 @@
                             <div class="row">
                                 <div class="col-sm-6 col-md-4 col-lg-4">
                                     <div class="megamenu-section" id="vehicleGroupTypes">
-                                        <h6 class="megamenu-title">Vehicle Types</h6>
+                                        <h6 class="megamenu-title text-success">Vehicle Types</h6>
 
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6 col-md-4 col-lg-4">
                                     <div class="megamenu-section" id="vehicleGroupandMakes">
-                                        <h6 class="megamenu-title">Vehicle Makes</h6>
+                                        <h6 class="megamenu-title text-success">Vehicle Makes</h6>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6 col-md-4 col-lg-4">
                                     <div class="megamenu-section">
-                                        <h6 class="megamenu-title">Others</h6>
+                                        <h6 class="megamenu-title  text-success">Others</h6>
                                         <a class="dropdown-item" href="{{ route('new') }}">New Arrivals</a>
                                         <a class="dropdown-item" href="{{ url('discounted-vehicles') }}">Discounted</a>
                                         <a class="dropdown-item" href="{{ url('vehicles-list') }}">High end</a>

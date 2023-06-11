@@ -77,21 +77,26 @@ class Dealer extends Model
     public function quotes()
     {
         $vehicles = Vehicle::where('dealer_id',auth()->user()->dealer_id)->pluck('id');
-        $quotes = Quote::whereIn('vehicle_id', $vehicles)->get();
+        $quotes = Quote::whereIn('vehicle_id', $vehicles)->with('vehicle')->get();
         return $quotes;
     }
 
     public function finances()
     {
         $vehicles = Vehicle::where('dealer_id', auth()->user()->dealer_id)->pluck('id');
-        $finances = Finance::whereIn('vehicle_id', $vehicles)->get();
+        $finances = Finance::whereIn('vehicle_id', $vehicles)->with('vehicle')->get();
         return $finances;
     }
 
     public function tradeins()
     {
         $vehicles = Vehicle::where('dealer_id', auth()->user()->dealer_id)->pluck('id');
-        $tradeins = Tradein::whereIn('vehicle_id', $vehicles)->get();
+        $tradeins = Tradein::whereIn('vehicle_id', $vehicles)->with('vehicle')->get();
         return $tradeins;
+    }
+
+    public function dealerSubscription()
+    {
+        $subscriptions = '';
     }
 }

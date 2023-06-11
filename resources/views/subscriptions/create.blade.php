@@ -45,7 +45,9 @@
                             <h4>Payment options</h4>
                             <p>You can make your payment through any of the following options </p>
                         </div>
+
                         <div id="accordion">
+                            
                             <div class="card">
                                 <div class="card-header" id="headingOne">
                                     <h2 class="mb-0">

@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}">
+    <style>
+        .Paypal {
+            display: none;
+        }
+
+        .mpesa {
+            display: none;
+        }
+    </style>
 @endsection
 
 
@@ -39,81 +48,119 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-8 mt-2" id="subscriptionsTableSection">
-                                                    <table class="table table-bordered table-sm">
+                                                    <table class="table table-bordered table-responsive table-md">
                                                         <thead>
                                                             <th>#</th>
                                                             <th>Provider</th>
-                                                            <th>ID</th>
+                                                            <th>Transaction</th>
+                                                            <th>Business Code</th>
                                                             <th>Secret</th>
-                                                            <th>Name</th>
+                                                            <th>Key</th>
+                                                            <th>Passkey</th>
+                                                            <th>Balance</th>
                                                             <th>Action</th>
                                                         </thead>
-
-                                                        <tbody id="subscriptionTable">
+                                                        <tbody id="accountsTable">
 
                                                         </tbody>
                                                     </table>
                                                 </div>
 
                                                 <div class="col-md-4 user-create-section">
-                                                    <h4 class="text text-center mb-2">Subscription Form</h4>
-                                                    <div id="subscriptionfeedback"></div>
+                                                    <h4 class="text text-center mb-2">Accounts Form</h4>
+                                                    <div id="accountsfeedback"></div>
 
-                                                    <form action="" method="post" id="createSubscriptionForm">
+                                                    <form action="" method="post" id="createAccountForm">
                                                         @csrf
-                                                        <input type="hidden" name="subscription_id" id="subscriptionID">
+                                                        <input type="hidden" name="account_id" id="accountID">
                                                         <div class="row">
                                                             <div class="col-md-12 form-group">
                                                                 <label>Service Provider</label>
-                                                                <select name="provider" id="provider" class="form-control form-control-sm">
+                                                                <select name="provider" id="providerID"
+                                                                    class="form-control">
                                                                     <Option value="">Select One</Option>
                                                                     <option value="Mpesa">Mpesa</option>
                                                                     <option value="Paypal">Paypal</option>
                                                                     <option value="Bank">Bank</option>
                                                                 </select>
                                                             </div>
-                                                            
+
                                                             <div class="col-md-12 form-group Paypal">
                                                                 <label>Client ID</label>
                                                                 <input type="text" name="client_id" id="clientID"
-                                                                    class="form-control form-control-sm" required>
+                                                                    class="form-control">
                                                             </div>
 
                                                             <div class="col-md-12 form-group Paypal">
                                                                 <label>Client Secret</label>
-                                                                <input type="text" name="client_secrest" id="clientSecrest"
-                                                                    class="form-control form-control-sm" required>
+                                                                <input type="text" name="client_secrest"
+                                                                    id="clientSecrest" class="form-control">
                                                             </div>
 
                                                             <div class="col-md-12 form-group Paypal">
                                                                 <label>Business Name</label>
-                                                                <input type="text" name="name" id="paypalName"
-                                                                    class="form-control form-control-sm" required>
+                                                                <input type="text" name="name" id="paypalBusinessName"
+                                                                    class="form-control">
                                                             </div>
 
                                                             <div class="col-md-12 form-group Paypal">
                                                                 <label>Card Number</label>
-                                                                <input type="text" name="name" id="paypalName"
-                                                                    class="form-control form-control-sm" required>
+                                                                <input type="text" name="cardnumber"
+                                                                    id="paypalCardNumber" class="form-control">
                                                             </div>
 
                                                             <div class="col-md-12 form-group Paypal">
                                                                 <label>Expiration</label>
                                                                 <input type="text" name="expiration" id="expirationDate"
-                                                                    class="form-control form-control-sm" required>
-                                                            </div>
-                                                            
-                                                            <div class="col-md-12 form-group Paypal">
-                                                                <label>CW</label>
-                                                                <input type="text" name="name" id="paypalName"
-                                                                    class="form-control form-control-sm" required>
+                                                                    class="form-control">
                                                             </div>
 
-                                                            <div class="col-md-12 text-center mt-3">
-                                                                <button class='btn btn-success btn-sm' id='saveuser'><i
+                                                            <div class="col-md-12 form-group Paypal">
+                                                                <label>CW</label>
+                                                                <input type="text" name="cw" id="paypalCW"
+                                                                    class="form-control">
+                                                            </div>
+
+                                                            <div class="col-md-12 form-group Mpesa">
+                                                                <label>Customer secret</label>
+                                                                <input type="text" name="customer_secret"
+                                                                    id="mpesaSecret" class="form-control">
+                                                            </div>
+
+                                                            <div class="col-md-12 form-group Mpesa">
+                                                                <label>Customer Key</label>
+                                                                <input type="text" name="customer_key"
+                                                                    id="mpesaCustomerKey" class="form-control">
+                                                            </div>
+
+                                                            <div class="col-md-12 form-group Mpesa">
+                                                                <label>Passkey</label>
+                                                                <input type="text" name="passkey" id="mpesaPassKey"
+                                                                    class="form-control">
+                                                            </div>
+
+                                                            <div class="col-md-12 form-group Mpesa">
+                                                                <label>Business short code</label>
+                                                                <input type="text" name="businessshortcode"
+                                                                    id="businessShortCode" class="form-control">
+                                                            </div>
+
+                                                            <div class="col-md-12 form-group Mpesa">
+                                                                <label>Transaction Type</label>
+                                                                <select name="transaction_type" id="transactionType"
+                                                                    class="form-control">
+                                                                    <option value="CustomerPayBillOnline">Customer PayBill
+                                                                        Online</option>
+                                                                    <option value="CustomerBuyGoodsOnline">Customer Buy
+                                                                        Goods Online</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-12 mt-3">
+                                                                <button class='btn btn-success btn-md' id='saveuser'><i
                                                                         class="fal fa-save fa-lg fa-fw"></i> Save
                                                                 </button>
-                                                                <button class='btn btn-outline-warning btn-sm'
+                                                                <button class='btn btn-outline-warning btn-md'
                                                                     id='clearuser'><i
                                                                         class="fal fa-broom fa-lg fa-fw"></i>
                                                                     Clear
@@ -131,7 +178,8 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade mb-3" id="transactionsTab" role="tabpanel" aria-labelledby="pop2-tab">
+                            <div class="tab-pane fade mb-3" id="transactionsTab" role="tabpanel"
+                                aria-labelledby="pop2-tab">
                                 <div id="userdetails" class="mt-2">
                                     <div class="card containergroup">
                                         <div class="card-body">
@@ -150,7 +198,7 @@
                                                             <div class="col-md-12">
                                                                 <label for="name">Account Type</label>
                                                                 <select name="account_type" id="accountType"
-                                                                    class="form-control form-control-sm">
+                                                                    class="form-control ">
                                                                     <option value="">Select One</option>
                                                                     <option value="Mpesa">Mpesa</option>
                                                                     <option value="Bank">Bank</option>
@@ -189,10 +237,10 @@
                                                             </div>
 
                                                             <div class="col-md-12 text-center mt-3">
-                                                                <button class='btn btn-success btn-sm' id='savedealer'><i
+                                                                <button class='btn btn-success btn-md' id='savedealer'><i
                                                                         class="fal fa-save fa-lg fa-fw"></i> Save
                                                                 </button>
-                                                                <button class='btn btn-outline-warning btn-sm'
+                                                                <button class='btn btn-outline-warning btn-md'
                                                                     id='cleardealer'><i
                                                                         class="fal fa-broom fa-lg fa-fw"></i>
                                                                     Clear
@@ -286,10 +334,10 @@
                                                     </div>
 
                                                     <div class="col-md-12 form-group">
-                                                        <button class='btn btn-success btn-sm' id='savemail'><i
+                                                        <button class='btn btn-success btn-md' id='savemail'><i
                                                                 class="fal fa-save fa-lg fa-fw"></i> Save
                                                         </button>
-                                                        <button class='btn btn-outline-warning btn-sm'
+                                                        <button class='btn btn-outline-warning btn-md'
                                                             id='clearmailform'><i class="fal fa-broom fa-lg fa-fw"></i>
                                                             Reset</button>
                                                     </div>
@@ -324,7 +372,8 @@
                                             <h4 class="text text-center mb-2">Services Form</h4>
                                             <div id="servicesfeedback"></div>
 
-                                            <form action="{{ route('services.store') }}" method="post" id="createServiceForm">
+                                            <form action="{{ route('services.store') }}" method="post"
+                                                id="createServiceForm">
                                                 @csrf
                                                 <input type="hidden" name="service_id" id="serviceCreateID">
 
@@ -332,7 +381,8 @@
 
                                                     <div class="col-md-12 form-group">
                                                         <label for="service">Service</label>
-                                                        <input type="text" class="form-control form-control-md" id="serviceName" name="service" required>
+                                                        <input type="text" class="form-control form-control-md"
+                                                            id="serviceName" name="service" required>
                                                     </div>
 
                                                     <div class="col-md-12 form-group">
@@ -347,10 +397,10 @@
                                                     </div>
 
                                                     <div class="col-md-12 form-group">
-                                                        <button class='btn btn-success btn-sm' id='saveservice'><i
+                                                        <button class='btn btn-success btn-md' id='saveservice'><i
                                                                 class="fal fa-save fa-lg fa-fw"></i> Save
                                                         </button>
-                                                        <button class='btn btn-outline-warning btn-sm'
+                                                        <button class='btn btn-outline-warning btn-md'
                                                             id='clearserviceform'><i class="fal fa-broom fa-lg fa-fw"></i>
                                                             Reset</button>
                                                     </div>
@@ -364,16 +414,58 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
     </main>
 @endsection
 
+<div class="modal fade" id="assignToSubscriptionModal" tabindex="-1" role="dialog"
+    aria-labelledby="financeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content" id="vehiclePreviewSection">
+            <div class="modal-header">
+                <div class="modal-title" id="carOverviewModalLabel">
+                    <h4 class="text-black">Assign account to subscription
+                </div>
+                <button type="button" class="close btn btn-warning text-danger" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
+            <div class="modal-body">
+                <form action="{{ route('accounts.subscribe') }}" method="POST" id="accountAssignForm">
+                    @csrf
+                    <div class="row">
+                        <input type="hidden" name="account_id" id="assignAccountID" value="">
 
+                        <div class="col-md-12 form-group mb-2">
+                            <label for="subject">Subscription</label>
+                            <div class="form-group">
+                                <select name="subscrin_id" id="subscriptionAssignID" class="form-control" required>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div id="assignfeeback"></div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-md btn-warning">Submi</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 @section('footer_scrips')
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/main/dataTables.buttons.min.js') }}"></script>

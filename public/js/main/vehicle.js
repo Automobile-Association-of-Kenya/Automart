@@ -422,7 +422,8 @@
     getVehicleFeatures();
 
     function getDealerYards(dealer_id = null) {
-        $url = (dealer_id == null) ? "/dealer-yards/" : "/dealer-yards/" + dealer_id;
+        $url =
+            dealer_id == null ? "/dealer-yards/" : "/dealer-yards/" + dealer_id;
         $.getJSON($url, function (yards) {
             let option1 = '<option value="">All</option>';
             let option = '<option value="">Select One</option>';
@@ -611,18 +612,38 @@
         getDealerYards(id);
     });
 
-
     makeCreateForm.on("submit", function (event) {
         event.preventDefault();
         let $this = $(this),
             token = $("input[name='_token']").val(),
             submit = $this.find("button[type='submit']"),
             make_id = makeCreateID.val(),
-            make = makeName.val();
+            make = makeName.val(),
+            errors = [];
 
+        var formData = new FormData();
+        var fileInput = document.getElementById("makeLogo");
+        var file = fileInput.files[0];
+        formData.append("logo", file);
+        formData.append("make", make);
+        formData.append("make_id", make_id);
+        formData.append("_token", token);
         submit.prop({ disabled: true });
-        let data = { make_id: make_id, make: make };
-        if (make !== "" && make !== undefined) {
+        let size = file.size;
+        console.log(size);
+        if (size > (1024 * 1024) / 2) {
+            errors.push("Logo size cannot be more than 500kb");
+        }
+        if (make == "" && make == undefined) {
+            errors.push("Make is required");
+        }
+        if (errors.length > 0) {
+            var p = "";
+            $.each(errors, function (key, value) {
+                p += "<p>" + value + "</p>";
+            });
+            showError(p, "#makefeedback");
+        } else {
             $.ajaxSetup({
                 headers: {
                     "X-CSRF-TOKEN": token,
@@ -631,8 +652,13 @@
             $.ajax({
                 type: "POST",
                 url: "/makes",
-                data: data,
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function (params) {
+                    submit.prop({ disabled: false });
+
+                    console.log(params);
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#makefeedback");
@@ -642,9 +668,11 @@
                     } else {
                         showError(result.error, "#makefeedback");
                     }
-                    submit.prop({ disabled: false });
                 },
                 error: function (error) {
+                    submit.prop({ disabled: false });
+
+                    console.log(error);
                     if (error.status == 422) {
                         var errors = "";
                         $.each(
@@ -660,7 +688,6 @@
                             "#modelfeedback"
                         );
                     }
-                    submit.prop({ disabled: false });
                 },
             });
         }
@@ -1198,90 +1225,90 @@
     $("#vehicleImagesUpload").on("click", function (event) {
         event.preventDefault();
 
-        var file = input.files[0];
-        if (input.files.length > 0) {
-            var reader = new FileReader();
-            reader.onload = function () {
-                var img = new Image();
-                img.onload = function () {
-                    var width = 850;
-                    var height = 500;
-                    var canvas = document.createElement("canvas");
-                    canvas.width = width;
-                    canvas.height = height;
-                    canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-                    var compressedFile = canvas.toDataURL("image/jpeg", 0.8);
-                    $.post("/upload", {
-                        _token: token,
-                        str_id: uniqueStrID.val(),
-                        image: compressedFile,
-                        vehicle_id: vehicleID.val(),
-                        cover_image: true,
-                    })
-                        .done(function (params) {
-                            if (params == "success") {
-                                $("#coverPhotoPreview").children().remove();
-                            }
-                        })
-                        .fail(function (error) {
-                        });
-                };
-                img.src = reader.result;
-            };
-            reader.readAsDataURL(file);
-        }
+        // var file = input.files[0];
+        // if (input.files.length > 0) {
+        //     var reader = new FileReader();
+        //     reader.onload = function () {
+        //         var img = new Image();
+        //         img.onload = function () {
+        //             var width = 850;
+        //             var height = 500;
+        //             var canvas = document.createElement("canvas");
+        //             canvas.width = width;
+        //             canvas.height = height;
+        //             canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+        //             var compressedFile = canvas.toDataURL("image/jpeg", 0.8);
+        //             $.post("/upload", {
+        //                 _token: token,
+        //                 str_id: uniqueStrID.val(),
+        //                 image: compressedFile,
+        //                 vehicle_id: vehicleID.val(),
+        //                 cover_image: true,
+        //             })
+        //                 .done(function (params) {
+        //                     if (params == "success") {
+        //                         $("#coverPhotoPreview").children().remove();
+        //                     }
+        //                 })
+        //                 .fail(function (error) {
+        //                 });
+        //         };
+        //         img.src = reader.result;
+        //     };
+        //     reader.readAsDataURL(file);
+        // }
 
-        var files = multiImagesUpload.files;
-        if (multiImagesUpload.files.length > 0) {
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                var read = new FileReader();
-                read.onload = function (e) {
-                    var img = new Image();
-                    img.src = e.target.result;
-                    img.onload = function () {
-                        var canvas = document.createElement("canvas");
-                        var ctx = canvas.getContext("2d");
-                        canvas.width = 800;
-                        canvas.height = 500;
-                        let leet = "image_" + i;
-                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                        var compressedDataUrl = canvas.toDataURL(
-                            "image/jpeg",
-                            0.5
-                        );
-                        $.post("/upload", {
-                            _token: token,
-                            str_id: uniqueStrID.val(),
-                            vehicle_id: vehicleID.val(),
-                            image: compressedDataUrl,
-                        })
-                            .done(function (params) {
+        // var files = multiImagesUpload.files;
+        // if (multiImagesUpload.files.length > 0) {
+        //     for (var i = 0; i < files.length; i++) {
+        //         var file = files[i];
+        //         var read = new FileReader();
+        //         read.onload = function (e) {
+        //             var img = new Image();
+        //             img.src = e.target.result;
+        //             img.onload = function () {
+        //                 var canvas = document.createElement("canvas");
+        //                 var ctx = canvas.getContext("2d");
+        //                 canvas.width = 800;
+        //                 canvas.height = 500;
+        //                 let leet = "image_" + i;
+        //                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        //                 var compressedDataUrl = canvas.toDataURL(
+        //                     "image/jpeg",
+        //                     0.5
+        //                 );
+        //                 $.post("/upload", {
+        //                     _token: token,
+        //                     str_id: uniqueStrID.val(),
+        //                     vehicle_id: vehicleID.val(),
+        //                     image: compressedDataUrl,
+        //                 })
+        //                     .done(function (params) {
 
-                                if (params == "success") {
-                                    $('img[src="' + img.src + '"]')
-                                        .parent()
-                                        .remove();
-                                    if (
-                                        $("#image-preview").children().length ==
-                                            0 &&
-                                        $("#coverPhotoPreview").children()
-                                            .length == 0
-                                    ) {
-                                        showSuccess(
-                                            "Images uploaded successfully. Complete filling this form and click on save. ",
-                                            "#imageFeedback"
-                                        );
-                                    }
-                                }
-                            })
-                            .fail(function (error) {
-                            });
-                    };
-                };
-                read.readAsDataURL(file);
-            }
-        }
+        //                         if (params == "success") {
+        //                             $('img[src="' + img.src + '"]')
+        //                                 .parent()
+        //                                 .remove();
+        //                             if (
+        //                                 $("#image-preview").children().length ==
+        //                                     0 &&
+        //                                 $("#coverPhotoPreview").children()
+        //                                     .length == 0
+        //                             ) {
+        //                                 showSuccess(
+        //                                     "Images uploaded successfully. Complete filling this form and click on save. ",
+        //                                     "#imageFeedback"
+        //                                 );
+        //                             }
+        //                         }
+        //                     })
+        //                     .fail(function (error) {
+        //                     });
+        //             };
+        //         };
+        //         read.readAsDataURL(file);
+        //     }
+        // }
     });
 
     vehicleCreateForm.on("submit", function (event) {
@@ -1317,11 +1344,11 @@
             tags = vehicleTags.val(),
             description = descriptionHtm.val(),
             usage = $("#usage").val(),
-            gear = $('#gear').val(),
-            speed = $('#speed').val(),
-            terrain = $('#terrain').val(),
-            engine = $('#engine').val(),
-            horsepower = $('#horsepower').val(),
+            gear = $("#gear").val(),
+            speed = $("#speed").val(),
+            terrain = $("#terrain").val(),
+            engine = $("#engine").val(),
+            horsepower = $("#horsepower").val(),
             errors = [];
 
         savevehicle.prop("disabled", true);
@@ -1356,6 +1383,12 @@
             horsepower: horsepower,
         };
 
+        var files = multiImagesUpload.files,
+            imagesUploadPromises = [];
+
+        if (multiImagesUpload.files.length <= 0) {
+            errors.push("Images ae required");
+        }
         if (make == "" && make == undefined) {
             errors.push("Make is required");
         }
@@ -1379,55 +1412,131 @@
             });
             showError("" + p + "", "#vehiclefeedback");
         } else {
-            $.ajaxSetup({
-                headers: {
-                    "X-CSRF-TOKEN": token,
-                },
-            });
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageUploadPromise = new Promise(function (
+                    resolve,
+                    reject
+                ) {
+                    var read = new FileReader();
+                    read.onload = function (e) {
+                        var img = new Image();
+                        img.src = e.target.result;
+                        img.onload = function () {
+                            var canvas = document.createElement("canvas");
+                            var ctx = canvas.getContext("2d");
+                            canvas.width = 800;
+                            canvas.height = 500;
+                            let leet = "image_" + i;
+                            ctx.drawImage(
+                                img,
+                                0,
+                                0,
+                                canvas.width,
+                                canvas.height
+                            );
+                            var compressedDataUrl = canvas.toDataURL(
+                                "image/jpeg",
+                                0.5
+                            );
+                            console.log(compressedDataUrl);
 
-            $.ajax({
-                method: "POST",
-                url: "/vehicles",
-                data: data,
-                success: function (params) {
-                    savevehicle.prop("disabled", false);
+                            $.post("/upload", {
+                                _token: token,
+                                str_id: uniqueStrID.val(),
+                                vehicle_id: vehicleID.val(),
+                                image: compressedDataUrl,
+                            })
+                                .done(function (params) {
+                                    console.log(params);
+                                    if (params == "success") {
+                                        resolve();
+                                        $('img[src="' + img.src + '"]')
+                                            .parent()
+                                            .remove();
+                                        if (
+                                            $("#image-preview").children()
+                                                .length == 0 &&
+                                            $("#coverPhotoPreview").children()
+                                                .length == 0
+                                        ) {
+                                            // showSuccess(
+                                            //     "Images uploaded successfully. Complete filling this form and click on save. ",
+                                            //     "#imageFeedback"
+                                            // );
+                                        }
+                                    }
+                                })
+                                .fail(function (error) {
+                                    reject();
+                                });
+                        };
+                    };
+                    read.readAsDataURL(file);
+                });
+                imagesUploadPromises.push(imageUploadPromise);
+            }
 
-                    let result = JSON.parse(params);
-                    if (result.status == "success") {
-                        showSuccess(result.message, "#vehiclefeedback");
-                        yardCreateID.val("");
-                        $this.trigger("reset");
-                        $("#coverPhotoPreview").children().remove();
-                        $("#image-preview").children().remove();
-                        // getVehicles();
-                        $(".chzn-select").select2({
-                            allowClear: true,
-                        });
-                    } else {
-                        showError(result.error, "#vehiclefeedback");
-                    }
-                },
+            console.log(imagesUploadPromises);
+            Promise.all(imagesUploadPromises)
+                .then((result) => {
+                    console.log("heresggsg");
+                    console.log(result);
+                    $.ajaxSetup({
+                        headers: {
+                            "X-CSRF-TOKEN": token,
+                        },
+                    });
 
-                error: function (error) {
-                    savevehicle.prop("disabled", false);
+                    $.ajax({
+                        method: "POST",
+                        url: "/vehicles",
+                        data: data,
+                        success: function (params) {
+                            console.log(params);
 
-                    if (error.status == 422) {
-                        var errors = "";
-                        $.each(
-                            error.responseJSON.errors,
-                            function (key, value) {
-                                errors += value + "!";
+                            savevehicle.prop("disabled", false);
+                            let result = JSON.parse(params);
+                            if (result.status == "success") {
+                                showSuccess(result.message, "#vehiclefeedback");
+                                yardCreateID.val("");
+                                $this.trigger("reset");
+                                $("#coverPhotoPreview").children().remove();
+                                $("#image-preview").children().remove();
+                                // getVehicles();
+                                $(".chzn-select").select2({
+                                    allowClear: true,
+                                });
+                            } else {
+                                showError(result.error, "#vehiclefeedback");
                             }
-                        );
-                        showError(errors, "#vehiclefeedback");
-                    } else {
-                        showError(
-                            "Error occurred during processing",
-                            "#vehiclefeedback"
-                        );
-                    }
-                },
-            });
+                        },
+
+                        error: function (error) {
+                            console.log(error);
+                            savevehicle.prop("disabled", false);
+
+                            if (error.status == 422) {
+                                var errors = "";
+                                $.each(
+                                    error.responseJSON.errors,
+                                    function (key, value) {
+                                        errors += value + "!";
+                                    }
+                                );
+                                showError(errors, "#vehiclefeedback");
+                            } else {
+                                showError(
+                                    "Error occurred during processing",
+                                    "#vehiclefeedback"
+                                );
+                            }
+                        },
+                    });
+                })
+                .catch((errors) => {
+                    console.log(errors);
+                });
         }
     });
 
@@ -1559,41 +1668,47 @@
                     });
 
                     /** Preview Images on edit */
-                    if (
-                        vehicle.cover_photo !== "" &&
-                        vehicle.cover_photo !== null
-                    ) {
-                        let preview = $("#coverPhotoPreview");
-                        const coverImage = $("<img>")
-                            .attr("src", "/vehicleimages/" + vehicle.cover_photo)
-                            .attr("width", "100%")
-                            .attr("height", "200px");
-                        preview.append(coverImage);
-                        const removeButton = $(
-                            "<button class='btn btn-outline-danger' id='coverPhotoDelete' data-id='" +
-                                vehicle.id +
-                                "'>"
-                        )
-                            .html("<i class='fal fa-trash btn-danger'></i>")
-                            .on("click", function (event) {
-                                event.preventDefault();
-                                let $this = $(this),
-                                    data = {
-                                        _token: token,
-                                        vehicle_id: vehicle.id,
-                                        cover_photo_delete: true,
-                                    };
-                                $.post("/image-delete", data).done(function (
-                                    params
-                                ) {
-                                    let result = JSON.parse(params);
-                                    if (result.status == "success") {
-                                        preview.remove();
-                                    }
-                                });
-                            });
-                        preview.append(removeButton);
-                    }
+                    // if (
+                    //     vehicle.cover_photo !== "" &&
+                    //     vehicle.cover_photo !== null
+                    // ) {
+                    //     let preview = $("#coverPhotoPreview");
+                    //     const coverImage = $("<img>")
+                    //         .attr(
+                    //             "src",
+                    //             "/vehicleimages/" + vehicle.cover_photo
+                    //         )
+                    //         .attr("width", "100%")
+                    //         .attr("height", "200px");
+                    //     preview.append(coverImage);
+                    //     const removeButton = $(
+                    //         "<button class='btn btn-outline-danger' id='coverPhotoDelete' data-id='" +
+                    //             vehicle.id +
+                    //             "'>"
+                    //     )
+                    //         .html("<i class='fal fa-trash btn-danger'></i>")
+                    //         .on("click", function (event) {
+                    //             event.preventDefault();
+                    //             let $this = $(this),
+                    //                 data = {
+                    //                     _token: token,
+                    //                     vehicle_id: vehicle.id,
+                    //                     cover_photo_delete: true,
+                    //                 };
+                    //             $.post("/image-delete", data).done(function (
+                    //                 params
+                    //             ) {
+                    //                 console.log(params);
+                    //                 let result = JSON.parse(params);
+                    //                 if (result.status == "success") {
+                    //                     preview.remove();
+                    //                 }
+                    //             }).fail(function(error) {
+                    //                 console.log(error);
+                    //             });
+                    //         });
+                    //     preview.append(removeButton);
+                    // }
 
                     if (vehicle.images !== "[]" && vehicle.images !== null) {
                         let previewContainer = $("#image-preview");
@@ -1627,16 +1742,20 @@
                                                 image: value,
                                                 photo_delete: true,
                                             };
-                                        $.post("/image-delete", data).done(
-                                            function (params) {
+                                        console.log(data);
+                                        $.post("/image-delete", data)
+                                            .done(function (params) {
+                                                console.log(params);
                                                 let result = JSON.parse(params);
                                                 if (
                                                     result.status == "success"
                                                 ) {
                                                     imgpreview.remove();
                                                 }
-                                            }
-                                        );
+                                            })
+                                            .fail(function (error) {
+                                                console.error(error);
+                                            });
                                     });
                                 imgpreview.append(removeButton);
                             }

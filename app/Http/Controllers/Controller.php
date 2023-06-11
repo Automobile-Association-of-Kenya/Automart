@@ -31,10 +31,12 @@ class Controller extends BaseController
     protected $quote;
     protected $finance;
     protected $tradein;
+    protected $account;
+    protected $payment;
 
     public function checksubscription()
     {
-        
+
     }
 
 }

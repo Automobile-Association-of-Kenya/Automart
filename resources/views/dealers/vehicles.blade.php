@@ -291,7 +291,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
+                                                <div class="col-md-3">
                                                     <label for="company">Description:</label>
                                                     <div class="input-group">
                                                         <textarea name="description" id="description" class="form-control"></textarea>
@@ -447,30 +447,44 @@
 
                                     <div class="card mt-2">
                                         <div class="card-header bg-white">
-                                            <h4 class="text text-success">Select vehicle images and then
-                                                click upload button to the left before submitting this form.
-                                            </h4>
-                                        </div>
-
-                                        <div class="card-body">
-
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group">
                                                 <label for="documentnumber"><span id="images">Images:</label>
                                                 <div class="input-group">
-                                                    <input type="file" name="images" id="addionalImages" multiple>
+                                                    <input type="file" name="images" id="addionalImages" multiple
+                                                        required>
                                                 </div>
+                                                <p class="text-danger">You can upload from 1 - 20 photos</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="row" id="image-preview">
+
                                             </div>
 
-                                            <div class="form-group col-md-12 row" id="image-preview">
-                                                <div class="col-md-3" id="coverPhotoPreview">
+                                            <div id="imageFeedback"></div>
+                                        </div>
+                                    </div>
 
+                                    <div class="mt-2" id="postboost">
+                                        <div class="col-md-3">
+                                            <div class="card card2 h-100">
+                                                <div class="card-body">
+                                                    <h3 class="card-title">Boost Your ads</h3>
+                                                    <p class='text-muted'></p>
+                                                    <br><br>
+                                                    <span class="h2">$20</span>
+                                                    <br><br>
+                                                    <div class="d-grid my-3">
+                                                        <button class="btn btn-outline-dark btn-block">Select</button>
+                                                    </div>
+                                                    <ul>
+                                                        <li>Cras justo odio</li>
+                                                        <li>Dapibus ac facilisis in</li>
+                                                        <li>Vestibulum at eros</li>
+                                                    </ul>
                                                 </div>
-
-                                                <div id="imageFeedback"></div>
                                             </div>
-                                            {{-- <button type="submit" class="btn btn-md btn-primary"
-                                                id="vehicleImagesUpload"><i class="fal fa-arrow-up"></i>&nbsp;&nbsp;Upload
-                                                Images</button> --}}
                                         </div>
                                     </div>
 

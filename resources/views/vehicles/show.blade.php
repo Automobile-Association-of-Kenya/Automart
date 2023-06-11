@@ -47,17 +47,17 @@
                         <div class="product-slider-box cds-2 clearfix mb-30">
                             <div class="product-img-slide">
                                 <div class="slider-for">
-                                    <img src="{{ '/vehicleimages/' . $vehicle->cover_photo }}" class="img-fluid w-100"
-                                        alt="slider-car">
+                                    {{-- <img src="{{ '/vehicleimages/' . $vehicle->cover_photo }}" class="img-fluid w-100"
+                                        alt="slider-car"> --}}
                                     @foreach ($images as $image)
                                         <img src="{{ '/vehicleimages/' . $image }}" class="img-fluid w-100"
                                             alt="slider-car">
                                     @endforeach
                                 </div>
                                 <div class="slider-nav">
-                                    <div class="thumb-slide"><img src="{{ '/vehicleimages/' . $vehicle->cover_photo }}"
+                                    {{-- <div class="thumb-slide"><img src="{{ '/vehicleimages/' . $vehicle->cover_photo }}"
                                             class="img-fluid" alt="small-car">
-                                    </div>
+                                    </div> --}}
                                     @foreach ($images as $image)
                                         <div class="thumb-slide"><img src="{{ '/vehicleimages/' . $image }}"
                                                 class="img-fluid" alt="small-car">
@@ -67,7 +67,6 @@
                             </div>
                         </div>
                         <div class="row">
-
                             <div class="col-md-4 mb-1">
                                 <button href="#" id="quoteRequestToggle" class="btn btn-warning"
                                     data-bs-toggle="modal" data-bs-target="#quoteModal" data-id="{{ $vehicle->id }}"
@@ -189,7 +188,7 @@
                                                                                 {{ number_format($item->price, 2) }}</span>
                                                                         </div>
                                                                         <img class="d-block w-100"
-                                                                            src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
+                                                                            src="{{ asset('/vehicleimages/' . $images[0] . '') }}"
                                                                             alt="car">
                                                                     </a>
                                                                     <div class="carbox-overlap-wrapper">
@@ -206,12 +205,12 @@
                                                                                     <i class="fa fa-heart-o"></i>
                                                                                 </a>
                                                                                 <div class="car-magnify-gallery">
-                                                                                    <a href="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
+                                                                                    <a href="{{ asset('/vehicleimages/' . $images[0] . '') }}"
                                                                                         class="overlap-btn"
                                                                                         data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                                                         <i class="fa fa-expand"></i>
                                                                                         <img class="hidden"
-                                                                                            src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
+                                                                                            src="{{ asset('/vehicleimages/' . $images[0] . '') }}"
                                                                                             alt="hidden-img">
                                                                                     </a>
                                                                                     @foreach ($images as $image)

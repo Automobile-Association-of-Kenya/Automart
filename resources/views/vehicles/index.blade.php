@@ -121,20 +121,20 @@
                                 @csrf
                                 <div class="col-md-3">
                                     <label>Dealer</label>
-                                    <select name="filterlistdealer_id" class="form-control form-control--md chzn-select"
+                                    <select name="filterlistdealer_id" class="form-control  chzn-select"
                                         id="filterDealerID" style="width: 100%;">
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Make</label>
-                                    <select name="filterlistmake_id" class="form-control form-control--md chzn-select"
+                                    <select name="filterlistmake_id" class="form-control  chzn-select"
                                         id="filterMakeID" style="width: 100%;">
                                     </select>
                                 </div>
 
                                 <div class="col-md-2">
                                     <label for="filterliststatus">Model</label>
-                                    <select name="filterlistmodel_id" class="form-control form-control--md chzn-select"
+                                    <select name="filterlistmodel_id" class="form-control  chzn-select"
                                         id="filterModelID" style="width: 100%;">
 
                                     </select>
@@ -143,7 +143,7 @@
                                 <div class="col-md-3">
                                     <label for="vehicles">Vehicles</label>
                                     <select name="vehicleslist_id" style="width: 100%;"
-                                        class="form-control form-control--md chzn-select" id="filterVehiclesID"
+                                        class="form-control  chzn-select" id="filterVehiclesID"
                                         style="width: 100%;">
                                     </select>
                                 </div>
@@ -157,7 +157,7 @@
 
                         <div class="row mt-2">
                             <form action="{{ route('vehicles.store') }}" id="vehicleCreateForm">
-                            {{-- <p class="text-danger">Fields marked with * are required</p> --}}
+                                {{-- <p class="text-danger">Fields marked with * are required</p> --}}
 
                                 <div class="col-md-12">
                                     <div class="card ">
@@ -168,18 +168,18 @@
                                                     value="{{ $str }}">
                                                 <input type="hidden" name="vehicle_id" id="vehicleID" value="">
                                                 <div class="col-md-3 form-group">
-                                                    <label for="type">Dealer: </label>
+                                                    <label for="type">Dealer: <sup>*</sup></label>
                                                     <div class="input-group">
-                                                        <select class="form-control form-control--md chzn-select"
+                                                        <select class="form-control  chzn-select"
                                                             name="dealer_id" id="vehicleDealer"
                                                             style="width: 100%;"></select>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-3 form-group">
-                                                    <label for="type">Vehicle Type:</label>
+                                                    <label for="type">Vehicle Type:<sup>*</sup></label>
                                                     <div class="input-group">
-                                                        <select class="form-control form-control--md chzn-select"
+                                                        <select class="form-control  chzn-select"
                                                             name="type" id="vehicleType"
                                                             style="width: 100%;"></select>
                                                     </div>
@@ -188,7 +188,7 @@
                                                 <div class="col-md-3 form-group">
                                                     <label for="make">Vehicle Make: <sup>*</sup></label>
                                                     <div class="input-group">
-                                                        <select class="form-control form-control--md chzn-select"
+                                                        <select class="form-control  chzn-select"
                                                             name="make" id="vehicleMake" required
                                                             style="width: 100%;"></select>
                                                     </div>
@@ -198,7 +198,7 @@
                                                     <label for="firstname">Vehicle Model: <sup>*</sup></label>
                                                     <div class="input-group">
                                                         <select name="model" id="vehicleModel"
-                                                            class="form-control form-control--md chzn-select" required
+                                                            class="form-control  chzn-select" required
                                                             style="width: 100%;"></select>
                                                     </div>
                                                 </div>
@@ -210,13 +210,13 @@
 
                                                     <div class="input-group locationInput">
                                                         <input type="text"
-                                                            class="form-control form-control--md location" id="location"
+                                                            class="form-control  location" id="location"
                                                             name="location">
                                                     </div>
 
                                                     <div class="input-group yardInput">
                                                         <select name="yard_id"
-                                                            id="yardID"class="form-control form-control--md location chzn-select"
+                                                            id="yardID"class="form-control  location chzn-select"
                                                             style="width: 100%;"></select>
                                                     </div>
                                                 </div>
@@ -225,7 +225,7 @@
                                                     <label for="company">Year of manufacture: <sup>*</sup></label>
                                                     <div class="input-group">
                                                         <select name="year" id="yearOfManufacture"
-                                                            class="form-control form-control--md chzn-select" required
+                                                            class="form-control  chzn-select" required
                                                             style="width: 100%;">
                                                             <option value="">Select One</option>
                                                             @for ($i = date('Y', strtotime(now())); $i >= 2000; $i--)
@@ -241,7 +241,8 @@
                                                     <label for="company">Condition:</label>
                                                     <div class="input-group">
                                                         <select name="usage" id="usage"
-                                                            class="form-control form-control--md chzn-select">
+                                                            class="form-control  chzn-select"
+                                                            style="width: 100%;">
                                                             <option value="">Any</option>
                                                             <option value="New">New</option>
                                                             <option value="Semi-new">Semi New</option>
@@ -256,7 +257,7 @@
                                                     <label for="company">Transmission:</label>
                                                     <div class="input-group">
                                                         <select name="transmission" id="transmission"
-                                                            class="form-control form-control--md chzn-select"
+                                                            class="form-control  chzn-select"
                                                             style="width: 100%;">
                                                             <option value="">Select One</option>
                                                             <option value="Automatic">Automatic</option>
@@ -273,7 +274,7 @@
                                                     <label for="company">Mileage: <sup>*</sup></label>
                                                     <div class="input-group">
                                                         <input type="number" name="mileage" id="mileAge"
-                                                            class="form-control form-control--md" required>
+                                                            class="form-control " required>
                                                     </div>
                                                 </div>
 
@@ -281,7 +282,7 @@
                                                     <label for="company">Price: <sup>*</sup></label>
                                                     <div class="input-group">
                                                         <input type="text" name="price" id="vehiclePrice"
-                                                            class="form-control form-control--md" required>
+                                                            class="form-control " required>
                                                     </div>
                                                 </div>
 
@@ -290,7 +291,7 @@
                                                     <label for="enginecc">Engine CC: <sup>*</sup></label>
                                                     <div class="input-group">
                                                         <input type="text" name="enginecc" id="engineCC"
-                                                            class="form-control form-control--md" required>
+                                                            class="form-control " required>
                                                     </div>
                                                 </div>
 
@@ -319,7 +320,7 @@
                                                     <label for="middlename">Country of origin:</label>
                                                     <div class="input-group">
                                                         <select name="country_of_origin" id="countryofOrigin"
-                                                            class="form-control form-control--md chzn-select"
+                                                            class="form-control  chzn-select"
                                                             style="width: 100%;"></select>
                                                     </div>
                                                 </div>
@@ -328,7 +329,7 @@
                                                     <label for="shipping_to">Shipping to:</label>
                                                     <div class="input-group">
                                                         <select name="shipping_to" id="shippingTo"
-                                                            class="form-control form-control--md chzn-select"
+                                                            class="form-control  chzn-select"
                                                             style="width: 100%;"></select>
                                                     </div>
                                                 </div>
@@ -336,7 +337,7 @@
                                                 <div class="col-md-3 form-group">
                                                     <label for="company">Color:</label>
                                                     <select name="color" id="vehicleColor"
-                                                        class="form-control  form-control--md chzn-select"
+                                                        class="form-control   chzn-select"
                                                         style="width: 100%;">
                                                         <option value="">Select One</option>
                                                         <option value="Black">Black</option>
@@ -366,7 +367,7 @@
                                                     <label for="company">Interior:</label>
                                                     <div class="input-group">
                                                         <select name="inetrior" id="interior"
-                                                            class="form-control form-control--md chzn-select"
+                                                            class="form-control  chzn-select"
                                                             style="width: 100%;">
                                                             <option value="">Select One</option>
                                                             <option value="Leather">Leather</option>
@@ -380,7 +381,7 @@
                                                     <label for="company">Fuel Type:</label>
                                                     <div class="input-group">
                                                         <select name="fuel_type" id="fuelType"
-                                                            class="form-control form-control--md chzn-select"
+                                                            class="form-control  chzn-select"
                                                             style="width: 100%;">
                                                             <option value="">Select One</option>
                                                             <option value="Petrol">Petrol</option>
@@ -398,7 +399,7 @@
                                                     <label for="gear">NO of Gears: </label>
                                                     <div class="input-group">
                                                         <input type="text" name="gear" id="gear"
-                                                            class="form-control form-control--md">
+                                                            class="form-control ">
                                                     </div>
                                                 </div>
 
@@ -406,7 +407,7 @@
                                                     <label for="speed">Top Speed: </label>
                                                     <div class="input-group">
                                                         <input type="text" name="speed" id="speed"
-                                                            class="form-control form-control--md">
+                                                            class="form-control ">
                                                     </div>
                                                 </div>
 
@@ -414,7 +415,7 @@
                                                     <label for="terrain">Drive terrain: </label>
                                                     <div class="input-group">
                                                         <input type="text" name="terrain" id="terrain"
-                                                            class="form-control form-control--md">
+                                                            class="form-control ">
                                                     </div>
                                                 </div>
 
@@ -422,7 +423,7 @@
                                                     <label for="engine">Engine: </label>
                                                     <div class="input-group">
                                                         <input type="text" name="engine" id="engine"
-                                                            class="form-control form-control--md">
+                                                            class="form-control ">
                                                     </div>
                                                 </div>
 
@@ -430,7 +431,7 @@
                                                     <label for="horsepower">Horse Power: </label>
                                                     <div class="input-group">
                                                         <input type="text" name="horsepower" id="horsepower"
-                                                            class="form-control form-control--md">
+                                                            class="form-control ">
                                                     </div>
                                                 </div>
 
@@ -439,7 +440,7 @@
                                                     <label for="company">Tags:</label>
                                                     <div class="input-group">
                                                         <select name="tags" id="vehicleTags"
-                                                            class="form-control form-control--md" multiple="multiple"
+                                                            class="form-control " multiple="multiple"
                                                             style="width: 100%;">
                                                             <option value="#Best deals">#Best deals</option>
                                                             <option value="#Cars on sale">#Cars on sale</option>
@@ -458,30 +459,24 @@
                                     <div class="card containergroup mt-2">
                                         <div class="card-header bg-white">
                                             <div class="form-group">
-                                                <label for="documentnumber"><span id="images">Additional
-                                                        Images:</label>
+                                                <label for="documentnumber"><span id="images">Images:</label>
                                                 <div class="input-group">
-                                                    <input type="file" name="images" id="addionalImages" multiple>
+                                                    <input type="file" name="images" id="addionalImages" multiple
+                                                        required>
                                                 </div>
                                                 <p class="text-danger">You can upload from 1 - 20 photos</p>
                                             </div>
-                                            {{-- <h4 class="text text-success">Select vehicle images and then
-                                                click upload button to the left before submitting this form.
-                                            </h4> --}}
+
                                         </div>
                                         <div class="card-body">
-
                                             <div class="row" id="image-preview">
-
                                             </div>
-
                                             <div id="imageFeedback"></div>
-
-                                            {{-- <button type="submit" class="btn btn-md btn-primary"
-                                                    id="vehicleImagesUpload"><i
-                                                        class="fal fa-arrow-up"></i>&nbsp;&nbsp;Upload
-                                                    Images</button> --}}
                                         </div>
+                                    </div>
+
+                                    <div id="subscription-intro-secti">
+
                                     </div>
 
 
@@ -494,7 +489,6 @@
                                             <button class='btn btn-outline-warning btn-md' id='clearvehicle'><i
                                                     class="fal fa-broom fa-lg fa-fw"></i>
                                                 Clear Fields</button>
-
                                         </div>
                                     </div>
 
@@ -513,28 +507,28 @@
                                             <div class="col-md-3">
                                                 <label>Yard</label>
                                                 <select name="filterlistyard_id" id="filterListVehicleYardID"
-                                                    class="form-control form-control--md chzn-select" style="width: 100%;">
+                                                    class="form-control  chzn-select" style="width: 100%;">
                                                 </select>
                                             </div>
                                         @endif --}}
 
                                 <div class="col-md-4">
                                     <label>Dealer</label>
-                                    <select name="filterlistdealer_id" class="form-control form-control--md chzn-select"
+                                    <select name="filterlistdealer_id" class="form-control  chzn-select"
                                         id="filterListDealerID" style="width: 100%;">
                                     </select>
                                 </div>
 
                                 <div class="col-md-4">
                                     <label>Make</label>
-                                    <select name="filterlistmake_id" class="form-control form-control--md chzn-select"
+                                    <select name="filterlistmake_id" class="form-control  chzn-select"
                                         id="filterListMakeID" style="width: 100%;">
                                     </select>
                                 </div>
 
                                 <div class="col-md-3">
                                     <label for="filterliststatus">Model</label>
-                                    <select name="filterlistmodel_id" class="form-control form-control--md chzn-select"
+                                    <select name="filterlistmodel_id" class="form-control  chzn-select"
                                         id="filterListModelID" style="width: 100%;">
 
                                     </select>
@@ -574,36 +568,50 @@
                     <div class="tab-pane fade mb-3" id="makesTab" role="tabpanel" aria-labelledby="pop2-tab">
                         <div class="row">
 
+                            <div class="col-md-8 mt-2">
+                                <div class="card">
+                                    <div class="card-body" id="makesTableSection">
 
-                            <div class="col-md-8 mt-2" id="makesTableSection">
-
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-md-4">
-                                <div class="make-create-section mt-2">
-                                    <h4 class="text text-center mb-2">Makes Form</h4>
+                                <div class="card make-create-section mt-2">
+                                    <div class="card-header bg-white">
+                                        <h4 class="text text-center mb-2">Makes Form</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="#" method="post" id="makeCreateForm" enctype="multipart/form-data">
+                                            <div id="makefeedback"></div>
+                                            @csrf
+                                            <div class="row">
+                                                <input type="hidden" name="make_id" id="makeCreateID" value="">
+                                                <div class="col-md-12 form-group">
+                                                    <label for="make">Make:</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="make" id="makeName"
+                                                            class="form-control ">
+                                                    </div>
+                                                </div>
 
-                                    <form action="#" method="post" id="makeCreateForm">
-                                        <div id="makefeedback"></div>
-                                        @csrf
-                                        <div class="row">
-                                            <input type="hidden" name="make_id" id="makeCreateID" value="">
-                                            <div class="col-md-12 form-group">
-                                                <label for="make">Make:</label>
-                                                <div class="input-group">
-                                                    <input type="text" name="make" id="makeName"
-                                                        class="form-control form-control--md">
+                                                <div class="col-md-12 form-group">
+                                                    <label for="make">Logo:</label>
+                                                    <div class="input-group">
+                                                        <input type="file" name="logo" id="makeLogo">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 form-group">
+                                                    <button type="submit" class="btn btn-sm btn-success"
+                                                        id="submitMake"><i
+                                                            class="fal fa-save fa-lg fa-fw"></i>save</button>
+                                                    <button class='btn btn-outline-warning btn-sm' id='clearMake'><i
+                                                            class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-12 form-group">
-                                                <button type="submit" class="btn btn-sm btn-success" id="submitMake"><i
-                                                        class="fal fa-save fa-lg fa-fw"></i>save</button>
-                                                <button class='btn btn-outline-warning btn-sm' id='clearMake'><i
-                                                        class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
 
                             </div>
@@ -612,44 +620,54 @@
 
                     <div class="tab-pane fade mb-3" id="vehicleModelsTab" role="tabpanel" aria-labelledby="pop2-tab">
                         <div class="row">
-                            <div class="col-md-8" id="modelsTableSection">
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-body" id="modelsTableSection">
 
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="model-create-section mt-2">
-                                    <h4 class="text text-center mb-2">Model Form</h4>
+                                    <div class="card">
+                                        <div class="card-header bg-white">
+                                            <h4 class="text text-center mb-2">Model Form</h4>
 
-                                    <form action="#" method="post" id="modelCreateForm">
-                                        @csrf
-                                        <div id="modelfeedback"></div>
-                                        <div class="row">
-                                            <input type="hidden" name="model_id" id="modelID" value="">
-                                            <div class="col-md-12 form-group">
-                                                <label for="make_id">Make:</label>
-                                                <div class="input-group">
-                                                    <select name="make_id" id="modelMakeID"
-                                                        class="form-control form-control--md"></select>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-12 form-group">
-                                                <label for="make">Model:</label>
-                                                <div class="input-group">
-                                                    <input type="text" name="model" id="modelName"
-                                                        class="form-control form-control--md">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-12 form-group">
-                                                <button type="submit" class="btn btn-sm btn-success" id="submitModel"><i
-                                                        class="fal fa-save fa-lg fa-fw"></i>save</button>
-                                                <button class='btn btn-outline-warning btn-sm' id='clearModel'><i
-                                                        class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
-                                            </div>
                                         </div>
-                                    </form>
+                                        <div class="card-body">
+                                            <form action="#" method="post" id="modelCreateForm">
+                                                @csrf
+                                                <div id="modelfeedback"></div>
+                                                <div class="row">
+                                                    <input type="hidden" name="model_id" id="modelID" value="">
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="make_id">Make:</label>
+                                                        <div class="input-group">
+                                                            <select name="make_id" id="modelMakeID"
+                                                                class="form-control "></select>
+                                                        </div>
+                                                    </div>
 
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="make">Model:</label>
+                                                        <div class="input-group">
+                                                            <input type="text" name="model" id="modelName"
+                                                                class="form-control ">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <button type="submit" class="btn btn-sm btn-success"
+                                                            id="submitModel"><i
+                                                                class="fal fa-save fa-lg fa-fw"></i>save</button>
+                                                        <button class='btn btn-outline-warning btn-sm' id='clearModel'><i
+                                                                class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -657,41 +675,54 @@
 
                     <div class="tab-pane fade mb-3" id="featuresTab" role="tabpanel" aria-labelledby="pop2-tab">
                         <div class="row">
-                            <div class="col-md-8" id="featureseSection"></div>
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-body" id="featureseSection">
+
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="make-create-section mt-2">
-                                    <h4 class="text text-center mb-2">Features Form</h4>
+                                    <div class="card">
+                                        <div class="card-header bg-white">
+                                            <h4 class="text text-center mb-2">Features Form</h4>
 
-                                    <form action="#" method="post" id="featureCreateForm">
-                                        <div id="featurefeedback"></div>
-                                        @csrf
-                                        <input type="hidden" name="feature_id" id="featureCreateID" value="">
-                                        <div class="row">
-
-                                            <div class="col-md-12 form-group">
-                                                <label for="make">Feature:</label>
-                                                <div class="input-group">
-                                                    <input type="text" name="feature" id="featureName"
-                                                        class="form-control form-control--md">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-12 form-group">
-                                                <label for="make">Description:</label>
-                                                <div class="input-group">
-                                                    <textarea name="description" id="featureDescription" class="form-control form-control--md"></textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-12 form-group">
-                                                <button type="submit" class="btn btn-sm btn-success"><i
-                                                        class="fal fa-save fa-lg fa-fw"></i>save</button>
-                                                <button class='btn btn-outline-warning btn-sm' id='clearFeature'><i
-                                                        class="fal fa-broom fa-lg fa-fw"></i>
-                                                    Reset</button>
-                                            </div>
                                         </div>
-                                    </form>
+                                        <div class="card-body">
+                                            <form action="#" method="post" id="featureCreateForm">
+                                                <div id="featurefeedback"></div>
+                                                @csrf
+                                                <input type="hidden" name="feature_id" id="featureCreateID"
+                                                    value="">
+                                                <div class="row">
+
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="make">Feature:</label>
+                                                        <div class="input-group">
+                                                            <input type="text" name="feature" id="featureName"
+                                                                class="form-control ">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="make">Description:</label>
+                                                        <div class="input-group">
+                                                            <textarea name="description" id="featureDescription" class="form-control "></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <button type="submit" class="btn btn-sm btn-success"><i
+                                                                class="fal fa-save fa-lg fa-fw"></i>save</button>
+                                                        <button class='btn btn-outline-warning btn-sm'
+                                                            id='clearFeature'><i class="fal fa-broom fa-lg fa-fw"></i>
+                                                            Reset</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -700,33 +731,45 @@
 
                     <div class="tab-pane fade mb-3" id="vehicleTypesTab" role="tabpanel" aria-labelledby="pop2-tab">
                         <div class="row">
-                            <div class="col-md-8" id="typesSection"></div>
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-body" id="typesSection"></div>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="make-create-section mt-2">
-                                    <h4 class="text text-center mb-2">Vehicle Types Form</h4>
-
-                                    <form action="#" method="post" id="typeCreateForm">
-                                        <div id="typefeedback"></div>
-                                        @csrf
-                                        <input type="hidden" name="type_id" id="typeCreateID" value="">
-                                        <div class="row">
-
-                                            <div class="col-md-12 form-group">
-                                                <label for="make">Name:</label>
-                                                <div class="input-group">
-                                                    <input type="text" name="feature" id="typeName"
-                                                        class="form-control form-control--md">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-12 form-group">
-                                                <button type="submit" class="btn btn-sm btn-success"><i
-                                                        class="fal fa-save fa-lg fa-fw"></i>save</button>
-                                                <button class='btn btn-outline-warning btn-sm' id='clearType'><i
-                                                        class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
-                                            </div>
+                                    <div class="card">
+                                        <div class="card-header bg-white">
+                                            <h4 class="text text-center mb-2">Vehicle Types Form</h4>
                                         </div>
-                                    </form>
+
+                                        <div class="card-body">
+                                            <form action="#" method="post" id="typeCreateForm">
+                                                <div id="typefeedback"></div>
+                                                @csrf
+                                                <input type="hidden" name="type_id" id="typeCreateID" value="">
+                                                <div class="row">
+
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="make">Name:</label>
+                                                        <div class="input-group">
+                                                            <input type="text" name="feature" id="typeName"
+                                                                class="form-control ">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <button type="submit" class="btn btn-sm btn-success"><i
+                                                                class="fal fa-save fa-lg fa-fw"></i>save</button>
+                                                        <button class='btn btn-outline-warning btn-sm' id='clearType'><i
+                                                                class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -734,62 +777,70 @@
 
                     <div class="tab-pane fade mb-3" id="yardsTab" role="tabpanel" aria-labelledby="pop2-tab">
                         <div class="row">
-                            <div class="col-md-8" id="yardsSection"></div>
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-body" id="yardsSection"></div>
+                                </div>
+                            </div>
                             <div class="col-md-4">
-                                <div class="make-create-section mt-2">
-                                    <h4 class="text text-center mb-2">Vehicle yards Form</h4>
+                                <div class="card make-create-section mt-2">
+                                    <div class="card-header-bg-white">
+                                        <h4 class="text text-center mb-2">Vehicle yards Form</h4>
 
-                                    <form action="#" method="post" id="yardCreateForm">
-                                        <div id="yardfeedback"></div>
-                                        @csrf
-                                        <input type="hidden" name="yard_id" id="yardCreateID" value="">
-                                        <div class="row">
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="#" method="post" id="yardCreateForm">
+                                            <div id="yardfeedback"></div>
+                                            @csrf
+                                            <input type="hidden" name="yard_id" id="yardCreateID" value="">
+                                            <div class="row">
 
-                                            <div class="col-md-12 form-group">
-                                                <label for="make">Dealer:</label>
-                                                <div class="input-group">
-                                                    <select type="text" name="dealer_id" id="dealerYardID"
-                                                        class="form-control form-control--md"></select>
+                                                <div class="col-md-12 form-group">
+                                                    <label for="make">Dealer:</label>
+                                                    <div class="input-group">
+                                                        <select type="text" name="dealer_id" id="dealerYardID"
+                                                            class="form-control chzn-select" style="width: 100%;"></select>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="col-md-12 form-group">
-                                                <label for="make">Name:</label>
-                                                <div class="input-group">
-                                                    <input type="text" name="yard" id="yardName"
-                                                        class="form-control form-control--md">
+                                                <div class="col-md-12 form-group">
+                                                    <label for="make">Name:</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="yard" id="yardName"
+                                                            class="form-control ">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-12 form-group">
-                                                <label for="make">Address:</label>
-                                                <div class="input-group">
-                                                    <input type="text" name="yardaddress" id="yardAddress"
-                                                        class="form-control form-control--md">
+                                                <div class="col-md-12 form-group">
+                                                    <label for="make">Address:</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="yardaddress" id="yardAddress"
+                                                            class="form-control ">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-12 form-group">
-                                                <label for="make">Email:</label>
-                                                <div class="input-group">
-                                                    <input type="text" name="yardemail" id="yardEmail"
-                                                        class="form-control form-control--md">
+                                                <div class="col-md-12 form-group">
+                                                    <label for="make">Email:</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="yardemail" id="yardEmail"
+                                                            class="form-control ">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-12 form-group">
-                                                <label for="make">Phone:</label>
-                                                <div class="input-group">
-                                                    <input type="text" name="yardphone" id="yardPhone"
-                                                        class="form-control form-control--md">
+                                                <div class="col-md-12 form-group">
+                                                    <label for="make">Phone:</label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="yardphone" id="yardPhone"
+                                                            class="form-control ">
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="col-md-12 form-group">
-                                                <button type="submit" class="btn btn-sm btn-success"><i
-                                                        class="fal fa-save fa-lg fa-fw"></i>save</button>
-                                                <button class='btn btn-outline-warning btn-sm' id='clearYard'><i
-                                                        class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
+                                                <div class="col-md-12 form-group">
+                                                    <button type="submit" class="btn btn-sm btn-success"><i
+                                                            class="fal fa-save fa-lg fa-fw"></i>save</button>
+                                                    <button class='btn btn-outline-warning btn-sm' id='clearYard'><i
+                                                            class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -812,7 +863,7 @@
                     <div id="scheduledetailsnotifications"></div>
                     <div class="form-group">
                         <label for="schedulecategory">Schedule Category</label>
-                        <select name="schedulecategory" id="schedulecategory" class="form-control form-control--md">
+                        <select name="schedulecategory" id="schedulecategory" class="form-control ">
                             <option value="">&lt;Choose&gt;</option>
                             <option value="shares">Shares</option>
                             <option value="deposits">Deposits</option>

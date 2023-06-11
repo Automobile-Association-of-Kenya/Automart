@@ -115,7 +115,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
                                 <div class="card-body">
                                     <form action="{{ route('login') }}" method="POST" id="loginForm">
                                         @csrf
-                                        <div class="form-group">
+                                        <div class="form-group mb-2">
                                             <label class="float-left">Email Address</label>
                                             <input type="email" name="email" value="{{ old('email') }}" id="emailLo"
                                                 class="form-control @error('email') invalid @enderror"
@@ -125,7 +125,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
                                             @endif
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-group mb-2">
                                             <label class="float-left" for="password">Password</label>
                                             <div class="input-group">
                                                 <input type="password" name="password" id="passwordLo" class="form-control"
@@ -140,7 +140,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
                                             @endif
                                         </div>
 
-                                        <div class="form-group form-box checkbox clearfix">
+                                        <div class="form-group form-box checkbox clearfix mb-2">
                                             <div class="form-check checkbox-theme">
                                                 <input class="form-check-input" type="checkbox" value=""
                                                     id="rememberMe">

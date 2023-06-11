@@ -100,41 +100,7 @@ $(function () {
     });
 
     // Partners strat
-    $(".custom-slider").slick({
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: false,
-                },
-            },
-            {
-                breakpoint: 900,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: false,
-                },
-            },
-            {
-                breakpoint: 550,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: false,
-                },
-            },
-        ],
-    });
+
 
     // Accordion strat
     var acc = document.getElementsByClassName("accordion");
@@ -704,7 +670,48 @@ $(function () {
         .trigger("resize");
 })(jQuery);
 
+
+
 (function () {
+    function slidePartners() {
+        $(".custom-slider").slick({
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            responsive: [
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: false,
+                    },
+                },
+                {
+                    breakpoint: 900,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: false,
+                    },
+                },
+                {
+                    breakpoint: 550,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: false,
+                    },
+                },
+            ],
+        });
+    }
+
+
     function getTypesWithVehicle() {
         $.getJSON("/types-with-vehicles", function (makes) {
             let item = "",
@@ -738,7 +745,7 @@ $(function () {
     function vehicleMakesWithVehicles() {
         $.getJSON("/makes-with-vehicles", function (vehicles) {
             let item = "",
-                option = "<option value=''>All</option>";
+                option = "<option value=''>All</option>", brand = "";
             $.each(vehicles, function (key, value) {
                 item +=
                     '<a class="dropdown-item" href="/make-vehicles/' +
@@ -752,11 +759,15 @@ $(function () {
                     ">" +
                     value.make +
                     "</option>";
+                brand += "<div class=\"custom-box\"><img src=\"/images/brands/" + value.logo + "\" alt=\"brand\" class=\"img-fluid\"></div>";
             });
             $("#vehicleGroupandMakes").append(item);
             $("#filterMakesID").html(option);
+            $("#brands-section").html(brand);
+            slidePartners();
         });
     }
+    
     vehicleMakesWithVehicles();
 
     function getCounties() {
@@ -817,13 +828,13 @@ $(function () {
 
                     let img =
                         '<a href="/vehicleimages/' +
-                        value.cover_photo +
+                        images[0] +
                         '" class="overlap-btn" data-sub-html="<h4>' +
                         value.model.model +
                         "</h4><p>" +
                         value.description +
                         '</p>"><i class="fa fa-expand"></i><img class="hidden" src="/vehicleimages/' +
-                        value.cover_photo +
+                        images[0] +
                         '" alt="hidden-img"></a>';
                     $.each(images, function (key, image) {
                         img +=
@@ -849,7 +860,7 @@ $(function () {
                             currency: "KSH",
                         }) +
                         '</span></div><img class="d-block w-100" src="/vehicleimages/' +
-                        value.cover_photo +
+                        images[0] +
                         '" alt="car"></a><div class="carbox-overlap-wrapper"><div class="overlap-box"><div class="overlap-btns-area"><a class="overlap-btn" data-bs-toggle="modal" data-bs-target="#carOverviewModal" id="vehicleDetailsModalToggle" data-id="' +
                         value.id +
                         '"><i class="fa fa-eye-slash"></i></a><a class="overlap-btn wishlist-btn" data-id="vehicleLike" id="' +
@@ -899,6 +910,7 @@ $(function () {
             $.each(vehicle.features, function (key, value) {
                 features += "<li>" + value.feature + "</li>";
             });
+            let images = JSON.parse(vehicle.images);
 
             let vehicledata =
                 '<div class="modal-header"><div class="modal-title"><h4 id="vehicleName">' +
@@ -908,7 +920,7 @@ $(function () {
                 '</h4><h5 id="vehicleLocation"><i class="flaticon-pin"></i> &nbsp;' +
                 location +
                 '</h5></div><button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><div class="row modal-raw"><div class="col-lg-6 modal-left"><div class="item active"><img src="/vehicleimages/' +
-                vehicle.cover_photo +
+                images[0] +
                 '" alt="best-car" class="img-fluid"><div class="sobuz"><div class="price-box"><span class="del-2">Kes. ' +
                 vehiclePrice +
                 '</span></div></div></div></div><div class="col-lg-6 modal-right"><div class="modal-right-content"><section><h3>Features</h3><div class="features"><ul class="bullets">' +
@@ -996,7 +1008,7 @@ $(function () {
                         : "";
                 vehicle +=
                     '<div class="col-md-4 slide slide-box"><div class="car-box"><div class="car-image"><img class="d-block w-100" src="vehicleimages/' +
-                    value.cover_photo +
+                    images[0] +
                     '" alt="car-photo"><div class="tag">' +
                     value.usage +
                     '</div><div class="facilities-list clearfix"><ul><li><i class="flaticon-way"></i>' +
