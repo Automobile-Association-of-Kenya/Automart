@@ -79,7 +79,7 @@
                 let li = "";
                 $.each(value.properties, function (key, value) {
                     li +=
-                        '<li><i class="fa fa-thumbs-up text-success"></i>&nbsp;' +
+                        '<li><i class="fa fa-check-circle fa-1x text-success"></i>&nbsp;' +
                         value.name +
                         "</li>";
                 });
@@ -94,7 +94,7 @@
                     value.billingcycle +
                     '</span> </div></div><div class="plan-list"><ul>' +
                     li +
-                    '</ul><div class="plan-button text-center"><a href="#" data-bs-toggle="modal" data-bs-target="#subscriptionPaymentModal" id="subscriptionSelect" class="btn pricing-btn" data-id="' +
+                    '</ul><div class="plan-button text-center"><a href="subscription/'+value.id+'" id="subscriptionSelect" class="btn pricing-btn" data-id="' +
                     value.id +
                     '">Get Started</a></div></div></div></div>';
             });
@@ -102,79 +102,79 @@
         });
     }
     getSubscriptions();
-    
 
-    $("body").on("click", "#subscriptionSelect", function (event) {
-        event.preventDefault();
-        $("#subscriptionOverviewModalLabel").html(
-            '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
-        );
-        $("#subscriptiondescription").html(
-            '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
-        );
-        $("#subscriptiondetails").html(
-            '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
-        );
-        $("#subscriptionPrice").html(
-            '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
-        );
-        let plan_id = $(this).data("id");
-        $.getJSON("/subscriptions/" + plan_id, function (subscription) {
-            $("#subscriptionForPaymentID").val(subscription.id);
-            let header =
-                    '<h4 class="text-black">' + subscription.name + "</h4>",
-                description = "",
-                token = $("#paymentForm").find("input[name='_token']").val(),
-                pricesection = "",
-                price = subscription.cost !== "free" ? subscription.cost : 0;
 
-            pricesection +=
-                '<div class="social-list text-center"><h3>Kes: <span class="text-success">' +
-                price +
-                "</span></h3></div>";
-            $("#subscriptionOverviewModalLabel").html(header);
-            $.each(subscription.properties, function (key, value) {
-                description +=
-                    '<p><span class="fa fa-check-circle fa-1x text-success"></span>&nbsp;' +
-                    value.name +
-                    "</p>";
-            });
+    // $("body").on("click", "#subscriptionSelect", function (event) {
+    //     event.preventDefault();
+    //     $("#subscriptionOverviewModalLabel").html(
+    //         '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
+    //     );
+    //     $("#subscriptiondescription").html(
+    //         '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
+    //     );
+    //     $("#subscriptiondetails").html(
+    //         '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
+    //     );
+    //     $("#subscriptionPrice").html(
+    //         '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
+    //     );
+    //     let plan_id = $(this).data("id");
+    //     $.getJSON("/subscriptions/" + plan_id, function (subscription) {
+    //         $("#subscriptionForPaymentID").val(subscription.id);
+    //         let header =
+    //                 '<h4 class="text-black">' + subscription.name + "</h4>",
+    //             description = "",
+    //             token = $("#paymentForm").find("input[name='_token']").val(),
+    //             pricesection = "",
+    //             price = subscription.cost !== "free" ? subscription.cost : 0;
 
-            $("#subscriptiondescription").text(subscription.description);
-            $("#subscriptiondetails").html(description);
-            $("#subscriptiondetails").append(pricesection);
-            $("#subscriptionPrice").val(price);
+    //         pricesection +=
+    //             '<div class="social-list text-center"><h3>Kes: <span class="text-success">' +
+    //             price +
+    //             "</span></h3></div>";
+    //         $("#subscriptionOverviewModalLabel").html(header);
+    //         $.each(subscription.properties, function (key, value) {
+    //             description +=
+    //                 '<p><span class="fa fa-check-circle fa-1x text-success"></span>&nbsp;' +
+    //                 value.name +
+    //                 "</p>";
+    //         });
 
-            if (parseFloat(subscription.cost) <= 0) {
-                $("#mpesa-submit-button").prop("disabled", true);
-                $(".loadersection").html(
-                    '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
-                );
-                let user_id = $("#subscriberID"),
-                    dealer_id = $("#dealerID"),
-                    subscription_id = subscription.id;
-                let data = {
-                    _token: token,
-                    user_id: user_id,
-                    dealer_id: dealer_id,
-                    subscription_id: subscription_id,
-                };
+    //         $("#subscriptiondescription").text(subscription.description);
+    //         $("#subscriptiondetails").html(description);
+    //         $("#subscriptiondetails").append(pricesection);
+    //         $("#subscriptionPrice").val(price);
 
-                $.post("/subscribe", data)
-                    .done(function (params) {
-                        console.log(params);
-                        $("#mpesa-submit-button").prop("disabled", true);
-                        let result = JSON.parse(params);
-                        if (result.status === "success") {
-                        }
-                    })
-                    .fail(function (error) {
-                        $("#mpesa-submit-button").prop("disabled", true);
-                        console.error(error);
-                    });
-            }
-        });
-    });
+    //         if (parseFloat(subscription.cost) <= 0) {
+    //             $("#mpesa-submit-button").prop("disabled", true);
+    //             $(".loadersection").html(
+    //                 '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
+    //             );
+    //             let user_id = $("#subscriberID"),
+    //                 dealer_id = $("#dealerID"),
+    //                 subscription_id = subscription.id;
+    //             let data = {
+    //                 _token: token,
+    //                 user_id: user_id,
+    //                 dealer_id: dealer_id,
+    //                 subscription_id: subscription_id,
+    //             };
+
+    //             $.post("/subscribe", data)
+    //                 .done(function (params) {
+    //                     console.log(params);
+    //                     $("#mpesa-submit-button").prop("disabled", true);
+    //                     let result = JSON.parse(params);
+    //                     if (result.status === "success") {
+    //                     }
+    //                 })
+    //                 .fail(function (error) {
+    //                     $("#mpesa-submit-button").prop("disabled", true);
+    //                     console.error(error);
+    //                 });
+    //         }
+    //     });
+    // });
 
     $("#mpesaPaymentForm").on("submit", function (event) {
         event.preventDefault();
@@ -223,8 +223,9 @@
                         showSuccess(result.message, "#paymentfeedback");
                         window.setInterval(() => {
                             $.getJSON(
-                                "paymentconfirm/" + result.checkoutid,
+                                "/paymentconfirm/" + result.checkoutid,
                                 function (payment) {
+                                    console.log(payment);
                                     if (
                                         payment.complete === 1 &&
                                         payment.trans_id !== null
@@ -233,6 +234,8 @@
                                             "Thank you. Payment received successfully. Please proceed to enjoy unleaded advertisement experience on our platform.",
                                             "#paymentfeedback"
                                         );
+                                        $(".loadersection").children().remove();
+                                        submit.prop({ disabled: false });
                                         setTimeout(() => {
                                             window.location.href = "/dealers";
                                         }, 3000);
@@ -241,12 +244,15 @@
                             );
                         }, 7000);
                     } else {
+                        $(".loadersection").children().remove();
+                        submit.prop({ disabled: false });
                         showError(result.message, "#paymentfeedback");
                     }
                 })
                 .fail(function (error) {
                     console.log(error);
                     submit.prop({ disabled: false });
+                    $(".loadersection").children().remove();
                     if (error.status == 422) {
                         var errors = "";
                         $.each(
@@ -265,4 +271,60 @@
                 });
         }
     });
+
+    paypal.Buttons({
+        // Order is created on the server and the order id is returned
+            // createOrder() {
+            //     return fetch("/my-server/create-paypal-order", {
+            //         method: "POST",
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //             ''
+            //         },
+            //         // use the "body" param to optionally pass additional order information
+            //         // like product skus and quantities
+            //         body: JSON.stringify({
+            //             cart: [
+            //                 {
+            //                     sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
+            //                     quantity: 1,
+            //                 },
+            //             ],
+            //         }),
+            //     })
+            //         .then((response) => response.json())
+            //         .then((order) => order.id);
+            // },
+            // // Finalize the transaction on the server after payer approval
+            // onApprove(data) {
+            //     return fetch("/my-server/capture-paypal-order", {
+            //         method: "POST",
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //         },
+            //         body: JSON.stringify({
+            //             orderID: data.orderID,
+            //         }),
+            //     })
+            //         .then((response) => response.json())
+            //         .then((orderData) => {
+            //             // Successful capture! For dev/demo purposes:
+            //             console.log(
+            //                 "Capture result",
+            //                 orderData,
+            //                 JSON.stringify(orderData, null, 2)
+            //             );
+            //             const transaction =
+            //                 orderData.purchase_units[0].payments.captures[0];
+            //             alert(
+            //                 `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`
+            //             );
+            //             // When ready to go live, remove the alert and show a success message within this page. For example:
+            //             // const element = document.getElementById('paypal-button-container');
+            //             // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+            //             // Or go to another URL:  window.location.href = 'thank_you.html';
+            //         });
+            // },
+        })
+        .render("#paypal-button-container");
 })();

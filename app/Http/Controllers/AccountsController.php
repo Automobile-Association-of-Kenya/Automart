@@ -9,7 +9,7 @@ class AccountsController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
         $this->account = new Account();
     }
     /**
@@ -20,20 +20,9 @@ class AccountsController extends Controller
         return view('accounts.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $validated = $request->validate(['account_id'=>'nullable','exists:accounts,id','provider' => 'nullable', 'pp_client_id' => 'nullable', 'pp_client_secret' => 'nullable', 'pp_business_name' => 'nullable', 'pp_card_number' => 'nullable', 'pp_expiry' => 'nullable', 'pp_cw' => 'nullable', 'mpesa_secret' => 'nullable', 'mpesa_customer_key' => 'nullable', 'mpesa_pass_key' => 'nullable', 'mpesa_business_short_code' => 'nullable', 'mpesa_transaction_type' => 'nullable']);
+        $validated = $request->validate(['account_id'=>'nullable','exists:accounts,id','provider' => 'nullable', 'pp_client_id' => 'nullable', 'pp_client_secret' => 'nullable', 'pp_business_name' => 'nullable', 'pp_card_number' => 'nullable', 'pp_expiry' => 'nullable', 'pp_cw' => 'nullable', 'mpesa_secret' => 'nullable', 'mpesa_customer_key' => 'nullable', 'mpesa_pass_key' => 'nullable', 'mpesa_business_short_code' => 'nullable', 'currency'=>'nullable|max:10', 'mpesa_transaction_type' => 'nullable']);
         if ($validated["account_id"] && !is_null($validated['account_id'])) {
             $account = $this->account->find($validated["account_id"]);
             $account->update($validated);

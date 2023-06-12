@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('mpesa_pass_kwy')->nullable();
             $table->string('mpesa_business_short_code')->unique()->nullable();
             $table->string('mpesa_transaction_type')->nullable();
+            $table->string('currency', 10)->nullable();
             $table->string('active')->default(1);
             $table->timestamps();
         });

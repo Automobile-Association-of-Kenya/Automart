@@ -4,12 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class Payment extends Model
 {
     use HasFactory;
 
     protected $fillable = ['user_id', 'dealer_id', 'subscription_id', 'account_id', 'name', 'phone', 'trans_id', 'crid', 'mrid', 'amount', 'trans_time', 'org_balance', 'complete', 'completed_at'];
+
+    public function subscription(): BelongsTo
+    {
+        return $this->belongsTo(Subscription::class, 'subscription_id');
+    }
+
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class, 'account_id');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    
+    public function dealer(): BelongsTo
+    {
+        return $this->belongsTo(Dealer::class, 'dealer_id');
+    }
 
     public function initiatempesa($account, $subscription, $dealer_id, $phone)
     {
@@ -46,7 +68,7 @@ class Payment extends Model
             'PartyA' => $phone,
             'PartyB' => '174379',
             'PhoneNumber' => $phone,
-            'CallBackURL' => 'https://0d9e-41-80-112-131.ngrok-free.app/api/mpesa-callback',
+            'CallBackURL' => 'https://2e5c-41-80-113-121.ngrok-free.app/api/mpesa-callback',
             'AccountReference' => 'Automart AA Kenya',
             'TransactionDesc' => "Payment for " . $subscription->name . " subscription"
         );
@@ -78,7 +100,39 @@ class Payment extends Model
     {
         $payment = $this->where('crid', $checkOutId)->first();
         if (!is_null($payment)) {
-            $payment->update(['trans_id' => $trans_id, 'phone'=>$phonenumber, 'amount'=>$amount, 'complete' => 1, 'completed_at' => $completed_at]);
+            $payment->update(['trans_id' => $trans_id, 'phone' => $phonenumber, 'amount' => $amount, 'complete' => 1, 'completed_at' => $completed_at]);
+        }
+    }
+
+    public function initiatepaypal($account, $subscription)
+    {
+        $provider = new PayPalClient();
+        $provider->setApiCredentials(config('paypal'));
+        $paypalToken = $provider->getAccessToken();
+        $response = $provider->createOrder([
+            "intent" => "CAPTURE",
+            "application_context" => [
+                "return_url" => route('paypal.success'),
+                "cancel_url" => route('paypal.cancel'),
+            ],
+            "purchase_units" => [
+                0 => [
+                    "amount" => [
+                        "currency_code" => $account->currency,
+                        "value" => $subscription->cost
+                    ]
+                ]
+            ]
+        ]);
+        if (isset($response['id']) && $response['id'] != null) {
+            foreach ($response['links'] as $links) {
+                if ($links['rel'] == 'approve') {
+                    return json_encode(['status' => 'success', 'url' => $links['href'], 'message' => $links["message"]]);
+                }
+            }
+            return json_encode(['status' => 'error', 'message' => $response['message']  ?? "Error occured during processing. Please try again later. "]);
+        } else {
+            return json_encode(['status' => 'error', 'message' => $response['message'] ?? "Error occured during processing. Please try again later. "]);
         }
     }
 }

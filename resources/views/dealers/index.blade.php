@@ -27,6 +27,7 @@
             </nav>
         </div><!-- End Page Title -->
 
+
         <section class="section dashboard">
             <div class="row">
 
@@ -114,14 +115,14 @@
                                     <div class="ps-3 pl-3">
                                         <h6>{{ count($vehicles) }}</h6>
                                         <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                        class="text-muted small pt-2 ps-1">increase</span>
+                                            class="text-muted small pt-2 ps-1">increase</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
-                
+
                 <div class="col-xl-3 col-md-4">
                     <a href="{{ route('dealer.requests') }}">
                         <div class="card info-card revenue-card">
@@ -146,14 +147,14 @@
                                     <div class="ps-3 pl-3">
                                         <h6>{{ count($quotes) + count($tradeins) + count($finances) }}</h6>
                                         <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                        class="text-muted small pt-2 ps-1">increase</span>
+                                            class="text-muted small pt-2 ps-1">increase</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
-                
+
                 {{-- <div class="col-xl-3 col-md-4">
                     <a href="{{ route('dealer.requests') }}">
                         <div class="card info-card revenue-card">
@@ -174,7 +175,7 @@
                                 <div class="d-flex align-items-center">
                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                     <i>Ksh</i>
-                                </div> 
+                                </div>
                                     <div class="ps-3 pl-3">
                                         <h6>{{ count($quotes) }}</h6>
                                         <span class="text-success small pt-1 fw-bold">8%</span> <span

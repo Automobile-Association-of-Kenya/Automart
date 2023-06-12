@@ -172,8 +172,7 @@
                                                 </div>
 
                                                 <div class="col-md-3 form-group">
-                                                    <label for="make">Vehicle Make: <sup
-                                                            class="text-danger">*</sup></label>
+                                                    <label for="make">Vehicle Make: <sup>*</sup></label>
                                                     <div class="input-group">
                                                         <select class="form-control form-control--md chzn-select"
                                                             name="make" id="vehicleMake" required
@@ -182,8 +181,7 @@
                                                 </div>
 
                                                 <div class="col-md-3 form-group">
-                                                    <label for="firstname">Vehicle Model: <sup
-                                                            class="text-danger">*</sup></label>
+                                                    <label for="firstname">Vehicle Model: <sup>*</sup></label>
                                                     <div class="input-group">
                                                         <select name="model" id="vehicleModel"
                                                             class="form-control form-control--md chzn-select" required
@@ -192,8 +190,7 @@
                                                 </div>
 
                                                 <div class="col-md-3 form-group">
-                                                    <label for="company">Year of manufacture: <sup
-                                                            class="text-danger">*</sup></label>
+                                                    <label for="company">Year of manufacture: <sup>*</sup></label>
                                                     <div class="input-group">
                                                         <select name="year" id="yearOfManufacture"
                                                             class="form-control form-control--md chzn-select" required
@@ -258,8 +255,7 @@
                                                 </div>
 
                                                 <div class="col-md-3 form-group">
-                                                    <label for="company">Mileage: <sup
-                                                            class="text-danger">*</sup></label>
+                                                    <label for="company">Mileage: <sup>*</sup></label>
                                                     <div class="input-group">
                                                         <input type="number" name="mileage" id="mileAge"
                                                             class="form-control form-control--md" required>
@@ -267,7 +263,7 @@
                                                 </div>
 
                                                 <div class="col-md-3 form-group">
-                                                    <label for="company">Price: <sup class="text-danger">*</sup></label>
+                                                    <label for="company">Price: <sup>*</sup></label>
                                                     <div class="input-group">
                                                         <input type="text" name="price" id="vehiclePrice"
                                                             class="form-control form-control--md" required>
@@ -283,8 +279,7 @@
                                                 </div>
 
                                                 <div class="col-md-3 form-group">
-                                                    <label for="enginecc">Engine CC: <sup
-                                                            class="text-danger">*</sup></label>
+                                                    <label for="enginecc">Engine CC: <sup>*</sup></label>
                                                     <div class="input-group">
                                                         <input type="text" name="enginecc" id="engineCC"
                                                             class="form-control form-control--md" required>
@@ -465,28 +460,9 @@
                                             <div id="imageFeedback"></div>
                                         </div>
                                     </div>
-
-                                    <div class="mt-2" id="postboost">
-                                        <div class="col-md-3">
-                                            <div class="card card2 h-100">
-                                                <div class="card-body">
-                                                    <h3 class="card-title">Boost Your ads</h3>
-                                                    <p class='text-muted'></p>
-                                                    <br><br>
-                                                    <span class="h2">$20</span>
-                                                    <br><br>
-                                                    <div class="d-grid my-3">
-                                                        <button class="btn btn-outline-dark btn-block">Select</button>
-                                                    </div>
-                                                    <ul>
-                                                        <li>Cras justo odio</li>
-                                                        <li>Dapibus ac facilisis in</li>
-                                                        <li>Vestibulum at eros</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {{-- @if (session('subscription')->cost > 0)
+    <p class="text-warning">Hshshjj  we reaaa</p>
+                                    @endif --}}
 
                                     <div id="vehiclefeedback"></div>
                                     <div class="row">
@@ -504,7 +480,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="tab-pane fade mb-3" id="vehicleListTab" role="tabpanel" aria-labelledby="pop2-tab">
                         <div class="bg-primary mt-2 mb-2 pb-3 pt-3 pl-2 pr-1 border-rounded" style="border-radius: 6px;">
@@ -569,7 +544,13 @@
 
                     <div class="tab-pane fade mb-3" id="yardsTab" role="tabpanel" aria-labelledby="pop2-tab">
                         <div class="row mt-2">
-                            <div class="col-md-8" id="yardsSection"></div>
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-body" id="yardsSection">
+
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="make-create-section mt-2">
                                     <div class="card">

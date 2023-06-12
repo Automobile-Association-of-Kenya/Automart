@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Dealer::class);
             $table->foreignIdFor(Subscription::class);
-            $table->string('status', 30);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

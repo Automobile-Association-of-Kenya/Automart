@@ -5,9 +5,9 @@
 @endsection
 
 @section('header_styles')
+    {{-- <link rel="stylesheet" href="{{ asset('css/component.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
-
 @endsection
 
 @section('main')
@@ -19,7 +19,7 @@
             <br>
             <div class="card">
                 <div class="row">
-                    <div class="col-lg-5 col-md-12 authsection" style="margin: auto;padding:2em 4em;">
+                    <div class="col-lg-5 col-md-12" style="margin: auto;padding:2em 4em;">
                         <div>
                             <div class="">
                                 <h1 style="color:black;">{{ $plan->name }}</h1>
@@ -47,7 +47,7 @@
                         </div>
 
                         <div id="accordion">
-                            
+
                             <div class="card">
                                 <div class="card-header" id="headingOne">
                                     <h2 class="mb-0">
@@ -61,12 +61,40 @@
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                     data-parent="#accordion">
                                     <div class="card-body">
-                                        <form action="" method="post" id="">
+                                        <form action="{{ route('payments.store') }}" method="post" id="mpesaPaymentForm"
+                                            id="mpesaPaymentForm">
+                                            @csrf
                                             <div class="form-group mb-2">
-                                                <label for="">Enter the phone number you would like to ppay with for this plan in the format indicated in the textbox below and click process. A popup will be sent to your phone. Accept and key in you mpesa pin to complete.   </label>
-                                                <input type="text" class="form-control form-control-lg mb-2" name="phone" id="phoneNumber" placeholder="2547xxxxxxxx" value="{{ auth()->user()->phone }}">
+                                                <label for="">Enter the phone number you would like to pay with for
+                                                    this plan in the format indicated in the textbox below and click
+                                                    process. A
+                                                    popup will be sent to your phone. Accept and key in you mpesa pin to
+                                                    complete. </label>
                                             </div>
-                                            <button type="submit" class="btn btn-success">Process</button>
+                                            <input type="hidden" name="subscription_for_payment_id"
+                                                id="subscriptionForPaymentID" value="{{ $plan->id }}">
+
+                                            <input type="hidden" name="user_id" id="subscriberID"
+                                                value="{{ auth()->id() }}">
+                                            <input type="hidden" name="dealer_id" id="dealerID"
+                                                value="{{ auth()->user()->dealer_id }}">
+
+                                            <div class="form-group mb-2">
+                                                <input type="text" class="form-control" name="price"
+                                                    id="subscriptionPrice" value="{{ $plan->cost }}" disabled>
+                                            </div>
+
+                                            <div class="form-group mb-2">
+                                                <input type="text" class="form-control form-control-lg mb-2"
+                                                    name="phone" id="phoneNumber" placeholder="2547xxxxxxxx"
+                                                    value="{{ intval(auth()->user()->phone) }}">
+                                            </div>
+
+                                            <div class="loadersection"></div>
+                                            <div id="paymentfeedback"></div>
+
+                                            <button type="submit" class="btn btn-success" id="mpesa-submit-button"><i
+                                                    class="fa fa-save fa-lg fa-fw"></i> Process</button>
                                         </form>
                                     </div>
                                 </div>
@@ -75,7 +103,7 @@
                             <div class="card">
                                 <div class="card-header" id="headingTwo">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link collapsed" data-toggle="collapse"
+                                        <button class="btn collapsed" data-toggle="collapse"
                                             data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                             Paypal
                                         </button>
@@ -84,7 +112,9 @@
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                     data-parent="#accordion">
                                     <div class="card-body">
-                                            <div id="paypal-button-container"></div>
+                                        <form action="post" id="paypalForm">
+                                        </form>
+                                        <div id="paypal-button-container"></div>
                                     </div>
                                 </div>
                             </div>
@@ -99,53 +129,7 @@
     </div>
 @endsection
 @section('footer_scripts')
-        <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
-        <script>
-      paypal.Buttons({
-        // Order is created on the server and the order id is returned
-        createOrder() {
-          return fetch("/my-server/create-paypal-order", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            // use the "body" param to optionally pass additional order information
-            // like product skus and quantities
-            body: JSON.stringify({
-              cart: [
-                {
-                  sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
-                  quantity: "YOUR_PRODUCT_QUANTITY",
-                },
-              ],
-            }),
-          })
-          .then((response) => response.json())
-          .then((order) => order.id);
-        },
-        // Finalize the transaction on the server after payer approval
-        onApprove(data) {
-          return fetch("/my-server/capture-paypal-order", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              orderID: data.orderID
-            })
-          })
-          .then((response) => response.json())
-          .then((orderData) => {
-            // Successful capture! For dev/demo purposes:
-            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-            const transaction = orderData.purchase_units[0].payments.captures[0];
-            alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-            // When ready to go live, remove the alert and show a success message within this page. For example:
-            // const element = document.getElementById('paypal-button-container');
-            // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-            // Or go to another URL:  window.location.href = 'thank_you.html';
-          });
-        }
-      }).render('#paypal-button-container');
-    </script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AcCsvkFgC0FezC6lMi_Cl9c8u0ohr90xdmJ67Qa_29xoj0GLkQGdEpfmc9evvnjN2m5Q-ks5pZ78Bq6q&currency=KSH"></script>
+    <script src="{{ asset('js/main/subscriptions.js') }}"></script>
+
 @endsection

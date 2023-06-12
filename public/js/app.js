@@ -767,7 +767,7 @@ $(function () {
             slidePartners();
         });
     }
-    
+
     vehicleMakesWithVehicles();
 
     function getCounties() {
@@ -838,7 +838,7 @@ $(function () {
                         '" alt="hidden-img"></a>';
                     $.each(images, function (key, image) {
                         img +=
-                            '<a href="/vehicleimages/' +
+                            '<a href="//' +
                             image +
                             '" class="hidden" data-sub-html="<h4>' +
                             value.model.model +
@@ -853,7 +853,7 @@ $(function () {
                         '<div class="col-lg-4 col-md-4"><div class="car-box-3"><div class="car-thumbnail"><a href="/vehicle-details/' +
                         value.id +
                         '" class="car-img" ><div class="tag-2 bg-active">' +
-                        tags[0] +
+                        value.usage +
                         '</div><div class="price-box"><span><span>Kes: ' +
                         price.toLocaleString("en-US", {
                             style: "currency",

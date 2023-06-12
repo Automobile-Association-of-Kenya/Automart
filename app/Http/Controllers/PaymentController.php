@@ -7,6 +7,7 @@ use App\Models\Payment;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class PaymentController extends Controller
 {
@@ -17,33 +18,17 @@ class PaymentController extends Controller
         $this->subscription = new Subscription();
     }
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $this->subscription = new Subscription();
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $subscription = $this->subscription->find($request->subscription_id);
-        $account = $this->account->getfortransaction("Mpesa",$request->subscription_id);
+        $account = $this->account->getfortransaction($request->type,$request->subscription_id);
         if (is_null($account)) {
             return json_encode(['status'=>'error', 'message'=>"We are currently not accepting payments"]);
         }
         if ($request->type === "Mpesa") {
             return $this->payment->initiatempesa($account, $subscription,$request->dealer_id, $request->phonenumber);
+        }else {
+            return $this->payment->initiatepaypal($account,$subscription);
         }
     }
 
@@ -66,44 +51,56 @@ class PaymentController extends Controller
             $trans_id = $Item[1]->Value;
             $completed_at = $Item[2]->Value;
             $phonenumber = $Item[3]->Value;
-            $this->payment->confirm($checkOutId,$trans_id, $phonenumber,$amount,$completed_at);
+            $this->mpesaconfirm($checkOutId,$trans_id, $phonenumber,$amount,$completed_at);
         }
     }
 
-    public function mpesaconfirm($MpesaReceiptNumber, $checkOutId)
+    public function mpesaconfirm($checkOutId,$trans_id, $phonenumber,$amount,$completed_at)
     {
-        $this->payment->confirm($MpesaReceiptNumber, $checkOutId);
+        $this->payment->confirm($checkOutId, $trans_id, $phonenumber, $amount, $completed_at);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function paymentconfirm($checkOutId)
     {
-        //
+        $payment = $this->payment->where('crid',$checkOutId)->first();
+        if ($payment->complete == 1 && !is_null($payment->trans_id)) {
+            $this->subscription->subscribe($payment->dealer_id,$payment->subscription_id);
+        }
+        return json_encode($payment);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function successTransaction(Request $request)
     {
-        //
+        $provider = new PayPalClient;
+        $provider->setApiCredentials(config('paypal'));
+        $provider->getAccessToken();
+        $response = $provider->capturePaymentOrder($request['token']);
+        if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            return json_encode(['status'=>'success', 'message'=>$response["message"], 'response'=>$response]);
+        } else {
+            return json_encode(['status' => 'error', 'message' => $response["message"]  ?? 'Something went wrong', 'response' => $response]);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    function get(Request $request)
     {
-        //
+        $query = $this->payment->query();
+        $query->where('complete',1);
+        if (!is_null($request->dealer_id)) {
+            $query->where('dealer_id', $request->dealer_id);
+        }
+        if (!is_null($request->account_id)) {
+            $query->where('account_id', $request->account_id);
+        }
+        if (!is_null($request->start_date)) {
+            $query->where('created_at','>=', $request->start_date);
+        }
+        if (!is_null($request->end_date)) {
+            $query->where('created_at', '<=', $request->end_date);
+        }
+        $payments = $query->with('subscription:id,name','user:id,name', 'dealer:id,name', 'account:id,provider,mpesa_business_short_code')->latest()->get();
+
+        return json_encode($payments);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

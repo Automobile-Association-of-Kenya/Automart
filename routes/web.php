@@ -11,6 +11,7 @@ use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubscriptionController;
@@ -99,7 +100,7 @@ Route::get('counties/{country_id?}', [ApplicationController::class, 'counties'])
 Route::resource('settings', SettingsController::class);
 
 Route::view('about',  'about')->name("about");
-Route::view('contact','contact')->name("contact");
+Route::view('contact', 'contact')->name("contact");
 Route::view('privacy', 'privacy')->name('privacy');
 
 Route::get('auth/facebook', [AuthenticatedSessionController::class, 'redirectToFacebook'])->name('facebook.login');
@@ -107,7 +108,6 @@ Route::get('auth/facebook/callback', [AuthenticatedSessionController::class, 'ha
 
 Route::get('auth/google', [AuthenticatedSessionController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [AuthenticatedSessionController::class, 'handleGoogleCallback']);
-
 
 Route::get('auth/twitter', [AuthenticatedSessionController::class, 'redirectToTwitter'])->name('twitter.login');
 Route::get('auth/twitter/callback', [AuthenticatedSessionController::class, 'handleTwitterCallback']);
@@ -119,6 +119,7 @@ Route::controller(SubscriptionController::class)->group(function () {
 
 /** Subscriptions related routes */
 Route::resource('subscriptions', SubscriptionController::class);
+Route::get('subscription/{id}', [SubscriptionController::class, 'create'])->name('subscription.create');
 Route::get('subscription-plans', [SubscriptionController::class, 'plans'])->name('subscription.plan');
 Route::get('subscription-features', [SubscriptionController::class, 'features']);
 
@@ -127,22 +128,22 @@ Route::post('subscribe', [SubscriptionController::class, 'subscribe'])->name('su
 Route::get('mpesaconfirm/{recc}/{checjc}', [PaymentController::class, 'mpesaconfirm']);
 /** Subscriptions */
 
-Route::controller(SettingsController::class)->group(function ()
-{
-    Route::get('mails/{id?}','mails');
+Route::controller(SettingsController::class)->group(function () {
+    Route::get('mails/{id?}', 'mails');
     Route::post('mails', 'mailCreate');
     Route::get('socials/{id?}', 'socials');
     Route::post('socials', 'socialStore')->name('social.store');
 });
 
 Route::resource('services', ServicesController::class);
-Route::get('services-get/{id?}', [ServicesController::class,'services']);
+Route::get('services-get/{id?}', [ServicesController::class, 'services']);
 
 Route::resource('accounts', AccountsController::class);
 Route::get('accounts-get/{id?}', [AccountsController::class, 'get']);
 Route::post('accounts-subscribe', [AccountsController::class, 'subscribe'])->name('accounts.subscribe');
 
 Route::resource('dealers', DealerController::class);
+Route::get('dealers-get', [DealerController::class, 'getDealers']);
 Route::get('dealer-add', [DealerController::class, 'add'])->name('dealer.add');
 
 Route::view('terms', 'terms')->name('terms');
@@ -168,8 +169,7 @@ Route::get('search', [ApplicationController::class, 'search'])->name('search');
 Route::get('vehicle-details/{id}', [ApplicationController::class, 'vehicleDetails']);
 
 
-Route::prefix('dealer')->group(function ()
-{
+Route::prefix('dealer')->group(function () {
     Route::get('vehicles', [DealerController::class, 'vehicles'])->name('dealer.vehicles');
     Route::get('summary', [DealerController::class, 'summary']);
     Route::get('requests', [DealerController::class, 'requests'])->name('dealer.requests');
@@ -184,7 +184,13 @@ Route::resource('finances', FinanceController::class);
 
 Route::post('tradein-store', [FinanceController::class, 'tradeInStore'])->name('tradein.store');
 
- Route::resource('payments', PaymentController::class);
+/** Payment routes */
+Route::resource('payments', PaymentController::class);
+Route::get('paymentconfirm/{checkoutid}', [PaymentController::class, 'paymentconfirm']);
+Route::post('paypalcancel', [PaymentController::class, 'cancelTransaction'])->name('paypal.cancel');
+Route::post('paypalsuccess', [PaymentController::class, 'successTransaction'])->name('paypal.success');
+Route::post('payments-get', [PaymentController::class, 'get']);
 
- Route::get('requests', [ApplicationController::class, 'requests'])->name('requests.index');
+Route::get('requests', [ApplicationController::class, 'requests'])->name('requests.index');
 
+Route::resource('reports', ReportController::class);

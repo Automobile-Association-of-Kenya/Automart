@@ -36,23 +36,22 @@ class SubscriptionController extends Controller
     public function plans()
     {
         $title = "Subscription Plans";
-        return view('subscriptions.plans', compact('title'));
+        return view('subscriptions.index', compact('title'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    // public function create($id)
-    // {
-    //     $plan = $this->subscription->with('properties')->find($id);
-    //     if ($plan->cost <= 0) {
-    //         // $subscription = $this->subscription->getDealerSubscription
-    //         DB::table('dealer_subscription')->insert(['dealer_id' => auth()->user()->dealer_id, 'subscription_id' => $id,'status'=>'active']);
-    //         return redirect()->route('dealers.index');
-    //     } else {
-    //         return view('subscriptions.create', compact('plan'));
-    //     }
-    // }
+    public function create($id)
+    {
+        $plan = $this->subscription->with('properties')->find($id);
+        if ($plan->cost <= 0) {
+            $this->subscription->subscribe(auth()->user()->dealer_id, $plan->id);
+            return redirect()->route('dealers.index');
+        } else {
+            return view('subscriptions.create', compact('plan'));
+        }
+    }
 
     /**
      * Store a newly created resource in storage.

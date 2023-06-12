@@ -4238,8 +4238,8 @@ input[type=checkbox]:checked+label:before {
 .pricing-1 .plan-list ul li {
     list-style: none;
     border-bottom: 1px dashed #eaeceb;
-    line-height: 42px;
-    font-size: 15px;
+    line-height: 32px;
+    font-size: 14px;
     font-weight: 500;
 }
 

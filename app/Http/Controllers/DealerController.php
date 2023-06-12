@@ -27,24 +27,20 @@ class DealerController extends Controller
 
     public function index()
     {
-        if (auth()->user() && is_null(auth()->user()->dealer_id)) {
-            return redirect()->route('dealer.add');
-        } else {
-            if (auth()->user() && auth()->user()->role === "dealer") {
-                $subscription = $this->dealer->subscription(auth()->user()->dealer_id);
-                if (!is_null($subscription)) {
-                }else {
-                    return redirect()->route('subscription.plan');
-
-                }
+        $subscription = $this->dealer->checkDealerSubscription(auth()->user()->dealer_id);
+        if (!is_null($subscription)) {
+            $message = $this->dealer->checkonfreesubscription($subscription);
+            if (!is_null($message)) {
+                session()->put('subscription_notification', $message);
             }
+            session()->put('subscription', $subscription);
         }
         $vehicles = $this->dealer->dealerVehicles();
         $quotes = $this->dealer->quotes();
         $finances = $this->dealer->finances();
         $tradeins = $this->dealer->tradeins();
 
-        return view('dealers.index', compact('vehicles', 'quotes','finances','tradeins'));
+        return view('dealers.index', compact('vehicles', 'quotes', 'finances', 'tradeins',));
     }
 
     public function create()
@@ -66,7 +62,7 @@ class DealerController extends Controller
         $vehicles = $this->dealer->dealerVehicles();
         $subscription = $this->checksubscription();
 
-        return view('dealers.vehicles', compact('vehicles','str'));
+        return view('dealers.vehicles', compact('vehicles', 'str'));
     }
 
     public function store(DealerRequest $request)
@@ -104,9 +100,6 @@ class DealerController extends Controller
         $quotes = $this->dealer->dealerQuotes();
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function requests()
     {
         $quotes = $this->dealer->quotes();
@@ -115,27 +108,9 @@ class DealerController extends Controller
         return view('dealers.requests', compact('quotes', 'finances', 'tradeins'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function getDealers()
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $dealers = $this->dealer->select('id', 'name', 'email', 'phone', 'alt_phone', 'address')->get();
+        return json_encode($dealers);
     }
 }

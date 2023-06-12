@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Facades\DB;
 
 class Dealer extends Model
@@ -54,6 +56,16 @@ class Dealer extends Model
         return DB::table('dealer_subscription')->where('dealer_id', $dealer_id)->where('status', 'active')->latest()->first();
     }
 
+    /**
+     * Get all of the payments for the Dealer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'dealer_id', 'id');
+    }
+
     public function dealerVehicles()
     {
         $vehicles = Vehicle::where('dealer_id', auth()->user()->dealer_id)
@@ -95,8 +107,33 @@ class Dealer extends Model
         return $tradeins;
     }
 
-    public function dealerSubscription()
+    /**
+     * The subscriptions that belong to the Dealer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function subscriptions(): BelongsToMany
     {
-        $subscriptions = '';
+        return $this->belongsToMany(Subscription::class, 'dealer_subscription', 'dealer_id', 'subscription_id')->withPivot('status','start_date','expiry_date')->wherePivot('status',1);
+    }
+
+    public function checkDealerSubscription($dealer_id)
+    {
+        $dealer = $this->with('subscriptions')->find($dealer_id);
+        $subscriptions  = $dealer->subscriptions;
+        foreach ($subscriptions as $key => $value) {
+            if (is_null($value->pivot->expiry_date) || $value->pivot->expiry_date > now()) {
+                return $value;
+            }else {
+                return redirect()->route('subscription.plan');
+            }
+        }
+    }
+
+    public function checkonfreesubscription($subscription)
+    {
+        if (is_null($subscription->cost) || $subscription->cost == 0) {
+            return "You are currently subscribed to $subscription->name which may not give you the bes services on our plartform";
+        }
     }
 }

@@ -102,7 +102,7 @@
     getUsers();
 
     function getDealers() {
-        $.getJSON("/dealers", function (dealers) {
+        $.getJSON("/dealers-get", function (dealers) {
             let tr = "",
                 i = 1;
             $.each(dealers, function (key, value) {

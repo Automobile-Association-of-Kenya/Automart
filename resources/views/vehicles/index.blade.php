@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <style>
         .filterSection,
         #additionInfo {
@@ -894,7 +893,6 @@
     <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('js/main/jquery-ui.js') }}"></script>
-    <script src="{{ asset('js/select2.min.js') }}"></script>
     <script src="{{ asset('js/main/vehicle.js') }}"></script>
     <script>
         (function() {

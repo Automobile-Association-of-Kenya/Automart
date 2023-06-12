@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -57,9 +58,40 @@ class Subscription extends Model
         return $this->belongsToMany(Subsproperty::class, 'subscription_property', 'subscription_id', 'subsproperty_id');
     }
 
-    public function subscribe()
+    public function subscribe($dealer_id, $subscription_id)
     {
-        # code...
+        if (is_null($dealer_id)) {
+            $dealer_id = auth()->user()->dealer_id;
+        }
+        $subscription = $this->find($subscription_id);
+        if ($subscription->billingcycle === "Monthly") {
+            $expiry = Carbon::now()->addMonth();
+        }elseif($subscription->billingcycle === "Yearly"){
+            $expiry = Carbon::now()->addYear();
+        }else{
+            $expiry = Carbon::now()->addDays($subscription->billingcycle);
+        }
+        DB::table('dealer_subscription')->insert(['dealer_id'=>$dealer_id, 'subscription_id'=>$subscription_id, 'start_date'=>date('Y-m-d H:i:s'), 'expiry_date'=>$expiry, 'status'=>1]);
+    }
+
+    /**
+     * The dealers that belong to the Subscription
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function dealers(): BelongsToMany
+    {
+        return $this->belongsToMany(Dealer::class, 'dealer_subscription', 'dealer_id', 'subscription_id');
+    }
+
+    /**
+     * Get all of the payments for the Subscription
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'subscription_id', 'id');
     }
 
 }

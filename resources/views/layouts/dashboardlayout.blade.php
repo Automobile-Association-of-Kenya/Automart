@@ -8,10 +8,13 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="{{ asset('css/all.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/components.css') }}" rel="stylesheet" id="bootstrap-css">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet" id="master-css">
     <link href="{{ asset('css/master.css') }}" rel="stylesheet" id="master-css">
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet" id="master-css">
     <link rel="icon" href="{{ asset('images/favicon.ico') }}" />
-    {{-- <link rel="icon" href="{{ asset('images/logo.png') }}" /> --}}
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+
 
     <title>@yield('title') | AA Kenya Limited</title>
     <style>
@@ -103,7 +106,7 @@
 
                 <li class="{{ Request::is('accounts') ? 'active' : '' }}">
                     <a href="{{ route('accounts.index') }}" id="accounts" class='validation' data-id=14>
-                        <span><i class="fal fa-cog"></i></span>
+                        <span><i class="fad fa-usd-circle"></i></span>
                         <span>Accounting</span>
                     </a>
                 </li>
@@ -116,14 +119,14 @@
                 </li>
 
                 <li class="{{ Request::is('reports') ? 'active' : '' }}">
-                    <a href="reports.php" id="reports" class='validation' data-id=56>
+                    <a href="{{ route('reports.index') }}" id="reports" class='validation' data-id=56>
                         <span><i class="fal fa-chart-line"></i></span>
                         <span>Reports</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="../controllers/useroperations.php?logoutuser" id="logoutuser">
+                    <a href="#" id="logoutuser">
                         <span><i class="fal fa-sign-out-alt"></i></span>
                         <span>Logout</span>
                     </a>
@@ -184,6 +187,7 @@
 <script src="js/components.js"></script>
 <script src="{{ asset('js/iziToast.min.js') }}"></script>
 <script src="{{ asset('js/main/moment.js') }}"></script>
+<script src="{{ asset('js/select2.min.js') }}"></script>
 @yield('footer_scrips')
 
 </html>

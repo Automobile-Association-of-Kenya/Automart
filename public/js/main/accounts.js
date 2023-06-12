@@ -30,9 +30,18 @@
     function getAccounts() {
         $.getJSON("/accounts-get", function (accounts) {
             let tr = "",
-                i = 1;
+                i = 1,
+                option = "<option value=''>All</option>";
             $.each(accounts, function (key, value) {
                 if (value.provider === "Mpesa") {
+                    option +=
+                        "<option value='" +
+                        value.id +
+                        "'>" +
+                        value.provider +
+                        " " +
+                        value.mpesa_business_short_code +
+                        "</option>";
                     tr +=
                         "<tr><td>" +
                         i++ +
@@ -53,10 +62,30 @@
                         '><i class="fa fa-edit text-warning"></i>&nbsp;Add subscription</a></li></ul></li></td></tr>';
                 }
             });
+            $("#accountFilterID").html(option);
             $("#accountsTable").html(tr);
         });
     }
     getAccounts();
+
+    function getDealers() {
+        $.getJSON("/dealers-get", function (dealers) {
+            let option = "<option value=''>All</option>",
+                i = 1;
+            console.log(dealers);
+            $.each(dealers, function (key, value) {
+                option +=
+                    "<option value='" +
+                    value.id +
+                    "'>" +
+                    value.name +
+                    "</option>";
+            });
+            $("#dealerPaymentFilterID").html(option);
+        });
+    }
+
+    getDealers();
 
     let accountID = $("#accountID"),
         providerID = $("#providerID"),
@@ -71,7 +100,8 @@
         mpesaPassKey = $("#mpesaPassKey"),
         businessShortCode = $("#businessShortCode"),
         transactionType = $("#transactionType"),
-        createAccountForm = $("#createAccountForm");
+        createAccountForm = $("#createAccountForm"),
+        accurrency = $("#accurrency");
 
     createAccountForm.on("submit", function (event) {
         event.preventDefault();
@@ -89,7 +119,8 @@
             mpesa_customer_key = mpesaCustomerKey.val(),
             mpesa_pass_kwy = mpesaPassKey.val(),
             mpesa_business_short_code = businessShortCode.val(),
-            mpesa_transaction_type = transactionType.val();
+            mpesa_transaction_type = transactionType.val(),
+            currency = accurrency.val();
         let data = {
             _token: token,
             account_id: account_id,
@@ -105,10 +136,8 @@
             mpesa_pass_key: mpesa_pass_kwy,
             mpesa_business_short_code: mpesa_business_short_code,
             mpesa_transaction_type: mpesa_transaction_type,
+            currency: currency,
         };
-
-        console.log(data);
-
         $.post("/accounts", data)
             .done(function (params) {
                 console.log(params);
@@ -164,8 +193,8 @@
         assignAccountID.val(account_id);
     });
 
-    subscriptionAssignID.on('change', function() {
-        console.log('there');
+    subscriptionAssignID.on("change", function () {
+        console.log("there");
     });
 
     accountAssignForm.on("submit", function (event) {
@@ -180,7 +209,7 @@
             _token: token,
         };
         console.log(data);
-        
+
         $.post("/accounts-subscribe", data)
             .done(function (params) {
                 console.log(params);
@@ -210,4 +239,99 @@
                 }
             });
     });
+
+    let filterTransactionsForm = $("#filterTransactionsForm"),
+        accountFilterID = $("#accountFilterID"),
+        dealerPaymentFilterID = $("#dealerPaymentFilterID"),
+        startDate = $("#startDate"),
+        endDate = $("#endDate");
+    filterTransactionsForm.on("submit", function (event) {
+        event.preventDefault();
+        let $this = $(this),
+            account_id = accountFilterID.val(),
+            dealer_id = dealerPaymentFilterID.val(),
+            start_date = startDate.val(),
+            end_date = endDate.val();
+        let data = {
+            _token: $this.find("input[name='_token']").val(),
+            account_id: account_id,
+            dealer_id: dealer_id,
+            start_date: start_date,
+            end_date: end_date,
+        };
+        $.post("/payments-get", data)
+            .done(function (params) {
+                console.log(params);
+                let tr = "",
+                    i = 1,
+                    amount = 0;
+                let payments = JSON.parse(params);
+                $.each(payments, function (key, value) {
+                    if (value.account.provider === "Mpesa") {
+                        tr +=
+                            "<tr><td><input type=\"checkbox\" name=\"payment-select\" id=\"payment-select\">&nbsp;&nbsp;" +
+                            i++ +
+                            "</td><td>" +
+                            value.account.provider +
+                            " " +
+                            value.account.mpesa_business_short_code +
+                            "</td><td>" +
+                            value.user.name +
+                            "</td><td>" +
+                            value.dealer.name +
+                            "</td><td>" +
+                            value.subscription.name +
+                            "</td><td>" +
+                            value.trans_id +
+                            "</td><td>" +
+                            value.phone +
+                            "</td><td>" +
+                            moment(value.created_at).format(
+                                "D MMM, YYYY H:mm:s"
+                            ) +
+                            "</td><td>" +
+                            toMoney(value.amount) +
+                            "</td></tr>";
+                    }
+                    amount += parseFloat(value.amount);
+                });
+                let table =
+                    "<table class='table table-bordered table-hover table-responsive transactionsTable'><thead><th>#</th><th>Account</th><th>Payee</th><th>Dealer</th><th>Subscription</th><th>Trans ID</th><th>Phone</th><th>Date</th><th>Amount</th></thead><tbody>" +
+                    tr +
+                    "</tbody><tfoot><tr><td colspan='8'><strong>Total</strong></td><td><strong>" +
+                    toMoney(amount) +
+                    "</strong></td></tfoot></table>";
+                $("#transactionSection").html(table);
+                if ($.fn.DataTable.isDataTable(".transactionsTable")) {
+                    $(".transactionsTable").destroy();
+                    $(".transactionsTable").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            "copyHtml5",
+                            "excelHtml5",
+                            "csvHtml5",
+                            "pdfHtml5",
+                        ],
+                    });
+                } else {
+                    $(".transactionsTable").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            "copyHtml5",
+                            "excelHtml5",
+                            "csvHtml5",
+                            "pdfHtml5",
+                        ],
+                    });
+                }
+            })
+            .fail(function (error) {
+                console.log(error);
+            });
+    });
+
+    function toMoney(number) {
+        let actul = parseFloat(number);
+        return actul.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+    }
 })();

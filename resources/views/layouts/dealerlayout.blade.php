@@ -19,6 +19,12 @@
             margin-bottom: 10px;
         }
 
+        sup {
+            font-size: 16px;
+            color: #f00;
+            font-weight: 600
+        }
+
         .pagetitle h1 {
             font-size: 24px;
             margin-bottom: 0;
@@ -151,6 +157,8 @@
                 </li>
             @endauth
         </div>
+        
+        @include('components.subs_notification')
 
         @yield('main')
 

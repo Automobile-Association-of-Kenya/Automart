@@ -240,9 +240,9 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    {{-- <script src="{{ asset('js/components.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script> --}}
+    <script src="{{ asset('js/components.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap-submenu.js') }}"></script>
     <script src="{{ asset('js/rangeslider.js') }}"></script>
