@@ -3,7 +3,6 @@ $(function () {
 
     // Showing page loader
     $(window).on("load", function () {
-        populateColorPlates();
         setTimeout(function () {
             $(".page_loader").fadeOut("fast");
         }, 100);
@@ -100,7 +99,6 @@ $(function () {
     });
 
     // Partners strat
-
 
     // Accordion strat
     var acc = document.getElementsByClassName("accordion");
@@ -376,46 +374,6 @@ $(function () {
         });
     });
 
-    // Countdown activation
-    $(function () {
-        //$.backstretch('../img/nature.jpg');
-        // var endDate = "December  27, 2019 15:03:25";
-        // $(".countdown.simple").countdown({ date: endDate });
-        // $(".countdown.styled").countdown({
-        //     date: endDate,
-        //     render: function (data) {
-        //         $(this.el).html(
-        //             "<div>" +
-        //                 this.leadingZeros(data.days, 3) +
-        //                 " <span>Days</span></div><div>" +
-        //                 this.leadingZeros(data.hours, 2) +
-        //                 " <span>Hours</span></div><div>" +
-        //                 this.leadingZeros(data.min, 2) +
-        //                 " <span>Minutes</span></div><div>" +
-        //                 this.leadingZeros(data.sec, 2) +
-        //                 " <span>Seconds</span></div>"
-        //         );
-        //     },
-        // });
-        // $(".countdown.callback")
-        //     .countdown({
-        //         date: +new Date() + 10000,
-        //         render: function (data) {
-        //             $(this.el).text(this.leadingZeros(data.sec, 2) + " sec");
-        //         },
-        //         onEnd: function () {
-        //             $(this.el).addClass("ended");
-        //         },
-        //     })
-        //     .on("click", function () {
-        //         $(this)
-        //             .removeClass("ended")
-        //             .data("countdown")
-        //             .update(+new Date() + 10000)
-        //             .start();
-        //     });
-    });
-
     $(".range-slider-ui").each(function () {
         var minRangeValue = $(this).attr("data-min");
         var maxRangeValue = $(this).attr("data-max");
@@ -490,14 +448,6 @@ $(function () {
         });
     })();
 
-    // Background video playing script
-    // $(document).ready(function () {
-    //     $(".player").mb_YTPlayer({
-    //         mobileFallbackImage: "img/banner/banner-1.jpg",
-    //     });
-    // });
-
-    // Multilevel menuus
     $("[data-submenu]").submenupicker();
 
     // Expending/Collapsing advance search content
@@ -618,29 +568,6 @@ $(function () {
     $(".panel-group").on("shown.bs.collapse", toggleChevron);
     $(".panel-group").on("hidden.bs.collapse", toggleChevron);
 
-    // Switching Color schema
-    function populateColorPlates() {
-        var plateStings =
-            '<div class="option-panel option-panel-collased">\n' +
-            "    <h2>Change Color</h2>\n" +
-            '    <div class="color-plate default-plate" data-color="default"></div>\n' +
-            '    <div class="color-plate midnight-blue-plate" data-color="midnight-blue"></div>\n' +
-            '    <div class="color-plate yellow-plate" data-color="yellow"></div>\n' +
-            '    <div class="color-plate blue-plate" data-color="blue"></div>\n' +
-            '    <div class="color-plate green-light-plate" data-color="green-light"></div>\n' +
-            '    <div class="color-plate yellow-light-plate" data-color="yellow-light"></div>\n' +
-            '    <div class="color-plate green-plate" data-color="green"></div>\n' +
-            '    <div class="color-plate green-light-2-plate" data-color="green-light-2"></div>\n' +
-            '    <div class="color-plate red-plate" data-color="red"></div>\n' +
-            '    <div class="color-plate purple-plate" data-color="purple"></div>\n' +
-            '    <div class="color-plate brown-plate" data-color="brown"></div>\n' +
-            '    <div class="color-plate olive-plate" data-color="olive"></div>\n' +
-            '    <div class="setting-button">\n' +
-            '        <i class="fa fa-gear"></i>\n' +
-            "    </div>\n" +
-            "</div>";
-        $("body").append(plateStings);
-    }
 
     $(document).on("click", ".color-plate", function () {
         var name = $(this).attr("data-color");
@@ -670,9 +597,8 @@ $(function () {
         .trigger("resize");
 })(jQuery);
 
-
-
 (function () {
+
     function slidePartners() {
         $(".custom-slider").slick({
             slidesToShow: 5,
@@ -712,63 +638,185 @@ $(function () {
     }
 
 
-    function getTypesWithVehicle() {
-        $.getJSON("/types-with-vehicles", function (makes) {
-            let item = "",
-                option = '<option value="">All</option>';
-            $.each(makes, function (key, value) {
-                item +=
-                    '<a class="dropdown-item" href="/type-vehicles/' +
-                    value.id +
-                    '">' +
-                    value.type +
-                    "</a>";
-                option +=
-                    "<option value=" +
-                    value.id +
-                    ">" +
-                    value.type +
-                    "</option>";
-            });
-            $("#filterMakesID").html(option);
-            $("#vehicleGroupTypes").append(item);
-            $("#filterVehicleType").html(option);
-            let currenttype = $("#currentType").val();
-            $("#filterVehicleType option[value=" + currenttype + "]").prop(
-                "selected",
-                true
-            );
-        });
-    }
-    getTypesWithVehicle();
+    // window.onload = function () {
+    //     google.accounts.id.initialize({
+    //         client_id:
+    //             "542097242134-vvu2f4mhg8226pj8s9dvkfr7je4nfah0.apps.googleusercontent.com",
+    //         callback: handleCredentialResponse,
+    //     });
+    //     google.accounts.id.renderButton(
+    //         document.getElementById("buttonDiv"),
+    //         {
+    //             theme: "outline",
+    //             size: "large",
+    //             locale: "en",
+    //         }
+    //     );
+    //     google.accounts.id.prompt();
+    // };
 
-    function vehicleMakesWithVehicles() {
-        $.getJSON("/makes-with-vehicles", function (vehicles) {
-            let item = "",
-                option = "<option value=''>All</option>", brand = "";
-            $.each(vehicles, function (key, value) {
-                item +=
-                    '<a class="dropdown-item" href="/make-vehicles/' +
-                    value.id +
-                    '">' +
-                    value.make +
-                    "</a>";
-                option +=
-                    "<option value=" +
-                    value.id +
-                    ">" +
-                    value.make +
-                    "</option>";
-                brand += "<div class=\"custom-box\"><img src=\"/images/brands/" + value.logo + "\" alt=\"brand\" class=\"img-fluid\"></div>";
-            });
-            $("#vehicleGroupandMakes").append(item);
-            $("#filterMakesID").html(option);
-            $("#brands-section").html(brand);
-            slidePartners();
+    // function handleCredentialResponse(response) {
+    //     const responsePayload = decodeJwtResponse(response.credential);
+    //     console.log("ID: " + responsePayload.sub);
+    //     console.log("Full Name: " + responsePayload.name);
+    //     console.log("Given Name: " + responsePayload.given_name);
+    //     console.log("Family Name: " + responsePayload.family_name);
+    //     console.log("Image URL: " + responsePayload.picture);
+    //     console.log("Email: " + responsePayload.email);
+    //     console.log(responsePayload);
+    //     let data = {
+    //         google_id: responsePayload.sub,
+    //         name: responsePayload.name,
+    //         profile: responsePayload.picture,
+    //         email: responsePayload.email,
+    //     };
+    // }
+
+
+    function showSuccess(message, target) {
+        iziToast.success({
+            title: "OK",
+            message: message,
+            position: "center",
+            timeout: 7000,
+            target: target,
         });
     }
 
-    vehicleMakesWithVehicles();
+    function showError(message, target) {
+        iziToast.error({
+            title: "Error",
+            message: message,
+            position: "center",
+            timeout: 7000,
+            target: target,
+        });
+    }
+
+
+    let nameRe = $("#nameRe"),
+        phoneRe = $("#phoneRe"),
+        emailRe = $("#emailRe"),
+        passwordRe = $("#passwordRe"),
+        roleRe = $("#roleRe"),
+        passwordConfirmationRe = $("#passwordConfirmationRe");
+    registerForm = $("#registerForm");
+
+    registerForm.on("submit", function (event) {
+        event.preventDefault();
+        let $this = $(this),
+            name = nameRe.val(),
+            phone = phoneRe.val(),
+            email = emailRe.val(),
+            password = passwordRe.val(),
+            password_confirmation = passwordConfirmationRe.val(),
+            role = roleRe.val(),
+            token = $this.find("input[name='_token']").val(),
+            registerSubmit = $("#registerSubmit");
+        registerSubmit.prop({ disabled: true });
+
+        let data = {
+            name: name,
+            phone: phone,
+            email: email,
+            password: password,
+            password_confirmation: password_confirmation,
+            role: role,
+        };
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": token,
+            },
+        });
+
+        $.ajax({
+            method: "POST",
+            url: "/register",
+            data: data,
+            success: function (params) {
+                console.log(params);
+                registerSubmit.prop({ disabled: false });
+                let result = JSON.parse(params);
+                if (result.status == "success") {
+                    showSuccess(result.message, "#registerfeedback");
+                    window.setTimeout(function () {
+                        window.location.href = "/login";
+                    }, 3000);
+                } else {
+                    showError(result.error, "#registerfeedback");
+                }
+            },
+
+            error: function (error) {
+                console.error(error);
+                registerSubmit.prop({ disabled: false });
+                if (error.status == 422) {
+                    var errors = "";
+                    $.each(error.responseJSON.errors, function (key, value) {
+                        errors += value + "!";
+                    });
+                    showError(errors, "#registerfeedback");
+                } else {
+                    showError(
+                        "Error occurred during processing",
+                        "#registerfeedback"
+                    );
+                }
+            },
+        });
+    });
+
+    $("#passwordResetLinkForm").on("submit", function (event) {
+        event.preventDefault();
+        let email = $("#emailForget").val(),
+            $this = $(this),
+            token = $this.find("input[name='_token']").val(),
+            submitEmail = $("#submitEmail");
+        submitEmail.prop({ disabled: true });
+        if (email !== "" && email !== null) {
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": token,
+                },
+            });
+            $.ajax({
+                type: "POST",
+                url: "/forgot-password",
+                data: { email: email },
+                success: function (params) {
+                    submitEmail.prop({ disabled: false });
+                    let result = JSON.parse(params);
+                    if (result.status == "success") {
+                        showSuccess(result.message, "#feedback");
+                    } else {
+                        showError(result.error, "#feedback");
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                    submitEmail.prop({ disabled: false });
+                    if (error.status == 422) {
+                        var errors = "";
+                        $.each(
+                            error.responseJSON.errors,
+                            function (key, value) {
+                                errors += value + "!";
+                            }
+                        );
+                        showError(errors, "#feedback");
+                    } else {
+                        showError(
+                            "Error occurred during processing",
+                            "#feedback"
+                        );
+                    }
+                },
+            });
+        } else {
+            showError("Email address is required");
+        }
+    });
+
 
     function getCounties() {
         $.getJSON("/counties/110", function (counties) {
@@ -903,10 +951,7 @@ $(function () {
             let features = "",
                 price = parseFloat(vehicle.price),
                 vehiclePrice = price.toFixed(2),
-                location =
-                    vehicle.yard !== null && vehicle.yard !== []
-                        ? vehicle.yard.address
-                        : vehicle.location;
+                location =(vehicle.yard !== null && vehicle.yard !== "") ? vehicle.yard.address : vehicle.location;
             $.each(vehicle.features, function (key, value) {
                 features += "<li>" + value.feature + "</li>";
             });
@@ -942,26 +987,7 @@ $(function () {
         });
     });
 
-    function getServices() {
-        $.getJSON("/services-get", function (services) {
-            let service = "",
-                i = 1;
-            $.each(services, function (key, value) {
-                service +=
-                    '<div class="col-lg-6 col-md-6 col-sm-12"><div class="single-info"><div class="number">' +
-                    i++ +
-                    '</div><div class="icon"><div class="icon-inner"><i class="flaticon-shield"></i></div></div><h2><a href="/service/' +
-                    value.id +
-                    '">' +
-                    value.service +
-                    "</a></h2><p>" +
-                    value.description +
-                    "</p></div></div>";
-            });
-            $("#servicesSection").html(service);
-        });
-    }
-    getServices();
+
 
     function numberFormat(
         number,
@@ -988,129 +1014,53 @@ $(function () {
         return formattedNumber;
     }
 
-    function getLatestCars() {
-        $.getJSON("/new-arrivals", function (data) {
-            let vehicle = "",
-                vehicles = data.data;
+
+
+
+
+    function vehicleMakesWithVehicles() {
+        $.getJSON("/makes-with-vehicles", function (vehicles) {
+            let item = "",
+                option = "<option value=''>All</option>",
+                brand = "",
+                li = "";
             $.each(vehicles, function (key, value) {
-                let images = JSON.parse(value.images),
-                    tags = JSON.parse(value.tags);
-                var price =
-                    value.price !== null
-                        ? parseFloat(value.price).toFixed(2)
-                        : 0;
-                var mileage = value.mileage !== null ? value.mileage : 0;
-                var location =
-                    value.location !== null
-                        ? value.location
-                        : value.yard !== undefined
-                        ? value.yard.address
-                        : "";
-                vehicle +=
-                    '<div class="col-md-4 slide slide-box"><div class="car-box"><div class="car-image"><img class="d-block w-100" src="vehicleimages/' +
-                    images[0] +
-                    '" alt="car-photo"><div class="tag">' +
-                    value.usage +
-                    '</div><div class="facilities-list clearfix"><ul><li><i class="flaticon-way"></i>' +
-                    value.mileage +
-                    'km</li><li><i class="flaticon-calendar-1"></i>' +
-                    value.year +
-                    '</li><li><i class="flaticon-manual-transmission"></i>' +
-                    value.transmission +
-                    '</li></ul></div></div><div class="detail"><h1 class="title"><a href="vehicle-details/' +
+                li +=
+                    '<li><a href="/make-vehicles/' +
                     value.id +
                     '">' +
-                    value.make.make +
-                    " " +
-                    value.model.model +
-                    '</a></h1><div class="' +
-                    location +
-                    '"><a href="/vehicle-details/' +
+                    value.make +
+                    "</a></li>";
+                item +=
+                    '<a class="dropdown-item" href="/make-vehicles/' +
                     value.id +
-                    '"><i class="flaticon-pin"></i>' +
-                    location +
-                    '</a></div></div><div class="footer"><div class="pull-right"><p class="price"><span>Kes: </span>' +
-                    numberFormat(parseFloat(value.price), 2, ".", ",") +
-                    "</p></div></div></div></div>";
-
-                // let img =
-                //     '<a href="/vehicleimages/' +
-                //     value.cover_photo +
-                //     '" class="overlap-btn" data-sub-html="<h4>' +
-                //     value.model.model +
-                //     "</h4><p>" +
-                //     value.description +
-                //     '</p>"><i class="fa fa-expand"></i><img class="hidden" src="/vehicleimages/' +
-                //     value.cover_photo +
-                //     '" alt="hidden-img"></a>';
-                // $.each(images, function (key, image) {
-                //     img +=
-                //         '<a href="/vehicleimages/' +
-                //         image +
-                //         '" class="hidden" data-sub-html="<h4>' +
-                //         value.model.model +
-                //         "</h4><p>" +
-                //         value.description +
-                //         '</p>"><img src="/vehicleimages/' +
-                //         image +
-                //         '" alt="hidden-img"></a>';
-                // });
-
-                // vehicle +=
-                //     '<div class="col-lg-4 col-md-4"><div class="car-box-3"><div class="car-thumbnail"><a href="/vehicle-details/' +
-                //     value.id +
-                //     '" class="car-img" ><div class="tag-2 bg-active">' +
-                //     tags[0] +
-                //     '</div><div class="price-box"><span><span>Kes: ' +
-                //     price.toLocaleString("en-US", {
-                //         style: "currency",
-                //         currency: "KSH",
-                //     }) +
-                //     '</span></div><img class="d-block w-100" src="/vehicleimages/' +
-                //     value.cover_photo +
-                //     '" alt="car"></a><div class="carbox-overlap-wrapper"><div class="overlap-box"><div class="overlap-btns-area"><a class="overlap-btn" data-bs-toggle="modal" data-bs-target="#carOverviewModal" id="vehicleDetailsModalToggle" data-id="' +
-                //     value.id +
-                //     '"><i class="fa fa-eye-slash"></i></a><a class="overlap-btn wishlist-btn" data-id="vehicleLike" id="' +
-                //     value.id +
-                //     '"><i class="fa fa-heart-o"></i></a><div class="car-magnify-gallery">' +
-                //     img +
-                //     '</div></div></div></div></div><div class="detail"><h1 class="title"><a href="/vehicle-details/' +
-                //     value.id +
-                //     '">' +
-                //     value.make.make +
-                //     " " +
-                //     value.model.model +
-                //     " " +
-                //     value.year +
-                //     '</a></h1><ul class="custom-list"><li><a href="#">' +
-                //     value.usage +
-                //     '</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li><a href="#">' +
-                //     value.transmission +
-                //     '</a>&nbsp;&nbsp;|</li><li><a href="#">' +
-                //     value.type.type +
-                //     '</a></li></ul><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i>' +
-                //     value.fuel_type +
-                //     '</li><li><i class="flaticon-way"></i>&nbsp;' +
-                //     mileage +
-                //     ' km</li><li><i class="flaticon-gear"></i>&nbsp;' +
-                //     value.color +
-                //     "</li></ul></div></div></div>";
+                    '">' +
+                    value.make +
+                    "</a>";
+                option +=
+                    "<option value=" +
+                    value.id +
+                    ">" +
+                    value.make +
+                    "</option>";
+                brand +=
+                    '<a href="make-vehicles/'+value.id+'"><div class="custom-box"><img src="/brands/' +
+                    value.logo +
+                    '" alt="brand" class="img-fluid"></div></a>';
             });
-            $("#latestCarsSection").html(vehicle);
-            $("#latestCarsSection").append(
-                '<div class="col-lg-12 text-center"><a  class="btn-9 btn" href="new-vehicles">&nbsp;Learn More</a></div>'
-            );
+            $("#vehicleGroupandMakes").append(item);
+            $("#vehicleGroupMakes").append(li);
+            $("#filterMakesID").html(option);
+            $("#brands-section").html(brand);
+            slidePartners();
         });
     }
-    getLatestCars();
 
-    function getVehiclesOnOffer() {
-        $.getJSON("/vehicle-discounts", function (params) {});
-    }
+    vehicleMakesWithVehicles();
 
     function getSocials() {
         $.getJSON("/socials", function (socials) {
-            let li = "";
+            let li = "", phone = "";
             $.each(socials, function (key, value) {
                 if (value.type === "address") {
                     $("#contact-info").append(
@@ -1118,60 +1068,62 @@ $(function () {
                             value.address +
                             "</li>"
                     );
-                } else {
-                    if (value.type == "mail") {
-                        li +=
-                            '<li><i class="flaticon-mail"></i><a  href="mailto:' +
+                }
+
+                if (value.type === "phone") {
+                    phone += "<a href=\"tel:" + value.link + "\"><i class=\"fa fa-phone\"></i>Need Support? " + value.link + "</a>";
+                    $("#contact-info").append(
+                        '<li><i class="flaticon-phone"></i><a href="tel:' +
                             value.link +
                             '">' +
                             value.link +
-                            "</a></li>";
-                    } else if (value.type === "phone") {
-                        $("#contact-info").append(
-                            '<li><i class="flaticon-phone"></i><a href="tel:' +
-                                value.link +
-                                '">' +
-                                value.link +
-                                "</a></li>"
-                        );
-                    } else if (
-                        value.type === "social" &&
-                        value.name === "facebook"
-                    ) {
-                        li +=
-                            '<div class="icon facebook"><div class="tooltip">Facebook</div><a href=\'' +
-                            value.link +
-                            "' target='_blank'><span><i class=\"fa fa-facebook\"></i></span></a></div>";
-                    } else if (
-                        value.type == "social" &&
-                        value.name == "twitter"
-                    ) {
-                        li +=
-                            '<div class="icon twitter"><div class="tooltip">Twitter</div><a href=\'' +
-                            value.link +
-                            "' target='_blank'><span><i class=\"fa fa-twitter\"></i></span></a></div>";
-                    } else if (
-                        value.type === "social" &&
-                        value.name === "instagram"
-                    ) {
-                        li +=
-                            '<div class="icon instagram"><div class="tooltip">Instagram</div><a href=\'' +
-                            value.link +
-                            "' target='_blank'><span><i class=\"fa fa-instagram\"></i></span></div>";
-                    } else if (
-                        value.type === "social" &&
-                        value.name === "whatsapp"
-                    ) {
-                        li +=
-                            '<div class="icon whatsapp"><div class="tooltip">Whatsapp</div><a href=\'' +
-                            value.link +
-                            "' target='_blank'><span><i class=\"fa fa-whatsapp\"></i></span></div>";
-                    }
+                            "</a></li>"
+                    );
+                }
+
+                if (value.type == "mail") {
+                    phone += "<a href=\"tel:" + value.link + "\"><i class=\"fa fa-envelope\"></i>" + value.link + "</a>";
+                    li +=
+                        '<li><i class="flaticon-mail"></i><a  href="mailto:' +
+                        value.link +
+                        '">' +
+                        value.link +
+                        "</a></li>";
+                }
+
+                if (value.type === "social" && value.name === "facebook") {
+                    li +=
+                        '<div class="icon facebook"><div class="tooltip">Facebook</div><a href=\'' +
+                        value.link +
+                        "' target='_blank'><span><i class=\"fa fa-facebook\"></i></span></a></div>";
+                } else if (value.type == "social" && value.name == "twitter") {
+                    li +=
+                        '<div class="icon twitter"><div class="tooltip">Twitter</div><a href=\'' +
+                        value.link +
+                        "' target='_blank'><span><i class=\"fa fa-twitter\"></i></span></a></div>";
+                } else if (
+                    value.type === "social" &&
+                    value.name === "instagram"
+                ) {
+                    li +=
+                        '<div class="icon instagram"><div class="tooltip">Instagram</div><a href=\'' +
+                        value.link +
+                        "' target='_blank'><span><i class=\"fa fa-instagram\"></i></span></div>";
+                } else if (
+                    value.type === "social" &&
+                    value.name === "whatsapp"
+                ) {
+                    li +=
+                        '<div class="icon whatsapp"><div class="tooltip">Whatsapp</div><a href=\'' +
+                        value.link +
+                        "' target='_blank'><span><i class=\"fa fa-whatsapp\"></i></span></div>";
                 }
             });
+            $("#socialheader").html(phone);
             $(".social-list").html(li);
         });
     }
+    getSocials();
 
     function getPartners() {
         $.getJSON("/partners", function (partners) {
@@ -1188,6 +1140,7 @@ $(function () {
         });
     }
     getPartners();
+
     let makeID = $("#makeID"),
         vehicleModelID = $("#vehicleModelID");
 
@@ -1231,5 +1184,4 @@ $(function () {
             getVehicleModels(make_id);
         }
     });
-
 })(jQuery);

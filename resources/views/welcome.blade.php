@@ -15,44 +15,45 @@
     @include('layouts.search')
     {{-- </div> --}}
     <!-- Featured car start -->
-    <div class="featured-car content-area-21">
+    <div class="featured-car content-area-21 bg-white">
         <div class="container">
-            <!-- Main title -->
             <div class="main-title">
                 <h1>Latest Vehicles</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+                <p>On this platform, you can get newly manufactured, imported cars and refurbished vehicles at affordable
+                    prices. </p>
             </div>
-            <div class="row" id="latestCarsSection">
-                <div class="lds-roller">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+            <div class="row bg-grey pt-4 pb-2" id="latestCarsSection">
+                <div class="text-center">
+                    <div class="lds-roller">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="featured-car content-area-21">
+    <div class="featured-car content-area-21 bg-white">
         <div class="container">
             <!-- Main title -->
             <div class="main-title">
                 <h1>Vehicles on Offer</h1>
                 <p>Get the best cars in the market at discounted prices. </p>
             </div>
-            <div class="row" id="vehiclesonoffer">
-
+            <div class="row bg-grey pt-4 pb-2" id="vehiclesonoffer">
                 @foreach ($discounts as $item)
                     @php
                         $images = json_decode($item['images']);
-                        // $tags = json_decode($item['tags']);
                     @endphp
                     <div class="col-lg-4 col-md-6">
                         <div class="car-box-3">
+
                             <div class="car-thumbnail">
                                 <a href="{{ url('/vehicle-details/' . $item->id) }}" class="car-img">
                                     <div class="for">{{ $item->usage }}</div>
@@ -98,13 +99,12 @@
                                 </div>
                             </div>
 
-
                             @foreach ($images as $image)
                             @endforeach
-
                             <div class="detail">
                                 <h1 class="title">
-                                    <a href="{{ url('/vehicle-details/' . $item->id) }}">{{ $item->model->model }}</a>
+                                    <a
+                                        href="{{ url('/vehicle-details/' . $item->id) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                 </h1>
                                 <ul class="custom-list">
                                     <li>
@@ -115,34 +115,45 @@
                                         <a href="">{{ $item->transmission }}</a> &nbsp;|&nbsp;
                                     </li>
                                     <li>
-                                        <a href="#">{{ $item->type?->type }}</a>
+                                        <a href="#">{{ $item->fuel_type }}</a>
                                     </li>
                                 </ul>
-
                                 <ul class="facilities-list clearfix">
-                                    <li>
-                                        <i class="flaticon-fuel"></i> {{ $item->fuel_type }}
-                                    </li>
                                     <li>
                                         <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km
                                     </li>
                                     <li>
-                                        <i class="flaticon-gear"></i> {{ $item->color }}
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-calendar-1"></i> {{ $item->year }}
+                                        <i class="flaticon-gear"></i> {{ $item->enginecc }} cc
                                     </li>
                                 </ul>
-
                             </div>
 
+                            <div class="footer">
+                                <div class="d-flex justify-space-between mb-2 mt-2">
+                                    <div class="col-md-3 text-center">
+                                        <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"><i
+                                                class="fa fa-whatsapp fa-2x"></i></a>
+                                    </div>
+
+                                    <div class="col-md-3 text-center">
+                                        <a href="{{ url('/buy/'.$item->vehicle_no ?? $item->id) }}"
+                                            class="btn btn-warning btn-block" style="color: #fff;"><i
+                                                class="fa fa-hand-heart"></i> Buy</a>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <a href="{{ url('/loan/'.$item->vehicle_no ?? $item->id) }}"
+                                            class="btn btn-success btn-block" style="color: #fff;"><i
+                                                class="fa fa-hand-heart"></i> Apply Loan</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforeach
 
                 <div class="col-lg-12 text-center">
-                    <a class="btn-9 btn" href="{{ route('vehicles.discounted') }}">
-                        <span></span><span></span><span></span><span></span>Learn More
+                    <a class="btn-9 btn bg-white" href="{{ route('vehicles.discounted') }}">
+                        <span></span><span></span><span></span><span></span><strong>View More</strong>
                     </a>
                 </div>
             </div>
@@ -154,7 +165,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 align-self-center">
-                    <!-- Main title -->
                     <div class="main-title">
                         <h1>Our Services</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
@@ -165,14 +175,24 @@
                 </div>
                 <div class="col-lg-7 offset-lg-1">
                     <div class="row" id="servicesSection">
-
+                        <div class="text-center">
+                            <div class="lds-roller">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Partners strat -->
     <div class="partners">
         <div class="container">
             <div class="main-title">
@@ -181,19 +201,25 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="custom-slider slide-box-btn" id="brands-section">
-
-                        {{-- <div class="custom-box"><img src="img/brand/brand-2.png" alt="brand" class="img-fluid"></div>
-                        <div class="custom-box"><img src="img/brand/brand-3.png" alt="brand" class="img-fluid"></div>
-                        <div class="custom-box"><img src="img/brand/brand-4.png" alt="brand" class="img-fluid"></div>
-                        <div class="custom-box"><img src="img/brand/brand-1.png" alt="brand" class="img-fluid"></div>
-                        <div class="custom-box"><img src="img/brand/brand-2.png" alt="brand" class="img-fluid"></div>
-                        <div class="custom-box"><img src="img/brand/brand-3.png" alt="brand" class="img-fluid"></div>
-                        <div class="custom-box"><img src="img/brand/brand-4.png" alt="brand" class="img-fluid"></div>
-                        <div class="custom-box"><img src="img/brand/brand-1.png" alt="brand" class="img-fluid"></div> --}}
-
+                        <div class="text-center">
+                            <div class="lds-roller">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer_scripts')
+<script src="{{ asset('js/welcome.js') }}"></script>
 @endsection

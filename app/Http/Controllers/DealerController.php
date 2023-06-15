@@ -34,6 +34,8 @@ class DealerController extends Controller
                 session()->put('subscription_notification', $message);
             }
             session()->put('subscription', $subscription);
+        }else {
+            return redirect()->route('subscription.plan');
         }
         $vehicles = $this->dealer->dealerVehicles();
         $quotes = $this->dealer->quotes();
@@ -88,9 +90,6 @@ class DealerController extends Controller
             $url = "/login";
         }
         DB::commit();
-        // event(new Registered($user));
-        // SendEmailVerificationNotification::dispatch($user)->onQueue('emails');
-
         return json_encode(['status' => 'success', 'url' => $url, 'message' => 'Dealer account created successfully. And verification link has been sent to your email.']);
     }
 

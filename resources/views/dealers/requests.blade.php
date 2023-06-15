@@ -70,7 +70,7 @@
                     </table>
                 </div>
 
-                <div class="tab-pane fade show active" id="finacesTab" role="tabpanel">
+                <div class="tab-pane fade" id="finacesTab" role="tabpanel">
                     <table class="table table-bordered table-hover">
                         <thead>
                             <th>#</th>
@@ -98,7 +98,7 @@
                     </table>
                 </div>
 
-                <div class="tab-pane fade show" id="tradeinsTab" role="tabpanel">
+                <div class="tab-pane fade" id="tradeinsTab" role="tabpanel">
                     <table class="table table-bordered table-hover">
                         <thead>
                             <th>#</th>

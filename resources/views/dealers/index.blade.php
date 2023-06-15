@@ -31,6 +31,25 @@
         <section class="section dashboard">
             <div class="row">
 
+
+                <div id="g_id_onload"
+     data-client_id="542097242134-vvu2f4mhg8226pj8s9dvkfr7je4nfah0.apps.googleusercontent.com"
+     data-context="signup"
+     data-ux_mode="popup"
+     data-login_uri="http://127.0.0.1:800/loginwithgoogle"
+     data-nonce=""
+     data-auto_prompt="true">
+</div>
+
+<div class="g_id_signin"
+     data-type="standard"
+     data-shape="rectangular"
+     data-theme="outline"
+     data-text="signin_with"
+     data-size="medium"
+     data-logo_alignment="left">
+</div>
+
                 <div class="col-xl-3 col-md-4">
                     <div class="card info-card sales-card">
                         <div class="filter">
@@ -63,6 +82,7 @@
                 <div class="col-xl-3 col-md-4">
 
                     <div class="card info-card revenue-card">
+
                         <div class="filter">
                             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -88,6 +108,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -224,10 +245,10 @@
 
         <section class="vehicles">
             <div class="card mt-4">
-                <div class="card-header bg-white">
-                    <h5><b>My Vehicles</b></h5>
-                    <a href="{{ route('dealer.vehicles') }}" class="btn btn-success float-right"><i
-                            class="fa fa-pl"></i>&nbsp;&nbsp;Add new</a>
+                <div class="card-header">
+                    {{-- <h5><b>My Vehicles</b></h5> --}}
+                    <a href="{{ route('dealer.vehicles') }}" class="btn btn-success"><i
+                            class="fal fa-plus"></i>&nbsp;&nbsp;Add new</a>
                 </div>
 
                 <div class="card-body">

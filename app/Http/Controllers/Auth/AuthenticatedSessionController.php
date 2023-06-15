@@ -35,14 +35,10 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        if (auth()->user()->role === "dealer") {
-            $url = redirect()->intended(RouteServiceProvider::DEALER);
-        }elseif (auth()->user()->role === "buyer") {
-            $url = redirect()->intended(RouteServiceProvider::BUYER);
-        }elseif (auth()->user()->role === "admin") {
+        if (auth()->user()->role === "admin") {
             $url = redirect()->intended(RouteServiceProvider::HOME);
-        }elseif(auth()->user()->role === "partner") {
-            $url = redirect()->intended(RouteServiceProvider::PARTNER);
+        }else {
+            $url = redirect()->intended(RouteServiceProvider::PROFILE);
         }
         return $url;
         // $intendedUrl = $request->input('intended_url', session('url.intended'));

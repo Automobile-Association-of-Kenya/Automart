@@ -22,7 +22,7 @@ class Vehicle extends Model
         'horsepower',
     ];
 
-    protected $with = ['make:id,make','model:id,model','dealer:id,name,phone,email'];
+    protected $with = ['make:id,make', 'model:id,model', 'dealer:id,name,phone,email'];
 
     /**
      * Get the dealer that owns the Vehicle
@@ -210,5 +210,62 @@ class Vehicle extends Model
             }
         }
         return $discountedvehicles;
+    }
+
+    function vehicle($vehicle_no)
+    {
+        $vehicle = $this->with([
+            'dealer:id,name',
+            'type:id,type',
+            'make:id,make',
+            'model:id,model',
+            'yard'
+        ])->where('vehicle_no', $vehicle_no)
+        ->orWhere('id', $vehicle_no)->first();
+        return $vehicle;
+    }
+
+    public function discounts()
+    {
+        $discountedVehicles = $this->with([
+            'dealer:id,name',
+            'type:id,type',
+            'make:id,make',
+            'model:id,model',
+            'yard'
+        ])
+            ->whereHas('vehiclePrices', function ($query) {
+                $query->select('vehicle_id')
+                    ->groupBy('vehicle_id')
+                    ->havingRaw('COUNT(*) > 1')
+                    ->orderByDesc('created_at')
+                    ->limit(2);
+            })
+            ->get()
+            ->filter(function ($vehicle) {
+                $prices = $vehicle->vehiclePrices;
+                if ($prices->count() > 1 && $prices[0]->price < $prices[1]->price) {
+                    $vehicle['current_price'] = $prices[0]->price;
+                    $vehicle['initial_price'] = $prices[1]->price;
+                    return true;
+                }
+                return false;
+            });
+        return $discountedVehicles;
+    }
+
+    function getvehicles()
+    {
+        $newarrivals = $this
+            ->with(['dealer' => function ($dealer) {
+                return $dealer->select('id', 'name');
+            }, 'type' => function ($type) {
+                return $type->select('id', 'type');
+            }, 'make' => function ($make) {
+                return $make->select('id', 'make');
+            }, 'model' => function ($model) {
+                return $model->select('id', 'model');
+            }, 'prices'])->latest()->paginate(10);
+        return json_encode($newarrivals);
     }
 }

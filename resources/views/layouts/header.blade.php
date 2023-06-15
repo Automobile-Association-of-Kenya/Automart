@@ -9,42 +9,11 @@
         </button>
         <div class="navbar-collapse collapse w-100 justify-content-end" id="navbar">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('/') }}" aria-expanded="false">
                         Home
                     </a>
                 </li>
-
-                {{-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                        </a>
-                        <ul class="dropdown-menu megamenu" aria-labelledby="navbarDropdownMenuLink">
-                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">List Layout</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="car-list-rightside.html">List Right Sidebar</a></li>
-                                    <li><a class="dropdown-item" href="car-list-leftsidebar.html">List Left Sidebar</a></li>
-                                    <li><a class="dropdown-item" href="car-list-fullWidth.html">List FullWidth</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Grid Layout</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="car-grid-rightside.html">Grid Right Sidebar</a></li>
-                                    <li><a class="dropdown-item" href="car-grid-leftside.html">Grid Left Sidebar</a></li>
-                                    <li><a class="dropdown-item" href="car-grid-fullWidth.html">Grid FullWidth</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Car Details</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="car-details.html">Car Details 1</a></li>
-                                    <li><a class="dropdown-item" href="car-details-2.html">Car Details 2</a></li>
-                                    <li><a class="dropdown-item" href="car-details-3.html">Car Details 3</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li> --}}
 
                 <li class="nav-item dropdown megamenu-li">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
@@ -71,7 +40,7 @@
                                         <h6 class="megamenu-title  text-success">Others</h6>
                                         <a class="dropdown-item" href="{{ route('new') }}">New Arrivals</a>
                                         <a class="dropdown-item" href="{{ url('discounted-vehicles') }}">Discounted</a>
-                                        <a class="dropdown-item" href="{{ url('vehicles-list') }}">High end</a>
+                                        <a class="dropdown-item" href="{{ route('vehicles.list') }}">All Vehicles</a>
                                     </div>
                                 </div>
 
@@ -79,51 +48,6 @@
                         </div>
                     </div>
                 </li>
-
-
-                {{-- <li class="nav-item dropdown megamenu-li">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Selling A car</a>
-                        <div class="dropdown-menu megamenu" aria-labelledby="dropdown01">
-                            <div class="megamenu-area">
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-4 col-lg-4">
-                                        <div class="megamenu-section">
-                                            <h6 class="megamenu-title">Vehicle Categories</h6>
-                                            <a class="dropdown-item" href="{{ url('new-arrivals') }}">New Arrivals</a>
-                                            <a class="dropdown-item" href="{{ url('vehicles-discounted') }}">Discounted</a>
-                                            <a class="dropdown-item" href="#">Premium</a>
-                                            <a class="dropdown-item" href="#">Vehicle Types</a>
-                                            <a class="dropdown-item" href="services-2.html">Services 2</a>
-                                            <a class="dropdown-item" href="car-comparison.html">Car Compare</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 col-lg-4">
-                                        <div class="megamenu-section">
-                                            <h6 class="megamenu-title">Pages</h6>
-                                            <a class="dropdown-item" href="pricing-tables.html">Pricing Tables</a>
-                                            <a class="dropdown-item" href="gallery.html">Gallery</a>
-                                            <a class="dropdown-item" href="typography.html">Typography</a>
-                                            <a class="dropdown-item" href="elements.html">Elements</a>
-                                            <a class="dropdown-item" href="faq.html">Faq</a>
-                                            <a class="dropdown-item" href="search-brand.html">Car Brands</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6 col-md-4 col-lg-4">
-                                        <div class="megamenu-section">
-                                            <h6 class="megamenu-title">Pages</h6>
-                                            <a class="dropdown-item" href="icon.html">Icons</a>
-                                            <a class="dropdown-item" href="coming-soon.html">Coming Soon</a>
-                                            <a class="dropdown-item" href="404.html">Error Page</a>
-                                            <a class="dropdown-item" href="login.html">login</a>
-                                            <a class="dropdown-item" href="signup.html">Register</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </li> --}}
 
                 @if (auth()->user() && auth()->user()->role === 'dealer')
                     <li class="nav-item dropdown">
@@ -134,17 +58,6 @@
                         <a class="nav-link" href="{{ route('dealers.create') }}">Selling Vehicles?</a>
                     </li>
                 @endif
-
-                {{-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Blog
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="blog-post.html">Blog Post</a></li>
-                            <li><a class="dropdown-item" href="blog-sidebar.html">Blog Sidebar</a></li>
-                            <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
-                        </ul>
-                    </li> --}}
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink7"
@@ -176,21 +89,27 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
-                            @if (auth()->user()->role === 'admin' && auth()->user()->role === 'dealer')
+                            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'dealer')
                                 <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
                             @endif
                             {{-- <li><a class="dropdown-item" href="">Logout</a></li> --}}
 
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
 
-                                <li><a class="dropdown-item" :href="route('logout')"
+                                    <a class="dropdown-item" :href="route('logout')"
                                         onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                         {{ __('Log Out') }}
-                                    </a></li>
-                            </form>
+                                    </a>
+                                </form>
+                            </li>
                         </ul>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#accountModal"><i class="fa fa-sign-in"></i>  Login / Register</a>
                     </li>
                 @endauth
 
@@ -198,3 +117,118 @@
         </div>
     </nav>
 </div>
+
+
+
+<!-- Sidenav start -->
+<nav id="sidebar" class="nav-sidebar">
+    <!-- Close btn-->
+    <div id="dismiss">
+        <i class="fa fa-close"></i>
+    </div>
+    <div class="sidebar-inner">
+        <div class="sidebar-logo">
+            <a href="index.html">
+                {{-- <img src="img/logos/black-logo.png" alt="sidebarlogo"> --}}
+                <h1>AutoMart</h1>
+            </a>
+        </div>
+        <div class="sidebar-navigation">
+            <h3 class="heading">Pages</h3>
+            <ul class="menu-list">
+                <li><a href="{{ url('/') }}" class="active pt0">Home</a></li>
+                <li>
+                    <a href="#">Buying a Vehicle?<em class="fa fa-chevron-down"></em></a>
+                    <ul>
+                        <li>
+                            <a href="#">Vehicle Types<em class="fa fa-chevron-down"></em></a>
+                            <ul id="vehicleGroupType">
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Vehicle Makes <em class="fa fa-chevron-down"></em></a>
+                            <ul id="vehicleGroupMakes">
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Others <em class="fa fa-chevron-down"></em></a>
+                            <ul>
+                                <a href="{{ route('new') }}">New Arrivals</a>
+                                <a href="{{ url('discounted-vehicles') }}">Discounted</a>
+                                <a href="{{ route('vehicles.list') }}">All Vehicles</a>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Pages <em class="fa fa-chevron-down"></em></a>
+                    <ul>
+                        <li><a href="{{ url('about') }}">About Us</a></li>
+                        <li>
+                            <a href="{{ url('services') }}">Services</a>
+                        </li>
+
+                        <li><a href="faq.html">Faq</a></li>
+
+                    </ul>
+                </li>
+
+                {{-- <li><a href="#">Shop <em class="fa fa-chevron-down"></em></a>
+                    <ul>
+                        <li><a href="shop-list.html">Shop List</a></li>
+                        <li><a href="shop-cart.html">Shop Cart</a></li>
+                        <li><a href="shop-checkout.html">Shop Checkout</a></li>
+                        <li><a href="shop-details.html">Shop Details</a></li>
+                    </ul>
+                </li> --}}
+                <li>
+                    <a href="{{ route('contact') }}">Contact</a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="accountModal"> <i
+                            class="fa fa-sign-in"></i>Login / Register</a>
+                </li>
+
+                {{-- <li>
+                    <a href="#full-page-search" class="nav-link h-icon">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </li> --}}
+            </ul>
+        </div>
+        <div class="get-in-touch">
+            <h3 class="heading">Get in Touch</h3>
+            <div class="get-in-touch-box d-flex mb-2">
+                <i class="flaticon-phone"></i>
+                <a href="tel:0477-0477-8556-552">0288 2547 874</a>
+            </div>
+            <div class="get-in-touch-box d-flex mb-2">
+                <i class="flaticon-mail"></i>
+                <div class="media-body">
+                    <a href="#">info@themevessel.com</a>
+                </div>
+            </div>
+            <div class="get-in-touch-box d-flex">
+                <i class="flaticon-earth"></i>
+                <div class="media-body">
+                    <a href="#">info@themevessel.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="get-social">
+            <h3 class="heading">Get Social</h3>
+            <a href="#" class="facebook-bg">
+                <i class="fa fa-facebook"></i>
+            </a>
+            <a href="#" class="twitter-bg">
+                <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#" class="google-bg">
+                <i class="fa fa-google"></i>
+            </a>
+            <a href="#" class="linkedin-bg">
+                <i class="fa fa-linkedin"></i>
+            </a>
+        </div>
+    </div>
+</nav>

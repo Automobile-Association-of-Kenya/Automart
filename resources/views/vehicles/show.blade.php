@@ -331,7 +331,7 @@
                                                             </li>
                                                             <li>
                                                                 <i class="fa fa-check"></i>Body Style:
-                                                                {{ $vehicle->type->type }}
+                                                                {{ @$vehicle->type->type }}
                                                             </li>
                                                             <li>
                                                                 <i class="fa fa-check"></i>Year: {{ $vehicle->year }}
@@ -387,7 +387,7 @@
                                     <span>Model</span> {{ $vehicle->model->model }}
                                 </li>
                                 <li>
-                                    <span>Body Style</span> {{ $vehicle->type->type }}
+                                    <span>Body Style</span> {{ @$vehicle->type->type }}
                                 </li>
                                 <li>
                                     <span>Year</span> {{ $vehicle->year }}
@@ -395,6 +395,7 @@
                                 <li>
                                     <span>Condition</span>{{ $vehicle->usage ?? 'new' }}
                                 </li>
+                                
                                 <li>
                                     <span>Mileage</span>{{ $vehicle->mileage }} Km
                                 </li>

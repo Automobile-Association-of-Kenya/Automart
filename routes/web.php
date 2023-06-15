@@ -18,48 +18,20 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VehicleController;
 use App\Models\Subscription;
+use App\Models\Vehicle;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', [ApplicationController::class, 'welcome']);
 
 Route::get('/dashboard', [ApplicationController::class, 'dashboard'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
-
-// Route::get('/email/verify', function () {
-//     return view('auth.verify-email');
-// })->middleware(['auth'])->name('verification.notice');
-
-// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-//     $request->fulfill();
-
-//     return redirect('/home');
-// })->middleware(['auth', 'signed'])->name('verification.verify');
-
-// Route::post('/email/verification-notification', function (Request $request) {
-//     $request->user()->sendEmailVerificationNotification();
-
-//     return back()->with('status', 'verification-link-sent');
-// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::resource('vehicles', VehicleController::class);
 
@@ -156,7 +128,7 @@ Route::get('new-vehicles', [ApplicationController::class, 'newVehicles'])->name(
 // Route::get('vehicle-types',[ApplicationController::class, 'vehicleTypesWithVehicles'])->name('');
 Route::get('types-with-vehicles', [ApplicationController::class, 'vehicleTypesWithVehicles']);
 Route::get('makes-with-vehicles', [ApplicationController::class, 'makesWithVehicles']);
-Route::get('vehicles-list', [ApplicationController::class]);
+Route::get('vehicles-list', [ApplicationController::class, 'index'])->name('vehicles.list');
 /**  */
 
 Route::get('type-vehicles/{id}', [ApplicationController::class, 'vehicleTypes'])->name('type.vehicles');
@@ -194,3 +166,8 @@ Route::post('payments-get', [PaymentController::class, 'get']);
 Route::get('requests', [ApplicationController::class, 'requests'])->name('requests.index');
 
 Route::resource('reports', ReportController::class);
+
+Route::get('latest', [ApplicationController::class, 'latest'])->name('latest');
+Route::get('discounts', [VehicleController::class, 'discounts'])->name('discounts');
+Route::get('buy/{no}', [ApplicationController::class, 'buy'])->name('buy');
+Route::get('loan/{no}', [ApplicationController::class, 'loan'])->name('loan');

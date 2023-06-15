@@ -49,7 +49,7 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
                                 <select class="form-select form-select-lg border-rounded" name="usage" id="usage">
-                                    <option value="">Usage</option>
+                                    <option value="">Condition</option>
                                     <option value="New">New</option>
                                     <option value="Semi-new">Semi New</option>
                                     <option value="Locally Used">Locally used</option>

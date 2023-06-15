@@ -161,16 +161,6 @@
                                             <div class="row">
                                                 <input type="hidden" name="unique_str" id="uniqueStrID"
                                                     value="{{ $str }}">
-                                                <input type="hidden" name="vehicle_id" id="vehicleID" value="">
-                                                <div class="col-md-3 form-group">
-                                                    <label for="type">Vehicle Type:</label>
-                                                    <div class="input-group">
-                                                        <select class="form-control form-control--md chzn-select"
-                                                            name="type" id="vehicleType"
-                                                            style="width: 100%;"></select>
-                                                    </div>
-                                                </div>
-
                                                 <div class="col-md-3 form-group">
                                                     <label for="make">Vehicle Make: <sup>*</sup></label>
                                                     <div class="input-group">
@@ -196,7 +186,7 @@
                                                             class="form-control form-control--md chzn-select" required
                                                             style="width: 100%;">
                                                             <option value="">Select One</option>
-                                                            @for ($i = date('Y', strtotime(now())); $i >= 2000; $i--)
+                                                            @for ($i = date('Y', strtotime(now())); $i >= 1995; $i--)
                                                                 <option value="{{ $i }}">
                                                                     {{ $i }}
                                                                 </option>
@@ -206,15 +196,32 @@
                                                 </div>
 
                                                 <div class="col-md-3 form-group">
-                                                    <label for="company">Transmission:</label>
+                                                    <label for="company">Fuel Type: <sup>*</sup></label>
+                                                    <div class="input-group">
+                                                        <select name="fuel_type" id="fuelType" class="form-control form-control--md chzn-select" style="width: 100%;" required>
+                                                            <option value="">Select One</option>
+                                                            <option value="Petrol">Petrol</option>
+                                                            <option value="Diesel">Diesel</option>
+                                                            <option value="Hybrid">Hybrid</option>
+                                                            <option value="Diesel-Hybrid">Diesel-Hybrid
+                                                            </option>
+                                                            <option value="Electic">Electic</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3 form-group">
+                                                    <label for="company">Transmission: <sup>*</sup></label>
                                                     <div class="input-group">
                                                         <select name="transmission" id="transmission"
                                                             class="form-control form-control--md chzn-select"
-                                                            style="width: 100%;">
+                                                            style="width: 100%;" required>
                                                             <option value="">Select One</option>
                                                             <option value="Automatic">Automatic</option>
                                                             <option value="Manual">Manual</option>
-                                                            <option value="Semi-Auto">Semi-Auto</option>
+                                                            <option value="Electric">Electric</option>
+                                                            <option value="Tiptronic">Tiptronic</option>
                                                             <option value="Tiptronic">Tiptronic</option>
                                                             <option value="None">None</option>
                                                         </select>
@@ -222,17 +229,62 @@
                                                 </div>
 
                                                 <div class="col-md-3 form-group">
-                                                    <label for="company">Usage:</label>
+                                                    <label for="company">Condition: <sup>*</sup></label>
                                                     <div class="input-group">
-                                                        <select name="usage" id="usage"
-                                                            class="form-control form-control--md chzn-select">
-                                                            <option value="">Any</option>
+                                                        <select name="usage" id="usage" class="form-control form-control--md chzn-select" style="width:100%;">
+                                                            <option value="">Select One</option>
                                                             <option value="New">New</option>
                                                             <option value="Semi-new">Semi New</option>
                                                             <option value="Locally Used">Locally used</option>
                                                             <option value="Foreign Used">Foreign used</option>
                                                             <option value="Damaged">Damaged</option>
                                                         </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3 form-group">
+                                                    <label for="company">Price: <sup>*</sup></label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="price" id="vehiclePrice"
+                                                            class="form-control form-control--md" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3 form-group">
+                                                    <label for="enginecc">Engine CC: <sup>*</sup></label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="enginecc" id="engineCC"
+                                                            class="form-control form-control--md" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3 form-group">
+                                                    <label for="company">Mileage:</label>
+                                                    <div class="input-group">
+                                                        <input type="number" name="mileage" id="mileAge"
+                                                            class="form-control form-control--md">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="card mt-2">
+                                        <div class="card-header d-flex bg-white" id="additionalToggle">
+                                            <h4><b>Additional Information</b></h4>
+                                            <button type="button"
+                                                class="btn btn-outline-danger mt-1 mb-1 btn-floated float-right"><i
+                                                    class="fa fa-plus fa-1x text-warning"></i></button>
+                                        </div>
+
+                                        <div class="card-body" id="additionInfo">
+                                            <div class="row">
+                                                 <div class="col-md-3 form-group">
+                                                    <label for="engine">Engine: </label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="engine" id="engine"
+                                                            class="form-control form-control--md">
                                                     </div>
                                                 </div>
 
@@ -253,60 +305,15 @@
                                                             style="width: 100%;"></select>
                                                     </div>
                                                 </div>
-
+                                                <input type="hidden" name="vehicle_id" id="vehicleID" value="">
                                                 <div class="col-md-3 form-group">
-                                                    <label for="company">Mileage: <sup>*</sup></label>
+                                                    <label for="type">Vehicle Type:</label>
                                                     <div class="input-group">
-                                                        <input type="number" name="mileage" id="mileAge"
-                                                            class="form-control form-control--md" required>
+                                                        <select class="form-control form-control--md chzn-select"
+                                                            name="type" id="vehicleType"
+                                                            style="width: 100%;"></select>
                                                     </div>
                                                 </div>
-
-                                                <div class="col-md-3 form-group">
-                                                    <label for="company">Price: <sup>*</sup></label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="price" id="vehiclePrice"
-                                                            class="form-control form-control--md" required>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-3 form-group">
-                                                    <label for="engine">Engine: </label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="engine" id="engine"
-                                                            class="form-control form-control--md">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-3 form-group">
-                                                    <label for="enginecc">Engine CC: <sup>*</sup></label>
-                                                    <div class="input-group">
-                                                        <input type="text" name="enginecc" id="engineCC"
-                                                            class="form-control form-control--md" required>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-3">
-                                                    <label for="company">Description:</label>
-                                                    <div class="input-group">
-                                                        <textarea name="description" id="description" class="form-control"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="card mt-2">
-                                        <div class="card-header d-flex bg-white" id="additionalToggle">
-                                            <h4><b>Additional Information</b></h4>
-                                            <button type="button"
-                                                class="btn btn-outline-danger mt-1 mb-1 btn-floated float-right"><i
-                                                    class="fa fa-plus fa-1x text-warning"></i></button>
-                                        </div>
-
-                                        <div class="card-body" id="additionInfo">
-                                            <div class="row">
                                                 <div class="col-md-3 form-group">
                                                     <label for="company">Color:</label>
                                                     <select name="color" id="vehicleColor"
@@ -350,23 +357,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3 form-group">
-                                                    <label for="company">Fuel Type:</label>
-                                                    <div class="input-group">
-                                                        <select name="fuel_type" id="fuelType"
-                                                            class="form-control form-control--md chzn-select"
-                                                            style="width: 100%;">
-                                                            <option value="">Select One</option>
-                                                            <option value="Petrol">Petrol</option>
-                                                            <option value="Diesel">Diesel</option>
-                                                            <option value="Hybrid">Hybrid</option>
-                                                            <option value="Diesel-Hybrid">Diesel-Hybrid
-                                                            </option>
-                                                            <option value="Electic">Electic</option>
-                                                            <option value="Other">Other</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+
 
                                                 <div class="col-md-3 form-group">
                                                     <label for="middlename">Country of origin:</label>
@@ -429,6 +420,12 @@
                                                             <option value="#New Arrivals">#New Arrivals</option>
                                                             <option value="#Best deals">#Best deals</option>
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="company">Description:</label>
+                                                    <div class="input-group">
+                                                        <textarea name="description" id="description" class="form-control"></textarea>
                                                     </div>
                                                 </div>
                                             </div>

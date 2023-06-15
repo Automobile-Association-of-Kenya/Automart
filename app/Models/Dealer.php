@@ -122,7 +122,7 @@ class Dealer extends Model
         $dealer = $this->with('subscriptions')->find($dealer_id);
         $subscriptions  = $dealer->subscriptions;
         foreach ($subscriptions as $key => $value) {
-            if (is_null($value->pivot->expiry_date) || $value->pivot->expiry_date > now()) {
+            if (!is_null($value->pivot->expiry_date) && $value->pivot->expiry_date > now()) {
                 return $value;
             }else {
                 return redirect()->route('subscription.plan');

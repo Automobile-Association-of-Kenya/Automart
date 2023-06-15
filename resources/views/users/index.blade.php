@@ -20,54 +20,7 @@
     <main id="vehicleship">
         <div class="card" id="main-content-card">
             <div class="card-body">
-                {{-- <div class="container"> --}}
                 <div class="row">
-                    {{-- <div class="col-md-2">
-                        <section class="filterpane">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12 mt-2" id="filteroptions">
-                                        <div class="card" style="padding: 0;">
-                                            <div class="card-header">
-                                                <h5>Filter Options</h5>
-                                            </div>
-
-                                            <form id="filtervehiclesform">
-                                                <div class="col-12">
-                                                    <label>Dealer</label>
-                                                    <select name="filterlistdealer" id="filterlistdealer"
-                                                        class="form-control form-control-md">
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <label>Make</label>
-                                                    <select name="filterlistmake" id="filterlistmake"
-                                                        class="form-control form-control-md">
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <label for="filterliststatus">Model</label>
-                                                    <select name="filterlistmodel" id="filterlistmodel"
-                                                        class="form-control form-control-md">
-
-                                                    </select>
-                                                </div>
-                                            </form>
-
-                                            <select name="vehicleslist" id="vehicleslist" class="vehicleslisttreeview mt-2"
-                                                multiple></select>
-
-                                            <p class='bg-secondary p-1  mt-1 text-white text-center'><span
-                                                    id="listcount">No</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div> --}}
-
                     <div class="col-md-12">
                         <div class="alert alert-primary">
                             <div class="row">

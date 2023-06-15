@@ -43,6 +43,12 @@ class VehicleController extends Controller
         return view('vehicles.index', compact('str'));
     }
 
+    public function discounts()
+    {
+        $discounts = $this->vehicle->discounts();
+        return json_encode($discounts);
+    }
+
     public function makes($id = null)
     {
         $query = $this->make->query();

@@ -29,7 +29,6 @@ class ApplicationController extends Controller
         $this->quote = new Quote();
         $this->tradein = new Tradein();
         $this->finance = new Finance();
-
         // $this->vehicleservice = new VehicleSevice();
     }
 
@@ -39,23 +38,43 @@ class ApplicationController extends Controller
         return view('welcome', compact('discounts'));
     }
 
+    public function buy($vehicle_no)
+    {
+        $vehicle = $this->vehicle->vehicle($vehicle_no);
+        return view('vehicles.sale', compact('vehicle'));
+    }
+
+    public function loan($vehicle_no)
+    {
+        $vehicle = $this->vehicle->vehicle($vehicle_no);
+        return view('vehicles.loan', compact('vehicle'));
+    }
+
     public function dashboard()
     {
         if (auth()->user()) {
-            if (auth()->user()->role === "dealer") {
-                return redirect()->route('dealers.index');
-            } elseif (auth()->user()->role === "admin") {
+            if (auth()->user()->role === "admin") {
                 $vehicles = $this->vehicle->count();
                 $summary = $this->getRequests();
                 return view('dashboard.index', compact('vehicles', 'summary'));
-            } elseif (auth()->user()->role === "buyer") {
-                return redirect()->route('profile');
-            } elseif (auth()->user()->role === "partner") {
-                return redirect()->route('profile');
+            } else {
+                return view('users.index');
             }
         } else {
             return redirect()->route('login');
         }
+    }
+
+    function index()
+    {
+        $vehicles = $this->vehicle->getvehicles();
+        return view('index', compact('vehicles'));
+    }
+
+    public function latest()
+    {
+        $vehicles = $this->vehicle->latest(9);
+        return json_encode($vehicles);
     }
 
     public function countries()
@@ -265,8 +284,8 @@ class ApplicationController extends Controller
                 $model->select('id', 'model');
             }, 'prices' => function ($price) {
                 $price->select('price');
-            }])->latest()->paginate(6);
-
+            },'yard'])->latest()->paginate(9);
+        // $vehicles = $this->vehicle->getvehicles();
         return json_encode($vehicles);
     }
 
@@ -360,7 +379,7 @@ class ApplicationController extends Controller
         $tradeins = $this->tradein->count();
         $quotes = $this->quote->count();
         $finances = $this->finance->count();
-        return ['tradeins'=>$tradeins, 'quotes' => $quotes, 'finances'=>$finances];
+        return ['tradeins' => $tradeins, 'quotes' => $quotes, 'finances' => $finances];
     }
 
     public function requests()

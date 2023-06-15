@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
-
-<!-- Mirrored from storage.googleapis.com/theme-vessel-items/checking-sites/autocar-html/HTML/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 05 Apr 2023 11:27:23 GMT -->
+<html lang="en">
 
 <head>
     <title>@yield('title') | AA Kenya Limited</title>
@@ -29,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="{{ asset('css/skins/yellow.css') }}">
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
+    <meta name="google-signin-client_id" content=".apps.googleusercontent.com">
 
     <!-- Favicon icon -->
     {{-- <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon" > --}}
@@ -40,22 +39,23 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;300;400;500;600;700;800;900&amp;display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/some.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/some.css') }}">
     @yield('header_styles')
 
 </head>
 
 <body>
 
-    <header class="top-header bg-active" id="top-header-2">
+    {{-- <header class="top-header bg-active" id="top-header-2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-8 col-sm-7">
-                    <div class="list-inline">
+                    <div class="list-inline" id="socialheader">
                         <a href="tel:1-8X0-666-8X88"><i class="fa fa-phone"></i>Need Support? 1-8X0-666-8X88</a>
                         <a href="tel:info@themevessel.com"><i class="fa fa-envelope"></i>info@themevessel.com</a>
                     </div>
                 </div>
+
                 <div class="col-lg-6 col-md-4 col-sm-5">
                     <ul class="top-social-media pull-right">
                         @auth
@@ -65,18 +65,16 @@
                             </li>
                         @else
                             <li>
-                                <a href="{{ route('login') }}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('register') }}" class="sign-in"><i class="fa fa-user"></i> Register</a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#accountModal" class="sign-in"><i
+                                        class="fa fa-sign-in"></i> Login / Register</a>
                             </li>
                         @endauth
-
                     </ul>
                 </div>
             </div>
         </div>
-    </header>
+    </header> --}}
+
     <!-- Top header end -->
 
     <!-- Main header start -->
@@ -181,33 +179,23 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <p class="copy">© 2022 <a href="{{ url('/') }}">Automart AA Kenya Limited</a> All
+                        <p class="copy">© 2023 <a href="{{ url('/') }}">Automart AA Kenya Limited</a> All
                             Rights Reserved.
                         </p>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="social-media clearfix">
                             <div class="social-list">
-                                {{-- <div class="icon facebook">
-                                    <div class="tooltip">Facebook</div>
-                                    <span><i class="fa fa-facebook"></i></span>
+                                <div class="lds-roller">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
                                 </div>
-                                <div class="icon twitter">
-                                    <div class="tooltip">Twitter</div>
-                                    <span><i class="fa fa-twitter"></i></span>
-                                </div>
-                                <div class="icon instagram">
-                                    <div class="tooltip">Instagram</div>
-                                    <span><i class="fa fa-instagram"></i></span>
-                                </div>
-                                <div class="icon github">
-                                    <div class="tooltip">Github</div>
-                                    <span><i class="fa fa-github"></i></span>
-                                </div>
-                                <div class="icon youtube mr-0">
-                                    <div class="tooltip">Youtube</div>
-                                    <span><i class="fa fa-youtube"></i></span>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -220,15 +208,12 @@
     <!-- Full Page Search -->
     <div id="full-page-search">
         <button type="button" class="close">×</button>
-        <form
-            action="https://storage.googleapis.com/theme-vessel-items/checking-sites/autocar-html/HTML/main/index.html#"
-            class="full-page-search-inner">
+        <form action="" class="full-page-search-inner">
             <input type="search" value="" placeholder="type keyword(s) here" />
             <button type="submit" class="btn btn-sm button-theme">Search</button>
         </form>
     </div>
 
-    <!-- Car Overview Modal -->
     <div class="car-model-2">
         <div class="modal fade" id="carOverviewModal" tabindex="-1" role="dialog"
             aria-labelledby="carOverviewModalLabel" aria-hidden="true">
@@ -239,6 +224,186 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="financeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-content" id="vehiclePreviewSection">
+                <div class="modal-header">
+                    <div class="modal-title" id="subscriptionOverviewModalLabel">
+                        <p><b>Enjoy great advertising experience on our platform</b></p>
+                    </div>
+                    <button type="button" class="close btn btn-warning text-danger" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body tab-content">
+
+                    <nav class="nav-justified bg-white">
+                        <div class="nav nav-tabs " id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="pop1-tab" data-toggle="tab" href="#loginTab"
+                                role="tab" data-target="#loginTab" aria-controls="pop1"
+                                aria-selected="true">Sign
+                                in</a>
+                            <a class="nav-item nav-link" id="signup" data-toggle="tab" href="#signupTab"
+                                data-target="#signupTab" role="tab" aria-controls="pop1"
+                                aria-selected="true">Sign up</a>
+
+                            <a class="nav-item nav-link" id="forgot" data-toggle="tab" href="#forgotTab"
+                                data-target="#forgotTab" role="tab" aria-controls="pop1"
+                                aria-selected="true">Forgot</a>
+                        </div>
+                    </nav>
+
+                    <div class="tab-pane fade show active" id="loginTab" role="tabpanel">
+                        <form action="{{ route('login') }}" method="POST" id="loginForm">
+                            @csrf
+                            <div class="form-group mb-2">
+                                <label class="float-left">Email Address</label>
+                                <input type="email" name="email" value="{{ old('email') }}" id="emailLo"
+                                    class="form-control @error('email') invalid @enderror" placeholder="Email Address"
+                                    aria-label="Email Address">
+                                @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="form-group mb-2">
+                                <label class="float-left" for="password">Password</label>
+                                <div class="input-group">
+                                    <input type="password" name="password" id="passwordLo" class="form-control"
+                                        autocomplete>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="show-password"><i
+                                                class="fa fa-eye"></i></span>
+                                    </div>
+                                </div>
+                                @if ($errors->has('password'))
+                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="feedback" id="feedback"></div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-md btn-warning" id="loginUser">Login</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="signupTab" role="tabpanel">
+                        <form action="{{ route('register') }}" method="POST" id="registerForm">
+                            @csrf
+                            <div id="registerfeedback"></div>
+                            <div class="col-md-12 mb-2">
+                                <label class="float-left">Full Name</label>
+                                <input type="text" name="name" id="nameRe" value="{{ old('name') }}"
+                                    class="form-control @error('name') invalid @enderror">
+                                @if ($errors->has('name'))
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="col-md-12 mb-2">
+                                <label class="float-left">Phone</label>
+                                <input type="text" name="phone" id="phoneRe" value="{{ old('phone') }}"
+                                    class="form-control @error('phone') invalid @enderror">
+                                @if ($errors->has('phone'))
+                                    <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="col-md-12 mb-2">
+                                <label class="float-left">Email Address</label>
+                                <input type="email" name="email" id="emailRe" value="{{ old('email') }}"
+                                    class="form-control @error('email') invalid @enderror">
+                                @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="col-md-12 mb-2">
+                                <label class="float-left">Password</label>
+                                <div class="input-group">
+                                    <input type="password" name="password" id="passwordRe" class="form-control">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text show-passwordRe"><i
+                                                class="fa fa-eye"></i></span>
+                                    </div>
+                                </div>
+                                @if ($errors->has('password'))
+                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
+                            </div>
+
+                            <input type="hidden" name="role" id="roleRe" value="buyer">
+                            <div class="col-md-12 text-left mb-2">
+                                <label class="">
+                                    <input type="checkbox" checked name="" id="termsOfService">I agree to
+                                    the<a href="#" class="terms">terms of service</a></label>
+                            </div>
+
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-md btn-warning"
+                                    id="registerSubmit">Register</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="forgotTab" role="tabpanel">
+                        <form action="{{ route('password.email') }}" method="POST" id="passwordResetLinkForm">
+                            <div class="feedback" id="feedback"></div>
+                            @csrf
+                            <div class="form-group">
+                                <label class="float-left">Email Address</label>
+                                <input type="email" name="email" value="{{ old('email') }}" id="emailForget"
+                                    class="form-control @error('email') invalid @enderror" placeholder="Email Address"
+                                    aria-label="Email Address">
+                                @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                @endif
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-md btn-warning btn-round" id="submitEmail">Send
+                                    Link</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="login-social border-t mt-1 pt-2 mb-1 text-center">
+                        <p class="mb-2">OR</p>
+
+                        {{-- <a href="{{ route('twitter.login') }}" class="btn-twitter"><i class="fa fa-twitter"
+                                aria-hidden="true"></i>
+                            Twitter</a> --}}
+                            <br>
+
+                            <a class="btn-google" id="buttonDiv"></a> <br>
+                            <a href="{{ route('facebook.login') }}" class="btn-facebook mt-2 btn-block"><i class="fa fa-facebook"
+                                aria-hidden="true"></i>
+                            Facebook</a>
+
+                        {{-- <a href="#" class="btn-google"><i class="fa fa-google" aria-hidden="true"></i>
+                            Google</a> --}}
+                        {{-- <div id="g_id_onload"
+                            data-client_id="542097242134-vvu2f4mhg8226pj8s9dvkfr7je4nfah0.apps.googleusercontent.com"
+                            data-context="signup" data-ux_mode="popup"
+                            data-callback="http://127.0.0.1:800/loginwithgoogle" data-nonce=""
+                            data-auto_prompt="true">
+                        </div>
+
+                        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
+                            data-text="signin_with" data-size="medium" data-logo_alignment="left">
+                        </div> --}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     {{-- <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script> --}}
@@ -258,8 +423,10 @@
     <script src="{{ asset('js/lightgallery-all.js') }}"></script>
     <script src="{{ asset('js/jnoty.js') }}"></script>
     <script src="{{ asset('js/sidebar.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/iziToast.min.js') }}"></script>
+    {{-- <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script> --}}
+    <script src="{{ asset('js/app.js') }}"></script>
 
     @yield('footer_scripts')
 

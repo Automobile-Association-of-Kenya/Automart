@@ -127,7 +127,6 @@
                                             <button type="submit" class="btn btn-md btn-warning"
                                                 id="registerSubmit">Register</button>
                                         </div>
-
                                     </form>
                                 </div>
 
