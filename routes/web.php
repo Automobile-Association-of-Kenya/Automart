@@ -3,11 +3,13 @@
 // use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\AccountsController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DealerController;
 use App\Http\Controllers\FinanceController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuoteController;
@@ -163,11 +165,36 @@ Route::post('paypalcancel', [PaymentController::class, 'cancelTransaction'])->na
 Route::post('paypalsuccess', [PaymentController::class, 'successTransaction'])->name('paypal.success');
 Route::post('payments-get', [PaymentController::class, 'get']);
 
-Route::get('requests', [ApplicationController::class, 'requests'])->name('requests.index');
 
 Route::resource('reports', ReportController::class);
 
 Route::get('latest', [ApplicationController::class, 'latest'])->name('latest');
 Route::get('discounts', [VehicleController::class, 'discounts'])->name('discounts');
-Route::get('buy/{no}', [ApplicationController::class, 'buy'])->name('buy');
-Route::get('loan/{no}', [ApplicationController::class, 'loan'])->name('loan');
+Route::get('vehicle/{no}/buy', [ApplicationController::class, 'buy'])->name('buy');
+Route::get('vehicle/{no}/loan', [ApplicationController::class, 'loan'])->name('loan');
+Route::view('logins', 'auth.logins');
+Route::get('like/{id}', [ApplicationController::class,'like']);
+Route::get('view/{id}', [ApplicationController::class,'view']);
+Route::get('whatsapp/{id}', [ApplicationController::class, 'whatsapp']);
+
+/** Loan Routes */
+Route::get('/partner-loanproducts/{partner_id}', [PartnerController::class, 'partnerloanproducts']);
+
+/** Partner Routes */
+Route::prefix('/partner')->group(function () {
+    Route::get('index', [PartnerController::class, 'index'])->name('partner.index');
+    Route::get('loans',[PartnerController::class,'loans'])->name('partner.loans');
+    Route::post('store', [PartnerController::class, 'store'])->name('partner.store');
+    Route::post('saveloanproduct', [PartnerController::class, 'saveloanproduct'])->name('partner.saveloanproduct');
+    Route::get('loanproducts', [PartnerController::class, 'loanproducts']);
+});
+
+Route::prefix('admin')->group(function() {
+    Route::get('index', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('vehicles',[AdminController::class,'vehicles'])->name('admin.vehicles');
+    Route::get('users', [AdminController::class,'users'])->name('admin.users');
+    Route::get('accounts', [AdminController::class, 'accounts'])->name('admin.accounts');
+    Route::get('requests', [AdminController::class, 'requests'])->name('admin.requests');
+    Route::get('settings', [AdminController::class, 'index'])->name('admin.settings');
+    Route::get('reports',[AdminController::class, 'reports'])->name('admin.reports');
+});

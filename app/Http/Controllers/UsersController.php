@@ -21,10 +21,7 @@ class UsersController extends Controller
         $this->partner = new Partner();
     }
 
-    public function index()
-    {
-        return view('users.index');
-    }
+    
 
     /**
      * Show the form for creating a new resource.

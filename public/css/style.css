@@ -895,12 +895,11 @@ input[type=checkbox]:checked+label:before {
     transition: all 0.3s linear;
     z-index: 1;
     overflow: hidden;
-    padding: 12px 35px 11px;
-    height: 45px;
+    padding: 12px 15px 11px;
+    height: 25px;
     font-weight: 600;
     font-size: 15px;
     border-radius: 3px;
-    text-transform: uppercase;
     background: #fff;
 }
 
@@ -2078,7 +2077,7 @@ input[type=checkbox]:checked+label:before {
     margin-bottom: 0;
     font-size: 14px;
     color: #777;
-    font-width: 500;
+    font-weight: 500;
     text-transform: uppercase;
 }
 
@@ -6653,12 +6652,12 @@ input[type=checkbox]:checked+label:before {
 
 /** Service info 2 start **/
 .service-info-2 {
-    padding: 30px 20px;
-    margin-bottom: 30px;
+    padding: 15px 10px;
+    margin-bottom: 20px;
     background: #fff;
     text-align: center;
-    -webkit-transition: all 0.5s;
-    transition: all 0.9s;
+    /* -webkit-transition: all 0.5s; */
+    /* transition: all 0.9s; */
     position: relative;
     border-radius: 4px;
     z-index: 1;
@@ -6726,8 +6725,8 @@ input[type=checkbox]:checked+label:before {
 }
 
 .service-info-2:hover {
-    -webkit-transform: translateY(-5px);
-    transform: translateY(-5px);
+    /* -webkit-transform: translateY(-5px);
+    transform: translateY(-5px); */
 }
 
 .service-info-2:hover::before {
@@ -8260,7 +8259,10 @@ input[type=checkbox]:checked+label:before {
 }
 
 .content-area-18 {
-    padding: 100px 0 100px;
+    padding: 50px 0 100px;
+}
+.form-group {
+    margin-bottom: .45rem;
 }
 
 .content-area-19 {
@@ -8502,6 +8504,7 @@ input[type=checkbox]:checked+label:before {
     width: 90%;
     margin: 2em 1em;
 }
+
 /*
 .contact-section .login-inner-form p {
     color: #444;
@@ -8518,6 +8521,7 @@ input[type=checkbox]:checked+label:before {
     margin-bottom: 5px;
     height: 70px;
 }
+
 /*
 .contact-section .login-inner-form h3 {
     margin: 0 0 30px;
@@ -8560,7 +8564,7 @@ input[type=radio] {
     color: #fff;
 }
 
-.login-inner-form .card-header p{
+.login-inner-form .card-header p {
     font-size: 23px;
     font-weight: 600;
 }
@@ -8787,7 +8791,7 @@ input[type=radio] {
 
 .form-search .form-control {
     box-shadow: none;
-    border: 1px solid #F7F7F7;
+    border: 1px solid #fed945;
     background: #F7F7F7;
     border-radius: 3px;
     height: 35px;
@@ -9095,10 +9099,10 @@ input[type=radio] {
 }
 
 /** Sub Banner start **/
-/* .sub-banner {
-    background: rgba(0, 0, 0, 0.04) url(../img/img-5.jpg) top left repeat;
+.sub-banner {
+    background: #006544;
     background-size: cover;
-    height: 500px;
+    height: 170px;
     background-position: center center;
     background-repeat: no-repeat;
     position: relative;
@@ -9107,7 +9111,7 @@ input[type=radio] {
 .sub-banner .breadcrumb-area {
     letter-spacing: 1px;
     position: absolute;
-    top: 49%;
+    top: 64%;
     right: 0;
     left: 0;
 }
@@ -9116,44 +9120,36 @@ input[type=radio] {
     margin-bottom: 7px;
 }
 
-.sub-banner .breadcrumb-area h1 {
-    margin: 0;
-    font-weight: 600;
-    font-size: 35px;
-    color: #fff;
-    text-transform: uppercase;
-}
 
 .sub-banner .breadcrumbs li {
     display: inline-block;
     list-style: none;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 500;
     margin: 0;
 }
 
 .sub-banner .breadcrumbs li a {
-    color: #444;
-    font-size: 20px;
-    line-height: 36px;
+    color: #fff;
+    font-size: 13px;
     font-weight: 400;
+}
+
+.sub-banner .breadcrumbs li::before {
+    margin-right: 7px;
+    content: "\f0da";
+    padding: 0 3px;
+    color: #fff;
+    font: normal normal normal 14px/1 FontAwesome;
 }
 
 .sub-banner .breadcrumbs .active {
     margin-left: 3px;
-    color: #444;
+    color: #fff;
 }
 
-.sub-banner .breadcrumbs .active:before {
-    margin-right: 7px;
-    content: "\f0da";
-    padding: 0 3px;
-    color: #444;
-    font: normal normal normal 14px/1 FontAwesome;
-} */
-
 /** Sub Banner start **/
-.sub-banner {
+/* .sub-banner {
     background: rgba(0, 0, 0, 0.04) url(../img/img-5.jpg) top left repeat;
     background-size: cover;
     height: 420px;
@@ -9208,7 +9204,8 @@ input[type=radio] {
     padding: 0 3px;
     color: #fff;
     font: normal normal normal 14px/1 FontAwesome;
-}
+} */
+
 .blog-social-list {
     float: right;
     font-family: 'Barlow Condensed', sans-serif;
@@ -11621,7 +11618,7 @@ input[type="tel"] {
     }
 
     .content-area-18 {
-        padding: 80px 0 80px;
+        padding: 40px 0 80px;
     }
 
     .content-area-19 {
@@ -11634,10 +11631,6 @@ input[type="tel"] {
 
     .content-area-22 {
         padding-top: 0;
-    }
-
-    .sub-banner .breadcrumb-area h1 {
-        font-size: 45px;
     }
 
     .main-footer-2 .footer-menu ul li a:before {
@@ -12130,7 +12123,7 @@ input[type="tel"] {
     }
 
     .main-header .navbar-expand-lg .navbar-nav .link-color {
-        padding: 10px 15px !important;
+        padding: 10px 10px !important;
         border-radius: 0;
         border: none;
         font-size: 14px;
@@ -12375,7 +12368,7 @@ input[type="tel"] {
     }
 
     .sub-banner {
-        height: 220px;
+        height: 180px;
     }
 
     .sticky-header {
@@ -12418,9 +12411,19 @@ input[type="tel"] {
     }
 }
 
+@media (max-width: 576px) {
+    .banner {
+        margin: 10em 0;
+    }
+}
+
 @media (max-width: 768px) {
     .sub-banner {
         height: 200px;
+    }
+
+    .banner {
+        margin: 5em 0;
     }
 
     .intro-text h3 {
@@ -12614,7 +12617,7 @@ input[type="tel"] {
     }
 
     .content-area-18 {
-        padding: 60px 0 60px;
+        padding: 30px 0 60px;
     }
 
     .content-area-19 {
@@ -12712,40 +12715,6 @@ input[type="tel"] {
 
     .counters-1 {
         padding: 60px 0 20px;
-    }
-
-    .testimonial-3 .testimonial-item-new {
-        padding: 30px;
-    }
-
-    .testimonial-3 .testimonial-item-new p {
-        font-size: 15px;
-        margin-bottom: 10px;
-    }
-
-    .testimonial-3 .testimonial-item-new .author-content h5 {
-        font-size: 16px;
-    }
-
-    .testimonial-3 .testimonial-item-new .pl-40 {
-        padding-left: 30px;
-    }
-
-    .testimonial-3 .testimonial-item-new .left-line::before {
-        width: 20px;
-    }
-
-    .testimonial-3 .testimonial-item-new .author-img .author-avatar {
-        float: left;
-    }
-
-    .testimonial-3 .testimonial-item-new .author-img .author-avatar img {
-        height: 80px;
-    }
-
-    .testimonial-3 .testimonial-item-new .author-img .icon {
-        top: 35px;
-        right: -10px;
     }
 
     .sub-banner .breadcrumbs li {
@@ -13245,15 +13214,11 @@ input[type="tel"] {
         padding-top: 60px;
     }
 
-    .sub-banner .breadcrumb-area h1 {
-        font-size: 35px;
-    }
 
     .intro-section .btn-md {
         padding: 13px 27px 8px;
         height: 45px;
     }
-
 }
 
 @media (max-width: 580px) {
@@ -13344,11 +13309,11 @@ input[type="tel"] {
 
     color: #fff;
 
-    /* background: #ccc; */
+    background: #ccc;
 
     display: inline-block;
 
-    /* border: 1px solid #395899; */
+    border: 1px solid #395899;
 }
 
 .login-social a.btn-facebook i,
@@ -13378,8 +13343,10 @@ input[type="tel"] {
 }
 
 .login-social a.btn-google {
+    background: #db3236;
+    border-color: #db3236;
+}
 
-    /* background: #db3236;
-
-    border-color: #db3236; */
+.box-shadow {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }

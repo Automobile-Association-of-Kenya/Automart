@@ -16,11 +16,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'dealer_id',
         'partner_id',
@@ -33,21 +28,11 @@ class User extends Authenticatable
         'google_id'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -73,35 +58,39 @@ class User extends Authenticatable
             'created_at' => Carbon::now()
         ]);
     }
-
-    /**
-     * Get the dealer that owns the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function dealer(): BelongsTo
     {
         return $this->belongsTo(Dealer::class, 'dealer_id');
     }
 
-    /**
-     * Get the partner that owns the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function partner(): BelongsTo
     {
         return $this->belongsTo(Partner::class, 'partner_id');
     }
 
-    /**
-     * Get all of the payments for the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class, 'user_id', 'id');
     }
 
+    public function vehicles(): HasMany
+    {
+        return $this->hasMany(Vehicle::class, 'user_id', 'id');
+    }
+
+
+    function redirect()
+    {
+        if (auth()->user()) {
+            $role = auth()->user()->role;
+            if ($role === "admin") {
+                return redirect()->route('admin.admin');
+            } elseif ($role === "partner") {
+                return redirect()->route('partner.index');
+            } else {
+                return redirect()->route('home');
+            }
+        }
+        return redirect()->route('login');
+    }
 }

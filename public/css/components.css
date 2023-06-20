@@ -1557,7 +1557,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   height: calc(2.875rem + 2px); }
 
 .form-group {
-  margin-bottom: .65rem; }
+  margin-bottom: .35rem; }
 
 .form-text {
   display: block;

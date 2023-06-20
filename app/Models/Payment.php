@@ -27,7 +27,7 @@ class Payment extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    
+
     public function dealer(): BelongsTo
     {
         return $this->belongsTo(Dealer::class, 'dealer_id');
@@ -68,7 +68,7 @@ class Payment extends Model
             'PartyA' => $phone,
             'PartyB' => '174379',
             'PhoneNumber' => $phone,
-            'CallBackURL' => 'https://e1d6-41-139-232-226.ngrok-free.app/api/mpesa-callback',
+            'CallBackURL' => 'https://3ab4-41-139-232-226.ngrok-free.app/api/mpesa-callback',
             'AccountReference' => 'Automart AA Kenya',
             'TransactionDesc' => "Payment for " . $subscription->name . " subscription"
         );

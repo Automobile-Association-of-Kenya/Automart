@@ -33,27 +33,8 @@ $(function () {
 
     $(".car-magnify-gallery").lightGallery();
 
-    $(document).on("click", ".compare-btn", function () {
-        if ($(this).hasClass("active")) {
-            $(this).removeClass("active");
-            $.jnoty("Car has been removed from compare list", {
-                header: "Warning",
-                sticky: true,
-                theme: "jnoty-warning",
-                icon: "fa fa-check-circle",
-            });
-        } else {
-            $(this).addClass("active");
-            $.jnoty("Car has been added to compare list", {
-                header: "Success",
-                sticky: true,
-                theme: "jnoty-success",
-                icon: "fa fa-check-circle",
-            });
-        }
-    });
-
     $(document).on("click", ".wishlist-btn", function () {
+        let vehicle_id = $(this).data("id");
         if ($(this).hasClass("active")) {
             $(this).removeClass("active");
             $.jnoty("Car has been removed from wishlist list", {
@@ -64,13 +45,35 @@ $(function () {
             });
         } else {
             $(this).addClass("active");
-            $.jnoty("Car has been added to wishlist list", {
-                header: "Success",
-                sticky: true,
-                theme: "jnoty-success",
-                icon: "fa fa-check-circle",
+            console.log("kffdkklkf");
+            $.getJSON("/like/" + vehicle_id, function (params) {
+                if (params.status == "success") {
+                    $.jnoty("Car has been added to wishlist list", {
+                        header: "Success",
+                        sticky: true,
+                        theme: "jnoty-success",
+                        icon: "fa fa-check-circle",
+                    });
+                } else {
+                    $.jnoty("Car has been removed from wishlist list", {
+                        header: "Warning",
+                        sticky: true,
+                        theme: "jnoty-warning",
+                        icon: "fa fa-check-circle",
+                    });
+                }
             });
         }
+    });
+
+    $("body").on("click", "#whatsappToggle", function (event) {
+        event.preventDefault();
+        let vehicle_id = $(this).data("id");
+        console.log(vehicle_id);
+        $.getJSON("/whatsapp/" + vehicle_id, function (params) {
+            window.open(params.url, "_blank");
+            console.log(params);
+        });
     });
 
     // Header shrink while page scroll
@@ -97,6 +100,8 @@ $(function () {
         prevArrow:
             '<button class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
     });
+
+    
 
     // Partners strat
 
@@ -568,7 +573,6 @@ $(function () {
     $(".panel-group").on("shown.bs.collapse", toggleChevron);
     $(".panel-group").on("hidden.bs.collapse", toggleChevron);
 
-
     $(document).on("click", ".color-plate", function () {
         var name = $(this).attr("data-color");
         $('link[id="style_sheet"]').attr("href", "css/skins/" + name + ".css");
@@ -598,7 +602,6 @@ $(function () {
 })(jQuery);
 
 (function () {
-
     function slidePartners() {
         $(".custom-slider").slick({
             slidesToShow: 5,
@@ -637,7 +640,6 @@ $(function () {
         });
     }
 
-
     // window.onload = function () {
     //     google.accounts.id.initialize({
     //         client_id:
@@ -672,7 +674,6 @@ $(function () {
     //     };
     // }
 
-
     function showSuccess(message, target) {
         iziToast.success({
             title: "OK",
@@ -693,256 +694,292 @@ $(function () {
         });
     }
 
+    // let nameRe = $("#nameRe"),
+    //     phoneRe = $("#phoneRe"),
+    //     emailRe = $("#emailRe"),
+    //     passwordRe = $("#passwordRe"),
+    //     roleRe = $("#roleRe"),
+    //     passwordConfirmationRe = $("#passwordConfirmationRe");
+    // registerForm = $("#registerForm");
 
-    let nameRe = $("#nameRe"),
-        phoneRe = $("#phoneRe"),
-        emailRe = $("#emailRe"),
-        passwordRe = $("#passwordRe"),
-        roleRe = $("#roleRe"),
-        passwordConfirmationRe = $("#passwordConfirmationRe");
-    registerForm = $("#registerForm");
+    // registerForm.on("submit", function (event) {
+    //     event.preventDefault();
+    //     let $this = $(this),
+    //         name = nameRe.val(),
+    //         phone = phoneRe.val(),
+    //         email = emailRe.val(),
+    //         password = passwordRe.val(),
+    //         password_confirmation = passwordConfirmationRe.val(),
+    //         role = roleRe.val(),
+    //         token = $this.find("input[name='_token']").val(),
+    //         registerSubmit = $("#registerSubmit");
+    //     registerSubmit.prop({ disabled: true });
 
-    registerForm.on("submit", function (event) {
-        event.preventDefault();
-        let $this = $(this),
-            name = nameRe.val(),
-            phone = phoneRe.val(),
-            email = emailRe.val(),
-            password = passwordRe.val(),
-            password_confirmation = passwordConfirmationRe.val(),
-            role = roleRe.val(),
-            token = $this.find("input[name='_token']").val(),
-            registerSubmit = $("#registerSubmit");
-        registerSubmit.prop({ disabled: true });
+    //     let data = {
+    //         name: name,
+    //         phone: phone,
+    //         email: email,
+    //         password: password,
+    //         password_confirmation: password_confirmation,
+    //         role: role,
+    //     };
+    //     $.ajaxSetup({
+    //         headers: {
+    //             "X-CSRF-TOKEN": token,
+    //         },
+    //     });
 
-        let data = {
-            name: name,
-            phone: phone,
-            email: email,
-            password: password,
-            password_confirmation: password_confirmation,
-            role: role,
-        };
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": token,
-            },
-        });
+    //     $.ajax({
+    //         method: "POST",
+    //         url: "/register",
+    //         data: data,
+    //         success: function (params) {
+    //             console.log(params);
+    //             registerSubmit.prop({ disabled: false });
+    //             let result = JSON.parse(params);
+    //             if (result.status == "success") {
+    //                 showSuccess(result.message, "#registerfeedback");
+    //                 window.setTimeout(function () {
+    //                     window.location.href = "/login";
+    //                 }, 3000);
+    //             } else {
+    //                 showError(result.error, "#registerfeedback");
+    //             }
+    //         },
 
-        $.ajax({
-            method: "POST",
-            url: "/register",
-            data: data,
-            success: function (params) {
-                console.log(params);
-                registerSubmit.prop({ disabled: false });
-                let result = JSON.parse(params);
-                if (result.status == "success") {
-                    showSuccess(result.message, "#registerfeedback");
-                    window.setTimeout(function () {
-                        window.location.href = "/login";
-                    }, 3000);
-                } else {
-                    showError(result.error, "#registerfeedback");
-                }
-            },
+    //         error: function (error) {
+    //             console.error(error);
+    //             registerSubmit.prop({ disabled: false });
+    //             if (error.status == 422) {
+    //                 var errors = "";
+    //                 $.each(error.responseJSON.errors, function (key, value) {
+    //                     errors += value + "!";
+    //                 });
+    //                 showError(errors, "#registerfeedback");
+    //             } else {
+    //                 showError(
+    //                     "Error occurred during processing",
+    //                     "#registerfeedback"
+    //                 );
+    //             }
+    //         },
+    //     });
+    // });
 
-            error: function (error) {
-                console.error(error);
-                registerSubmit.prop({ disabled: false });
-                if (error.status == 422) {
-                    var errors = "";
-                    $.each(error.responseJSON.errors, function (key, value) {
-                        errors += value + "!";
-                    });
-                    showError(errors, "#registerfeedback");
-                } else {
-                    showError(
-                        "Error occurred during processing",
-                        "#registerfeedback"
-                    );
-                }
-            },
-        });
-    });
+    // $("#passwordResetLinkForm").on("submit", function (event) {
+    //     event.preventDefault();
+    //     let email = $("#emailForget").val(),
+    //         $this = $(this),
+    //         token = $this.find("input[name='_token']").val(),
+    //         submitEmail = $("#submitEmail");
+    //     submitEmail.prop({ disabled: true });
+    //     if (email !== "" && email !== null) {
+    //         $.ajaxSetup({
+    //             headers: {
+    //                 "X-CSRF-TOKEN": token,
+    //             },
+    //         });
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "/forgot-password",
+    //             data: { email: email },
+    //             success: function (params) {
+    //                 submitEmail.prop({ disabled: false });
+    //                 let result = JSON.parse(params);
+    //                 if (result.status == "success") {
+    //                     showSuccess(result.message, "#feedback");
+    //                 } else {
+    //                     showError(result.error, "#feedback");
+    //                 }
+    //             },
+    //             error: function (error) {
+    //                 console.log(error);
+    //                 submitEmail.prop({ disabled: false });
+    //                 if (error.status == 422) {
+    //                     var errors = "";
+    //                     $.each(
+    //                         error.responseJSON.errors,
+    //                         function (key, value) {
+    //                             errors += value + "!";
+    //                         }
+    //                     );
+    //                     showError(errors, "#feedback");
+    //                 } else {
+    //                     showError(
+    //                         "Error occurred during processing",
+    //                         "#feedback"
+    //                     );
+    //                 }
+    //             },
+    //         });
+    //     } else {
+    //         showError("Email address is required");
+    //     }
+    // });
 
-    $("#passwordResetLinkForm").on("submit", function (event) {
-        event.preventDefault();
-        let email = $("#emailForget").val(),
-            $this = $(this),
-            token = $this.find("input[name='_token']").val(),
-            submitEmail = $("#submitEmail");
-        submitEmail.prop({ disabled: true });
-        if (email !== "" && email !== null) {
-            $.ajaxSetup({
-                headers: {
-                    "X-CSRF-TOKEN": token,
-                },
-            });
-            $.ajax({
-                type: "POST",
-                url: "/forgot-password",
-                data: { email: email },
-                success: function (params) {
-                    submitEmail.prop({ disabled: false });
-                    let result = JSON.parse(params);
-                    if (result.status == "success") {
-                        showSuccess(result.message, "#feedback");
-                    } else {
-                        showError(result.error, "#feedback");
-                    }
-                },
-                error: function (error) {
-                    console.log(error);
-                    submitEmail.prop({ disabled: false });
-                    if (error.status == 422) {
-                        var errors = "";
-                        $.each(
-                            error.responseJSON.errors,
-                            function (key, value) {
-                                errors += value + "!";
-                            }
-                        );
-                        showError(errors, "#feedback");
-                    } else {
-                        showError(
-                            "Error occurred during processing",
-                            "#feedback"
-                        );
-                    }
-                },
-            });
-        } else {
-            showError("Email address is required");
-        }
-    });
+    // function getCounties() {
+    //     $.getJSON("/counties/110", function (counties) {
+    //         var option = '<option value="">All</option>';
+    //         $.each(counties, (key, value) => {
+    //             let { id, name } = value;
+    //             option += "<option value=" + id + ">" + name + "</option>";
+    //         });
+    //         $("#countiesID").html(option);
+    //     });
+    // }
 
+    // getCounties();
 
-    function getCounties() {
-        $.getJSON("/counties/110", function (counties) {
-            var option = '<option value="">All</option>';
-            $.each(counties, (key, value) => {
-                let { id, name } = value;
-                option += "<option value=" + id + ">" + name + "</option>";
-            });
-            $("#countiesID").html(option);
-        });
-    }
+    // let filterVehicleType = $("#filterVehicleType"),
+    //     filterMakesID = $("#filterMakesID"),
+    //     usageID = $("#usage"),
+    //     filterYear = $("#filterYear"),
+    //     countiesID = $("#countiesID"),
+    //     filterTransmission = $("#filterTransmission");
+    // $("#vehiclesSearchForm").on("submit", function (event) {
+    //     event.preventDefault();
+    //     let price = $("#priceSlider").slider("values");
+    //     let type_id = filterVehicleType.val(),
+    //         make_id = filterMakesID.val(),
+    //         usage = usageID.val(),
+    //         year = filterYear.val(),
+    //         county_id = countiesID.val(),
+    //         transmission = filterTransmission.val(),
+    //         $this = $(this);
+    //     let data = {
+    //         _token: $this.find("input[name='_token']").val(),
+    //         type_id: type_id,
+    //         make_id: make_id,
+    //         usage: usage,
+    //         year: year,
+    //         county_id: county_id,
+    //         transmission: transmission,
+    //         price: price,
+    //     };
+    //     console.log(data);
+    //     $.getJSON("/vehicles-search", data)
+    //         .done(function (data) {
+    //             let vehicles = data.data;
+    //             $("#countResults").html(vehicles.length);
+    //             $("#pagination").html(data.links);
 
-    getCounties();
+    //             let vehicle = "";
+    //             $.each(vehicles, function (key, value) {
+    //                 let images = JSON.parse(value.images),
+    //                     tags = JSON.parse(value.tags);
+    //                 var price =
+    //                     value.price !== null
+    //                         ? parseFloat(value.price).toFixed(2)
+    //                         : 0;
+    //                 var mileage = value.mileage !== null ? value.mileage : 0;
 
-    let filterVehicleType = $("#filterVehicleType"),
-        filterMakesID = $("#filterMakesID"),
-        usageID = $("#usage"),
-        filterYear = $("#filterYear"),
-        countiesID = $("#countiesID"),
-        filterTransmission = $("#filterTransmission");
-    $("#vehiclesSearchForm").on("submit", function (event) {
-        event.preventDefault();
-        let price = $("#priceSlider").slider("values");
-        let type_id = filterVehicleType.val(),
-            make_id = filterMakesID.val(),
-            usage = usageID.val(),
-            year = filterYear.val(),
-            county_id = countiesID.val(),
-            transmission = filterTransmission.val(),
-            $this = $(this);
-        let data = {
-            _token: $this.find("input[name='_token']").val(),
-            type_id: type_id,
-            make_id: make_id,
-            usage: usage,
-            year: year,
-            county_id: county_id,
-            transmission: transmission,
-            price: price,
-        };
-        console.log(data);
-        $.getJSON("/vehicles-search", data)
-            .done(function (data) {
-                let vehicles = data.data;
-                $("#countResults").html(vehicles.length);
-                $("#pagination").html(data.links);
+    //                 let img =
+    //                     '<a href="#' +
+    //                     images[0] +
+    //                     '" class="overlap-btn" data-sub-html="<h4>' +
+    //                     value.model.model +
+    //                     "</h4><p>" +
+    //                     value.description +
+    //                     '</p>"><i class="fa fa-expand"></i><img class="hidden" src="/vehicleimages/' +
+    //                     images[0] +
+    //                     '" alt="hidden-img"></a>';
+    //                 $.each(images, function (key, image) {
+    //                     img +=
+    //                         '<a href="#' +
+    //                         image +
+    //                         '" class="hidden" data-sub-html="<h4>' +
+    //                         value.model.model +
+    //                         "</h4><p>" +
+    //                         value.description +
+    //                         '</p>"><img src="/vehicleimages/' +
+    //                         image +
+    //                         '" alt="hidden-img"></a>';
+    //                 });
 
-                let vehicle = "";
-                $.each(vehicles, function (key, value) {
-                    let images = JSON.parse(value.images),
-                        tags = JSON.parse(value.tags);
-                    var price =
-                        value.price !== null
-                            ? parseFloat(value.price).toFixed(2)
-                            : 0;
-                    var mileage = value.mileage !== null ? value.mileage : 0;
+    //                 vehicle +=
+    //                     '<div class="col-lg-4 col-md-4"><div class="car-box-3"><div class="car-thumbnail"><a href="/vehicle-details/' +
+    //                     value.id +
+    //                     '" class="car-img" ><div class="tag-2 bg-active">' +
+    //                     value.usage +
+    //                     '</div><div class="price-box"><span><span>Kes: ' +
+    //                     price.toLocaleString("en-US", {
+    //                         style: "currency",
+    //                         currency: "KSH",
+    //                     }) +
+    //                     '</span></div><img class="d-block w-100" src="/vehicleimages/' +
+    //                     images[0] +
+    //                     '" alt="car"></a><div class="carbox-overlap-wrapper"><div class="overlap-box"><div class="overlap-btns-area"><a class="overlap-btn" data-bs-toggle="modal" data-bs-target="#carOverviewModal" id="vehicleDetailsModalToggle" data-id="' +
+    //                     value.id +
+    //                     '"><i class="fa fa-eye-slash"></i></a><a class="overlap-btn wishlist-btn" data-id="vehicleLike" id="' +
+    //                     value.id +
+    //                     '"><i class="fa fa-heart-o"></i></a><div class="car-magnify-gallery">' +
+    //                     img +
+    //                     '</div></div></div></div></div><div class="detail"><h1 class="title"><a href="/vehicle-details/' +
+    //                     value.id +
+    //                     '">' +
+    //                     value.make.make +
+    //                     " " +
+    //                     value.model.model +
+    //                     " " +
+    //                     value.year +
+    //                     '</a></h1><ul class="custom-list"><li><a href="#">' +
+    //                     value.usage +
+    //                     '</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li><a href="#">' +
+    //                     value.transmission +
+    //                     '</a>&nbsp;&nbsp;|</li><li><a href="#">' +
+    //                     value.type.type +
+    //                     '</a></li></ul><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i>' +
+    //                     value.fuel_type +
+    //                     '</li><li><i class="flaticon-way"></i>&nbsp;' +
+    //                     mileage +
+    //                     ' km</li><li><i class="flaticon-gear"></i>&nbsp;' +
+    //                     value.color +
+    //                     "</li></ul></div></div></div>";
+    //             });
+    //             $("#vehiclesection").html(vehicle);
+    //         })
+    //         .fail(function (error) {
+    //             console.log(error);
+    //         });
+    // });
 
-                    let img =
-                        '<a href="/vehicleimages/' +
-                        images[0] +
-                        '" class="overlap-btn" data-sub-html="<h4>' +
-                        value.model.model +
-                        "</h4><p>" +
-                        value.description +
-                        '</p>"><i class="fa fa-expand"></i><img class="hidden" src="/vehicleimages/' +
-                        images[0] +
-                        '" alt="hidden-img"></a>';
-                    $.each(images, function (key, image) {
-                        img +=
-                            '<a href="//' +
-                            image +
-                            '" class="hidden" data-sub-html="<h4>' +
-                            value.model.model +
-                            "</h4><p>" +
-                            value.description +
-                            '</p>"><img src="/vehicleimages/' +
-                            image +
-                            '" alt="hidden-img"></a>';
-                    });
-
-                    vehicle +=
-                        '<div class="col-lg-4 col-md-4"><div class="car-box-3"><div class="car-thumbnail"><a href="/vehicle-details/' +
-                        value.id +
-                        '" class="car-img" ><div class="tag-2 bg-active">' +
-                        value.usage +
-                        '</div><div class="price-box"><span><span>Kes: ' +
-                        price.toLocaleString("en-US", {
-                            style: "currency",
-                            currency: "KSH",
-                        }) +
-                        '</span></div><img class="d-block w-100" src="/vehicleimages/' +
-                        images[0] +
-                        '" alt="car"></a><div class="carbox-overlap-wrapper"><div class="overlap-box"><div class="overlap-btns-area"><a class="overlap-btn" data-bs-toggle="modal" data-bs-target="#carOverviewModal" id="vehicleDetailsModalToggle" data-id="' +
-                        value.id +
-                        '"><i class="fa fa-eye-slash"></i></a><a class="overlap-btn wishlist-btn" data-id="vehicleLike" id="' +
-                        value.id +
-                        '"><i class="fa fa-heart-o"></i></a><div class="car-magnify-gallery">' +
-                        img +
-                        '</div></div></div></div></div><div class="detail"><h1 class="title"><a href="/vehicle-details/' +
-                        value.id +
-                        '">' +
-                        value.make.make +
-                        " " +
-                        value.model.model +
-                        " " +
-                        value.year +
-                        '</a></h1><ul class="custom-list"><li><a href="#">' +
-                        value.usage +
-                        '</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li><a href="#">' +
-                        value.transmission +
-                        '</a>&nbsp;&nbsp;|</li><li><a href="#">' +
-                        value.type.type +
-                        '</a></li></ul><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i>' +
-                        value.fuel_type +
-                        '</li><li><i class="flaticon-way"></i>&nbsp;' +
-                        mileage +
-                        ' km</li><li><i class="flaticon-gear"></i>&nbsp;' +
-                        value.color +
-                        "</li></ul></div></div></div>";
-                });
-                $("#vehiclesection").html(vehicle);
-            })
-            .fail(function (error) {
-                console.log(error);
-            });
-    });
+     function getTypesWithVehicle() {
+         $.getJSON("/types-with-vehicles", function (makes) {
+             let item = "",
+                 option = '<option value="">All</option>',
+                 li = "";
+             $.each(makes, function (key, value) {
+                 li +=
+                     '<li><a href="/type-vehicles/' +
+                     value.id +
+                     '">' +
+                     value.type +
+                     "</a></li>";
+                 item +=
+                     '<a class="dropdown-item" href="/type-vehicles/' +
+                     value.id +
+                     '">' +
+                     value.type +
+                     "</a>";
+                 option +=
+                     "<option value=" +
+                     value.id +
+                     ">" +
+                     value.type +
+                     "</option>";
+             });
+             $("#filterMakesID").html(option);
+             $("#vehicleGroupTypes").append(item);
+             $("#vehicleGroupType").append(li);
+             $("#filterVehicleType").html(option);
+             let currenttype = $("#currentType").val();
+             $("#filterVehicleType option[value=" + currenttype + "]").prop(
+                 "selected",
+                 true
+             );
+         });
+     }
+     getTypesWithVehicle();
 
     $("body").on("click", "#vehicleDetailsModalToggle", function (event) {
         let vehicle_id = $(this).data("id");
@@ -951,7 +988,10 @@ $(function () {
             let features = "",
                 price = parseFloat(vehicle.price),
                 vehiclePrice = price.toFixed(2),
-                location =(vehicle.yard !== null && vehicle.yard !== "") ? vehicle.yard.address : vehicle.location;
+                location =
+                    vehicle.yard !== null && vehicle.yard !== ""
+                        ? vehicle.yard.address
+                        : vehicle.location;
             $.each(vehicle.features, function (key, value) {
                 features += "<li>" + value.feature + "</li>";
             });
@@ -987,8 +1027,6 @@ $(function () {
         });
     });
 
-
-
     function numberFormat(
         number,
         decimals,
@@ -1014,16 +1052,16 @@ $(function () {
         return formattedNumber;
     }
 
-
-
-
+    // ;
+    // vehicleModelID;
 
     function vehicleMakesWithVehicles() {
         $.getJSON("/makes-with-vehicles", function (vehicles) {
             let item = "",
                 option = "<option value=''>All</option>",
                 brand = "",
-                li = "";
+                li = "",
+                logo = "";
             $.each(vehicles, function (key, value) {
                 li +=
                     '<li><a href="/make-vehicles/' +
@@ -1044,14 +1082,21 @@ $(function () {
                     value.make +
                     "</option>";
                 brand +=
-                    '<a href="make-vehicles/'+value.id+'"><div class="custom-box"><img src="/brands/' +
+                    '<a href="make-vehicles/' +
+                    value.id +
+                    '"><div class="custom-box"><img src="/brands/' +
                     value.logo +
                     '" alt="brand" class="img-fluid"></div></a>';
+                // logo +=
+                //     '<div class="col-lg-2" style="background: #fff; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;padding:.25em; border-radius:7px;"><a href="/make-vehicles"><img src="/brands/' +
+                //     value.logo +
+                //     '" alt=""></a></div>';
             });
             $("#vehicleGroupandMakes").append(item);
             $("#vehicleGroupMakes").append(li);
             $("#filterMakesID").html(option);
-            $("#brands-section").html(brand);
+            $(".brands-section").html(brand);
+            // $("#banner-brands").html(logo);
             slidePartners();
         });
     }
@@ -1060,7 +1105,8 @@ $(function () {
 
     function getSocials() {
         $.getJSON("/socials", function (socials) {
-            let li = "", phone = "";
+            let li = "",
+                phone = "";
             $.each(socials, function (key, value) {
                 if (value.type === "address") {
                     $("#contact-info").append(
@@ -1071,7 +1117,12 @@ $(function () {
                 }
 
                 if (value.type === "phone") {
-                    phone += "<a href=\"tel:" + value.link + "\"><i class=\"fa fa-phone\"></i>Need Support? " + value.link + "</a>";
+                    phone +=
+                        '<a href="tel:' +
+                        value.link +
+                        '"><i class="fa fa-phone"></i>Need Support? ' +
+                        value.link +
+                        "</a>";
                     $("#contact-info").append(
                         '<li><i class="flaticon-phone"></i><a href="tel:' +
                             value.link +
@@ -1082,7 +1133,12 @@ $(function () {
                 }
 
                 if (value.type == "mail") {
-                    phone += "<a href=\"tel:" + value.link + "\"><i class=\"fa fa-envelope\"></i>" + value.link + "</a>";
+                    phone +=
+                        '<a href="tel:' +
+                        value.link +
+                        '"><i class="fa fa-envelope"></i>' +
+                        value.link +
+                        "</a>";
                     li +=
                         '<li><i class="flaticon-mail"></i><a  href="mailto:' +
                         value.link +
@@ -1157,6 +1213,7 @@ $(function () {
                     "</option>";
             });
             makeID.html(option);
+            $("#filterMakesID").html(option);
         });
     }
 

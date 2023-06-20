@@ -14,11 +14,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('ref_no')->unique();
             $table->string('name', 100);
             $table->string('email', 60)->unique();
-            $table->string('phone', 14)->nullable();
+            $table->string('phone', 16)->nullable();
             $table->string('alt_phone', 14)->nullable();
-            $table->string('role', 60)->nullable()->default('buyer');
+            $table->string('role', 60)->nullable();
             $table->string('google_id')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('profile')->nullable();

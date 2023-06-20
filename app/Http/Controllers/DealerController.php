@@ -18,7 +18,7 @@ class DealerController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['create', 'store']);
+        $this->middleware('auth');
         $this->dealer = new Dealer();
         $this->user = new User();
         $this->vehicle = new Vehicle();

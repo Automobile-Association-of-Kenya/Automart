@@ -16,7 +16,6 @@
             target: target,
         });
     }
-
     function showError(message, target) {
         iziToast.error({
             title: "Error",
@@ -26,7 +25,6 @@
             target: target,
         });
     }
-
     function getAccounts() {
         $.getJSON("/accounts-get", function (accounts) {
             let tr = "",
@@ -72,7 +70,6 @@
         $.getJSON("/dealers-get", function (dealers) {
             let option = "<option value=''>All</option>",
                 i = 1;
-            console.log(dealers);
             $.each(dealers, function (key, value) {
                 option +=
                     "<option value='" +
@@ -84,7 +81,6 @@
             $("#dealerPaymentFilterID").html(option);
         });
     }
-
     getDealers();
 
     let accountID = $("#accountID"),
@@ -140,7 +136,6 @@
         };
         $.post("/accounts", data)
             .done(function (params) {
-                console.log(params);
                 let result = JSON.parse(params);
                 $this.find("button[type='submit']").prop({ disabled: false });
                 if (result.status == "success") {
@@ -151,7 +146,6 @@
                 }
             })
             .fail(function (error) {
-                console.log(error);
                 $this.find("button[type='submit']").prop({ disabled: false });
                 if (error.status == 422) {
                     var errors = "";
@@ -194,7 +188,6 @@
     });
 
     subscriptionAssignID.on("change", function () {
-        console.log("there");
     });
 
     accountAssignForm.on("submit", function (event) {
@@ -208,11 +201,8 @@
             subscription_id: subscription_id,
             _token: token,
         };
-        console.log(data);
-
         $.post("/accounts-subscribe", data)
             .done(function (params) {
-                console.log(params);
                 let result = JSON.parse(params);
                 $this.find("button[type='submit']").prop({ disabled: false });
                 if (result.status == "success") {
@@ -223,7 +213,6 @@
                 }
             })
             .fail(function (error) {
-                console.log(error);
                 $this.find("button[type='submit']").prop({ disabled: false });
                 if (error.status == 422) {
                     var errors = "";
@@ -261,7 +250,6 @@
         };
         $.post("/payments-get", data)
             .done(function (params) {
-                console.log(params);
                 let tr = "",
                     i = 1,
                     amount = 0;
@@ -326,7 +314,6 @@
                 }
             })
             .fail(function (error) {
-                console.log(error);
             });
     });
 

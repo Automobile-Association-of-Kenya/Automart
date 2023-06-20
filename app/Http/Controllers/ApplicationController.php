@@ -9,6 +9,7 @@ use App\Models\Make;
 use App\Models\Quote;
 use App\Models\Tradein;
 use App\Models\Type;
+use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
 use App\Models\VehiclePrice;
@@ -29,13 +30,15 @@ class ApplicationController extends Controller
         $this->quote = new Quote();
         $this->tradein = new Tradein();
         $this->finance = new Finance();
+        $this->user = new User();
         // $this->vehicleservice = new VehicleSevice();
     }
 
     public function welcome()
     {
-        $discounts = $this->vehicle->discountedVehicles();
-        return view('welcome', compact('discounts'));
+        $vehicles = $this->vehicle->getlatest(9);
+        $discounts = $this->vehicle->discounts();
+        return view('welcome', compact('discounts', 'vehicles'));
     }
 
     public function buy($vehicle_no)
@@ -52,22 +55,12 @@ class ApplicationController extends Controller
 
     public function dashboard()
     {
-        if (auth()->user()) {
-            if (auth()->user()->role === "admin") {
-                $vehicles = $this->vehicle->count();
-                $summary = $this->getRequests();
-                return view('dashboard.index', compact('vehicles', 'summary'));
-            } else {
-                return view('users.index');
-            }
-        } else {
-            return redirect()->route('login');
-        }
+        return $this->user->redirect();
     }
 
     function index()
     {
-        $vehicles = $this->vehicle->getvehicles();
+        $vehicles = $this->vehicle->getvehiclespaginate(40);
         return view('index', compact('vehicles'));
     }
 
@@ -193,40 +186,7 @@ class ApplicationController extends Controller
 
     public function search(Request $request)
     {
-        $query = $this->vehicle->query();
-        if (!is_null($request->type)) {
-            $query->where('type_id', $request->type);
-        }
-        if (!is_null($request->make)) {
-            $query->where('make_id', $request->make);
-        }
-        if (!is_null($request->year)) {
-            $query->where('year', $request->year);
-        }
-        if (!is_null($request->county)) {
-            $query->where('county_id', $request->county);
-        }
-        if (!is_null($request->transmission)) {
-            $query->where('transmission', $request->transmission);
-        }
-        if (!is_null($request->usage)) {
-            $query->where('usage', $request->usage);
-        }
-        // if (!is_null($request->price) && !empty($request->price)) {
-        //     // $query->whereBetween('price','>=',intval($request->price[0]))->where('price','<=',intval($request->price[0]));
-        //     $query->whereBetween('price',$request->price);
-        // }
-        $vehicles = $query->with(['dealer' => function ($dealer) {
-            return $dealer->select('id', 'name');
-        }, 'type' => function ($type) {
-            return $type->select('id', 'type');
-        }, 'make' => function ($make) {
-            return $make->select('id', 'make');
-        }, 'model' => function ($model) {
-            return $model->select('id', 'model');
-        }, 'prices' => function ($price) {
-            return $price->select('price');
-        }])->latest()->paginate(20);
+        $vehicles = $this->vehicle->searchpaginate($request,20);
 
         return view('vehicles.search', compact('vehicles'));
     }
@@ -254,56 +214,31 @@ class ApplicationController extends Controller
     public function vehicleMakes($id)
     {
         $make = $this->make->find($id);
-
-        $vehicles = $this->vehicle->where('make_id', $make->id)
-            ->with(['dealer' => function ($dealer) {
-                return $dealer->select('id', 'name');
-            }, 'type' => function ($type) {
-                return $type->select('id', 'type');
-            }, 'make' => function ($make) {
-                return $make->select('id', 'make');
-            }, 'model' => function ($model) {
-                return $model->select('id', 'model');
-            }, 'prices' => function ($price) {
-                return $price->select('price');
-            }])->latest()->paginate(20);
-
+        $vehicles = $this->vehicle->vehiclesbymake($id,20);
         return view('vehicles.makes', compact('vehicles', 'make'));
+    }
+
+    function like($id) {
+        return $this->vehicle->liked($id);
+    }
+
+    function view($id) {
+        return $this->vehicle->viewed($id);
+    }
+
+    function whatsapp($id) {
+        return $this->vehicle->whatsapp($id);
     }
 
     public function newArrivals()
     {
-        $vehicles = $this->vehicle
-            ->with(['dealer' => function ($dealer) {
-                $dealer->select('id', 'name');
-            }, 'type' => function ($type) {
-                $type->select('id', 'type');
-            }, 'make' => function ($make) {
-                $make->select('id', 'make');
-            }, 'model' => function ($model) {
-                $model->select('id', 'model');
-            }, 'prices' => function ($price) {
-                $price->select('price');
-            },'yard'])->latest()->paginate(9);
-        // $vehicles = $this->vehicle->getvehicles();
+        $vehicles = $this->vehicle->getvehiclespaginate(9);
         return json_encode($vehicles);
     }
 
     public function newVehicles()
     {
-        $vehicles = $this->vehicle
-            ->with(['dealer' => function ($dealer) {
-                $dealer->select('id', 'name');
-            }, 'type' => function ($type) {
-                $type->select('id', 'type');
-            }, 'make' => function ($make) {
-                $make->select('id', 'make');
-            }, 'model' => function ($model) {
-                $model->select('id', 'model');
-            }, 'prices' => function ($price) {
-                $price->select('price');
-            }])->latest()->paginate(20);
-
+        $vehicles = $this->vehicle->newvehiclespaginated(20);
         return view('vehicles.new', compact('vehicles'));
     }
 
@@ -315,47 +250,16 @@ class ApplicationController extends Controller
 
     public function vehicle($id)
     {
-        $vehicle = $this->vehicle
-            ->with(['dealer' => function ($dealer) {
-                return $dealer->select('id', 'name');
-            }, 'type' => function ($type) {
-                return $type->select('id', 'type');
-            }, 'make' => function ($make) {
-                return $make->select('id', 'make');
-            }, 'model' => function ($model) {
-                return $model->select('id', 'model');
-            }, 'prices' => function ($query) {
-                return $query->select('id', 'price');
-            }, 'yard' => function ($yard) {
-                return $yard->select('id', 'yard');
-            }, 'features' => function ($fea) {
-                return $fea->select('features.id', 'features.feature');
-            }])->find($id);
-
+        $vehicle = $this->vehicle->vehilclebyid($id);
+        $this->vehicle->viewed($vehicle->id);
         return json_encode($vehicle);
     }
 
     public function vehicleDetails($id)
     {
-        $vehicle = $this->vehicle
-            ->with(['dealer' => function ($dealer) {
-                return $dealer->select('id', 'name');
-            }, 'type' => function ($type) {
-                return $type->select('id', 'type');
-            }, 'make' => function ($make) {
-                return $make->select('id', 'make');
-            }, 'model' => function ($model) {
-                return $model->select('id', 'model');
-            }, 'prices' => function ($query) {
-                return $query->select('id', 'price');
-            }, 'yard' => function ($yard) {
-                return $yard->select('id', 'yard');
-            }, 'features' => function ($fea) {
-                return $fea->select('features.id', 'features.feature');
-            }])->find($id);
-
+        $vehicle = $this->vehicle->vehicle($id);
         $relatedvehicles = $this->vehicle->getRelatedVehicles($vehicle);
-
+        $this->vehicle->viewed($vehicle->id);
         return view('vehicles.show', compact('vehicle', 'relatedvehicles'));
     }
 
@@ -382,11 +286,5 @@ class ApplicationController extends Controller
         return ['tradeins' => $tradeins, 'quotes' => $quotes, 'finances' => $finances];
     }
 
-    public function requests()
-    {
-        $quotes = $this->quote->with('vehicle')->latest()->get();
-        $tradeins = $this->tradein->with('vehicle')->latest()->get();
-        $finances = $this->finance->with('vehicle')->latest()->get();
-        return view('admin.requests', compact('quotes', 'tradeins', 'finances'));
-    }
+    
 }

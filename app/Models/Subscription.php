@@ -72,6 +72,7 @@ class Subscription extends Model
             $expiry = Carbon::now()->addDays($subscription->billingcycle);
         }
         DB::table('dealer_subscription')->insert(['dealer_id'=>$dealer_id, 'subscription_id'=>$subscription_id, 'start_date'=>date('Y-m-d H:i:s'), 'expiry_date'=>$expiry, 'status'=>1]);
+        //Promote ads
     }
 
     /**

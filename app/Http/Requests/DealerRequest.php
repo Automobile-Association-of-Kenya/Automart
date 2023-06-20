@@ -23,7 +23,7 @@ class DealerRequest extends FormRequest
     {
         return [
             'name' => ['required','max:80'],
-            'phone' => ['required','max:18','unique:dealers'],
+            'phone' => ['required','max:14','unique:dealers'],
             'email' => ['required','max:60','unique:dealers,email'],
             'address' => ['nullable','max:100'],
             'county_id' => ['nullable','max:20','exists:counties,id'],

@@ -464,9 +464,6 @@ $(document).ready(function () {
                 $this.find("button[type='submit']").prop({ disabled: false });
                 if (result.status == "success") {
                     showSuccess(result.message, ".dealersfeedback");
-                    window.setTimeout(function () {
-                        window.location.href = "/login";
-                    }, 7000);
                 } else {
                     showError(result.error, ".dealersfeedback");
                 }

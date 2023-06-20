@@ -215,7 +215,7 @@
     </div>
 
     <div class="car-model-2">
-        <div class="modal fade" id="carOverviewModal" tabindex="-1" role="dialog"
+        <div class="modal fade" id="vehicleDetailsModalToggle" tabindex="-1" role="dialog"
             aria-labelledby="carOverviewModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" id="vehiclePreviewSection">
@@ -405,9 +405,9 @@
 
 
 
-    {{-- <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.min.js') }}"></script> --}}
-    <script src="{{ asset('js/components.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/components.js') }}"></script> --}}
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap-submenu.js') }}"></script>
     <script src="{{ asset('js/rangeslider.js') }}"></script>

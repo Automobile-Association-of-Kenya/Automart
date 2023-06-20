@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand company-logo-2" href="{{ url('/') }}">
             {{-- <img src="img/logos/black-logo.png" alt="logo"> --}}
-            <h1>AutoMart</h1>
+            <h1>AA AutoMart</h1>
         </a>
         <button class="navbar-toggler" type="button" id="drawer">
             <span class="fa fa-bars"></span>
@@ -49,17 +49,15 @@
                     </div>
                 </li>
 
-                @if (auth()->user() && auth()->user()->role === 'dealer')
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="{{ route('dealers.index') }}">Selling Vehicles?</a>
-                    </li>
-                @else
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="{{ route('dealers.create') }}">Selling Vehicles?</a>
-                    </li>
-                @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard') }}">Selling Vehicles?</a>
+                </li>
 
-                <li class="nav-item dropdown">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard') }}">Partner</a>
+                </li>
+
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink7"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Shop
@@ -70,7 +68,7 @@
                         <li><a class="dropdown-item" href="shop-checkout.html">Shop Checkout</a></li>
                         <li><a class="dropdown-item" href="shop-details.html">Shop Details</a></li>
                     </ul>
-                </li>
+                </li> --}}
 
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="{{ url('about') }}">About Us</a>
@@ -109,16 +107,13 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="modal" data-target="#accountModal"><i class="fa fa-sign-in"></i>  Login / Register</a>
+                        <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-sign-in"></i> Login / Register</a>
                     </li>
                 @endauth
-
             </ul>
         </div>
     </nav>
 </div>
-
-
 
 <!-- Sidenav start -->
 <nav id="sidebar" class="nav-sidebar">
@@ -134,11 +129,11 @@
             </a>
         </div>
         <div class="sidebar-navigation">
-            <h3 class="heading">Pages</h3>
+            <h3 class="heading">Buying a Vehicle</h3>
             <ul class="menu-list">
                 <li><a href="{{ url('/') }}" class="active pt0">Home</a></li>
                 <li>
-                    <a href="#">Buying a Vehicle?<em class="fa fa-chevron-down"></em></a>
+                    <a href="">Buying a Vehicle?<em class="fa fa-chevron-down"></em></a>
                     <ul>
                         <li>
                             <a href="#">Vehicle Types<em class="fa fa-chevron-down"></em></a>
@@ -160,34 +155,52 @@
                         </li>
                     </ul>
                 </li>
+
                 <li>
-                    <a href="#">Pages <em class="fa fa-chevron-down"></em></a>
-                    <ul>
-                        <li><a href="{{ url('about') }}">About Us</a></li>
-                        <li>
-                            <a href="{{ url('services') }}">Services</a>
-                        </li>
-
-                        <li><a href="faq.html">Faq</a></li>
-
-                    </ul>
+                    <a class="nav-link" href="{{ route('dashboard') }}">Selling Vehicles?</a>
                 </li>
 
-                {{-- <li><a href="#">Shop <em class="fa fa-chevron-down"></em></a>
-                    <ul>
-                        <li><a href="shop-list.html">Shop List</a></li>
-                        <li><a href="shop-cart.html">Shop Cart</a></li>
-                        <li><a href="shop-checkout.html">Shop Checkout</a></li>
-                        <li><a href="shop-details.html">Shop Details</a></li>
-                    </ul>
-                </li> --}}
+                <li>
+                    <a class="nav-link" href="{{ route('dashboard') }}">Partner</a>
+                </li>
+
                 <li>
                     <a href="{{ route('contact') }}">Contact</a>
                 </li>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="accountModal"> <i
-                            class="fa fa-sign-in"></i>Login / Register</a>
-                </li>
+
+                @auth
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink6"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{ asset('images/avatar.png') }}" height="30px" width="30px"alt=""
+                                class="profilephoto">{{ auth()->user()->name }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
+                            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'dealer')
+                                <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
+                            @endif
+                            {{-- <li><a class="dropdown-item" href="">Logout</a></li> --}}
+
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+
+                                    <a class="dropdown-item" :href="route('logout')"
+                                        onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </a>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('login') }}" data-toggle="modal" data-target="accountModal"> <i
+                                class="fa fa-sign-in"></i>Login / Register</a>
+                    </li>
+                @endauth
 
                 {{-- <li>
                     <a href="#full-page-search" class="nav-link h-icon">

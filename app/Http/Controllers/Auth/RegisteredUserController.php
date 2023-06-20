@@ -34,11 +34,12 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:60', 'unique:' . User::class],
-            'phone' => ['nullable', 'string', 'max:18', 'unique:' . User::class],
+            'phone' => ['nullable', 'string', 'max:16', 'unique:' . User::class],
             'alt_phone' => ['nullable', 'string', 'max:18'],
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
         ]);
-
+        $user = User::latest()->first();
+        $ref_no = (!is_null($user)) ? strtotime(now()) . '-' . $user->id + 1 : strtotime(now()) . '-1';
         $user = User::create([
             'name' => $request->name,
             'phone' => $request->phone,

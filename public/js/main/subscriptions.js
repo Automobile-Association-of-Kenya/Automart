@@ -69,7 +69,6 @@
     //         }
     //     });
     // }
-
     // getSubscriptions();
 
     function getSubscriptions() {
@@ -216,8 +215,6 @@
 
             $.post("/payments", data)
                 .done(function (params) {
-                    console.log(params);
-                    // submit.prop({ disabled: false });
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#paymentfeedback");
@@ -225,7 +222,6 @@
                             $.getJSON(
                                 "/paymentconfirm/" + result.checkoutid,
                                 function (payment) {
-                                    console.log(payment);
                                     if (
                                         payment.complete === 1 &&
                                         payment.trans_id !== null
@@ -234,11 +230,23 @@
                                             "Thank you. Payment received successfully. Please proceed to enjoy unleaded advertisement experience on our platform.",
                                             "#paymentfeedback"
                                         );
+                                        let attempts = 0
                                         $(".loadersection").children().remove();
                                         submit.prop({ disabled: false });
                                         setTimeout(() => {
+                                            attempts += 1;
                                             window.location.href = "/dealers";
                                         }, 3000);
+                                        console.log(attempts);
+                                        if (attempts >= 5) {
+                                            $(".loadersection").children().remove();
+                                            submit.prop("disabled", false);
+                                            showError(
+                                                "We have received 0 from you. Please click on this button and retry",
+                                                "#paymentfeedback"
+                                            );
+                                            return false;
+                                        }
                                     }
                                 }
                             );

@@ -131,10 +131,12 @@
                                 </div>
 
                                 <div class="col-md-12 row mb-2">
-                                    <div class="col-md-12 text-center mb-2">
+
+                                    {{-- <div class="col-md-12 text-center mb-2">
                                         <span>You can also join as a dealer by <a href="{{ route('dealers.create') }}"
                                                 class="text text-warning">clicking here</a></span>
-                                    </div><br>
+                                    </div><br> --}}
+
                                     <div class="col-md-6 text-center">
                                         @if (Route::has('login'))
                                             <a href="{{ route('login') }}" class="text text-warning">Login</a>
@@ -147,10 +149,7 @@
                                                 Password</a>
                                         @endif
                                     </div>
-
                                 </div>
-
-
                                 <div class="login-social border-t mt-1 pt-2 mb-1 text-center">
                                     <p class="mb-2">OR continue with</p>
                                     <a href="{{ route('facebook.login') }}" class="btn-facebook"><i
@@ -159,10 +158,9 @@
                                     <a href="{{ route('twitter.login') }}" class="btn-twitter"><i class="fa fa-twitter"
                                             aria-hidden="true"></i>
                                         Twitter</a>
-                                    <a href="#" class="btn-google"><i class="fa fa-google" aria-hidden="true"></i>
+                                    <a href="#"  class="btn-google"><i class="fa fa-google"></i>
                                         Google</a>
                                 </div>
-
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-@extends('layouts.dashboardlayout')
+@extends('layouts.admin')
 
 @section('title')
     Reports @parent

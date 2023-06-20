@@ -24,8 +24,8 @@
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="form-select form-select-lg border-rounded" name="county"
-                                    id="countiesID">
+                                <select class="form-select form-select-lg border-rounded" name="model_id"
+                                    id="vehicleModelID">
 
                                 </select>
                             </div>
@@ -36,7 +36,7 @@
                                 <select class="form-select form-select-lg border-rounded" name="year"
                                     id="filterYear">
                                     <option value="">Select Year</option>
-                                    @for ($i = 2023; $i >= 1994; $i--)
+                                    @for ($i = date('Y'); $i >= 1990; $i--)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
                                 </select>
@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
                                 <button class="btn w-100 button-theme btn-md" type="submit">

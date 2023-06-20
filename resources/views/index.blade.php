@@ -8,23 +8,21 @@
 @endsection
 
 @section('main')
-    <!-- Banner start -->
+    <div class="sub-banner">
+        <div class="container breadcrumb-area">
+            <div class="breadcrumb-areas">
+                <ul class="breadcrumbs">
+                    <li><a href="{{ url('/') }}">Home</a></li>
+                    <li class="active">All</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <div class="banner" id="banner">
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-            <div class="carousel-inner banner-slider-inner">
-                <div class="carousel-item active item-bg">
-                    <img class="d-block w-100 h-100" src="img/banner/img-1.jpg" alt="banner">
-                    <div class="carousel-content container banner-info-2 bi-2">
-                        <div class="banner-content2">
-                            <h2>Find Your Suitable Vehicle. </h2>
-                            <p></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Search box 3 start -->
-            <div class="search-box-3 sb-5">
+            <div class="search-box-3">
                 <div class="container">
                     <div class="search-area-inner">
                         <div class="search-contents">
@@ -127,7 +125,7 @@
 
     <!-- Featured car start -->
     <div class="featured-car content-area-18">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 @php
                     $vehicles = json_decode($vehicles);
@@ -163,19 +161,19 @@
                     </div>
 
                     <div class="row" id="vehiclesection">
+                        
                         @foreach ($vehicles->data as $item)
                             @php
                                 $images = json_decode($item->images);
-                                // $tags = json_decode($item['tags']);
                             @endphp
-                            <div class="col-lg-3 col-md-3">
+                            <div class="col-lg-3 col-md-6">
                                 <div class="car-box-3">
+
                                     <div class="car-thumbnail">
-                                        <a href="#" class="car-img">
+                                        <a href="{{ url('/vehicle-details/' . $item->id) }}" class="car-img">
                                             <div class="for">{{ $item->usage }}</div>
                                             <div class="price-box">
-                                                {{-- <span class="del"><del>$950.00</del></span> --}}
-                                                {{-- <br> --}}
+                                                
                                                 <span>Kes: {{ number_format($item->price, 2) }}</span>
                                             </div>
                                             <img class="d-block w-100"
@@ -185,16 +183,14 @@
                                             <div class="overlap-box">
                                                 <div class="overlap-btns-area">
                                                     <a class="overlap-btn" data-bs-toggle="modal"
-                                                        data-bs-target="#carOverviewModal" data-id="{{ $item->id }}"
-                                                        id="vehicleDetailsModalToggle">
+                                                        data-bs-target="#vehicleDetailsModalToggle"
+                                                        data-id="{{ $item->id }}" id="vehicleDetailsModalToggle">
                                                         <i class="fa fa-eye-slash"></i>
                                                     </a>
-                                                    <a class="overlap-btn wishlist-btn">
+                                                    <a class="overlap-btn wishlist-btn" data-id="{{ $item->id }}">
                                                         <i class="fa fa-heart-o"></i>
                                                     </a>
-                                                    {{-- <a class="overlap-btn compare-btn">
-                                                        <i class="fa fa-balance-scale"></i>
-                                                    </a> --}}
+
                                                     <div class="car-magnify-gallery">
                                                         <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                                             class="overlap-btn"
@@ -219,45 +215,48 @@
                                         </div>
                                     </div>
 
-
-                                    @foreach ($images as $image)
-                                    @endforeach
-
                                     <div class="detail">
                                         <h1 class="title">
-                                            <a
-                                                href="{{ url('/vehicle-details/' . $item->id) }}">{{ $item->model->model }}</a>
+                                            <a class="text-success"
+                                                href="{{ url('/vehicle-details/' . $item->id) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                         </h1>
                                         <ul class="custom-list">
                                             <li>
-                                                <a
-                                                    href="{{ url('/vehicle-details/' . $item->id) }}">{{ $item->usage }}</a>
+                                                <a href="{{ route('vehicles.show', $item->id) }}">{{ $item->usage }}</a>
                                                 &nbsp;|&nbsp;
                                             </li>
                                             <li>
                                                 <a href="">{{ $item->transmission }}</a> &nbsp;|&nbsp;
                                             </li>
                                             <li>
-                                                <a href="#">{{ $item->type?->type }}</a>
+                                                <a href="#">{{ $item->fuel_type }}</a>
                                             </li>
                                         </ul>
                                         <ul class="facilities-list clearfix">
-
-                                            <li>
-                                                <i class="flaticon-fuel"></i> {{ $item->fuel_type }}
-                                            </li>
                                             <li>
                                                 <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km
                                             </li>
                                             <li>
-                                                <i class="flaticon-gear"></i> {{ $item->color }}
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-calendar-1"></i> {{ $item->year }}
+                                                <i class="flaticon-gear"></i> {{ $item->enginecc }} cc
                                             </li>
                                         </ul>
                                     </div>
-
+                                    @php
+                                        $vehicle_no = $item->vehicle_no ?? $item->id;
+                                    @endphp
+                                    <div class="footer">
+                                        <div class="buttons mb-2 text-center">
+                                            <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
+                                                data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
+                                                Enquire</a>
+                                            <a href="{{ url('/vehicle/' . $vehicle_no . '/buy') }}"
+                                                class="btn btn-success btn-sm btn-block"><i class="fa fa-hand"></i> Buy</a>
+                                            <a href="{{ url('/vehicle/' . $vehicle_no . '/loan') }}"
+                                                class="btn btn-success btn-block btn-sm float-ri"><i class="fa fa-"></i>
+                                                Apply
+                                                Loan</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach

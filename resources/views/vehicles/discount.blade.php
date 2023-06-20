@@ -12,7 +12,6 @@
     <div class="sub-banner">
         <div class="container breadcrumb-area">
             <div class="breadcrumb-areas">
-                <h1>Discounted Vehicles</h1>
                 <ul class="breadcrumbs">
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li class="active">Discounted Vehicles</li>
@@ -36,7 +35,8 @@
                         <div class="row">
                             <div class="col-lg-5 col-md-6 col-sm-12">
                                 <div class="sorting-options2">
-                                    <h5>Showing 1-20 of <span id="countResults">{{ count($discountedvehicles) }}</span> Vehicles</h5>
+                                    <h5>Showing 1-20 of <span id="countResults">{{ count($discountedvehicles) }}</span>
+                                        Vehicles</h5>
                                 </div>
                             </div>
 
@@ -60,47 +60,45 @@
                     </div>
 
                     <div class="row" id="vehiclesection">
-                        @foreach ($discountedvehicles as $item)
+
+                        @foreach ($discounts as $item)
                             @php
-                                $images = json_decode($item->images);
-                                $tags = json_decode($item->tags);
+                                $images = json_decode($item['images']);
                             @endphp
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-lg-4 col-md-6">
                                 <div class="car-box-3">
+
                                     <div class="car-thumbnail">
-                                        <a href="#" class="car-img">
-                                            <div class="for">{{ $tags[0] }}</div>
+                                        <a href="{{ url('/vehicle-details/' . $item->id) }}" class="car-img">
+                                            <div class="for">{{ $item->usage }}</div>
                                             <div class="price-box">
-                                                <span class="del">Kes: <del>{{ number_format($item->initial_price, 2) }}</del></span><br>
+                                                <span
+                                                    class="del"><del>{{ number_format($item->initial_price, 2) }}</del></span>
+                                                <br>
                                                 <span>Kes: {{ number_format($item->current_price, 2) }}</span>
                                             </div>
                                             <img class="d-block w-100"
-                                                src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
-                                                alt="car">
+                                                src="{{ asset('/vehicleimages/' . @$images[0] . '') }}" alt="car">
                                         </a>
                                         <div class="carbox-overlap-wrapper">
                                             <div class="overlap-box">
                                                 <div class="overlap-btns-area">
                                                     <a class="overlap-btn" data-bs-toggle="modal"
-                                                        data-bs-target="#carOverviewModal" data-id="{{ $item->id }}"
-                                                        id="vehicleDetailsModalToggle">
+                                                        data-bs-target="#vehicleDetailsModalToggle"
+                                                        data-id="{{ $item->id }}" id="vehicleDetailsModalToggle">
                                                         <i class="fa fa-eye-slash"></i>
                                                     </a>
-                                                    <a class="overlap-btn wishlist-btn">
+                                                    <a class="overlap-btn wishlist-btn" data-id="{{ $item->id }}">
                                                         <i class="fa fa-heart-o"></i>
                                                     </a>
 
-                                                    {{-- <a class="overlap-btn compare-btn">
-                                                        <i class="fa fa-balance-scale"></i>
-                                                    </a> --}}
-                                                    
                                                     <div class="car-magnify-gallery">
-                                                        <a href="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
+                                                        <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                                             class="overlap-btn"
                                                             data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                             <i class="fa fa-expand"></i>
                                                             <img class="hidden"
-                                                                src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
+                                                                src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                                                 alt="hidden-img">
                                                         </a>
                                                         @foreach ($images as $image)
@@ -118,14 +116,10 @@
                                         </div>
                                     </div>
 
-
-                                    @foreach ($images as $image)
-                                    @endforeach
-
                                     <div class="detail">
                                         <h1 class="title">
-                                            <a
-                                                href="{{ route('vehicles.show', $item->id) }}">{{ $item->model->model }}</a>
+                                            <a class="text-success"
+                                                href="{{ url('/vehicle-details/' . $item->id) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                         </h1>
                                         <ul class="custom-list">
                                             <li>
@@ -136,29 +130,38 @@
                                                 <a href="">{{ $item->transmission }}</a> &nbsp;|&nbsp;
                                             </li>
                                             <li>
-                                                <a href="#">{{ $item->type?->type }}</a>
+                                                <a href="#">{{ $item->fuel_type }}</a>
                                             </li>
                                         </ul>
                                         <ul class="facilities-list clearfix">
-
-                                            <li>
-                                                <i class="flaticon-fuel"></i> {{ $item->fuel_type }}
-                                            </li>
                                             <li>
                                                 <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km
                                             </li>
                                             <li>
-                                                <i class="flaticon-gear"></i> {{ $item->color }}
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-calendar-1"></i> {{ $item->year }}
+                                                <i class="flaticon-gear"></i> {{ $item->enginecc }} cc
                                             </li>
                                         </ul>
                                     </div>
-
+                                    @php
+                                        $vehicle_no = $item->vehicle_no ?? $item->id;
+                                    @endphp
+                                    <div class="footer">
+                                        <div class="buttons mb-2 text-center">
+                                            <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
+                                                data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
+                                                Enquire</a>
+                                            <a href="{{ url('/vehicle/' . $vehicle_no . '/buy') }}"
+                                                class="btn btn-success btn-sm"><i class="fa fa-hand"></i> Buy</a>
+                                            <a href="{{ url('/vehicle/' . $vehicle_no . '/loan') }}"
+                                                class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i>
+                                                Apply
+                                                Loan</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
+
                     </div>
                     <!-- Page navigation start -->
                     <div class="pagination-box p-box-2 text-center">

@@ -34,15 +34,7 @@ class VehicleController extends Controller
         $this->yard = new Yard();
     }
 
-    public function index()
-    {
-        // if (auth()->user()->role !== "admin") {
-        //     return redirect()->route('dashboard');
-        // }
-        $str = strtotime(date('Y-m-d H:i:s')) . auth()->id();
-        return view('vehicles.index', compact('str'));
-    }
-
+    
     public function discounts()
     {
         $discounts = $this->vehicle->discounts();

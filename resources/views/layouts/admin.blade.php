@@ -12,8 +12,9 @@
     <link href="{{ asset('css/master.css') }}" rel="stylesheet" id="master-css">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet" id="master-css">
     <link rel="icon" href="{{ asset('images/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
 
 
     <title>@yield('title') | AA Kenya Limited</title>
@@ -83,43 +84,43 @@
                     </a>
                 </li>
 
-                <li class="{{ Request::is('vehicles') ? 'active' : '' }}">
-                    <a href="{{ route('vehicles.index') }}" class='validation' data-id=2 id="membership">
+                <li class="{{ Request::is('admin/vehicles') ? 'active' : '' }}">
+                    <a href="{{ route('admin.vehicles') }}" class='validation' data-id=2 id="membership">
                         <span><i class="fal fa-cars"></i></span>
                         <span>Vehicles</span>
                     </a>
                 </li>
 
-                <li class="{{ Request::is('requests') ? 'active' : '' }}">
-                    <a href="{{ route('requests.index') }}" class='validation' data-id=2 id="membership">
+                <li class="{{ Request::is('admin/requests') ? 'active' : '' }}">
+                    <a href="{{ route('admin.requests') }}" class='validation' data-id=2 id="membership">
                         <span><i class="fal fa-hand-heart"></i></span>
                         <span>Requests</span>
                     </a>
                 </li>
 
-                <li class="{{ Request::is('users') ? 'active' : '' }}">
-                    <a href="{{ route('users.index') }}" class='validation' data-id=49 id="loans">
+                <li class="{{ Request::is('admin/users') ? 'active' : '' }}">
+                    <a href="{{ route('admin.users') }}" class='validation' data-id=49 id="loans">
                         <span><i class="fal fa-users-crown"></i></span>
                         <span>Users</span>
                     </a>
                 </li>
 
-                <li class="{{ Request::is('accounts') ? 'active' : '' }}">
-                    <a href="{{ route('accounts.index') }}" id="accounts" class='validation' data-id=14>
+                <li class="{{ Request::is('admin/accounts') ? 'active' : '' }}">
+                    <a href="{{ route('admin.accounts') }}" id="accounts" class='validation' data-id=14>
                         <span><i class="fad fa-usd-circle"></i></span>
                         <span>Accounting</span>
                     </a>
                 </li>
 
-                <li class="{{ Request::is('settings') ? 'active' : '' }}">
-                    <a href="{{ route('settings.index') }}" id="settings" class='validation' data-id=14>
+                <li class="{{ Request::is('admin/settings') ? 'active' : '' }}">
+                    <a href="{{ route('admin.settings') }}" id="settings" class='validation' data-id=14>
                         <span><i class="fal fa-cog"></i></span>
                         <span>Settings</span>
                     </a>
                 </li>
 
-                <li class="{{ Request::is('reports') ? 'active' : '' }}">
-                    <a href="{{ route('reports.index') }}" id="reports" class='validation' data-id=56>
+                <li class="{{ Request::is('admin/reports') ? 'active' : '' }}">
+                    <a href="{{ route('admin.reports') }}" id="reports" class='validation' data-id=56>
                         <span><i class="fal fa-chart-line"></i></span>
                         <span>Reports</span>
                     </a>
@@ -184,7 +185,7 @@
     </div>
 </body>
 
-<script src="js/components.js"></script>
+<script src="{{ asset('js/components.js') }}"></script>
 <script src="{{ asset('js/iziToast.min.js') }}"></script>
 <script src="{{ asset('js/main/moment.js') }}"></script>
 <script src="{{ asset('js/select2.min.js') }}"></script>

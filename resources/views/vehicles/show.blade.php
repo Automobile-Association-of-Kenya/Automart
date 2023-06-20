@@ -14,15 +14,14 @@
     <div class="sub-banner">
         <div class="container breadcrumb-area">
             <div class="breadcrumb-areas">
-                <h1>{{ $vehicle->model->model }}</h1>
                 <ul class="breadcrumbs">
                     <li><a href="{{ url('/') }}">Home</a></li>
+                    <li><a href="{{ route('vehicles.list') }}">Vehicles</a></li>
                     <li class="active">{{ $vehicle->make->make }}</li>
                 </ul>
             </div>
         </div>
     </div>
-
 
     <!-- Car details page start -->
     <div class="car-details-page content-area-6">
@@ -44,6 +43,7 @@
                                     {{ number_format($vehicle->price, 2) }}<span></span></div>
                             </div>
                         </div>
+
                         <div class="product-slider-box cds-2 clearfix mb-30">
                             <div class="product-img-slide">
                                 <div class="slider-for">
@@ -54,6 +54,7 @@
                                             alt="slider-car">
                                     @endforeach
                                 </div>
+
                                 <div class="slider-nav">
                                     {{-- <div class="thumb-slide"><img src="{{ '/vehicleimages/' . $vehicle->cover_photo }}"
                                             class="img-fluid" alt="small-car">
@@ -66,30 +67,32 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="col-md-4 mb-1">
-                                <button href="#" id="quoteRequestToggle" class="btn btn-warning"
+                            <div class="col-md-3 mb-1">
+                                <button href="#" id="quoteRequestToggle" class="btn btn-warning btn-block"
                                     data-bs-toggle="modal" data-bs-target="#quoteModal" data-id="{{ $vehicle->id }}"
                                     data-no="{{ $vehicle->vehicle_no }}">Request for a
                                     quote</button>
                             </div>
 
-                            <div class="col-md-4 mt-1">
-                                <button href="#" id="financeRequestToggle" class="btn btn-warning"
-                                    data-bs-toggle="modal" data-bs-target="#financeModal" data-id="{{ $vehicle->id }}"
-                                    data-no="{{ $vehicle->vehicle_no }}">Request for a
-                                    Finance</button>
+                            <div class="col-md-3 mt-1">
+                                <a href="{{ route('buy',$vehicle->vehicle_no??$vehicle->id) }}" id="financeRequestToggle" class="btn btn-success btn-block" data-id="{{ $vehicle->id }}"
+                                    data-no="{{ $vehicle->vehicle_no }}">Buy</a>
+                            </div>
+                            
+                            <div class="col-md-3 mt-1">
+                                <a href="{{ route('loan',$vehicle->vehicle_no??$vehicle->id) }}" id="financeRequestToggle" class="btn btn-success btn-block"
+                                     data-id="{{ $vehicle->id }}" data-no="{{ $vehicle->vehicle_no }}">Apply for Loan</a>
                             </div>
 
-                            <div class="col-md-4 mt-1">
-                                <button href="#" id="tradeinRequestToggle" class="btn btn-warning"
+                            <div class="col-md-3 mt-1">
+                                <button href="#" id="tradeinRequestToggle" class="btn btn-success btn-block"
                                     data-bs-toggle="modal" data-bs-target="#tradeinModal" data-id="{{ $vehicle->id }}"
                                     data-no="{{ $vehicle->vehicle_no }}">Enquire trade in</button>
                             </div>
                         </div>
-
                     </div>
-
 
                     <div class="car-details-section">
                         <div class="tabbing tabbing-box mb-40">
@@ -395,7 +398,7 @@
                                 <li>
                                     <span>Condition</span>{{ $vehicle->usage ?? 'new' }}
                                 </li>
-                                
+
                                 <li>
                                     <span>Mileage</span>{{ $vehicle->mileage }} Km
                                 </li>

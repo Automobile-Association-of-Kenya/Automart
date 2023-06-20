@@ -20,145 +20,341 @@
             transform: translateY(-50%);
             cursor: pointer;
         }
+
+        .form-control {
+            border: 1px solid #fed945;
+        }
     </style>
 @endsection
 
 @section('main')
-
     <div class="contact-section">
-        <div class="container"><br>
+        <div class="container mt-2 mb-4"><br>
+            <br>
             <br>
             <br>
             <br>
             <div class="card">
                 <div class="row">
-                    <div class="col-lg-7 col-md-12 authsection" style="margin: auto;padding:4em;">
-                        <div>
-                            <div class="">
-                                <h1 style="color:black;">AA AutoMart</h1>
+                    <div class="col-md-6">
+                        <div class="card p-4" id="login-section">
+                            <div class="card-header bg-white text-center">
+                                <a href="{{ url('/') }}">
+                                    <img src="{{ asset('images/logo.png') }}" alt="logo"
+                                        style="width: 100px; height: 80px;">
+                                </a>
+                                <h3>Sign in</h3>
                             </div>
-                            <p>At our platform, we bring together a vast selection of high-quality cars and a wide range of
-                                accessories from trusted manufacturers and sellers. From sleek sedans to rugged SUVs, we
-                                offer a
-                                diverse inventory of vehicles to suit every style and preference. </p>
-                                <p><strong>When you sign in you access</strong></p>
-                                    <p><span class="fa fa-check-circle fa-1x text-success"></span>&nbsp;</p>
-                                    <p><span class="fa fa-check-circle fa-1x text-success"></span>&nbsp;</p>
-                                    <p><span class="fa fa-check-circle fa-1x text-success"></span>&nbsp;</p>
-                                    <p><span class="fa fa-check-circle fa-1x text-success"></span>&nbsp;</p>
-                            <div class="social-list text-center">
-                                <div class="buttons">
-                                    <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
-                                    <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-                                    <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
-                                    <a href="#" class="dribbble-bg"><i class="fa fa-linkedin"></i></a>
+
+                            <div class="card-body">
+
+                                <form action="{{ route('login') }}" id="loginForm" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" id="loginEmail"
+                                            class="form-control form-control-md" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="float-left" for="password">Password</label>
+                                        <div class="input-group">
+                                            <input type="password" name="password" id="loginPassword" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="show-password"><i
+                                                        class="fa fa-eye"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-0 form-checkbox mt-1">
+                                        <input type="checkbox"> Remember Me
+                                    </div>
+
+                                    <div class="form-group text-center mt-1">
+                                        <button type="submit" class="btn btn-success">Login</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="sign-up text-center">
+                                <p class="m-0">Do not have an account? <a href="#" id="signupToggle"
+                                        class="text-primary">Sign Up </a></p>
+                                <p>OR</p>
+                                <p><span><a href="#" class="text-primary" id="forgetPasswordToggle">Forgot
+                                            password?</a></span></p>
+                            </div>
+
+                        </div>
+
+                        <div class="card p-4" id="emailpassword-reset" style="display: none;">
+                            <div class="card-header bg-white text-center">
+                                <a href="{{ url('/') }}">
+                                    <img src="{{ asset('images/logo.png') }}" alt="logo"
+                                        style="width: 100px; height: 80px;">
+                                </a>
+                                <h3>Reset Password</h3>
+                            </div>
+
+                            <div class="card-body">
+
+                                <form action="{{ route('password.email') }}" id="passwordResetForm" method="POST">
+                                    @csrf
+
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" id="resetEmail"
+                                            class="form-control form-control-md" required>
+                                    </div>
+
+                                    <div class="form-group text-center mt-1">
+                                        <button type="submit" class="btn btn-success" id="submitEmail">Send email password
+                                            reset
+                                            link</button>
+                                    </div>
+                                </form>
+
+                                <div class="sign-up">
+                                    <p class="m-0">Already have an account? <a href="#" id="loginToggle1"
+                                            class="text-primary">Login</a></p>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-5 col-md-12">
-                        <div class="login-inner-form">
-                            <div class="card">
-                                <div class="card-header bg-white text-center">
-                                    <a href="{{ url('/') }}">
-                                        <img src="{{ asset('images/logo.png') }}" alt="logo">
-                                    </a>
-                                    <h3>Sign in</h3>
-                                </div>
-
-                                <div class="card-body">
-                                    <form action="{{ route('login') }}" method="POST" id="loginForm">
-                                        @csrf
-                                        <div class="form-group mb-2">
-                                            <label class="float-left">Email Address</label>
-                                            <input type="email" name="email" value="{{ old('email') }}" id="emailLo"
-                                                class="form-control @error('email') invalid @enderror"
-                                                placeholder="Email Address" aria-label="Email Address">
-                                            @if ($errors->has('email'))
-                                                <span class="text-danger">{{ $errors->first('email') }}</span>
-                                            @endif
-                                        </div>
-
-                                        <div class="form-group mb-2">
-                                            <label class="float-left" for="password">Password</label>
-                                            <div class="input-group">
-                                                <input type="password" name="password" id="passwordLo" class="form-control"
-                                                    autocomplete>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text" id="show-password"><i
-                                                            class="fa fa-eye"></i></span>
-                                                </div>
-                                            </div>
-                                            @if ($errors->has('password'))
-                                                <span class="text-danger">{{ $errors->first('password') }}</span>
-                                            @endif
-                                        </div>
-
-                                        <div class="form-group form-box checkbox clearfix mb-2">
-                                            <div class="form-check checkbox-theme">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    id="rememberMe">
-                                                <label class="form-check-label" for="rememberMe">
-                                                    Remember me
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="feedback" id="feedback"></div>
-
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-md btn-warning"
-                                                id="loginUser">Login</button>
-                                        </div>
-                                    </form>
-                                </div>
-
-                                <div class="col-md-12 col-md-12 row mb-4">
-                                    <div class="col-md-12 text-center mb-2">
-                                        <span>You can also join as a dealer by <a href="{{ route('dealers.create') }}"
-                                                class="text text-warning">clicking here</a></span>
-                                    </div><br>
-
-                                    <div class="col-md-6 text-center">
-                                        @if (Route::has('password.request'))
-                                            <a href="{{ route('password.request') }}" class="text text-warning">Forgot
-                                                Password</a>
-                                        @endif
-                                    </div>
-
-                                    <div class="col-md-6 text-center">
-                                        @if (Route::has('register'))
-                                            <a href="{{ route('register') }}" class="text text-warning">Register</a>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="login-social border-t mt-1 pt-2 mb-1 text-center">
-                                    <p class="mb-2">OR continue with</p>
-                                    <a href="{{ route('facebook.login') }}" class="btn-facebook"><i class="fa fa-facebook"
-                                            aria-hidden="true"></i>
-                                        Facebook</a>
-                                    <a href="{{ route('twitter.login') }}" class="btn-twitter"><i class="fa fa-twitter"
-                                            aria-hidden="true"></i>
-                                        Twitter</a>
-                                    <a href="#" class="btn-google"><i class="fa fa-google" aria-hidden="true"></i>
-                                        Google</a>
-                                </div>
-
+                        <div class="card p-4" id="register-section" style="display: none;">
+                            <div class="card-header bg-white text-center">
+                                <a href="{{ url('/') }}">
+                                    <img src="{{ asset('images/logo.png') }}" alt="logo"
+                                        style="width: 100px; height: 80px;">
+                                </a>
+                                <h3>Create Account</h3>
                             </div>
+
+                            <div class="card-body">
+                                <form action="{{ route('register') }}" id="registerForm" method="POST">
+                                    @csrf
+
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" name="name" id="registerName"
+                                            class="form-control form-control-md ">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" id="registerEmail"
+                                            class="form-control form-control-md ">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" name="phone" id="registerPhone"
+                                            class="form-control form-control-md ">
+                                    </div>
+
+                                    <input type="hidden" name="role" id="registerRole" value="user">
+                                    <div class="form-group">
+                                        <label class="float-left">Password</label>
+                                        <div class="input-group">
+                                            <input type="password" name="password" id="registerPassword"
+                                                class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text show-passwordRe"><i
+                                                        class="fa fa-eye"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="float-left">Password Confirmation</label>
+                                        <div class="input-group">
+                                            <input type="password" name="password_confirmation"
+                                                id="registerPasswordConfirmation" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text show-passwordRe"><i
+                                                        class="fa fa-eye"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 form-group mb-0 form-checkbox mt-1">
+                                        <input type="checkbox" required> <small>By clicking this, you are agree to to<a
+                                                href="{{ route('terms') }}" class="text-success"> <strong>our terms of
+                                                    use</strong></a> and <a href="{{ route('privacy') }}"
+                                                class="text-success"><strong>privacy
+                                                    policy</strong></a></small>
+                                    </div>
+
+                                    <div class="form-group text-center mt-1">
+                                        <button type="submit" class="btn btn-success"
+                                            id="registerSubmit">Register</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="sign-up">
+                                <h5 class="m-0">Already have an account? &nbsp;<a href="#" id="loginToggle"
+                                        class="text-success">Login</a></h5>
+
+                                <h5 class="m-0">Partner with us? &nbsp;<a href="#" id="partnerToggle"
+                                        class="text-success">Click here</a></h5>
+                            </div>
+                        </div>
+
+                        <div class="card p-4" id="partner-section" style="display: none;">
+                            <div class="card-header bg-white text-center">
+                                <a href="{{ url('/') }}">
+                                    <img src="{{ asset('images/logo.png') }}" alt="logo"
+                                        style="width: 100px; height: 80px;">
+                                </a>
+                                <h3>Create Partner Account</h3>
+                            </div>
+
+                            <div class="card-body">
+                                <form action="{{ route('partner.store') }}" id="partnerForm" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="partnertype">Type</label>
+                                        <select name="partnertype" id="partnertype" class="form-select">
+                                            <option value="">Select One</option>
+                                            <option value="Bank">Bank</option>
+                                            <option value="Micro-finance">Micro-finance</option>
+                                            <option value="Sacco">Sacco</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="partnername">Company Name</label>
+                                        <input type="text" name="partnername" id="partnerName"
+                                            class="form-control form-control-md">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="partnername"> Company Address</label>
+                                        <input type="text" name="partneraddress" id="partnerAddress"
+                                            class="form-control form-control-md ">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="partneremail">Company Email</label>
+                                        <input type="email" name="partneremail" id="partnerEmail"
+                                            class="form-control form-control-md ">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="partnerphone">Company Phone</label>
+                                        <input type="text" name="partnerphone" id="partnerPhone"
+                                            class="form-control form-control-md ">
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <hr>
+                                        <h5><strong>Contact Person Details</strong></h5>
+                                        <hr>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="contactname">Name</label>
+                                        <input type="text" name="contactname" id="contactName"
+                                            class="form-control form-control-md ">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="contactemail">Email</label>
+                                        <input type="email" name="contactemail" id="contactEmail"
+                                            class="form-control form-control-md ">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="contactphone">Phone</label>
+                                        <input type="text" name="contactphone" id="contactPhone"
+                                            class="form-control form-control-md ">
+                                    </div>
+
+                                    <input type="hidden" name="role" id="partnerRole" value="partner">
+
+                                    <div class="form-group">
+                                        <label class="float-left">Password</label>
+                                        <div class="input-group">
+                                            <input type="password" name="password" id="partnerPassword"
+                                                class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text show-password-patner"><i
+                                                        class="fa fa-eye"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group mb-0 form-checkbox mt-1">
+                                        <input type="checkbox" required> <small>By clicking this, you are agree to to<a
+                                                href="{{ route('terms') }}" class="text-success"> <strong>our terms of
+                                                    use</strong></a> and <a href="{{ route('privacy') }}"
+                                                class="text-success"><strong>privacy
+                                                    policy</strong></a></small>
+                                    </div>
+
+                                    <div class="form-group text-center mt-1">
+                                        <button type="submit" class="btn btn-success">Register</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="sign-up">
+                                <p class="m-0">Already have an account? <a href="#" id="loginToggle"
+                                        class="text-primary">Login</a></p>
+                            </div>
+                        </div>
+
+                        <div id="authfeedback"></div>
+
+
+                        <div class="login-social border-t mt-1 pt-2 mb-1 text-center">
+                            <p class="mb-2">OR continue with</p>
+                            <a href="#" class="btn-google"><i class="fa fa-google" aria-hidden="true"></i>
+                                Google</a>
+                            <a href="{{ route('facebook.login') }}" class="btn-facebook"><i class="fa fa-facebook"
+                                    aria-hidden="true"></i>
+                                Facebook</a>
                         </div>
                     </div>
 
+                    <div class="col-md-6" style="padding: 1em;">
+                        <div class="text-center" style="background: #F7F9F9; border-radius: 15px;padding:2.5em;">
+                            <img src="{{ asset('images/img.png') }}" alt="">
+                            <p class="mt-2">We provide secure and trusted platform that helps you maximise on your
+                                potential by giving you a pool of customers to market to. Get started by joining this pool
+                                of customers, dealers and partner and get cutting edge advertising experience. </p>
+                        </div>
+                        <div class="alert-info mt-2" style="border-radius: 15px;padding:2.5em;">
+                            <h5 class="text-center mb-4">When You Sign Up/In </h5>
+                            <p><i class="fa fa-check-circle"></i>&nbsp; Access to thousands of vehicles you can choose
+                                from.</p>
+                            <p><i class="fa fa-check-circle"></i>&nbsp; You can enquire about vehcles at your convenience.
+                            </p>
+                            <p><i class="fa fa-check-circle"></i>&nbsp; Advetise your vehicles with ease and access
+                                millions of potential customers country wide.</p>
+                            <p><i class="fa fa-check-circle"></i>&nbsp; Connect with our partners on this platform and
+                                facilitate easy loans and financial support to your customers.</p>
+                            <p><i class="fa fa-check-circle"></i>&nbsp; Easy communication from potential customers on your
+                                advertisements.</p>
+                            <p><i class="fa fa-check-circle"></i>&nbsp; Make money on this platform by advertising your
+                                vehicles on this platform and access exclusive local and international customers.</p>
+                            <h6 class="mt-2 mb-1"><strong>Partners</strong></h6>
+                            <p><i class="fa fa-check-circle"></i>&nbsp; Get access to thousands of customers for your loan
+                                products.</p>
+                            <p><i class="fa fa-check-circle"></i>&nbsp; Receive applications for loans directly on your
+                                dashboard and process as necessary.</p>
+                            <p><i class="fa fa-check-circle"></i>&nbsp; Make profit by collaborating with us to provide our
+                                customers with loan products for vehicles to our customers to facilitate their purchases.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <br>
         </div>
     </div>
 @endsection
 
 @section('footer_scripts')
     <script src="{{ asset('js/iziToast.min.js') }}"></script>
-    <script src="{{ asset('js/select2.min.js') }}"></script>
-    <script src="{{ asset('js/main/auth.js') }}"></script>
+    <script src="{{ asset('js/main/auths.js') }}"></script>
 @endsection
