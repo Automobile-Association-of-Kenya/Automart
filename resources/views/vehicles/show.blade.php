@@ -5,6 +5,15 @@
 @endsection
 
 @section('header_styles')
+    <style>
+        #loansectiontoggle:hover {
+            cursor: pointer;
+        }
+
+        .loansection {
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('main')
@@ -31,9 +40,9 @@
 
                     <div class="slide car-details-section cds-2 mb-30">
 
-                        <div class="heading-car clearfix">
+                        <div class="heading-car clearfix ">
                             <div class="pull-left">
-                                <h3>{{ $vehicle->make->make . ' ' . $vehicle->model->model }}</h3>
+                                <h3>{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}</h3>
                                 <p>
                                     <i class="flaticon-pin"></i>{{ $vehicle->location ?? $vehicle->yard?->address }}
                                 </p>
@@ -54,7 +63,6 @@
                                             alt="slider-car">
                                     @endforeach
                                 </div>
-
                                 <div class="slider-nav">
                                     {{-- <div class="thumb-slide"><img src="{{ '/vehicleimages/' . $vehicle->cover_photo }}"
                                             class="img-fluid" alt="small-car">
@@ -68,28 +76,89 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-3 mb-1">
-                                <button href="#" id="quoteRequestToggle" class="btn btn-warning btn-block"
-                                    data-bs-toggle="modal" data-bs-target="#quoteModal" data-id="{{ $vehicle->id }}"
-                                    data-no="{{ $vehicle->vehicle_no }}">Request for a
-                                    quote</button>
-                            </div>
+                        <div class="mb-4 card p-3">
+                            <div class="row">
+                                <div class="col-md-3 mb-1">
+                                    <button href="#" id="quoteRequestToggle" class="btn btn-warning btn-block"
+                                        data-bs-toggle="modal" data-bs-target="#quoteModal" data-id="{{ $vehicle->id }}"
+                                        data-no="{{ $vehicle->vehicle_no }}">Request a
+                                        quote</button>
+                                </div>
 
-                            <div class="col-md-3 mt-1">
-                                <a href="{{ route('buy',$vehicle->vehicle_no??$vehicle->id) }}" id="financeRequestToggle" class="btn btn-success btn-block" data-id="{{ $vehicle->id }}"
-                                    data-no="{{ $vehicle->vehicle_no }}">Buy</a>
-                            </div>
-                            
-                            <div class="col-md-3 mt-1">
-                                <a href="{{ route('loan',$vehicle->vehicle_no??$vehicle->id) }}" id="financeRequestToggle" class="btn btn-success btn-block"
-                                     data-id="{{ $vehicle->id }}" data-no="{{ $vehicle->vehicle_no }}">Apply for Loan</a>
-                            </div>
+                                <div class="col-md-3 mt-1">
+                                    <a href="{{ route('buy', $vehicle->vehicle_no ?? $vehicle->id) }}"
+                                        id="financeRequestToggle" class="btn btn-success btn-block"
+                                        data-id="{{ $vehicle->id }}" data-no="{{ $vehicle->vehicle_no }}">Buy</a>
+                                </div>
 
-                            <div class="col-md-3 mt-1">
-                                <button href="#" id="tradeinRequestToggle" class="btn btn-success btn-block"
-                                    data-bs-toggle="modal" data-bs-target="#tradeinModal" data-id="{{ $vehicle->id }}"
-                                    data-no="{{ $vehicle->vehicle_no }}">Enquire trade in</button>
+                                <div class="col-md-3 mt-1">
+                                    <a href="{{ route('loan', $vehicle->vehicle_no ?? $vehicle->id) }}"
+                                        id="financeRequestToggle" class="btn btn-success btn-block"
+                                        data-id="{{ $vehicle->id }}" data-no="{{ $vehicle->vehicle_no }}">Apply for
+                                        Loan</a>
+                                </div>
+
+                                <div class="col-md-3 mt-1">
+                                    <button href="#" id="tradeinRequestToggle" class="btn btn-success btn-block"
+                                        data-bs-toggle="modal" data-bs-target="#tradeinModal" data-id="{{ $vehicle->id }}"
+                                        data-no="{{ $vehicle->vehicle_no }}">Enquire trade in</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mt-4">
+                            <div class="card-header alert-success" id="loansectiontoggle">
+                                <span><strong>Try our Financing options and make the right choice.</strong></span>
+                                <i class="fa fa-caret-down float-right"></i>
+                            </div>
+                            <div class="card-body loansection">
+                                <form action="#" method="GET" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <label class="form-label">Price</label>
+                                            <input type="text" class="form-control" name="principal" id="principalAmount"
+                                                value="{{ $vehicle->price }}" required readonly>
+                                        </div>
+
+                                        <div class="form-group col-lg-6">
+                                            <label class="form-label">Financier</label>
+                                            <select name="partner_id" id="loanPartnerID" class="form-select">
+                                                <option value="">Select One</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-6">
+                                            <label class="form-label">Loan Product</label>
+                                            <select name="loan_product_id" id="loanproductID" class="form-select">
+                                                <option value="">Select One</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-6">
+                                            <label class="form-label">Interest Rate (%)</label>
+                                            <input type="text" class="form-control" name="interest" id="interestRate"
+                                                readonly>
+                                        </div>
+
+                                        <div class="form-group col-lg-6">
+                                            <label class="form-label">Period In Months</label>
+                                            <input type="text" class="form-control" name="calcperiod" id="calcPeriod"
+                                                readonly>
+                                        </div>
+
+                                        <div class="form-group col-lg-6">
+                                            <label class="form-label">Down Payment</label>
+                                            <input type="text" class="form-control" name="calcdepost" id="calcDepost"
+                                                readonly>
+                                        </div>
+
+                                        <div class="form-group col-lg-6">
+                                            <label class="form-label">Installments</label>
+                                            <input type="text" class="form-control" name="calcinstallment"
+                                                id="calcInstallment" readonly>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -104,15 +173,9 @@
                                 </li>
 
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                                        type="button" role="tab" aria-controls="profile"
+                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                        data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
                                         aria-selected="false">Features</button>
-                                </li>
-
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
-                                        type="button" role="tab" aria-controls="contact" aria-selected="false">Related
-                                        Vehicles</button>
                                 </li>
 
                                 <li class="nav-item" role="presentation">
@@ -120,18 +183,6 @@
                                         data-bs-target="#contact-4" type="button" role="tab"
                                         aria-controls="contact-4" aria-selected="false">Specifications</button>
                                 </li>
-
-                                {{-- <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="contact-tab-5" data-bs-toggle="tab"
-                                        data-bs-target="#contact-5" type="button" role="tab" aria-controls="contact-5"
-                                        aria-selected="false">Location</button>
-                                </li>
-
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="contact-tab-6" data-bs-toggle="tab"
-                                        data-bs-target="#contact-6" type="button" role="tab" aria-controls="contact-6"
-                                        aria-selected="false">Video</button>
-                                </li> --}}
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel"
@@ -284,7 +335,6 @@
                                                                         </li>
                                                                     </ul>
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -424,52 +474,78 @@
                             </ul>
                         </div>
 
-                        <div class="contact-2 financing-calculator widget widget-3">
-                            <h3 class="sidebar-title">Financing Calculator</h3>
-                            <div class="s-border"></div>
-                            <div class="m-border"></div>
-                            <form action="#" method="GET" enctype="multipart/form-data">
-
-                                <div class="form-group">
-                                    <label class="form-label">Price</label>
-                                    <input type="text" class="form-control" name="price" id="price"
-                                        value="{{ $vehicle->price }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Financier</label>
-                                    <select name="partner_id" id="partner_id" class="form-select">
-                                        <option value="">Select One</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Interest Rate (%)</label>
-                                    <input type="text" class="form-control" placeholder="15%">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Period In Months</label>
-                                    <input type="text" class="form-control" placeholder="6 Months">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Down PaymenT</label>
-                                    <input type="text" class="form-control" placeholder="$25,500">
-                                </div>
-
-                                <div class="form-group mb-0">
-                                    <button type="submit" class="btn button-theme btn-md w-100">Cauculate</button>
-                                </div>
-
-                            </form>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <div class="featured-car">
+        <div class="container">
+
+            <h4 class="text-success">Related Vehicles</h4>
+
+            <div class="featured-slider row slide-box-btn slider"
+                data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+
+                @foreach ($relatedvehicles as $item)
+                @php
+                    $images = json_decode($item->images);
+                    $location = ($item->yard !== null) ? $item->yard->address : $item->location;
+                                $vehicle_no = (!is_null($item->vehicle_no)) ? $item->vehicle_no : $item->id;
+                @endphp
+                    <div class="slide slide-box">
+                        <div class="car-box">
+                            <div class="car-image">
+                                <img class="d-block w-100" src="{{ asset('/vehicleimages/'.$images[0]) }}" alt="car-photo">
+                                <div class="tag">{{ $item->usage }}</div>
+                                <div class="facilities-list clearfix">
+                                    <ul>
+                                        <li>
+                                            <i class="flaticon-way"></i> {{ $item->mileage }}
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-manual-transmission"></i> {{ $item->fuel_type }}
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-manual-transmission"></i> {{ $item->transmission }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <h1 class="title">
+                                    <a href="{{ url('/vehicle-details/'.$vehicle_no.'/discount') }}">{{ $item->year.' '.$item->make->make.' '.$item->model->model }}</a>
+                                </h1>
+                                <div class="location">
+                                    <a href="{{ url('/vehicle-details/'.$vehicle_no.'/discount') }}">
+                                        <i class="flaticon-pin"></i>{{$location}}
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="footer clearfix">
+                                <div class="pull-left ratings">
+                                    <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
+                                        data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp; Enquire</a>
+                                    <a href="{{ url('/vehicle/' . $vehicle_no . '/buy') }}"
+                                        class="btn btn-success btn-sm"><i class="fa fa-hand"></i> Buy</a>
+                                    <a href="{{ url('/vehicle/' . $vehicle_no . '/loan') }}"
+                                        class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i> Apply
+                                        Loan</a>
+                                </div>
+
+                                <div class="pull-right">
+                                    <p class="price">Kes: {{ number_format($item->price,2) }}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 
 
@@ -766,4 +842,5 @@
 
 @section('footer_scripts')
     <script src="{{ asset('js/main/show.js') }}"></script>
+    <script src="{{ asset('js/main/loan.js') }}"></script>
 @endsection

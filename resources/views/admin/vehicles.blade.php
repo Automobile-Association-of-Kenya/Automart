@@ -278,7 +278,6 @@
                                                     </div>
                                                 </div>
 
-
                                                 <div class="col-md-3 form-group">
                                                     <label for="enginecc">Engine CC: <sup>*</sup></label>
                                                     <div class="input-group">
@@ -287,10 +286,20 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
-                                                    <label for="company">Description:</label>
+                                                <div class="col-md-3 form-group">
+                                                    <label for="company">Fuel Type:</label>
                                                     <div class="input-group">
-                                                        <textarea name="description" id="description" class="form-control"></textarea>
+                                                        <select name="fuel_type" id="fuelType"
+                                                            class="form-control  chzn-select" style="width: 100%;">
+                                                            <option value="">Select One</option>
+                                                            <option value="Petrol">Petrol</option>
+                                                            <option value="Diesel">Diesel</option>
+                                                            <option value="Hybrid">Hybrid</option>
+                                                            <option value="Diesel-Hybrid">Diesel-Hybrid
+                                                            </option>
+                                                            <option value="Electic">Electic</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
                                                     </div>
                                                 </div>
 
@@ -367,22 +376,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3 form-group">
-                                                    <label for="company">Fuel Type:</label>
-                                                    <div class="input-group">
-                                                        <select name="fuel_type" id="fuelType"
-                                                            class="form-control  chzn-select" style="width: 100%;">
-                                                            <option value="">Select One</option>
-                                                            <option value="Petrol">Petrol</option>
-                                                            <option value="Diesel">Diesel</option>
-                                                            <option value="Hybrid">Hybrid</option>
-                                                            <option value="Diesel-Hybrid">Diesel-Hybrid
-                                                            </option>
-                                                            <option value="Electic">Electic</option>
-                                                            <option value="Other">Other</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                
 
                                                 <div class="col-md-3 form-group">
                                                     <label for="gear">NO of Gears: </label>
@@ -421,6 +415,13 @@
                                                     <div class="input-group">
                                                         <input type="text" name="horsepower" id="horsepower"
                                                             class="form-control ">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label for="company">Description:</label>
+                                                    <div class="input-group">
+                                                        <textarea name="description" id="description" class="form-control"></textarea>
                                                     </div>
                                                 </div>
 

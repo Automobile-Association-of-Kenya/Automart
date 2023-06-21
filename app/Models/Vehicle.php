@@ -110,7 +110,7 @@ class Vehicle extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    
+
     public function quotes(): HasMany
     {
         return $this->hasMany(Quote::class, 'vehicle_id', 'id');
@@ -179,12 +179,12 @@ class Vehicle extends Model
     {
         $vehicle = $this->where('vehicle_no', $vehicle_no)
             ->orWhere('id', $vehicle_no)->with([
-            'dealer:id,name',
-            'type:id,type',
-            'make:id,make',
-            'model:id,model',
-            'yard'
-        ])->first();
+                'dealer:id,name',
+                'type:id,type',
+                'make:id,make',
+                'model:id,model',
+                'yard'
+            ])->first();
         return $vehicle;
     }
 
@@ -196,9 +196,13 @@ class Vehicle extends Model
         return $vehicle;
     }
 
-    public function discounts()
+    public function discounts($limit, $vehicle_id = null)
     {
-        $discountedVehicles = $this->with([
+        $query = $this->query();
+        if (!is_null($vehicle_id)) {
+            $query->where('id','!=', $vehicle_id)->orWhere('vehicle_no','!=',$vehicle_id);
+        }
+        $discountedVehicles = $query->where('status', '!=', 'sold')->with([
             'dealer:id,name',
             'type:id,type',
             'make:id,make',
@@ -225,6 +229,12 @@ class Vehicle extends Model
         return $discountedVehicles;
     }
 
+    public function discountedrelated($vehicle_id)
+    {
+        $vehicles = $this->discounts(10, $vehicle_id);
+        return $vehicles;
+    }
+
     /**
      * Get the user that owns the Vehicle
      *
@@ -242,10 +252,18 @@ class Vehicle extends Model
         return json_encode($newarrivals);
     }
 
-    public function getlatest($limit)
+    public function getlatest($limit,$except_id=null)
     {
-        $newarrivals = $this->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model'])->limit($limit)->get();
+        $query = $this->query();
+        if (!is_null($except_id)) {
+            $query->where('id','!=',$except_id)->orWhere('vehicle_no','!=',$except_id);
+        }
+        $newarrivals = $query->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model'])->limit($limit)->get();
         return $newarrivals;
+    }
+
+    function latestrelated($except_id) {
+        return $this->getlatest($except_id);
     }
 
     function newvehiclespaginated($paginate)
@@ -272,14 +290,14 @@ class Vehicle extends Model
         } else {
             View::create(['vehicle_id' => $id]);
         };
-        return json_encode(['status'=>'success']);
+        return json_encode(['status' => 'success']);
     }
 
     function vehiclecontactphone($id)
     {
         $vehicle = $this->where('id', $id)->with(['user:id,phone', 'dealer:id,phone'])->first();
         $phone = $vehicle->user->phone ?? $vehicle->dealer->phone;
-        return "+254".substr($phone,-9);
+        return "+254" . substr($phone, -9);
     }
 
     function whatsapp($id)
@@ -293,7 +311,7 @@ class Vehicle extends Model
         } else {
             Messages::create(['vehicle_id' => $id, 'type' => 'whatsapp', 'destination' => $phone, 'message' => $message]);
         }
-        return json_encode(['status' => "success", "url" => $social->link."?phone=".$phone."&text=".$message]);
+        return json_encode(['status' => "success", "url" => $social->link . "?phone=" . $phone . "&text=" . $message]);
     }
 
     function liked($id)
@@ -303,7 +321,7 @@ class Vehicle extends Model
         } else {
             Like::create(['vehicle_id' => $id]);
         };
-        return json_encode(['status'=>'success']);
+        return json_encode(['status' => 'success']);
     }
 
     function searchpaginate($request)

@@ -58,19 +58,20 @@
 
 
                     <div class="row" id="vehiclesection">
-                        
+
                         @foreach ($vehicles as $item)
                             @php
                                 $images = json_decode($item['images']);
+                                $vehicle_no = $item->vehicle_no ?? $item->id;
                             @endphp
                             <div class="col-lg-4 col-md-6">
                                 <div class="car-box-3">
 
                                     <div class="car-thumbnail">
-                                        <a href="{{ url('/vehicle-details/' . $item->id) }}" class="car-img">
+                                        <a href="{{ url('/vehicle-details/' . $vehicle_no) }}" class="car-img">
                                             <div class="for">{{ $item->usage }}</div>
                                             <div class="price-box">
-                                                
+
                                                 <span>Kes: {{ number_format($item->current_price, 2) }}</span>
                                             </div>
                                             <img class="d-block w-100"
@@ -115,11 +116,11 @@
                                     <div class="detail">
                                         <h1 class="title">
                                             <a class="text-success"
-                                                href="{{ url('/vehicle-details/' . $item->id) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
+                                                href="{{ url('/vehicle-details/' . $vehicle_no) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                         </h1>
                                         <ul class="custom-list">
                                             <li>
-                                                <a href="{{ route('vehicles.show', $item->id) }}">{{ $item->usage }}</a>
+                                                <a href="{{ url('/vehicle-details/' . $vehicle_no) }}">{{ $item->usage }}</a>
                                                 &nbsp;|&nbsp;
                                             </li>
                                             <li>
@@ -138,9 +139,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    @php
-                                        $vehicle_no = $item->vehicle_no ?? $item->id;
-                                    @endphp
+
                                     <div class="footer">
                                         <div class="buttons mb-2 text-center">
                                             <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"

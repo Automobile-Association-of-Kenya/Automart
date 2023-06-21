@@ -11,7 +11,7 @@ class LoanProduct extends Model
 
     protected $fillable = ['partner_id','name','period', 'method','deposit','interest','limit'];
 
-    function FunctionName($partner_id){
+    function partnerloanproducts($partner_id){
         return $this->where('partner_id', $partner_id)->get();
     }
 }

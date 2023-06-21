@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="col-lg-5 col-md-6 col-sm-12">
                                 <div class="sorting-options2">
-                                    <h5>Showing 1-20 of <span id="countResults">{{ count($discountedvehicles) }}</span>
+                                    <h5>Showing 1-20 of <span id="countResults">{{ count($vehicles) }}</span>
                                         Vehicles</h5>
                                 </div>
                             </div>
@@ -61,15 +61,16 @@
 
                     <div class="row" id="vehiclesection">
 
-                        @foreach ($discounts as $item)
+                        @foreach ($vehicles as $item)
                             @php
                                 $images = json_decode($item['images']);
+                                $vehicle_no = (!is_null($item->vehicle_no)) ? $item->vehicle_no : $item->id;
                             @endphp
                             <div class="col-lg-4 col-md-6">
                                 <div class="car-box-3">
 
                                     <div class="car-thumbnail">
-                                        <a href="{{ url('/vehicle-details/' . $item->id) }}" class="car-img">
+                                        <a href="{{ url('/vehicle-details/' .$vehicle_no.'/discount') }}" class="car-img">
                                             <div class="for">{{ $item->usage }}</div>
                                             <div class="price-box">
                                                 <span
@@ -119,7 +120,7 @@
                                     <div class="detail">
                                         <h1 class="title">
                                             <a class="text-success"
-                                                href="{{ url('/vehicle-details/' . $item->id) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
+                                                href="{{ url('/vehicle-details/' .$vehicle_no.'/discount') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                         </h1>
                                         <ul class="custom-list">
                                             <li>

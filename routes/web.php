@@ -140,7 +140,7 @@ Route::get('discounted-vehicles', [ApplicationController::class, 'discountedVehi
 Route::get('vehicles-search', [ApplicationController::class, 'vehicleSearch']);
 Route::get('vehicle-detail/{id}', [ApplicationController::class, 'vehicle'])->name('vehicle.detail');
 Route::get('search', [ApplicationController::class, 'search'])->name('search');
-Route::get('vehicle-details/{id}', [ApplicationController::class, 'vehicleDetails']);
+Route::get('vehicle-details/{id}/{tag?}', [ApplicationController::class, 'vehicleDetails']);
 
 
 Route::prefix('dealer')->group(function () {
@@ -179,7 +179,7 @@ Route::get('whatsapp/{id}', [ApplicationController::class, 'whatsapp']);
 
 /** Loan Routes */
 Route::get('/partner-loanproducts/{partner_id}', [PartnerController::class, 'partnerloanproducts']);
-
+Route::get('loanproducts/{id?}', [PartnerController::class, 'getloanproducts']);
 /** Partner Routes */
 Route::prefix('/partner')->group(function () {
     Route::get('index', [PartnerController::class, 'index'])->name('partner.index');

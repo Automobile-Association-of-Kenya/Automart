@@ -37,7 +37,7 @@ class ApplicationController extends Controller
     public function welcome()
     {
         $vehicles = $this->vehicle->getlatest(9);
-        $discounts = $this->vehicle->discounts();
+        $discounts = $this->vehicle->discounts(21);
         return view('welcome', compact('discounts', 'vehicles'));
     }
 
@@ -186,7 +186,7 @@ class ApplicationController extends Controller
 
     public function search(Request $request)
     {
-        $vehicles = $this->vehicle->searchpaginate($request,20);
+        $vehicles = $this->vehicle->searchpaginate($request, 20);
 
         return view('vehicles.search', compact('vehicles'));
     }
@@ -214,19 +214,22 @@ class ApplicationController extends Controller
     public function vehicleMakes($id)
     {
         $make = $this->make->find($id);
-        $vehicles = $this->vehicle->vehiclesbymake($id,20);
+        $vehicles = $this->vehicle->vehiclesbymake($id, 20);
         return view('vehicles.makes', compact('vehicles', 'make'));
     }
 
-    function like($id) {
+    function like($id)
+    {
         return $this->vehicle->liked($id);
     }
 
-    function view($id) {
+    function view($id)
+    {
         return $this->vehicle->viewed($id);
     }
 
-    function whatsapp($id) {
+    function whatsapp($id)
+    {
         return $this->vehicle->whatsapp($id);
     }
 
@@ -244,8 +247,8 @@ class ApplicationController extends Controller
 
     public function discountedVehicles()
     {
-        $discountedvehicles = $this->vehicle->discountedVehicles();
-        return view('vehicles.discount', compact('discountedvehicles'));
+        $vehicles = $this->vehicle->discounts(21);
+        return view('vehicles.discount', compact('vehicles'));
     }
 
     public function vehicle($id)
@@ -255,10 +258,16 @@ class ApplicationController extends Controller
         return json_encode($vehicle);
     }
 
-    public function vehicleDetails($id)
+    public function vehicleDetails($id, $param = null)
     {
         $vehicle = $this->vehicle->vehicle($id);
-        $relatedvehicles = $this->vehicle->getRelatedVehicles($vehicle);
+        if ($param == "discount") {
+            $relatedvehicles = $this->vehicle->discountedrelated($vehicle->id ?? $vehicle->vehicle_no);
+        }elseif ($param == "latest") {
+            $relatedvehicles = $this->vehicle->latestrelated($vehicle->id);
+        } else {
+            $relatedvehicles = $this->vehicle->getRelatedVehicles($vehicle);
+        }
         $this->vehicle->viewed($vehicle->id);
         return view('vehicles.show', compact('vehicle', 'relatedvehicles'));
     }
@@ -285,6 +294,4 @@ class ApplicationController extends Controller
         $finances = $this->finance->count();
         return ['tradeins' => $tradeins, 'quotes' => $quotes, 'finances' => $finances];
     }
-
-    
 }

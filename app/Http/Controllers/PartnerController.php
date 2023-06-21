@@ -53,12 +53,21 @@ class PartnerController extends Controller
         return json_encode($loanproducts);
     }
 
+    public function getloanproducts($id=null) {
+        $query = $this->loanproduct->query();
+        if (!is_null($id)) {
+            $query->where('id',$id);
+        }
+        $products = $query->get();
+        return json_encode($products);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function partnerloanproducts(string $id)
     {
-        $loanproducts = $this->partnerloanproducts($id);
+        $loanproducts = $this->loanproduct->partnerloanproducts($id);
         return json_encode($loanproducts);
     }
 

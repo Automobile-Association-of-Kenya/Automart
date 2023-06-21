@@ -46,6 +46,7 @@ return new class extends Migration
             $table->string('views')->default(0);
             $table->string('likes')->default(0);
             $table->tinyInteger('priority',1)->default(9);
+            $table->string('status', 30)->default('pending');
             $table->timestamps();
             $table->softDeletes();
         });

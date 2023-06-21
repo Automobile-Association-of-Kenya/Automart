@@ -63,12 +63,15 @@
                         @foreach ($vehicles as $item)
                             @php
                                 $images = json_decode($item['images']);
+                                $vehicle_no = $item->vehicle_no ?? $item->id;
+
                             @endphp
                             <div class="col-lg-4 col-md-6">
                                 <div class="car-box-3">
 
                                     <div class="car-thumbnail">
-                                        <a href="{{ url('/vehicle-details/' . $item->id) }}" class="car-img">
+                                        <a href="{{ url('/vehicle-details/' . $vehicle_no. '/latest') }}"
+                                            class="car-img">
                                             <div class="for">{{ $item->usage }}</div>
                                             <div class="price-box">
                                                 <span>Kes: {{ number_format($item->current_price, 2) }}</span>
@@ -115,11 +118,12 @@
                                     <div class="detail">
                                         <h1 class="title">
                                             <a class="text-success"
-                                                href="{{ url('/vehicle-details/' . $item->id) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
+                                                href="{{ url('/vehicle-details/' . $vehicle_no. '/latest') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                         </h1>
                                         <ul class="custom-list">
                                             <li>
-                                                <a href="{{ route('vehicles.show', $item->id) }}">{{ $item->usage }}</a>
+                                                <a
+                                                    href="{{ url('/vehicle-details/' . $vehicle_no. '/latest') }}">{{ $item->usage }}</a>
                                                 &nbsp;|&nbsp;
                                             </li>
                                             <li>
@@ -138,19 +142,15 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    @php
-                                        $vehicle_no = $item->vehicle_no ?? $item->id;
-                                    @endphp
                                     <div class="footer">
                                         <div class="buttons mb-2 text-center">
                                             <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
                                                 data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
                                                 Enquire</a>
                                             <a href="{{ url('/vehicle/' . $vehicle_no . '/buy') }}"
-                                                class="btn btn-success btn-sm btn-block"><i class="fa fa-hand"></i> Buy</a>
+                                                class="btn btn-success btn-sm"><i class="fa fa-hand"></i> Buy</a>
                                             <a href="{{ url('/vehicle/' . $vehicle_no . '/loan') }}"
-                                                class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i>
-                                                Apply
+                                                class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i> Apply
                                                 Loan</a>
                                         </div>
                                     </div>
@@ -162,7 +162,7 @@
                     <div class="pagination-box p-box-2 text-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination" id="pagination">
-                                {{ $vehicles->links() }}
+                                {{-- {{ $vehicles->links() }} --}}
                                 {{-- <li class="page-item">
                                     <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
                                 </li>
