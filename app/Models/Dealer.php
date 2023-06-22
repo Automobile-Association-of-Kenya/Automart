@@ -119,7 +119,7 @@ class Dealer extends Model
 
     public function checkDealerSubscription($dealer_id)
     {
-        $dealer = $this->with('subscriptions')->find($dealer_id);
+        $dealer = $this->where('id',$dealer_id)->with('subscriptions')->first();
         $subscriptions  = $dealer->subscriptions;
         foreach ($subscriptions as $key => $value) {
             if (!is_null($value->pivot->expiry_date) && $value->pivot->expiry_date > now()) {

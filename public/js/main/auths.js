@@ -3,7 +3,7 @@
         $("#register-section").show();
         $("#login-section").hide();
         $("#emailpassword-reset").hide();
-        $("#partner-section").hide();   
+        $("#partner-section").hide();
     });
     $("#loginToggle").on("click", function () {
         $("#register-section").hide();
@@ -13,6 +13,12 @@
     });
 
     $("#loginToggle1").on("click", function () {
+        $("#register-section").hide();
+        $("#login-section").show();
+        $("#emailpassword-reset").hide();
+        $("#partner-section").hide();
+    });
+    $("#partnerLoginToggle").on("click", function () {
         $("#register-section").hide();
         $("#login-section").show();
         $("#emailpassword-reset").hide();
@@ -44,7 +50,7 @@
             $(this).html('<i class="fa fa-eye"></i>');
         }
     });
-    
+
     $(".show-password-patner").click(function () {
         var passwordField = $("#partnerPassword");
         var passwordFieldType = passwordField.attr("type");

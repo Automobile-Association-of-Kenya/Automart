@@ -84,11 +84,11 @@ class User extends Authenticatable
         if (auth()->user()) {
             $role = auth()->user()->role;
             if ($role === "admin") {
-                return redirect()->route('admin.admin');
+                return redirect()->route('admin.index');
             } elseif ($role === "partner") {
                 return redirect()->route('partner.index');
             } else {
-                return redirect()->route('home');
+                return redirect()->route('dealers.index');
             }
         }
         return redirect()->route('login');

@@ -299,7 +299,7 @@
                             </div>
 
                             <div class="sign-up">
-                                <p class="m-0">Already have an account? <a href="#" id="loginToggle"
+                                <p class="m-0">Already have an account? <a href="#" id="partnerLoginToggle"
                                         class="text-primary">Login</a></p>
                             </div>
                         </div>

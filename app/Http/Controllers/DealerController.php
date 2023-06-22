@@ -27,16 +27,20 @@ class DealerController extends Controller
 
     public function index()
     {
-        $subscription = $this->dealer->checkDealerSubscription(auth()->user()->dealer_id);
-        if (!is_null($subscription)) {
-            $message = $this->dealer->checkonfreesubscription($subscription);
-            if (!is_null($message)) {
-                session()->put('subscription_notification', $message);
-            }
-            session()->put('subscription', $subscription);
-        }else {
-            return redirect()->route('subscription.plan');
-        }
+        // if (auth()->user()->role === "dealer" && auth()->user()->dealer_id == null) {
+        //     return redirect()->route('dealer.add');
+        // }
+        // $subscription = $this->dealer->checkDealerSubscription(auth()->user()->dealer_id);
+        // if (!is_null($subscription)) {
+        //     $message = $this->dealer->checkonfreesubscription($subscription);
+        //     if (!is_null($message)) {
+        //         session()->put('subscription_notification', $message);
+        //     }
+        //     session()->put('subscription', $subscription);
+        // }else {
+        //     return redirect()->route('subscription.plan');
+        // }
+        $
         $vehicles = $this->dealer->dealerVehicles();
         $quotes = $this->dealer->quotes();
         $finances = $this->dealer->finances();

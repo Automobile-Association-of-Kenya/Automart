@@ -250,9 +250,9 @@
                                                 data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
                                                 Enquire</a>
                                             <a href="{{ url('/vehicle/' . $vehicle_no . '/buy') }}"
-                                                class="btn btn-success btn-sm btn-block"><i class="fa fa-hand"></i> Buy</a>
+                                                class="btn btn-success btn-sm "><i class="fa fa-hand"></i> Buy</a>
                                             <a href="{{ url('/vehicle/' . $vehicle_no . '/loan') }}"
-                                                class="btn btn-success btn-block btn-sm float-ri"><i class="fa fa-"></i>
+                                                class="btn btn-success  btn-sm float-ri"><i class="fa fa-"></i>
                                                 Apply
                                                 Loan</a>
                                         </div>

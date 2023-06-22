@@ -68,7 +68,7 @@ class Payment extends Model
             'PartyA' => $phone,
             'PartyB' => '174379',
             'PhoneNumber' => $phone,
-            'CallBackURL' => 'https://3ab4-41-139-232-226.ngrok-free.app/api/mpesa-callback',
+            'CallBackURL' => 'https://5a35-41-139-232-226.ngrok-free.app/api/mpesa-callback',
             'AccountReference' => 'Automart AA Kenya',
             'TransactionDesc' => "Payment for " . $subscription->name . " subscription"
         );

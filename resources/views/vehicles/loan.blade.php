@@ -109,29 +109,24 @@
             </div>
         </div>
     </div>
-
-    
+    <br>
     <div class="featured-car">
-        <div class="container">
-
-            <h4 class="text-success">Reasons to Finance Your Vehicles with us.</h4>
-
-            <div class="featured-slider row slide-box-btn slider"
+        <div class="container mt-4">
+            <h4 class="text-success">Reasons to Finance Your Vehicles on our Plartform.</h4>
+            <br>
+            <br>
+            <div class="featured-slider row slide-box-btn slider mt-4"
                 data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
 
                 @foreach ($services as $item)
                     <div class="slide slide-box">
-                        <div class="card bg-info">
-                            <div class="card-header">
-                                <h5 class="card-title">{{ $item->name }}</h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">{{ $item->description }}</p>
-                            </div>
+                        <div class="card" style="border-radius: 15px; background: #DAF7A6; padding:1.5em;">
+                            <h5 class="card-title white">{{ $item->service }}</h5>
+                            <p class="card-text white">{{ $item->description }}</p>
+
+                            <a href="{{ route('services.index') }}" class="btn btn-light btn-sm">Learn More</a>
                         </div>
-                        <div class="card-footer">
-                            a.btn.btn-
-                        </div>
+
                     </div>
                 @endforeach
             </div>
@@ -501,7 +496,8 @@
 
                         <div class="col-md-6 form-group">
                             <label for="accountholdername">Bank Holder Name <sup>*</sup></label>
-                            <input type="text" name="accountholdername" id="accountholdername" class="form-control">
+                            <input type="text" name="accountholdername" id="accountholdername"
+                                class="form-control">
                         </div>
 
                         <div class="col-md-6 form-group">
@@ -525,7 +521,7 @@
                     </div>
 
                 </div>
-                
+
                 <div class="tab-pane fade" id="loanproviderTab" role="tabpanel" aria-labelledby="home-tab">
                     <h5>Loan Provider Information </h5>
                     <div class="row">

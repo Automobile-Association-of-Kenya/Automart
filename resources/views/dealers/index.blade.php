@@ -1,4 +1,4 @@
-@extends('layouts.dealerlayout')
+@extends('layouts.dealer')
 
 @section('title')
     Dealer @parent

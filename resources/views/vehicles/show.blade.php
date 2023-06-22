@@ -242,7 +242,7 @@
                                                                                 {{ number_format($item->price, 2) }}</span>
                                                                         </div>
                                                                         <img class="d-block w-100"
-                                                                            src="{{ asset('/vehicleimages/' . $images[0] . '') }}"
+                                                                            src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                                                             alt="car">
                                                                     </a>
                                                                     <div class="carbox-overlap-wrapper">
@@ -259,12 +259,12 @@
                                                                                     <i class="fa fa-heart-o"></i>
                                                                                 </a>
                                                                                 <div class="car-magnify-gallery">
-                                                                                    <a href="{{ asset('/vehicleimages/' . $images[0] . '') }}"
+                                                                                    <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                                                                         class="overlap-btn"
                                                                                         data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                                                         <i class="fa fa-expand"></i>
                                                                                         <img class="hidden"
-                                                                                            src="{{ asset('/vehicleimages/' . $images[0] . '') }}"
+                                                                                            src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                                                                             alt="hidden-img">
                                                                                     </a>
                                                                                     @foreach ($images as $image)
@@ -498,7 +498,7 @@
                     <div class="slide slide-box">
                         <div class="car-box">
                             <div class="car-image">
-                                <img class="d-block w-100" src="{{ asset('/vehicleimages/'.$images[0]) }}" alt="car-photo">
+                                <img class="d-block w-100" src="{{ asset('/vehicleimages/'.@$images[0]) }}" alt="car-photo">
                                 <div class="tag">{{ $item->usage }}</div>
                                 <div class="facilities-list clearfix">
                                     <ul>

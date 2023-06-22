@@ -7,6 +7,7 @@ use App\Models\County;
 use App\Models\Finance;
 use App\Models\Make;
 use App\Models\Quote;
+use App\Models\Services;
 use App\Models\Tradein;
 use App\Models\Type;
 use App\Models\User;
@@ -31,6 +32,7 @@ class ApplicationController extends Controller
         $this->tradein = new Tradein();
         $this->finance = new Finance();
         $this->user = new User();
+        $this->service = new Services();
         // $this->vehicleservice = new VehicleSevice();
     }
 
@@ -50,7 +52,8 @@ class ApplicationController extends Controller
     public function loan($vehicle_no)
     {
         $vehicle = $this->vehicle->vehicle($vehicle_no);
-        return view('vehicles.loan', compact('vehicle'));
+        $services = $this->service->get();
+        return view('vehicles.loan', compact('vehicle', 'services'));
     }
 
     public function dashboard()

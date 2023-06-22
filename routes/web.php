@@ -116,10 +116,6 @@ Route::resource('accounts', AccountsController::class);
 Route::get('accounts-get/{id?}', [AccountsController::class, 'get']);
 Route::post('accounts-subscribe', [AccountsController::class, 'subscribe'])->name('accounts.subscribe');
 
-Route::resource('dealers', DealerController::class);
-Route::get('dealers-get', [DealerController::class, 'getDealers']);
-Route::get('dealer-add', [DealerController::class, 'add'])->name('dealer.add');
-
 Route::view('terms', 'terms')->name('terms');
 
 /** Vehicles grouping routes */
@@ -155,7 +151,6 @@ Route::view('mail', 'mail');
 
 Route::resource('quotes', QuoteController::class);
 Route::resource('finances', FinanceController::class);
-
 Route::post('tradein-store', [FinanceController::class, 'tradeInStore'])->name('tradein.store');
 
 /** Payment routes */
@@ -164,7 +159,6 @@ Route::get('paymentconfirm/{checkoutid}', [PaymentController::class, 'paymentcon
 Route::post('paypalcancel', [PaymentController::class, 'cancelTransaction'])->name('paypal.cancel');
 Route::post('paypalsuccess', [PaymentController::class, 'successTransaction'])->name('paypal.success');
 Route::post('payments-get', [PaymentController::class, 'get']);
-
 
 Route::resource('reports', ReportController::class);
 
@@ -180,9 +174,10 @@ Route::get('whatsapp/{id}', [ApplicationController::class, 'whatsapp']);
 /** Loan Routes */
 Route::get('/partner-loanproducts/{partner_id}', [PartnerController::class, 'partnerloanproducts']);
 Route::get('loanproducts/{id?}', [PartnerController::class, 'getloanproducts']);
+
 /** Partner Routes */
 Route::prefix('/partner')->group(function () {
-    Route::get('index', [PartnerController::class, 'index'])->name('partner.index');
+    Route::get('/', [PartnerController::class, 'index'])->name('partner.index');
     Route::get('loans',[PartnerController::class,'loans'])->name('partner.loans');
     Route::post('store', [PartnerController::class, 'store'])->name('partner.store');
     Route::post('saveloanproduct', [PartnerController::class, 'saveloanproduct'])->name('partner.saveloanproduct');
@@ -190,11 +185,15 @@ Route::prefix('/partner')->group(function () {
 });
 
 Route::prefix('admin')->group(function() {
-    Route::get('index', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('vehicles',[AdminController::class,'vehicles'])->name('admin.vehicles');
     Route::get('users', [AdminController::class,'users'])->name('admin.users');
     Route::get('accounts', [AdminController::class, 'accounts'])->name('admin.accounts');
     Route::get('requests', [AdminController::class, 'requests'])->name('admin.requests');
-    Route::get('settings', [AdminController::class, 'index'])->name('admin.settings');
+    Route::get('settings', [SettingsController::class, 'index'])->name('admin.settings');
     Route::get('reports',[AdminController::class, 'reports'])->name('admin.reports');
+});
+
+Route::prefix('dealer')->group(function() {
+    Route::get('/', [DealerController::class,'index'])->name('dealers.index');
 });

@@ -13,7 +13,6 @@
     <div class="sub-banner">
         <div class="container breadcrumb-area">
             <div class="breadcrumb-areas">
-                <h1>Subscription Plans</h1>
                 <ul class="breadcrumbs">
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li class="active">Subscription Plans</li>
