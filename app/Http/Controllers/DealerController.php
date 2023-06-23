@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Dealer as EventsDealer;
 use App\Http\Requests\DealerRequest;
 use App\Jobs\SendEmailVerificationNotification;
 use App\Models\Dealer;
@@ -27,26 +28,10 @@ class DealerController extends Controller
 
     public function index()
     {
-        // if (auth()->user()->role === "dealer" && auth()->user()->dealer_id == null) {
-        //     return redirect()->route('dealer.add');
-        // }
-        // $subscription = $this->dealer->checkDealerSubscription(auth()->user()->dealer_id);
-        // if (!is_null($subscription)) {
-        //     $message = $this->dealer->checkonfreesubscription($subscription);
-        //     if (!is_null($message)) {
-        //         session()->put('subscription_notification', $message);
-        //     }
-        //     session()->put('subscription', $subscription);
-        // }else {
-        //     return redirect()->route('subscription.plan');
-        // }
-        $
-        $vehicles = $this->dealer->dealerVehicles();
-        $quotes = $this->dealer->quotes();
-        $finances = $this->dealer->finances();
-        $tradeins = $this->dealer->tradeins();
-
-        return view('dealers.index', compact('vehicles', 'quotes', 'finances', 'tradeins',));
+        $this->dealer->checkstatus();
+        $summary = $this->dealer->summary();
+        // $properties = $this->
+        return view('dealers.index', compact('summary'));
     }
 
     public function create()
@@ -71,30 +56,21 @@ class DealerController extends Controller
         return view('dealers.vehicles', compact('vehicles', 'str'));
     }
 
-    public function store(DealerRequest $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
-        DB::beginTransaction();
-        $dealer = $this->dealer->create($validated);
-        if (auth()->user() && !is_null(auth()->user())) {
-            $user = $this->user->where('id', auth()->id())->first();
-            $user->dealer_id = $dealer->id;
-            $user->role = "dealer";
-            $user->update();
-            $url = "/subscription-plans";
-        } else {
-            $user = User::create([
-                'dealer_id' => $dealer->id,
-                'name' => $validated["adminname"],
-                'email' => $validated["adminemail"],
-                'phone' => $validated["adminphone"],
-                'role' => "dealer",
-                'password' => Hash::make($validated["password"])
-            ]);
-            $url = "/login";
+        $dealer = $this->dealer->getbyemailorphone($request->email,$request->phone);
+        if (!is_null($dealer)) {
+            if (isset($request->continue)) {
+                new EventsDealer($dealer,auth()->user());
+            }else {
+                $message = "A dealer with these details <strong>" . $dealer->name . "</strong>  <strong>" . $dealer->email . "</strong> already exists do you want to be added to the same dealer? Note! All your ads will be under this dealer! You an also change your details in this form and save";
+                return json_encode(['status' => 'data', 'message' => $message]);
+            }
+        }else {
+            $dealer = $this->dealer->add($request);
         }
-        DB::commit();
-        return json_encode(['status' => 'success', 'url' => $url, 'message' => 'Dealer account created successfully. And verification link has been sent to your email.']);
+        
+        return json_encode(['status' => 'success', 'message' => 'Dealer account created successfully. And verification link has been sent to your email.']);
     }
 
     public function summary()

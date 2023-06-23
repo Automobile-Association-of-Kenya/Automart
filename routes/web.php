@@ -6,7 +6,6 @@ use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DealerController;
 use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\PartnerController;
@@ -19,10 +18,6 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VehicleController;
-use App\Models\Subscription;
-use App\Models\Vehicle;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ApplicationController::class, 'welcome']);
@@ -138,13 +133,6 @@ Route::get('vehicle-detail/{id}', [ApplicationController::class, 'vehicle'])->na
 Route::get('search', [ApplicationController::class, 'search'])->name('search');
 Route::get('vehicle-details/{id}/{tag?}', [ApplicationController::class, 'vehicleDetails']);
 
-
-Route::prefix('dealer')->group(function () {
-    Route::get('vehicles', [DealerController::class, 'vehicles'])->name('dealer.vehicles');
-    Route::get('summary', [DealerController::class, 'summary']);
-    Route::get('requests', [DealerController::class, 'requests'])->name('dealer.requests');
-});
-
 require __DIR__ . '/auth.php';
 
 Route::view('mail', 'mail');
@@ -195,5 +183,8 @@ Route::prefix('admin')->group(function() {
 });
 
 Route::prefix('dealer')->group(function() {
-    Route::get('/', [DealerController::class,'index'])->name('dealers.index');
+    Route::get('/', [DealerController::class,'index'])->name('dealer.index');
+    Route::get('vehicles', [DealerController::class, 'vehicles'])->name('dealer.vehicles');
+    Route::get('requests', [DealerController::class, 'requests'])->name('dealer.requests');
+    Route::post('store', [DealerController::class, 'store'])->name('dealer.store');
 });

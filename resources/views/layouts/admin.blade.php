@@ -18,49 +18,6 @@
 
 
     <title>@yield('title') | AA Kenya Limited</title>
-    <style>
-        sup {
-            font-size: 16px;
-            color: #f00;
-            font-weight: 600
-        }
-        .pagetitle {
-            margin-bottom: 10px;
-        }
-        .pagetitle h1 {
-            font-size: 24px;
-            margin-bottom: 0;
-            font-weight: 600;
-            color: #006544;
-        }
-        .dashboard .info-card {
-            padding-bottom: 10px;
-        }
-        .dashboard .info-card h6 {
-            font-size: 28px;
-            color: #006544;
-            font-weight: 700;
-            margin: 0;
-            padding: 0;
-        }
-        .dashboard .sales-card .card-icon {
-            color: #006544;
-            background: #f6f6fe;
-        }
-        .dashboard .revenue-card .card-icon {
-            color: #006544;
-            background: #e0f8e9;
-        }
-        .dashboard .customers-card .card-icon {
-            color: #fed945;
-            background: #ffecdf;
-        }
-        .sidebar-menu li.active{
-            border-bottom: 1px solid #fff;
-            border-top: 1px solid #fff;
-            background: #06ad75;
-        }
-    </style>
     @yield('header_styles')
 </head>
 

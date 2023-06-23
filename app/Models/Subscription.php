@@ -86,6 +86,16 @@ class Subscription extends Model
     }
 
     /**
+     * The users that belong to the Subscription
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'dealer_subscription', 'user_id', 'subscription_id')->withPivot('status', 'start_date', 'expiry_date')->wherePivot('status', 1);
+    }
+    
+    /**
      * Get all of the payments for the Subscription
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

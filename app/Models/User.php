@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -78,6 +79,16 @@ class User extends Authenticatable
         return $this->hasMany(Vehicle::class, 'user_id', 'id');
     }
 
+    /**
+     * Get all of the sub for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subscriptions(): BelongsToMany
+    {
+        return $this->belongsToMany(Subscription::class, 'dealer_subscription', 'dealer_id', 'subscription_id')->withPivot('status', 'start_date', 'expiry_date')->wherePivot('status', 1);
+    }
+
 
     function redirect()
     {
@@ -88,7 +99,7 @@ class User extends Authenticatable
             } elseif ($role === "partner") {
                 return redirect()->route('partner.index');
             } else {
-                return redirect()->route('dealers.index');
+                return redirect()->route('dealer.index');
             }
         }
         return redirect()->route('login');

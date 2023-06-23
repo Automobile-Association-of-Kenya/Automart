@@ -28,11 +28,6 @@ class DealerRequest extends FormRequest
             'address' => ['nullable','max:100'],
             'county_id' => ['nullable','max:20','exists:counties,id'],
             'city' => ['nullable','max:80'],
-
-            'adminname' => ['nullable','max:80'],
-            'adminphone' => ['nullable','max:16','unique:users,phone'],
-            'adminemail' => ['nullable','max:60','unique:users,email'],
-            'password' => ['nullable','min:6'],
         ];
     }
 }

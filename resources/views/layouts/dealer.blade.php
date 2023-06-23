@@ -8,122 +8,74 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="{{ asset('css/all.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/components.css') }}" rel="stylesheet" id="bootstrap-css">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet" id="master-css">
     <link href="{{ asset('css/master.css') }}" rel="stylesheet" id="master-css">
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet" id="master-css">
     <link rel="icon" href="{{ asset('images/favicon.ico') }}" />
-    {{-- <link rel="icon" href="{{ asset('images/logo.png') }}" /> --}}
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
-
-    <title>@yield('title') | AA Kenya Limited</title>
-    <style>
-        .pagetitle {
-            margin-bottom: 10px;
-        }
-
-        sup {
-            font-size: 16px;
-            color: #f00;
-            font-weight: 600
-        }
-
-        .pagetitle h1 {
-            font-size: 24px;
-            margin-bottom: 0;
-            font-weight: 600;
-            color: #006544;
-        }
-
-        .dashboard .info-card {
-            padding-bottom: 10px;
-        }
-
-        .dashboard .info-card h6 {
-            font-size: 28px;
-            color: #006544;
-            font-weight: 700;
-            margin: 0;
-            padding: 0;
-        }
-
-        .dashboard .sales-card .card-icon {
-            color: #006544;
-            background: #f6f6fe;
-        }
-
-        .dashboard .revenue-card .card-icon {
-            color: #006544;
-            background: #e0f8e9;
-        }
-
-        .dashboard .customers-card .card-icon {
-            color: #fed945;
-            background: #ffecdf;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    <title>Dealer | @yield('title')</title>
     @yield('header_styles')
 </head>
 
 <body>
     <input type="checkbox" name="nav-toggle" id="nav-toggle" checked>
     <div class="sidebar">
-
         <div class="sidebar-brand">
             <h2>
                 <a href="{{ url('/') }}"><i class="fas fa-home text-white"></i><b><span class="text-white">AA
-                            KENYA - AutoMart</span></b></a>
+                            KENYA</span></b></a>
             </h2>
         </div>
-        <br>
 
         <div class="sidebar-menu">
             <ul>
-                <li>
-                    <a href="{{ route('dashboard') }}" class='validation' data-id=48 id="dashboard">
+                <li class="{{ Request::is('dealer') ? 'active' : '' }}" class='validation'>
+                    <a href="{{ route('dealer.index') }}">
                         <span><i class="fal fa-tachometer"></i></span>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li>
-                    <a href="{{ route('dealer.vehicles') }}" class='validation' data-id=2 id="membership">
-                        <span><i class="fal fa-cars"></i></span>
-                        <span>My Vehicles</span>
+                <li class="{{ Request::is('dealer/vehicles') ? 'active' : '' }}" class='validation'>
+                    <a href="{{ route('dealer.vehicles') }}">
+                        <span><i class="fad fa-cars"></i></span>
+                        <span>Vehicles</span>
                     </a>
                 </li>
 
-                <li>
-                    <a href="{{ route('dealer.requests') }}" class='validation' data-id=49 id="loans">
+                <li class="">
+                    <a href="{{ route('dealer.requests') }}" class='validation'>
                         <span><i class="fal fa-users-crown"></i></span>
-                        <span>Requests/Leads</span>
+                        <span>Requests</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="reports.php" id="reports" class='validation' data-id=56>
-                        <span><i class="fal fa-chart-line"></i></span>
-                        <span>Reports</span>
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a class="dropdown-item" :href="route('logout')"
+                            onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                            <span><i class="fal fa-sign-out-alt"></i></span>
+                            <span>{{ __('Log Out') }}</span>
+                        </a>
+                    </form>
                 </li>
-
-                <li>
-                    <a href="#" id="logoutuser">
-                        <span><i class="fal fa-sign-out-alt"></i></span>
-                        <span>Logout</span>
-                    </a>
-                </li>
-
             </ul>
         </div>
-
     </div>
+
 
     <div class="main-content">
         <div class="header">
-            <h4 class="text text-white">
+            <h2 class="text text-white">
                 <label for="nav-toggle">
                     <i class="fas fa-bars"></i>
                 </label>
                 @yield('page')
-            </h4>
+            </h2>
 
             {{-- <div class="search-wrapper">
                 <i class="fas fa-search text-white"></i>
@@ -139,9 +91,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
-                        @if (auth()->user()->role === 'admin' && auth()->user()->role === 'dealer')
-                            <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
-                        @endif
+                        <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
                         {{-- <li><a class="dropdown-item" href="">Logout</a></li> --}}
 
                         <form method="POST" action="{{ route('logout') }}">
@@ -157,17 +107,160 @@
                 </li>
             @endauth
         </div>
-        
-        @include('components.subs_notification')
 
         @yield('main')
 
     </div>
 </body>
 
+
+
+<div class="modal fade" id="addBusinessModal" tabindex="-1" role="dialog" aria-labelledby="quoteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content" id="vehiclePreviewSection">
+            <div class="modal-header">
+                <div class="modal-title" id="carOverviewModalLabel">
+                    Business Information
+                </div>
+                <button type="button" class="close btn btn-warning text-danger" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div id="businessfeedback"></div>
+                <form action="{{ route('dealer.store') }}" method="POST" enctype="multipart/form-data"
+                    id="dealerForm">
+                    @csrf
+                    <div class="row">
+                        <input type="hidden" name="dealer_id" id="dealerID" value="">
+
+                        <div class="col-md-12 form-group mb-2">
+                            <label for="name">Business Name</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="name" id="dealerName"
+                                    placeholder="Name" aria-label="Business Name">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group mb-2">
+                            <label for="email">Business Email</label>
+                            <div class="form-group email">
+                                <input type="email" class="form-control" name="email" id="dealerEmail"
+                                    placeholder="Email" aria-label="Business Email">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group mb-2">
+                            <label for="phone">Business Phone</label>
+                            <div class="form-group number">
+                                <input type="text" class="form-control" name="phone" id="dealerPhone"
+                                    placeholder="Phone" aria-label="Business Phone">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group mb-2">
+                            <label for="phone">Alternative Phone</label>
+                            <div class="form-group number">
+                                <input type="text" class="form-control" name="alt_phone" id="dealerAltPhone"
+                                    placeholder="Phone" aria-label="Alt Phone">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group mb-2">
+                            <label for="phone">Zip/Postal Address</label>
+                            <div class="form-group number">
+                                <input type="text" class="form-control" name="postol" id="postolAddress"
+                                    placeholder="Zip/Postal Address" aria-label="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group mb-2">
+                            <label for="phone">Physical Address</label>
+                            <div class="form-group number">
+                                <input type="text" class="form-control" name="address" id="dealerAddress"
+                                    placeholder="Physical Address" aria-label="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group mb-2">
+                            <label for="phone">City</label>
+                            <div class="form-group number">
+                                <input type="text" class="form-control" name="city" id="dealerCity"
+                                    placeholder="City" aria-label="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button class='btn btn-success btn-md' type="submit" id='savedealer'><i
+                                            class="fal fa-save fa-lg fa-fw"></i>
+                                        Save
+                                    </button>
+                                    <button class='btn btn-outline-warning btn-md' id='cleardealer'><i
+                                            class="fal fa-broom fa-lg fa-fw"></i>
+                                        Clear Fields</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="subscriptionPlansModal" tabindex="-1" role="dialog" aria-labelledby="quoteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" id="vehiclePreviewSection">
+
+            <div class="modal-header bg-success">
+                <div class="modal-title" id="carOverviewModalLabel">
+                    <h4 class="text-white">Subscription Plans</h4>
+                </div>
+                <button type="button" class="close btn btn-warning text-danger" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-success">
+                                <h4 class="text-white">Services</h4>
+                            </div>
+
+                            <div class="card-body">
+                                <ol class="list-group">
+                                    {{-- @foreach ($properties as $item)
+                                    @endforeach --}}
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"></div>
+                    {{-- <div class="col-md-3"></div> --}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="{{ asset('js/components.js') }}"></script>
 <script src="{{ asset('js/iziToast.min.js') }}"></script>
 <script src="{{ asset('js/main/moment.js') }}"></script>
+<script src="{{ asset('js/select2.min.js') }}"></script>
 @yield('footer_scrips')
 
 </html>

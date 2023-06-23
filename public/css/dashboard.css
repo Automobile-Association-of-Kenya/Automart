@@ -6,12 +6,12 @@
       text-align: left;
   }
 
-  #dashboard .card-list{
+  /* #dashboard .card-list{
     display:flex;
     column-gap: 1rem;
     margin-bottom: 1rem;
     color: rgb(255, 255, 255);
-  }
+  } */
 
   #dashboard .blue{
       margin-top:5px;
@@ -114,7 +114,7 @@
     line-height: .5;
     border-radius: .2rem;
   }
-  #dashboard .col{
+  #dashboard .col {
     margin-left:5px;
     padding-left:10px;
   }
@@ -123,4 +123,54 @@
     overflow-y:scroll; 
     height:200px;
     font-size: 0.7rem;
+  }
+
+  sup {
+      font-size: 16px;
+      color: #f00;
+      font-weight: 600
+  }
+
+  .pagetitle {
+      margin-bottom: 10px;
+  }
+
+  .pagetitle h1 {
+      font-size: 24px;
+      margin-bottom: 0;
+      font-weight: 600;
+      color: #006544;
+  }
+
+  .dashboard .info-card {
+      padding-bottom: 10px;
+  }
+
+  .dashboard .info-card h6 {
+      font-size: 28px;
+      color: #006544;
+      font-weight: 700;
+      margin: 0;
+      padding: 0;
+  }
+
+  .dashboard .sales-card .card-icon {
+      color: #006544;
+      background: #f6f6fe;
+  }
+
+  .dashboard .revenue-card .card-icon {
+      color: #006544;
+      background: #e0f8e9;
+  }
+
+  .dashboard .customers-card .card-icon {
+      color: #fed945;
+      background: #ffecdf;
+  }
+
+  .sidebar-menu li.active {
+      border-bottom: 1px solid #fff;
+      border-top: 1px solid #fff;
+      background: #06ad75;
   }

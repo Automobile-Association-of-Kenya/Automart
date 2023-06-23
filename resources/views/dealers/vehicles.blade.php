@@ -105,7 +105,7 @@
 
 
                         <div class="bg-primary pb-3 pt-3 pl-2 pr-1 border-rounded filterSection"
-                            style="border-radius: 6px;">
+                            style="border-radius: 6px; display:none;">
 
                             <form id="filterVehiclesForm" class="form-row">
                                 @csrf
@@ -621,8 +621,6 @@
     <script src="{{ asset('js/main/pdfmake.min.js') }}"></script>
     <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('js/main/jquery-ui.js') }}"></script>
-    <script src="{{ asset('js/select2.min.js') }}"></script>
     <script src="{{ asset('js/main/vehicle.js') }}"></script>
     <script>
         (function() {
@@ -632,6 +630,7 @@
             });
             $('#filterToggle').on('click', function() {
                 console.log('hsrsss');
+                
                 $('.filterSection').toggle();
             });
         })()

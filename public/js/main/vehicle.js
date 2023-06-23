@@ -1549,7 +1549,7 @@
             $("#coverPhotoPreview").children().remove();
 
             $.getJSON("/vehicles/" + vehicle_id, function (vehicle) {
-                if (vehicle !== null && vehicle !== []) {
+                if (vehicle !== null && vehicle.length > 0) {
                     showSuccess(
                         "Vehicle accepted for editing, You can make changes and click save to save changes",
                         "#vehiclefeedback"
@@ -1651,12 +1651,11 @@
 
                     let featuressss = [];
 
-                    if (vehicle.features !== null && vehicle.features !== []) {
+                    if (vehicle.features !== null && vehicle.features.length > 0) {
                         $.each(vehicle.features, function (key, value) {
                             featuressss.push(value.id);
                         });
                     }
-
                     $(".vehicleFeatures").each(function (key, input) {
                         let value = parseInt($(input).val());
                         if ($(input).is(":checked")) {

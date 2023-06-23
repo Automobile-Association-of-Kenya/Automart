@@ -48,6 +48,7 @@ return new class extends Migration
             $table->tinyInteger('priority',1)->default(9);
             $table->string('status', 30)->default('pending');
             $table->timestamps();
+            $table->timestamp('sold_at');
             $table->softDeletes();
         });
     }
