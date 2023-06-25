@@ -117,13 +117,13 @@
 
 <div class="modal fade" id="addBusinessModal" tabindex="-1" role="dialog" aria-labelledby="quoteModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content" id="vehiclePreviewSection">
             <div class="modal-header">
                 <div class="modal-title" id="carOverviewModalLabel">
-                    Business Information
+                    <h3>Business Information</h3>
                 </div>
-                <button type="button" class="close btn btn-warning text-danger" data-dismiss="modal"
+                <button type="button" class="btn btn-warning" data-dismiss="modal"
                     aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -137,7 +137,7 @@
                     <div class="row">
                         <input type="hidden" name="dealer_id" id="dealerID" value="">
 
-                        <div class="col-md-12 form-group mb-2">
+                        <div class="col-md-6 form-group">
                             <label for="name">Business Name</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="name" id="dealerName"
@@ -145,7 +145,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12 form-group mb-2">
+                        <div class="col-md-6 form-group">
                             <label for="email">Business Email</label>
                             <div class="form-group email">
                                 <input type="email" class="form-control" name="email" id="dealerEmail"
@@ -153,7 +153,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12 form-group mb-2">
+                        <div class="col-md-6 form-group">
                             <label for="phone">Business Phone</label>
                             <div class="form-group number">
                                 <input type="text" class="form-control" name="phone" id="dealerPhone"
@@ -161,7 +161,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12 form-group mb-2">
+                        <div class="col-md-6 form-group">
                             <label for="phone">Alternative Phone</label>
                             <div class="form-group number">
                                 <input type="text" class="form-control" name="alt_phone" id="dealerAltPhone"
@@ -169,7 +169,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12 form-group mb-2">
+                        <div class="col-md-6 form-group">
                             <label for="phone">Zip/Postal Address</label>
                             <div class="form-group number">
                                 <input type="text" class="form-control" name="postol" id="postolAddress"
@@ -177,7 +177,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12 form-group mb-2">
+                        <div class="col-md-6 form-group">
                             <label for="phone">Physical Address</label>
                             <div class="form-group number">
                                 <input type="text" class="form-control" name="address" id="dealerAddress"
@@ -185,7 +185,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12 form-group mb-2">
+                        <div class="col-md-6 form-group">
                             <label for="phone">City</label>
                             <div class="form-group number">
                                 <input type="text" class="form-control" name="city" id="dealerCity"
@@ -249,7 +249,6 @@
                     </div>
                     <div class="col-md-4"></div>
                     <div class="col-md-4"></div>
-                    {{-- <div class="col-md-3"></div> --}}
                 </div>
 
             </div>

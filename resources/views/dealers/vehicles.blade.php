@@ -620,6 +620,7 @@
     <script src="{{ asset('js/main/jszip.min.js') }}"></script>
     <script src="{{ asset('js/main/pdfmake.min.js') }}"></script>
     <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('js/jquery_ui.js') }}"></script>
     <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('js/main/vehicle.js') }}"></script>
     <script>
@@ -630,7 +631,7 @@
             });
             $('#filterToggle').on('click', function() {
                 console.log('hsrsss');
-                
+
                 $('.filterSection').toggle();
             });
         })()

@@ -68,7 +68,7 @@
                                 <div class="car-box-3">
 
                                     <div class="car-thumbnail">
-                                        <a href="{{ url('/vehicle-details/' . $vehicle_no) }}" class="car-img">
+                                        <a href="{{ url('/vehicle/' . $vehicle_no) }}" class="car-img">
                                             <div class="for">{{ $item->usage }}</div>
                                             <div class="price-box">
 
@@ -116,11 +116,11 @@
                                     <div class="detail">
                                         <h1 class="title">
                                             <a class="text-success"
-                                                href="{{ url('/vehicle-details/' . $vehicle_no) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
+                                                href="{{ url('/vehicle/' . $vehicle_no) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                         </h1>
                                         <ul class="custom-list">
                                             <li>
-                                                <a href="{{ url('/vehicle-details/' . $vehicle_no) }}">{{ $item->usage }}</a>
+                                                <a href="{{ url('/vehicle/' . $vehicle_no) }}">{{ $item->usage }}</a>
                                                 &nbsp;|&nbsp;
                                             </li>
                                             <li>

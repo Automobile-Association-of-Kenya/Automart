@@ -161,7 +161,7 @@ class Vehicle extends Model
     public function getRelatedVehicles($vehicle)
     {
         $query = $this->query();
-        $query->where('id', '!==', $vehicle->id);
+        $query->where('id', '<>', $vehicle->id);
         if (!is_null($vehicle->type_id)) {
             $query->where('type_id', $vehicle->type_id);
         }
@@ -169,7 +169,7 @@ class Vehicle extends Model
             $query->where('make_id', $vehicle->make_id);
         }
         if (!is_null($vehicle->vehicle_model_id)) {
-            $query->where('vehicle_model_id', $vehicle->vehicle_model_id);
+            $query->orWhere('vehicle_model_id', $vehicle->vehicle_model_id);
         }
         $vehicles = $query->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices'])->limit(10)->get();
         return $vehicles;
@@ -190,7 +190,7 @@ class Vehicle extends Model
 
     public function vehilclebyid($id)
     {
-        $vehicle = $this->where('id', $id)
+        $vehicle = $this->where('id', $id)->orWhere('vehicle_no',$id)
             ->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices:id,price', 'yard:id,yard,address', 'features:id,feature'])
             ->first();
         return $vehicle;

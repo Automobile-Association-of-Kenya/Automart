@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('vehicles', VehicleController::class);
+// Route::resource('vehicles', VehicleController::class);
 
 Route::controller(VehicleController::class)->group(function () {
     Route::get('makes/{make_id?}', 'makes');
@@ -63,8 +63,8 @@ Route::controller(UsersController::class)->group(function () {
     Route::post('partners', 'partnerCreate');
 });
 
-Route::get('countries', [ApplicationController::class, 'countries']);
-Route::get('counties/{country_id?}', [ApplicationController::class, 'counties']);
+// Route::get('countries', [ApplicationController::class, 'countries']);
+// Route::get('counties/{country_id?}', [ApplicationController::class, 'counties']);
 
 Route::resource('settings', SettingsController::class);
 
@@ -115,7 +115,7 @@ Route::view('terms', 'terms')->name('terms');
 
 /** Vehicles grouping routes */
 
-Route::get('new-arrivals', [ApplicationController::class, 'newArrivals'])->name('new.arrivals');
+Route::get('vehicles/new', [ApplicationController::class, 'newArrivals'])->name('new.arrivals');
 Route::get('new-vehicles', [ApplicationController::class, 'newVehicles'])->name('new');
 
 // Route::get('vehicle-types',[ApplicationController::class, 'vehicleTypesWithVehicles'])->name('');
@@ -124,14 +124,14 @@ Route::get('makes-with-vehicles', [ApplicationController::class, 'makesWithVehic
 Route::get('vehicles-list', [ApplicationController::class, 'index'])->name('vehicles.list');
 /**  */
 
-Route::get('type-vehicles/{id}', [ApplicationController::class, 'vehicleTypes'])->name('type.vehicles');
-Route::get('model-vehicles/{id}', [ApplicationController::class, 'vehicleModels'])->name('model.vehicles');
-Route::get('make-vehicles/{id}', [ApplicationController::class, 'vehicleMakes'])->name('make.vehicles');
-Route::get('discounted-vehicles', [ApplicationController::class, 'discountedVehicles'])->name('vehicles.discounted');
-Route::get('vehicles-search', [ApplicationController::class, 'vehicleSearch']);
+Route::get('vehicles/type/{id}', [ApplicationController::class, 'vehicleTypes'])->name('type.vehicles');
+Route::get('vehicles/model/{id}', [ApplicationController::class, 'vehicleModels'])->name('model.vehicles');
+Route::get('vehicles/make/{id}', [ApplicationController::class, 'vehicleMakes'])->name('make.vehicles');
+Route::get('discounts', [ApplicationController::class, 'discountedVehicles'])->name('vehicles.discounted');
+Route::get('search', [ApplicationController::class, 'vehicleSearch']);
 Route::get('vehicle-detail/{id}', [ApplicationController::class, 'vehicle'])->name('vehicle.detail');
 Route::get('search', [ApplicationController::class, 'search'])->name('search');
-Route::get('vehicle-details/{id}/{tag?}', [ApplicationController::class, 'vehicleDetails']);
+Route::get('vehicle/{id}/{tag?}', [ApplicationController::class, 'vehicleDetails']);
 
 require __DIR__ . '/auth.php';
 
@@ -151,19 +151,24 @@ Route::post('payments-get', [PaymentController::class, 'get']);
 Route::resource('reports', ReportController::class);
 
 Route::get('latest', [ApplicationController::class, 'latest'])->name('latest');
-Route::get('discounts', [VehicleController::class, 'discounts'])->name('discounts');
-Route::get('vehicle/{no}/buy', [ApplicationController::class, 'buy'])->name('buy');
-Route::get('vehicle/{no}/loan', [ApplicationController::class, 'loan'])->name('loan');
+
+// Route::get('discounts', [VehicleController::class, 'discounts'])->name('discounts');
+
+Route::get('vehicles-buy/{no}', [ApplicationController::class, 'buy'])->name('buy');
+Route::get('vehicles-loan/{no}', [ApplicationController::class, 'loan'])->name('loan');
+Route::post('purchase', [ApplicationController::class, 'purchase'])->name('purchase');
 Route::view('logins', 'auth.logins');
 Route::get('like/{id}', [ApplicationController::class,'like']);
 Route::get('view/{id}', [ApplicationController::class,'view']);
 Route::get('whatsapp/{id}', [ApplicationController::class, 'whatsapp']);
 
+
+
 /** Loan Routes */
 Route::get('/partner-loanproducts/{partner_id}', [PartnerController::class, 'partnerloanproducts']);
 Route::get('loanproducts/{id?}', [PartnerController::class, 'getloanproducts']);
 
-/** Partner Routes */
+
 Route::prefix('/partner')->group(function () {
     Route::get('/', [PartnerController::class, 'index'])->name('partner.index');
     Route::get('loans',[PartnerController::class,'loans'])->name('partner.loans');

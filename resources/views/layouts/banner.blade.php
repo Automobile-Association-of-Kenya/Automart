@@ -20,7 +20,7 @@
                                     </a>
 
                                     <a href="{{ route('dashboard') }}" class="btn-8">
-                                        <span>Sell</span>
+                                        <span>Sell Your Cars</span>
                                     </a>
                                 </div>
                             </div>

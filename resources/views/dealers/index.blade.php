@@ -22,8 +22,8 @@
         @endif
         {{-- <div class="col-md-12 m-2"> --}}
             <div class="row mt-2 mb-2 p-2">
-                <div class="col-md-3">
-                    <div class="bg-primary" style="width: 95%;">
+                <div class="col-md-3 mb-2">
+                    <div class="badge bg-primary" style="width: 98%;">
                         <a href="{{ route('dealer.vehicles') }}">
                             <div class="image" style="display: inline-block">
                                 <i class="fas fa-plus text-white fa-lg"></i>
@@ -36,8 +36,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
-                    <div class="badge bg-primary" style="width: 95%;">
+                <div class="col-md-3 mb-2">
+                    <div class="badge bg-primary" style="width: 98%;">
                         <div class="image" style="display: inline-block">
                             <i class="fas fa-cars fa-lg"></i>
                         </div>
@@ -51,8 +51,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="badge bg-info" style="width: 95%;">
+                <div class="col-md-3 mb-2">
+                    <div class="badge bg-info" style="width: 98%;">
                         <div class="image" style="display: inline-block">
                             <i class="fas fa-cars fa-lg"></i>
                         </div>
@@ -67,8 +67,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
-                    <div class="badge bg-warning" style="width: 95%;">
+                <div class="col-md-3 mb-2">
+                    <div class="badge bg-warning" style="width: 98%;">
                         <div class="image" style="display: inline-block">
                             <i class="fas fa-usd-circle fa-lg"></i>
                         </div>
@@ -95,8 +95,8 @@
 
         {{-- <div class="col-md-12 mt-4"> --}}
             <div class="row mt-4 p-2 mb-3">
-                <div class="col-md-3">
-                    <div class="badge alert-success" style="width: 95%;">
+                <div class="col-md-3 mb-2">
+                    <div class="badge alert-success" style="width: 98%;">
                         <div class="image" style="display: inline-block">
                             <i class="fas fa-users fa-lg"></i>
                         </div>
@@ -113,8 +113,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
-                    <div class="badge alert-primary" style="width: 95%;">
+                <div class="col-md-3 mb-2">
+                    <div class="badge alert-primary" style="width: 98%;">
                         <div class="image" style="display: inline-block">
                             <i class="fas fa-cars fa-lg"></i>
                         </div>
@@ -130,8 +130,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
-                    <div class="badge alert-info" style="width: 95%;">
+                <div class="col-md-3 mb-2">
+                    <div class="badge alert-info" style="width: 98%;">
                         <div class="image" style="display: inline-block">
                             <i class="fas fa-cars fa-lg"></i>
                         </div>
@@ -148,8 +148,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
-                    <div class="badge alert-warning" style="width: 95%;">
+                <div class="col-md-3 mb-2">
+                    <div class="badge alert-warning" style="width: 98%;">
                         <div class="image" style="display: inline-block">
                             <i class="fas fa-usd-circle fa-lg"></i>
                         </div>
@@ -180,7 +180,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-6">
                 <div class="card">
 

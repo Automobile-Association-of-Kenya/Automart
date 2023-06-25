@@ -34,7 +34,7 @@ class VehicleController extends Controller
         $this->yard = new Yard();
     }
 
-    
+
     public function discounts()
     {
         $discounts = $this->vehicle->discounts();
@@ -59,7 +59,7 @@ class VehicleController extends Controller
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
             $fileName .= uniqid() . '.' . $logo->getClientOriginalExtension();
-            $logo->move("brands/",$fileName);
+            $logo->move("brands/", $fileName);
         }
         $validated["logo"] = $fileName;
 
@@ -276,7 +276,17 @@ class VehicleController extends Controller
     public function store(VehicleRequest $request)
     {
         $validated = $request->validated();
-        $dealer = (isset($validated['dealer_id'])) && !is_null($validated["dealer_id"]) ? $this->dealer->find($validated["dealer_id"]) : $this->auth->dealer();
+        if (auth()->user()->role === "admin") {
+            $dealer = $this->dealer->find($validated['dealer_id']);
+        } else {
+            if (!is_null(auth()->user()->dealer_id)) {
+                $dealer = $this->dealer->find(auth()->user()->dealer_id);
+            } else {
+                $dealer = null;
+            }
+        }
+        $name = (!is_null($dealer)) ? $dealer->name : auth()->user()->name;
+
         if (isset($request->vehicle_id) && $request->vehicle_id !== null) {
             $vehicle = $this->vehicle->find($request->vehicle_id);
             $strkey = $vehicle->vehicle_no;
@@ -292,7 +302,7 @@ class VehicleController extends Controller
                 $image = base64_decode($value);
                 $fileName = 'img' . auth()->id() . $key . strtotime(now()) . '.jpg'; // or any other desired file name
                 $img = Image::make($image);
-                $img->text(' ' . $dealer->name . ' via AA Kenya', 150, 120, function ($font) {
+                $img->text(' ' . $name . ' via AA Kenya', 150, 120, function ($font) {
                     $font->file(public_path('fonts//font.ttf'));
                     $font->size(18);
                     $font->color('#CECECE');
@@ -309,7 +319,7 @@ class VehicleController extends Controller
             $image = base64_decode($jsone);
             $coverImage = 'img' . auth()->id() . 'cover' . strtotime(now()) . '.jpg'; // or any other desired file name
             $img = Image::make($image);
-            $img->text(' ' . $dealer->name . ' via AA Kenya', 150, 120, function ($font) {
+            $img->text(' ' . $name . ' via AA Kenya', 150, 120, function ($font) {
                 $font->file(public_path('fonts/font.ttf'));
                 $font->size(18);
                 $font->color('#CECECE');
@@ -324,18 +334,22 @@ class VehicleController extends Controller
 
         DB::beginTransaction();
         if (isset($request->vehicle_id) && $request->vehicle_id !== null) {
-            $vehicle->update(['vehicle_no' => $strkey, 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images)] + $validated);
+
+            $vehicle->update(['updated_by' => auth()->id(), 'vehicle_no' => $strkey, 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images)] + $validated);
             if (isset($validated["features"]) && count($validated["features"]) > 0) {
                 $this->vehicle->updatefeatures($vehicle->id, $validated["features"]);
             }
-            VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
+            if ($vehicle->price !== $validated["price"]) {
+                VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
+            }
             $message = "Vehicle updated successfully";
         } else {
-            $vehicle = Vehicle::create(['vehicle_no' => $strkey, 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images), 'views' => 0] + $validated);
 
+            $vehicle = Vehicle::create(['user_id'=>auth()->id(),'vehicle_no' => $strkey, 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images), 'views' => 0] + $validated);
             if (isset($validated["features"]) && count($validated["features"]) > 0) {
                 $this->vehicle->addfeatures($vehicle->id, $validated["features"]);
             }
+
             VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
             $message = "Vehicle added successfully";
         }
@@ -415,14 +429,7 @@ class VehicleController extends Controller
         //     ->join('makes', 'vehicles.make_id', '=', 'makes.id')
         //     ->join('vehicle_models', 'vehicles.vehicle_model_id', '=', 'vehicle_models.id')
         //     ->select('dealers.id as dealer_id', 'dealers.name as dealer','makes.id as make_id','makes.make as make', 'vehicle_models.id as model_id', 'vehicle_models.model as model', 'vehicles.id', 'vehicles.vehicle_no', 'vehicles.year', 'vehicles.price', 'vehicles.color', 'vehicles.mileage', 'vehicles.enginecc', 'vehicles.fuel_type', 'vehicles.transmission', 'vehicles.status', 'vehicles.created_at')->get();
-        $vehicles = $query->latest()
-            ->with(['dealer' => function ($dealer) {
-                return $dealer->select('id', 'name');
-            }, 'make' => function ($make) {
-                return $make->select('id', 'make');
-            }, 'model' => function ($model) {
-                return $model->select('id', 'model');
-            }, 'prices'])->get();
+        $vehicles = $query->latest()->with(['dealer:id,name', 'make:id,make', 'model:id,model', 'prices'])->get();
         // ->select('id', 'vehicle_no', 'year', 'price', 'color', 'mileage', 'enginecc', 'fuel_type', 'transmission', 'status', 'created_at')->get();
 
         return json_encode($vehicles);

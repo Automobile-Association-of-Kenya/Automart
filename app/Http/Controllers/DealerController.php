@@ -30,7 +30,6 @@ class DealerController extends Controller
     {
         $this->dealer->checkstatus();
         $summary = $this->dealer->summary();
-        // $properties = $this->
         return view('dealers.index', compact('summary'));
     }
 
@@ -68,8 +67,9 @@ class DealerController extends Controller
             }
         }else {
             $dealer = $this->dealer->add($request);
+            new EventsDealer($dealer, auth()->user());
         }
-        
+
         return json_encode(['status' => 'success', 'message' => 'Dealer account created successfully. And verification link has been sent to your email.']);
     }
 

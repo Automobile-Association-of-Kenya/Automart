@@ -6,6 +6,7 @@ use App\Models\Country;
 use App\Models\County;
 use App\Models\Finance;
 use App\Models\Make;
+use App\Models\Purchase;
 use App\Models\Quote;
 use App\Models\Services;
 use App\Models\Tradein;
@@ -14,7 +15,6 @@ use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
 use App\Models\VehiclePrice;
-use App\Service\VehicleSevice;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
@@ -33,6 +33,7 @@ class ApplicationController extends Controller
         $this->finance = new Finance();
         $this->user = new User();
         $this->service = new Services();
+        $this->purchase = new Purchase();
         // $this->vehicleservice = new VehicleSevice();
     }
 
@@ -46,7 +47,14 @@ class ApplicationController extends Controller
     public function buy($vehicle_no)
     {
         $vehicle = $this->vehicle->vehicle($vehicle_no);
-        return view('vehicles.sale', compact('vehicle'));
+        $services = $this->service->get();
+        return view('vehicles.buy', compact('vehicle', 'services'));
+    }
+
+    public function purchase(Request $request) {
+        $validated = $request->validate(['vehicle_id' => ['required','exists:vehicles,id'],'name' => ['required','max:80'],'id_no' => ['required','max:10'],'phone' => ['required','max:16'],'email' => ['required','max:80'],'pickup' => ['required','max:80'],'estate' => ['nullable','max:80'],'housenumber' => ['nullable','max:80'],'payment_method' => ['required','max:80']]);
+        $purchase = $this->purchase->create([$validated+['user_id'=>auth()->id()??null]]);
+        return json_encode(['status'=>'success', 'message'=>'Purchase request captured successfully']);
     }
 
     public function loan($vehicle_no)

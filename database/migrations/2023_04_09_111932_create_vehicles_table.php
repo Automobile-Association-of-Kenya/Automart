@@ -50,6 +50,7 @@ return new class extends Migration
             $table->timestamps();
             $table->timestamp('sold_at');
             $table->softDeletes();
+            $table->foreignId('updated_by')->constrained()->references('id')->on('users');
         });
     }
 

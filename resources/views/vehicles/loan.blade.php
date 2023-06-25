@@ -20,7 +20,7 @@
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li><a href="{{ url('makes/' . $vehicle->make->id) }}">{{ $vehicle->make->make }}</a></li>
                     <li><a
-                            href="{{ url('/vehicle-details/' . $vehicle->id) }}">{{ $vehicle->year . ' ' . $vehicle->model->model }}</a>
+                            href="{{ url('/vehicle/' . $vehicle->id) }}">{{ $vehicle->year . ' ' . $vehicle->model->model }}</a>
                     </li>
                     <li class="active">Loan Application</li>
                 </ul>
@@ -30,7 +30,7 @@
 
 
     <!-- Car details page start -->
-    <div class="car-details-page mt-4 mb-4">
+    <div class="car-details-page mb-4 mt-4">
         <div class="container">
             <div class="card">
                 <div class="card-body">
@@ -38,12 +38,14 @@
                         <div class="col-md-3">
                             <div class="intro">
                                 <div class="introimage" style="max-height: 500px;">
-                                    <img src="{{ asset('vehicleimages/' . @$images[0]) }}"
-                                        alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}"
-                                        width="100%" max-height="350px">
+                                    @if (count($images) > 0)
+                                        <img src="{{ asset('vehicleimages/' . @$images[0]) }}"
+                                            alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}"
+                                            width="100%">
+                                    @endif
                                 </div>
                                 <div class="introtext mt-2">
-                                    <a href="{{ url('vehicle-details/' . $vehicle_no) }}">
+                                    <a href="{{ url('vehicle/' . $vehicle_no) }}">
                                         <h3 class="text text-success">
                                             {{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}
                                         </h3>
@@ -109,15 +111,12 @@
             </div>
         </div>
     </div>
-    <br>
-    
+
 
     <div class="featured-car">
-        <div class="container mt-4">
+        <div class="container">
             <h4 class="text-success">Reasons to Finance Your Vehicles on our Plartform.</h4>
-            <br>
-            <br>
-            <div class="featured-slider row slide-box-btn slider mt-4"
+            <div class="featured-slider row slide-box-btn slider"
                 data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
 
                 @foreach ($services as $item)
@@ -128,7 +127,6 @@
 
                             <a href="{{ route('services.index') }}" class="btn btn-light btn-sm">Learn More</a>
                         </div>
-
                     </div>
                 @endforeach
             </div>
@@ -212,28 +210,27 @@
 
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-                            data-bs-target="#bsuniessandEmploymentTab" type="button" role="tab"
+                            data-bs-target="#businessandEmploymentTab" type="button" role="tab"
                             aria-controls="profile" aria-selected="false">Employment Info</button>
                     </li>
 
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="contact-tab-4" data-bs-toggle="tab"
-                            data-bs-target="#jjjjjjsjsjsjsnsnsnn" type="button" role="tab"
-                            aria-controls="contact-4" aria-selected="false">Specifications</button>
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                            data-bs-target="#bankaccountTab" type="button" role="tab" aria-controls="profile"
+                            aria-selected="false">Bank information</button>
                     </li>
-
                 </ul>
                 <button type="button" class="close btn btn-warning text-danger" data-bs-dismiss="modal"
                     aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="userinfo" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                        <form action="" method="post">
-                            <h5 class="text text-success"><strong>Personal Information</strong></h5>
-                            <hr>
+
+            <form action="#" method="post">
+                <div class="modal-body tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="userinfo" role="tabpanel"
+                        aria-labelledby="home-tab">
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label for="title" class="control-label">Title <sup>*</sup></label>
@@ -252,13 +249,13 @@
 
                                 <div class="col-md-6 form-group">
                                     <label for="firstName" class="control-label">First name <sup>*</sup></label>
-                                    <input id="firstName" name="firstname" type="text" placeholder="First name"
-                                        class="form-control required">
+                                    <input id="firstName" name="firstname" type="text" class="form-control"
+                                        required>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="lastName" class="control-label">Last name <sup>*</sup></label>
-                                    <input id="lastName" name="lastname" type="text" placeholder="Last name"
-                                        class="form-control" required>
+                                    <input id="lastName" name="lastname" type="text" class="form-control"
+                                        required>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="dateOfbirth" class="control-label">Date of birth <sup>*</sup></label>
@@ -267,25 +264,25 @@
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="emailAddress" class="control-label">Email address <sup>*</sup></label>
-                                    <input id="emailAddress" name="email" type="email" placeholder="@"
-                                        class="form-control" required>
+                                    <input id="emailAddress" name="email" type="email" class="form-control"
+                                        required>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="phoneNumber" class="control-label">Phone Number <sup>*</sup></label>
-                                    <input id="phoneNumber" name="phonenumber" type="text" placeholder="254"
+                                    <input id="phoneNumber" name="phonenumber" type="text"
                                         class="form-control required">
                                 </div>
 
                                 <div class="col-md-6 form-group">
                                     <label for="kraPin" class="control-label">KRA Pin <sup>*</sup></label>
-                                    <input id="kraPin" name="krapin" placeholder="KRA Pin" type="text"
-                                        class="form-control" required>
+                                    <input id="kraPin" name="krapin" type="text" class="form-control"
+                                        required>
                                 </div>
 
                                 <div class="col-md-6 form-group">
                                     <label for="idNo" class="control-label">National ID <sup>*</sup></label>
-                                    <input id="idNo" name="idno" placeholder="National ID" type="text"
-                                        class="form-control" required>
+                                    <input id="idNo" name="idno" type="text" class="form-control"
+                                        required>
                                 </div>
 
                                 <div class="col-md-6 form-group">
@@ -297,50 +294,47 @@
                                 <div class="col-md-6 form-group">
                                     <label for="cityResidence" class="control-label">City of residence
                                         <sup>*</sup></label>
-                                    <input id="cityResidence" name="city" type="text" placeholder="City"
-                                        class="form-control" required>
+                                    <input id="cityResidence" name="city" type="text" class="form-control"
+                                        required>
                                 </div>
 
                                 <div class="col-md-6 form-group">
                                     <label for="estateName" class="control-label">Estate / Street name
                                         <sup>*</sup></label>
-                                    <input id="estateName" name="estate" type="text" placeholder="Estate"
-                                        class="form-control" required>
+                                    <input id="estateName" name="estate" type="text" class="form-control"
+                                        required>
                                 </div>
 
                                 <div class="col-md-6 form-group">
                                     <label for="houseNO" class="control-label">House NO <sup>*</sup></label>
-                                    <input id="houseNO" name="house_no" type="text" placeholder="House NO"
-                                        class="form-control" required>
+                                    <input id="houseNO" name="house_no" type="text" class="form-control"
+                                        required>
                                 </div>
                             </div>
-                        </form>
+
+                            <div class="col-md-12 ">
+
+                                <button class='btn btn-success btn-md float-right' type="submit" id='savevehicle'><i
+                                        class="fa fa-save fa-fw"></i>Next </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="tab-pane fade" id="bsuniessandEmploymentTab" role="tabpanel" aria-labelledby="home-tab">
-                    <form action="" method="post">
-                        <h5 class="text text-success"><strong>Employment & Financing Information</strong></h5>
-
+                    <div class="tab-pane fade" id="businessandEmploymentTab" role="tabpanel"
+                        aria-labelledby="home-tab">
                         <div class="row">
                             <div class="col-md-12 form-group">
-                                <label for="employmentType" class="control-label">Type of employment
-                                    <sup>*</sup></label>
                                 <div class="col-md-12">
                                     <label class="custom-control custom-radio">
-                                        <strong>
-                                            <input type="radio" name="employment"value="salary">
-                                            <span class="custom-control-label"></span>
-                                            <a class="custom-control-description">Salaried Employee</a>
-                                        </strong>
+                                        <input type="radio" name="employment"value="salary" required>
+                                        <span class="custom-control-label"></span>
+                                        <a class="custom-control-description">Salaried Employee</a>
                                     </label>
 
                                     <label class="custom-control custom-radio">
-                                        <strong>
-                                            <input type="radio" name="employment" value="business">
-                                            <span class="custom-control-label"></span>
-                                            <a class="custom-control-description">Business Owner</a>
-                                        </strong>
+                                        <input type="radio" name="employment" value="business" required>
+                                        <span class="custom-control-label"></span>
+                                        <a class="custom-control-description">Business Owner</a>
                                     </label>
                                 </div>
                             </div>
@@ -368,88 +362,74 @@
                             <div class="col-md-6 form-group">
                                 <label for="employerName">Name of Employer <sup>*</sup></label>
                                 <input type="text" name="employername" id="employerName" class="form-control"
-                                    required placeholder="Name Employer ">
+                                    required>
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <label for="yearsOfEmployment">Year(s) with Employer <sup>*</sup></label>
                                 <input type="text" name="years_of_employment" id="yearsOfEmployment"
-                                    class="form-control" placeholder="Year(s) with Employer " required>
+                                    class="form-control" required>
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <label for="employerAddress">Employer Address <sup>*</sup></label>
                                 <input type="text" name="employeraddress" id="employerAddress"
-                                    class="form-control" placeholder="Employer Address ">
+                                    class="form-control">
                             </div>
 
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 form-group">
+                            <div class="col-md-6 form-group">
                                 <label for="sidebusiness" class="control-label">Do you own a business
                                     <sup>*</sup></label>
                                 <div class="col-md-12">
                                     <label class="custom-control custom-radio">
-                                        <strong>
-                                            <input type="radio" name="sidebusiness" value="yes">
-                                            <span class="custom-control-label"></span>
-                                            <a class="custom-control-description">Yes</a>
-                                        </strong>
+                                        <input type="radio" name="sidebusiness" value="yes">
+                                        <span class="custom-control-label"></span>
+                                        <a class="custom-control-description">Yes</a>
                                     </label>
 
                                     <label class="custom-control custom-radio">
-                                        <strong>
-                                            <input type="radio" name="sidebusiness" value="no">
-                                            <span class="custom-control-label"></span>
-                                            <a class="custom-control-description">No</a>
-                                        </strong>
+                                        <input type="radio" name="sidebusiness" value="no">
+                                        <span class="custom-control-label"></span>
+                                        <a class="custom-control-description">No</a>
                                     </label>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row business">
-                            <p>Business Details</p>
 
-                            <div class="col-md-12 form-group">
+                            <div class="col-md-6 form-group business">
                                 <label for="businessowner" class="control-label">Are you the owner of the business or
                                     one of the directors? <sup>*</sup></label>
                                 <div class="col-md-12">
                                     <label class="custom-control custom-radio">
-                                        <strong>
-                                            <input type="radio" name="businessowner" value="Owner">
-                                            <span class="custom-control-label"></span>
-                                            <a class="custom-control-description">Yes</a>
-                                        </strong>
+                                        <input type="radio" name="businessowner" value="Owner">
+                                        <span class="custom-control-label"></span>
+                                        <a class="custom-control-description">Yes</a>
                                     </label>
 
                                     <label class="custom-control custom-radio">
-                                        <strong>
-                                            <input type="radio" name="businessowner" value="Director">
-                                            <span class="custom-control-label"></span>
-                                            <a class="custom-control-description">No</a>
-                                        </strong>
+                                        <input type="radio" name="businessowner" value="Director">
+                                        <span class="custom-control-label"></span>
+                                        <a class="custom-control-description">No</a>
                                     </label>
                                 </div>
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group business">
                                 <label for="businessindustry">Industry</label>
                                 <select name="" id="" class="form-select"></select>
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group business">
                                 <label for="businessname">Business Name</label>
                                 <input type="text" name="businessname" id="businessName" class="form-control">
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group business">
                                 <label for="businessregno">Business Reg Number</label>
                                 <input type="text" name="businessregno" id="businessRegNo" class="form-control">
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group business">
                                 <label for="businesstype">Business Type</label>
                                 <select name="businesstype" id="businesstype" class="form-select">
                                     <option value=""></option>
@@ -458,284 +438,88 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group business">
                                 <label for="sidebusinessaddress">Business Address</label>
                                 <input type="text" name="businessaddress" id="businessAddress"
                                     class="form-control">
                             </div>
-                        </div>
-                    </form>
-                </div>
 
-                <div class="tab-pane fade" id="bankaccountTab" role="tabpanel" aria-labelledby="home-tab">
-                    <h5>Bank Details </h5>
-                    <div class="row">
-                        <div class="col-md-12 form-group">
-                            <label for="typeOfAccount" class="control-label">Type of bank account <sup>*</sup></label>
-                            <div class="col-md-12">
-                                <label class="custom-control custom-radio">
-                                    <strong>
+                        </div>
+
+                        <div class="col-md-12 ">
+                            <button class='btn btn-warning btn-md float-left' type="submit" data-bs-toggle="tab"
+                                data-bs-target="#userinfo"><span class="text-white">
+                                    << Prev</span></button>
+                            <button class='btn btn-success btn-md float-right' type="submit" id='savevehicle'><i
+                                    class="fa fa-save fa-fw"></i>Next </button>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="bankaccountTab" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label for="typeOfAccount" class="control-label">Type of bank account
+                                    <sup>*</sup></label>
+                                <div class="col-md-12">
+                                    <label class="custom-control custom-radio">
                                         <input type="radio" name="typeOfAccount" value="Personal" required>
                                         <span class="custom-control-label"></span>
                                         <a class="custom-control-description">Personal</a>
-                                    </strong>
-                                </label>
+                                    </label>
 
-                                <label class="custom-control custom-radio">
-                                    <strong>
+                                    <label class="custom-control custom-radio">
                                         <input type="radio" name="typeOfAccount" value="Business" required>
                                         <span class="custom-control-label"></span>
                                         <a class="custom-control-description">Business</a>
-                                    </strong>
-                                </label>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="bankName">Bank Name <sup>*</sup></label>
+                                <input type="text" name="bank" id="bankName" class="form-control">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="accountholdername">Bank Holder Name <sup>*</sup></label>
+                                <input type="text" name="accountholdername" id="accountholdername"
+                                    class="form-control">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="accountNumber">Bank Account Number <sup>*</sup></label>
+                                <input type="text" name="accountnumber" id="accountNumber" class="form-control">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="bankAccountType">Bank Account Type <sup>*</sup></label>
+                                <select name="bankaccounttype" id="bankAccountType" class="form-select">
+                                    <option value=""></option>
+                                    <option value="current">Cheque / Current </option>
+                                    <option value="savings">Savings</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="monthlyturnover">Bank Account monthly turnover <sup>*</sup></label>
+                                <input name="monthlyturnover" id="monthlyTurnover" class="form-control">
                             </div>
                         </div>
 
-                        <div class="col-md-6 form-group">
-                            <label for="bankName">Bank Name <sup>*</sup></label>
-                            <input type="text" name="bank" id="bankName" class="form-control">
-                        </div>
-
-                        <div class="col-md-6 form-group">
-                            <label for="accountholdername">Bank Holder Name <sup>*</sup></label>
-                            <input type="text" name="accountholdername" id="accountholdername"
-                                class="form-control">
-                        </div>
-
-                        <div class="col-md-6 form-group">
-                            <label for="accountNumber">Bank Account Number <sup>*</sup></label>
-                            <input type="text" name="accountnumber" id="accountNumber" class="form-control">
-                        </div>
-
-                        <div class="col-md-6 form-group">
-                            <label for="bankAccountType">Bank Account Type <sup>*</sup></label>
-                            <select name="bankaccounttype" id="bankAccountType" class="form-select">
-                                <option value=""></option>
-                                <option value="current">Cheque / Current </option>
-                                <option value="savings">Savings</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-6 form-group">
-                            <label for="monthlyturnover">Bank Account monthly turnover <sup>*</sup></label>
-                            <input name="monthlyturnover" id="monthlyTurnover" class="form-control">
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="tab-pane fade" id="loanproviderTab" role="tabpanel" aria-labelledby="home-tab">
-                    <h5>Loan Provider Information </h5>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label for="providerID">Your preffered provider <sup>*</sup></label>
-                            <select name="provider_id" id="providerID"></select>
-                        </div>
-
-                        <div class="col-md-6 form-group">
-                            <label for="loanProductID">Preffered Loan Product <sup>*</sup></label>
-                            <input type="text" name="loan_product_id" id="loanProductID" class="form-control">
+                        <div class="col-md-12 ">
+                            <button class='btn btn-warning btn-md float-left' type="button" data-bs-toggle="tab"
+                                data-bs-target="#businessandEmploymentTab"><span class="text-white">
+                                    << Prev</span></button>
+                            <button class='btn btn-success btn-md float-right' type="submit" id='savevehicle'><i
+                                    class="fa fa-save fa-fw"></i>Finish </button>
                         </div>
                     </div>
                 </div>
-
-            </div>
+            </form>
         </div>
     </div>
 </div>
 
-
-{{-- <div class="row">
-    <div class="col">
-        <div class="card m-t-35">
-            <div class="card-header bg-white">
-                <i class="fa fa-file-text-o"></i>
-                Validation Wizard
-            </div>
-            <div class="card-body m-t-20">
-                <!--main content-->
-                <div class="row">
-                    <div class="col">
-                        <!-- BEGIN FORM WIZARD WITH VALIDATION -->
-                        <form id="commentForm" method="post" action="#" class="validate">
-                            <div id="rootwizard">
-                                <ul class="nav nav-pills">
-                                    <li class="nav-item m-t-15">
-                                        <a class="nav-link" href="#tab1" data-toggle="tab">
-                                            <span class="userprofile_tab1">1</span>User
-                                            profile</a>
-                                    </li>
-                                    <li class="nav-item m-t-15">
-                                        <a class="nav-link" href="#tab2" data-toggle="tab">
-                                            <span class="userprofile_tab2">2</span>Profile
-                                            details</a>
-                                    </li>
-                                    <li class="nav-item m-t-15">
-                                        <a class="nav-link" href="#tab3" data-toggle="tab"><span>3</span>Finish</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content m-t-20">
-                                    <div class="tab-pane" id="tab1">
-                                        <div class="form-group">
-                                            <label for="userName" class="control-label">User
-                                                name *</label>
-                                            <input id="userName" name="username" type="text"
-                                                placeholder="Enter your name" class="form-control required">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email" class="control-label">Email
-                                                *</label>
-                                            <input id="email" name="email" placeholder="Enter your Email"
-                                                type="text" class="form-control required email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password" class="control-label">Password
-                                                *</label>
-                                            <input id="password" name="password" type="password"
-                                                placeholder="Enter your password" class="form-control required">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="confirm" class="control-label">Confirm
-                                                Password
-                                                *</label>
-                                            <input id="confirm" name="confirm" type="password"
-                                                placeholder="Confirm your password " class="form-control required">
-                                        </div>
-                                        <ul class="pager wizard pager_a_cursor_pointer">
-                                            <li class="previous">
-                                                <a><i class="fa fa-long-arrow-left"></i>
-                                                    Previous</a>
-                                            </li>
-                                            <li class="next">
-                                                <a>Next <i class="fa fa-long-arrow-right"></i>
-                                                </a>
-                                            </li>
-                                            <li class="next finish" style="display:none;">
-                                                <a>Finish</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="tab-pane" id="tab2">
-                                        <div class="form-group">
-                                            <label for="name1" class="control-label">First name
-                                                *</label>
-                                            <input id="name1" name="val_first_name"
-                                                placeholder="Enter your First name" type="text"
-                                                class="form-control required">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="surname1" class="control-label">Last
-                                                name *</label>
-                                            <input id="surname1" name="lname" type="text"
-                                                placeholder=" Enter your Last name" class="form-control required">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Gender</label>
-                                            <select class="custom-select form-control" id="gender"
-                                                title="Select an account type...">
-                                                <option>Select</option>
-                                                <option>MALE</option>
-                                                <option>FEMALE</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="address">Address *</label>
-                                            <input id="address" name="val_address" type="text"
-                                                class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="age" class="control-label">Age *</label>
-                                            <input id="age" name="val_age" type="text" maxlength="3"
-                                                class="form-control required number">
-                                        </div>
-                                        <ul class="pager wizard pager_a_cursor_pointer">
-                                            <li class="previous">
-                                                <a><i class="fa fa-long-arrow-left"></i>
-                                                    Previous</a>
-                                            </li>
-                                            <li class="next">
-                                                <a>Next <i class="fa fa-long-arrow-right"></i>
-                                                </a>
-                                            </li>
-                                            <li class="next finish" style="display:none;">
-                                                <a>Finish</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="tab-pane" id="tab3">
-                                        <div class="form-group">
-                                            <label>Home number *</label>
-                                            <input type="text" class="form-control" id="phone1" name="phone1"
-                                                placeholder="(999)999-9999">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Personal number *</label>
-                                            <input type="text" class="form-control" id="phone2" name="phone2"
-                                                placeholder="(999)999-9999">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Alternate number *</label>
-                                            <input type="text" class="form-control" id="phone3" name="phone3"
-                                                placeholder="(999)999-9999">
-                                        </div>
-                                        <div class="form-group">
-                                            <span>Terms and Conditions *</span>
-                                            <br>
-                                            <label class="custom-control custom-checkbox wizard_label_block">
-                                                <input type="checkbox" id="acceptTerms" name="acceptTerms"
-                                                    class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                                <span
-                                                    class="custom-control-description custom_control_description_color">I
-                                                    agree with the Terms and Conditions.</span>
-                                            </label>
-
-                                        </div>
-                                        <ul class="pager wizard pager_a_cursor_pointer">
-                                            <li class="previous">
-                                                <a><i class="fa fa-long-arrow-left"></i>
-                                                    Previous</a>
-                                            </li>
-                                            <li class="next">
-                                                <a>Next <i class="fa fa-long-arrow-right"></i>
-                                                </a>
-                                            </li>
-                                            <li class="next finish" style="display:none;">
-                                                <a>Finish</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="myModal" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-
-                                            <h4 class="modal-title">Wizard</h4>
-                                            <button type="button" class="close"
-                                                data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>You Submitted Successfully.</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                OK
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
 
 
 @section('footer_scripts')

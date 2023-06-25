@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Dealer as EventsDealer;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,7 +24,7 @@ class Dealer extends Model
     ];
 
     public function add($request) {
-        $dealer = $this->dealer->create([
+        $dealer = $this->create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -181,10 +182,10 @@ class Dealer extends Model
     {
         if (!is_null(auth()->user()->dealer_id)) {
              $dealer = $this->find(auth()->user()->dealer_id);
-            $subscriptions = $dealer->subscriptions()->wherePivot('expiry_date','>',Carbon::now())->get(); 
+            $subscriptions = $dealer->subscriptions()->wherePivot('expiry_date','>',Carbon::now())->get();
         }else {
             $user = User::find(auth()->id());
-            $subscriptions = $user->subscriptions()->wherePivot('expiry_date', '>', Carbon::now())->get(); 
+            $subscriptions = $user->subscriptions()->wherePivot('expiry_date', '>', Carbon::now())->get();
         }
 
         return $subscriptions;

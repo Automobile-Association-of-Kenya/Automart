@@ -91,29 +91,6 @@
     <!-- Footer start -->
 
     <footer class="footer">
-
-        <div class="subscribe-newsletter">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <h3>Subscribe Newsletter</h3>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="Subscribe-box">
-                            <div class="newsletter-content-wrap">
-                                <form class="newsletter-form d-flex" action="#">
-                                    <input class="form-control" type="email" id="email"
-                                        placeholder="Email Address...">
-                                    <button class="btn btn-theme" type="submit"><i
-                                            class="fa fa-paper-plane"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
         <div class="footer-inner">
             <div class="container">
                 <div class="row">
@@ -154,19 +131,24 @@
                                 <li>
                                     <a href="{{ url('/') }}"><i class="fa fa-angle-right"></i>Home</a>
                                 </li>
+
                                 <li>
                                     <a href="{{ route('about') }}"><i class="fa fa-angle-right"></i>About Us</a>
                                 </li>
+
                                 <li>
                                     <a href="{{ route('services.index') }}"><i
                                             class="fa fa-angle-right"></i>Services</a>
                                 </li>
+
                                 <li>
                                     <a href="{{ route('new') }}"><i class="fa fa-angle-right"></i>Vehicles</a>
                                 </li>
+
                                 <li>
                                     <a href="{{ route('contact') }}"><i class="fa fa-angle-right"></i>Contact Us</a>
                                 </li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -175,6 +157,7 @@
                 </div>
             </div>
         </div>
+
         <div class="sub-footer">
             <div class="container">
                 <div class="row">
@@ -186,16 +169,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="social-media clearfix">
                             <div class="social-list">
-                                <div class="lds-roller">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -225,7 +199,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="financeModalLabel"
+    {{-- <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="financeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
             <div class="modal-content" id="vehiclePreviewSection">
@@ -373,35 +347,17 @@
 
                     <div class="login-social border-t mt-1 pt-2 mb-1 text-center">
                         <p class="mb-2">OR</p>
+                        <br>
 
-                        {{-- <a href="{{ route('twitter.login') }}" class="btn-twitter"><i class="fa fa-twitter"
-                                aria-hidden="true"></i>
-                            Twitter</a> --}}
-                            <br>
-
-                            <a class="btn-google" id="buttonDiv"></a> <br>
-                            <a href="{{ route('facebook.login') }}" class="btn-facebook mt-2 btn-block"><i class="fa fa-facebook"
-                                aria-hidden="true"></i>
+                        <a class="btn-google" id="buttonDiv"></a> <br>
+                        <a href="{{ route('facebook.login') }}" class="btn-facebook mt-2 btn-block"><i
+                                class="fa fa-facebook" aria-hidden="true"></i>
                             Facebook</a>
-
-                        {{-- <a href="#" class="btn-google"><i class="fa fa-google" aria-hidden="true"></i>
-                            Google</a> --}}
-                        {{-- <div id="g_id_onload"
-                            data-client_id="542097242134-vvu2f4mhg8226pj8s9dvkfr7je4nfah0.apps.googleusercontent.com"
-                            data-context="signup" data-ux_mode="popup"
-                            data-callback="http://127.0.0.1:800/loginwithgoogle" data-nonce=""
-                            data-auto_prompt="true">
-                        </div>
-
-                        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
-                            data-text="signin_with" data-size="medium" data-logo_alignment="left">
-                        </div> --}}
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
 

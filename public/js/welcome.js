@@ -82,7 +82,7 @@
     //                 });
 
     //                 vehicle +=
-    //                     '<div class="col-lg-4 col-md-4"><div class="car-box-3"><div class="car-thumbnail"><a href="/vehicle-details/' +
+    //                     '<div class="col-lg-4 col-md-4"><div class="car-box-3"><div class="car-thumbnail"><a href="/vehicle/' +
     //                     value.id +
     //                     '" class="car-img" ><div class="tag-2 bg-active">' +
     //                     value.usage +
@@ -99,7 +99,7 @@
     //                     value.id +
     //                     '"><i class="fa fa-heart-o"></i></a><div class="car-magnify-gallery">' +
     //                     img +
-    //                     '</div></div></div></div></div><div class="detail"><h1 class="title"><a href="/vehicle-details/' +
+    //                     '</div></div></div></div></div><div class="detail"><h1 class="title"><a href="/vehicle/' +
     //                     value.id +
     //                     '">' +
     //                     value.make.make +
@@ -196,7 +196,7 @@
     //                     '" alt="hidden-img"></a>';
     //             });
     //             div +=
-    //                 '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="/vehicle-details/' +
+    //                 '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="/vehicle/' +
     //                 vehicles.id +
     //                 '" class="car-img"><div class="for">' +
     //                 vehicle.usage +
@@ -216,7 +216,7 @@
     //                 images[0] +
     //                 '" alt="hidden-img"> </a>' +
     //                 imagessection +
-    //                 '</div></div></div></div></div> <div class="detail"><h1 class="title"><a href="/vehicle-details/' +
+    //                 '</div></div></div></div></div> <div class="detail"><h1 class="title"><a href="/vehicle/' +
     //                 vehicle.id +
     //                 '">' +
     //                 vehicle.year +
@@ -270,7 +270,7 @@
     //                     '" alt="hidden-img"></a>';
     //             });
     //             div +=
-    //                 '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="/vehicle-details/' +
+    //                 '<div class="col-lg-4 col-md-6"><div class="car-box-3"><div class="car-thumbnail"><a href="/vehicle/' +
     //                 vehicles.id +
     //                 '" class="car-img"><div class="for">' +
     //                 vehicle.usage +
@@ -292,7 +292,7 @@
     //                 images[0] +
     //                 '" alt="hidden-img"> </a>' +
     //                 imagessection +
-    //                 '</div></div></div></div></div> <div class="detail"><h1 class="title"><a href="/vehicle-details/' +
+    //                 '</div></div></div></div></div> <div class="detail"><h1 class="title"><a href="/vehicle/' +
     //                 vehicle.id +
     //                 '">' +
     //                 vehicle.year +
@@ -337,7 +337,7 @@
     //             var carBox = $("<div>").addClass("car-box-3");
     //             var carThumbnail = $("<div>").addClass("car-thumbnail");
     //             var carImg = $("<a>")
-    //                 .attr("href", "/vehicle-details/" + item.id)
+    //                 .attr("href", "/vehicle/" + item.id)
     //                 .addClass("car-img");
     //             var forDiv = $("<div>").addClass("for").text(item.usage);
     //             var priceBox = $("<div>").addClass("price-box");
@@ -426,7 +426,7 @@
     //             var detailDiv = $("<div>").addClass("detail");
     //             var titleH1 = $("<h1>").addClass("title");
     //             var titleLink = $("<a>")
-    //                 .attr("href", "/vehicle-details/" + item.id)
+    //                 .attr("href", "/vehicle/" + item.id)
     //                 .text(
     //                     item.year +
     //                         " " +

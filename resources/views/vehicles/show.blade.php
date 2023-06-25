@@ -19,6 +19,7 @@
 @section('main')
     @php
         $images = json_decode($vehicle->images);
+        $vehicle_no = $vehicle->vehicle_no ?? $vehicle->id;
     @endphp
     <div class="sub-banner">
         <div class="container breadcrumb-area">
@@ -26,7 +27,7 @@
                 <ul class="breadcrumbs">
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li><a href="{{ route('vehicles.list') }}">Vehicles</a></li>
-                    <li class="active">{{ $vehicle->make->make }}</li>
+                    <li class="active">{{ $vehicle->year.' '.$vehicle->make->make.' '.$vehicle->model->model }}</li>
                 </ul>
             </div>
         </div>
@@ -86,15 +87,12 @@
                                 </div>
 
                                 <div class="col-md-3 mt-1">
-                                    <a href="{{ route('buy', $vehicle->vehicle_no ?? $vehicle->id) }}"
-                                        id="financeRequestToggle" class="btn btn-success btn-block"
-                                        data-id="{{ $vehicle->id }}" data-no="{{ $vehicle->vehicle_no }}">Buy</a>
+                                    <a href="{{ route('buy',$vehicle_no) }}"
+                                        id="financeRequestToggle" class="btn btn-success btn-block">Buy</a>
                                 </div>
 
                                 <div class="col-md-3 mt-1">
-                                    <a href="{{ route('loan', $vehicle->vehicle_no ?? $vehicle->id) }}"
-                                        id="financeRequestToggle" class="btn btn-success btn-block"
-                                        data-id="{{ $vehicle->id }}" data-no="{{ $vehicle->vehicle_no }}">Apply for
+                                    <a href="{{ route('loan', $vehicle_no) }}" class="btn btn-success btn-block">Apply for
                                         Loan</a>
                                 </div>
 
@@ -198,6 +196,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     <div class="accordion accordion-flush" id="accordionFlushExample2">
                                         <div class="accordion-item">
@@ -516,10 +515,10 @@
                             </div>
                             <div class="detail">
                                 <h1 class="title">
-                                    <a href="{{ url('/vehicle-details/'.$vehicle_no.'/discount') }}">{{ $item->year.' '.$item->make->make.' '.$item->model->model }}</a>
+                                    <a href="{{ url('/vehicle/'.$vehicle_no.'/discount') }}">{{ $item->year.' '.$item->make->make.' '.$item->model->model }}</a>
                                 </h1>
                                 <div class="location">
-                                    <a href="{{ url('/vehicle-details/'.$vehicle_no.'/discount') }}">
+                                    <a href="{{ url('/vehicle/'.$vehicle_no.'/discount') }}">
                                         <i class="flaticon-pin"></i>{{$location}}
                                     </a>
                                 </div>

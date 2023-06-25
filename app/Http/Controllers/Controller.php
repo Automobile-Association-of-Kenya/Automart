@@ -34,10 +34,6 @@ class Controller extends BaseController
     protected $account;
     protected $payment;
     protected $loanproduct;
-
-    public function checksubscription()
-    {
-
-    }
+    protected $purchase;
 
 }

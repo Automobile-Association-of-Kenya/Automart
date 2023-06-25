@@ -31,7 +31,7 @@
                         <div class="car-box-3">
 
                             <div class="car-thumbnail">
-                                <a href="{{ url('/vehicle-details/' .$vehicle_no. '/latest') }}"
+                                <a href="{{ url('/vehicle/' .$vehicle_no. '/latest') }}"
                                     class="car-img">
                                     <div class="for">{{ $item->usage }}</div>
                                     <div class="price-box">
@@ -80,12 +80,12 @@
                             <div class="detail">
                                 <h1 class="title">
                                     <a class="text-success"
-                                        href="{{ url('/vehicle-details/' .$vehicle_no. '/latest') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
+                                        href="{{ url('/vehicle/' .$vehicle_no. '/latest') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                 </h1>
                                 <ul class="custom-list">
                                     <li>
                                         <a
-                                            href="{{ url('/vehicle-details/' .$vehicle_no. '/latest') }}">{{ $item->usage }}</a>
+                                            href="{{ url('/vehicle/' .$vehicle_no. '/latest') }}">{{ $item->usage }}</a>
                                         &nbsp;|&nbsp;
                                     </li>
                                     <li>
@@ -108,9 +108,9 @@
                                 <div class="buttons mb-2 text-center">
                                     <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
                                         data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp; Enquire</a>
-                                    <a href="{{ url('/vehicle/' . $vehicle_no . '/buy') }}"
+                                    <a href="{{ route('buy', $vehicle_no) }}"
                                         class="btn btn-success btn-sm"><i class="fa fa-hand"></i> Buy</a>
-                                    <a href="{{ url('/vehicle/' . $vehicle_no . '/loan') }}"
+                                    <a href="{{ route('loan', $vehicle_no) }}"
                                         class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i> Apply
                                         Loan</a>
                                 </div>
@@ -153,7 +153,7 @@
                         <div class="car-box-3">
 
                             <div class="car-thumbnail">
-                                <a href="{{ url('/vehicle-details/' . $vehicle_no . '/discount') }}" class="car-img">
+                                <a href="{{ url('/vehicle/' . $vehicle_no . '/discount') }}" class="car-img">
                                     <div class="for">{{ $item->usage }}</div>
                                     <div class="price-box">
                                         <span class="del"><del>{{ number_format($item->initial_price, 2) }}</del></span>
@@ -201,12 +201,12 @@
                             <div class="detail">
                                 <h1 class="title">
                                     <a class="text-success"
-                                        href="{{ url('/vehicle-details/' . $vehicle_no . '/discount') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
+                                        href="{{ url('/vehicle/' . $vehicle_no . '/discount') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                 </h1>
                                 <ul class="custom-list">
                                     <li>
                                         <a
-                                            href="{{ url('/vehicle-details/' . $vehicle_no . '/discount') }}">{{ $item->usage }}</a>
+                                            href="{{ url('/vehicle/' . $vehicle_no . '/discount') }}">{{ $item->usage }}</a>
                                         &nbsp;|&nbsp;
                                     </li>
                                     <li>
@@ -229,9 +229,9 @@
                                 <div class="buttons mb-2 text-center">
                                     <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
                                         data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp; Enquire</a>
-                                    <a href="{{ url('/vehicle/' . $vehicle_no . '/buy') }}"
+                                    <a href="{{ route('buy',$vehicle_no) }}"
                                         class="btn btn-success btn-sm"><i class="fa fa-hand"></i> Buy</a>
-                                    <a href="{{ url('/vehicle/' . $vehicle_no . '/loan') }}"
+                                    <a href="{{ route('loan',$vehicle_no) }}"
                                         class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i> Apply
                                         Loan</a>
                                 </div>

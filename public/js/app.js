@@ -101,8 +101,6 @@ $(function () {
             '<button class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
     });
 
-    
-
     // Partners strat
 
     // Accordion strat
@@ -897,7 +895,7 @@ $(function () {
     //                 });
 
     //                 vehicle +=
-    //                     '<div class="col-lg-4 col-md-4"><div class="car-box-3"><div class="car-thumbnail"><a href="/vehicle-details/' +
+    //                     '<div class="col-lg-4 col-md-4"><div class="car-box-3"><div class="car-thumbnail"><a href="/vehicle/' +
     //                     value.id +
     //                     '" class="car-img" ><div class="tag-2 bg-active">' +
     //                     value.usage +
@@ -914,7 +912,7 @@ $(function () {
     //                     value.id +
     //                     '"><i class="fa fa-heart-o"></i></a><div class="car-magnify-gallery">' +
     //                     img +
-    //                     '</div></div></div></div></div><div class="detail"><h1 class="title"><a href="/vehicle-details/' +
+    //                     '</div></div></div></div></div><div class="detail"><h1 class="title"><a href="/vehicle/' +
     //                     value.id +
     //                     '">' +
     //                     value.make.make +
@@ -943,43 +941,42 @@ $(function () {
     //         });
     // });
 
-     function getTypesWithVehicle() {
-         $.getJSON("/types-with-vehicles", function (makes) {
-             let item = "",
-                 option = '<option value="">All</option>',
-                 li = "";
-             $.each(makes, function (key, value) {
-                 li +=
-                     '<li><a href="/type-vehicles/' +
-                     value.id +
-                     '">' +
-                     value.type +
-                     "</a></li>";
-                 item +=
-                     '<a class="dropdown-item" href="/type-vehicles/' +
-                     value.id +
-                     '">' +
-                     value.type +
-                     "</a>";
-                 option +=
-                     "<option value=" +
-                     value.id +
-                     ">" +
-                     value.type +
-                     "</option>";
-             });
-             $("#filterMakesID").html(option);
-             $("#vehicleGroupTypes").append(item);
-             $("#vehicleGroupType").append(li);
-             $("#filterVehicleType").html(option);
-             let currenttype = $("#currentType").val();
-             $("#filterVehicleType option[value=" + currenttype + "]").prop(
-                 "selected",
-                 true
-             );
-         });
-     }
-     getTypesWithVehicle();
+    function getTypesWithVehicle() {
+        $.getJSON("/types-with-vehicles", function (types) {
+            let item = "",
+                option = '<option value="">All</option>',
+                li = "";
+            $.each(types, function (key, value) {
+                li +=
+                    '<li><a href="/vehicles/type/' +
+                    value.id +
+                    '">' +
+                    value.type +
+                    "</a></li>";
+                item +=
+                    '<a class="dropdown-item" href="/vehicles/type/' +
+                    value.id +
+                    '">' +
+                    value.type +
+                    "</a>";
+                option +=
+                    "<option value=" +
+                    value.id +
+                    ">" +
+                    value.type +
+                    "</option>";
+            });
+            $("#vehicleGroupTypes").append(item);
+            $("#vehicleGroupType").append(li);
+            $("#filterVehicleType").html(option);
+            let currenttype = $("#currentType").val();
+            $("#filterVehicleType option[value=" + currenttype + "]").prop(
+                "selected",
+                true
+            );
+        });
+    }
+    getTypesWithVehicle();
 
     $("body").on("click", "#vehicleDetailsModalToggle", function (event) {
         let vehicle_id = $(this).data("id");
@@ -1020,7 +1017,7 @@ $(function () {
                 vehicle.price +
                 '</li></ul></section><div class="description"><h3>Description</h3><p>' +
                 vehicle.description +
-                '</p><a href="/vehicle-details/' +
+                '</p><a href="/vehicle/' +
                 vehicle.id +
                 '" class="btn btn-md btn-round btn-theme">Show Detail</a></div></div></div></div></div>';
             $("#vehiclePreviewSection").html(vehicledata);
@@ -1064,13 +1061,13 @@ $(function () {
                 logo = "";
             $.each(vehicles, function (key, value) {
                 li +=
-                    '<li><a href="/make-vehicles/' +
+                    '<li><a href="/vehicles/make/' +
                     value.id +
                     '">' +
                     value.make +
                     "</a></li>";
                 item +=
-                    '<a class="dropdown-item" href="/make-vehicles/' +
+                    '<a class="dropdown-item" href="/vehicles/make/' +
                     value.id +
                     '">' +
                     value.make +
@@ -1082,7 +1079,7 @@ $(function () {
                     value.make +
                     "</option>";
                 brand +=
-                    '<a href="make-vehicles/' +
+                    '<a href="vehicles/make/' +
                     value.id +
                     '"><div class="custom-box"><img src="/brands/' +
                     value.logo +
@@ -1240,5 +1237,65 @@ $(function () {
         if (make_id !== "" && make_id !== null) {
             getVehicleModels(make_id);
         }
+    });
+
+    let vehiclePurchaseForm = $("#vehiclePurchaseForm"),
+        purchaseVehicleID = $("#purchaseVehicleID"),
+        buyerName = $("#buyerName"),
+        idNO = $("#idNO"),
+        buyerPhone = $("#buyerPhone"),
+        buyerEmail = $("#buyerEmail"),
+        pickupType = $("#pickupType"),
+        homeEstate = $("#homeEstate"),
+        houseNumber = $("#houseNumber"),
+        paymentMethod = $("#paymentMethod");
+    vehiclePurchaseForm.on("submit", function (event) {
+        event.preventDefault();
+        let $this = $(this),
+            submit = $this.find("button[type='submit']");
+        data = {
+            _token: $this.find("input[name='_token']").val(),
+            vehicle_id: purchaseVehicleID.val(),
+            name: buyerName.val(),
+            id_no: idNO.val(),
+            phone: buyerPhone.val(),
+            email: buyerEmail.val(),
+            pickup: pickupType.val(),
+            estate: homeEstate.val(),
+            house_number: houseNumber.val(),
+            payment_method: paymentMethod.val(),
+        };
+        console.log(data);
+        submit.prop("disabled", true);
+        $.post("/purchase", data)
+            .done(function (params) {
+                console.log(params);
+                submit.prop("disabled", false);
+                let result = JSON.parse(params);
+                if (result.status == "success") {
+                    showSuccess(result.message, "#purchasefeedback");
+                    window.setTimeout(function () {
+                        window.location.href = "/login";
+                    }, 3000);
+                } else {
+                    showError(result.error, "#purchasefeedback");
+                }
+            })
+            .fail(function (error) {
+                console.log(error);
+                submit.prop("disabled", false);
+                if (error.status == 422) {
+                    var errors = "";
+                    $.each(error.responseJSON.errors, function (key, value) {
+                        errors += value + "!";
+                    });
+                    showError(errors, "#purchasefeedback");
+                } else {
+                    showError(
+                        "Error occurred during processing",
+                        "#purchasefeedback"
+                    );
+                }
+            });
     });
 })(jQuery);

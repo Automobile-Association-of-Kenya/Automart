@@ -33,7 +33,7 @@ class Payment extends Model
         return $this->belongsTo(Dealer::class, 'dealer_id');
     }
 
-    public function initiatempesa($account, $subscription, $dealer_id, $phone)
+    public function initiatempesa($account, $subscription, $dealer_id = null, $phone)
     {
         $url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
         $consumer_secret = $account->mpesa_secret;
