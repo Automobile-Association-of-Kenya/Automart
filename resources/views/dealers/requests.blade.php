@@ -1,4 +1,4 @@
-@extends('layouts.dealerlayout')
+@extends('layouts.dealer')
 
 @section('title')
     Requests @parent
@@ -45,7 +45,7 @@
 
             <div class="card-body tab-content">
                 <div class="tab-pane fade show active" id="quotesTab" role="tabpanel">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover table-sm">
                         <thead>
                             <th>#</th>
                             <th>Customer</th>
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="tab-pane fade" id="finacesTab" role="tabpanel">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover table-sm">
                         <thead>
                             <th>#</th>
                             <th>Customer</th>
@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="tab-pane fade" id="tradeinsTab" role="tabpanel">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover table-sm">
                         <thead>
                             <th>#</th>
                             <th>Customer</th>

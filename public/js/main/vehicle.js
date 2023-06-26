@@ -1398,12 +1398,17 @@
         if (year == "" && year == undefined) {
             errors.push("Year of manufacture is required");
         }
-
         if (color == "" && color == undefined) {
             errors.push("Vehicle color is required");
         }
+        if (enginecc.length > 6) {
+            errors.push("Engine CC cannot be greater than 6 characters");
+        }
         if (price == "" && price == undefined) {
             errors.push("Vehicle price is required");
+        }
+        if (mileage.length > 6) {
+            errors.push("Mileage cannot be greater than 6 characters");
         }
         if (errors.length > 0) {
             p = "";
@@ -1490,11 +1495,10 @@
 
                     $.ajax({
                         method: "POST",
-                        url: "/vehicles",
+                        url: "/vehicles/store",
                         data: data,
                         success: function (params) {
                             console.log(params);
-
                             savevehicle.prop("disabled", false);
                             let result = JSON.parse(params);
                             if (result.status == "success") {

@@ -183,7 +183,7 @@
                                             <div class="overlap-box">
                                                 <div class="overlap-btns-area">
                                                     <a class="overlap-btn" data-bs-toggle="modal"
-                                                        data-bs-target="#vehicleDetailsModalToggle"
+                                                        data-bs-target="#vehicleDetailsModal"
                                                         data-id="{{ $item->id }}" id="vehicleDetailsModalToggle">
                                                         <i class="fa fa-eye-slash"></i>
                                                     </a>

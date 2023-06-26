@@ -188,8 +188,8 @@
         </form>
     </div>
 
-    <div class="car-model-2">
-        <div class="modal fade" id="vehicleDetailsModalToggle" tabindex="-1" role="dialog"
+    {{-- <div class="car-model-2"> --}}
+        <div class="modal fade" id="vehicleDetailsModal" tabindex="-1" role="dialog"
             aria-labelledby="carOverviewModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content" id="vehiclePreviewSection">
@@ -197,7 +197,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    {{-- </div> --}}
 
     {{-- <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="financeModalLabel"
         aria-hidden="true">

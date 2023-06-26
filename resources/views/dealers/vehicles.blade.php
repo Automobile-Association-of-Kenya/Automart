@@ -1,7 +1,7 @@
 @extends('layouts.dealer')
 
 @section('title')
-    My Vehicles @parent
+    Vehicles @parent
 @endsection
 
 @section('header_styles')
@@ -26,64 +26,9 @@
 @endsection
 
 @section('main')
-    <main style="padding: 1em;">
-        {{-- <div class="container"> --}}
+    <main>
         <div class="row">
             <div class="col-md-12" id="vehicledetailsSection">
-                {{-- <div class="alert alert-primary"> --}}
-                {{-- <div class="row">
-                                <div class="col">
-                                    <label for="cardvehicleno">Views: <span class='font-weight-bold'
-                                            id="cardvehicleviews"></span></label>
-                                </div>
-
-                                <div class="col">
-                                    <label for="cardvehiclelikes">Likes: <span class='font-weight-bold'
-                                            id="cardvehiclelikes"></span></label>
-                                </div>
-
-                                <div class="col">
-                                    <label for="cardvehiclecdealer">Dealer: <span class='font-weight-bold'
-                                            id="cardvehiclecdealer"></span></label>
-                                </div>
-                            </div> --}}
-
-                {{-- <div class="row">
-                                <div class="col">
-                                    <label for="cardvehicleenquiries">Enquiries: <span class='font-weight-bold'
-                                            id="cardvehicleloans"></span></label>
-                                </div>
-
-                                <div class="col">
-                                    <label for="cardvehiclefinance">ROF: <span class='font-weight-bold'
-                                            id="cardvehiclefinance">0.00</span></label>
-                                </div>
-
-                                <div class="col">
-                                    <label for="cardvehiclecreated">Created at: <span class='font-weight-bold'
-                                            id="cardvehiclecreated"></span></label>
-                                </div>
-                            </div> --}}
-
-                {{-- <div class="row">
-                                    <div class="col">
-                                        <label for="cardtotalsavings">Total Savings <span class='font-weight-bold'
-                                                id="cardtotalsavings">0.00</span></label>
-                                    </div>
-
-                                    <div class="col">
-                                        <label for="cardgauaranteeddeposits">Guaranteed Deposits: <span
-                                                class='font-weight-bold' id="cardgauaranteeddeposits">0.00</span></label>
-                                    </div>
-
-                                    <div class="col">
-                                        <label for="cardfreedeposits">Free Deposits: <span class='font-weight-bold'
-                                                id="cardfreedeposits">0.00</span></label>
-                                    </div>
-                                </div> --}}
-                {{-- </div> --}}
-                <!-- Set up tabs  -->
-
                 <nav class="nav-justified bg-white">
                     <div class="nav nav-tabs " id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="pop1-tab" data-toggle="tab" href="#vehicledetails"
@@ -103,7 +48,11 @@
                                     class="fa fa-list text-danger"></i></button>
                         </div>
 
-
+                        @if (Session::has('dealerinfo'))
+                            <div class="alert alert-warning" role="alert">
+                                {!! Session::get('dealerinfo') !!}
+                            </div>
+                        @endif
                         <div class="bg-primary pb-3 pt-3 pl-2 pr-1 border-rounded filterSection"
                             style="border-radius: 6px; display:none;">
 
@@ -198,7 +147,9 @@
                                                 <div class="col-md-3 form-group">
                                                     <label for="company">Fuel Type: <sup>*</sup></label>
                                                     <div class="input-group">
-                                                        <select name="fuel_type" id="fuelType" class="form-control form-control--md chzn-select" style="width: 100%;" required>
+                                                        <select name="fuel_type" id="fuelType"
+                                                            class="form-control form-control--md chzn-select"
+                                                            style="width: 100%;" required>
                                                             <option value="">Select One</option>
                                                             <option value="Petrol">Petrol</option>
                                                             <option value="Diesel">Diesel</option>
@@ -231,7 +182,9 @@
                                                 <div class="col-md-3 form-group">
                                                     <label for="company">Condition: <sup>*</sup></label>
                                                     <div class="input-group">
-                                                        <select name="usage" id="usage" class="form-control form-control--md chzn-select" style="width:100%;">
+                                                        <select name="usage" id="usage"
+                                                            class="form-control form-control--md chzn-select"
+                                                            style="width:100%;">
                                                             <option value="">Select One</option>
                                                             <option value="New">New</option>
                                                             <option value="Semi-new">Semi New</option>
@@ -280,7 +233,7 @@
 
                                         <div class="card-body" id="additionInfo">
                                             <div class="row">
-                                                 <div class="col-md-3 form-group">
+                                                <div class="col-md-3 form-group">
                                                     <label for="engine">Engine: </label>
                                                     <div class="input-group">
                                                         <input type="text" name="engine" id="engine"
@@ -457,21 +410,23 @@
                                             <div id="imageFeedback"></div>
                                         </div>
                                     </div>
-                                    {{-- @if (session('subscription')->cost > 0)
-    <p class="text-warning">Hshshjj  we reaaa</p>
-                                    @endif --}}
+
+                                    @if (Session::has('subscriptioninfo'))
+                                        <div class="alert alert-warning" role="alert">
+                                            {!! Session::get('subscriptioninfo') !!}
+                                        </div>
+                                    @endif
 
                                     <div id="vehiclefeedback"></div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <button class='btn btn-success btn-md' type="submit" id='savevehicle'><i
-                                                    class="fal fa-save fa-lg fa-fw"></i>
-                                                Save
-                                                vehicle</button>
-                                            <button class='btn btn-outline-warning btn-md' id='clearvehicle'><i
-                                                    class="fal fa-broom fa-lg fa-fw"></i>
-                                                Clear Fields</button>
-                                        </div>
+
+                                    <div class="col-md-12">
+                                        <button class='btn btn-success btn-md' type="submit" id='savevehicle'><i
+                                                class="fal fa-save fa-lg fa-fw"></i>
+                                            Save
+                                            vehicle</button>
+                                        <button class='btn btn-outline-warning btn-md' id='clearvehicle'><i
+                                                class="fal fa-broom fa-lg fa-fw"></i>
+                                            Clear Fields</button>
                                     </div>
                                 </form>
                             </div>

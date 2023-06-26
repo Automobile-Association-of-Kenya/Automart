@@ -91,8 +91,8 @@ Route::resource('subscriptions', SubscriptionController::class);
 Route::get('subscription/{id}', [SubscriptionController::class, 'create'])->name('subscription.create');
 Route::get('subscription-plans', [SubscriptionController::class, 'plans'])->name('subscription.plan');
 Route::get('subscription-features', [SubscriptionController::class, 'features']);
-
 Route::post('subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+Route::get('/subscriptions-shortcut', [SubscriptionController::class, 'shortcut']);
 
 Route::get('mpesaconfirm/{recc}/{checjc}', [PaymentController::class, 'mpesaconfirm']);
 /** Subscriptions */
@@ -154,14 +154,19 @@ Route::get('latest', [ApplicationController::class, 'latest'])->name('latest');
 
 // Route::get('discounts', [VehicleController::class, 'discounts'])->name('discounts');
 
+Route::prefix('vehicles')->group(function() {
+    Route::get('show', [VehicleController::class, 'show'])->name('vehicles.show');
+    Route::post('store', [VehicleController::class, 'store'])->name('vehicles.store');
+});
+
 Route::get('vehicles-buy/{no}', [ApplicationController::class, 'buy'])->name('buy');
-Route::get('vehicles-loan/{no}', [ApplicationController::class, 'loan'])->name('loan');
+Route::get('vehicle-loan/{no}', [ApplicationController::class, 'loan'])->name('loan');
+Route::post('loan-application', [ApplicationController::class,'apply']);
 Route::post('purchase', [ApplicationController::class, 'purchase'])->name('purchase');
 Route::view('logins', 'auth.logins');
 Route::get('like/{id}', [ApplicationController::class,'like']);
 Route::get('view/{id}', [ApplicationController::class,'view']);
 Route::get('whatsapp/{id}', [ApplicationController::class, 'whatsapp']);
-
 
 
 /** Loan Routes */

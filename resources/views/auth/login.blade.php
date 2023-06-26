@@ -53,17 +53,23 @@
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="email" name="email" id="loginEmail"
-                                            class="form-control form-control-md" required>
+                                            class="form-control form-control-md @error('email') @enderror" required>
+                                            @if ($errors->has('email'))
+                                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                                @endif
                                     </div>
 
                                     <div class="form-group">
                                         <label class="float-left" for="password">Password</label>
                                         <div class="input-group">
-                                            <input type="password" name="password" id="loginPassword" class="form-control">
+                                            <input type="password" name="password" id="loginPassword" class="form-control @error('email') @enderror">
                                             <div class="input-group-append">
                                                 <span class="input-group-text" id="show-password"><i
                                                         class="fa fa-eye"></i></span>
                                             </div>
+                                            @if ($errors->has('password'))
+                                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                                @endif
                                         </div>
                                     </div>
 

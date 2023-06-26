@@ -27,7 +27,7 @@
                 <ul class="breadcrumbs">
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li><a href="{{ route('vehicles.list') }}">Vehicles</a></li>
-                    <li class="active">{{ $vehicle->year.' '.$vehicle->make->make.' '.$vehicle->model->model }}</li>
+                    <li class="active">{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}</li>
                 </ul>
             </div>
         </div>
@@ -41,7 +41,7 @@
 
                     <div class="slide car-details-section cds-2 mb-30">
 
-                        <div class="heading-car clearfix ">
+                        <div class="heading-car clearfix">
                             <div class="pull-left">
                                 <h3>{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}</h3>
                                 <p>
@@ -87,8 +87,8 @@
                                 </div>
 
                                 <div class="col-md-3 mt-1">
-                                    <a href="{{ route('buy',$vehicle_no) }}"
-                                        id="financeRequestToggle" class="btn btn-success btn-block">Buy</a>
+                                    <a href="{{ route('buy', $vehicle_no) }}" id="financeRequestToggle"
+                                        class="btn btn-success btn-block">Buy</a>
                                 </div>
 
                                 <div class="col-md-3 mt-1">
@@ -196,7 +196,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     <div class="accordion accordion-flush" id="accordionFlushExample2">
                                         <div class="accordion-item">
@@ -218,130 +218,6 @@
                                     </div>
                                 </div>
 
-                                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                    <div class="accordion accordion-flush" id="accordionFlushExample3">
-                                        <div class="accordion-item">
-                                            <div class="related-car mb-40">
-
-                                                <h3 class="heading-2">Related Vehicles</h3>
-
-                                                <div class="row">
-                                                    @foreach ($relatedvehicles as $item)
-                                                        @php
-                                                            $images = json_decode($item['images']);
-                                                            $tags = json_decode($item['tags']);
-                                                        @endphp
-                                                        <div class="col-lg-4 col-md-4">
-                                                            <div class="car-box-3">
-                                                                <div class="car-thumbnail">
-                                                                    <a href="#" class="car-img">
-                                                                        <div class="for">{{ $tags[0] }}</div>
-                                                                        <div class="price-box">
-                                                                            <span>Kes:
-                                                                                {{ number_format($item->price, 2) }}</span>
-                                                                        </div>
-                                                                        <img class="d-block w-100"
-                                                                            src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
-                                                                            alt="car">
-                                                                    </a>
-                                                                    <div class="carbox-overlap-wrapper">
-                                                                        <div class="overlap-box">
-                                                                            <div class="overlap-btns-area">
-                                                                                <a class="overlap-btn"
-                                                                                    data-bs-toggle="modal"
-                                                                                    data-bs-target="#carOverviewModal"
-                                                                                    data-id="{{ $item->id }}"
-                                                                                    id="vehicleDetailsModalToggle">
-                                                                                    <i class="fa fa-eye-slash"></i>
-                                                                                </a>
-                                                                                <a class="overlap-btn wishlist-btn">
-                                                                                    <i class="fa fa-heart-o"></i>
-                                                                                </a>
-                                                                                <div class="car-magnify-gallery">
-                                                                                    <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
-                                                                                        class="overlap-btn"
-                                                                                        data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
-                                                                                        <i class="fa fa-expand"></i>
-                                                                                        <img class="hidden"
-                                                                                            src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
-                                                                                            alt="hidden-img">
-                                                                                    </a>
-                                                                                    @foreach ($images as $image)
-                                                                                        <a href="{{ asset('/vehicleimages/' . $image . '') }}"
-                                                                                            class="hidden"
-                                                                                            data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
-                                                                                            <img src="{{ asset('/vehicleimages/' . $image . '') }}"
-                                                                                                alt="hidden-img">
-                                                                                        </a>
-                                                                                    @endforeach
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                @foreach ($images as $image)
-                                                                @endforeach
-
-                                                                <div class="detail">
-                                                                    <h1 class="title">
-                                                                        <a
-                                                                            href="{{ route('vehicles.show', $item->id) }}">{{ $item->model->model }}</a>
-                                                                    </h1>
-                                                                    <ul class="custom-list">
-                                                                        <li>
-                                                                            <a
-                                                                                href="{{ route('vehicles.show', $item->id) }}">{{ $item->usage }}</a>
-                                                                            &nbsp;|&nbsp;
-                                                                        </li>
-                                                                        <li>
-                                                                            <a
-                                                                                href="">{{ $item->transmission }}</a>
-                                                                            &nbsp;|&nbsp;
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">{{ $item->type?->type }}</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                    <ul class="facilities-list clearfix">
-
-                                                                        <li>
-                                                                            <i class="flaticon-fuel"></i>
-                                                                            {{ $item->fuel_type }}
-                                                                        </li>
-                                                                        <li>
-                                                                            <i class="flaticon-way"></i>
-                                                                            {{ $item->mileage ?? 0 }} km
-                                                                        </li>
-
-                                                                        <li>
-                                                                            <i class="flaticon-manual-transmission"></i>
-                                                                            {{ $item->transmission }}
-                                                                        </li>
-                                                                        <li>
-                                                                            <i class="flaticon-car"></i>
-                                                                            {{ $item->type?->type }}
-                                                                        </li>
-
-                                                                        <li>
-                                                                            <i class="flaticon-gear"></i>
-                                                                            {{ $item->color }}
-                                                                        </li>
-                                                                        <li>
-                                                                            <i class="flaticon-calendar-1"></i>
-                                                                            {{ $item->year }}
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="tab-pane fade" id="contact-4" role="tabpanel"
                                     aria-labelledby="contact-tab-4">
@@ -473,6 +349,40 @@
                             </ul>
                         </div>
 
+                        <div class="widget mt-4">
+                            <h3 class="sidebar-title">Loan Calculator</h3>
+                            <div class="s-border"></div>
+                            <div class="m-border"></div>
+                            <div class="form-group">
+                                <label for="">Down Payment</label>
+                                <div class="range-slider">
+                                    <div data-min="0" data-max="" data-unit="Kes" data-min-name="min_price"
+                                        data-max-name="max_price" class="range-slider-ui ui-slider"
+                                        aria-disabled="false"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Interest Rate</label>
+                                <div class="range-slider">
+                                    <div data-min="0" data-max="30000000" data-unit="Kes" data-min-name="min_price"
+                                        data-max-name="max_price" class="range-slider-ui ui-slider"
+                                        aria-disabled="false"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Tenure</label>
+                                <div class="range-slider">
+                                    <div data-min="0" data-max="30000000" data-unit="Kes" data-min-name="min_price"
+                                        data-max-name="max_price" class="range-slider-ui ui-slider"
+                                        aria-disabled="false"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -483,62 +393,102 @@
     <div class="featured-car">
         <div class="container">
 
-            <h4 class="text-success">Related Vehicles</h4>
+            <h4 class="text-success">Other Vehicles You May Like</h4>
 
             <div class="featured-slider row slide-box-btn slider"
                 data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
 
                 @foreach ($relatedvehicles as $item)
-                @php
-                    $images = json_decode($item->images);
-                    $location = ($item->yard !== null) ? $item->yard->address : $item->location;
-                                $vehicle_no = (!is_null($item->vehicle_no)) ? $item->vehicle_no : $item->id;
-                @endphp
-                    <div class="slide slide-box">
-                        <div class="car-box">
-                            <div class="car-image">
-                                <img class="d-block w-100" src="{{ asset('/vehicleimages/'.@$images[0]) }}" alt="car-photo">
-                                <div class="tag">{{ $item->usage }}</div>
-                                <div class="facilities-list clearfix">
-                                    <ul>
-                                        <li>
-                                            <i class="flaticon-way"></i> {{ $item->mileage }}
-                                        </li>
-                                        <li>
-                                            <i class="flaticon-manual-transmission"></i> {{ $item->fuel_type }}
-                                        </li>
-                                        <li>
-                                            <i class="flaticon-manual-transmission"></i> {{ $item->transmission }}
-                                        </li>
-                                    </ul>
+                    @php
+                        $images = json_decode($item['images']);
+                        $vehicle_no = $item->vehicle_no ?? $item->id;
+                        $location = $item->yard !== null ? $item->yard->address : $item->location;
+                    @endphp
+                    <div class="col-lg-4 col-md-6">
+                        <div class="car-box-3">
+
+                            <div class="car-thumbnail">
+                                <a href="{{ url('/vehicle/' . $vehicle_no) }}" class="car-img">
+                                    <div class="for">{{ $item->usage }}</div>
+                                    <div class="price-box">
+                                        <span>Kes: {{ number_format($item->current_price, 2) }}</span>
+                                    </div>
+                                    <img class="d-block w-100" src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                        alt="car">
+                                </a>
+                                <div class="carbox-overlap-wrapper">
+                                    <div class="overlap-box">
+                                        <div class="overlap-btns-area">
+                                            <a class="overlap-btn" data-bs-toggle="modal"
+                                                data-bs-target="#vehicleDetailsModal" data-id="{{ $item->id }}"
+                                                id="vehicleDetailsModalToggle">
+                                                <i class="fa fa-eye-slash"></i>
+                                            </a>
+                                            <a class="overlap-btn wishlist-btn" data-id="{{ $item->id }}">
+                                                <i class="fa fa-heart-o"></i>
+                                            </a>
+
+                                            <div class="car-magnify-gallery">
+                                                <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                    class="overlap-btn"
+                                                    data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
+                                                    <i class="fa fa-expand"></i>
+                                                    <img class="hidden"
+                                                        src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                        alt="hidden-img">
+                                                </a>
+                                                @foreach ($images as $image)
+                                                    <a href="{{ asset('/vehicleimages/' . $image . '') }}" class="hidden"
+                                                        data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
+                                                        <img src="{{ asset('/vehicleimages/' . $image . '') }}"
+                                                            alt="hidden-img">
+                                                    </a>
+                                                @endforeach
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="detail">
                                 <h1 class="title">
-                                    <a href="{{ url('/vehicle/'.$vehicle_no.'/discount') }}">{{ $item->year.' '.$item->make->make.' '.$item->model->model }}</a>
+                                    <a class="text-success"
+                                        href="{{ url('/vehicle/' . $vehicle_no) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                 </h1>
-                                <div class="location">
-                                    <a href="{{ url('/vehicle/'.$vehicle_no.'/discount') }}">
-                                        <i class="flaticon-pin"></i>{{$location}}
-                                    </a>
-                                </div>
+                                <ul class="custom-list">
+                                    <li>
+                                        <a href="{{ url('/vehicle/' . $vehicle_no) }}">{{ $item->usage }}</a>
+                                        &nbsp;|&nbsp;
+                                    </li>
+                                    <li>
+                                        <a href="">{{ $item->transmission }}</a> &nbsp;|&nbsp;
+                                    </li>
+                                    <li>
+                                        <a href="#">{{ $item->fuel_type }}</a>
+                                    </li>
+                                </ul>
+                                <ul class="facilities-list clearfix">
+                                    <li>
+                                        <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km
+                                    </li>
+                                    <li>
+                                        <i class="flaticon-gear"></i> {{ $item->enginecc }} cc
+                                    </li>
+                                </ul>
                             </div>
-
-                            <div class="footer clearfix">
-                                <div class="pull-left ratings">
+                            <div class="footer">
+                                <div class="buttons mb-2 text-center">
                                     <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
-                                        data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp; Enquire</a>
-                                    <a href="{{ url('/vehicle/' . $vehicle_no . '/buy') }}"
-                                        class="btn btn-success btn-sm"><i class="fa fa-hand"></i> Buy</a>
-                                    <a href="{{ url('/vehicle/' . $vehicle_no . '/loan') }}"
-                                        class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i> Apply
+                                        data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
+                                        Enquire</a>
+                                    <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm"><i
+                                            class="fa fa-hand"></i> Buy</a>
+                                    <a href="{{ route('loan', $vehicle_no) }}" class="btn btn-success btn-sm float-ri"><i
+                                            class="fa fa-"></i>
+                                        Apply
                                         Loan</a>
                                 </div>
-
-                                <div class="pull-right">
-                                    <p class="price">Kes: {{ number_format($item->price,2) }}</p>
-                                </div>
-
                             </div>
                         </div>
                     </div>

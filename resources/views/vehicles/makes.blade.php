@@ -79,7 +79,7 @@
                                             <div class="overlap-box">
                                                 <div class="overlap-btns-area">
                                                     <a class="overlap-btn" data-bs-toggle="modal"
-                                                        data-bs-target="#vehicleDetailsModalToggle"
+                                                        data-bs-target="#vehicleDetailsModal"
                                                         data-id="{{ $item->id }}" id="vehicleDetailsModalToggle">
                                                         <i class="fa fa-eye-slash"></i>
                                                     </a>
@@ -142,9 +142,9 @@
                                             <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
                                                 data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
                                                 Enquire</a>
-                                            <a href="{{ url('/vehicle/' . $vehicle_no . '/buy') }}"
+                                            <a href="{{ route('buy', $vehicle_no) }}"
                                                 class="btn btn-success btn-sm"><i class="fa fa-hand"></i> Buy</a>
-                                            <a href="{{ url('/vehicle/' . $vehicle_no . '/loan') }}"
+                                            <a href="{{ route('loan', $vehicle_no) }}"
                                                 class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i>
                                                 Apply
                                                 Loan</a>

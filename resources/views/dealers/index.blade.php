@@ -21,70 +21,62 @@
             </div>
         @endif
         {{-- <div class="col-md-12 m-2"> --}}
-            <div class="row mt-2 mb-2 p-2">
-                <div class="col-md-3 mb-2">
-                    <div class="badge bg-primary" style="width: 98%;">
-                        <a href="{{ route('dealer.vehicles') }}">
-                            <div class="image" style="display: inline-block">
-                                <i class="fas fa-plus text-white fa-lg"></i>
-                            </div>
+        <div class="row mt-2 mb-2 p-2">
 
-                            <div class="heading" style="display: inline-block; color:#fff;">
-                                Advertise Now
-                            </div>
-                        </a>
+            <div class="col-md-3 mb-2">
+                <a href="{{ route('dealer.vehicles') }}" class="btn btn-success btn-md"><i class="fas fa-plus"></i>
+                    Advertise</a>
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <div class="badge bg-primary" style="width: 98%;">
+                    <div class="image" style="display: inline-block">
+                        <i class="fas fa-cars fa-lg"></i>
                     </div>
-                </div>
-
-                <div class="col-md-3 mb-2">
-                    <div class="badge bg-primary" style="width: 98%;">
-                        <div class="image" style="display: inline-block">
-                            <i class="fas fa-cars fa-lg"></i>
-                        </div>
-                        <div class="heading" style="display: inline-block">
-                            My Vehicles
-                            <p class="subheading">Vehicles added today <span
-                                    class="badge badge-secondary">{{ $summary['todaysvehiclecount'] }}</span></p>
-                        </div>
-                        <div class="number" style="display: inline-block" id='loanAppliedlabel'>
-                            {{ $summary['vehiclescount'] }}<br>
-                        </div>
+                    <div class="heading" style="display: inline-block">
+                        My Vehicles
+                        <p class="subheading">Vehicles added today <span
+                                class="badge badge-secondary">{{ $summary['todaysvehiclecount'] }}</span></p>
                     </div>
-                </div>
-                <div class="col-md-3 mb-2">
-                    <div class="badge bg-info" style="width: 98%;">
-                        <div class="image" style="display: inline-block">
-                            <i class="fas fa-cars fa-lg"></i>
-                        </div>
-                        <div class="heading" style="display: inline-block">
-                            Sales
-                            <p class="subheading">Todays sales <span
-                                    class="badge badge-secondary">{{ $summary['soldtodaycount'] }}</span></p>
-                        </div>
-                        <div class="number" style="display: inline-block" id="activeLoanslabel">
-                            {{ $summary['countvehiclessold'] }}<br>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 mb-2">
-                    <div class="badge bg-warning" style="width: 98%;">
-                        <div class="image" style="display: inline-block">
-                            <i class="fas fa-usd-circle fa-lg"></i>
-                        </div>
-
-                        <div class="heading" style="display: inline-block">
-                            Revenue
-                            <p class="subheading">Income today <span
-                                    class="badge badge-secondary">{{ $summary['incometoday'] }}</span></p>
-                        </div>
-
-                        <div class="number" style="display: inline-block" id="vehiclesFundedlabel">
-                            {{ $summary['income'] }}<br>
-                        </div>
+                    <div class="number" style="display: inline-block" id='loanAppliedlabel'>
+                        {{ $summary['vehiclescount'] }}<br>
                     </div>
                 </div>
             </div>
+            <div class="col-md-3 mb-2">
+                <div class="badge bg-info" style="width: 98%;">
+                    <div class="image" style="display: inline-block">
+                        <i class="fas fa-usd-circle fa-lg"></i>
+                    </div>
+                    <div class="heading" style="display: inline-block">
+                        Sales
+                        <p class="subheading">Todays sales <span
+                                class="badge badge-secondary">{{ $summary['soldtodaycount'] }}</span></p>
+                    </div>
+                    <div class="number" style="display: inline-block" id="activeLoanslabel">
+                        {{ $summary['countvehiclessold'] }}<br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <div class="badge bg-warning" style="width: 98%;">
+                    <div class="image" style="display: inline-block">
+                        <i class="fas fa-usd-circle fa-lg"></i>
+                    </div>
+
+                    <div class="heading" style="display: inline-block">
+                        Revenue
+                        <p class="subheading">Income today <span
+                                class="badge badge-secondary">{{ $summary['incometoday'] }}</span></p>
+                    </div>
+
+                    <div class="number" style="display: inline-block" id="vehiclesFundedlabel">
+                        {{ $summary['income'] }}<br>
+                    </div>
+                </div>
+            </div>
+        </div>
         {{-- </div> --}}
 
         @if (Session::has('advertinfo'))
@@ -94,78 +86,78 @@
         @endif
 
         {{-- <div class="col-md-12 mt-4"> --}}
-            <div class="row mt-4 p-2 mb-3">
-                <div class="col-md-3 mb-2">
-                    <div class="badge alert-success" style="width: 98%;">
-                        <div class="image" style="display: inline-block">
-                            <i class="fas fa-users fa-lg"></i>
-                        </div>
-
-                        <div class="heading" style="display: inline-block">
-                            Visitors reached
-                            <p class="subheading">Reached today <span
-                                    class="badge badge-secondary">{{ $summary['todayviews'] }}</span></p>
-                        </div>
-
-                        <div class="number" style="display: inline-block" id="customersMonthLabel">
-                            {{ $summary['views'] }}
-                        </div>
+        <div class="row mt-4 p-2 mb-3">
+            <div class="col-md-3 mb-2">
+                <div class="badge alert-success" style="width: 98%;">
+                    <div class="image" style="display: inline-block">
+                        <i class="fas fa-users fa-lg"></i>
                     </div>
-                </div>
 
-                <div class="col-md-3 mb-2">
-                    <div class="badge alert-primary" style="width: 98%;">
-                        <div class="image" style="display: inline-block">
-                            <i class="fas fa-cars fa-lg"></i>
-                        </div>
-
-                        <div class="heading" style="display: inline-block">
-                            Quote Requests
-                            <p class="subheading">Requests today <span
-                                    class="badge badge-secondary">{{ $summary['quotescounttoday'] }}</span></p>
-                        </div>
-                        <div class="number" style="display: inline-block" id='loanAppliedlabel'>
-                            {{ $summary['quotescount'] }}<br>
-                        </div>
+                    <div class="heading" style="display: inline-block">
+                        Visitors reached
+                        <p class="subheading">Reached today <span
+                                class="badge badge-secondary">{{ $summary['todayviews'] }}</span></p>
                     </div>
-                </div>
 
-                <div class="col-md-3 mb-2">
-                    <div class="badge alert-info" style="width: 98%;">
-                        <div class="image" style="display: inline-block">
-                            <i class="fas fa-cars fa-lg"></i>
-                        </div>
-
-                        <div class="heading" style="display: inline-block">
-                            Financing Requests
-                            <p class="subheading">Todays requests <span
-                                    class="badge badge-secondary">{{ $summary['financescounttoday'] }}</span></p>
-                        </div>
-
-                        <div class="number" style="display: inline-block" id="activeLoanslabel">
-                            {{ $summary['financescount'] }}<br>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 mb-2">
-                    <div class="badge alert-warning" style="width: 98%;">
-                        <div class="image" style="display: inline-block">
-                            <i class="fas fa-usd-circle fa-lg"></i>
-                        </div>
-
-                        <div class="heading" style="display: inline-block">
-                            Tradein Requests
-                            <p class="subheading">Requests today <span
-                                    class="badge badge-secondary">{{ $summary['tradeinscounttoday'] }}</span></p>
-                        </div>
-
-                        <div class="number" style="display: inline-block" id="vehiclesFundedlabel">
-                            {{ $summary['tradeinscount'] }}<br>
-                        </div>
+                    <div class="number" style="display: inline-block" id="customersMonthLabel">
+                        {{ $summary['views'] }}
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-3 mb-2">
+                <div class="badge alert-primary" style="width: 98%;">
+                    <div class="image" style="display: inline-block">
+                        <i class="fas fa-cars fa-lg"></i>
+                    </div>
+
+                    <div class="heading" style="display: inline-block">
+                        Quote Requests
+                        <p class="subheading">Requests today <span
+                                class="badge badge-secondary">{{ $summary['quotescounttoday'] }}</span></p>
+                    </div>
+                    <div class="number" style="display: inline-block" id='loanAppliedlabel'>
+                        {{ $summary['quotescount'] }}<br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <div class="badge alert-info" style="width: 98%;">
+                    <div class="image" style="display: inline-block">
+                        <i class="fas fa-cars fa-lg"></i>
+                    </div>
+
+                    <div class="heading" style="display: inline-block">
+                        Financing Requests
+                        <p class="subheading">Todays requests <span
+                                class="badge badge-secondary">{{ $summary['financescounttoday'] }}</span></p>
+                    </div>
+
+                    <div class="number" style="display: inline-block" id="activeLoanslabel">
+                        {{ $summary['financescount'] }}<br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <div class="badge alert-warning" style="width: 98%;">
+                    <div class="image" style="display: inline-block">
+                        <i class="fas fa-usd-circle fa-lg"></i>
+                    </div>
+
+                    <div class="heading" style="display: inline-block">
+                        Tradein Requests
+                        <p class="subheading">Requests today <span
+                                class="badge badge-secondary">{{ $summary['tradeinscounttoday'] }}</span></p>
+                    </div>
+
+                    <div class="number" style="display: inline-block" id="vehiclesFundedlabel">
+                        {{ $summary['tradeinscount'] }}<br>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row mt-4 p-2">
 
@@ -202,5 +194,4 @@
 
 
 @section('footer_scrips')
-    <script src="{{ asset('js/main/dealer.js') }}"></script>
 @endsection

@@ -123,8 +123,7 @@
                 <div class="modal-title" id="carOverviewModalLabel">
                     <h3>Business Information</h3>
                 </div>
-                <button type="button" class="btn btn-warning" data-dismiss="modal"
-                    aria-label="Close">
+                <button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -218,7 +217,7 @@
 
 <div class="modal fade" id="subscriptionPlansModal" tabindex="-1" role="dialog" aria-labelledby="quoteModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content" id="vehiclePreviewSection">
 
             <div class="modal-header bg-success">
@@ -232,25 +231,17 @@
             </div>
 
             <div class="modal-body">
-                <div class="row">
+                <div class="row" id="planSubsSummary">
                     <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header bg-success">
-                                <h4 class="text-white">Services</h4>
-                            </div>
+                        <h4 class="text-success"><strong>Services</strong></h4>
+                        <ol class="list-group" id="subscriptionprops">
 
-                            <div class="card-body">
-                                <ol class="list-group">
-                                    {{-- @foreach ($properties as $item)
-                                    @endforeach --}}
-                                </ol>
-                            </div>
-                        </div>
+                        </ol>
                     </div>
+
                     <div class="col-md-4"></div>
                     <div class="col-md-4"></div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -260,6 +251,9 @@
 <script src="{{ asset('js/iziToast.min.js') }}"></script>
 <script src="{{ asset('js/main/moment.js') }}"></script>
 <script src="{{ asset('js/select2.min.js') }}"></script>
+<script src="{{ asset('js/main/dealer.js') }}"></script>
+<script src="{{ asset('js/main/subscriptions.js') }}"></script>
+
 @yield('footer_scrips')
 
 </html>

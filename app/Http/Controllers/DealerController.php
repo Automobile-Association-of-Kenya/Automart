@@ -50,13 +50,14 @@ class DealerController extends Controller
     {
         $str = strtotime(date('Y-m-d H:i:s')) . auth()->id();
         $vehicles = $this->dealer->dealerVehicles();
-        $subscription = $this->checksubscription();
-
         return view('dealers.vehicles', compact('vehicles', 'str'));
     }
 
     public function store(Request $request)
     {
+        if (!is_null(auth()->user()->dealer_id)) {
+            return json_encode(['status' => 'info', 'message' => 'Business information already exist for this user']);
+        }
         $dealer = $this->dealer->getbyemailorphone($request->email,$request->phone);
         if (!is_null($dealer)) {
             if (isset($request->continue)) {
@@ -69,7 +70,6 @@ class DealerController extends Controller
             $dealer = $this->dealer->add($request);
             new EventsDealer($dealer, auth()->user());
         }
-
         return json_encode(['status' => 'success', 'message' => 'Dealer account created successfully. And verification link has been sent to your email.']);
     }
 

@@ -5,6 +5,15 @@
 @endsection
 
 @section('header_styles')
+    <style>
+        .employment {
+            display: none;
+        }
+
+        .business {
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('main')
@@ -56,8 +65,9 @@
                                 </div>
                             </div>
 
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#loanCalculatorModal"
-                                class="btn btn-warning btn-md">Try Loan Calculator</a>
+                            {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#loanCalculatorModal"
+                                class="btn btn-warning btn-md">Loan Calculator</a> --}}
+
                         </div>
 
                         <div class="col-md-9 text-center">
@@ -110,25 +120,133 @@
                 </div>
             </div>
         </div>
-    </div>
 
+        <div class="featured-car">
+            <div class="container">
+                <div class="main-title">
+                    <h4 class="text-success">Reasons to Finance Your Vehicles on our Plartform.</h4>
+                </div>
+                <div class="featured-slider row slide-box-btn"
+                    data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
 
-    <div class="featured-car">
-        <div class="container">
-            <h4 class="text-success">Reasons to Finance Your Vehicles on our Plartform.</h4>
-            <div class="featured-slider row slide-box-btn slider"
-                data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+                    @foreach ($services as $item)
+                        <div class="col-md-4 slide slide-box">
+                            <div class="card" style="border-radius: 8px; padding:1.5em;">
+                                <h5 class="card-title white">{{ $item->service }}</h5>
+                                <p class="card-text white">{{ $item->description }}</p>
 
-                @foreach ($services as $item)
-                    <div class="slide slide-box">
-                        <div class="card" style="border-radius: 15px; background: #DAF7A6; padding:1.5em;">
-                            <h5 class="card-title white">{{ $item->service }}</h5>
-                            <p class="card-text white">{{ $item->description }}</p>
-
-                            <a href="{{ route('services.index') }}" class="btn btn-light btn-sm">Learn More</a>
+                                <a href="{{ route('services.index') }}" class="btn btn-success btn-sm">Learn More</a>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="featured-car mt-4">
+            <div class="container">
+                <h4>Vehicles you may like</h4>
+                <div class="featured-slider row slide-box-btn">
+                    @foreach ($vehicles as $item)
+                        @php
+                            $images = json_decode($item['images']);
+                            $vehicle_no = $item->vehicle_no ?? $item->id;
+                            
+                        @endphp
+                        <div class="col-lg-4 col-md-6">
+                            <div class="car-box-3">
+
+                                <div class="car-thumbnail">
+                                    <a href="{{ url('/vehicle/' . $vehicle_no) }}" class="car-img">
+                                        <div class="for">{{ $item->usage }}</div>
+                                        <div class="price-box">
+                                            <span>Kes: {{ number_format($item->current_price, 2) }}</span>
+                                        </div>
+                                        @if (count($images) > 0)
+                                            <img class="d-block w-100"
+                                                src="{{ asset('/vehicleimages/' . @$images[0] . '') }}" alt="car">
+                                        @endif
+                                    </a>
+                                    <div class="carbox-overlap-wrapper">
+                                        <div class="overlap-box">
+                                            <div class="overlap-btns-area">
+                                                <a class="overlap-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#vehicleDetailsModal"
+                                                    data-id="{{ $item->id }}" id="vehicleDetailsModalToggle">
+                                                    <i class="fa fa-eye-slash"></i>
+                                                </a>
+                                                <a class="overlap-btn wishlist-btn" data-id="{{ $item->id }}">
+                                                    <i class="fa fa-heart-o"></i>
+                                                </a>
+
+                                                <div class="car-magnify-gallery">
+                                                    <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                        class="overlap-btn"
+                                                        data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
+                                                        <i class="fa fa-expand"></i>
+                                                        <img class="hidden"
+                                                            src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                            alt="hidden-img">
+                                                    </a>
+                                                    @foreach ($images as $image)
+                                                        <a href="{{ asset('/vehicleimages/' . $image . '') }}"
+                                                            class="hidden"
+                                                            data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
+                                                            <img src="{{ asset('/vehicleimages/' . $image . '') }}"
+                                                                alt="hidden-img">
+                                                        </a>
+                                                    @endforeach
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="detail">
+                                    <h1 class="title">
+                                        <a class="text-success"
+                                            href="{{ url('/vehicle/' . $vehicle_no) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
+                                    </h1>
+                                    <ul class="custom-list">
+                                        <li>
+                                            <a href="{{ url('/vehicle/' . $vehicle_no) }}">{{ $item->usage }}</a>
+                                            &nbsp;|&nbsp;
+                                        </li>
+                                        <li>
+                                            <a href="">{{ $item->transmission }}</a> &nbsp;|&nbsp;
+                                        </li>
+                                        <li>
+                                            <a href="#">{{ $item->fuel_type }}</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="facilities-list clearfix">
+                                        <li>
+                                            <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-gear"></i> {{ $item->enginecc }} cc
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="footer">
+                                    <div class="buttons mb-2 text-center">
+                                        <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
+                                            data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
+                                            Enquire</a>
+                                        <a href="{{ url('/vehicle/' . $vehicle_no . '/buy') }}"
+                                            class="btn btn-success btn-sm"><i class="fa fa-hand"></i> Buy</a>
+                                        <a href="{{ url('/vehicle/' . $vehicle_no . '/loan') }}"
+                                            class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i>
+                                            Apply
+                                            Loan</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
@@ -225,8 +343,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <div id="loanfeedback"></div>
 
-            <form action="#" method="post">
+            <form action="#" method="post" id="loanApplicationForm">
+                @csrf
                 <div class="modal-body tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="userinfo" role="tabpanel"
                         aria-labelledby="home-tab">
@@ -312,21 +432,22 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12 ">
-
-                                <button class='btn btn-success btn-md float-right' type="submit" id='savevehicle'><i
-                                        class="fa fa-save fa-fw"></i>Next </button>
-                            </div>
+                            {{-- <div class="col-md-12">
+                                <button class='nav-link btn btn-success btn-md float-right' data-bs-toggle="tab"
+                                    role="tab" data-bs-target="#businessandEmploymentTab" type="button"><span
+                                        class="text-white">Next >></span></button>
+                            </div> --}}
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="businessandEmploymentTab" role="tabpanel"
                         aria-labelledby="home-tab">
+
                         <div class="row">
-                            <div class="col-md-12 form-group">
+                            <div class="col-md-6 form-group">
                                 <div class="col-md-12">
                                     <label class="custom-control custom-radio">
-                                        <input type="radio" name="employment"value="salary" required>
+                                        <input type="radio" name="employment"value="employment" required>
                                         <span class="custom-control-label"></span>
                                         <a class="custom-control-description">Salaried Employee</a>
                                     </label>
@@ -339,7 +460,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group employment">
                                 <label for="employementType">Employment Type <sup>*</sup></label>
                                 <select name="employement_type" id="employementType" class="form-select">
                                     <option value=""></option>
@@ -355,23 +476,31 @@
                                 <label for="industry">Industry <sup>*</sup></label>
                                 <select name="industry" id="industry" class="form-select">
                                     <option value=""></option>
-
+                                    @foreach ($industries as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group employment">
+                                <label for="employerName">Proffession <sup>*</sup></label>
+                                <input type="text" name="proffession" id="proffession" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-md-6 form-group employment">
                                 <label for="employerName">Name of Employer <sup>*</sup></label>
                                 <input type="text" name="employername" id="employerName" class="form-control"
                                     required>
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group employment">
                                 <label for="yearsOfEmployment">Year(s) with Employer <sup>*</sup></label>
                                 <input type="text" name="years_of_employment" id="yearsOfEmployment"
                                     class="form-control" required>
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group employment">
                                 <label for="employerAddress">Employer Address <sup>*</sup></label>
                                 <input type="text" name="employeraddress" id="employerAddress"
                                     class="form-control">
@@ -396,7 +525,7 @@
                             </div>
 
 
-                            <div class="col-md-6 form-group business">
+                            <div class="col-md-6 form-group employment">
                                 <label for="businessowner" class="control-label">Are you the owner of the business or
                                     one of the directors? <sup>*</sup></label>
                                 <div class="col-md-12">
@@ -412,11 +541,6 @@
                                         <a class="custom-control-description">No</a>
                                     </label>
                                 </div>
-                            </div>
-
-                            <div class="col-md-6 form-group business">
-                                <label for="businessindustry">Industry</label>
-                                <select name="" id="" class="form-select"></select>
                             </div>
 
                             <div class="col-md-6 form-group business">
@@ -446,13 +570,13 @@
 
                         </div>
 
-                        <div class="col-md-12 ">
+                        {{-- <div class="col-md-12 ">
                             <button class='btn btn-warning btn-md float-left' type="submit" data-bs-toggle="tab"
                                 data-bs-target="#userinfo"><span class="text-white">
                                     << Prev</span></button>
                             <button class='btn btn-success btn-md float-right' type="submit" id='savevehicle'><i
                                     class="fa fa-save fa-fw"></i>Next </button>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="tab-pane fade" id="bankaccountTab" role="tabpanel" aria-labelledby="home-tab">
@@ -507,11 +631,11 @@
                         </div>
 
                         <div class="col-md-12 ">
-                            <button class='btn btn-warning btn-md float-left' type="button" data-bs-toggle="tab"
+                            {{-- <button class='btn btn-warning btn-md float-left' type="button" data-bs-toggle="tab"
                                 data-bs-target="#businessandEmploymentTab"><span class="text-white">
-                                    << Prev</span></button>
+                                    << Prev</span></button> --}}
                             <button class='btn btn-success btn-md float-right' type="submit" id='savevehicle'><i
-                                    class="fa fa-save fa-fw"></i>Finish </button>
+                                    class="fa fa-save fa-fw"></i>Save </button>
                         </div>
                     </div>
                 </div>

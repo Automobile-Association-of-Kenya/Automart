@@ -22,8 +22,11 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
+        $properties = $this->subsprop->get();
+        $propids = $this->subsprop->pluck('id');
         $subscriptions = $this->subscription->with('properties:id,name')->orderBy('cost', 'ASC')->get();
-        return json_encode($subscriptions);
+        $data = ['properties'=>$properties, 'subscriptions'=> $subscriptions, 'propids'=> $propids];
+        return json_encode($data);
     }
 
     /** Subscription Features */

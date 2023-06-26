@@ -8,6 +8,7 @@
         </div>
     </div>
 @endif
+
 @if ($errors->any())
     <div class="col-lg">
         <div class="alert alert-danger alert-dismissable">

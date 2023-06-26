@@ -74,6 +74,7 @@
     function getSubscriptions() {
         $.getJSON("/subscriptions", function (subscriptions) {
             let plan = "";
+
             $.each(subscriptions, function (key, value) {
                 let li = "";
                 $.each(value.properties, function (key, value) {
@@ -101,6 +102,64 @@
         });
     }
     getSubscriptions();
+
+    function getSubscriptionsSummary() {
+        $.getJSON("/subscriptions", function(params) {
+            let propids = params.propids,
+                properties = params.properties,
+                subscriptions = params.subscriptions, li = "", plan = "";
+            $.each(properties, function (key, value) {
+                li += "<li class='list-group-item'>" + value.name + "</li>";
+            });
+
+            // console.log(subscriptions);
+            // console.log(properties);
+            // subscriptions.forEach(element => {
+            //     let subs = element.properties
+            //     subs.forEach((element1) => {
+            //         let subPropId = element1.pivot.subsproperty_id;
+
+            //         if ($.inArray(subPropId, propids) !== -1) {
+            //             console.log(subPropId)
+            //         }
+            //     });
+            // });
+//             console.log(propids);
+
+            // $.each(subscriptions, function (key, value) {
+            //     let lii = "";
+            //     $.each(value.properties, function (key, value) {
+            //         if ($.inArray(value.pivot.subsproperty_id, propids) !== -1) {
+            //             lii +=
+            //                 '<li><i class="fa fa-check-circle fa-1x text-success"></i>&nbsp;' +
+            //                 value.name +
+            //                 "</li>";
+            //         } else {
+            //             lii += "<li class='text-center'>&times;</li>";
+            //         }
+            //     });
+            //     plan +=
+            //         '<div class="col-xl-4 col-lg-4 col-md-12"><div class="pricing-1 plan"><div class="plan-header"><h5>' +
+            //         value.name +
+            //         "</h5><p>" +
+            //         value.description +
+            //         '</p><div class="plan-price"><sup>Kes</sup>' +
+            //         value.cost +
+            //         "<span>/" +
+            //         value.billingcycle +
+            //         '</span> </div></div><div class="plan-list"><ul>' +
+            //         lii +
+            //         '</ul><div class="plan-button text-center"><a href="#" id="subscriptionSelect" data-bs-toggle="modal" data-bs-target="#" class="btn btn-success btn-sm" data-id="' +
+            //         value.id +
+            //         '">Get Started</a></div></div></div></div>';
+            // });
+            $("#planSubsSummary").append(plan);
+
+            $("#subscriptionprops").html(li);
+        });
+    }
+
+    getSubscriptionsSummary();
 
 
     // $("body").on("click", "#subscriptionSelect", function (event) {
@@ -280,7 +339,7 @@
         }
     });
 
-    paypal.Buttons({
+    // paypal.Buttons({
         // Order is created on the server and the order id is returned
             // createOrder() {
             //     return fetch("/my-server/create-paypal-order", {
@@ -333,6 +392,6 @@
             //             // Or go to another URL:  window.location.href = 'thank_you.html';
             //         });
             // },
-        })
-        .render("#paypal-button-container");
+        // })
+        // .render("#paypal-button-container");
 })();

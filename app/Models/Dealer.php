@@ -169,12 +169,13 @@ class Dealer extends Model
         }
         $subscription = $this->checkDealerSubscription();
         if (is_null($subscription) || count($subscription) <= 0) {
-            session()->put("subscriptioninfo", "You are not subscribed to any of our subscription plans to promote your ads. Promote now <a href='#' data-toggle='modal' data-target='#subscriptionPlansModal' class='btn btn-light btn-sm alert-link'>Click here</a>");
+            session()->put("subscriptioninfo", "You are not subscribed to any of our subscription plans to promote your ads. Promote now <a href='/subscription-plans' _target='_blank' class='btn btn-light btn-sm alert-link'>&nbsp;Click here</a>");
+            // data-toggle='modal' data-target='#subscriptionPlansModal'
         }
         $vehicles = $this->initialize()->where('status','<>','sold')->get();
 
         if (is_null($vehicles) || count($vehicles)) {
-            session()->put("advertinfo", "You are have not advertised on our platform. Get a classified advertisement experience by posting your cars for sale here <a href='{{route('dealer.vehicles')}}'  class='btn btn-light btn-sm alert-link'>Click here</a>");
+            session()->put("advertinfo", "You are have not advertised on our platform. Get a classified advertisement experience by posting your cars for sale here <a href='dealer/vehicles'  class='btn btn-light btn-sm alert-link'>Click here</a>");
         }
     }
 

@@ -10,6 +10,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class Dealer
@@ -32,6 +33,7 @@ class Dealer
         $this->user->dealer_id = $this->dealer->id;
         $this->user->update();
         Vehicle::where('user_id',$this->user->id)->update(['dealer_id'=>$this->dealer->id]);
+        DB::table('dealer_subscription')->where('user_id', $this->user->id)->update(['dealer_id'=>$this->dealer->id]);
         if (Session::has('dealerinfo')) {
             Session::forget('dealerinfo');
         }

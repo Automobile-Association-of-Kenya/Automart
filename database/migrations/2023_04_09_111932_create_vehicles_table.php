@@ -34,8 +34,8 @@ return new class extends Migration
             $table->string('price');
             $table->string('location')->nullable();
             $table->string('color')->nullable();
-            $table->string('mileage')->nullable();
-            $table->string('enginecc')->nullable();
+            $table->string('mileage',6)->nullable();
+            $table->string('enginecc',6)->nullable();
             $table->string('interior')->nullable();
             $table->string('fuel_type')->nullable();
             $table->string('transmission')->nullable();

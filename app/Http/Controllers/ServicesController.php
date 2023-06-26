@@ -23,6 +23,11 @@ class ServicesController extends Controller
         return json_encode($services);
     }
 
+    public function index() {
+        $services = $this->service->get();
+        return view('services.index', compact('services'));
+    }
+
 
     public function store(Request $request)
     {

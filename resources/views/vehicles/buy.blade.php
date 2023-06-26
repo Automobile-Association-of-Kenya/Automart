@@ -156,7 +156,7 @@
     <div class="featured-car">
         <div class="container mt-4">
             <div class="main-title">
-                <h4 class="text-success">Reasons to Finance Your Vehicles on our Plartform.</h4>
+                <h4 class="text-success">Reasons to Buy Your Vehicles on our Plartform.</h4>
             </div>
             <div class="featured-slider row slide-box-btn slider mt-4"
                 data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>

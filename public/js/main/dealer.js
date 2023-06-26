@@ -125,4 +125,13 @@
                 }
             });
     });
+
+    // function getSubscriptions() {
+    //     $.getJSON("/subscriptions-shortcut", function (params) {
+    //         let props = "";
+    //         $.each(params, function (key, value) {});
+    //     });
+    // }
+
+    // getSubscriptions();
 })();

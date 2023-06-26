@@ -1265,7 +1265,7 @@ $(function () {
             house_number: houseNumber.val(),
             payment_method: paymentMethod.val(),
         };
-        console.log(data);
+
         submit.prop("disabled", true);
         $.post("/purchase", data)
             .done(function (params) {
@@ -1274,9 +1274,6 @@ $(function () {
                 let result = JSON.parse(params);
                 if (result.status == "success") {
                     showSuccess(result.message, "#purchasefeedback");
-                    window.setTimeout(function () {
-                        window.location.href = "/login";
-                    }, 3000);
                 } else {
                     showError(result.error, "#purchasefeedback");
                 }
