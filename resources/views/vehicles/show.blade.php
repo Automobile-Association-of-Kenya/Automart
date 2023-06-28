@@ -34,7 +34,7 @@
     </div>
 
     <!-- Car details page start -->
-    <div class="car-details-page content-area-6">
+    <div class="car-details-page mt-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-12 col-xs-12">
@@ -356,8 +356,8 @@
                             <div class="form-group">
                                 <label for="">Down Payment</label>
                                 <div class="range-slider">
-                                    <div data-min="0" data-max="" data-unit="Kes" data-min-name="min_price"
-                                        data-max-name="max_price" class="range-slider-ui ui-slider"
+                                    <div data-min="0" data-max="" data-unit="Kes" data-min-name="min_downpayement"
+                                        data-max-name="max_downpayement" class="range-slider-ui ui-slider"
                                         aria-disabled="false"></div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -411,7 +411,7 @@
                                 <a href="{{ url('/vehicle/' . $vehicle_no) }}" class="car-img">
                                     <div class="for">{{ $item->usage }}</div>
                                     <div class="price-box">
-                                        <span>Kes: {{ number_format($item->current_price, 2) }}</span>
+                                        <span>Kes: {{ number_format($item->price, 2) }}</span>
                                     </div>
                                     <img class="d-block w-100" src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                         alt="car">
@@ -437,6 +437,7 @@
                                                         src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                                         alt="hidden-img">
                                                 </a>
+
                                                 @foreach ($images as $image)
                                                     <a href="{{ asset('/vehicleimages/' . $image . '') }}" class="hidden"
                                                         data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">

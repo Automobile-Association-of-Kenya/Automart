@@ -24,12 +24,13 @@
     <!-- Featured car start -->
     <div class="featured-car content-area">
         <div class="container-fluid">
+            @include('layouts.search')
             <div class="row">
-                <div class="col-lg-3 col-md-12">
+                {{-- <div class="col-lg-3 col-md-12">
                     @include('layouts.right')
-                </div>
+                </div> --}}
 
-                <div class="col-lg-9 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <!-- Option bar start -->
                     <div class="option-bar clearfix">
                         <div class="row">
@@ -66,18 +67,19 @@
                                 $images = json_decode($item['images']);
                                         $vehicle_no = $item->vehicle_no ?? $item->id;
                             @endphp
-                            <div class="col-lg-4 col-md-6">
+                            <div class="col-lg-3 col-md-6">
                                 <div class="car-box-3">
 
                                     <div class="car-thumbnail">
                                         <a href="{{ url('/vehicle/'.$vehicle_no) }}" class="car-img">
                                             <div class="for">{{ $item->usage }}</div>
                                             <div class="price-box">
-                                                <span>Kes: {{ number_format($item->current_price, 2) }}</span>
+                                                <span>Kes: {{ number_format($item->price, 2) }}</span>
                                             </div>
                                             <img class="d-block w-100"
                                                 src="{{ asset('/vehicleimages/' . @$images[0] . '') }}" alt="car">
                                         </a>
+                                        
                                         <div class="carbox-overlap-wrapper">
                                             <div class="overlap-box">
                                                 <div class="overlap-btns-area">
@@ -163,17 +165,7 @@
                     <div class="pagination-box p-box-2 text-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination" id="pagination">
-                                {{ $vehicles->links() }}
-                                {{-- <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-                                </li>
-
-                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-                                </li> --}}
+                                {!! $vehicles->links() !!}
                             </ul>
                         </nav>
                     </div>

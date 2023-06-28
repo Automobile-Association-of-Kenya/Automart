@@ -48,8 +48,9 @@
 
                                     <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                                         <div class="form-group">
-                                            <select class="form-select form-select-lg border-rounded" name="county"
-                                                id="countiesID">
+                                            <select class="form-select form-select-lg border-rounded" name="model"
+                                                id="vehicleModelID">
+                                                <option value=""></option>
 
                                             </select>
                                         </div>
@@ -60,7 +61,7 @@
                                             <select class="form-select form-select-lg border-rounded" name="year"
                                                 id="filterYear">
                                                 <option value="">Select Year</option>
-                                                @for ($i = 2023; $i >= 1994; $i--)
+                                                @for ($i = 2023; $i >= 1990; $i--)
                                                     <option value="{{ $i }}">{{ $i }}</option>
                                                 @endfor
                                             </select>
@@ -103,6 +104,10 @@
                                                     class="range-slider-ui ui-slider" aria-disabled="false"></div>
                                                 <div class="clearfix"></div>
                                             </div>
+                                            <input type="hidden" name="start_price" id="rangeSliderStartPrice"
+                                                value="0">
+                                            <input type="hidden" name="end_price" id="rangeSliderEndPrice"
+                                                value="30000000">
                                         </div>
                                     </div>
 
@@ -161,7 +166,7 @@
                     </div>
 
                     <div class="row" id="vehiclesection">
-                        
+
                         @foreach ($vehicles->data as $item)
                             @php
                                 $images = json_decode($item->images);
@@ -173,7 +178,7 @@
                                         <a href="{{ url('/vehicle/' . $item->id) }}" class="car-img">
                                             <div class="for">{{ $item->usage }}</div>
                                             <div class="price-box">
-                                                
+
                                                 <span>Kes: {{ number_format($item->price, 2) }}</span>
                                             </div>
                                             <img class="d-block w-100"

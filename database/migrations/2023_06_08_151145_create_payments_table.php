@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('amount', 20)->nullable();
             $table->string('trans_time')->nullable();
             $table->string('org_balance')->nullable();
-            $table->tinyInteger('complete',1)->default(0);
+            $table->string('complete',1)->default(0);
             $table->dateTime('completed_at')->nullable();
             $table->timestamps();
         });

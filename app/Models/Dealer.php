@@ -84,7 +84,7 @@ class Dealer extends Model
 
     public function summary() {
         $vehiclescount = $this->initialize()->count();
-        $todaysvehiclecount = $this->initialize()->where('created_at',Carbon::today())->count();
+        $todaysvehiclecount = $this->initialize()->where('created_at','%like%',date('Y-m-d'))->count();
         $countvehiclessold = $this->initialize()->where('status','sold')->count();
         $soldtodaycount = $this->initialize()->where('sold_at',Carbon::today())->count();
         $views = $this->initialize()->sum('views');
@@ -97,8 +97,8 @@ class Dealer extends Model
         $financescounttoday = count($this->financestoday());
         $quotescounttoday = count($this->quotestoday());
         $tradeinscounttoday = count($this->tradeinstoday());
-
-        return ['vehiclescount'=>$vehiclescount, 'todaysvehiclecount'=>$todaysvehiclecount, 'countvehiclessold'=>$countvehiclessold, 'soldtodaycount'=>$soldtodaycount, 'views'=>$views, 'todayviews'=> $todayviews, 'income'=>$income, 'incometoday'=>$incometoday, 'financescount'=>$financescount, 'quotescount'=>$quotescount, 'tradeinscount'=>$tradeinscount, 'financescounttoday'=>$financescounttoday, 'quotescounttoday'=>$quotescounttoday, 'tradeinscounttoday'=>$tradeinscounttoday];
+        $purchasecount = count($this->purchases());
+        return ['vehiclescount'=>$vehiclescount, 'purchasecount'=> $purchasecount, 'todaysvehiclecount'=>$todaysvehiclecount, 'countvehiclessold'=>$countvehiclessold, 'soldtodaycount'=>$soldtodaycount, 'views'=>$views, 'todayviews'=> $todayviews, 'income'=>$income, 'incometoday'=>$incometoday, 'financescount'=>$financescount, 'quotescount'=>$quotescount, 'tradeinscount'=>$tradeinscount, 'financescounttoday'=>$financescounttoday, 'quotescounttoday'=>$quotescounttoday, 'tradeinscounttoday'=>$tradeinscounttoday];
     }
 
     public function quotes()
@@ -110,7 +110,7 @@ class Dealer extends Model
 
     function todayviews() {
         $vehicles = $this->initialize()->pluck('id');
-        $views = View::where('created_at',Carbon::today())->get();
+        $views = View::whereIn('vehicle_id',$vehicles)->where('created_at',Carbon::today())->get();
         return $views;
     }
 
@@ -158,6 +158,12 @@ class Dealer extends Model
         return $query;
     }
 
+    public function purchases() {
+        $vehicles = $this->initialize()->pluck('id');
+        $purchases = Purchase::whereIn('vehicle_id',$vehicles)->with('user:id,name','vehicle')->latest()->get();
+        return $purchases;
+    }
+
     public function subscriptions(): BelongsToMany
     {
         return $this->belongsToMany(Subscription::class, 'dealer_subscription', 'dealer_id', 'subscription_id')->withPivot('status','start_date','expiry_date')->wherePivot('status',1);
@@ -165,17 +171,16 @@ class Dealer extends Model
 
     public function checkstatus() {
         if (auth()->user()->role === "dealer" && auth()->user()->dealer_id == null) {
-            session()->put('dealerinfo', "You can add your bsuness related infomartion to get a better experience <a href='#' data-toggle='modal' data-target='#addBusinessModal' class='btn btn-light btn-sm alert-link'>Click here</a>");
+            session()->put('dealerinfo', "You can add your business related infomartion to get a better experience      <a href='#' data-toggle='modal' data-target='#addBusinessModal' class='btn btn-light btn-sm alert-link'>Click here</a>");
         }
         $subscription = $this->checkDealerSubscription();
         if (is_null($subscription) || count($subscription) <= 0) {
-            session()->put("subscriptioninfo", "You are not subscribed to any of our subscription plans to promote your ads. Promote now <a href='/subscription-plans' _target='_blank' class='btn btn-light btn-sm alert-link'>&nbsp;Click here</a>");
+            session()->put("subscriptioninfo", "You are not subscribed to any of our subscription plans to promote your ads. Promote now        <a href='/subscription-plans' _target='_blank' class='btn btn-light btn-sm alert-link'>&nbsp;Click here</a>");
             // data-toggle='modal' data-target='#subscriptionPlansModal'
         }
         $vehicles = $this->initialize()->where('status','<>','sold')->get();
-
-        if (is_null($vehicles) || count($vehicles)) {
-            session()->put("advertinfo", "You are have not advertised on our platform. Get a classified advertisement experience by posting your cars for sale here <a href='dealer/vehicles'  class='btn btn-light btn-sm alert-link'>Click here</a>");
+        if (is_null($vehicles) || count($vehicles) <= 0) {
+            session()->put("advertinfo", "You are have not advertised on our platform. Get a classified advertisement experience by posting your cars for sale here         <a href='dealer/vehicles'  class='btn btn-light btn-sm alert-link'>Click here</a>");
         }
     }
 

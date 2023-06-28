@@ -6,6 +6,7 @@ use App\Models\Maillist;
 use App\Models\Vehicle;
 use App\Observers\MaillistObserver;
 use App\Observers\VehicleObserver;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Vehicle::observe(VehicleObserver::class);
         Maillist::observe(MaillistObserver::class);
+        Paginator::useBootstrap();
     }
 }

@@ -412,6 +412,8 @@ $(function () {
                     .text(currentMax + " " + unit);
                 $(this).children(".current-min").val(currentMin);
                 $(this).children(".current-max").val(currentMax);
+                $("#rangeSliderStartPrice").val(currentMin);
+                $("#rangeSliderEndPrice").val(currentMax);
             },
         });
 
@@ -638,40 +640,6 @@ $(function () {
         });
     }
 
-    // window.onload = function () {
-    //     google.accounts.id.initialize({
-    //         client_id:
-    //             "542097242134-vvu2f4mhg8226pj8s9dvkfr7je4nfah0.apps.googleusercontent.com",
-    //         callback: handleCredentialResponse,
-    //     });
-    //     google.accounts.id.renderButton(
-    //         document.getElementById("buttonDiv"),
-    //         {
-    //             theme: "outline",
-    //             size: "large",
-    //             locale: "en",
-    //         }
-    //     );
-    //     google.accounts.id.prompt();
-    // };
-
-    // function handleCredentialResponse(response) {
-    //     const responsePayload = decodeJwtResponse(response.credential);
-    //     console.log("ID: " + responsePayload.sub);
-    //     console.log("Full Name: " + responsePayload.name);
-    //     console.log("Given Name: " + responsePayload.given_name);
-    //     console.log("Family Name: " + responsePayload.family_name);
-    //     console.log("Image URL: " + responsePayload.picture);
-    //     console.log("Email: " + responsePayload.email);
-    //     console.log(responsePayload);
-    //     let data = {
-    //         google_id: responsePayload.sub,
-    //         name: responsePayload.name,
-    //         profile: responsePayload.picture,
-    //         email: responsePayload.email,
-    //     };
-    // }
-
     function showSuccess(message, target) {
         iziToast.success({
             title: "OK",
@@ -692,254 +660,24 @@ $(function () {
         });
     }
 
-    // let nameRe = $("#nameRe"),
-    //     phoneRe = $("#phoneRe"),
-    //     emailRe = $("#emailRe"),
-    //     passwordRe = $("#passwordRe"),
-    //     roleRe = $("#roleRe"),
-    //     passwordConfirmationRe = $("#passwordConfirmationRe");
-    // registerForm = $("#registerForm");
-
-    // registerForm.on("submit", function (event) {
-    //     event.preventDefault();
-    //     let $this = $(this),
-    //         name = nameRe.val(),
-    //         phone = phoneRe.val(),
-    //         email = emailRe.val(),
-    //         password = passwordRe.val(),
-    //         password_confirmation = passwordConfirmationRe.val(),
-    //         role = roleRe.val(),
-    //         token = $this.find("input[name='_token']").val(),
-    //         registerSubmit = $("#registerSubmit");
-    //     registerSubmit.prop({ disabled: true });
-
-    //     let data = {
-    //         name: name,
-    //         phone: phone,
-    //         email: email,
-    //         password: password,
-    //         password_confirmation: password_confirmation,
-    //         role: role,
-    //     };
-    //     $.ajaxSetup({
-    //         headers: {
-    //             "X-CSRF-TOKEN": token,
-    //         },
-    //     });
-
-    //     $.ajax({
-    //         method: "POST",
-    //         url: "/register",
-    //         data: data,
-    //         success: function (params) {
-    //             console.log(params);
-    //             registerSubmit.prop({ disabled: false });
-    //             let result = JSON.parse(params);
-    //             if (result.status == "success") {
-    //                 showSuccess(result.message, "#registerfeedback");
-    //                 window.setTimeout(function () {
-    //                     window.location.href = "/login";
-    //                 }, 3000);
-    //             } else {
-    //                 showError(result.error, "#registerfeedback");
-    //             }
-    //         },
-
-    //         error: function (error) {
-    //             console.error(error);
-    //             registerSubmit.prop({ disabled: false });
-    //             if (error.status == 422) {
-    //                 var errors = "";
-    //                 $.each(error.responseJSON.errors, function (key, value) {
-    //                     errors += value + "!";
-    //                 });
-    //                 showError(errors, "#registerfeedback");
-    //             } else {
-    //                 showError(
-    //                     "Error occurred during processing",
-    //                     "#registerfeedback"
-    //                 );
-    //             }
-    //         },
-    //     });
-    // });
-
-    // $("#passwordResetLinkForm").on("submit", function (event) {
-    //     event.preventDefault();
-    //     let email = $("#emailForget").val(),
-    //         $this = $(this),
-    //         token = $this.find("input[name='_token']").val(),
-    //         submitEmail = $("#submitEmail");
-    //     submitEmail.prop({ disabled: true });
-    //     if (email !== "" && email !== null) {
-    //         $.ajaxSetup({
-    //             headers: {
-    //                 "X-CSRF-TOKEN": token,
-    //             },
-    //         });
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "/forgot-password",
-    //             data: { email: email },
-    //             success: function (params) {
-    //                 submitEmail.prop({ disabled: false });
-    //                 let result = JSON.parse(params);
-    //                 if (result.status == "success") {
-    //                     showSuccess(result.message, "#feedback");
-    //                 } else {
-    //                     showError(result.error, "#feedback");
-    //                 }
-    //             },
-    //             error: function (error) {
-    //                 console.log(error);
-    //                 submitEmail.prop({ disabled: false });
-    //                 if (error.status == 422) {
-    //                     var errors = "";
-    //                     $.each(
-    //                         error.responseJSON.errors,
-    //                         function (key, value) {
-    //                             errors += value + "!";
-    //                         }
-    //                     );
-    //                     showError(errors, "#feedback");
-    //                 } else {
-    //                     showError(
-    //                         "Error occurred during processing",
-    //                         "#feedback"
-    //                     );
-    //                 }
-    //             },
-    //         });
-    //     } else {
-    //         showError("Email address is required");
-    //     }
-    // });
-
-    // function getCounties() {
-    //     $.getJSON("/counties/110", function (counties) {
-    //         var option = '<option value="">All</option>';
-    //         $.each(counties, (key, value) => {
-    //             let { id, name } = value;
-    //             option += "<option value=" + id + ">" + name + "</option>";
-    //         });
-    //         $("#countiesID").html(option);
-    //     });
-    // }
-
-    // getCounties();
-
-    // let filterVehicleType = $("#filterVehicleType"),
-    //     filterMakesID = $("#filterMakesID"),
-    //     usageID = $("#usage"),
-    //     filterYear = $("#filterYear"),
-    //     countiesID = $("#countiesID"),
-    //     filterTransmission = $("#filterTransmission");
-    // $("#vehiclesSearchForm").on("submit", function (event) {
-    //     event.preventDefault();
-    //     let price = $("#priceSlider").slider("values");
-    //     let type_id = filterVehicleType.val(),
-    //         make_id = filterMakesID.val(),
-    //         usage = usageID.val(),
-    //         year = filterYear.val(),
-    //         county_id = countiesID.val(),
-    //         transmission = filterTransmission.val(),
-    //         $this = $(this);
-    //     let data = {
-    //         _token: $this.find("input[name='_token']").val(),
-    //         type_id: type_id,
-    //         make_id: make_id,
-    //         usage: usage,
-    //         year: year,
-    //         county_id: county_id,
-    //         transmission: transmission,
-    //         price: price,
-    //     };
-    //     console.log(data);
-    //     $.getJSON("/vehicles-search", data)
-    //         .done(function (data) {
-    //             let vehicles = data.data;
-    //             $("#countResults").html(vehicles.length);
-    //             $("#pagination").html(data.links);
-
-    //             let vehicle = "";
-    //             $.each(vehicles, function (key, value) {
-    //                 let images = JSON.parse(value.images),
-    //                     tags = JSON.parse(value.tags);
-    //                 var price =
-    //                     value.price !== null
-    //                         ? parseFloat(value.price).toFixed(2)
-    //                         : 0;
-    //                 var mileage = value.mileage !== null ? value.mileage : 0;
-
-    //                 let img =
-    //                     '<a href="#' +
-    //                     images[0] +
-    //                     '" class="overlap-btn" data-sub-html="<h4>' +
-    //                     value.model.model +
-    //                     "</h4><p>" +
-    //                     value.description +
-    //                     '</p>"><i class="fa fa-expand"></i><img class="hidden" src="/vehicleimages/' +
-    //                     images[0] +
-    //                     '" alt="hidden-img"></a>';
-    //                 $.each(images, function (key, image) {
-    //                     img +=
-    //                         '<a href="#' +
-    //                         image +
-    //                         '" class="hidden" data-sub-html="<h4>' +
-    //                         value.model.model +
-    //                         "</h4><p>" +
-    //                         value.description +
-    //                         '</p>"><img src="/vehicleimages/' +
-    //                         image +
-    //                         '" alt="hidden-img"></a>';
-    //                 });
-
-    //                 vehicle +=
-    //                     '<div class="col-lg-4 col-md-4"><div class="car-box-3"><div class="car-thumbnail"><a href="/vehicle/' +
-    //                     value.id +
-    //                     '" class="car-img" ><div class="tag-2 bg-active">' +
-    //                     value.usage +
-    //                     '</div><div class="price-box"><span><span>Kes: ' +
-    //                     price.toLocaleString("en-US", {
-    //                         style: "currency",
-    //                         currency: "KSH",
-    //                     }) +
-    //                     '</span></div><img class="d-block w-100" src="/vehicleimages/' +
-    //                     images[0] +
-    //                     '" alt="car"></a><div class="carbox-overlap-wrapper"><div class="overlap-box"><div class="overlap-btns-area"><a class="overlap-btn" data-bs-toggle="modal" data-bs-target="#carOverviewModal" id="vehicleDetailsModalToggle" data-id="' +
-    //                     value.id +
-    //                     '"><i class="fa fa-eye-slash"></i></a><a class="overlap-btn wishlist-btn" data-id="vehicleLike" id="' +
-    //                     value.id +
-    //                     '"><i class="fa fa-heart-o"></i></a><div class="car-magnify-gallery">' +
-    //                     img +
-    //                     '</div></div></div></div></div><div class="detail"><h1 class="title"><a href="/vehicle/' +
-    //                     value.id +
-    //                     '">' +
-    //                     value.make.make +
-    //                     " " +
-    //                     value.model.model +
-    //                     " " +
-    //                     value.year +
-    //                     '</a></h1><ul class="custom-list"><li><a href="#">' +
-    //                     value.usage +
-    //                     '</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li><li><a href="#">' +
-    //                     value.transmission +
-    //                     '</a>&nbsp;&nbsp;|</li><li><a href="#">' +
-    //                     value.type.type +
-    //                     '</a></li></ul><ul class="facilities-list clearfix"><li><i class="flaticon-fuel"></i>' +
-    //                     value.fuel_type +
-    //                     '</li><li><i class="flaticon-way"></i>&nbsp;' +
-    //                     mileage +
-    //                     ' km</li><li><i class="flaticon-gear"></i>&nbsp;' +
-    //                     value.color +
-    //                     "</li></ul></div></div></div>";
-    //             });
-    //             $("#vehiclesection").html(vehicle);
-    //         })
-    //         .fail(function (error) {
-    //             console.log(error);
-    //         });
-    // });
+    $("#filterMakesID").on("change", function (event) {
+        let make_id = $(this).val();
+        console.log('here');
+        if (make_id !== "") {
+            $.getJSON("/models/" + make_id, function (models) {
+                let option = "<option value=''>All</option>";
+                $.each(models, function (key, value) {
+                    option +=
+                        "<option value=" +
+                        value.id +
+                        ">" +
+                        value.model +
+                        "</option>";
+                });
+                $("#vehicleModelID").html(option);
+            });
+        }
+    });
 
     function getTypesWithVehicle() {
         $.getJSON("/types-with-vehicles", function (types) {
@@ -980,7 +718,6 @@ $(function () {
 
     $("body").on("click", "#vehicleDetailsModalToggle", function (event) {
         let vehicle_id = $(this).data("id");
-        console.log(vehicle_id);
         $.getJSON("/vehicle-detail/" + vehicle_id, function (vehicle) {
             let features = "",
                 price = parseFloat(vehicle.price),
@@ -1001,7 +738,7 @@ $(function () {
                 vehicle.model.model +
                 '</h4><h5 id="vehicleLocation"><i class="flaticon-pin"></i> &nbsp;' +
                 location +
-                '</h5></div><button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><div class="row modal-raw"><div class="col-lg-6 modal-left"><div class="item active"><img src="/vehicleimages/' +
+                '</h5></div><button type="button" class="close btn btn-warning" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><div class="row modal-raw"><div class="col-lg-6 modal-left"><div class="item active"><img src="/vehicleimages/' +
                 images[0] +
                 '" alt="best-car" class="img-fluid"><div class="sobuz"><div class="price-box"><span class="del-2">Kes. ' +
                 vehiclePrice +
@@ -1023,34 +760,6 @@ $(function () {
             $("#vehiclePreviewSection").html(vehicledata);
         });
     });
-
-    function numberFormat(
-        number,
-        decimals,
-        decimalSeparator,
-        thousandSeparator
-    ) {
-        decimals = decimals || 0;
-        decimalSeparator = decimalSeparator || ".";
-        thousandSeparator = thousandSeparator || ",";
-
-        var parts = number.toFixed(decimals).split(".");
-        var integerPart = parts[0].replace(
-            /\B(?=(\d{3})+(?!\d))/g,
-            thousandSeparator
-        );
-        var formattedNumber = integerPart;
-
-        if (parts.length > 1) {
-            var decimalPart = parts[1];
-            formattedNumber += decimalSeparator + decimalPart;
-        }
-
-        return formattedNumber;
-    }
-
-    // ;
-    // vehicleModelID;
 
     function vehicleMakesWithVehicles() {
         $.getJSON("/makes-with-vehicles", function (vehicles) {
@@ -1199,7 +908,7 @@ $(function () {
 
     function getVehicleMakes() {
         $.getJSON("/makes", function (makes) {
-            let option = "<option value=''>Select One</option>";
+            let option = "<option value=''>All</option>";
 
             $.each(makes, function (key, value) {
                 option +=

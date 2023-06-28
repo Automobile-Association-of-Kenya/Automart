@@ -17,68 +17,63 @@
 @section('main')
     <main id="dashboard">
         <!-- Cards -->
-        <div class="row card-list">
-            <div class="col badge blue text-left" id="innovators">
-                <div class="image" style="display: inline-block">
-                    <i class="fas fa-users fa-lg"></i>
-                </div>
-
-                <div class="heading" style="display: inline-block">
-                    Dealers
-                    <p class="subheading">New dealers today</p>
-                </div>
-
-                <div class="number" style="display: inline-block" id='innovatorlabel'>
-                    0
+        <div class="row mt-2 p-2">
+            <div class="col-md-3 mb-2">
+                <div class="badge bg-primary" style="width: 98%;">
+                    <h4 class="text-white text-start" style="padding: .4em;">My Vehicles</h4>
+                    <div class="number" style="display: inline-block" id='loanAppliedlabel'>
+                        {{ $summary['vehiclescount'] }}<br>
+                    </div>
                 </div>
             </div>
 
-            <div class="col badge green" id="openreceivables">
-                <div class="image" style="display: inline-block">
-                    <i class="fas fa-download fa-lg"></i>
-                </div>
-
-                <div class="heading" style="display: inline-block">
-                    Subscriptions
-                    <p class="subheading">Active subscriptions</p>
-                </div>
-
-                <div class="number" style="display: inline-block" id="mentorlabel">
-                    0
+            <div class="col-md-3 mb-2">
+                <div class="badge bg-info" style="width: 98%;">
+                    <h4 class="text-white text-start" style="padding: .4em;">Sales</h4>
+                    <div class="number" style="display: inline-block" id="activeLoanslabel">
+                        {{ $summary['countvehiclessold'] }}<br>
+                    </div>
                 </div>
             </div>
 
-            <div class="col badge red" id="openpayables">
-                <div class="image" style="display: inline-block">
-                    <i class="fas fa-upload fa-lg"></i>
-                </div>
-
-                <div class="heading" style="display: inline-block">
-                    Vehicles
-                    <p class="subheading">Newly added</p>
-                </div>
-
-                <div class="number" style="display: inline-block" id="funderlabel">
-                    0
+            <div class="col-md-3 mb-2">
+                <div class="badge bg-warning" style="width: 98%;">
+                    <h4 class="text-white text-start" style="padding: .4em;">Revenue</h4>
+                    <i>Ksh</i>
+                    <div class="number" style="display: inline-block" id="vehiclesFundedlabel">
+                        {{ number_format($summary['income'], 2) }}<br>
+                    </div>
                 </div>
             </div>
 
-            <div class="col badge purple" id="openorders">
-                <div class="image" style="display: inline-block">
-                    <i class="fas fa-file-invoice-dollar fa-lg"></i>
-                </div>
-
-                <div class="heading" style="display: inline-block">
-                    Sales
-                    <p class="subheading">Sales today</p>
-                </div>
-
-                <div class="number" style="display: inline-block" id="serviceproviderlabel">
-                    0
+            <div class="col-md-3 mb-2">
+                <div class="badge alert-warning" style="width: 98%;">
+                    <h4 class="text-start" style="padding: .4em;">Purchase Requests</h4>
+                    <div class="number" style="display: inline-block" id="vehiclesFundedlabel">
+                        {{ $summary['purchasecount'] }}<br>
+                    </div>
                 </div>
             </div>
+
+            <div class="col-md-3 mb-2">
+                <div class="badge alert-primary" style="width: 98%;">
+                    <h4 class="text-start" style="padding: .4em;">Quote Requests</h4>
+                    <div class="number" style="display: inline-block" id='loanAppliedlabel'>
+                        {{ $summary['quotescount'] }}<br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <div class="badge alert-info" style="width: 98%;">
+                    <h4 class="text-start" style="padding: .4em;">Trade in Requests</h4>
+                    <div class="number" style="display: inline-block" id='loanAppliedlabel'>
+                        {{ $summary['tradeinscount'] }}<br>
+                    </div>
+                </div>
+            </div>
+            
         </div>
-
         <!-- People Charts -->
         <div class="row chart">
             <div class="col">

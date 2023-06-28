@@ -12,7 +12,8 @@
 
 @section('main')
     <div class="contact-section">
-        <div class="container"><br>
+        <div class="container">
+            <br>
             <br>
             <br>
             <br>
@@ -51,10 +52,10 @@
                             <div class="card">
                                 <div class="card-header" id="headingOne">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                        <a  data-toggle="collapse" data-target="#collapseOne"
                                             aria-expanded="true" aria-controls="collapseOne">
                                             Mpesa
-                                        </button>
+                                        </a>
                                     </h2>
                                 </div>
 
@@ -118,10 +119,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
             </div>
             <br>

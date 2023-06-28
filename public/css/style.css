@@ -8345,7 +8345,7 @@ input[type=checkbox]:checked+label:before {
     color: #fff;
 }
 
-.pagination>li>.active {
+.pagination>li.active {
     color: #fff;
 }
 
@@ -12413,7 +12413,7 @@ input[type="tel"] {
 
 @media (max-width: 576px) {
     .banner {
-        margin: 10em 0;
+        margin: 2em 0;
     }
 }
 
@@ -12423,7 +12423,7 @@ input[type="tel"] {
     }
 
     .banner {
-        margin: 5em 0;
+        margin: 1em 0;
     }
 
     .intro-text h3 {

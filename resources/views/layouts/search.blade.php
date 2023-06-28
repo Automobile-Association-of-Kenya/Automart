@@ -24,8 +24,9 @@
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="form-select form-select-lg border-rounded" name="model_id"
+                                <select class="form-select form-select-lg border-rounded" name="model"
                                     id="vehicleModelID">
+                                    <option value=""></option>
 
                                 </select>
                             </div>
@@ -35,7 +36,7 @@
                             <div class="form-group">
                                 <select class="form-select form-select-lg border-rounded" name="year"
                                     id="filterYear">
-                                    <option value="">Select Year</option>
+                                    <option value="">All</option>
                                     @for ($i = date('Y'); $i >= 1990; $i--)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
@@ -71,6 +72,7 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
                                 <div class="range-slider">
@@ -80,6 +82,8 @@
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
+                            <input type="hidden" name="start_price" id="rangeSliderStartPrice" value="0">
+                            <input type="hidden" name="end_price" id="rangeSliderEndPrice" value="30000000">
                         </div>
 
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">

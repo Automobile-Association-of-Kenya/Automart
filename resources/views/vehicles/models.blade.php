@@ -162,7 +162,7 @@
                     <div class="pagination-box p-box-2 text-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination" id="pagination">
-                                {{ $vehicles->links() }}
+                                {!! $vehicles->links() !!}
                                 {{-- <li class="page-item">
                                     <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
                                 </li>

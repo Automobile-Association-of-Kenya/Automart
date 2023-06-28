@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('estate',80)->nullable();
             $table->string('housenumber',80)->nullable();
             $table->string('payment_method',80);
-            $table->string('status',1)->default(0);
+            $table->string('status',20)->default('pending');
             $table->timestamps();
             $table->timestamp('completed_at')->nullable();
         });

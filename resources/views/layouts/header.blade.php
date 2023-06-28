@@ -31,7 +31,7 @@
 
                                 <div class="col-sm-6 col-md-4 col-lg-4">
                                     <div class="megamenu-section" id="vehicleGroupandMakes">
-                                        <h6 class="megamenu-title text-success">Vehicle Makes</h6>
+                                        <h6 class="megamenu-title text-success">Top Brands</h6>
                                     </div>
                                 </div>
 
@@ -39,7 +39,7 @@
                                     <div class="megamenu-section">
                                         <h6 class="megamenu-title  text-success">Others</h6>
                                         <a class="dropdown-item" href="{{ route('new') }}">New Arrivals</a>
-                                        <a class="dropdown-item" href="{{ url('discounted-vehicles') }}">Discounted</a>
+                                        <a class="dropdown-item" href="{{ route('vehicles.discounts') }}">Discounted</a>
                                         <a class="dropdown-item" href="{{ route('vehicles.list') }}">All Vehicles</a>
                                     </div>
                                 </div>

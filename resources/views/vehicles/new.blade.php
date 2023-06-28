@@ -8,7 +8,6 @@
 @endsection
 
 @section('main')
-    <!-- Sub banner start -->
     <div class="sub-banner">
         <div class="container breadcrumb-area">
             <div class="breadcrumb-areas">
@@ -19,9 +18,7 @@
             </div>
         </div>
     </div>
-    <!-- Sub Banner end -->
 
-    <!-- Featured car start -->
     <div class="featured-car content-area">
         <div class="container-fluid">
             <div class="row">
@@ -30,7 +27,6 @@
                 </div>
 
                 <div class="col-lg-9 col-md-12">
-                    <!-- Option bar start -->
                     <div class="option-bar clearfix">
                         <div class="row">
                             <div class="col-lg-5 col-md-6 col-sm-12">
@@ -43,8 +39,9 @@
                                 {{-- <div class="sorting-options float-end">
                                     <a href="car-list-rightside.html" class="change-view-btn float-right"><i
                                             class="fa fa-th-list"></i></a>
-                                    <a href="{{ url('') }}" class="change-view-btn active-view-btn float-right"><i class="fa fa-th-large"></i></a>
-                        </div> --}}
+                                    <a href="{{ url('') }}" class="change-view-btn active-view-btn float-right"><i
+                                            class="fa fa-th-large"></i></a>
+                                </div>
                                 <div class="sorting-options-3 float-end">
                                     <select class="selectpicker search-fields" name="default-order">
                                         <option>Default Order</option>
@@ -53,11 +50,10 @@
                                         <option>Newest Properties</option>
                                         <option>Oldest Properties</option>
                                     </select>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
-
 
                     <div class="row" id="vehiclesection">
                         @foreach ($vehicles as $item)
@@ -70,11 +66,10 @@
                                 <div class="car-box-3">
 
                                     <div class="car-thumbnail">
-                                        <a href="{{ url('/vehicle/' . $vehicle_no. '/latest') }}"
-                                            class="car-img">
+                                        <a href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}" class="car-img">
                                             <div class="for">{{ $item->usage }}</div>
                                             <div class="price-box">
-                                                <span>Kes: {{ number_format($item->current_price, 2) }}</span>
+                                                <span>Kes: {{ number_format($item->price, 2) }}</span>
                                             </div>
                                             <img class="d-block w-100"
                                                 src="{{ asset('/vehicleimages/' . @$images[0] . '') }}" alt="car">
@@ -83,8 +78,8 @@
                                             <div class="overlap-box">
                                                 <div class="overlap-btns-area">
                                                     <a class="overlap-btn" data-bs-toggle="modal"
-                                                        data-bs-target="#vehicleDetailsModal"
-                                                        data-id="{{ $item->id }}" id="vehicleDetailsModalToggle">
+                                                        data-bs-target="#vehicleDetailsModal" data-id="{{ $item->id }}"
+                                                        id="vehicleDetailsModalToggle">
                                                         <i class="fa fa-eye-slash"></i>
                                                     </a>
                                                     <a class="overlap-btn wishlist-btn" data-id="{{ $item->id }}">
@@ -118,12 +113,12 @@
                                     <div class="detail">
                                         <h1 class="title">
                                             <a class="text-success"
-                                                href="{{ url('/vehicle/' . $vehicle_no. '/latest') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
+                                                href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                         </h1>
                                         <ul class="custom-list">
                                             <li>
                                                 <a
-                                                    href="{{ url('/vehicle/' . $vehicle_no. '/latest') }}">{{ $item->usage }}</a>
+                                                    href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}">{{ $item->usage }}</a>
                                                 &nbsp;|&nbsp;
                                             </li>
                                             <li>
@@ -147,8 +142,8 @@
                                             <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
                                                 data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
                                                 Enquire</a>
-                                            <a href="{{ route('buy', $vehicle_no) }}"
-                                                class="btn btn-success btn-sm"><i class="fa fa-hand"></i> Buy</a>
+                                            <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm"><i
+                                                    class="fa fa-hand"></i> Buy</a>
                                             <a href="{{ route('loan', $vehicle_no) }}"
                                                 class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i> Apply
                                                 Loan</a>
@@ -159,20 +154,10 @@
                         @endforeach
                     </div>
                     <!-- Page navigation start -->
-                    <div class="pagination-box p-box-2 text-center">
+                    <div class="pagination-box text-center">
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination" id="pagination">
-                                {{-- {{ $vehicles->links() }} --}}
-                                {{-- <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-                                </li>
-
-                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-                                </li> --}}
+                            <ul class="pagination">
+                                {{ $vehicles->links() }}
                             </ul>
                         </nav>
                     </div>

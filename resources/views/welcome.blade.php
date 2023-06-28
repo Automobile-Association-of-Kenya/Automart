@@ -31,13 +31,12 @@
                         <div class="car-box-3">
 
                             <div class="car-thumbnail">
-                                <a href="{{ url('/vehicle/' .$vehicle_no. '/latest') }}"
-                                    class="car-img">
+                                <a href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}" class="car-img">
                                     <div class="for">{{ $item->usage }}</div>
                                     <div class="price-box">
-                                        <span class="del"><del>{{ number_format($item->initial_price, 2) }}</del></span>
-                                        <br>
-                                        <span>Kes: {{ number_format($item->current_price, 2) }}</span>
+                                        {{-- <span class="del"><del>{{ number_format($item->initial_price, 2) }}</del></span> --}}
+                                        {{-- <br> --}}
+                                        <span>Kes: {{ number_format($item->price, 2) }}</span>
                                     </div>
                                     <img class="d-block w-100" src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                         alt="car">
@@ -80,12 +79,11 @@
                             <div class="detail">
                                 <h1 class="title">
                                     <a class="text-success"
-                                        href="{{ url('/vehicle/' .$vehicle_no. '/latest') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
+                                        href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                 </h1>
                                 <ul class="custom-list">
                                     <li>
-                                        <a
-                                            href="{{ url('/vehicle/' .$vehicle_no. '/latest') }}">{{ $item->usage }}</a>
+                                        <a href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}">{{ $item->usage }}</a>
                                         &nbsp;|&nbsp;
                                     </li>
                                     <li>
@@ -108,10 +106,10 @@
                                 <div class="buttons mb-2 text-center">
                                     <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
                                         data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp; Enquire</a>
-                                    <a href="{{ route('buy', $vehicle_no) }}"
-                                        class="btn btn-success btn-sm"><i class="fa fa-hand"></i> Buy</a>
-                                    <a href="{{ route('loan', $vehicle_no) }}"
-                                        class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i> Apply
+                                    <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm"><i
+                                            class="fa fa-hand"></i> Buy</a>
+                                    <a href="{{ route('loan', $vehicle_no) }}" class="btn btn-success btn-sm float-ri"><i
+                                            class="fa fa-"></i> Apply
                                         Loan</a>
                                 </div>
                             </div>
@@ -119,6 +117,11 @@
                     </div>
                 @endforeach
 
+                <div class="col-lg-12 text-center">
+                    <a class="btn-9 btn bg-white" href="{{ route('new') }}">
+                        <span></span><span></span><span></span><span></span><strong>View More</strong>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -163,6 +166,7 @@
                                     <img class="d-block w-100" src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                         alt="car">
                                 </a>
+                                
                                 <div class="carbox-overlap-wrapper">
                                     <div class="overlap-box">
                                         <div class="overlap-btns-area">
@@ -229,10 +233,10 @@
                                 <div class="buttons mb-2 text-center">
                                     <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
                                         data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp; Enquire</a>
-                                    <a href="{{ route('buy',$vehicle_no) }}"
-                                        class="btn btn-success btn-sm"><i class="fa fa-hand"></i> Buy</a>
-                                    <a href="{{ route('loan',$vehicle_no) }}"
-                                        class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i> Apply
+                                    <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm"><i
+                                            class="fa fa-hand"></i> Buy</a>
+                                    <a href="{{ route('loan', $vehicle_no) }}" class="btn btn-success btn-sm float-ri"><i
+                                            class="fa fa-"></i> Apply
                                         Loan</a>
                                 </div>
                             </div>
@@ -241,7 +245,7 @@
                 @endforeach
 
                 <div class="col-lg-12 text-center">
-                    <a class="btn-9 btn bg-white" href="{{ route('vehicles.discounted') }}">
+                    <a class="btn-9 btn bg-white" href="{{ route('vehicles.discounts') }}">
                         <span></span><span></span><span></span><span></span><strong>View More</strong>
                     </a>
                 </div>

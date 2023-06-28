@@ -38,10 +38,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
     public function getUserBy($key, $value)
     {
         return $this->where("$key", "$value")->first();
+    }
+
+    /**
+     * Get all of the users for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class, 'user_id', 'id');
     }
 
     public function emailAccountVerification($email)
@@ -103,5 +112,9 @@ class User extends Authenticatable
             }
         }
         return redirect()->route('login');
+    }
+
+    public function summary() {
+        $vehicles = Vehicle::where('');
     }
 }

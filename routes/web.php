@@ -115,8 +115,7 @@ Route::view('terms', 'terms')->name('terms');
 
 /** Vehicles grouping routes */
 
-Route::get('vehicles/new', [ApplicationController::class, 'newArrivals'])->name('new.arrivals');
-Route::get('new-vehicles', [ApplicationController::class, 'newVehicles'])->name('new');
+
 
 // Route::get('vehicle-types',[ApplicationController::class, 'vehicleTypesWithVehicles'])->name('');
 Route::get('types-with-vehicles', [ApplicationController::class, 'vehicleTypesWithVehicles']);
@@ -127,7 +126,6 @@ Route::get('vehicles-list', [ApplicationController::class, 'index'])->name('vehi
 Route::get('vehicles/type/{id}', [ApplicationController::class, 'vehicleTypes'])->name('type.vehicles');
 Route::get('vehicles/model/{id}', [ApplicationController::class, 'vehicleModels'])->name('model.vehicles');
 Route::get('vehicles/make/{id}', [ApplicationController::class, 'vehicleMakes'])->name('make.vehicles');
-Route::get('discounts', [ApplicationController::class, 'discountedVehicles'])->name('vehicles.discounted');
 Route::get('search', [ApplicationController::class, 'vehicleSearch']);
 Route::get('vehicle-detail/{id}', [ApplicationController::class, 'vehicle'])->name('vehicle.detail');
 Route::get('search', [ApplicationController::class, 'search'])->name('search');
@@ -148,22 +146,26 @@ Route::post('paypalcancel', [PaymentController::class, 'cancelTransaction'])->na
 Route::post('paypalsuccess', [PaymentController::class, 'successTransaction'])->name('paypal.success');
 Route::post('payments-get', [PaymentController::class, 'get']);
 
+/** Reports */
 Route::resource('reports', ReportController::class);
 
-Route::get('latest', [ApplicationController::class, 'latest'])->name('latest');
 
 // Route::get('discounts', [VehicleController::class, 'discounts'])->name('discounts');
 
 Route::prefix('vehicles')->group(function() {
     Route::get('show', [VehicleController::class, 'show'])->name('vehicles.show');
     Route::post('store', [VehicleController::class, 'store'])->name('vehicles.store');
+    Route::get('latest', [ApplicationController::class, 'latest'])->name('latest');
+    Route::get('discounts', [ApplicationController::class, 'discountedVehicles'])->name('vehicles.discounts');
+
 });
+Route::get('vehicles/new', [ApplicationController::class, 'newArrivals'])->name('new.arrivals');
+Route::get('new-vehicles', [ApplicationController::class, 'newVehicles'])->name('new');
 
 Route::get('vehicles-buy/{no}', [ApplicationController::class, 'buy'])->name('buy');
 Route::get('vehicle-loan/{no}', [ApplicationController::class, 'loan'])->name('loan');
 Route::post('loan-application', [ApplicationController::class,'apply']);
 Route::post('purchase', [ApplicationController::class, 'purchase'])->name('purchase');
-Route::view('logins', 'auth.logins');
 Route::get('like/{id}', [ApplicationController::class,'like']);
 Route::get('view/{id}', [ApplicationController::class,'view']);
 Route::get('whatsapp/{id}', [ApplicationController::class, 'whatsapp']);
@@ -192,9 +194,12 @@ Route::prefix('admin')->group(function() {
     Route::get('reports',[AdminController::class, 'reports'])->name('admin.reports');
 });
 
-Route::prefix('dealer')->group(function() {
+// dd(auth()->user());
+Route::middleware('dealer')->prefix('dealer')->group(function() {
     Route::get('/', [DealerController::class,'index'])->name('dealer.index');
     Route::get('vehicles', [DealerController::class, 'vehicles'])->name('dealer.vehicles');
     Route::get('requests', [DealerController::class, 'requests'])->name('dealer.requests');
     Route::post('store', [DealerController::class, 'store'])->name('dealer.store');
+    Route::get('purchase/approve/{id}', [DealerController::class, 'purchaseapprove'])->name('dealer.puchase.approve');
+    Route::post('purchase/decline', [DealerController::class, 'purchasedecline'])->name('dealer.purchase.decline');
 });

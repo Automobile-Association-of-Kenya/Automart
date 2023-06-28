@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Dealer;
+use App\Models\Partner;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Dealer::class)->nullable();
+            $table->foreignIdFor(Partner::class)->nullable();
             $table->string('ref_no')->unique();
             $table->string('name', 100);
             $table->string('email', 60)->unique();

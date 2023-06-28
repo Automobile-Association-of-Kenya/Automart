@@ -24,12 +24,13 @@
     <!-- Featured car start -->
     <div class="featured-car content-area">
         <div class="container-fluid">
+            @include('layouts.search')
             <div class="row">
-                <div class="col-lg-3 col-md-12">
+                {{-- <div class="col-lg-3 col-md-12">
                     @include('layouts.right')
-                </div>
+                </div> --}}
 
-                <div class="col-lg-9 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <!-- Option bar start -->
                     <div class="option-bar clearfix">
                         <div class="row">
@@ -46,7 +47,7 @@
                                             class="fa fa-th-list"></i></a>
                                     <a href="{{ url('') }}" class="change-view-btn active-view-btn float-right"><i class="fa fa-th-large"></i></a>
                         </div> --}}
-                                <div class="sorting-options-3 float-end">
+                                {{-- <div class="sorting-options-3 float-end">
                                     <select class="selectpicker search-fields" name="default-order">
                                         <option>Default Order</option>
                                         <option>Price High to Low</option>
@@ -54,21 +55,19 @@
                                         <option>Newest Properties</option>
                                         <option>Oldest Properties</option>
                                     </select>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
 
                     <div class="row" id="vehiclesection">
-
                         @foreach ($vehicles as $item)
                             @php
                                 $images = json_decode($item['images']);
                                 $vehicle_no = (!is_null($item->vehicle_no)) ? $item->vehicle_no : $item->id;
                             @endphp
-                            <div class="col-lg-4 col-md-6">
+                            <div class="col-lg-3 col-md-6">
                                 <div class="car-box-3">
-
                                     <div class="car-thumbnail">
                                         <a href="{{ url('/vehicle/' .$vehicle_no.'/discount') }}" class="car-img">
                                             <div class="for">{{ $item->usage }}</div>
@@ -164,24 +163,14 @@
                         @endforeach
 
                     </div>
-                    <!-- Page navigation start -->
-                    <div class="pagination-box p-box-2 text-center">
+
+                    {{-- <div class="pagination-box p-box-2 text-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination" id="pagination">
-                                {{-- {{ $discountedvehicles->links() }} --}}
-                                {{-- <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-                                </li>
-
-                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-                                </li> --}}
+                                {!! $vehicles->links() !!}
                             </ul>
                         </nav>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

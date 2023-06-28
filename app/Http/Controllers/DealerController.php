@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Events\Dealer as EventsDealer;
-use App\Http\Requests\DealerRequest;
-use App\Jobs\SendEmailVerificationNotification;
+use App\Events\Purchase as EventsPurchase;
 use App\Models\Dealer;
+use App\Models\Purchase;
 use App\Models\User;
 use App\Models\Vehicle;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class DealerController extends Controller
 {
@@ -23,6 +21,7 @@ class DealerController extends Controller
         $this->dealer = new Dealer();
         $this->user = new User();
         $this->vehicle = new Vehicle();
+        $this->purchase = new Purchase();
         $this->auth = auth()->user();
     }
 
@@ -84,12 +83,28 @@ class DealerController extends Controller
         $quotes = $this->dealer->quotes();
         $finances = $this->dealer->finances();
         $tradeins = $this->dealer->tradeins();
-        return view('dealers.requests', compact('quotes', 'finances', 'tradeins'));
+        $purchases = $this->dealer->purchases();
+        return view('dealers.requests', compact('quotes', 'finances', 'tradeins', 'purchases'));
     }
 
     public function getDealers()
     {
         $dealers = $this->dealer->select('id', 'name', 'email', 'phone', 'alt_phone', 'address')->get();
         return json_encode($dealers);
+    }
+
+    public function purchaseapprove($id) {
+        $purchase = $this->purchase->with('vehicle')->find($id);
+        $vehicle = $purchase->vehicle;
+        DB::beginTransaction();
+        $vehicle->update(['status'=>'sold', 'sold_at'=>date('Y-m-d H:i:s')]);
+        $purchase->update(['status'=>'approved']);
+        DB::commit();
+        new EventsPurchase('approval',$purchase);
+        return redirect()->back()->with('success', 'Purchase approval was successful.');
+    }
+
+    public function purchasedecline(Request $request) {
+        
     }
 }

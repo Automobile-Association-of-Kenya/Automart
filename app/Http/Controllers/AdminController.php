@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Finance;
 use App\Models\Quote;
 use App\Models\Tradein;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,6 +16,7 @@ class AdminController extends Controller
         $this->quote = new Quote();
         $this->tradein = new Tradein();
         $this->finance = new Finance();
+        $this->user = new User();
     }
 
     /**
@@ -22,6 +24,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $summary = $this->user->summary();
         return view('admin.index');
     }
 

@@ -72,8 +72,9 @@
     // getSubscriptions();
 
     function getSubscriptions() {
-        $.getJSON("/subscriptions", function (subscriptions) {
-            let plan = "";
+        $.getJSON("/subscriptions", function (params) {
+            let plan = "",
+                subscriptions = params.subscriptions;
 
             $.each(subscriptions, function (key, value) {
                 let li = "";
@@ -103,14 +104,14 @@
     }
     getSubscriptions();
 
-    function getSubscriptionsSummary() {
-        $.getJSON("/subscriptions", function(params) {
-            let propids = params.propids,
-                properties = params.properties,
-                subscriptions = params.subscriptions, li = "", plan = "";
-            $.each(properties, function (key, value) {
-                li += "<li class='list-group-item'>" + value.name + "</li>";
-            });
+    // function getSubscriptionsSummary() {
+    //     $.getJSON("/subscriptions", function(params) {
+    //         let propids = params.propids,
+    //             properties = params.properties,
+    //             subscriptions = params.subscriptions, li = "", plan = "";
+    //         $.each(properties, function (key, value) {
+    //             li += "<li class='list-group-item'>" + value.name + "</li>";
+    //         });
 
             // console.log(subscriptions);
             // console.log(properties);
@@ -153,13 +154,13 @@
             //         value.id +
             //         '">Get Started</a></div></div></div></div>';
             // });
-            $("#planSubsSummary").append(plan);
+    //         $("#planSubsSummary").append(plan);
 
-            $("#subscriptionprops").html(li);
-        });
-    }
+    //         $("#subscriptionprops").html(li);
+    //     });
+    // }
 
-    getSubscriptionsSummary();
+    // getSubscriptionsSummary();
 
 
     // $("body").on("click", "#subscriptionSelect", function (event) {

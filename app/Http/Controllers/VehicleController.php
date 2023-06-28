@@ -11,6 +11,7 @@ use App\Models\Vehicle;
 use App\Models\VehicleModel;
 use App\Models\VehiclePrice;
 use App\Models\Yard;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -354,6 +355,9 @@ class VehicleController extends Controller
         DB::commit();
         session()->forget($strkey . "images");
         session()->forget($strkey . 'cover');
+        if (session()->has('advertinfo')) {
+            session()->forget('advertinfo');
+        }
         return json_encode(['status' => 'success', 'message' => $message]);
     }
 

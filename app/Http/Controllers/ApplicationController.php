@@ -43,8 +43,8 @@ class ApplicationController extends Controller
 
     public function welcome()
     {
-        $vehicles = $this->vehicle->getlatest(9);
-        $discounts = $this->vehicle->discounts(21);
+        $vehicles = $this->vehicle->getlatest(12);
+        $discounts = $this->vehicle->discounts(24);
         return view('welcome', compact('discounts', 'vehicles'));
     }
 
@@ -60,7 +60,7 @@ class ApplicationController extends Controller
         $validated = $request->validate(['vehicle_id' => ['required', 'exists:vehicles,id'], 'name' => ['required', 'max:80'], 'id_no' => ['required', 'max:10'], 'phone' => ['required', 'max:16'], 'email' => ['required', 'max:80'], 'pickup' => ['required', 'max:80'], 'estate' => ['nullable', 'max:80'], 'housenumber' => ['nullable', 'max:80'], 'payment_method' => ['required', 'max:80']]);
         $validated['user_id'] = auth()->id() ?? null;
         $purchase = $this->purchase->create($validated);
-        
+
         return json_encode(['status' => 'success', 'message' => 'Purchase request captured successfully']);
     }
 
@@ -155,86 +155,26 @@ class ApplicationController extends Controller
     public function vehicleTypes($id = null)
     {
         $type = $this->type->find($id);
-        $vehicles = $this->vehicle->where('type_id', $type->id)
-            ->with(['dealer' => function ($dealer) {
-                return $dealer->select('id', 'name');
-            }, 'type' => function ($type) {
-                return $type->select('id', 'type');
-            }, 'make' => function ($make) {
-                return $make->select('id', 'make');
-            }, 'model' => function ($model) {
-                return $model->select('id', 'model');
-            }, 'prices' => function ($price) {
-                return $price->select('price');
-            }])->latest()->paginate(20);
-        // return $vehicles;
+        $vehicles = $this->vehicle->where('type_id', $type->id)->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices'])->latest()->paginate(20);
         return view('vehicles.types', compact('type', 'vehicles'));
     }
 
     public function vehicleSearch(Request $request)
     {
-        $query = $this->vehicle->query();
-        if (!is_null($request->type_id)) {
-            $query->where('type_id', $request->type_id);
-        }
-        if (!is_null($request->make_id)) {
-            $query->where('make_id', $request->make_id);
-        }
-        if (!is_null($request->year)) {
-            $query->where('year', $request->year);
-        }
-        if (!is_null($request->county_id)) {
-            $query->where('county_id', $request->county_id);
-        }
-        if (!is_null($request->transmission)) {
-            $query->where('transmission', $request->transmission);
-        }
-        if (!is_null($request->usage)) {
-            $query->where('usage', $request->usage);
-        }
-        // if (!is_null($request->price) && !empty($request->price)) {
-        //     // $query->whereBetween('price','>=',intval($request->price[0]))->where('price','<=',intval($request->price[0]));
-        //     $query->whereBetween('price',$request->price);
-        // }
-        $vehicles = $query->with(['dealer' => function ($dealer) {
-            return $dealer->select('id', 'name');
-        }, 'type' => function ($type) {
-            return $type->select('id', 'type');
-        }, 'make' => function ($make) {
-            return $make->select('id', 'make');
-        }, 'model' => function ($model) {
-            return $model->select('id', 'model');
-        }, 'prices' => function ($price) {
-            return $price->select('price');
-        }])->paginate(20);
-
+        $vehicles = $this->vehicle->search($request->all());
         return json_encode($vehicles);
     }
 
     public function search(Request $request)
     {
-        $vehicles = $this->vehicle->searchpaginate($request, 20);
-
+        $vehicles = $this->vehicle->searchpaginate($request->all());
         return view('vehicles.search', compact('vehicles'));
     }
-
     public function vehicleModels($id)
     {
         $model = $this->model->find($id);
 
-        $vehicles = $this->vehicle->where('vehicle_model_id', $model->id)
-            ->with(['dealer' => function ($dealer) {
-                return $dealer->select('id', 'name');
-            }, 'type' => function ($type) {
-                return $type->select('id', 'type');
-            }, 'make' => function ($make) {
-                return $make->select('id', 'make');
-            }, 'model' => function ($model) {
-                return $model->select('id', 'model');
-            }, 'prices' => function ($price) {
-                return $price->select('price');
-            }])->paginate(20);
-
+        $vehicles = $this->vehicle->where('vehicle_model_id', $model->id)->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices'])->paginate(20);
         return view('vehicles.models', compact('model', 'vehicles'));
     }
 
@@ -274,7 +214,7 @@ class ApplicationController extends Controller
 
     public function discountedVehicles()
     {
-        $vehicles = $this->vehicle->discounts(21);
+        $vehicles = $this->vehicle->discounts();
         return view('vehicles.discount', compact('vehicles'));
     }
 

@@ -45,14 +45,14 @@
                     </a>
                 </li>
 
-                <li class="">
+                <li class="{{ Request::is('dealer/requests') ? 'active' : '' }}">
                     <a href="{{ route('dealer.requests') }}" class='validation'>
-                        <span><i class="fal fa-users-crown"></i></span>
+                        <span><i class="fal fa-hand-heart"></i></span>
                         <span>Requests</span>
                     </a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="dropdown-item" :href="route('logout')"
@@ -62,7 +62,7 @@
                             <span>{{ __('Log Out') }}</span>
                         </a>
                     </form>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>
@@ -77,10 +77,7 @@
                 @yield('page')
             </h2>
 
-            {{-- <div class="search-wrapper">
-                <i class="fas fa-search text-white"></i>
-                <input type="text" name="search" id="search" placeholder="Search here ...">
-            </div> --}}
+            <li class="nav-item"><a href="{{ route('dealer.vehicles') }}" class="nav-link bg-success text-white">Advertise</a></li>
 
             @auth
                 <li class="nav-item dropdown">
@@ -97,7 +94,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <li><a class="dropdown-item" :href="route('logout')"
+                            <li><a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                     {{ __('Log Out') }}
