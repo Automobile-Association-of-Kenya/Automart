@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Maillist;
 use App\Models\Vehicle;
+use App\Models\Visit;
 use App\Observers\MaillistObserver;
 use App\Observers\VehicleObserver;
 use Illuminate\Pagination\Paginator;
@@ -24,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Visit::visit(request()->server());
         Vehicle::observe(VehicleObserver::class);
         Maillist::observe(MaillistObserver::class);
         Paginator::useBootstrap();

@@ -49,7 +49,7 @@ class SubscriptionController extends Controller
     {
         $plan = $this->subscription->with('properties')->find($id);
         if ($plan->cost <= 0) {
-            $this->subscription->subscribe(auth()->user()->dealer_id, $plan->id);
+            $this->subscription->subscribe(auth()->user(), $plan->id);
             return redirect()->route('dealers.index');
         } else {
             return view('subscriptions.create', compact('plan'));

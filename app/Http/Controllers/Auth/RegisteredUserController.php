@@ -41,6 +41,7 @@ class RegisteredUserController extends Controller
         $user = User::latest()->first();
         $ref_no = (!is_null($user)) ? strtotime(now()) . '-' . $user->id + 1 : strtotime(now()) . '-1';
         $user = User::create([
+            'ref_no' => $ref_no,
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,

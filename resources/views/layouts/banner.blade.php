@@ -41,9 +41,9 @@
                                         class="fa fa-check-circle text-success"></i>&nbsp;<small>You can also pick your
                                         Vehicle from our Dealer Yards and Pay.</small></li>
                             </ul>
-                            <h5 class="mt-2 mb-1 text-success"><small>You can shop by brand.</small></h5>
+                            {{-- <h5 class="mt-2 mb-1 text-success"><small>You can shop by brand.</small></h5>
                             <div class="row mt-2 mb-2 ml-2 mr-2" id="banner-brands">
-                                {{-- <div class="text-center">
+                                <div class="text-center">
                                     <div class="lds-roller">
                                         <div></div>
                                         <div></div>
@@ -54,8 +54,8 @@
                                         <div></div>
                                         <div></div>
                                     </div>
-                                </div> --}}
-                            </div>
+                                </div>
+                            </div> --}}
 
                             <a href="{{ route('vehicles.list') }}" class="btn btn-success mt-2 btn-lg btn-block"><i
                                     class="fa fa-search"></i>&nbsp;Find

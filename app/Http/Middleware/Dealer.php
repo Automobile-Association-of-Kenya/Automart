@@ -16,11 +16,11 @@ class Dealer
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check()) {
-            if (Auth::user()->role !== "dealer") {
-                return redirect('/')->withErrors('Your are not authorised to access this route');
-            }
-        }
+        // if (auth()->check()) {
+        //     if (Auth::user()->role !== "dealer") {
+        //         return redirect('/')->withErrors('Your are not authorised to access this route');
+        //     }
+        // }
         return $next($request);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Finance;
+use App\Models\Loan;
 use App\Models\Quote;
 use App\Models\Tradein;
 use App\Models\User;
@@ -17,6 +18,7 @@ class AdminController extends Controller
         $this->tradein = new Tradein();
         $this->finance = new Finance();
         $this->user = new User();
+        $this->loan = new Loan();
     }
 
     /**
@@ -25,7 +27,7 @@ class AdminController extends Controller
     public function index()
     {
         $summary = $this->user->summary();
-        return view('admin.index');
+        return view('admin.index', compact('summary'));
     }
 
     public function vehicles()
@@ -49,6 +51,7 @@ class AdminController extends Controller
         $quotes = $this->quote->with('vehicle')->latest()->get();
         $tradeins = $this->tradein->with('vehicle')->latest()->get();
         $finances = $this->finance->with('vehicle')->latest()->get();
+        $loans = $this->loan->latest()->get();
         return view('admin.requests', compact('quotes', 'tradeins', 'finances'));
     }
 

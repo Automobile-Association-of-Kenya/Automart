@@ -53,7 +53,7 @@
                                 {!! Session::get('dealerinfo') !!}
                             </div>
                         @endif
-                        
+
                         <div class="bg-primary pb-3 pt-3 pl-2 pr-1 border-rounded filterSection"
                             style="border-radius: 6px; display:none;">
 
@@ -111,6 +111,15 @@
                                             <div class="row">
                                                 <input type="hidden" name="unique_str" id="uniqueStrID"
                                                     value="{{ $str }}">
+
+                                                <div class="col-md-3 form-group">
+                                                    <label for="type">Vehicle Type:</label>
+                                                    <div class="input-group">
+                                                        <select class="form-control form-control--md chzn-select"
+                                                            name="type" id="vehicleType"
+                                                            style="width: 100%;"></select>
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-3 form-group">
                                                     <label for="make">Vehicle Make: <sup>*</sup></label>
                                                     <div class="input-group">
@@ -183,7 +192,7 @@
                                                 <div class="col-md-3 form-group">
                                                     <label for="company">Condition: <sup>*</sup></label>
                                                     <div class="input-group">
-                                                        <select name="usage" id="usage"
+                                                        <select name="usage" id="usageCondition"
                                                             class="form-control form-control--md chzn-select"
                                                             style="width:100%;">
                                                             <option value="">Select One</option>
@@ -260,14 +269,7 @@
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="vehicle_id" id="vehicleID" value="">
-                                                <div class="col-md-3 form-group">
-                                                    <label for="type">Vehicle Type:</label>
-                                                    <div class="input-group">
-                                                        <select class="form-control form-control--md chzn-select"
-                                                            name="type" id="vehicleType"
-                                                            style="width: 100%;"></select>
-                                                    </div>
-                                                </div>
+
                                                 <div class="col-md-3 form-group">
                                                     <label for="company">Color:</label>
                                                     <select name="color" id="vehicleColor"
@@ -438,14 +440,12 @@
                         <div class="bg-primary mt-2 mb-2 pb-3 pt-3 pl-2 pr-1 border-rounded" style="border-radius: 6px;">
                             <form id="filterVehiclesListForm" class="form-row">
                                 @csrf
-                                @if (auth()->user()->role === 'dealer')
-                                    <div class="col-md-4">
-                                        <label>Yard</label>
-                                        <select name="filterlistyard_id" id="filterListVehicleYardID"
-                                            class="form-control form-control--md chzn-select" style="width: 100%;">
-                                        </select>
-                                    </div>
-                                @endif
+                                <div class="col-md-4">
+                                    <label>Yard</label>
+                                    <select name="filterlistyard_id" id="filterListVehicleYardID"
+                                        class="form-control form-control--md chzn-select" style="width: 100%;">
+                                    </select>
+                                </div>
                                 <input type="hidden" name="dealer_id" id="filterListDealerID"
                                     value="{{ auth()->user()->dealer_id }}">
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Dealer;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('yards', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Dealer::class);
+            $table->foreignIdFor(User::class)->nullable();
+            $table->foreignIdFor(Dealer::class)->nullable();
             $table->string('yard');
             $table->string('address')->nullable();
             $table->string('email')->nullable();

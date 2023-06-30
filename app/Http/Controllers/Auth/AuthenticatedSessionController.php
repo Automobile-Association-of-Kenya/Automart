@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\Login;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
@@ -33,6 +34,7 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
         $request->session()->regenerate();
+        new Login(auth()->user());
         return redirect()->intended(RouteServiceProvider::HOME);
         // $intendedUrl = $request->input('intended_url', session('url.intended'));
         // return json_encode(['status' => 'success', 'message' => "Login successful.", 'url' => $intendedUrl]);

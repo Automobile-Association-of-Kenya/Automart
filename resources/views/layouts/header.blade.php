@@ -50,12 +50,12 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dashboard') }}">Selling Vehicles?</a>
+                    <a class="nav-link" href="{{ route('dealer.vehicles') }}">Selling Vehicles?</a>
                 </li>
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboard') }}">Partner</a>
-                </li>
+                </li> --}}
 
                 {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink7"
@@ -87,9 +87,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
-                            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'dealer')
                                 <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
-                            @endif
                             {{-- <li><a class="dropdown-item" href="">Logout</a></li> --}}
 
                             <li>
@@ -177,9 +175,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
-                            @if (auth()->user()->role === 'admin' || auth()->user()->role === 'dealer')
                                 <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
-                            @endif
                             {{-- <li><a class="dropdown-item" href="">Logout</a></li> --}}
 
                             <li>

@@ -435,8 +435,21 @@ $(function () {
         $(".search-options-btn .fa").toggleClass("fa-chevron-down");
     });
 
+    // $('input[type="range"]').rangeslider();
+
     // Our Partbers toggle
     (function () {
+        function numberFormat(number) {
+            var parts = number.toFixed(2).split(".");
+            var integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            var formattedNumber = integerPart;
+            if (parts.length > 1) {
+                var decimalPart = parts[1];
+                formattedNumber += "." + decimalPart;
+            }
+            return formattedNumber;
+        }
+
         $(".our-partners .item").each(function () {
             var itemToClone = $(this);
             for (var i = 1; i < 4; i++) {
@@ -451,6 +464,68 @@ $(function () {
                     .appendTo($(this));
             }
         });
+
+        $('input[type="range"]').rangeslider({
+            update: true,
+            // Feature detection the default is `true`.
+            // Set this to `false` if you want to use
+            // the polyfill also in Browsers which support
+            // the native <input type="range"> element.
+            polyfill: true,
+
+            // Default CSS classes
+            rangeClass: "rangeslider",
+            disabledClass: "rangeslider--disabled",
+            horizontalClass: "rangeslider--horizontal",
+            verticalClass: "rangeslider--vertical",
+            fillClass: "rangeslider__fill",
+            handleClass: "rangeslider__handle",
+
+            // Callback function
+            onInit: function () {
+                console.log("here");
+            },
+
+            // Callback function
+            onSlide: function (position, value) {
+                console.log(position);
+                console.log(value);
+            },
+
+            // Callback function
+            onSlideEnd: function (position, value) {
+                console.log(position);
+                console.log(value);
+            },
+        });
+
+        let downPaymentSlider = $("#downPaymentSlider"),
+            interestRateSlider = $("#interestRateSlider"),
+            tenureSlider = $("#tenureSlider");
+        downPaymentSlider.on("change", function () {
+            console.log($(this).val());
+            calculateLoan();
+        });
+        interestRateSlider.on("change", function () {
+            console.log($(this).val());
+            calculateLoan();
+        });
+        tenureSlider.on("change", function () {
+            console.log($(this).val());
+            calculateLoan();
+        });
+
+        function calculateLoan() {
+            let downpayment = parseFloat(downPaymentSlider.val()),
+                interestrate = parseFloat(interestRateSlider.val()),
+                tenure = parseFloat(tenureSlider.val());
+            console.log(downpayment);
+            console.log(interestrate);
+            console.log(tenure);
+            $("#downPayment").text(numberFormat(downpayment));
+            $("#interestRate").text(interestrate);
+            $("#tenureYears").text(tenure);
+        }
     })();
 
     $("[data-submenu]").submenupicker();
@@ -662,7 +737,7 @@ $(function () {
 
     $("#filterMakesID").on("change", function (event) {
         let make_id = $(this).val();
-        console.log('here');
+        console.log("here");
         if (make_id !== "") {
             $.getJSON("/models/" + make_id, function (models) {
                 let option = "<option value=''>All</option>";

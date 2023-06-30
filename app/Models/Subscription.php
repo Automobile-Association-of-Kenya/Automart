@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Subscription as EventsSubscription;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -58,11 +59,8 @@ class Subscription extends Model
         return $this->belongsToMany(Subsproperty::class, 'subscription_property', 'subscription_id', 'subsproperty_id');
     }
 
-    public function subscribe($dealer_id, $subscription_id)
+    public function subscribe($user, $subscription_id)
     {
-        if (is_null($dealer_id)) {
-            $dealer_id = auth()->user()->dealer_id;
-        }
         $subscription = $this->find($subscription_id);
         if ($subscription->billingcycle === "Monthly") {
             $expiry = Carbon::now()->addMonth();
@@ -71,8 +69,9 @@ class Subscription extends Model
         }else{
             $expiry = Carbon::now()->addDays($subscription->billingcycle);
         }
-        DB::table('dealer_subscription')->insert(['dealer_id'=>$dealer_id, 'subscription_id'=>$subscription_id, 'start_date'=>date('Y-m-d H:i:s'), 'expiry_date'=>$expiry, 'status'=>1]);
-        //Promote ads
+        $dealer_id = auth()->user()->dealer_id ?? null;
+        DB::table('dealer_subscription')->insert(['user_id'=>auth()->id(),'dealer_id'=>$dealer_id, 'subscription_id'=>$subscription_id, 'start_date'=>date('Y-m-d H:i:s'), 'expiry_date'=>$expiry, 'status'=>1]);
+        new EventsSubscription(auth()->user(),$subscription);
     }
 
     /**
@@ -94,7 +93,7 @@ class Subscription extends Model
     {
         return $this->belongsToMany(User::class, 'dealer_subscription', 'user_id', 'subscription_id')->withPivot('status', 'start_date', 'expiry_date')->wherePivot('status', 1);
     }
-    
+
     /**
      * Get all of the payments for the Subscription
      *

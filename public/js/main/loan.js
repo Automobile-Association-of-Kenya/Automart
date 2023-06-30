@@ -66,6 +66,19 @@
     }
     getPartners();
 
+    function getCountries() {
+        $.getJSON('/countries', function (countries) {
+            let option = "<option value=''>Select One</option>";
+            $.each(countries, function (key, value) {
+            option += "<option value="+value.id+">"+value.name+"</option>"
+            });
+            $("#countryID").html(option);
+            $("#countryID option[value='110']").prop("selected",true);
+        });
+    }
+
+    getCountries();
+
     loanPartnerID.on("change", function () {
         let partner_id = $(this).val();
         if (partner_id !== null && partner_id !== "") {
@@ -140,126 +153,4 @@
         }
     });
 
-    function showSuccess(message, target) {
-        iziToast.success({
-            title: "OK",
-            message: message,
-            position: "center",
-            timeout: 7000,
-            target: target,
-        });
-    }
-
-    function showError(message, target) {
-        iziToast.error({
-            title: "Error",
-            message: message,
-            position: "center",
-            timeout: 7000,
-            target: target,
-        });
-    }
-
-    let loanApplicationForm = $("#loanApplicationForm"),
-        appliTitle = $("#appliTitle"),
-        firstName = $("#firstName"),
-        lastName = $("#lastName"),
-        dateOfbirth = $("#dateOfbirth"),
-        emailAddress = $("#emailAddress"),
-        phoneNumber = $("#phoneNumber"),
-        kraPin = $("#kraPin"),
-        idNo = $("#idNo"),
-        countryID = $("#countryID"),
-        cityResidence = $("#cityResidence"),
-        estateName = $("#estateName"),
-        houseNO = $("#houseNO"),
-        employmentinput = $("input[name='employment']"),
-        employementType = $("#employementType"),
-        industry = $("#industry"),
-        proffession = $("#proffession"),
-        employerName = $("#employerName"),
-        yearsOfEmployment = $("#yearsOfEmployment"),
-        employerAddress = $("#employerAddress"),
-        sidebusinessinput = $("input[name='sidebusiness']"),
-        businessowner = $("input[name='businessowner']"),
-        businessName = $("#businessName"),
-        businessRegNo = $("#businessRegNo"),
-        businesstype = $("#businesstype"),
-        businessaddress = $("#businessAddress"),
-        typeOfAccount = $("input[name='typeOfAccount']"),
-        bankName = $("#bankName"),
-        accountholdername = $("#accountholdername"),
-        accountNumber = $("#accountNumber"),
-        bankAccountType = $("#bankAccountType"),
-        monthlyTurnover = $("#monthlyTurnover");
-    loanApplicationForm.on("submit", function (event) {
-        event.preventDefault();
-
-        let $this = $(this),
-            submit = $this.find("button[type='submit']"),
-            data = {
-                _token: $this.find("input[name='_token']").val(),
-                title: appliTitle.val(),
-                firstname: firstName.val(),
-                lastname: lastName.val(),
-                date_of_birth: dateOfbirth.val(),
-                email: emailAddress.val(),
-                phone: phoneNumber.val(),
-                kra_pin: kraPin.val(),
-                id_no: idNo.val(),
-                country_id: countryID.val(),
-                city: cityResidence.val(),
-                estate: estateName.val(),
-                house_no: houseNO.val(),
-                occupation: employmentinput.val(),
-                employement_type: employementType.val(),
-                industry_id: industry.val(),
-                proffession: proffession.val(),
-                employer: employerName.val(),
-                years_of_employment: yearsOfEmployment.val(),
-                employer_address: employerAddress.val(),
-                business: sidebusinessinput.val(),
-                businessowner: businessowner.val(),
-                business_name: businessName.val(),
-                business_reg_no: businessRegNo.val(),
-                businesstype: businesstype.val(),
-                businessaddress: businessaddress.val(),
-                type_of_bank_account: typeOfAccount.val(),
-                bank: bankName.val(),
-                accountholdername: accountholdername.val(),
-                account_number: accountNumber.val(),
-                bank_account_type: bankAccountType.val(),
-                monthly_turnover: monthlyTurnover.val(),
-            };
-        console.log(data);
-        submit.prop("disabled", true);
-        $.post("/loan-application", data)
-            .done(function (params) {
-                console.log(params);
-                submit.prop({ disabled: false });
-                let result = JSON.parse(params);
-                if (result.status == "success") {
-                    showSuccess(result.message, "#loanfeedback");
-                    $this.trigger("reset");
-                } else {
-                    showError(result.error, "#loanfeedback");
-                }
-            })
-            .fail(function (error) {
-                submit.prop({ disabled: false });
-                console.log(error);
-                if (error.status == 422) {
-                    var errors = "";
-                    $.each(error.responseJSON.errors, function (key, value) {
-                        errors += value + "!";
-                    });
-                    showError(errors, "#loanfeedback");
-                } else {
-                    showError(
-                        "Error occurred during processing",
-                        "#loanfeedback"
-                    );
-                }
-            });
-    });
 })();

@@ -159,15 +159,7 @@ class VehicleController extends Controller
     public function listVehicles()
     {
         $vehicles = $this->vehicle
-            ->with(['dealer' => function ($dealer) {
-                return $dealer->select('id', 'name');
-            }, 'make' => function ($make) {
-                return $make->select('id', 'make');
-            }, 'model' => function ($model) {
-                return $model->select('id', 'model');
-            }, 'prices' => function ($query) {
-                return $query->latest()->limit(2)->select('price');
-            }])->latest()->get();
+            ->with('dealer', 'make', 'model', 'prices')->latest()->get();
         // if ($this->auth->role === "dealer") {
         //     $vehicles = $this->vehicle->where('dealer_id', $this->auth->dealer_id)
         //         ->with(['dealer', 'make', 'model', 'prices' => function ($query) {
@@ -238,12 +230,12 @@ class VehicleController extends Controller
     public function yardsCreate(Request $request)
     {
         $validated = $request->validate(['yard_id' => ['nullable', 'exists:yards,id', 'integer'], 'yard' => ['required', 'max:80'], 'address' => ['string', 'max:200', 'nullable'], 'email' => ['email', 'max:60', 'string'], 'phone' => ['string', 'max:18', 'nullable']]);
-        $dealer_id = $request->dealer_id ?? $this->user->dealer_id;
+        $dealer_id = $request->dealer_id ?? auth()->user()->dealer_id;
         if (!is_null($request->yard_id)) {
             $yard = $this->yard->find($request->yard_id);
             $yard->update(['dealer_id' => $dealer_id] + $validated);
         } else {
-            $this->yard->create(['dealer_id' => $dealer_id] + $validated);
+            $this->yard->create(['user_id'=>auth()->id(),'dealer_id' => $dealer_id] + $validated);
         }
         return json_encode(['status' => 'success', 'message' => 'Yard added successfully']);
     }
@@ -411,7 +403,7 @@ class VehicleController extends Controller
 
     public function filterVehicles(Request $request)
     {
-        $query = Vehicle::query();
+        $query = $this->vehicle->initialize();
         if (isset($request->dealer_id) && !is_null($request->dealer_id)) {
             $query->where('dealer_id', $request->dealer_id);
         }
@@ -424,14 +416,7 @@ class VehicleController extends Controller
         if (isset($request->model_id) && !is_null($request->model_id)) {
             $query->where('vehicle_model_id', $request->model_id);
         }
-
-        // $vehicles = $query->join('dealers', 'vehicles.dealer_id', '=', 'dealers.id')
-        //     ->join('makes', 'vehicles.make_id', '=', 'makes.id')
-        //     ->join('vehicle_models', 'vehicles.vehicle_model_id', '=', 'vehicle_models.id')
-        //     ->select('dealers.id as dealer_id', 'dealers.name as dealer','makes.id as make_id','makes.make as make', 'vehicle_models.id as model_id', 'vehicle_models.model as model', 'vehicles.id', 'vehicles.vehicle_no', 'vehicles.year', 'vehicles.price', 'vehicles.color', 'vehicles.mileage', 'vehicles.enginecc', 'vehicles.fuel_type', 'vehicles.transmission', 'vehicles.status', 'vehicles.created_at')->get();
         $vehicles = $query->latest()->with(['dealer:id,name', 'make:id,make', 'model:id,model', 'prices'])->get();
-        // ->select('id', 'vehicle_no', 'year', 'price', 'color', 'mileage', 'enginecc', 'fuel_type', 'transmission', 'status', 'created_at')->get();
-
         return json_encode($vehicles);
     }
 }

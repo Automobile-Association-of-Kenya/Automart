@@ -1219,7 +1219,7 @@
         clearvehicle = $("#clearvehicle"),
         input = document.getElementById("coverPhoto"),
         token = $("input[name='_token']").val(),
-        usage = $("#usage"),
+        usage = $("#usageCondition"),
         multiImagesUpload = document.getElementById("addionalImages");
 
     $("#vehicleImagesUpload").on("click", function (event) {
@@ -1343,7 +1343,7 @@
             transmission = transmissionHtm.val(),
             tags = vehicleTags.val(),
             description = descriptionHtm.val(),
-            usage = $("#usage").val(),
+            usage = $("#usageCondition").val(),
             gear = $("#gear").val(),
             speed = $("#speed").val(),
             terrain = $("#terrain").val(),
@@ -1485,14 +1485,12 @@
             console.log(imagesUploadPromises);
             Promise.all(imagesUploadPromises)
                 .then((result) => {
-                    console.log("heresggsg");
-                    console.log(result);
                     $.ajaxSetup({
                         headers: {
                             "X-CSRF-TOKEN": token,
                         },
                     });
-
+console.log(data);
                     $.ajax({
                         method: "POST",
                         url: "/vehicles/store",
@@ -1552,8 +1550,9 @@
             $("#image-preview").children().remove();
             $("#coverPhotoPreview").children().remove();
 
-            $.getJSON("/vehicles/" + vehicle_id, function (vehicle) {
-                if (vehicle !== null && vehicle.length > 0) {
+            $.getJSON("/vehicles/show/" + vehicle_id, function (vehicle) {
+                console.log(vehicle);
+                if (vehicle !== null) {
                     showSuccess(
                         "Vehicle accepted for editing, You can make changes and click save to save changes",
                         "#vehiclefeedback"
@@ -1580,14 +1579,12 @@
                             vehicle.model?.model +
                             "</option>"
                     );
-                    $(
-                        "#countryofOrigin option[value='" +
+                    $("#countryofOrigin option[value='" +
                             vehicle.country_of_origin +
                             "']"
                     ).prop("selected", true);
 
-                    $(
-                        "#shippingTo option[value='" +
+                    $("#shippingTo option[value='" +
                             vehicle.shipping_to +
                             "']"
                     ).prop("selected", true);
@@ -1615,27 +1612,28 @@
                         );
                     }
 
-                    $(
-                        "#yearOfManufacture option[value='" +
+                    $("#yearOfManufacture option[value='" +
                             vehicle.year +
                             "']"
                     ).prop("selected", true);
 
-                    $(
-                        "#vehicleColor option[value='" + vehicle.color + "']"
+                    $("#vehicleColor option[value='" + vehicle.color + "']"
                     ).prop("selected", true);
 
-                    $(
-                        "#interiorHtm option[value='" + vehicle.interior + "']"
+                    $("#interiorHtm option[value='" + vehicle.interior + "']"
                     ).prop("selected", true);
-                    $(
-                        "#fuelType option[value='" + vehicle.fuel_type + "']"
+                    $("#fuelType option[value='" + vehicle.fuel_type + "']"
                     ).prop("selected", true);
-                    $(
-                        "#transmissionHtm option[value='" +
+
+                    $("#transmission option[value='" +
                             vehicle.transmission +
                             "']"
                     ).prop("selected", true);
+
+                    $("#usageCondition option[value='" + vehicle.usage + "']").prop(
+                        "selected",
+                        true
+                    );
 
                     $.each(JSON.parse(vehicle.tags), function (key, value) {
                         if (value !== null) {
@@ -1884,7 +1882,7 @@
                     "</td><td>" +
                     vehicle_no +
                     "</td><td>" +
-                    dealer.name +
+                    dealer?.name +
                     "</td><td>" +
                     make.make +
                     "</td><td>" +

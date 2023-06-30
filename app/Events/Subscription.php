@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Vehicle;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -17,20 +18,27 @@ class Subscription
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    protected $user;
+    protected $plan;
+    public function __construct($user, $plan)
     {
-        //
+        $this->user = $user;
+        $this->plan = $plan;
     }
+
 
     /**
      * Get the channels the event should broadcast on.
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+    public function broadcastOn(): void
     {
-        return [
-            new PrivateChannel('channel-name'),
-        ];
+        $query = Vehicle::query();
+        if (!is_null($this->user->dealer_id)) {
+            $query->where('dealer_id',$this->user->dealer_id);
+        }
+        $query->orWhere('user_id',$this->user->id)->update(['priority'=>$this->plan->priority,'sponsored'=>1]);
+    // subscribe and send new subscription notification with validity and expiry of the subscription package
     }
 }

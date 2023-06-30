@@ -63,8 +63,8 @@ Route::controller(UsersController::class)->group(function () {
     Route::post('partners', 'partnerCreate');
 });
 
-// Route::get('countries', [ApplicationController::class, 'countries']);
-// Route::get('counties/{country_id?}', [ApplicationController::class, 'counties']);
+Route::get('countries', [ApplicationController::class, 'countries']);
+Route::get('counties/{country_id?}', [ApplicationController::class, 'counties']);
 
 Route::resource('settings', SettingsController::class);
 
@@ -153,7 +153,7 @@ Route::resource('reports', ReportController::class);
 // Route::get('discounts', [VehicleController::class, 'discounts'])->name('discounts');
 
 Route::prefix('vehicles')->group(function() {
-    Route::get('show', [VehicleController::class, 'show'])->name('vehicles.show');
+    Route::get('show/{id}', [VehicleController::class, 'show'])->name('vehicles.show');
     Route::post('store', [VehicleController::class, 'store'])->name('vehicles.store');
     Route::get('latest', [ApplicationController::class, 'latest'])->name('latest');
     Route::get('discounts', [ApplicationController::class, 'discountedVehicles'])->name('vehicles.discounts');
@@ -192,6 +192,7 @@ Route::prefix('admin')->group(function() {
     Route::get('requests', [AdminController::class, 'requests'])->name('admin.requests');
     Route::get('settings', [SettingsController::class, 'index'])->name('admin.settings');
     Route::get('reports',[AdminController::class, 'reports'])->name('admin.reports');
+    Route::get('customers', [UsersController::class, 'customers']);
 });
 
 // dd(auth()->user());

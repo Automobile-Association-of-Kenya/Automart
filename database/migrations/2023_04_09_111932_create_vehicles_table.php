@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreignIdFor(Type::class)->nullable()->constrained();
             $table->foreignIdFor(Make::class)->constrained();
             $table->foreignIdFor(VehicleModel::class)->constrained();
-            // $table->unsignedBigInteger('contry_of_origin')->nullable()->foreign()->references('id')->on(Country::class);
+            $table->unsignedBigInteger('contry_of_origin')->nullable()->foreign()->references('id')->on(Country::class);
             // $table->unsignedBigInteger('country_located')->nullable()->foreign()->references('id')->on(Country::class);
             // $table->foreignIdFor(County::class)->nullable()->constrained();
             $table->foreignIdFor(Yard::class)->nullable();
@@ -46,14 +46,16 @@ return new class extends Migration
             $table->string('terrain', 60)->nullable();
             $table->string('engine', 60)->nullable();
             $table->string('horsepower', 60)->nullable();
+            $table->string('usage', 60)->nullable();
             $table->text('description')->nullable();
-            $table->text('cover_photo')->nullable();
+            // $table->text('cover_photo')->nullable();
             $table->text('images')->nullable();
             $table->text('tags', 255)->nullable();
             $table->string('views')->default(0);
             $table->string('likes')->default(0);
             $table->string('priority',1)->default(9);
             $table->string('status', 30)->default('pending');
+            $table->boolean('sponsored')->default(false);
             $table->timestamps();
             $table->timestamp('sold_at')->nullable();
             $table->softDeletes();

@@ -612,4 +612,59 @@
         socialName.val('');
         socialLink.val('');
     });
+
+    $("#sendRange").on('change', function(event) {
+        let val = $(this).val();
+        console.log(val);
+        let recepient_type = $("#recepientType").val();
+        if (val === "manual" && recepient_type === "customers") {
+            $.getJSON("/admin/customers", function (customers) {
+                console.log(customers);
+                let tr = "";
+                $.each(customers, function (key, value) {
+                    tr +=
+                        "<tr data-id=" +
+                        value.id +
+                        "><td><input type='checkbox' id='selectedUser'></td><td>" +
+                        value.name +
+                        "</td><td>" +
+                        value.email +
+                        "</td><td>" +
+                        value.phone +
+                        "</td><td>" +
+                        value.dealer?.name +
+                        "</td></tr>";
+                });
+                let table =
+                    "<table class='table table-bordered table-sm'><thead><th>#</th><th>User</th><th>Email</th><th>Phone</th><th>Dealer</th></thead><tbody>" + tr + "</tbody></table>";
+                $("#mailingSections").html(table);
+            });
+        }else if (val === "manual" && recepient_type === "partners") {
+            $.getJSON("/partners", function (partners) {
+                console.log(partners);
+                let tr = "";
+                $.each(partners, function (key, value) {
+                    tr +=
+                        "<tr data-id=" +
+                        value.id +
+                        "><td><input type='checkbox' id='selectedUser'></td><td>" +
+                        value.name +
+                        "</td><td>" +
+                        value.email +
+                        "</td><td>" +
+                        value.phone +
+                        "</td><td>" +
+                        value.partner?.name +
+                        "</td></tr>";
+                });
+                let table =
+                    "<table class='table table-bordered table-sm'><thead><th>#</th><th>User</th><th>Email</th><th>Phone</th><th>Dealer</th></thead><tbody>" +
+                    tr +
+                    "</tbody></table>";
+                $("#mailingSections").html(table);
+            });
+        }
+    });
+
+    // selectedUser;
 })();

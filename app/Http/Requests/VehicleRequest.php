@@ -47,7 +47,8 @@ class VehicleRequest extends FormRequest
             'description' => ['max:255', 'nullable', 'string'],
             'tags' => ['max:255', 'nullable', 'array'],
             'features' => ['nullable', 'array'],
-            'str_id' => ['required', 'max:20']
+            // 'str_id' => ['required', 'max:20'],
+            'usage' => ['required','max:50']
         ];
     }
 }

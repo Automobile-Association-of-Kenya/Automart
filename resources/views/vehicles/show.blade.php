@@ -13,6 +13,20 @@
         .loansection {
             display: none;
         }
+
+        input[type="range"] {
+            width: 100%;
+            height: 15px;
+            background-color: #006544;
+            color: #006544;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .rangeslider__fill {
+            color: #006544;
+        }
     </style>
 @endsection
 
@@ -349,37 +363,52 @@
                             </ul>
                         </div>
 
+                        @php
+                            $deposit = (40/100 * $vehicle->price);
+                            $mindeposit = (10/100 * $vehicle->price);
+                        @endphp
+
                         <div class="widget mt-4">
                             <h3 class="sidebar-title">Loan Calculator</h3>
                             <div class="s-border"></div>
                             <div class="m-border"></div>
+                            <div class="bg-success p-2 text-center" style="border-radius: 10px;">
+                                <p class="mb-0 text-white">Estimated Monthly Payment</p>
+                                <p class="text-white">Note: Monthly interest rate may differ as we partner with different finance institutions.</p>
+                            </div>
                             <div class="form-group">
-                                <label for="">Down Payment</label>
+                                <label for="">Down Payment</label> <span class="float-right text-success" id="downPayment">{{ number_format($mindeposit,2) }}</span>
                                 <div class="range-slider">
-                                    <div data-min="0" data-max="" data-unit="Kes" data-min-name="min_downpayement"
+                                    <input type="range" min="{{ $mindeposit }}" max="{{ $deposit }}" step="100" value="{{ $mindeposit }}"
+                                        data-orientation="horizontal"  id="downPaymentSlider"  class="mb-0">
+                                    {{-- <div data-min="0" data-max="" data-unit="Kes" data-min-name="min_downpayement"
                                         data-max-name="max_downpayement" class="range-slider-ui ui-slider"
                                         aria-disabled="false"></div>
-                                    <div class="clearfix"></div>
+                                    <div class="clearfix"></div> --}}
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="">Interest Rate</label>
+                                <label for="">Interest Rate</label> <span class="float-right text-success" id="interestRate">10 %</span>
                                 <div class="range-slider">
-                                    <div data-min="0" data-max="30000000" data-unit="Kes" data-min-name="min_price"
+                                    <input type="range" min="0" max="100" step="1" value="34"
+                                        data-orientation="horizontal" id="interestRateSlider"  class="mb-0">
+                                    {{-- <div data-min="0" data-max="30000000" data-unit="Kes" data-min-name="min_price"
                                         data-max-name="max_price" class="range-slider-ui ui-slider"
                                         aria-disabled="false"></div>
-                                    <div class="clearfix"></div>
+                                    <div class="clearfix"></div> --}}
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="">Tenure</label>
+                                <label for="">Tenure</label> <span class="float-right text-success" id="tenureYears">12</span>
                                 <div class="range-slider">
-                                    <div data-min="0" data-max="30000000" data-unit="Kes" data-min-name="min_price"
+                                    <input type="range" min="0" max="36" step="1" value="34"
+                                        data-orientation="horizontal" id="tenureSlider" class="mb-0">
+                                    {{-- <div data-min="0" data-max="30000000" data-unit="Kes" data-min-name="min_price"
                                         data-max-name="max_price" class="range-slider-ui ui-slider"
                                         aria-disabled="false"></div>
-                                    <div class="clearfix"></div>
+                                    <div class="clearfix"></div> --}}
                                 </div>
                             </div>
                         </div>

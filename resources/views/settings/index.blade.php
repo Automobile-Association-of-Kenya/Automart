@@ -107,9 +107,11 @@
                                                                 <select name="priority" id="subPriority"
                                                                     class="form-control form-control-md" required>
                                                                     <option value="">Select One</option>
-                                                                    <option value="High">High</option>
-                                                                    <option value="Moderate">Moderate</option>
-                                                                    <option value="Low">Low</option>
+                                                                    <option value="1">1 <sup>st</sup></option>
+                                                                    <option value="2">2 <sup>nd</sup></option>
+                                                                    <option value="3">3 <sup>rd</sup></option>
+                                                                    <option value="4">4 <sup>th</sup></option>
+                                                                    <option value="5">5 <sup>th</sup></option>
                                                                 </select>
                                                             </div>
 
@@ -161,11 +163,11 @@
                                                                 <textarea name="description" id="subsDescription" class="form-control"></textarea>
                                                             </div>
 
-                                                            <div class="col-md-12 text-center mt-3">
-                                                                <button class='btn btn-success btn-sm' id='saveuser'><i
+                                                            <div class="col-md-12 mt-3">
+                                                                <button class='btn btn-success btn-md' id='saveuser'><i
                                                                         class="fal fa-save fa-lg fa-fw"></i> Save
                                                                 </button>
-                                                                <button class='btn btn-outline-warning btn-sm'
+                                                                <button class='btn btn-outline-warning btn-md'
                                                                     id='clearuser'><i
                                                                         class="fal fa-broom fa-lg fa-fw"></i>
                                                                     Clear
@@ -305,11 +307,10 @@
 
                                                             <div class="col-md-12">
                                                                 <label for="name">Recepients Type</label>
-                                                                <select name="account_type" id="accountType"
+                                                                <select name="recepient_type" id="recepientType"
                                                                     class="form-control form-control-sm">
                                                                     <option value="">Select One</option>
-                                                                    <option value="buyers">Buyers</option>
-                                                                    <option value="dealers">Dealers</option>
+                                                                    <option value="customers">Customers</option>
                                                                     <option value="partners">Partners</option>
                                                                 </select>
                                                             </div>
@@ -328,16 +329,15 @@
                                                                 <textarea name="message" id="message" class="form-control form-control-md"></textarea>
                                                             </div>
 
-                                                            <div class="col-md-12 text-center mt-3">
-                                                                <button class='btn btn-success btn-sm' id='sendmail'><i
+                                                            <div class="col-md-12 mt-3">
+                                                                <button class='btn btn-success btn-md' id='sendmail'><i
                                                                         class="fal fa-save fa-lg fa-fw"></i> Send
                                                                 </button>
-                                                                <button class='btn btn-outline-warning btn-sm'
+                                                                <button class='btn btn-outline-warning btn-md'
                                                                     id='clearm'><i
                                                                         class="fal fa-broom fa-lg fa-fw"></i>
                                                                     Clear
                                                                     Fields</button>
-
                                                             </div>
                                                         </div>
 
@@ -467,7 +467,7 @@
                                                 <input type="hidden" name="social_id" id="socialCreateID">
 
                                                 <div class="row">
-                                                    
+
                                                     <div class="col-md-12 form-group">
                                                         <label for="type">Type</label>
                                                         <select id="socialType" name="type" class="form-control">
@@ -477,7 +477,7 @@
                                                             <option value="address">Adrress</option>
                                                         </select>
                                                     </div>
-                                                    
+
                                                     <div class="col-md-12 form-group">
                                                         <label for="socialname">Name</label>
                                                         <input type="text" class="form-control form-control-md"

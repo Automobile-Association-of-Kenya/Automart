@@ -19,7 +19,7 @@ class Vehicle extends Model
         'speed',
         'terrain',
         'engine',
-        'horsepower', 'status', 'priority',
+        'horsepower', 'status', 'sponsored', 'priority',
     ];
 
     protected $with = ['make:id,make', 'model:id,model', 'dealer:id,name,phone,email'];
@@ -182,24 +182,6 @@ class Vehicle extends Model
         }
         $vehicles = $query->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices'])->limit(10)->get();
         return $vehicles;
-        // $query = $this->query()->where('id', '!=', $vehicle->id);
-
-        // if (!is_null($vehicle->type_id) && $vehicle->type_id !== "") {
-        //     $query->where('type_id', $vehicle->type_id);
-        // }
-
-        // if (!is_null($vehicle->make_id) && $vehicle->make_id !== "") {
-        //     $query->where('make_id', $vehicle->make_id);
-        // }
-
-        // if (!is_null($vehicle->vehicle_model_id) && $vehicle->vehicle_model_id !== "") {
-        //     $query->where('vehicle_model_id', $vehicle->vehicle_model_id);
-        // }
-
-        // $vehicles = $query->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices'])
-        //     ->limit(10)
-        //     ->get();
-        // return $vehicles;
     }
 
     function vehicle($vehicle_no)
@@ -242,8 +224,7 @@ class Vehicle extends Model
                     ->havingRaw('COUNT(*) > 1')
                     ->orderByDesc('created_at')
                     ->limit(2);
-            })
-            ->get()
+            })->inRandomOrder()->orderBy('priority')->get()
             ->filter(function ($vehicle) {
                 $prices = $vehicle->prices;
                 if ($prices->count() > 1 && $prices[0]->price < $prices[1]->price) {
@@ -275,7 +256,7 @@ class Vehicle extends Model
     public function getvehiclespaginate($paginate)
     {
 
-        $newarrivals = $this->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices:id,price'])->latest()->paginate($paginate);
+        $newarrivals = $this->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices:id,price'])->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
         return json_encode($newarrivals);
     }
 
@@ -285,7 +266,7 @@ class Vehicle extends Model
         if (!is_null($except_id)) {
             $query->where('id', '!=', $except_id)->orWhere('vehicle_no', '!=', $except_id);
         }
-        $newarrivals = $query->with('dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model')->latest()->limit($limit)->get();
+        $newarrivals = $query->with('dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model')->inRandomOrder()->latest()->orderBy('priority')->limit($limit)->get();
         return $newarrivals;
     }
 
@@ -296,13 +277,13 @@ class Vehicle extends Model
 
     function newvehiclespaginated($paginate)
     {
-        $newvehicles = $this->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model'])->latest()->paginate($paginate);
+        $newvehicles = $this->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model'])->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
         return $newvehicles;
     }
 
     function vehiclesbymake($make_id, $paginate)
     {
-        $vehicles = $this->where('make_id', $make_id)->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model'])->latest()->paginate($paginate);
+        $vehicles = $this->where('make_id', $make_id)->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model'])->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
         return $vehicles;
     }
 
@@ -325,7 +306,7 @@ class Vehicle extends Model
 
     function vehiclecontactphone($id)
     {
-        $vehicle = $this->where('id', $id)->with(['user:id,phone', 'dealer:id,phone'])->first();
+        $vehicle = $this->where('id', $id)->with('user:id,phone', 'dealer:id,phone')->first();
         $phone = $vehicle->user->phone ?? $vehicle->dealer->phone;
         return "+254" . substr($phone, -9);
     }
@@ -393,11 +374,23 @@ class Vehicle extends Model
 
     function searchpaginate($data, $paginate = 20)
     {
-        return $this->relate($data)->latest()->paginate($paginate);
+        return $this->relate($data)->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
     }
 
     function search($data)
     {
-        return $this->relate($data)->latest()->get();
+        return $this->relate($data)->inRandomOrder()->orderBy('priority')->latest()->get();
+    }
+
+    function initialize() {
+        $query = $this->query();
+        if (auth()->user()->role !== "admin") {
+            if (!is_null(auth()->user()->dealer_id)) {
+                $query->where('dealer_id',auth()->user()->dealer_id);
+            }else {
+                $query->where('user_id',auth()->id());
+            }
+        }
+        return $query;
     }
 }

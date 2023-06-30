@@ -19,8 +19,10 @@ class Purchase
      */
     public function __construct($type,$purchase)
     {
-        
+
     }
+
+    // send purchase request email notification
 
     /**
      * Get the channels the event should broadcast on.

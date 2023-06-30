@@ -21,7 +21,7 @@ class UsersController extends Controller
         $this->partner = new Partner();
     }
 
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -33,19 +33,23 @@ class UsersController extends Controller
             $query->where('id', $id);
         }
         $users = $query->latest()->get();
-
         return json_encode($users);
     }
+
+    function customers() {
+        $users = $this->user->with('dealer:id,name')->get();
+        return json_encode($users);
+    }
+
+    // ->where('role','!=','admin')
 
     public function dealers($id = null)
     {
         $query = $this->dealer->query();
-
         if (!is_null($id)) {
             $query->where('id', $id);
         }
         $dealers = $query->with('users')->withCount('vehicles')->latest()->get();
-
         return json_encode($dealers);
     }
 
@@ -67,7 +71,6 @@ class UsersController extends Controller
             $dealer = $this->dealer->create($validated);
             $message = $request->name . " created successfully";
         }
-
         if (!is_null($request->user_id)) {
             $user = $this->user->find($request->user_id);
             $user->update(['dealer_id' => $dealer->id]);
@@ -111,19 +114,13 @@ class UsersController extends Controller
         return json_encode(['status' => 'success', 'message' => $message]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function partners($id = null)
     {
         $query = $this->partner->query();
-
         if (!is_null($id)) {
             $query->where('id', $id);
         }
-
         $partners = $query->with('users')->latest()->get();
-
         return json_encode($partners);
     }
 

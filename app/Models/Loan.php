@@ -10,6 +10,8 @@ class Loan extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
+        'vehicle_id',
         'title',
         'firstname',
         'lastname',
@@ -42,4 +44,6 @@ class Loan extends Model
         'bank_account_type',
         'monthly_turnover',
     ];
+
+
 }

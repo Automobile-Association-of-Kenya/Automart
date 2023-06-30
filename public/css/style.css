@@ -6739,15 +6739,15 @@ input[type=checkbox]:checked+label:before {
 }
 
 .service-info-2:hover p {
-    color: #fff;
+    color: #333;
 }
 
 .service-info-2:hover h3 a {
-    color: #fff;
+    color: #333;
 }
 
 .service-info-2:hover .read-more {
-    color: #ffffff;
+    color: #333;
 }
 
 /** Service section start **/

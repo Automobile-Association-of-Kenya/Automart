@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->nullable();
             $table->foreignIdFor(Dealer::class);
             $table->foreignIdFor(Subscription::class);
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('expiry_date')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
