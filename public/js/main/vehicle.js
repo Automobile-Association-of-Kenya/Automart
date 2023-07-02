@@ -1385,14 +1385,10 @@
 
         var files = multiImagesUpload.files,
             imagesUploadPromises = [];
-
-        if (multiImagesUpload.files.length <= 0) {
-            errors.push("Images ae required");
-        }
         if (make == "" && make == undefined) {
             errors.push("Make is required");
         }
-        if (vehicle_id == "" && files.length <= 0) {
+        if (vehicle_id === "" && files.length <= 0) {
             errors.push("Vehicle Images are required");
         }
         if (model == "" && model == undefined) {
@@ -1419,6 +1415,7 @@
                 p += value + "\n";
             });
             showError("" + p + "", "#vehiclefeedback");
+            savevehicle.prop("disabled", false);
         } else {
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
@@ -1485,6 +1482,7 @@
 
             Promise.all(imagesUploadPromises)
                 .then((result) => {
+                    console.log(data);
                     $.ajaxSetup({
                         headers: {
                             "X-CSRF-TOKEN": token,
@@ -1514,7 +1512,7 @@
                         },
 
                         error: function (error) {
-                            console.log(error);
+                            console.error(error);
                             savevehicle.prop("disabled", false);
 
                             if (error.status == 422) {
@@ -1675,50 +1673,6 @@
                             $(input).prop("checked", true);
                         }
                     });
-
-                    /** Preview Images on edit */
-                    // if (
-                    //     vehicle.cover_photo !== "" &&
-                    //     vehicle.cover_photo !== null
-                    // ) {
-                    //     let preview = $("#coverPhotoPreview");
-                    //     const coverImage = $("<img>")
-                    //         .attr(
-                    //             "src",
-                    //             "/vehicleimages/" + vehicle.cover_photo
-                    //         )
-                    //         .attr("width", "100%")
-                    //         .attr("height", "200px");
-                    //     preview.append(coverImage);
-                    //     const removeButton = $(
-                    //         "<button class='btn btn-outline-danger' id='coverPhotoDelete' data-id='" +
-                    //             vehicle.id +
-                    //             "'>"
-                    //     )
-                    //         .html("<i class='fal fa-trash btn-danger'></i>")
-                    //         .on("click", function (event) {
-                    //             event.preventDefault();
-                    //             let $this = $(this),
-                    //                 data = {
-                    //                     _token: token,
-                    //                     vehicle_id: vehicle.id,
-                    //                     cover_photo_delete: true,
-                    //                 };
-                    //             $.post("/image-delete", data).done(function (
-                    //                 params
-                    //             ) {
-                    //                 console.log(params);
-                    //                 let result = JSON.parse(params);
-                    //                 if (result.status == "success") {
-                    //                     preview.remove();
-                    //                 }
-                    //             }).fail(function(error) {
-                    //                 console.log(error);
-                    //             });
-                    //         });
-                    //     preview.append(removeButton);
-                    // }
-
                     if (vehicle.images !== "[]" && vehicle.images !== null) {
                         let previewContainer = $("#image-preview");
                         $.each(

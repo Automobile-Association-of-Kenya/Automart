@@ -273,6 +273,7 @@ class VehicleController extends Controller
             $images = [];
         }
 
+
         if (session()->has($strkey . 'images')) {
             foreach (session($strkey . 'images') as $key => $value) {
                 $image = base64_decode($value);
@@ -290,28 +291,11 @@ class VehicleController extends Controller
                 array_push($images, $fileName);
             }
         }
-        if (session()->has($strkey . 'cover')) {
-            $jsone = session($strkey . 'cover');
-            $image = base64_decode($jsone);
-            $coverImage = 'img' . auth()->id() . 'cover' . strtotime(now()) . '.jpg'; // or any other desired file name
-            $img = Image::make($image);
-            $img->text(' ' . $name . ' via AA Kenya', 150, 120, function ($font) {
-                $font->file(public_path('fonts/font.ttf'));
-                $font->size(18);
-                $font->color('#CECECE');
-                $font->align('center');
-                $font->valign('center');
-                $font->angle(0);
-            });
-            $img->save(public_path('vehicleimages/' . $coverImage));
-        }
-
         $validated['tags'] = (isset($validated['tags'])) ? json_encode($validated['tags']) : null;
-
         DB::beginTransaction();
         if (isset($request->vehicle_id) && $request->vehicle_id !== null) {
 
-            $vehicle->update(['updated_by' => auth()->id(), 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images)] + $validated);
+            $vehicle->update(['updated_by' => auth()->id(), 'images' => json_encode($images)] + $validated);
             if (isset($validated["features"]) && count($validated["features"]) > 0) {
                 $this->vehicle->updatefeatures($vehicle->id, $validated["features"]);
             }
@@ -320,7 +304,7 @@ class VehicleController extends Controller
             }
             $message = "Vehicle updated successfully";
         } else {
-            $vehicle = Vehicle::create(['user_id'=>auth()->id(),'vehicle_no' => strtoupper(Str::random(3)).strtotime(now()), 'cover_photo' => $coverImage ?? null, 'images' => json_encode($images), 'views' => 0] + $validated);
+            $vehicle = Vehicle::create(['user_id'=>auth()->id(),'vehicle_no' => strtoupper(Str::random(3)).strtotime(now()), 'images' => json_encode($images), 'views' => 0] + $validated);
             if (isset($validated["features"]) && count($validated["features"]) > 0) {
                 $this->vehicle->addfeatures($vehicle->id, $validated["features"]);
             }

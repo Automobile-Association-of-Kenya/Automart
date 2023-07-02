@@ -56,7 +56,8 @@
                             <p><i class="flaticon-pin"></i>&nbsp; {{ $location }}</p>
                         </div>
                     </div>
-                    <a href="{{ route('loan',$vehicle_no) }}" class="btn btn-warning btn-md">You can also apply for financing here</a>
+                    <a href="{{ route('loan', $vehicle_no) }}" class="btn btn-warning btn-md">You can also apply for
+                        financing here</a>
 
                     <div class="card mt-4">
                         <div class="card-header bg-white">
@@ -72,10 +73,11 @@
                             <p><span class="fa fa-check-circle text-success"></span></p>
                         </div>
                         <div class="card-footer bg-white text-center">
-                            <p>You are agreeing to to<a href="{{ route('terms') }}" class="text-success"> <strong>our terms of
-                                                    use</strong></a> and <a href="{{ route('privacy') }}"
-                                                class="text-success"><strong>privacy
-                                                    policy</strong></a></p>
+                            <p>You are agreeing to to<a href="{{ route('terms') }}" class="text-success"> <strong>our terms
+                                        of
+                                        use</strong></a> and <a href="{{ route('privacy') }}"
+                                    class="text-success"><strong>privacy
+                                        policy</strong></a></p>
                         </div>
                     </div>
                 </div>
@@ -87,8 +89,8 @@
                         </div>
                         <div class="card-body">
                             <form action="{{ route('purchase') }}" method="post" id="vehiclePurchaseForm">
-                            @csrf
-                            <input type="hidden" name="vehicle_id" id="purchaseVehicleID" value="{{ $vehicle->id }}">
+                                @csrf
+                                <input type="hidden" name="vehicle_id" id="purchaseVehicleID" value="{{ $vehicle->id }}">
                                 <div id="purchasefeedback"></div>
                                 <div class="row">
                                     <div class="col-md-12 form-group">
@@ -141,9 +143,23 @@
                                 </div>
 
                                 <div class="col-md-12 text-center mt-3">
-                                    <button type="submit" class="btn btn-success"><i class="fa fa-save fa-lg fa-fw"></i>&nbsp;Submit</button>
+                                    <button type="submit" class="btn btn-success"><i
+                                            class="fa fa-save fa-lg fa-fw"></i>&nbsp;Submit</button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <h3 class="sidebar-title">Vehicles Features</h3>
+                        <div class="card mt-4">
+                            <div class="row">
+                                @foreach ($vehicle->features as $item)
+                                    <div class="col-md-6">
+                                        <p class="m-2 bg-grey p-2">{{ $item->feature }}</p>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>

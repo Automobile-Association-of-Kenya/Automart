@@ -146,6 +146,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <div class="col-md-6">
                 <div class="card peoplebyregtrend">
@@ -159,90 +160,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Project Charts  -->
-        {{-- <div class="row chart">
-            <div class="col">
-                <div class="card projectbyindustry">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Grade A Loans</span>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="projectbyindustry"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card projectbyneed">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Potfolio at Risk</span>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="projectsummarybyneed"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card projectbystatus">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Quantitative Analysis</span>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="projectsbystatus"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
-        <!-- Summary Tables -->
-        {{-- <div class="row table">
-            <div class="col ml-2">
-                <div class="card recentapplications">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Qualitative Analysis</span>
-                    </div>
-                    <div class="card-body scrollable">
-                        <table id="recentinnovations">
-
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card recentmembers">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Recent Disbursements</span>
-                    </div>
-                    <div class="card-body scrollable">
-                        <table id="recentmembers">
-
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card projectbystatus">
-                    <div class="card-header">
-                        <span class="text-left font-weight-bold">Loan Aging Analysis</span>
-                    </div>
-                    <div class="card-body scrollable">
-                        <div>
-                            <table id="recentconnections">
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
     </main>
 @endsection
 

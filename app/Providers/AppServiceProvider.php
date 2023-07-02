@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Visit::visit(request()->server());
+        Visit::visit(request()->server());
         Vehicle::observe(VehicleObserver::class);
         Maillist::observe(MaillistObserver::class);
         Paginator::useBootstrap();

@@ -198,6 +198,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="widget mt-4">
 
@@ -206,9 +207,14 @@
                             </div>
 
                             <div class="loancalcsection">
-                                @foreach ($vehicle->features as $item)
-                                    <span class="m-2 bg-grey">{{ $item->feature }}</span>
+                                <div class="row">
+                                    @foreach ($vehicle->features as $item)
+                                    {{-- <span class="mb-2 bg-grey p-2">{{ $item->feature }}</span> --}}
+                                    <div class="col-md-6">
+                                        <p class="bg-grey p-2">{{ $item->feature }}</p>
+                                    </div>
                                 @endforeach
+                                </div>
                             </div>
 
                         </div>
@@ -249,7 +255,7 @@
                         @php
                             $images = json_decode($item['images']);
                             $vehicle_no = $item->vehicle_no ?? $item->id;
-                            
+
                         @endphp
                         <div class="col-lg-4 col-md-6">
                             <div class="car-box-3">
@@ -587,7 +593,7 @@
                                         </select>
                                     </div>
 
-                                    
+
 
                                     <div class="col-md-6 form-group employment">
                                         <label for="employerName">Proffession <sup>*</sup></label>

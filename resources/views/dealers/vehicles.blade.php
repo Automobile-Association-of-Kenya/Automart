@@ -186,7 +186,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Condition: <sup>*</sup></label>
+                                                        <label for="company">Usage: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select name="usage" id="usageCondition"
                                                                 class="form-control form-control--md chzn-select"

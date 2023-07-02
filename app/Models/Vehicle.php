@@ -213,7 +213,9 @@ class Vehicle extends Model
     {
         $query = $this->query();
         if (!is_null($except_id)) {
-            $query->where('id', '!=', $except_id)->orWhere('vehicle_no', '!=', $except_id);
+            // $query->where('id', '<>', $except_id)->where('vehicle_no', '<>', $except_id);
+            $query->where('id', '!=', $except_id)
+            ->where('vehicle_no', '!=', $except_id);
         }
         $newarrivals = $query->with('dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model')->inRandomOrder()->latest()->orderBy('priority')->limit($limit)->get();
         return $newarrivals;

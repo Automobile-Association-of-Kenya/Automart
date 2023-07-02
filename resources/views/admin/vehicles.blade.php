@@ -13,8 +13,6 @@
         #additionInfo {
             display: none;
         }
-
-        
     </style>
 @endsection
 
@@ -106,7 +104,6 @@
                                     <div class="col-md-12">
                                         <div class="card ">
                                             <div class="card-body">
-                                                <div id="vehiclefeedback"></div>
                                                 <div class="row">
                                                     <input type="hidden" name="unique_str" id="uniqueStrID"
                                                         value="{{ $str }}">
@@ -179,9 +176,9 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Condition:</label>
+                                                        <label for="company">Usage:</label>
                                                         <div class="input-group">
-                                                            <select name="usage" id="usage"
+                                                            <select name="usage" id="usageCondition"
                                                                 class="form-control  chzn-select" style="width: 100%;">
                                                                 <option value="">Any</option>
                                                                 <option value="New">New</option>
@@ -407,6 +404,7 @@
                                                 <div id="imageFeedback"></div>
                                             </div>
                                         </div>
+                                        <div id="vehiclefeedback"></div>
 
                                         <div class="row mt-2">
                                             <div class="col-md-12">
@@ -793,8 +791,7 @@
 
             <div class="modal-header">
                 <h5 class="modal-title" id="vehicleHeader"></h5>
-                <button type="button" class="close btn btn-warning" data-dismiss="modal"
-                    aria-label="Close">
+                <button type="button" class="close btn btn-warning" data-dismiss="modal" aria-label="Close">
                     <span class="text-danger">&times;</span>
                 </button>
             </div>

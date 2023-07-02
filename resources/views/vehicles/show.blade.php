@@ -27,7 +27,7 @@
         .rangeslider__fill {
             color: #006544;
         }
-        
+
     </style>
 @endsection
 
@@ -427,7 +427,7 @@
                         $vehicle_no = $item->vehicle_no ?? $item->id;
                         $location = $item->yard !== null ? $item->yard->address : $item->location;
                     @endphp
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 slide slide-box">
                         <div class="car-box-3">
 
                             <div class="car-thumbnail">

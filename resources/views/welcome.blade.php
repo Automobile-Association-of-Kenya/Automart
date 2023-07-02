@@ -24,9 +24,6 @@
                 @foreach ($vehicles as $item)
                     @php
                         $images = json_decode($item['images']);
-                        if (!is_array($images)) {
-                            dd($item);
-                        }
                         $vehicle_no = $item->vehicle_no ?? $item->id;
                     @endphp
                     <div class="col-lg-3 col-md-6">
@@ -40,7 +37,7 @@
                                         {{-- <br> --}}
                                         <span>Kes: {{ number_format($item->price, 2) }}</span>
                                     </div>
-                                    <img class="d-block w-100" src="{{ asset('/vehicleimages/' . @$image . '') }}"
+                                    <img class="d-block w-100" src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                         alt="car">
                                 </a>
                                 <div class="carbox-overlap-wrapper">
@@ -56,12 +53,12 @@
                                             </a>
 
                                             <div class="car-magnify-gallery">
-                                                <a href="{{ asset('/vehicleimages/' . @$image . '') }}"
+                                                <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                                     class="overlap-btn"
                                                     data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                     <i class="fa fa-expand"></i>
                                                     <img class="hidden"
-                                                        src="{{ asset('/vehicleimages/' . @$image . '') }}"
+                                                        src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                                         alt="hidden-img">
                                                 </a>
                                                 @foreach ($images as $image)
