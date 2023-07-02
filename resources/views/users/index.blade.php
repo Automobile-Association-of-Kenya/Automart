@@ -22,58 +22,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="alert alert-primary">
-                            <div class="row">
-                                <div class="col">
-                                    <label for="cardvehicleno">Views: <span class='font-weight-bold'
-                                            id="cardvehicleviews"></span></label>
-                                </div>
 
-                                <div class="col">
-                                    <label for="cardvehiclelikes">Likes: <span class='font-weight-bold'
-                                            id="cardvehiclelikes"></span></label>
-                                </div>
-
-                                <div class="col">
-                                    <label for="cardvehiclecdealer">Dealer: <span class='font-weight-bold'
-                                            id="cardvehiclecdealer"></span></label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col">
-                                    <label for="cardvehicleenquiries">Enquiries: <span class='font-weight-bold'
-                                            id="cardvehicleloans"></span></label>
-                                </div>
-
-                                <div class="col">
-                                    <label for="cardvehiclefinance">ROF: <span class='font-weight-bold'
-                                            id="cardvehiclefinance">0.00</span></label>
-                                </div>
-
-                                <div class="col">
-                                    <label for="cardvehiclecreated">Created at: <span class='font-weight-bold'
-                                            id="cardvehiclecreated"></span></label>
-                                </div>
-                            </div>
-                            {{-- <div class="row">
-                                    <div class="col">
-                                        <label for="cardtotalsavings">Total Savings <span class='font-weight-bold'
-                                                id="cardtotalsavings">0.00</span></label>
-                                    </div>
-
-                                    <div class="col">
-                                        <label for="cardgauaranteeddeposits">Guaranteed Deposits: <span
-                                                class='font-weight-bold' id="cardgauaranteeddeposits">0.00</span></label>
-                                    </div>
-
-                                    <div class="col">
-                                        <label for="cardfreedeposits">Free Deposits: <span class='font-weight-bold'
-                                                id="cardfreedeposits">0.00</span></label>
-                                    </div>
-                                </div> --}}
-                        </div>
-                        <!-- Set up tabs  -->
                         <nav class="nav-justified ">
                             <div class="nav nav-tabs " id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="pop1-tab" data-toggle="tab" href="#usersTab"

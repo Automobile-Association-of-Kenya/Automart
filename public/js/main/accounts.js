@@ -284,7 +284,7 @@
                     amount += parseFloat(value.amount);
                 });
                 let table =
-                    "<table class='table table-bordered table-hover table-responsive transactionsTable'><thead><th>#</th><th>Account</th><th>Payee</th><th>Dealer</th><th>Subscription</th><th>Trans ID</th><th>Phone</th><th>Date</th><th>Amount</th></thead><tbody>" +
+                    "<table class='table table-bordered table-hover transactionsTable'><thead><th>#</th><th>Account</th><th>Payee</th><th>Dealer</th><th>Subscription</th><th>Trans ID</th><th>Phone</th><th>Date</th><th>Amount</th></thead><tbody>" +
                     tr +
                     "</tbody><tfoot><tr><td colspan='8'><strong>Total</strong></td><td><strong>" +
                     toMoney(amount) +

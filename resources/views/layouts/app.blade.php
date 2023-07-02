@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="{{ asset('css/skins/yellow.css') }}">
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/rangesli') }}">
     <meta name="google-signin-client_id" content=".apps.googleusercontent.com">
 
     <!-- Favicon icon -->

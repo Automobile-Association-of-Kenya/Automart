@@ -27,6 +27,7 @@
         .rangeslider__fill {
             color: #006544;
         }
+        
     </style>
 @endsection
 
@@ -376,39 +377,32 @@
                                 <p class="mb-0 text-white">Estimated Monthly Payment</p>
                                 <p class="text-white">Note: Monthly interest rate may differ as we partner with different finance institutions.</p>
                             </div>
+
+                            <div class="text-center">
+                                <h4 class="text">Ksh.&nbsp; <span id="installmentAmount"></span>&nbsp;/Monthly</h4>
+                            </div>
                             <div class="form-group">
+                                <input type="hidden" id="vehicleLoanPrice" value="{{ $vehicle->price }}">
                                 <label for="">Down Payment</label> <span class="float-right text-success" id="downPayment">{{ number_format($mindeposit,2) }}</span>
                                 <div class="range-slider">
                                     <input type="range" min="{{ $mindeposit }}" max="{{ $deposit }}" step="100" value="{{ $mindeposit }}"
-                                        data-orientation="horizontal"  id="downPaymentSlider"  class="mb-0">
-                                    {{-- <div data-min="0" data-max="" data-unit="Kes" data-min-name="min_downpayement"
-                                        data-max-name="max_downpayement" class="range-slider-ui ui-slider"
-                                        aria-disabled="false"></div>
-                                    <div class="clearfix"></div> --}}
+                                        data-orientation="horizontal"  id="downPaymentSlider" class="text-warning">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="">Interest Rate</label> <span class="float-right text-success" id="interestRate">10 %</span>
+                                <label for="">Interest Rate</label> <span class="float-right text-success" id="interestRateText">10 %</span>
                                 <div class="range-slider">
-                                    <input type="range" min="0" max="100" step="1" value="34"
-                                        data-orientation="horizontal" id="interestRateSlider"  class="mb-0">
-                                    {{-- <div data-min="0" data-max="30000000" data-unit="Kes" data-min-name="min_price"
-                                        data-max-name="max_price" class="range-slider-ui ui-slider"
-                                        aria-disabled="false"></div>
-                                    <div class="clearfix"></div> --}}
+                                    <input type="range" min="0" max="34" step="1" value="10"
+                                        data-orientation="horizontal" id="interestRateSlider" class="text-warning">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="">Tenure</label> <span class="float-right text-success" id="tenureYears">12</span>
+                                <label for="">Tenure</label> <span class="float-right text-success" id="tenureYears">12</span>&nbsp;Months
                                 <div class="range-slider">
-                                    <input type="range" min="0" max="36" step="1" value="34"
-                                        data-orientation="horizontal" id="tenureSlider" class="mb-0">
-                                    {{-- <div data-min="0" data-max="30000000" data-unit="Kes" data-min-name="min_price"
-                                        data-max-name="max_price" class="range-slider-ui ui-slider"
-                                        aria-disabled="false"></div>
-                                    <div class="clearfix"></div> --}}
+                                    <input type="range" min="0" max="36" step="1" value="12"
+                                        data-orientation="horizontal" id="tenureSlider" class="text-warning">
                                 </div>
                             </div>
                         </div>
@@ -718,7 +712,7 @@
             <div class="modal-content" id="vehiclePreviewSection">
                 <div class="modal-header">
                     <div class="modal-title" id="carOverviewModalLabel">
-                        <h4 class="text-black">Ask for trade option with your current vehicle </h4>
+                        <h4 class="text-black">Ask for trade in option with your current vehicle </h4>
                         <p>Leave us your details on the form below and we will get back to you.</p>
                     </div>
                     <button type="button" class="close btn btn-warning text-danger" data-bs-dismiss="modal"

@@ -15,8 +15,11 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
-
-
+    <style>
+        .btn-floated {
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+    </style>
     <title>@yield('title') | AA Kenya Limited</title>
     @yield('header_styles')
 </head>
@@ -27,22 +30,22 @@
 
         <div class="sidebar-brand">
             <h2>
-                <a href="{{ url('/') }}"><i class="fas fa-home text-white"></i><b><span class="text-white">AA
+                <a href="{{ url('/') }}"><i class="fas fa-home fa-2x text-white"></i><b><span class="text-white">AA
                             KENYA</span></b></a>
             </h2>
         </div>
 
         <div class="sidebar-menu">
             <ul>
-                <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
-                    <a href="{{ route('dashboard') }}" class='validation' data-id=48 id="dashboard">
+                <li class="{{ Request::is('admin') ? 'active' : '' }}">
+                    <a href="{{ route('admin.index') }}">
                         <span><i class="fal fa-tachometer"></i></span>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li class="{{ Request::is('admin/vehicles') ? 'active' : '' }}">
-                    <a href="{{ route('admin.vehicles') }}" class='validation' data-id=2 id="membership">
+                    <a href="{{ route('admin.vehicles') }}" class='validation' id="membership">
                         <span><i class="fal fa-cars"></i></span>
                         <span>Vehicles</span>
                     </a>

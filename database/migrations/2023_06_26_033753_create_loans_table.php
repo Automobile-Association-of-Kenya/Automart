@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Country;
 use App\Models\Industry;
 use App\Models\User;
 use App\Models\Vehicle;
@@ -26,12 +27,12 @@ return new class extends Migration
             $table->string('phone');
             $table->string('kra_pin');
             $table->string('id_no');
-            $table->string('country_id')->nullable();
+            $table->foreignIdFor(Country::class)->nullable();
             $table->string('city');
             $table->string('estate');
             $table->string('house_no');
             $table->string('occupation');
-            $table->string('employement_type');
+            $table->string('employement_type')->nullable();
             $table->foreignIdFor(Industry::class)->nullable();
             $table->string('proffession')->nullable();
             $table->string('employer')->nullable();

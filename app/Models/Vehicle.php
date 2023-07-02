@@ -24,116 +24,74 @@ class Vehicle extends Model
 
     protected $with = ['make:id,make', 'model:id,model', 'dealer:id,name,phone,email'];
 
-    /**
-     * Get the dealer that owns the Vehicle
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function dealer(): BelongsTo
     {
         return $this->belongsTo(Dealer::class, 'dealer_id');
     }
 
-    /**
-     * Get the yard that owns the Vehicle
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function yard(): BelongsTo
     {
         return $this->belongsTo(Yard::class, 'yard_id');
     }
 
-    /**
-     * Get all of the purchases for the Vehicle
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function purchases(): HasMany
     {
         return $this->hasMany(Purchase::class, 'vehicle_id', 'id');
     }
 
-    /**
-     * The features that belong to the Vehicle
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function features(): BelongsToMany
     {
         return $this->belongsToMany(Feature::class, 'vehicle_feature', 'vehicle_id', 'feature_id');
     }
 
-    /**
-     * Get the make that owns the Vehicle
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function make(): BelongsTo
     {
         return $this->belongsTo(Make::class, 'make_id');
     }
 
-    /**
-     * Get the model that owns the Vehicle
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function model(): BelongsTo
     {
         return $this->belongsTo(VehicleModel::class, 'vehicle_model_id');
     }
-
-    /**
-     * Get all of the prices for the Vehicle
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
 
     public function prices(): HasMany
     {
         return $this->hasMany(VehiclePrice::class, 'vehicle_id', 'id');
     }
 
-    /**
-     * Get the type that owns the Vehicle
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function type(): BelongsTo
     {
         return $this->belongsTo(Type::class, 'type_id');
     }
 
-    /**
-     * Get all of the tradeins for the Vehicle
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function tradeins(): HasMany
     {
         return $this->hasMany(Tradein::class, 'vehicle_id', 'id');
     }
-
-    /**
-     * Get all of the quotes for the Vehicle
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
 
     public function quotes(): HasMany
     {
         return $this->hasMany(Quote::class, 'vehicle_id', 'id');
     }
 
-    /**
-     * Get all of the finance for the Vehicle
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+    public function loans(): HasMany
+    {
+        return $this->hasMany(Loan::class, 'vehicle_id', 'id');
+    }
+
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Messages::class, 'vehicle_id', 'id');
+    }
+
     public function finance(): HasMany
     {
         return $this->hasMany(Finance::class, 'vehicle_id', 'id');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function addfeatures($id, $features)
@@ -243,15 +201,6 @@ class Vehicle extends Model
         return $vehicles;
     }
 
-    /**
-     * Get the user that owns the Vehicle
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
 
     public function getvehiclespaginate($paginate)
     {

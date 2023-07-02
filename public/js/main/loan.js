@@ -24,24 +24,17 @@
 
     let sidebusiness = $("input[name='sidebusiness']"),
         employment = $("input[name='employment']");
-
     employment.on("change", function (event) {
         let val = $(this).val();
-        let business = sidebusiness.val();
-        if (val == "employment" && business == "yes") {
-            $("." + val).show();
-            $(".business").show();
-        } else if ((val === "employment") & (business === "no")) {
-            $("." + val).show();
+        if (val === "employment") {
+            $(".employment").show();
             $(".business").hide();
-        } else if (val == "business") {
-            $("." + val).hide();
-            $(".business").show();
-        } else {
-            $("." + val).show();
+        } else if (val === "business") {
+            $(".employment").hide();
             $(".business").show();
         }
     });
+
     sidebusiness.on("change", function () {
         if ($(this).val() == "yes") {
             $(".business").show();
@@ -67,13 +60,18 @@
     getPartners();
 
     function getCountries() {
-        $.getJSON('/countries', function (countries) {
+        $.getJSON("/countries", function (countries) {
             let option = "<option value=''>Select One</option>";
             $.each(countries, function (key, value) {
-            option += "<option value="+value.id+">"+value.name+"</option>"
+                option +=
+                    "<option value=" +
+                    value.id +
+                    ">" +
+                    value.name +
+                    "</option>";
             });
             $("#countryID").html(option);
-            $("#countryID option[value='110']").prop("selected",true);
+            $("#countryID option[value='110']").prop("selected", true);
         });
     }
 
@@ -152,5 +150,4 @@
             calcDepost.val(0);
         }
     });
-
 })();

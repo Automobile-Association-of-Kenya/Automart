@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
 // Route::resource('vehicles', VehicleController::class);
 
 Route::controller(VehicleController::class)->group(function () {
@@ -194,6 +195,8 @@ Route::prefix('admin')->group(function() {
     Route::get('reports',[AdminController::class, 'reports'])->name('admin.reports');
     Route::get('customers', [UsersController::class, 'customers']);
 });
+
+Route::get('dealers-get', [DealerController::class, 'getDealers']);
 
 // dd(auth()->user());
 Route::middleware('dealer')->prefix('dealer')->group(function() {

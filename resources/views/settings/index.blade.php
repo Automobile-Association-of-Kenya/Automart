@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bootstrap3-wysihtml5-bower/css/bootstrap3-wysihtml5.min.css') }}">
+
+    <style>
+        #mailingSections {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+        }
+    </style>
 @endsection
 
 @section('header_styles')
@@ -270,10 +282,10 @@
                                     <div class="card containergroup">
                                         <div class="card-body">
                                             <div class="row">
-                                                <div class="col-md-7 mt-2" id="mailingSections">
+                                                <div class="col-md-6 mt-2" id="mailingSections">
                                                 </div>
 
-                                                <div class="col-md-5 mail-create-section">
+                                                <div class="col-md-6 mail-create-section">
                                                     <h4 class="text text-center mb-2">Notification Form</h4>
                                                     <div id="mailsfeedback"></div>
 
@@ -283,7 +295,7 @@
 
                                                             <div class="col-md-12 form-group">
                                                                 <label for="usage">Notification Type</label>
-                                                                <select name="usage" id="mailUsage"
+                                                                <select name="usage" id="sendMailUsage"
                                                                     class="form-control form-control-md" required>
                                                                     <option value="">Select one</option>
                                                                     <option value="mail">Mail</option>
@@ -294,7 +306,7 @@
                                                             <div class="col-md-12 mail">
                                                                 <label for="name">Email Type</label>
                                                                 <select name="account_type" id="accountType"
-                                                                    class="form-control form-control-sm">
+                                                                    class="form-control form-control-sm" required>
                                                                     <option value="">Select one</option>
                                                                     <option value="Authentication">Authentication / User
                                                                         accounts
@@ -308,7 +320,7 @@
                                                             <div class="col-md-12">
                                                                 <label for="name">Recepients Type</label>
                                                                 <select name="recepient_type" id="recepientType"
-                                                                    class="form-control form-control-sm">
+                                                                    class="form-control form-control-sm" required>
                                                                     <option value="">Select One</option>
                                                                     <option value="customers">Customers</option>
                                                                     <option value="partners">Partners</option>
@@ -318,7 +330,7 @@
                                                             <div class="col-md-12">
                                                                 <label for="email">Range</label>
                                                                 <select name="sendrange" id="sendRange"
-                                                                    class="form-control">
+                                                                    class="form-control" required>
                                                                     <option value="">All</option>
                                                                     <option value="manual">Manually Select</option>
                                                                 </select>
@@ -326,7 +338,8 @@
 
                                                             <div class="col-md-12">
                                                                 <label for="phone">Message</label>
-                                                                <textarea name="message" id="message" class="form-control form-control-md"></textarea>
+                                                                {{-- <div class="float-right box-tools"></div> --}}
+                                                                <textarea class="textarea form_editors_textarea_wysihtml form-control" name="mailMessage" id="mailMessage" placeholder="Type your message here" required></textarea>
                                                             </div>
 
                                                             <div class="col-md-12 mt-3">
@@ -486,15 +499,16 @@
 
                                                     <div class="col-md-12 form-group">
                                                         <label for="social Link">Link</label>
-                                                        <input type="text" class="form-control" name="link" id="socialLink" >
+                                                        <input type="text" class="form-control" name="link"
+                                                            id="socialLink">
                                                     </div>
 
                                                     <div class="col-md-12 form-group">
                                                         <button class='btn btn-success btn-sm' id='savesocial'><i
                                                                 class="fal fa-save fa-lg fa-fw"></i> Save
                                                         </button>
-                                                        <button class='btn btn-outline-warning btn-sm'
-                                                            id='clearsocial'><i class="fal fa-broom fa-lg fa-fw"></i>
+                                                        <button class='btn btn-outline-warning btn-sm' id='clearsocial'><i
+                                                                class="fal fa-broom fa-lg fa-fw"></i>
                                                             Reset</button>
                                                     </div>
 
@@ -605,4 +619,39 @@
     <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('js/main/settings.js') }}"></script>
+    <script src="{{ asset('bootstrap3-wysihtml5-bower/js/bootstrap3-wysihtml5.all.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap3_wysihtml5.js') }}"></script>
+    <script>
+        (function() {
+                $(".textarea").wysihtml5();
+
+            // $('#bootstrap-editor').wysihtml5({
+            //     stylesheets: [
+            //         '/bootstrap-wysihtml5/stylesheets/bootstrap-wysihtml5wysiwyg-color.css'
+            //     ]
+            // });
+            $(".wysihtml5-toolbar li:nth-child(3) a").addClass("btn-outline-primary");
+            $(".wysihtml5-toolbar li:nth-child(4) a").addClass("btn-outline-primary");
+            $(".wysihtml5-toolbar li:nth-child(5) a").addClass("btn-outline-primary");
+            $(".wysihtml5-toolbar li:nth-child(6) a").addClass("btn-outline-primary");
+            $(".wysihtml5-toolbar .btn-group:eq(1) a:first-child").addClass("fas fa-list");
+            $(".wysihtml5-toolbar .btn-group:eq(1) a:nth-child(2)").addClass("fas fa-th-list");
+            $(".wysihtml5-toolbar .btn-group:eq(1) a:nth-child(3)").addClass("fas fa-align-left");
+            $(".wysihtml5-toolbar .btn-group:eq(1) a:nth-child(4)").addClass("fas fa-align-right");
+            $(".wysihtml5-toolbar .btn-group:eq(3) a:first-child").addClass("fas fa-list");
+            $(".wysihtml5-toolbar .btn-group:eq(3) a:nth-child(2)").addClass("fas fa-th-list");
+            $(".wysihtml5-toolbar .btn-group:eq(3) a:nth-child(3)").addClass("fas fa-align-left");
+            $(".wysihtml5-toolbar .btn-group:eq(3) a:nth-child(4)").addClass("fas fa-align-right");
+            $(".wysihtml5-toolbar li:nth-child(5) span").addClass("fas fa-share");
+            $(".wysihtml5-toolbar li:nth-child(6) span").addClass("fas fa-picture-o");
+            $("[data-wysihtml5-command='formatBlock'] span").css("position", "relative").css("top", "-5px").css("left",
+                "-5px");
+            $(".note-toolbar button").removeClass('btn-default').addClass('btn-light');
+            $(".wysihtml5-toolbar li:nth-child(2) a").removeClass('btn-default').addClass('btn-light');
+            $(".note-editor .note-editing-area").addClass('note-editing-area1');
+            $(".note-btn .note-icon-arrows-alt").click(function() {
+                $(".note-editing-area").removeClass('note-editing-area1');
+            })
+        })()
+    </script>
 @endsection

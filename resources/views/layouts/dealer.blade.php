@@ -24,14 +24,14 @@
     <div class="sidebar">
         <div class="sidebar-brand">
             <h2>
-                <a href="{{ url('/') }}"><i class="fas fa-home text-white"></i><b><span class="text-white">AA
+                <a href="{{ url('/') }}"><i class="fas fa-home fa-2x text-white"></i><b><span class="text-white">AA
                             KENYA</span></b></a>
             </h2>
         </div>
 
         <div class="sidebar-menu">
             <ul>
-                <li class="{{ Request::is('dealer') ? 'active' : '' }}" class='validation'>
+                <li class="{{ Request::is('dealer') ? 'active' : '' }}">
                     <a href="{{ route('dealer.index') }}">
                         <span><i class="fal fa-tachometer"></i></span>
                         <span>Dashboard</span>

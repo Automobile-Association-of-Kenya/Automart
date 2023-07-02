@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Loan extends Model
 {
@@ -44,6 +45,20 @@ class Loan extends Model
         'bank_account_type',
         'monthly_turnover',
     ];
+protected $with = ['country:id,name','industry:id,name'];
 
+public function vehicle(): BelongsTo
+{
+    return $this->belongsTo(Vehicle::class, 'vehicle_id');
+}
 
+public function industry(): BelongsTo
+{
+    return $this->belongsTo(Industry::class, 'industry_id');
+}
+
+public function country(): BelongsTo
+{
+    return $this->belongsTo(Country::class, 'country_id');
+}
 }

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Finance;
 use App\Models\Loan;
+use App\Models\Purchase;
 use App\Models\Quote;
 use App\Models\Tradein;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -19,11 +19,9 @@ class AdminController extends Controller
         $this->finance = new Finance();
         $this->user = new User();
         $this->loan = new Loan();
+        $this->purchase = new Purchase();
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $summary = $this->user->summary();
@@ -48,16 +46,14 @@ class AdminController extends Controller
 
     public function requests()
     {
-        $quotes = $this->quote->with('vehicle')->latest()->get();
-        $tradeins = $this->tradein->with('vehicle')->latest()->get();
-        $finances = $this->finance->with('vehicle')->latest()->get();
-        $loans = $this->loan->latest()->get();
-        return view('admin.requests', compact('quotes', 'tradeins', 'finances'));
+        $quotes = $this->quote->with('vehicle')->latest()->paginate(10);
+        $tradeins = $this->tradein->with('vehicle')->latest()->paginate(10);
+        $finances = $this->finance->with('vehicle')->latest()->paginate(10);
+        $loans = $this->loan->with('vehicle.user', 'vehicle.dealer','industry','country')->latest()->paginate(10);
+        $purchases = $this->purchase->latest()->paginate(10);
+        return view('admin.requests', compact('quotes', 'loans', 'tradeins', 'finances', 'purchases'));
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function settings()
     {
         return view('settings.index');
@@ -68,43 +64,4 @@ class AdminController extends Controller
         return view('admin.reports');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

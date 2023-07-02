@@ -311,89 +311,96 @@ $(document).ready(function () {
                 $rootwizard.find(".pager .next").show();
                 $rootwizard.find(".pager .finish").hide();
             }
-            $("#loanSubmit").on("click", function () {
-                var $validator = $("#loanApplicationForm")
-                    .data("bootstrapValidator")
-                    .validate();
-                if ($validator.isValid()) {
-                    // $("#myModal").modal("show");
-                    // loanApplicationForm.on("submit", function (event) {
-                    //     event.preventDefault();
-                    $("#loanSubmit").prop("disabled", true);
-                    let $this = $(this),
-                        submit = $this.find("button[type='submit']"),
-                        data = {
-                            _token: $("input[name='_token']").val(),
-                            vehicle_id: vehicleloanID.val(),
-                            title: appliTitle.val(),
-                            firstname: firstName.val(),
-                            lastname: lastName.val(),
-                            date_of_birth: dateOfbirth.val(),
-                            email: emailAddress.val(),
-                            phone: phoneNumber.val(),
-                            kra_pin: kraPin.val(),
-                            id_no: idNo.val(),
-                            country_id: countryID.val(),
-                            city: cityResidence.val(),
-                            estate: estateName.val(),
-                            house_no: houseNO.val(),
-                            occupation: employmentinput.val(),
-                            employement_type: employementType.val(),
-                            industry_id: industry.val(),
-                            proffession: proffession.val(),
-                            employer: employerName.val(),
-                            years_of_employment: yearsOfEmployment.val(),
-                            employer_address: employerAddress.val(),
-                            business: sidebusinessinput.val(),
-                            businessowner: businessowner.val(),
-                            business_name: businessName.val(),
-                            business_reg_no: businessRegNo.val(),
-                            businesstype: businesstype.val(),
-                            businessaddress: businessaddress.val(),
-                            type_of_bank_account: typeOfAccount.val(),
-                            bank: bankName.val(),
-                            accountholdername: accountholdername.val(),
-                            account_number: accountNumber.val(),
-                            bank_account_type: bankAccountType.val(),
-                            monthly_turnover: monthlyTurnover.val(),
-                        };
-                    $.post("/loan-application", data)
-                        .done(function (params) {
-                            console.log(params);
-                            $("#loanSubmit").prop("disabled", false);
-                            let result = JSON.parse(params);
-                            $("#loanApplicationForm").trigger("reset");
-                            if (result.status == "success") {
-                                showSuccess(result.message, "#loanfeedback");
-                                $this.trigger("reset");
-                            } else {
-                                showError(result.error, "#loanfeedback");
-                            }
-                        })
-                        .fail(function (error) {
-                            $("#loanSubmit").prop("disabled", false);
-                            console.log(error);
-                            if (error.status == 422) {
-                                var errors = "";
-                                $.each(
-                                    error.responseJSON.errors,
-                                    function (key, value) {
-                                        errors += value + "!";
-                                    }
-                                );
-                                showError(errors, "#loanfeedback");
-                            } else {
-                                showError(
-                                    "Error occurred during processing",
-                                    "#loanfeedback"
-                                );
-                            }
-                            // });
-                        });
-                }
-            });
         },
     });
+
+    loanApplicationForm.on('submit', function(event) {
+        event.preventDefault();
+        console.log('submitted');
+    });
+
+    $("#loanSubmit").on("click", function () {
+        var $validator = $("#loanApplicationForm")
+            .data("bootstrapValidator")
+            .validate();
+        if ($validator.isValid()) {
+            $("#loanSubmit").prop("disabled", true);
+            let $this = $(this),
+                submit = $this.find("button[type='submit']"),
+                data = {
+                    _token: $("input[name='_token']").val(),
+                    vehicle_id: vehicleloanID.val(),
+                    title: appliTitle.val(),
+                    firstname: firstName.val(),
+                    lastname: lastName.val(),
+                    date_of_birth: dateOfbirth.val(),
+                    email: emailAddress.val(),
+                    phone: phoneNumber.val(),
+                    kra_pin: kraPin.val(),
+                    id_no: idNo.val(),
+                    country_id: countryID.val(),
+                    city: cityResidence.val(),
+                    estate: estateName.val(),
+                    house_no: houseNO.val(),
+                    occupation: employmentinput.val(),
+                    employement_type: employementType.val(),
+                    industry_id: industry.val(),
+                    proffession: proffession.val(),
+                    employer: employerName.val(),
+                    years_of_employment: yearsOfEmployment.val(),
+                    employer_address: employerAddress.val(),
+                    business: sidebusinessinput.val(),
+                    businessowner: businessowner.val(),
+                    business_name: businessName.val(),
+                    business_reg_no: businessRegNo.val(),
+                    businesstype: businesstype.val(),
+                    businessaddress: businessaddress.val(),
+                    type_of_bank_account: typeOfAccount.val(),
+                    bank: bankName.val(),
+                    accountholdername: accountholdername.val(),
+                    account_number: accountNumber.val(),
+                    bank_account_type: bankAccountType.val(),
+                    monthly_turnover: monthlyTurnover.val(),
+                };
+            console.log(data);
+            $.post("/loan-application", data)
+                .done(function (params) {
+                    console.log(params);
+                    $("#loanSubmit").prop("disabled", false);
+                    let result = JSON.parse(params);
+                    $("#loanApplicationForm").trigger("reset");
+                    if (result.status == "success") {
+                        showSuccess(result.message, "#loanfeedback");
+                        $this.trigger("reset");
+                    } else {
+                        showError(result.error, "#loanfeedback");
+                    }
+                })
+                .fail(function (error) {
+                    $("#loanSubmit").prop("disabled", false);
+                    console.log(error);
+                    if (error.status == 422) {
+                        var errors = "";
+                        $.each(
+                            error.responseJSON.errors,
+                            function (key, value) {
+                                errors += value + "!";
+                            }
+                        );
+                        showError(errors, "#loanfeedback");
+                    } else {
+                        showError(
+                            "Error occurred during processing",
+                            "#loanfeedback"
+                        );
+                    }
+                    // });
+                });
+        }
+    });
+
+
+    
 
     $("#rootwizard_no_val").bootstrapWizard({ tabClass: "nav nav-pills" });
 

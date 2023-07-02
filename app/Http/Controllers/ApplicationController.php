@@ -45,6 +45,7 @@ class ApplicationController extends Controller
     {
         $vehicles = $this->vehicle->getlatest(12);
         $discounts = $this->vehicle->discounts(24);
+        // dd($vehicles);
         return view('welcome', compact('discounts', 'vehicles'));
     }
 

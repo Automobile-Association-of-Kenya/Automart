@@ -11,8 +11,6 @@ use App\Models\Vehicle;
 use App\Models\VehicleModel;
 use App\Models\VehiclePrice;
 use App\Models\Yard;
-use Illuminate\Contracts\Session\Session;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -178,22 +176,7 @@ class VehicleController extends Controller
     public function show($id)
     {
         $vehicle = $this->vehicle
-            ->with(['dealer' => function ($dealer) {
-                return $dealer->select('id', 'name');
-            }, 'type' => function ($type) {
-                return $type->select('id', 'type');
-            }, 'make' => function ($make) {
-                return $make->select('id', 'make');
-            }, 'model' => function ($model) {
-                return $model->select('id', 'model');
-            }, 'prices' => function ($query) {
-                return $query->select('id', 'price');
-            }, 'yard' => function ($yard) {
-                return $yard->select('id', 'yard');
-            }, 'features' => function ($fea) {
-                return $fea->select('features.id', 'features.feature');
-            }])->find($id);
-
+            ->with('dealer:id,name','user:id,name','type:id,type', 'make:id,make', 'model:id,model','prices:id,price', 'yard:id,yard','features:id,feature', 'tradeins', 'quotes','loans','messages')->find($id);
         return json_encode($vehicle);
     }
 
@@ -374,13 +357,6 @@ class VehicleController extends Controller
     public function imageDelete(Request $request)
     {
         $vehicle = $this->vehicle->find($request->vehicle_id);
-        // if (isset($request->cover_photo_delete) && $request->cover_photo_delete == true) {
-        //     if (File::exists(public_path('vehicleimages/' . $vehicle->cover_photo))) {
-        //         File::delete(public_path('vehicleimages/' . $vehicle->cover_photo));
-        //     }
-        //     $vehicle->cover_photo = null;
-        //     $vehicle->update();
-        // } else
         if (isset($request->photo_delete) && $request->photo_delete) {
             $image = $request->image;
             $images = array_filter(json_decode($vehicle->images, true), function ($value) use ($image) {
@@ -416,7 +392,7 @@ class VehicleController extends Controller
         if (isset($request->model_id) && !is_null($request->model_id)) {
             $query->where('vehicle_model_id', $request->model_id);
         }
-        $vehicles = $query->latest()->with(['dealer:id,name', 'make:id,make', 'model:id,model', 'prices'])->get();
+        $vehicles = $query->latest()->with(['dealer:id,name','user:id,name', 'make:id,make', 'model:id,model', 'prices'])->get();
         return json_encode($vehicles);
     }
 }

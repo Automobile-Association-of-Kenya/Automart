@@ -126,8 +126,10 @@ class User extends Authenticatable
         $purchasecount = Purchase::count();
         $todaypurchasecount = Purchase::whereDate('created_at', $today)->count();
         $visitscount = Visit::count();
-        $visitstoday = Visit::whereDate('time',date('Y-m-d'))->count();
-        $activesubscriptions = DB::table('dealer_subscription')->whereTime('expiry_date','>',date('Y-m-d H:i:s'))->count();
+        $loanscount = Loan::count();
+        $todayloanscount = Loan::whereDate('created_at', date('Y-m-d'))->count();
+        $visitstoday = Visit::whereDate('time', date('Y-m-d'))->count();
+        $activesubscriptions = DB::table('dealer_subscription')->whereTime('expiry_date', '>', date('Y-m-d H:i:s'))->count();
 
         return [
             'vehiclescount' => $vehiclescount,
@@ -143,8 +145,10 @@ class User extends Authenticatable
             'purchasecount' => $purchasecount,
             'todaypurchasecount' => $todaypurchasecount,
             'visitscount' => $visitscount,
-            'visitstoday'=> $visitstoday,
+            'visitstoday' => $visitstoday,
             'activesubscriptions' => $activesubscriptions,
+            'loanscount' => $loanscount,
+            'todayloanscount' => $todayloanscount
         ];
 
         // $views = ->sum('views');

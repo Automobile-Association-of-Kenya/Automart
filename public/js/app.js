@@ -45,7 +45,6 @@ $(function () {
             });
         } else {
             $(this).addClass("active");
-            console.log("kffdkklkf");
             $.getJSON("/like/" + vehicle_id, function (params) {
                 if (params.status == "success") {
                     $.jnoty("Car has been added to wishlist list", {
@@ -69,10 +68,8 @@ $(function () {
     $("body").on("click", "#whatsappToggle", function (event) {
         event.preventDefault();
         let vehicle_id = $(this).data("id");
-        console.log(vehicle_id);
         $.getJSON("/whatsapp/" + vehicle_id, function (params) {
             window.open(params.url, "_blank");
-            console.log(params);
         });
     });
 
@@ -501,31 +498,35 @@ $(function () {
 
         let downPaymentSlider = $("#downPaymentSlider"),
             interestRateSlider = $("#interestRateSlider"),
-            tenureSlider = $("#tenureSlider");
+            tenureSlider = $("#tenureSlider"),
+            vehicleLoanPrice = $("#vehicleLoanPrice"),
+            installmentAmount = $("#installmentAmount"),
+            downPayment = $("#downPayment"),
+            interestRateText = $("#interestRateText"),
+            tenureYears = $("#tenureYears");
         downPaymentSlider.on("change", function () {
-            console.log($(this).val());
             calculateLoan();
         });
         interestRateSlider.on("change", function () {
-            console.log($(this).val());
             calculateLoan();
         });
         tenureSlider.on("change", function () {
-            console.log($(this).val());
             calculateLoan();
         });
-
         function calculateLoan() {
             let downpayment = parseFloat(downPaymentSlider.val()),
                 interestrate = parseFloat(interestRateSlider.val()),
-                tenure = parseFloat(tenureSlider.val());
-            console.log(downpayment);
-            console.log(interestrate);
-            console.log(tenure);
-            $("#downPayment").text(numberFormat(downpayment));
-            $("#interestRate").text(interestrate);
-            $("#tenureYears").text(tenure);
+                tenure = parseFloat(tenureSlider.val()),
+                price = parseFloat($("#vehicleLoanPrice").val());
+            let installment =
+                (price + (price * interestrate) / 100 - downpayment) / tenure;
+            installmentAmount.text(installment);
+            $("#installmentAmount").text(numberFormat(installment));
+            downPayment.text(numberFormat(downpayment));
+            interestRateText.text(interestrate+' %');
+            tenureYears.text(tenure);
         }
+        calculateLoan();
     })();
 
     $("[data-submenu]").submenupicker();
@@ -737,7 +738,6 @@ $(function () {
 
     $("#filterMakesID").on("change", function (event) {
         let make_id = $(this).val();
-        console.log("here");
         if (make_id !== "") {
             $.getJSON("/models/" + make_id, function (models) {
                 let option = "<option value=''>All</option>";
@@ -1017,7 +1017,6 @@ $(function () {
 
     makeID.on("change", function () {
         let make_id = $(this).val();
-        console.log(make_id);
         if (make_id !== "" && make_id !== null) {
             getVehicleModels(make_id);
         }
@@ -1053,7 +1052,6 @@ $(function () {
         submit.prop("disabled", true);
         $.post("/purchase", data)
             .done(function (params) {
-                console.log(params);
                 submit.prop("disabled", false);
                 let result = JSON.parse(params);
                 if (result.status == "success") {

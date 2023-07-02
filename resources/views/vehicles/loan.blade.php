@@ -15,6 +15,26 @@
         .business {
             display: none;
         }
+
+        input[type="range"] {
+            width: 100%;
+            height: 15px;
+            background-color: #006544;
+            color: #006544;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .rangeslider__fill {
+            color: #006544;
+        }
+        .loancalcsection {
+            background: #fff;
+            padding: 1em;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+            border-radius: 10px;
+        }
     </style>
 @endsection
 
@@ -122,6 +142,80 @@
                 </div>
             </div>
         </div>
+        @php
+            $deposit = (40 / 100) * $vehicle->price;
+            $mindeposit = (10 / 100) * $vehicle->price;
+        @endphp
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="widget mt-4">
+                            <div class="text-center">
+                                <h3 class="sidebar-title">Loan Calculator</h3>
+                            </div>
+                            <div class="loancalcsection">
+                                <div class="bg-success p-2 text-center" style="border-radius: 10px;">
+                                    <p class="mb-0 text-white">Estimated Monthly Payment</p>
+                                    <p class="text-white">Note: Monthly interest rate may differ as we partner with
+                                        different
+                                        finance institutions.</p>
+                                </div>
+
+                                <div class="text-center mt-2">
+                                    <h4 class="text">Ksh.&nbsp; <span id="installmentAmount"></span>&nbsp;/Monthly</h4>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="hidden" id="vehicleLoanPrice" value="{{ $vehicle->price }}">
+                                    <label for="">Down Payment</label> <span class="float-right text-success"
+                                        id="downPayment">{{ number_format($mindeposit, 2) }}</span>
+                                    <div class="range-slider">
+                                        <input type="range" min="{{ $mindeposit }}" max="{{ $deposit }}"
+                                            step="100" value="{{ $mindeposit }}" data-orientation="horizontal"
+                                            id="downPaymentSlider" class="text-warning">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Interest Rate</label> <span class="float-right text-success"
+                                        id="interestRateText">10 %</span>
+                                    <div class="range-slider">
+                                        <input type="range" min="0" max="34" step="1" value="10"
+                                            data-orientation="horizontal" id="interestRateSlider" class="text-warning">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Tenure</label> <span class="float-right text-success"
+                                        id="tenureYears">12</span>&nbsp;Months
+                                    <div class="range-slider">
+                                        <input type="range" min="0" max="36" step="1"
+                                            value="12" data-orientation="horizontal" id="tenureSlider"
+                                            class="text-warning">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="widget mt-4">
+
+                            <div class="text-center">
+                                <h3 class="sidebar-title">Vehicles Features</h3>
+                            </div>
+
+                            <div class="loancalcsection">
+                                @foreach ($vehicle->features as $item)
+                                    <span class="m-2 bg-grey">{{ $item->feature }}</span>
+                                @endforeach
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <div class="featured-car">
             <div class="container">
@@ -318,9 +412,6 @@
     </div>
 </div>
 
-
-
-
 <div class="modal fade" id="vehicleDetailsModal" tabindex="-1" role="dialog"
     aria-labelledby="carOverviewModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
@@ -353,7 +444,8 @@
                         </ul>
 
                         <div id="loanfeedback"></div>
-                        <div class="tab-content m-t-20">
+                        <input type="hidden" id="vehicleloanID" value="{{ $vehicle->id }}">
+                        <div class="tab-content mt-3">
                             <div class="tab-pane show active" id="tab1">
 
                                 <div class="row">
@@ -441,17 +533,17 @@
                                 </div>
 
                                 <ul class="pager wizard pager_a_cursor_pointer mt-2">
-                                    <li class="previous">
+                                    {{-- <li class="previous">
                                         <a><i class="fa fa-long-arrow-left"></i>
                                             Previous</a>
-                                    </li>
+                                    </li> --}}
                                     <li class="next">
-                                        <a>Next <i class="fa fa-long-arrow-right"></i>
+                                        <a class="btn-outline-success">Next <i class="fa fa-long-arrow-right"></i>
                                         </a>
                                     </li>
-                                    <li class="next finish" style="display:none;">
+                                    {{-- <li class="next finish" style="display:none;">
                                         <a>Finish</a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
 
@@ -473,6 +565,16 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-6 form-group">
+                                        <label for="industry">Industry <sup>*</sup></label>
+                                        <select name="industry" id="industry" class="form-select">
+                                            <option value=""></option>
+                                            @foreach ($industries as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
                                     <div class="col-md-6 form-group employment">
                                         <label for="employementType">Employment Type <sup>*</sup></label>
                                         <select name="employement_type" id="employementType" class="form-select">
@@ -485,15 +587,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-6 form-group">
-                                        <label for="industry">Industry <sup>*</sup></label>
-                                        <select name="industry" id="industry" class="form-select">
-                                            <option value=""></option>
-                                            @foreach ($industries as $item)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                    
 
                                     <div class="col-md-6 form-group employment">
                                         <label for="employerName">Proffession <sup>*</sup></label>
@@ -519,7 +613,7 @@
                                             class="form-control">
                                     </div>
 
-                                    <div class="col-md-6 form-group">
+                                    <div class="col-md-6 form-group employment">
                                         <label for="sidebusiness" class="control-label">Do you own a business
                                             <sup>*</sup></label>
                                         <div class="col-md-12">
@@ -538,7 +632,7 @@
                                     </div>
 
 
-                                    <div class="col-md-6 form-group employment">
+                                    <div class="col-md-6 form-group business">
                                         <label for="businessowner" class="control-label">Are you the owner of the
                                             business or
                                             one of the directors? <sup>*</sup></label>
@@ -589,16 +683,16 @@
 
                                 <ul class="pager wizard pager_a_cursor_pointer">
                                     <li class="previous">
-                                        <a><i class="fa fa-long-arrow-left"></i>
+                                        <a class="btn btn-outline-success"><i class="fa fa-long-arrow-left"></i>
                                             Previous</a>
                                     </li>
                                     <li class="next">
-                                        <a>Next <i class="fa fa-long-arrow-right"></i>
+                                        <a class="btn btn-outline-success">Next <i class="fa fa-long-arrow-right"></i>
                                         </a>
                                     </li>
-                                    <li class="next finish" style="display:none;">
+                                    {{-- <li class="next finish" style="display:none;">
                                         <a>Finish</a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                             <div class="tab-pane" id="tab3">
@@ -649,18 +743,18 @@
                                     </div>
 
                                     <div class="col-md-6 form-group">
-                                        <label for="monthlyturnover">Bank Account monthly turnover <sup>*</sup></label>
+                                        <label for="monthlyturnover">Bank Account Monthly Turnover <sup>*</sup></label>
                                         <input name="monthlyturnover" id="monthlyTurnover" class="form-control">
                                     </div>
                                 </div>
 
                                 <ul class="pager wizard pager_a_cursor_pointer">
                                     <li class="previous">
-                                        <a><i class="fa fa-long-arrow-left"></i>
+                                        <a class="btn btn-outline-success"><i class="fa fa-long-arrow-left"></i>
                                             Previous</a>
                                     </li>
                                     <li class="next">
-                                        <a>Next <i class="fa fa-long-arrow-right"></i>
+                                        <a class="btn btn-outline-success">Next <i class="fa fa-long-arrow-right"></i>
                                         </a>
                                     </li>
 

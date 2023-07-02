@@ -1392,6 +1392,9 @@
         if (make == "" && make == undefined) {
             errors.push("Make is required");
         }
+        if (vehicle_id == "" && files.length <= 0) {
+            errors.push("Vehicle Images are required");
+        }
         if (model == "" && model == undefined) {
             errors.push("Model is required");
         }
@@ -1444,8 +1447,6 @@
                                 "image/jpeg",
                                 0.5
                             );
-                            console.log(compressedDataUrl);
-
                             $.post("/upload", {
                                 _token: token,
                                 str_id: uniqueStrID.val(),
@@ -1482,7 +1483,6 @@
                 imagesUploadPromises.push(imageUploadPromise);
             }
 
-            console.log(imagesUploadPromises);
             Promise.all(imagesUploadPromises)
                 .then((result) => {
                     $.ajaxSetup({
@@ -1490,7 +1490,6 @@
                             "X-CSRF-TOKEN": token,
                         },
                     });
-console.log(data);
                     $.ajax({
                         method: "POST",
                         url: "/vehicles/store",
@@ -1579,12 +1578,14 @@ console.log(data);
                             vehicle.model?.model +
                             "</option>"
                     );
-                    $("#countryofOrigin option[value='" +
+                    $(
+                        "#countryofOrigin option[value='" +
                             vehicle.country_of_origin +
                             "']"
                     ).prop("selected", true);
 
-                    $("#shippingTo option[value='" +
+                    $(
+                        "#shippingTo option[value='" +
                             vehicle.shipping_to +
                             "']"
                     ).prop("selected", true);
@@ -1612,28 +1613,32 @@ console.log(data);
                         );
                     }
 
-                    $("#yearOfManufacture option[value='" +
+                    $(
+                        "#yearOfManufacture option[value='" +
                             vehicle.year +
                             "']"
                     ).prop("selected", true);
 
-                    $("#vehicleColor option[value='" + vehicle.color + "']"
+                    $(
+                        "#vehicleColor option[value='" + vehicle.color + "']"
                     ).prop("selected", true);
 
-                    $("#interiorHtm option[value='" + vehicle.interior + "']"
+                    $(
+                        "#interiorHtm option[value='" + vehicle.interior + "']"
                     ).prop("selected", true);
-                    $("#fuelType option[value='" + vehicle.fuel_type + "']"
+                    $(
+                        "#fuelType option[value='" + vehicle.fuel_type + "']"
                     ).prop("selected", true);
 
-                    $("#transmission option[value='" +
+                    $(
+                        "#transmission option[value='" +
                             vehicle.transmission +
                             "']"
                     ).prop("selected", true);
 
-                    $("#usageCondition option[value='" + vehicle.usage + "']").prop(
-                        "selected",
-                        true
-                    );
+                    $(
+                        "#usageCondition option[value='" + vehicle.usage + "']"
+                    ).prop("selected", true);
 
                     $.each(JSON.parse(vehicle.tags), function (key, value) {
                         if (value !== null) {
@@ -1653,7 +1658,10 @@ console.log(data);
 
                     let featuressss = [];
 
-                    if (vehicle.features !== null && vehicle.features.length > 0) {
+                    if (
+                        vehicle.features !== null &&
+                        vehicle.features.length > 0
+                    ) {
                         $.each(vehicle.features, function (key, value) {
                             featuressss.push(value.id);
                         });
@@ -1837,6 +1845,17 @@ console.log(data);
             });
     });
 
+    function numberFormat(number) {
+        var parts = parseFloat(number).toFixed(2).split(".");
+        var integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var formattedNumber = integerPart;
+        if (parts.length > 1) {
+            var decimalPart = parts[1];
+            formattedNumber += "." + decimalPart;
+        }
+        return formattedNumber;
+    }
+
     $("#filterVehiclesListForm").on("submit", function (event) {
         event.preventDefault();
         let $this = $(this),
@@ -1860,29 +1879,36 @@ console.log(data);
                 let {
                     id,
                     vehicle_no,
-                    dealer,
                     make,
                     model,
                     year,
-                    prices,
+                    price,
                     enginecc,
-                    // color,
-                    // interior,
                     mileage,
                     fuel_type,
                     transmission,
                     status,
                     created_at,
                 } = value;
+                let sponsored = value.sponsored
+                        ? "<i class='fa fa-check-circle text-success'></i>"
+                        : "No",
+                    dealer =
+                        value.dealer !== null
+                            ? value.dealer.name
+                            : value.user !== null
+                            ? value.user.name
+                            : "";
                 tr +=
                     "<tr><td><input type='checkbox' class='vehicleselect' id='vehicleSelect' data-id=" +
                     id +
                     "></td><td>" +
+                    sponsored +
                     i++ +
                     "</td><td>" +
                     vehicle_no +
                     "</td><td>" +
-                    dealer?.name +
+                    dealer +
                     "</td><td>" +
                     make.make +
                     "</td><td>" +
@@ -1890,7 +1916,7 @@ console.log(data);
                     "</td><td>" +
                     year +
                     "</td><td>" +
-                    prices[0]?.price +
+                    numberFormat(price) +
                     "</td><td>" +
                     enginecc +
                     "</td><td>" +
@@ -1901,10 +1927,14 @@ console.log(data);
                     transmission +
                     "</td><td>" +
                     moment(new Date(created_at)).format("DD-MM-YYYY") +
-                    "</td><td></td></tr>";
+                    "</td><td>" +
+                    status +
+                    "</td><td><a href='#' data-toggle='modal' data-target='#vehicleDetailsModal' id='vehicleDetailsToggle' data-id=" +
+                    id +
+                    "><i class='fas fa-eye fa-lg text-success'></i></a></td></tr>";
             });
             let table =
-                '<table class="table table-bordered hover vehicleDataTable "><thead><th>#</th><th>#</th><th>NO</th><th>Dealer</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>CC</th><th>Mileage</th><th>Fuel</th><th>Trans</th><th>created</th><th>Action</th></thead><tbody' +
+                '<table class="table table-bordered hover vehicleDataTable "><thead><th>#</th><th>#</th><th>NO</th><th>Dealer</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>CC</th><th>Mileage</th><th>Fuel</th><th>Trans</th><th>created</th><th>Status</th><th>Action</th></thead><tbody' +
                 tr +
                 "</tbody></table>";
             $("#vehicledatasection").html(table);
@@ -1947,6 +1977,188 @@ console.log(data);
                     },
                 });
             }
+        });
+    });
+
+    $("body").on("click", "#vehicleDetailsToggle", function () {
+        let vehicle_id = $(this).data("id");
+        $.getJSON("/vehicles/show/" + vehicle_id, function (vehicle) {
+            console.log(vehicle);
+            let header =
+                "<h3><strong>" +
+                vehicle.usage +
+                " " +
+                vehicle.year +
+                " " +
+                vehicle.make.make +
+                " " +
+                vehicle.model.model +
+                " ref No " +
+                vehicle.vehicle_no +
+                "</strong></h3>";
+            $("#vehicleHeader").html(header);
+            let sponsored = vehicle.sponsored
+                    ? "<i class='fa fa-check-circle text-success'></i>"
+                    : "<span class='text-danger'>&times;</span>",
+                location =
+                    vehicle.location !== null
+                        ? vehicle.location
+                        : vehicle.yard !== null
+                        ? vehicle.yard.address
+                        : "",
+                dealer = vehicle.dealer?.name ?? "",
+                user = vehicle.user?.name ?? "",
+                mileage = vehicle.mileage ?? "",
+                enginecc = vehicle.enginecc ?? "",
+                fuel_type = vehicle.fuel_type ?? "",
+                transmission = vehicle.transmission ?? "",
+                gear = vehicle.gear ?? "",
+                color = vehicle.color ?? "",
+                interior = vehicle.interior ?? "",
+                speed = vehicle.speed ?? "",
+                terrain = vehicle.terrain ?? "",
+                engine = vehicle.engine ?? "",
+                horsepower = vehicle.horsepower ?? "";
+            let tr =
+                "<tr><td><b>Added By</b></td><td>" +
+                user +
+                "</td><td><b>Dealer</b></td><td>" +
+                dealer +
+                "</td><td><b>Price</b></td><td>" +
+                numberFormat(vehicle.price) +
+                "</td></tr>" +
+                "<tr><td><b>Located</b></td><td>" +
+                location +
+                "</td><td><b>Mile age</b></td><td>" +
+                mileage +
+                "</td><td><b>CC </b></td><td>" +
+                enginecc +
+                "</td></tr>" +
+                "<tr><td><b>Fuel</b></td><td>" +
+                fuel_type +
+                "</td><td><b>Transmission</b></td><td>" +
+                transmission +
+                "</td><td><b>Gear </b></td><td>" +
+                gear +
+                "</td></tr>" +
+                "<tr><td><b>Color</b></td><td>" +
+                color +
+                "</td><td><b>Interior</b></td><td>" +
+                interior +
+                "</td><td><b>Speed </b></td><td>" +
+                speed +
+                "</td></tr>" +
+                "<tr><td><b>Terrain</b></td><td>" +
+                terrain +
+                "</td><td><b>Engine</b></td><td>" +
+                engine +
+                "</td><td><b>H.P </b></td><td>" +
+                horsepower +
+                "</td></tr>" +
+                "<tr><td><b><i class='fas fa-eye fa-lg'></i></b></td><td>" +
+                vehicle.views +
+                "</td><td><b><i class='fas fa-heart fa-lg'></i></b></td><td>" +
+                vehicle.likes +
+                "</td><td><b>Priority</b></td><td>" +
+                vehicle.priority +
+                "</td></tr>" +
+                "<tr><td><b>Status</b></td><td>" +
+                vehicle.status +
+                "</td><td><b>Sponsored</b></td><td>" +
+                sponsored +
+                "</td><td><b>Priority</b></td><td>" +
+                vehicle.priority +
+                "</td></tr><tr><td><b>Quotes</b></td><td>" +
+                vehicle.quotes.length +
+                "</td><td><b>Loans</b></td><td>" +
+                vehicle.loans.length +
+                "</td><td><b>Tradeins</b></td><td>" +
+                vehicle.tradeins.length +
+                "</td></tr>";
+            let table =
+                "<table class='table table-bordered'>" + tr + "</table>";
+            $("#vehicledetailsSection").html(table);
+            let message = "";
+            $.each(vehicle.messages, function (key, value) {
+                message +=
+                    '<div class="accordion-item"><h2 class="accordion-header" id="headingOne"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">' +
+                    value.type +
+                    " " +
+                    moment(new Date(value.created_at)).format(
+                        "HH:mm DD MM YYYY "
+                    ) +
+                    '</button></h2><div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample"><div class="accordion-body">' +
+                    value.message +
+                    "</div></div></div>";
+            });
+            let text =
+                '<div class="accordion" id="accordionExample">' +
+                message +
+                "</div>";
+            $("#vehicleMessagesSection").html(text);
+            // let quotediv = "";
+            // $.each(vehicle.quotes, function (key, quote) {
+            //     quotediv +=
+            //         "<div class='quote'><h5 class='text-success'>" +
+            //         quote.name +
+            //         "  " +
+            //         quote.phone +
+            //         "  " +
+            //         quote.email +
+            //         "</h5><div class='mt-1'><h6>" +
+            //         quote.subject +
+            //         "</h6><p>" +
+            //         quote.message +
+            //         "</p></div></div>";
+            // });
+            // let quotesection =
+            //     '<div class="accordion-item"><h2 class="accordion-header" id="headingOne"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Vehicle Quotes</button></h2><div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample"><div class="accordion-body">' +
+            //     quotediv +
+            //     "</div></div></div>";
+
+            // let loan = "";
+            // $.each(vehicle.loans, function (key, value) {
+            //     loan +=
+            //         "<table><thead><th>Customer</th><th>Employment</th><th>bank</th><th></th></thead><tbody>" +
+            //         "<tr><td><span>" +
+            //         value.title +
+            //         " " +
+            //         value.firstname +
+            //         " " +
+            //         value.lastname +
+            //         "<i class='fas fa-calender'></i>" +
+            //         moment(new Date(value.date_of_birth)).format("DD-MM-YYYY");
+            //     "</span><br><span><i class='fas fa-envelope'></i>" +
+            //         value.email +
+            //         "<i class='fas fa-phone'></i>" +
+            //         value.phone +
+            //         "</span><br><span><b>Tax pin:</b>" +
+            //         value.kra_pin +
+            //         "</span>&nbsp;<span><b>ID</b>" +
+            //         value.id_no +
+            //         "</span><br><span>" +
+            //         value.country.name +
+            //         " " +
+            //         value.city +
+            //         ", " +
+            //         value.estate +
+            //         " Hs NO: " +
+            //         value.house_no +
+            //         "</span></td><td><span>" +
+            //         value.occupation +
+            //         " " +
+            //         value.industry.name +
+            //         " " +
+            //         value.employement_type +
+            //         "</span><span>" +
+            //         value.proffession +
+            //         "</span><br><span>"+value.employer+" years "+value.years_of_employment+"</span</td></tr></tbody></table>";
+            // });
+
+            // let tradeins = "";
+            // $.each(vehicle.tradeins, function (key, value) {
+            //     tradeins += "";
+            // });
         });
     });
 })();

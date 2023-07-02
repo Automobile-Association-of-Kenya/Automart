@@ -81,14 +81,14 @@
 
             <div class="col-md-3 mb-2">
                 <div class="badge alert-info" style="width: 98%;">
-                    <h4 class="text-start" style="padding: .4em;">Trade in Requests</h4>
+                    <h4 class="text-start" style="padding: .4em;">Loan Applications</h4>
                     {{-- <span class="badge">New {{ $summary["tradeinscounttoday"] }}</span> --}}
                     <div class="number" style="display: inline-block" id=''>
-                        {{ $summary['tradeinscount'] }}<br>
+                        {{ $summary['loanscount'] }}<br>
                     </div>
                 </div>
             </div>
-
+            
             <div class="col-md-3 mb-2">
                 <div class="badge alert-info" style="width: 98%;">
                     <h4 class="text-start" style="padding: .4em;">Active subscriptions</h4>

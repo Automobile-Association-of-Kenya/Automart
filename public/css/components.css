@@ -4179,7 +4179,10 @@ button.close {
   .modal-dialog-centered {
     min-height: calc(100% - (1.75rem * 2)); }
   .modal-sm {
-    max-width: 300px; } }
+    max-width: 300px; }
+        .modal-xl {
+            max-width: 800px;
+        } }
 
 @media (min-width: 992px) {
   .modal-lg {
@@ -6773,7 +6776,10 @@ a.text-gray:hover, a.text-gray:focus {
   color: #fff; }
   .btn-warning:hover, .btn-danger:hover {
     color: #fff; }
-
+.btn-round {
+    border-radius: 30px;
+    padding-bottom: 5px;
+}
 .text-white {
   color: #fff; }
 
@@ -6785,7 +6791,6 @@ a.text-gray:hover, a.text-gray:focus {
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
-
 /*
  * CSS Styles that are needed by jScrollPane for it to operate correctly.
  *

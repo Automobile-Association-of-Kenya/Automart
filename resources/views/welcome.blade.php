@@ -24,8 +24,10 @@
                 @foreach ($vehicles as $item)
                     @php
                         $images = json_decode($item['images']);
+                        if (!is_array($images)) {
+                            dd($item);
+                        }
                         $vehicle_no = $item->vehicle_no ?? $item->id;
-
                     @endphp
                     <div class="col-lg-3 col-md-6">
                         <div class="car-box-3">
@@ -38,7 +40,7 @@
                                         {{-- <br> --}}
                                         <span>Kes: {{ number_format($item->price, 2) }}</span>
                                     </div>
-                                    <img class="d-block w-100" src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                    <img class="d-block w-100" src="{{ asset('/vehicleimages/' . @$image . '') }}"
                                         alt="car">
                                 </a>
                                 <div class="carbox-overlap-wrapper">
@@ -54,12 +56,12 @@
                                             </a>
 
                                             <div class="car-magnify-gallery">
-                                                <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                <a href="{{ asset('/vehicleimages/' . @$image . '') }}"
                                                     class="overlap-btn"
                                                     data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                     <i class="fa fa-expand"></i>
                                                     <img class="hidden"
-                                                        src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                        src="{{ asset('/vehicleimages/' . @$image . '') }}"
                                                         alt="hidden-img">
                                                 </a>
                                                 @foreach ($images as $image)
@@ -166,7 +168,7 @@
                                     <img class="d-block w-100" src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
                                         alt="car">
                                 </a>
-                                
+
                                 <div class="carbox-overlap-wrapper">
                                     <div class="overlap-box">
                                         <div class="overlap-btns-area">

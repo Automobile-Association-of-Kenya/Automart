@@ -89,7 +89,7 @@ class DealerController extends Controller
 
     public function getDealers()
     {
-        $dealers = $this->dealer->select('id', 'name', 'email', 'phone', 'alt_phone', 'address')->get();
+        $dealers = $this->dealer->withCount('vehicles')->get();
         return json_encode($dealers);
     }
 

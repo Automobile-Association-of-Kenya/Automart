@@ -143,7 +143,7 @@
             cost: cost,
             billingcycle: billingcycle,
             properties: properties,
-            description:description,
+            description: description,
         };
 
         console.log(data);
@@ -542,7 +542,7 @@
             _token: _token,
             social_id: social_id,
             name: name,
-            type:type,
+            type: type,
             link: link,
         })
             .done(function (params) {
@@ -550,8 +550,8 @@
                 let result = JSON.parse(params);
                 if (result.status === "success") {
                     getSocials();
-                    socialCreateID.val('');
-                    $this.trigger('reset');
+                    socialCreateID.val("");
+                    $this.trigger("reset");
                     showSuccess(result.message, "#socialfeedback");
                 } else {
                     showError(
@@ -567,8 +567,9 @@
     });
 
     function getSocials() {
-        $.getJSON('/socials', function (socials) {
-            let tr = "", i = 1;
+        $.getJSON("/socials", function (socials) {
+            let tr = "",
+                i = 1;
             $.each(socials, function (key, value) {
                 tr +=
                     "<tr><td>" +
@@ -593,34 +594,41 @@
 
     $("body").on("click", "#editSocialToggle", function (event) {
         event.preventDefault();
-        let id = $(this).data('id');
-        $.getJSON('/socials/' + id, function (social) {
+        let id = $(this).data("id");
+        $.getJSON("/socials/" + id, function (social) {
             if (social.length > 0) {
-                showSuccess("Request accepted for processing. Make changes then save", "#socialfeedback");
+                showSuccess(
+                    "Request accepted for processing. Make changes then save",
+                    "#socialfeedback"
+                );
                 socialCreateID.val(social[0].id);
                 socialName.val(social[0].name);
                 socialLink.val(social[0].link);
             } else {
-                showError("Error occured during processing. Ensure you have internet connection then retry.", "#socialfeedback");
+                showError(
+                    "Error occured during processing. Ensure you have internet connection then retry.",
+                    "#socialfeedback"
+                );
             }
         });
     });
 
-    $("#clearsocial").on('click', function(event) {
+    $("#clearsocial").on("click", function (event) {
         event.preventDefault();
-        socialCreateID.val('');
-        socialName.val('');
-        socialLink.val('');
+        socialCreateID.val("");
+        socialName.val("");
+        socialLink.val("");
     });
 
-    $("#sendRange").on('change', function(event) {
+    $("#sendRange").on("change", function (event) {
         let val = $(this).val();
         console.log(val);
         let recepient_type = $("#recepientType").val();
         if (val === "manual" && recepient_type === "customers") {
             $.getJSON("/admin/customers", function (customers) {
                 console.log(customers);
-                let tr = "";
+                let tr = "",
+                    dealer = value.dealer?.name ?? "";
                 $.each(customers, function (key, value) {
                     tr +=
                         "<tr data-id=" +
@@ -632,17 +640,20 @@
                         "</td><td>" +
                         value.phone +
                         "</td><td>" +
-                        value.dealer?.name +
+                        dealer +
                         "</td></tr>";
                 });
                 let table =
-                    "<table class='table table-bordered table-sm'><thead><th>#</th><th>User</th><th>Email</th><th>Phone</th><th>Dealer</th></thead><tbody>" + tr + "</tbody></table>";
+                    "<table class='table table-bordered table-sm'><thead style='position:sticky;'><th>#</th><th>User</th><th>Email</th><th>Phone</th><th>Dealer</th></thead><tbody>" +
+                    tr +
+                    "</tbody></table>";
                 $("#mailingSections").html(table);
             });
-        }else if (val === "manual" && recepient_type === "partners") {
+        } else if (val === "manual" && recepient_type === "partners") {
             $.getJSON("/partners", function (partners) {
                 console.log(partners);
-                let tr = "";
+                let tr = "",
+                    partner = value.partner?.name ?? "";
                 $.each(partners, function (key, value) {
                     tr +=
                         "<tr data-id=" +
@@ -654,7 +665,7 @@
                         "</td><td>" +
                         value.phone +
                         "</td><td>" +
-                        value.partner?.name +
+                        partner +
                         "</td></tr>";
                 });
                 let table =
@@ -664,6 +675,22 @@
                 $("#mailingSections").html(table);
             });
         }
+    });
+
+    let sendMailForm = $("#sendMailForm"),
+        sendMailUsage = $("#sendMailUsage"),
+        accountType = $("#accountType"),
+        recepientType = $("#recepientType"),
+        sendRange = $("#sendRange"),
+        mailMessage = $("#mailMessage");
+    sendMailForm.on('submit', function(event) {
+        event.preventDefault();
+        let usage = sendMailUsage.val(),
+            account_type = accountType.val(),
+            recipient_type = recepientType.val(),
+            sendrange = sendRange.val(),
+            message = mailMessage.val();
+        let data = {}
     });
 
     // selectedUser;
