@@ -294,14 +294,16 @@ class VehicleController extends Controller
         $validated['tags'] = (isset($validated['tags'])) ? json_encode($validated['tags']) : null;
         DB::beginTransaction();
         if (isset($request->vehicle_id) && $request->vehicle_id !== null) {
-
+            if ($vehicle->price !== $validated["price"]) {
+                // return "price". $validated["price"];
+                VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
+            }
+            // return "here".$vehicle->price;
             $vehicle->update(['updated_by' => auth()->id(), 'images' => json_encode($images)] + $validated);
             if (isset($validated["features"]) && count($validated["features"]) > 0) {
                 $this->vehicle->updatefeatures($vehicle->id, $validated["features"]);
             }
-            if ($vehicle->price !== $validated["price"]) {
-                VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
-            }
+            
             $message = "Vehicle updated successfully";
         } else {
             $vehicle = Vehicle::create(['user_id'=>auth()->id(),'vehicle_no' => strtoupper(Str::random(3)).strtotime(now()), 'images' => json_encode($images), 'views' => 0] + $validated);
@@ -312,6 +314,7 @@ class VehicleController extends Controller
             $message = "Vehicle added successfully";
         }
         DB::commit();
+        // return "hhjjhjhshsd";
         session()->forget($strkey . "images");
         session()->forget($strkey . 'cover');
         if (session()->has('advertinfo')) {

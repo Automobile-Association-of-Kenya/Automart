@@ -147,18 +147,19 @@
                 </div>
             </div>
             
-
             <div class="col-md-6">
                 <div class="card peoplebyregtrend">
                     <div class="card-header bg-success">
                         <span class="text-left font-weight-bold text-white">Web Traffic</span> <input type="date"
-                            class="float-right" name="traffic" id="traffic" value="{{ date('Y-m-d') }}">
+                            class="float-right" name="traffic" id="trafficDate" value="{{ date('Y-m-d') }}">
                     </div>
                     <div class="card-body">
-                        <canvas id="peoplebyregtrend"></canvas>
+                        <canvas id="webtraffic"></canvas>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </main>
 @endsection
@@ -166,5 +167,6 @@
 
 
 @section('footer_scrips')
-    <script src="{{ asset('js/main/dealer.js') }}"></script>
+    <script src="{{ asset('js/chart.js') }}"></script>
+    <script src="{{ asset('js/dashboard.js') }}"></script>
 @endsection

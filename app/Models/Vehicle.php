@@ -180,12 +180,13 @@ class Vehicle extends Model
                 $query->select('vehicle_id')
                     ->groupBy('vehicle_id')
                     ->havingRaw('COUNT(*) > 1')
-                    ->orderByDesc('created_at')
+                    ->latest()
                     ->limit(2);
             })->inRandomOrder()->orderBy('priority')->get()
             ->filter(function ($vehicle) {
                 $prices = $vehicle->prices;
-                if ($prices->count() > 1 && $prices[0]->price < $prices[1]->price) {
+                
+                if ($prices->count() > 1 && $prices->last()->price < $prices[1]->price) {
                     $vehicle['current_price'] = $prices[0]->price;
                     $vehicle['initial_price'] = $prices[1]->price;
                     return true;

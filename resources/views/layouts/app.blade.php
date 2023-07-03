@@ -112,7 +112,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                         <div class="footer-item clearfix">
                             <h4>
-                                Contact Info
+                                Top brand
                             </h4>
                             <div class="s-border"></div>
                             <div class="m-border"></div>

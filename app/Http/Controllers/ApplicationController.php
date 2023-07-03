@@ -44,7 +44,7 @@ class ApplicationController extends Controller
     public function welcome()
     {
         $vehicles = $this->vehicle->getlatest(12);
-        $discounts = $this->vehicle->discounts(24);
+        $discounts = $this->vehicle->discounts(12);
         // dd($vehicles);
         return view('welcome', compact('discounts', 'vehicles'));
     }

@@ -7,7 +7,7 @@
                     <div class="row bi5">
                         <div class="col-lg-7 text-start">
                             <div class="banner-content3">
-                                <h3 class="mb-30">Buying or Selling Car?</h3>
+                                <h4 class="mb-30">Buying or Selling Car?</h4>
                                 <div class="price">
                                     <p>You are at the right place. Our platform offers a wide selection of vehicles from
                                         trusted dealers across the country, ensuring we match buyers with the perfect
@@ -61,6 +61,10 @@
                                     class="fa fa-search"></i>&nbsp;Find
                                 Your Vehicle</a>
                         </div>
+                    </div>
+
+                    <div class="row mt-3" id="banner-brands">
+                        
                     </div>
                 </div>
             </div>

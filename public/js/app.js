@@ -868,16 +868,16 @@ $(function () {
                     '"><div class="custom-box"><img src="/brands/' +
                     value.logo +
                     '" alt="brand" class="img-fluid"></div></a>';
-                // logo +=
-                //     '<div class="col-lg-2" style="background: #fff; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;padding:.25em; border-radius:7px;"><a href="/make-vehicles"><img src="/brands/' +
-                //     value.logo +
-                //     '" alt=""></a></div>';
+                logo +=
+                    '<div class="col-lg-2 mr-2"><a href="/make-vehicles"><img src="/brands/' +
+                    value.logo +
+                    '" alt=""></a></div>';
             });
             $("#vehicleGroupandMakes").append(item);
             $("#vehicleGroupMakes").append(li);
             $("#filterMakesID").html(option);
             $(".brands-section").html(brand);
-            // $("#banner-brands").html(logo);
+            $("#banner-brands").html(logo);
             slidePartners();
         });
     }

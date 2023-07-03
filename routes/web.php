@@ -207,3 +207,6 @@ Route::middleware('dealer')->prefix('dealer')->group(function() {
     Route::get('purchase/approve/{id}', [DealerController::class, 'purchaseapprove'])->name('dealer.puchase.approve');
     Route::post('purchase/decline', [DealerController::class, 'purchasedecline'])->name('dealer.purchase.decline');
 });
+
+
+Route::get('webtraffic/{date}', [SettingsController::class, 'webtraffic']);
