@@ -77,7 +77,7 @@
                 @yield('page')
             </h2>
 
-            <li class="nav-item"><a href="{{ route('dealer.vehicles') }}" class="nav-link bg-success text-white">Advertise</a></li>
+            <li class="nav-item" id="subscriptionCountdowntimer"></li>
 
             @auth
                 <li class="nav-item dropdown">
@@ -106,7 +106,7 @@
         </div>
 
         @yield('main')
-
+        <input type="hidden" name="subscription_expiry_date" id="subscriptionExpiryDate">
     </div>
 </body>
 

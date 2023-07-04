@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SubscriptionRequest;
 use App\Models\Subscription;
 use App\Models\Subsproperty;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,8 +39,13 @@ class SubscriptionController extends Controller
 
     public function plans()
     {
+        Visit::visit(request()->server());
         $title = "Subscription Plans";
-        return view('subscriptions.index', compact('title'));
+        $properties = $this->subsprop->get();
+        $propids = $this->subsprop->pluck('id')->toArray();
+        $subscriptions = $this->subscription->with('properties:id,name')->orderBy('cost', 'ASC')->get();
+        // dd($subscriptions);
+        return view('subscriptions.index', compact('title','properties', 'propids', 'subscriptions'));
     }
 
     /**
@@ -47,6 +53,7 @@ class SubscriptionController extends Controller
      */
     public function create($id)
     {
+        Visit::visit(request()->server());
         $plan = $this->subscription->with('properties')->find($id);
         if ($plan->cost <= 0) {
             $this->subscription->subscribe(auth()->user(), $plan->id);
@@ -79,9 +86,6 @@ class SubscriptionController extends Controller
         return json_encode(['status' => 'success', 'message' => $message]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $subscription = $this->subscription->with('properties')->find($id);
@@ -90,32 +94,7 @@ class SubscriptionController extends Controller
 
     public function subscribe(Request $request)
     {
-
         return $request;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 
     public function createSubsProp(Request $request)

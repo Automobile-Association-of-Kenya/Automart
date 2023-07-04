@@ -18,7 +18,10 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VehicleController;
+use App\Models\Visit;
 use Illuminate\Support\Facades\Route;
+
+// Visit::visit(request()->server());
 
 Route::get('/', [ApplicationController::class, 'welcome']);
 
@@ -29,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::view('time', 'dealers.timer');
 
 
 // Route::resource('vehicles', VehicleController::class);
@@ -153,24 +158,23 @@ Route::resource('reports', ReportController::class);
 
 // Route::get('discounts', [VehicleController::class, 'discounts'])->name('discounts');
 
-Route::prefix('vehicles')->group(function() {
+Route::prefix('vehicles')->group(function () {
     Route::get('show/{id}', [VehicleController::class, 'show'])->name('vehicles.show');
     Route::post('store', [VehicleController::class, 'store'])->name('vehicles.store');
     Route::get('latest', [ApplicationController::class, 'latest'])->name('latest');
     Route::get('discounts', [ApplicationController::class, 'discountedVehicles'])->name('vehicles.discounts');
-
+    Route::get('prices/{start}/{end?}', [ApplicationController::class, 'prices'])->name('vehicle.prices');
 });
 Route::get('vehicles/new', [ApplicationController::class, 'newArrivals'])->name('new.arrivals');
 Route::get('new-vehicles', [ApplicationController::class, 'newVehicles'])->name('new');
 
 Route::get('vehicles-buy/{no}', [ApplicationController::class, 'buy'])->name('buy');
 Route::get('vehicle-loan/{no}', [ApplicationController::class, 'loan'])->name('loan');
-Route::post('loan-application', [ApplicationController::class,'apply']);
+Route::post('loan-application', [ApplicationController::class, 'apply']);
 Route::post('purchase', [ApplicationController::class, 'purchase'])->name('purchase');
-Route::get('like/{id}', [ApplicationController::class,'like']);
-Route::get('view/{id}', [ApplicationController::class,'view']);
+Route::get('like/{id}', [ApplicationController::class, 'like']);
+Route::get('view/{id}', [ApplicationController::class, 'view']);
 Route::get('whatsapp/{id}', [ApplicationController::class, 'whatsapp']);
-
 
 /** Loan Routes */
 Route::get('/partner-loanproducts/{partner_id}', [PartnerController::class, 'partnerloanproducts']);
@@ -179,28 +183,29 @@ Route::get('loanproducts/{id?}', [PartnerController::class, 'getloanproducts']);
 
 Route::prefix('/partner')->group(function () {
     Route::get('/', [PartnerController::class, 'index'])->name('partner.index');
-    Route::get('loans',[PartnerController::class,'loans'])->name('partner.loans');
+    Route::get('loans', [PartnerController::class, 'loans'])->name('partner.loans');
     Route::post('store', [PartnerController::class, 'store'])->name('partner.store');
     Route::post('saveloanproduct', [PartnerController::class, 'saveloanproduct'])->name('partner.saveloanproduct');
     Route::get('loanproducts', [PartnerController::class, 'loanproducts']);
 });
 
-Route::prefix('admin')->group(function() {
+Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('vehicles',[AdminController::class,'vehicles'])->name('admin.vehicles');
-    Route::get('users', [AdminController::class,'users'])->name('admin.users');
+    Route::get('vehicles', [AdminController::class, 'vehicles'])->name('admin.vehicles');
+    Route::get('users', [AdminController::class, 'users'])->name('admin.users');
     Route::get('accounts', [AdminController::class, 'accounts'])->name('admin.accounts');
     Route::get('requests', [AdminController::class, 'requests'])->name('admin.requests');
     Route::get('settings', [SettingsController::class, 'index'])->name('admin.settings');
-    Route::get('reports',[AdminController::class, 'reports'])->name('admin.reports');
+    Route::get('reports', [AdminController::class, 'reports'])->name('admin.reports');
     Route::get('customers', [UsersController::class, 'customers']);
 });
 
 Route::get('dealers-get', [DealerController::class, 'getDealers']);
 
 // dd(auth()->user());
-Route::middleware('dealer')->prefix('dealer')->group(function() {
-    Route::get('/', [DealerController::class,'index'])->name('dealer.index');
+Route::middleware('dealer')->prefix('dealer')->group(function () {
+    Route::get('/', [DealerController::class, 'index'])->name('dealer.index');
+    Route::get('subscription', [DealerController::class, 'subscription']);
     Route::get('vehicles', [DealerController::class, 'vehicles'])->name('dealer.vehicles');
     Route::get('requests', [DealerController::class, 'requests'])->name('dealer.requests');
     Route::post('store', [DealerController::class, 'store'])->name('dealer.store');

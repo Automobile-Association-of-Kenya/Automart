@@ -185,7 +185,7 @@ class Vehicle extends Model
             })->inRandomOrder()->orderBy('priority')->get()
             ->filter(function ($vehicle) {
                 $prices = $vehicle->prices;
-                
+
                 if ($prices->count() > 1 && $prices->last()->price < $prices[1]->price) {
                     $vehicle['current_price'] = $prices[0]->price;
                     $vehicle['initial_price'] = $prices[1]->price;
@@ -194,6 +194,16 @@ class Vehicle extends Model
                 return false;
             });
         return $discountedVehicles;
+    }
+
+    public function sortbyprices($start,$end) {
+        $query = $this->query();
+        $query->where('price','>=',intval($start));
+        if (!empty($end)) {
+            $query = $query->where('price','<=',intval($end));
+        }
+        $vehicles = $query->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices:id,price'])->inRandomOrder()->orderBy('priority')->latest()->paginate(20);
+        return $vehicles;
     }
 
     public function discountedrelated($vehicle_id)
@@ -205,7 +215,6 @@ class Vehicle extends Model
 
     public function getvehiclespaginate($paginate)
     {
-
         $newarrivals = $this->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices:id,price'])->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
         return json_encode($newarrivals);
     }

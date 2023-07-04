@@ -8,8 +8,6 @@
 @endsection
 
 @section('main')
-    <!-- Sub banner start -->
-
     <div class="sub-banner">
         <div class="container breadcrumb-area">
             <div class="breadcrumb-areas">
@@ -21,7 +19,6 @@
         </div>
     </div>
 
-    <!-- Sub Banner end -->
 
     <div class="pricing-tables content-area">
         <div class="container">
@@ -31,6 +28,35 @@
                     platform as outlined below.</p>
             </div>
             <div class="row" id="plansSection">
+
+                {{-- <div class="col-md-4">
+                    <ul class="list-group" style="margin-top: 4.3em;">
+                        @foreach ($properties as $item)
+                            <li class="list-group-item" style="padding: .6em;"><i class="fa fa-star text-success"></i>
+                                &nbsp;&nbsp;{{ $item->name }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+
+                @foreach ($subscriptions as $item)
+                    <div class="col-md-3 text-center">
+                        <h4>{{ $item->name }}</h4>
+                        <p>Kes. <span class="text-success"
+                                style="font-size: 20px;">{{ $item->cost }}</span>&nbsp;/{{ $item->billingcycle }}</p>
+                        <ul class="list-group">
+                            @foreach ($item->properties as $value)
+                                <li class="list-group-item">
+                                    @if (in_array($value->id, $propids))
+                                        <i class="fa fa-check text-success"></i>
+                                    @else
+                                        <i class="fa fa-xmark text-danger"></i>
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endforeach --}}
+
                 <div class="lds-roller">
                     <div></div>
                     <div></div>
@@ -189,8 +215,8 @@
                                         <div class="loadersection"></div>
                                         <div id="paymentfeedback"></div>
 
-                                        <button type="submit" class="btn btn-success"
-                                            id="mpesa-submit-button"><i class="fa fa-save fa-lg fa-fw"></i> Process</button>
+                                        <button type="submit" class="btn btn-success" id="mpesa-submit-button"><i
+                                                class="fa fa-save fa-lg fa-fw"></i> Process</button>
                                     </form>
                                 </div>
 

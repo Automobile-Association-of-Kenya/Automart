@@ -12601,7 +12601,9 @@ input[type="tel"] {
     }
 
     .car-box-2 .detail .title {
-        font-size: 22px;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: capitalize;
     }
 
     .vs {

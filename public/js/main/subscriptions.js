@@ -275,6 +275,7 @@
 
             $.post("/payments", data)
                 .done(function (params) {
+                    console.log(params);
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#paymentfeedback");

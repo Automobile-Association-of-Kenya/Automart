@@ -1,33 +1,6 @@
 
 <!-- Footer start -->
 <footer class="footer">
-    <div class="lines">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-    </div>
-    <div class="subscribe-newsletter">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <h3>Subscribe Newsletter</h3>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="Subscribe-box">
-                        <div class="newsletter-content-wrap">
-                            <form class="newsletter-form d-flex" action="#">
-                                <input class="form-control" type="email" id="email" placeholder="Email Address...">
-                                <button class="btn btn-theme" type="submit"><i class="fa fa-paper-plane"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="clearfix"></div>
     <div class="footer-inner">
         <div class="container">
@@ -105,22 +78,22 @@
                             <div class="m-border"></div>
                             <ul>
                                 <li>
-                                    <img src="img/car/small-car-1.jpg" alt="small-img">
+                                    <img src="/img/car/small-car-1.jpg" alt="small-img">
                                 </li>
                                 <li>
-                                    <img src="img/car/small-car-2.jpg" alt="small-img">
+                                    <img src="/img/car/small-car-2.jpg" alt="small-img">
                                 </li>
                                 <li>
-                                    <img src="img/car/small-car-3.jpg" alt="small-img">
+                                    <img src="/img/car/small-car-3.jpg" alt="small-img">
                                 </li>
                                 <li>
-                                    <img src="img/car/small-car-4.jpg" alt="small-img">
+                                    <img src="/img/car/small-car-4.jpg" alt="small-img">
                                 </li>
                                 <li>
-                                    <img src="img/car/small-car-5.jpg" alt="small-img">
+                                    <img src="/img/car/small-car-5.jpg" alt="small-img">
                                 </li>
                                 <li>
-                                    <img src="img/car/small-car-6.jpg" alt="small-img">
+                                    <img src="/img/car/small-car-6.jpg" alt="small-img">
                                 </li>
                             </ul>
                         </div>
@@ -129,6 +102,8 @@
             </div>
         </div>
     </div>
+
+    
     <div class="sub-footer">
         <div class="container">
             <div class="row">

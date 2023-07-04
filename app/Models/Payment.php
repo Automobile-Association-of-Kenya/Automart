@@ -68,7 +68,7 @@ class Payment extends Model
             'PartyA' => $phone,
             'PartyB' => '174379',
             'PhoneNumber' => $phone,
-            'CallBackURL' => 'https://b1ea-102-135-169-115.ngrok-free.app/api/mpesa-callback',
+            'CallBackURL' => 'https://82a6-41-80-113-125.ngrok-free.app/api/mpesa-callback',
             'AccountReference' => 'Automart AA Kenya',
             'TransactionDesc' => "Payment for " . $subscription->name . " subscription"
         );
@@ -92,7 +92,7 @@ class Payment extends Model
             ]);
             return json_encode(['status' => 'success', 'checkoutid' => $data["CheckoutRequestID"], 'message' => $data["CustomerMessage"] . ". Check your phone and enter Mpesa pin to proceed."]);
         } else {
-            return json_encode(['status' => 'error', 'message' => $data["errorMessage"]]);
+            return json_encode(['status' => 'error', 'message' => $data]);
         }
     }
 

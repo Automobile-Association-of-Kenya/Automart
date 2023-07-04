@@ -91,7 +91,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-success">
-                        <h5 class="text-white font-weight-bold mt-2 mb-2">Ads stats</h5>
+                        <h5 class="text-white font-weight-bold mt-2 mb-2">Ads stats</h5><input type="date"
+                            class="float-right" name="traffic" id="trafficDate" value="{{ date('Y-m-d') }}">
                     </div>
                     <div class="card-body">
                     </div>
@@ -101,7 +102,7 @@
     </main>
 @endsection
 
-
-
 @section('footer_scrips')
+    <script src="{{ asset('js/chart.js') }}"></script>
+    <script src="{{ asset('js/dashboard.js') }}"></script>
 @endsection

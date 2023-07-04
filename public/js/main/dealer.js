@@ -126,12 +126,53 @@
             });
     });
 
-    // function getSubscriptions() {
-    //     $.getJSON("/subscriptions-shortcut", function (params) {
-    //         let props = "";
-    //         $.each(params, function (key, value) {});
-    //     });
-    // }
+    let subsPromise = new Promise(function (resolve, reject) {
+        $.getJSON("/dealer/subscription", function (subscription) {
+            resolve(subscription?.expiry_date);
+        });
+    });
+    Promise.resolve(subsPromise).then((result) => {
+        if (result !== undefined) {
+            var targetDate = new Date(result);
+        }
 
-    // getSubscriptions();
+        function updateCountdown() {
+            var countdownElement = document.getElementById("subscriptionCountdowntimer");
+            if (targetDate !== undefined) {
+                var currentDate = new Date();
+                var timeDifference = targetDate - currentDate;
+                var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                var hours = Math.floor(
+                    (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+                );
+                var minutes = Math.floor(
+                    (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+                );
+                var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+                
+                let day =
+                    days > 1
+                        ? days + " days, "
+                        : days < 1
+                        ? ""
+                        : days + " day, ";
+                countdownElement.innerHTML =
+                    "Subscription rem: " +
+                    day +
+                    hours +
+                    " : " +
+                    minutes +
+                    " : " +
+                    seconds;
+                if (timeDifference < 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.innerHTML = "Countdown is over!";
+                }
+            } else {
+                countdownElement.innerHTML =
+                    "<a href='/subscription-plans' _target='_blank' class='btn btn-light btn-sm alert-link'>&nbsp;Promote your ads</a>";
+            }
+        }
+        var countdownInterval = setInterval(updateCountdown, 1000);
+    });
 })();

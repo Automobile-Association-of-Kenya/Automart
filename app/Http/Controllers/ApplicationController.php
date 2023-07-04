@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
 use App\Models\VehiclePrice;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
@@ -43,6 +44,7 @@ class ApplicationController extends Controller
 
     public function welcome()
     {
+        Visit::visit(request()->server());
         $vehicles = $this->vehicle->getlatest(12);
         $discounts = $this->vehicle->discounts(12);
         // dd($vehicles);
@@ -51,6 +53,7 @@ class ApplicationController extends Controller
 
     public function buy($vehicle_no)
     {
+        Visit::visit(request()->server());
         $vehicle = $this->vehicle->vehicle($vehicle_no);
         $services = $this->service->get();
         return view('vehicles.buy', compact('vehicle', 'services'));
@@ -67,6 +70,7 @@ class ApplicationController extends Controller
 
     public function loan($vehicle_no)
     {
+        Visit::visit(request()->server());
         $vehicle = $this->vehicle->vehicle($vehicle_no);
         $services = $this->service->get();
         $industries = $this->industry->get();
@@ -88,6 +92,7 @@ class ApplicationController extends Controller
 
     function index()
     {
+        Visit::visit(request()->server());
         $vehicles = $this->vehicle->getvehiclespaginate(40);
         return view('index', compact('vehicles'));
     }
@@ -155,6 +160,7 @@ class ApplicationController extends Controller
 
     public function vehicleTypes($id = null)
     {
+        Visit::visit(request()->server());
         $type = $this->type->find($id);
         $vehicles = $this->vehicle->where('type_id', $type->id)->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices'])->latest()->paginate(20);
         return view('vehicles.types', compact('type', 'vehicles'));
@@ -168,19 +174,21 @@ class ApplicationController extends Controller
 
     public function search(Request $request)
     {
+        Visit::visit(request()->server());
         $vehicles = $this->vehicle->searchpaginate($request->all());
         return view('vehicles.search', compact('vehicles'));
     }
     public function vehicleModels($id)
     {
+        Visit::visit(request()->server());
         $model = $this->model->find($id);
-
         $vehicles = $this->vehicle->where('vehicle_model_id', $model->id)->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices'])->paginate(20);
         return view('vehicles.models', compact('model', 'vehicles'));
     }
 
     public function vehicleMakes($id)
     {
+        Visit::visit(request()->server());
         $make = $this->make->find($id);
         $vehicles = $this->vehicle->vehiclesbymake($id, 20);
         return view('vehicles.makes', compact('vehicles', 'make'));
@@ -209,12 +217,14 @@ class ApplicationController extends Controller
 
     public function newVehicles()
     {
+        Visit::visit(request()->server());
         $vehicles = $this->vehicle->newvehiclespaginated(20);
         return view('vehicles.new', compact('vehicles'));
     }
 
     public function discountedVehicles()
     {
+        Visit::visit(request()->server());
         $vehicles = $this->vehicle->discounts();
         return view('vehicles.discount', compact('vehicles'));
     }
@@ -228,6 +238,7 @@ class ApplicationController extends Controller
 
     public function vehicleDetails($id, $param = null)
     {
+        Visit::visit(request()->server());
         $vehicle = $this->vehicle->vehicle($id);
         if ($param == "discount") {
             $relatedvehicles = $this->vehicle->discountedrelated($vehicle->id ?? $vehicle->vehicle_no);
@@ -242,16 +253,19 @@ class ApplicationController extends Controller
 
     public function about()
     {
+        Visit::visit(request()->server());
         return view('about');
     }
 
     public function contact()
     {
+        Visit::visit(request()->server());
         return view('contact');
     }
 
     public function privacy()
     {
+        Visit::visit(request()->server());
         return view('privacy');
     }
 
@@ -261,5 +275,10 @@ class ApplicationController extends Controller
         $quotes = $this->quote->count();
         $finances = $this->finance->count();
         return ['tradeins' => $tradeins, 'quotes' => $quotes, 'finances' => $finances];
+    }
+
+    public function prices($start, $end=null) {
+        $vehicles = $this->vehicle->sortbyprices($start,$end);
+        return view('vehicles.prices', compact('vehicles'));
     }
 }

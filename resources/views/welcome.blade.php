@@ -125,11 +125,23 @@
         </div>
     </div>
 
+    <div class="alert-success" style="padding: 40px;">
+        <div class="container text-center">
+                            <h3 class="mb-2">Quickly Sort Price</h3>
+
+            <a class="btn btn-light" href="{{ url('vehicles/prices/0/1000000') }}">Under 1 M</a>
+            <a class="btn btn-light" href="{{ url('vehicles/prices/1000000/2000000') }}">1 M - 2 M</a>
+            <a class="btn btn-light" href="{{ url('vehicles/prices/3000000/5000000') }}">3 M - 3 M</a>
+            <a class="btn btn-light" href="{{ url('vehicles/prices/5000000/10000000') }}">5 M - 10 M</a>
+            <a class="btn btn-light" href="{{ url('vehicles/prices/10000000') }}">Over 10 M</a>
+        </div>
+    </div>
+
     <div class="featured-car content-area-21 bg-white">
         <div class="container">
             <!-- Main title -->
             <div class="main-title">
-                <h1>Vehicles on Offer</h1>
+                <h3><b>Vehicles on Offer</b></h3>
                 <p>Get the best cars in the market at discounted prices. </p>
             </div>
             <div class="row bg-grey pt-4 pb-2" id="vehiclesonoffer">
@@ -194,7 +206,6 @@
                                                             alt="hidden-img">
                                                     </a>
                                                 @endforeach
-
                                             </div>
                                         </div>
                                     </div>
@@ -202,10 +213,10 @@
                             </div>
 
                             <div class="detail">
-                                <h1 class="title">
+                                <h3 class="title">
                                     <a class="text-success"
                                         href="{{ url('/vehicle/' . $vehicle_no . '/discount') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
-                                </h1>
+                                </h3>
                                 <ul class="custom-list">
                                     <li>
                                         <a

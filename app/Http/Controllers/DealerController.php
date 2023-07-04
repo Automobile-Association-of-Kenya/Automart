@@ -57,15 +57,15 @@ class DealerController extends Controller
         if (!is_null(auth()->user()->dealer_id)) {
             return json_encode(['status' => 'info', 'message' => 'Business information already exist for this user']);
         }
-        $dealer = $this->dealer->getbyemailorphone($request->email,$request->phone);
+        $dealer = $this->dealer->getbyemailorphone($request->email, $request->phone);
         if (!is_null($dealer)) {
             if (isset($request->continue)) {
-                new EventsDealer($dealer,auth()->user());
-            }else {
+                new EventsDealer($dealer, auth()->user());
+            } else {
                 $message = "A dealer with these details <strong>" . $dealer->name . "</strong>  <strong>" . $dealer->email . "</strong> already exists do you want to be added to the same dealer? Note! All your ads will be under this dealer! You an also change your details in this form and save";
                 return json_encode(['status' => 'data', 'message' => $message]);
             }
-        }else {
+        } else {
             $dealer = $this->dealer->add($request);
             new EventsDealer($dealer, auth()->user());
         }
@@ -93,18 +93,25 @@ class DealerController extends Controller
         return json_encode($dealers);
     }
 
-    public function purchaseapprove($id) {
+    public function purchaseapprove($id)
+    {
         $purchase = $this->purchase->with('vehicle')->find($id);
         $vehicle = $purchase->vehicle;
         DB::beginTransaction();
-        $vehicle->update(['status'=>'sold', 'sold_at'=>date('Y-m-d H:i:s')]);
-        $purchase->update(['status'=>'approved']);
+        $vehicle->update(['status' => 'sold', 'sold_at' => date('Y-m-d H:i:s')]);
+        $purchase->update(['status' => 'approved']);
         DB::commit();
-        new EventsPurchase('approval',$purchase);
+        new EventsPurchase('approval', $purchase);
         return redirect()->back()->with('success', 'Purchase approval was successful.');
     }
 
-    public function purchasedecline(Request $request) {
-        
+    public function purchasedecline(Request $request)
+    {
+    }
+
+    public function subscription()
+    {
+        $subscription = DB::table('dealer_subscription')->where('user_id', auth()->id())->orWhere('dealer_id', auth()->user()?->dealer_id)->where('expiry_date', '>', date('Y-m-d H:I:s'))->latest()->first();
+        return json_encode($subscription);
     }
 }

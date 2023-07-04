@@ -409,8 +409,8 @@ $(function () {
                     .text(currentMax + " " + unit);
                 $(this).children(".current-min").val(currentMin);
                 $(this).children(".current-max").val(currentMax);
-                $("#rangeSliderStartPrice").val(currentMin);
-                $("#rangeSliderEndPrice").val(currentMax);
+                // $("#rangeSliderStartPrice").val(currentMin);
+                // $("#rangeSliderEndPrice").val(currentMax);
             },
         });
 
@@ -464,13 +464,7 @@ $(function () {
 
         $('input[type="range"]').rangeslider({
             update: true,
-            // Feature detection the default is `true`.
-            // Set this to `false` if you want to use
-            // the polyfill also in Browsers which support
-            // the native <input type="range"> element.
             polyfill: true,
-
-            // Default CSS classes
             rangeClass: "rangeslider",
             disabledClass: "rangeslider--disabled",
             horizontalClass: "rangeslider--horizontal",
@@ -478,21 +472,12 @@ $(function () {
             fillClass: "rangeslider__fill",
             handleClass: "rangeslider__handle",
 
-            // Callback function
             onInit: function () {
                 console.log("here");
             },
-
-            // Callback function
             onSlide: function (position, value) {
-                console.log(position);
-                console.log(value);
             },
-
-            // Callback function
             onSlideEnd: function (position, value) {
-                console.log(position);
-                console.log(value);
             },
         });
 
