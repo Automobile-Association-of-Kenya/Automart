@@ -63,26 +63,27 @@
 
                         @foreach ($vehicles as $item)
                             @php
-                                $images = json_decode($item['images']);
+                                $images = $item->images;
                                 $vehicle_no = $item->vehicle_no ?? $item->id;
                             @endphp
                             <div class="col-lg-3 col-md-6">
                                 <div class="car-box-3">
                                     <div class="car-thumbnail">
-                                        <a href="{{ url('/vehicle/'.$vehicle_no) }}" class="car-img">
+                                        <a href="{{ url('/vehicle/' . $vehicle_no) }}" class="car-img">
                                             <div class="for">{{ $item->usage }}</div>
                                             <div class="price-box">
                                                 <span>Kes: {{ number_format($item->price, 2) }}</span>
                                             </div>
                                             <img class="d-block w-100"
-                                                src="{{ asset('/vehicleimages/' . @$images[0] . '') }}" alt="car">
+                                                src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                alt="car">
                                         </a>
                                         <div class="carbox-overlap-wrapper">
                                             <div class="overlap-box">
                                                 <div class="overlap-btns-area">
                                                     <a class="overlap-btn" data-bs-toggle="modal"
-                                                        data-bs-target="#vehicleDetailsModal"
-                                                        data-id="{{ $item->id }}" id="vehicleDetailsModalToggle">
+                                                        data-bs-target="#vehicleDetailsModal" data-id="{{ $item->id }}"
+                                                        id="vehicleDetailsModalToggle">
                                                         <i class="fa fa-eye-slash"></i>
                                                     </a>
                                                     <a class="overlap-btn wishlist-btn" data-id="{{ $item->id }}">
@@ -90,22 +91,24 @@
                                                     </a>
 
                                                     <div class="car-magnify-gallery">
-                                                        <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                        <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
                                                             class="overlap-btn"
                                                             data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                             <i class="fa fa-expand"></i>
                                                             <img class="hidden"
-                                                                src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                                src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
                                                                 alt="hidden-img">
                                                         </a>
-                                                        @foreach ($images as $image)
-                                                            <a href="{{ asset('/vehicleimages/' . $image . '') }}"
-                                                                class="hidden"
-                                                                data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
-                                                                <img src="{{ asset('/vehicleimages/' . $image . '') }}"
-                                                                    alt="hidden-img">
-                                                            </a>
-                                                        @endforeach
+                                                        @if (is_array($images))
+                                                            @foreach ($images as $image)
+                                                                <a href="{{ asset('/vehicleimages/' . $image->image . '') }}"
+                                                                    class="hidden"
+                                                                    data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
+                                                                    <img src="{{ asset('/vehicleimages/' . $image->image . '') }}"
+                                                                        alt="hidden-img">
+                                                                </a>
+                                                            @endforeach
+                                                        @endif
 
                                                     </div>
                                                 </div>
@@ -116,11 +119,11 @@
                                     <div class="detail">
                                         <h1 class="title">
                                             <a class="text-success"
-                                                href="{{ url('/vehicle/'.$vehicle_no) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
+                                                href="{{ url('/vehicle/' . $vehicle_no) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                         </h1>
                                         <ul class="custom-list">
                                             <li>
-                                                <a href="{{ url('/vehicle/'.$vehicle_no) }}">{{ $item->usage }}</a>
+                                                <a href="{{ url('/vehicle/' . $vehicle_no) }}">{{ $item->usage }}</a>
                                                 &nbsp;|&nbsp;
                                             </li>
                                             <li>
@@ -144,8 +147,8 @@
                                             <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
                                                 data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
                                                 Enquire</a>
-                                            <a href="{{ route('buy', $vehicle_no) }}"
-                                                class="btn btn-success btn-sm"><i class="fa fa-hand"></i> Buy</a>
+                                            <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm"><i
+                                                    class="fa fa-hand"></i> Buy</a>
                                             <a href="{{ route('loan', $vehicle_no) }}"
                                                 class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i>
                                                 Apply

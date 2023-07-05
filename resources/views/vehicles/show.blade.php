@@ -27,7 +27,6 @@
         .rangeslider__fill {
             color: #006544;
         }
-
     </style>
 @endsection
 
@@ -365,8 +364,8 @@
                         </div>
 
                         @php
-                            $deposit = (40/100 * $vehicle->price);
-                            $mindeposit = (10/100 * $vehicle->price);
+                            $deposit = (40 / 100) * $vehicle->price;
+                            $mindeposit = (10 / 100) * $vehicle->price;
                         @endphp
 
                         <div class="widget mt-4">
@@ -375,7 +374,8 @@
                             <div class="m-border"></div>
                             <div class="bg-success p-2 text-center" style="border-radius: 10px;">
                                 <p class="mb-0 text-white">Estimated Monthly Payment</p>
-                                <p class="text-white">Note: Monthly interest rate may differ as we partner with different finance institutions.</p>
+                                <p class="text-white">Note: Monthly interest rate may differ as we partner with different
+                                    finance institutions.</p>
                             </div>
 
                             <div class="text-center">
@@ -383,15 +383,18 @@
                             </div>
                             <div class="form-group">
                                 <input type="hidden" id="vehicleLoanPrice" value="{{ $vehicle->price }}">
-                                <label for="">Down Payment</label> <span class="float-right text-success" id="downPayment">{{ number_format($mindeposit,2) }}</span>
+                                <label for="">Down Payment</label> <span class="float-right text-success"
+                                    id="downPayment">{{ number_format($mindeposit, 2) }}</span>
                                 <div class="range-slider">
-                                    <input type="range" min="{{ $mindeposit }}" max="{{ $deposit }}" step="100" value="{{ $mindeposit }}"
-                                        data-orientation="horizontal"  id="downPaymentSlider" class="text-warning">
+                                    <input type="range" min="{{ $mindeposit }}" max="{{ $deposit }}"
+                                        step="100" value="{{ $mindeposit }}" data-orientation="horizontal"
+                                        id="downPaymentSlider" class="text-warning">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="">Interest Rate</label> <span class="float-right text-success" id="interestRateText">10 %</span>
+                                <label for="">Interest Rate</label> <span class="float-right text-success"
+                                    id="interestRateText">10 %</span>
                                 <div class="range-slider">
                                     <input type="range" min="0" max="34" step="1" value="10"
                                         data-orientation="horizontal" id="interestRateSlider" class="text-warning">
@@ -399,7 +402,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="">Tenure</label> <span class="float-right text-success" id="tenureYears">12</span>&nbsp;Months
+                                <label for="">Tenure</label> <span class="float-right text-success"
+                                    id="tenureYears">12</span>&nbsp;Months
                                 <div class="range-slider">
                                     <input type="range" min="0" max="36" step="1" value="12"
                                         data-orientation="horizontal" id="tenureSlider" class="text-warning">
@@ -423,7 +427,7 @@
 
                 @foreach ($relatedvehicles as $item)
                     @php
-                        $images = json_decode($item['images']);
+                        $images = $item->images;
                         $vehicle_no = $item->vehicle_no ?? $item->id;
                         $location = $item->yard !== null ? $item->yard->address : $item->location;
                     @endphp
@@ -436,8 +440,8 @@
                                     <div class="price-box">
                                         <span>Kes: {{ number_format($item->price, 2) }}</span>
                                     </div>
-                                    <img class="d-block w-100" src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
-                                        alt="car">
+                                    <img class="d-block w-100"
+                                        src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}" alt="car">
                                 </a>
                                 <div class="carbox-overlap-wrapper">
                                     <div class="overlap-box">
@@ -452,22 +456,25 @@
                                             </a>
 
                                             <div class="car-magnify-gallery">
-                                                <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
                                                     class="overlap-btn"
                                                     data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                     <i class="fa fa-expand"></i>
                                                     <img class="hidden"
-                                                        src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                        src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
                                                         alt="hidden-img">
                                                 </a>
 
-                                                @foreach ($images as $image)
-                                                    <a href="{{ asset('/vehicleimages/' . $image . '') }}" class="hidden"
-                                                        data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
-                                                        <img src="{{ asset('/vehicleimages/' . $image . '') }}"
-                                                            alt="hidden-img">
-                                                    </a>
-                                                @endforeach
+                                                @if (is_array($images))
+                                                    @foreach ($images as $image)
+                                                        <a href="{{ asset('/vehicleimages/' . $image->image . '') }}"
+                                                            class="hidden"
+                                                            data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
+                                                            <img src="{{ asset('/vehicleimages/' . $image->image . '') }}"
+                                                                alt="hidden-img">
+                                                        </a>
+                                                    @endforeach
+                                                @endif
 
                                             </div>
                                         </div>

@@ -63,7 +63,7 @@
                     <div class="row" id="vehiclesection">
                         @foreach ($vehicles as $item)
                             @php
-                                $images = json_decode($item['images']);
+                                $images = $vehicle->images;
                                 $vehicle_no = (!is_null($item->vehicle_no)) ? $item->vehicle_no : $item->id;
                             @endphp
                             <div class="col-lg-3 col-md-6">
@@ -78,7 +78,7 @@
                                                 <span>Kes: {{ number_format($item->current_price, 2) }}</span>
                                             </div>
                                             <img class="d-block w-100"
-                                                src="{{ asset('/vehicleimages/' . @$images[0] . '') }}" alt="car">
+                                                src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}" alt="car">
                                         </a>
                                         <div class="carbox-overlap-wrapper">
                                             <div class="overlap-box">
@@ -93,23 +93,22 @@
                                                     </a>
 
                                                     <div class="car-magnify-gallery">
-                                                        <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                        <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
                                                             class="overlap-btn"
                                                             data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                             <i class="fa fa-expand"></i>
                                                             <img class="hidden"
-                                                                src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                                src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
                                                                 alt="hidden-img">
                                                         </a>
                                                         @foreach ($images as $image)
-                                                            <a href="{{ asset('/vehicleimages/' . $image . '') }}"
+                                                            <a href="{{ asset('/vehicleimages/' . $image->image . '') }}"
                                                                 class="hidden"
                                                                 data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
-                                                                <img src="{{ asset('/vehicleimages/' . $image . '') }}"
+                                                                <img src="{{ asset('/vehicleimages/' . $image->image . '') }}"
                                                                     alt="hidden-img">
                                                             </a>
                                                         @endforeach
-
                                                     </div>
                                                 </div>
                                             </div>

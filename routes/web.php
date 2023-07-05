@@ -215,3 +215,5 @@ Route::middleware('dealer')->prefix('dealer')->group(function () {
 
 
 Route::get('webtraffic/{date}', [SettingsController::class, 'webtraffic']);
+
+Route::get('processvehicles', [ServicesController::class, 'processvehicles']);

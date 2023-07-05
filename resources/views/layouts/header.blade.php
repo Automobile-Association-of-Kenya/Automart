@@ -205,7 +205,7 @@
                 </li> --}}
             </ul>
         </div>
-        <div class="get-in-touch">
+        {{-- <div class="get-in-touch">
             <h3 class="heading">Get in Touch</h3>
             <div class="get-in-touch-box d-flex mb-2">
                 <i class="flaticon-phone"></i>
@@ -223,8 +223,8 @@
                     <a href="#">info@themevessel.com</a>
                 </div>
             </div>
-        </div>
-        <div class="get-social">
+        </div> --}}
+        {{-- <div class="get-social">
             <h3 class="heading">Get Social</h3>
             <a href="#" class="facebook-bg">
                 <i class="fa fa-facebook"></i>
@@ -238,6 +238,6 @@
             <a href="#" class="linkedin-bg">
                 <i class="fa fa-linkedin"></i>
             </a>
-        </div>
+        </div> --}}
     </div>
 </nav>

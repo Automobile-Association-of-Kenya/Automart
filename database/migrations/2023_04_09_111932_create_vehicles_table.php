@@ -49,7 +49,7 @@ return new class extends Migration
             $table->string('usage', 60)->nullable();
             $table->text('description')->nullable();
             // $table->text('cover_photo')->nullable();
-            $table->text('images')->nullable();
+            // $table->text('images')->nullable();
             $table->text('tags', 255)->nullable();
             $table->string('views')->default(0);
             $table->string('likes')->default(0);

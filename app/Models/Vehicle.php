@@ -22,11 +22,16 @@ class Vehicle extends Model
         'horsepower', 'status', 'sponsored', 'priority',
     ];
 
-    protected $with = ['make:id,make', 'model:id,model', 'dealer:id,name,phone,email'];
+    public $with = ['user:id,phone','make:id,make', 'model:id,model', 'images:id,vehicle_id,image', 'dealer:id,name,phone,email', 'type:id,type', 'prices:id,price', 'yard:id,yard,address', 'features:id,feature'];
 
     public function dealer(): BelongsTo
     {
         return $this->belongsTo(Dealer::class, 'dealer_id');
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(VehicleImage::class, 'vehicle_id', 'id');
     }
 
     public function yard(): BelongsTo
@@ -128,38 +133,30 @@ class Vehicle extends Model
 
     public function getRelatedVehicles($vehicle)
     {
-        $query = $this->query()->where('id','!=',$vehicle->id);
+        $query = $this->query()->where('id','!=',intval($vehicle->id));
         if (!is_null($vehicle->type_id) && $vehicle->type_id !== "") {
-            $query->where('type_id', $vehicle->type_id);
+            $query->where('type_id', intval($vehicle->type_id));
         }
         if (!is_null($vehicle->make_id) && $vehicle->make_id  !== "") {
-            $query->where('make_id', $vehicle->make_id);
+            $query->where('make_id', intval($vehicle->make_id));
         }
         if (!is_null($vehicle->vehicle_model_id) && $vehicle->vehicle_model_id  !== "") {
-            $query->where('vehicle_model_id', $vehicle->vehicle_model_id);
+            $query->where('vehicle_model_id', intval($vehicle->vehicle_model_id));
         }
-        $vehicles = $query->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices'])->limit(10)->get();
+        $vehicles = $query->limit(10)->get();
         return $vehicles;
     }
 
     function vehicle($vehicle_no)
     {
         $vehicle = $this->where('vehicle_no', $vehicle_no)
-            ->orWhere('id', $vehicle_no)->with([
-                'dealer:id,name',
-                'type:id,type',
-                'make:id,make',
-                'model:id,model',
-                'yard'
-            ])->first();
+            ->orWhere('id', $vehicle_no)->first();
         return $vehicle;
     }
 
     public function vehilclebyid($id)
     {
-        $vehicle = $this->where('id', $id)->orWhere('vehicle_no', $id)
-            ->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices:id,price', 'yard:id,yard,address', 'features:id,feature'])
-            ->first();
+        $vehicle = $this->where('id', $id)->orWhere('vehicle_no', $id)->first();
         return $vehicle;
     }
 
@@ -169,14 +166,7 @@ class Vehicle extends Model
         if (!is_null($vehicle_id)) {
             $query->where('id', '!=', $vehicle_id)->orWhere('vehicle_no', '!=', $vehicle_id);
         }
-        $discountedVehicles = $query->where('status', '!=', 'sold')->with([
-            'dealer:id,name',
-            'type:id,type',
-            'make:id,make',
-            'model:id,model',
-            'yard'
-        ])
-            ->whereHas('prices', function ($query) {
+        $discountedVehicles = $query->where('status', '!=', 'sold')->whereHas('prices', function ($query) {
                 $query->select('vehicle_id')
                     ->groupBy('vehicle_id')
                     ->havingRaw('COUNT(*) > 1')
@@ -202,7 +192,7 @@ class Vehicle extends Model
         if (!empty($end)) {
             $query = $query->where('price','<=',intval($end));
         }
-        $vehicles = $query->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices:id,price'])->inRandomOrder()->orderBy('priority')->latest()->paginate(20);
+        $vehicles = $query->inRandomOrder()->orderBy('priority')->latest()->paginate(20);
         return $vehicles;
     }
 
@@ -215,7 +205,7 @@ class Vehicle extends Model
 
     public function getvehiclespaginate($paginate)
     {
-        $newarrivals = $this->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices:id,price'])->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
+        $newarrivals = $this->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
         return json_encode($newarrivals);
     }
 
@@ -227,7 +217,7 @@ class Vehicle extends Model
             $query->where('id', '!=', $except_id)
             ->where('vehicle_no', '!=', $except_id);
         }
-        $newarrivals = $query->with('dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model')->inRandomOrder()->latest()->orderBy('priority')->limit($limit)->get();
+        $newarrivals = $query->inRandomOrder()->latest()->orderBy('priority')->limit($limit)->get();
         return $newarrivals;
     }
 
@@ -238,13 +228,13 @@ class Vehicle extends Model
 
     function newvehiclespaginated($paginate)
     {
-        $newvehicles = $this->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model'])->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
+        $newvehicles = $this->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
         return $newvehicles;
     }
 
     function vehiclesbymake($make_id, $paginate)
     {
-        $vehicles = $this->where('make_id', $make_id)->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model'])->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
+        $vehicles = $this->where('make_id', intval($make_id))->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
         return $vehicles;
     }
 
@@ -267,7 +257,7 @@ class Vehicle extends Model
 
     function vehiclecontactphone($id)
     {
-        $vehicle = $this->where('id', $id)->with('user:id,phone', 'dealer:id,phone')->first();
+        $vehicle = $this->where('id', $id)->first();
         $phone = $vehicle->user->phone ?? $vehicle->dealer->phone;
         return "+254" . substr($phone, -9);
     }
@@ -320,17 +310,17 @@ class Vehicle extends Model
             $query->where('usage', $data["usage"]);
         }
         if (!is_null($data["min_price"])) {
-            $query->where('price', '>=', $data["min_price"]);
+            $query->where('price', '>=', floatval($data["min_price"]));
         }
         if (!is_null($data["max_price"])) {
-            $query->where('price', '<=', $data["max_price"]);
+            $query->where('price', '<=', floatval($data["max_price"]));
         }
         return $query;
     }
 
     function relate($data)
     {
-        return $this->searchprefix($data)->with('dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices');
+        return $this->searchprefix($data);
     }
 
     function searchpaginate($data, $paginate = 20)

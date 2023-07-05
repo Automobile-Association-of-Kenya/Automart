@@ -40,11 +40,16 @@
             <div class="row">
                 <div class="col-md-7 mb-4">
                     <div class="intro">
+                        
                         <div class="introimage" style="max-height: 500px;">
-                            <img src="{{ asset('vehicleimages/' . @$images[0]) }}"
+                            @php
+                                $images = $vehicle->images;
+                            @endphp
+                            <img src="{{ asset('vehicleimages/' . $images[0]->image) }}"
                                 alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}"
                                 width="100%" max-height="350px">
                         </div>
+
                         <div class="introtext mt-2">
                             <a href="{{ url('vehicle/' . $vehicle_no) }}">
                                 <h3 class="text text-success">
@@ -63,11 +68,15 @@
                         <div class="card-header bg-white">
                             <h4 class="text-success">Before you buy any vehicles on this platform</h4>
                         </div>
+
                         <div class="card-body">
-                            <p><span class="fa fa-check-circle text-success"></span></p>
-                            <p><span class="fa fa-check-circle text-success"></span></p>
-                            <p><span class="fa fa-check-circle text-success"></span></p>
-                            <p><span class="fa fa-check-circle text-success"></span></p>
+                            <p><span class="fa fa-check-circle text-success"></span>&nbsp;Inspect the vehicle to make sure
+                                they meet your needs.</p>
+                            <p><span class="fa fa-check-circle text-success"></span>&nbsp;Meet the seller at a safe public
+                                place.</p>
+                            <p><span class="fa fa-check-circle text-success"></span>&nbsp;Don't send any pre-payments.</p>
+                            <p><span class="fa fa-check-circle text-success"></span>&nbsp;Check all documentation and only
+                                pay if you're satisfied</p>
                             <p><span class="fa fa-check-circle text-success"></span></p>
                             <p><span class="fa fa-check-circle text-success"></span></p>
                             <p><span class="fa fa-check-circle text-success"></span></p>

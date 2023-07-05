@@ -47,7 +47,10 @@ class ApplicationController extends Controller
         Visit::visit(request()->server());
         $vehicles = $this->vehicle->getlatest(12);
         $discounts = $this->vehicle->discounts(12);
-        // dd($vehicles);
+        foreach ($vehicles as $value) {
+            return $value->mileage;
+            die();
+        }
         return view('welcome', compact('discounts', 'vehicles'));
     }
 

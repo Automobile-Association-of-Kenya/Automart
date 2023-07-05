@@ -21,9 +21,12 @@
                     prices. </p>
             </div>
             <div class="row bg-grey pt-4 pb-2" id="latestCarsSection">
+                @php
+                    dd($vehicles);
+                @endphp
                 @foreach ($vehicles as $item)
                     @php
-                        $images = json_decode($item['images']);
+                        $images = $item->images;
                         $vehicle_no = $item->vehicle_no ?? $item->id;
                     @endphp
                     <div class="col-lg-3 col-md-6">
@@ -37,8 +40,8 @@
                                         {{-- <br> --}}
                                         <span>Kes: {{ number_format($item->price, 2) }}</span>
                                     </div>
-                                    <img class="d-block w-100" src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
-                                        alt="car">
+                                    <img class="d-block w-100"
+                                        src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}" alt="car">
                                 </a>
                                 <div class="carbox-overlap-wrapper">
                                     <div class="overlap-box">
@@ -53,22 +56,25 @@
                                             </a>
 
                                             <div class="car-magnify-gallery">
-                                                <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
                                                     class="overlap-btn"
                                                     data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                     <i class="fa fa-expand"></i>
                                                     <img class="hidden"
-                                                        src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                        src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
                                                         alt="hidden-img">
                                                 </a>
-                                                @foreach ($images as $image)
-                                                    <a href="{{ asset('/vehicleimages/' . $image . '') }}" class="hidden"
-                                                        data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
-                                                        <img src="{{ asset('/vehicleimages/' . $image . '') }}"
-                                                            alt="hidden-img">
-                                                    </a>
-                                                @endforeach
 
+                                                @if (is_array($images))
+                                                    @foreach ($images as $image)
+                                                        <a href="{{ asset('/vehicleimages/' . $image->image . '') }}"
+                                                            class="hidden"
+                                                            data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
+                                                            <img src="{{ asset('/vehicleimages/' . $image->image . '') }}"
+                                                                alt="hidden-img">
+                                                        </a>
+                                                    @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -127,7 +133,7 @@
 
     <div class="alert-success" style="padding: 40px;">
         <div class="container text-center">
-                            <h3 class="mb-2">Quickly Sort Price</h3>
+            <h3 class="mb-2">Quickly Sort Price</h3>
 
             <a class="btn btn-light" href="{{ url('vehicles/prices/0/1000000') }}">Under 1 M</a>
             <a class="btn btn-light" href="{{ url('vehicles/prices/1000000/2000000') }}">1 M - 2 M</a>
@@ -160,7 +166,7 @@
 
                 @foreach ($discounts as $item)
                     @php
-                        $images = json_decode($item['images']);
+                        $images = $item->images;
                         $vehicle_no = $item->vehicle_no ?? $item->id;
                     @endphp
                     <div class="col-lg-3 col-md-6">
@@ -174,8 +180,8 @@
                                         <br>
                                         <span>Kes: {{ number_format($item->current_price, 2) }}</span>
                                     </div>
-                                    <img class="d-block w-100" src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
-                                        alt="car">
+                                    <img class="d-block w-100"
+                                        src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}" alt="car">
                                 </a>
 
                                 <div class="carbox-overlap-wrapper">
@@ -191,21 +197,24 @@
                                             </a>
 
                                             <div class="car-magnify-gallery">
-                                                <a href="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
                                                     class="overlap-btn"
                                                     data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                     <i class="fa fa-expand"></i>
                                                     <img class="hidden"
-                                                        src="{{ asset('/vehicleimages/' . @$images[0] . '') }}"
+                                                        src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
                                                         alt="hidden-img">
                                                 </a>
-                                                @foreach ($images as $image)
-                                                    <a href="{{ asset('/vehicleimages/' . $image . '') }}" class="hidden"
-                                                        data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
-                                                        <img src="{{ asset('/vehicleimages/' . $image . '') }}"
-                                                            alt="hidden-img">
-                                                    </a>
-                                                @endforeach
+                                                @if (is_array($images))
+                                                    @foreach ($images as $image)
+                                                        <a href="{{ asset('/vehicleimages/' . $image->image . '') }}"
+                                                            class="hidden"
+                                                            data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
+                                                            <img src="{{ asset('/vehicleimages/' . $image->image . '') }}"
+                                                                alt="hidden-img">
+                                                        </a>
+                                                    @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
