@@ -12,7 +12,7 @@
 @endsection
 
 @section('main')
-    <main style="padding: 1em;">
+    <main>
         <div class="card">
             <div class="card-header bg-white">
                 <div class="col-md-12">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 @endif
-                
+
                 @if ($errors->any())
                     <div class="col-lg">
                         <div class="alert alert-danger alert-dismissable">
@@ -57,113 +57,145 @@
                 @endif
 
                 <div class="tab-pane fade show active" id="purchasesTab" role="tabpanel">
-                    <table class="table table-bordered table-hover table-sm">
-                        <thead>
-                            <th>#</th>
-                            <th>Customer</th>
-                            <th>Pickup</th>
-                            <th>Residence</th>
-                            <th>Vehicle</th>
-                            <th>Requested at</th>
-                            <td>Added By</td>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </thead>
-                        <tbody>
-                            @php
-                                $i = 1;
-                            @endphp
-                            @foreach ($purchases as $item)
-                                @if ($item->status === 'approved')
-                                    <tr>
-                                        <td class="bg-success">{{ $i++ }}</td>
-                                        <td><span>{{ $item->name }}</span><br><span>{!! '<strong>Email:</strong>' . $item->email !!}</span><br><span>{!! '<strong>Phone:</strong>' . $item->phone !!}</span><br>
-                                        </td>
-                                        <td>{{ $item->pickup }}</td>
-                                        <td><span>{!! '<strong>Estate:</strong> ' . $item->estate !!}</span><br> <span>{!! '<strong>Hs NO:</strong> ' . $item->housenumber !!}</span>
-                                        </td>
-                                        <td><span>{{ $item->vehicle->year . ' ' . $item->vehicle->make->make . ' ' . $item->vehicle->model->model }}</span><br><span>{{ number_format($item->vehicle->price, 2) }}</span>
-                                        </td>
-                                        <td>{{ date('H:i j M Y ', strtotime($item->created_at)) }}</td>
-                                        <td>{{ $item->user->name ?? 'Anonymous' }}</td>
-                                        <td>{{ $item->status }}</td>
-                                        <td>
-                                            <li class="dropdown"><a href="#" data-toggle="dropdown"
-                                                    class="btn btn-success btn-sm">Action</a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="dropdown-item"><a
-                                                            href="{{ route('dealer.puchase.approve', $item->id) }}"><i
-                                                                class="fa fa-check text-success"></i>&nbsp;Approve</a></li>
-                                                    <li class="dropdown-item"><a href="#" id="desclinePurchase"
-                                                            data-toggle="modal" data-target="#declinePurchaseModal"
-                                                            data-id="{{ $item->id }}"><i
-                                                                class="fa fa-edit text-warning"></i>&nbsp;Decline</a></li>
-                                                </ul>
-                                            </li>
-                                        </td>
-                                    </tr>
-                                @else
-                                    <tr>
-                                        <td class="bg-warning">{{ $i++ }}</td>
-                                        <td><span>{{ $item->name }}</span><br><span>{!! '<strong>Email:</strong>' . $item->email !!}</span><br><span>{!! '<strong>Phone:</strong>' . $item->phone !!}</span><br>
-                                        </td>
-                                        <td>{{ $item->pickup }}</td>
-                                        <td><span>{!! '<strong>Estate:</strong> ' . $item->estate !!}</span><br> <span>{!! '<strong>Hs NO:</strong> ' . $item->housenumber !!}</span>
-                                        </td>
-                                        <td><span>{{ $item->vehicle->year . ' ' . $item->vehicle->make->make . ' ' . $item->vehicle->model->model }}</span><br><span>{{ number_format($item->vehicle->price, 2) }}</span>
-                                        </td>
-                                        <td>{{ date('H:i j M Y ', strtotime($item->created_at)) }}</td>
-                                        <td>{{ $item->user->name ?? 'Anonymous' }}</td>
-                                        <td>{{ $item->status }}</td>
+                    <div class="col-md-12">
+                        <table class="table">
+                            <td><b>Customer</b></td>
+                            <td><b>Residence</b></td>
+                            <td><b>Vehicle</b></td>
+                            <td><b>Action</b></td>
+                        </table>
 
-                                        <td>
-                                            <li class="dropdown"><a href="#" data-toggle="dropdown"
-                                                    class="btn btn-success btn-sm">Action</a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="dropdown-item"><a
-                                                            href="{{ route('dealer.puchase.approve', $item->id) }}"><i
-                                                                class="fa fa-check text-success"></i>&nbsp;Approve</a></li>
-                                                    <li class="dropdown-item"><a href="#" id="desclinePurchase"
-                                                            data-toggle="modal" data-target="#declinePurchaseModal"
-                                                            data-id="{{ $item->id }}"><i
-                                                                class="fa fa-edit text-warning"></i>&nbsp;Decline</a></li>
-                                                </ul>
-                                            </li>
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
+                        @foreach ($purchases as $item)
+                            @php
+                                $dealer = $item->vehicle->dealer->name ?? $item->vehicle->user->name;
+                                $dealerphone = $item->vehicle->dealer->phone ?? $item->vehicle->user->phone;
+                                $dealeremail = $item->vehilce->dealer->email ?? $item->vehicle->user->email;
+                            @endphp
+                            <table class="table table-hover">
+                                <tr>
+                                    <td>
+                                        <span><b>Name: </b>{{ $item->name }}</span><br>
+                                        <span><b>ID: </b>{{ $item->id_no }}</span><br>
+                                        <span><b>Email: </b>{{ $item->email }}</span><br>
+                                        <span><b>Phone: </b>{{ $item->phone }}</span>
+                                    </td>
+                                    <td>
+                                        <span><b>Pickup: </b>{{ $item->pickup }}</span><br>
+                                        <span><b>Estate: </b>{{ $item->estate }}</span><br>
+                                        <span><b>Hs NO: </b>{{ $item->housenumber }}</span>
+                                    </td>
+
+                                    <td>
+                                        <span>{{ $item->vehicle->year . ' ' . $item->vehicle->make->make . ' ' . $item->vehicle->model->model }}</span><br>
+                                        <span><b>Ref NO: </b>{!! $item->vehicle->vehicle_no . ' <b>Price: </b> ' . number_format($item->vehicle->price, 2) !!}</span><br>
+                                        <span><b>Mile age: </b>{!! $item->vehicle->mileage . ' <b>CC: </b> ' . $item->vehicle->enginecc !!}</span>
+                                        <p class="mt-2"><span><b>Dealer: </b>&nbsp; {{ $dealer }}
+                                            </span>&nbsp;<span><b>Email:</b>&nbsp;{{ $dealeremail }}</span><br><span><b>Phone:
+                                                </b>&nbsp;{{ $dealerphone }}</span></p>
+                                    </td>
+
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-6"><a href="#"
+                                                    class="btn btn-success btn-sm btn-round">Send Message</a></div>
+                                            <div class="col-md-6">
+                                                <li class="dropdown"><a href="#" data-toggle="dropdown"
+                                                        class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="dropdown-item"><a
+                                                                href="{{ route('dealer.puchase.approve', $item->id) }}"><i
+                                                                    class="fa fa-check text-success"></i>&nbsp;Approve</a>
+                                                        </li>
+                                                        <li class="dropdown-item"><a href="#" id="desclinePurchase"
+                                                                data-toggle="modal" data-target="#declinePurchaseModal"
+                                                                data-id="{{ $item->id }}"><i
+                                                                    class="fa fa-edit text-warning"></i>&nbsp;Decline</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </div>
+                                        </div>
+                                        <p class="mt-4">{{ date('H:i d M Y', strtotime($item->created_at)) }}</p>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        @endforeach
+                        <div class="text-center">
+                            {{ $purchases->links() }}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="tab-pane fade show" id="quotesTab" role="tabpanel">
-                    <table class="table table-bordered table-hover table-sm">
-                        <thead>
-                            <th>#</th>
-                            <th>Customer</th>
-                            <th>Vehicle</th>
-                            <th>Requested at</th>
-                            <th>Action</th>
-                        </thead>
-                        <tbody>
-                            @php
-                                $i = 1;
-                            @endphp
-                            @foreach ($quotes as $item)
-                                <tr>
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ $item->name . ' - ' . $item->email . ' - ' . $item->phone }}</td>
-                                    <td>{{ $item->vehicle->year . ' ' . $item->vehicle->make->make . '|' . $item->vehicle->model->model . '  ' . number_format($item->vehicle->price, 2) }}
-                                    </td>
-                                    <td>{{ date('H:i j M Y ', strtotime($item->created_at)) }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+                    <div class="col-md-12">
+                        <table class="table">
+                        <td><b>Customer</b></td>
+                        <td><b>Vehicle</b></td>
+                        <td><b>Message</b></td>
+                        <td><b>Action</b></td>
                     </table>
+                    @foreach ($quotes as $item)
+                        @php
+                            $dealer = $item->vehicle->dealer->name ?? $item->vehicle->user->name;
+                            $dealerphone = $item->vehicle->dealer->phone ?? $item->vehicle->user->phone;
+                            $dealeremail = $item->vehilce->dealer->email ?? $item->vehicle->user->email;
+                        @endphp
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <span><b>Name: </b>{{ $item->name }}</span><br>
+                                    <span><b>ID: </b>{{ $item->id_no }}</span><br>
+                                    <span><b>Email: </b>{{ $item->email }}</span><br>
+                                    <span><b>Phone: </b>{{ $item->phone }}</span>
+                                </td>
+
+                                <td>
+                                    <span>{{ $item->vehicle->year . ' ' . $item->vehicle->make->make . ' ' . $item->vehicle->model->model }}</span><br>
+                                    <span><b>Ref NO: </b>{!! $item->vehicle->vehicle_no . ' <b>Price: </b> ' . number_format($item->vehicle->price, 2) !!}</span><br>
+                                    <span><b>Mile age: </b>{!! $item->vehicle->mileage . ' <b>CC: </b> ' . $item->vehicle->enginecc !!}</span>
+                                    <p class="mt-2"><span><b>Dealer: </b>&nbsp; {{ $dealer }}
+                                        </span>&nbsp;<span><b>Email:</b>&nbsp;{{ $dealeremail }}</span><br><span><b>Phone:
+                                            </b>&nbsp;{{ $dealerphone }}</span></p>
+                                </td>
+
+                                <td>
+                                    <span><b>Subject: </b>{{ $item->subject }}</span><br>
+                                    <p class="mt-2">{{ $item->message }}</p>
+                                </td>
+
+                                <td>
+                                    <div class="row">
+                                        <div class="col-md-6"><a href="#"
+                                                class="btn btn-success btn-sm btn-round">Send Message</a></div>
+                                        <div class="col-md-6">
+                                            <li class="dropdown"><a href="#" data-toggle="dropdown"
+                                                    class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
+                                                <ul class="dropdown-menu">
+                                                    <li class="dropdown-item"><a
+                                                            href="{{ route('dealer.puchase.approve', $item->id) }}"><i
+                                                                class="fa fa-check text-success"></i>&nbsp;Approve</a></li>
+                                                    <li class="dropdown-item"><a href="#" id="desclinePurchase"
+                                                            data-toggle="modal" data-target="#declinePurchaseModal"
+                                                            data-id="{{ $item->id }}"><i
+                                                                class="fa fa-edit text-warning"></i>&nbsp;Decline</a></li>
+                                                </ul>
+                                            </li>
+                                        </div>
+                                    </div>
+                                    <p class="mt-4">{{ date('H:i d M Y', strtotime($item->created_at)) }}</p>
+                                </td>
+                            </tr>
+                        </table>
+                    @endforeach
+                    <div class="text-center">
+                        {{ $quotes->links() }}
+                    </div>
+                    </div>
                 </div>
 
                 <div class="tab-pane fade" id="finacesTab" role="tabpanel">
+
                     <table class="table table-bordered table-hover table-sm">
                         <thead>
                             <th>#</th>

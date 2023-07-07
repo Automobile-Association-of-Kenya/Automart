@@ -47,7 +47,7 @@ class VehicleController extends Controller
         if (!is_null($id)) {
             $query->where('id', $id);
         }
-        $makes = $query->select('id', 'make')->get();
+        $makes = $query->withCount('vehicles')->orderBy('vehicles_count','desc')->get();
 
         return json_encode($makes);
     }
@@ -79,7 +79,7 @@ class VehicleController extends Controller
         if ($make_id !== "null" && $make_id !== null) {
             $query->where('make_id', $make_id);
         }
-        $models = $query->with('make')->latest('id')->get();
+        $models = $query->with('make')->withCount('vehicles')->orderBy('vehicles_count','desc')->get();
 
         return json_encode($models);
     }
@@ -157,27 +157,14 @@ class VehicleController extends Controller
 
     public function listVehicles()
     {
-        $vehicles = $this->vehicle
-            ->with('dealer', 'make', 'model', 'prices')->latest()->get();
-        // if ($this->auth->role === "dealer") {
-        //     $vehicles = $this->vehicle->where('dealer_id', $this->auth->dealer_id)
-        //         ->with(['dealer', 'make', 'model', 'prices' => function ($query) {
-        //             return $query->latest()->limit(1);
-        //         }])->latest()->get();
-        // } else {
-        //     $vehicles = $this->vehicle
-        //         ->with(['dealer', 'make', 'model', 'prices' => function ($query) {
-        //             return $query->latest()->limit(1);
-        //         }])->latest()->get();
-        // }
-
+        $vehicles = $this->vehicle->latest()->get();
         return json_encode($vehicles);
     }
 
     public function show($id)
     {
         $vehicle = $this->vehicle
-            ->with('dealer:id,name','user:id,name','type:id,type', 'make:id,make', 'model:id,model','prices:id,price', 'yard:id,yard','features:id,feature', 'tradeins', 'quotes','loans','messages')->find($id);
+            ->with('dealer:id,name', 'user:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices:id,price', 'yard:id,yard', 'features:id,feature', 'tradeins', 'quotes', 'loans', 'messages')->find($id);
         return json_encode($vehicle);
     }
 
@@ -219,7 +206,7 @@ class VehicleController extends Controller
             $yard = $this->yard->find($request->yard_id);
             $yard->update(['dealer_id' => $dealer_id] + $validated);
         } else {
-            $this->yard->create(['user_id'=>auth()->id(),'dealer_id' => $dealer_id] + $validated);
+            $this->yard->create(['user_id' => auth()->id(), 'dealer_id' => $dealer_id] + $validated);
         }
         return json_encode(['status' => 'success', 'message' => 'Yard added successfully']);
     }
@@ -305,14 +292,14 @@ class VehicleController extends Controller
             }
             $message = "Vehicle updated successfully";
         } else {
-            $vehicle = Vehicle::create(['user_id'=>auth()->id(),'vehicle_no' => strtoupper(Str::random(3)).strtotime(now()), 'views' => 0] + $validated);
+            $vehicle = Vehicle::create(['user_id' => auth()->id(), 'vehicle_no' => strtoupper(Str::random(3)) . strtotime(now()), 'views' => 0] + $validated);
             if (isset($validated["features"]) && count($validated["features"]) > 0) {
                 $this->vehicle->addfeatures($vehicle->id, $validated["features"]);
             }
             VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
             $message = "Vehicle added successfully";
         }
-        VehicleImage::new($vehicle->id,$images);
+        VehicleImage::new($vehicle->id, $images);
         DB::commit();
         session()->forget($strkey . "images");
         session()->forget($strkey . 'cover');
@@ -378,7 +365,7 @@ class VehicleController extends Controller
         if (isset($request->model_id) && !is_null($request->model_id)) {
             $query->where('vehicle_model_id', $request->model_id);
         }
-        $vehicles = $query->latest()->with(['dealer:id,name','user:id,name', 'make:id,make', 'model:id,model', 'prices'])->get();
+        $vehicles = $query->latest()->with(['dealer:id,name', 'user:id,name', 'make:id,make', 'model:id,model', 'prices'])->get();
         return json_encode($vehicles);
     }
 }

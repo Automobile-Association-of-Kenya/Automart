@@ -1,7 +1,7 @@
 <div class="banner" id="banner">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner banner-slider-inner text-center">
-            <div class="carousel-item banner-max-height active item-bg">
+            <div class="carousel-item active item-bg">
                 <img class="d-block w-100 h-100" src="img/banner/img-5.jpg" alt="banner">
                 <div class="carousel-content container banner-info-2 bi-2">
                     <div class="row bi5">
@@ -26,9 +26,9 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-5 bg-white" style="border-radius:20px; padding:10px 10px 5px 10px;">
-                            <h5 style="margin:0;padding: 2px;"><strong class="text-success">Buy Your Vehicle from Our
-                                    Platform</strong></h5>
+                        <div class="col-lg-5 bg-white mt-3" style="border-radius:20px; padding:10px 10px 5px 10px;">
+                            <p style="margin:0;padding: 2px;"><strong class="text-success">Buy Your Vehicle from Our
+                                    Platform</strong></p>
                             <p class="text-start" style="margin:0;padding: 2px;"><strong>Process</strong></p>
                             <ul class="list-group text-start">
                                 <li class="list-group-item" style="padding: 5px;"><i
@@ -41,30 +41,12 @@
                                         class="fa fa-check-circle text-success"></i>&nbsp;<small>You can also pick your
                                         Vehicle from our Dealer Yards and Pay.</small></li>
                             </ul>
-                            {{-- <h5 class="mt-2 mb-1 text-success"><small>You can shop by brand.</small></h5>
-                            <div class="row mt-2 mb-2 ml-2 mr-2" id="banner-brands">
-                                <div class="text-center">
-                                    <div class="lds-roller">
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div> --}}
-
+                            <div class="shortcut-links-banner mt-2">
+                            </div>
                             <a href="{{ route('vehicles.list') }}" class="btn btn-success mt-2 btn-lg btn-block"><i
                                     class="fa fa-search"></i>&nbsp;Find
                                 Your Vehicle</a>
                         </div>
-                    </div>
-
-                    <div class="row mt-3" id="banner-brands">
-                        
                     </div>
                 </div>
             </div>

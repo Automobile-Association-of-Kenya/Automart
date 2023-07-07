@@ -44,7 +44,7 @@
                     <h4 class="text-white text-start" style="padding: .4em;">Dealers</h4>
                     {{-- <span class="badge">New {{ $summary["todaynewdealers"] }}</span> --}}
                     <div class="number" style="display: inline-block" id="">
-                        {{ number_format($summary['dealerscount'], 2) }}<br>
+                        {{ $summary['dealerscount'] }}<br>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-3 mb-2">
                 <div class="badge alert-info" style="width: 98%;">
                     <h4 class="text-start" style="padding: .4em;">Active subscriptions</h4>
@@ -146,7 +146,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-6">
                 <div class="card peoplebyregtrend">
                     <div class="card-header bg-success">

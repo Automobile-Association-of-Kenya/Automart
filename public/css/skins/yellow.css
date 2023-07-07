@@ -3,7 +3,7 @@
 }
 
 .button-theme:hover {
-    background: #efab0a;
+    background: #fed945;
 }
 
 .btn-border {
@@ -79,8 +79,8 @@
 }
 
 .btn-border:hover{
-    background: #efab0a;
-    border: solid 1px #efab0a;
+    background: #fed945;
+    border: solid 1px #fed945;
 }
 
 .blog-2 .b-btn{
@@ -251,7 +251,7 @@
 }
 
 .dashboard-nav ul {
-    border-bottom: 1px solid #efab0a;
+    border-bottom: 1px solid #fed945;
 }
 
 .new-user-box .follow:hover{
@@ -448,8 +448,8 @@ input[type=checkbox]:checked + label:before {
 }
 
 .btn-theme:hover{
-    background: #efab0a;
-    border: solid 1px #efab0a;
+    background: #fed945;
+    border: solid 1px #fed945;
 }
 
 .btn-white-lg-outline:hover {
@@ -497,7 +497,7 @@ input[type=checkbox]:checked + label:before {
 
 .search-button:hover {
     color: #fff;
-    background: #efab0a;
+    background: #fed945;
 }
 
 .popular .price-for-user{
@@ -523,7 +523,7 @@ input[type=checkbox]:checked + label:before {
 }
 
 .tag {
-    background:#fed945;
+    background:#006544;
 }
 
 .view-all ul li a:hover{
@@ -532,7 +532,7 @@ input[type=checkbox]:checked + label:before {
 }
 
 .tag::after {
-    border-left: 10px solid#fed945;
+    border-left: 10px solid#006544;
 }
 
 .recent-properties-box .detail header::after {
@@ -575,19 +575,19 @@ footer .footer-item .contact-info li label a:hover {
 }
 
 .btn-8:before {
-    background: #ffb606;
+    background: #fed945;
 }
 
 .btn-8:hover:before {
-    background: #ffb606;
+    background: #fed945;
 }
 
 .filteriz-navigation li.active {
-    background: #ffb606;
+    background: #fed945;
 }
 
 .filteriz-navigation li:hover{
-    background: #ffb606;
+    background: #fed945;
 }
 
 .main-header .navbar-expand-lg .user-account li a:hover {
@@ -608,8 +608,8 @@ footer .footer-item .contact-info li label a:hover {
 }
 
 .btn-outline:hover {
-    border: solid 1px #efab0a;
-    background: #efab0a;
+    border: solid 1px #fed945;
+    background: #fed945;
     color: #fff;
 }
 
@@ -624,8 +624,8 @@ footer .footer-item .contact-info li label a:hover {
 }
 
 .btn-outline-2:hover {
-    border: solid 2px #efab0a;
-    background: #efab0a;
+    border: solid 2px #fed945;
+    background: #fed945;
     color: #fff;
 }
 
@@ -906,7 +906,7 @@ li.active.filtr-button.filtr a{
 }
 
 .btn-5:after {
-    background: #efab0a;
+    background: #fed945;
 }
 
 .btn-5 {

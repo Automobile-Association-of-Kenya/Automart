@@ -22,10 +22,11 @@ class VehicleImage extends Model
     static function new($vehicle_id, $images)
     {
         foreach ($images as $image) {
-            $vehicleimage = self::where('vehicle_id', $vehicle_id)->where('image', $image)->first();
-            if (!is_null($vehicleimage)) {
+            // $vehicleimage = self::where('vehicle_id', $vehicle_id)->where('image', $image)->first();
+            // if (!is_null($vehicleimage)) {
                 self::create(['vehicle_id' => $vehicle_id, 'image' => $image]);
-            }
+            // }
         }
+
     }
 }

@@ -47,11 +47,8 @@ class ApplicationController extends Controller
         Visit::visit(request()->server());
         $vehicles = $this->vehicle->getlatest(12);
         $discounts = $this->vehicle->discounts(12);
-        foreach ($vehicles as $value) {
-            return $value->mileage;
-            die();
-        }
-        return view('welcome', compact('discounts', 'vehicles'));
+        $introvehicles = $this->vehicle->latest()->limit(30)->get();
+        return view('welcome', compact('discounts', 'vehicles', 'introvehicles'));
     }
 
     public function buy($vehicle_no)
@@ -157,7 +154,7 @@ class ApplicationController extends Controller
 
     public function modelsWithVehicles()
     {
-        $models = $this->model->whereHas('vehicles')->withCount('vehicles')->orderBy('vehicles_count', 'desc')->limit(15)->get();
+        $models = $this->model->whereHas('vehicles')->withCount('vehicles')->inRandomOrder()->orderBy('vehicles_count', 'desc')->get();
         return json_encode($models);
     }
 

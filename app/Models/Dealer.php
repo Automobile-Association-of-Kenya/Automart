@@ -104,7 +104,7 @@ class Dealer extends Model
     public function quotes()
     {
         $vehicles = $this->initialize()->pluck('id');
-        $quotes = Quote::whereIn('vehicle_id', $vehicles)->with('vehicle')->get();
+        $quotes = Quote::whereIn('vehicle_id', $vehicles)->with('vehicle')->paginate(10);
         return $quotes;
     }
 
@@ -160,7 +160,7 @@ class Dealer extends Model
 
     public function purchases() {
         $vehicles = $this->initialize()->pluck('id');
-        $purchases = Purchase::whereIn('vehicle_id',$vehicles)->with('user:id,name','vehicle')->latest()->get();
+        $purchases = Purchase::whereIn('vehicle_id',$vehicles)->with('user:id,name','vehicle')->latest()->paginate(10);
         return $purchases;
     }
 

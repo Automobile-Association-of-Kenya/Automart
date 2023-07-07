@@ -69,6 +69,7 @@ $(function () {
         event.preventDefault();
         let vehicle_id = $(this).data("id");
         $.getJSON("/whatsapp/" + vehicle_id, function (params) {
+            console.log(params);
             window.open(params.url, "_blank");
         });
     });
@@ -374,68 +375,64 @@ $(function () {
         });
     });
 
-    $(".range-slider-ui").each(function () {
-        var minRangeValue = $(this).attr("data-min");
-        var maxRangeValue = $(this).attr("data-max");
-        var minName = $(this).attr("data-min-name");
-        var maxName = $(this).attr("data-max-name");
-        var unit = $(this).attr("data-unit");
+    (function () {
+        $(".range-slider-ui").each(function () {
+            var minRangeValue = $(this).attr("data-min");
+            var maxRangeValue = $(this).attr("data-max");
+            var minName = $(this).attr("data-min-name");
+            var maxName = $(this).attr("data-max-name");
+            var unit = $(this).attr("data-unit");
 
-        $(this).append(
-            "" +
-                "<span class='min-value'></span> " +
-                "<span class='max-value'></span>" +
-                "<input class='current-min' type='hidden' name='" +
-                minName +
-                "'>" +
-                "<input class='current-max' type='hidden' name='" +
-                maxName +
-                "'>"
-        );
-        $(this).slider({
-            range: true,
-            min: minRangeValue,
-            max: maxRangeValue,
-            values: [minRangeValue, maxRangeValue],
-            slide: function (event, ui) {
-                event = event;
-                var currentMin = parseInt(ui.values[0], 10);
-                var currentMax = parseInt(ui.values[1], 10);
-                $(this)
-                    .children(".min-value")
-                    .text(currentMin + " " + unit);
-                $(this)
-                    .children(".max-value")
-                    .text(currentMax + " " + unit);
-                $(this).children(".current-min").val(currentMin);
-                $(this).children(".current-max").val(currentMax);
-                // $("#rangeSliderStartPrice").val(currentMin);
-                // $("#rangeSliderEndPrice").val(currentMax);
-            },
+            $(this).append(
+                "" +
+                    "<span class='min-value'></span> " +
+                    "<span class='max-value'></span>" +
+                    "<input class='current-min' type='hidden' name='" +
+                    minName +
+                    "'>" +
+                    "<input class='current-max' type='hidden' name='" +
+                    maxName +
+                    "'>"
+            );
+            $(this).slider({
+                range: true,
+                min: minRangeValue,
+                max: maxRangeValue,
+                values: [minRangeValue, maxRangeValue],
+                slide: function (event, ui) {
+                    event = event;
+                    var currentMin = parseInt(ui.values[0], 10);
+                    var currentMax = parseInt(ui.values[1], 10);
+                    $(this)
+                        .children(".min-value")
+                        .text(currentMin + " " + unit);
+                    $(this)
+                        .children(".max-value")
+                        .text(currentMax + " " + unit);
+                    $(this).children(".current-min").val(currentMin);
+                    $(this).children(".current-max").val(currentMax);
+                    $("#rangeSliderStartPrice").val(currentMin);
+                    $("#rangeSliderEndPrice").val(currentMax);
+                },
+            });
+
+            var currentMin = parseInt($(this).slider("values", 0), 10);
+            var currentMax = parseInt($(this).slider("values", 1), 10);
+            $(this)
+                .children(".min-value")
+                .text(currentMin + " " + unit);
+            $(this)
+                .children(".max-value")
+                .text(currentMax + " " + unit);
+            $(this).children(".current-min").val(currentMin);
+            $(this).children(".current-max").val(currentMax);
         });
 
-        var currentMin = parseInt($(this).slider("values", 0), 10);
-        var currentMax = parseInt($(this).slider("values", 1), 10);
-        $(this)
-            .children(".min-value")
-            .text(currentMin + " " + unit);
-        $(this)
-            .children(".max-value")
-            .text(currentMax + " " + unit);
-        $(this).children(".current-min").val(currentMin);
-        $(this).children(".current-max").val(currentMax);
-    });
+        $(".search-options-btn").on("click", function () {
+            $(".search-section").toggleClass("show-search-area");
+            $(".search-options-btn .fa").toggleClass("fa-chevron-down");
+        });
 
-    // Search option's icon toggle
-    $(".search-options-btn").on("click", function () {
-        $(".search-section").toggleClass("show-search-area");
-        $(".search-options-btn .fa").toggleClass("fa-chevron-down");
-    });
-
-    // $('input[type="range"]').rangeslider();
-
-    // Our Partbers toggle
-    (function () {
         function numberFormat(number) {
             var parts = number.toFixed(2).split(".");
             var integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -472,13 +469,9 @@ $(function () {
             fillClass: "rangeslider__fill",
             handleClass: "rangeslider__handle",
 
-            onInit: function () {
-                console.log("here");
-            },
-            onSlide: function (position, value) {
-            },
-            onSlideEnd: function (position, value) {
-            },
+            onInit: function () {},
+            onSlide: function (position, value) {},
+            onSlideEnd: function (position, value) {},
         });
 
         let downPaymentSlider = $("#downPaymentSlider"),
@@ -508,15 +501,12 @@ $(function () {
             installmentAmount.text(installment);
             $("#installmentAmount").text(numberFormat(installment));
             downPayment.text(numberFormat(downpayment));
-            interestRateText.text(interestrate+' %');
+            interestRateText.text(interestrate + " %");
             tenureYears.text(tenure);
         }
         calculateLoan();
     })();
 
-    $("[data-submenu]").submenupicker();
-
-    // Expending/Collapsing advance search content
     $(".show-more-options").on("click", function () {
         if ($(this).find(".fa").hasClass("fa-minus-circle")) {
             $(document).find("#options-content").addClass("show");
@@ -609,19 +599,6 @@ $(function () {
     $(".dropdown.btns .dropdown-toggle").on("click", function () {
         $(this).dropdown("toggle");
         return false;
-    });
-
-    // Dropzone initialization
-    Dropzone.autoDiscover = false;
-    $(function () {
-        $("div#myDropZone").dropzone({
-            url: "/file-upload",
-        });
-    });
-
-    // Filterizr initialization
-    $(function () {
-        //$('.filtr-container').filterizr();
     });
 
     function toggleChevron(e) {
@@ -740,29 +717,35 @@ $(function () {
     });
 
     function getTypesWithVehicle() {
+        let counter = 0;
         $.getJSON("/types-with-vehicles", function (types) {
             let item = "",
                 option = '<option value="">All</option>',
                 li = "";
+
             $.each(types, function (key, value) {
+                if (counter <= 12) {
+                    item +=
+                        '<a class="dropdown-item" href="/vehicles/type/' +
+                        value.id +
+                        '">' +
+                        value.type +
+                        "</a>";
+                }
                 li +=
                     '<li><a href="/vehicles/type/' +
                     value.id +
                     '">' +
                     value.type +
                     "</a></li>";
-                item +=
-                    '<a class="dropdown-item" href="/vehicles/type/' +
-                    value.id +
-                    '">' +
-                    value.type +
-                    "</a>";
+
                 option +=
                     "<option value=" +
                     value.id +
                     ">" +
                     value.type +
                     "</option>";
+                counter++;
             });
             $("#vehicleGroupTypes").append(item);
             $("#vehicleGroupType").append(li);
@@ -827,20 +810,24 @@ $(function () {
                 option = "<option value=''>All</option>",
                 brand = "",
                 li = "",
-                logo = "";
+                logo = "",
+                counter = 0;
+
             $.each(vehicles, function (key, value) {
+                if (counter < 10) {
+                    item +=
+                        '<a class="dropdown-item" href="/vehicles/make/' +
+                        value.id +
+                        '">' +
+                        value.make +
+                        "</a>";
+                }
                 li +=
                     '<li><a href="/vehicles/make/' +
                     value.id +
                     '">' +
                     value.make +
                     "</a></li>";
-                item +=
-                    '<a class="dropdown-item" href="/vehicles/make/' +
-                    value.id +
-                    '">' +
-                    value.make +
-                    "</a>";
                 option +=
                     "<option value=" +
                     value.id +
@@ -857,17 +844,46 @@ $(function () {
                     '<div class="col-lg-2 mr-2"><a href="/make-vehicles"><img src="/brands/' +
                     value.logo +
                     '" alt=""></a></div>';
+                counter++;
             });
             $("#vehicleGroupandMakes").append(item);
             $("#vehicleGroupMakes").append(li);
             $("#filterMakesID").html(option);
             $(".brands-section").html(brand);
-            $("#banner-brands").html(logo);
             slidePartners();
         });
     }
 
     vehicleMakesWithVehicles();
+
+    function modelsWithVehicles() {
+        $.getJSON("/models-with-vehicles", function (models) {
+            let item = "",
+                counter = 0,
+                link = "";
+            $.each(models, function (key, value) {
+                link +=
+                    '<a class="btn btn-outline-warning btn-sm btn-round mr-2" href=\'/vehicles/model/' +
+                    value.id +
+                    ">" +
+                    value.model +
+                    "</a>";
+                if (counter < 8) {
+                    item +=
+                        '<a class="dropdown-item" href="/vehicles/model/' +
+                        value.id +
+                        '">' +
+                        value.model +
+                        "</a>";
+                }
+                counter++;
+            });
+            $(".shortcut-links-banner").append(link);
+            $("#otherModels").append(item);
+        });
+    }
+
+    modelsWithVehicles();
 
     function getSocials() {
         $.getJSON("/socials", function (socials) {

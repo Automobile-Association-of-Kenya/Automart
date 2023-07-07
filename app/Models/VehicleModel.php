@@ -15,31 +15,16 @@ class VehicleModel extends Model
 
     public $timestamps = false;
 
-    /**
-     * Get the make that owns the VehicleModel
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function make(): BelongsTo
     {
         return $this->belongsTo(Make::class, 'make_id');
     }
 
-    /**
-     * Get all of the vehicles for the VehicleModel
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function vehicles(): HasMany
     {
         return $this->hasMany(Vehicle::class, 'make_id', 'id');
     }
 
-    /**
-     * Get all of the tradeInStore for the VehicleModel
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function tradeInStore(): HasMany
     {
         return $this->hasMany(Tradein::class, 'vehicle_model_id', 'id');

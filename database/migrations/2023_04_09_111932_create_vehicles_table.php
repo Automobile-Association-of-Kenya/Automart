@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreignIdFor(Type::class)->nullable()->constrained();
             $table->foreignIdFor(Make::class)->constrained();
             $table->foreignIdFor(VehicleModel::class)->constrained();
-            $table->unsignedBigInteger('contry_of_origin')->nullable()->foreign()->references('id')->on(Country::class);
+            $table->unsignedBigInteger('country_of_origin')->nullable()->foreign()->references('id')->on(Country::class);
             // $table->unsignedBigInteger('country_located')->nullable()->foreign()->references('id')->on(Country::class);
             // $table->foreignIdFor(County::class)->nullable()->constrained();
             $table->foreignIdFor(Yard::class)->nullable();

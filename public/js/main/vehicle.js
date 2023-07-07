@@ -200,7 +200,7 @@
                 tr = "",
                 i = 1;
             $.each(makes, (key, value) => {
-                let { id, make } = value;
+                let { id, make, vehicles_count } = value;
                 option += "<option value=" + id + ">" + make + "</option>";
                 option1 += "<option value=" + id + ">" + make + "</option>";
                 tr +=
@@ -208,6 +208,8 @@
                     i++ +
                     "</td><td>" +
                     make +
+                    "</td><td>" +
+                    vehicles_count +
                     '</td><td><a href="#" id="editMakeToggle" data-id=' +
                     id +
                     '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteMakeToggle" data-id=' +
@@ -220,7 +222,7 @@
             modelMakeID.html(option);
 
             let table =
-                '<table class="table table-bordered table-sm hover makesDataTable"><thead><th>#</th><th>Make</th><th>Action</th></thead><tbody>' +
+                '<table class="table table-bordered table-sm hover makesDataTable"><thead><th>#</th><th>Make</th><th>Vehicles</th><th>Action</th></thead><tbody>' +
                 tr +
                 "</tbody></table>";
             $("#makesTableSection").html(table);
@@ -287,7 +289,7 @@
                 tr = "",
                 i = "";
             $.each(models, (key, value) => {
-                let { id, make, model } = value;
+                let { id, make, model, vehicles_count } = value;
                 option += "<option value=" + id + ">" + model + "</option>";
                 option1 += "<option value=" + id + ">" + model + "</option>";
 
@@ -299,7 +301,7 @@
                         make.make +
                         "</td><td>" +
                         model +
-                        '</td><td><a href="#" id="editModelToggle" data-id=' +
+                        '</td><td>'+vehicles_count+'</td><td><a href="#" id="editModelToggle" data-id=' +
                         id +
                         '><i class="fas fa-edit text-warning" id="editVehicleModelToggle" data-id=' +
                         id +
@@ -312,7 +314,7 @@
             filtermodelID.html(option1);
             filterListModelID.html(option1);
             let table =
-                "<table class='table table-bordered table-sm hover modelsDataTable'><thead><th>#</th><th>Make</th><th>Model</th><th>Action</th></thead><tbody>" +
+                "<table class='table table-bordered table-sm hover modelsDataTable'><thead><th>#</th><th>Make</th><th>Model</th><th>Vehicles</th><th>Action</th></thead><tbody>" +
                 tr +
                 "</tbody></table>";
             $("#modelsTableSection").html(table);
@@ -630,7 +632,6 @@
         formData.append("_token", token);
         submit.prop({ disabled: true });
         let size = file.size;
-        console.log(size);
         if (size > (1024 * 1024) / 2) {
             errors.push("Logo size cannot be more than 500kb");
         }
@@ -643,6 +644,7 @@
                 p += "<p>" + value + "</p>";
             });
             showError(p, "#makefeedback");
+            submit.prop({ disabled: false });
         } else {
             $.ajaxSetup({
                 headers: {

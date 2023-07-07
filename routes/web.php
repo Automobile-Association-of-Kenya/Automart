@@ -127,11 +127,10 @@ Route::view('terms', 'terms')->name('terms');
 Route::get('types-with-vehicles', [ApplicationController::class, 'vehicleTypesWithVehicles']);
 Route::get('makes-with-vehicles', [ApplicationController::class, 'makesWithVehicles']);
 Route::get('vehicles-list', [ApplicationController::class, 'index'])->name('vehicles.list');
+Route::get('models-with-vehicles', [ApplicationController::class, 'modelsWithVehicles']);
 /**  */
 
-Route::get('vehicles/type/{id}', [ApplicationController::class, 'vehicleTypes'])->name('type.vehicles');
-Route::get('vehicles/model/{id}', [ApplicationController::class, 'vehicleModels'])->name('model.vehicles');
-Route::get('vehicles/make/{id}', [ApplicationController::class, 'vehicleMakes'])->name('make.vehicles');
+
 Route::get('search', [ApplicationController::class, 'vehicleSearch']);
 Route::get('vehicle-detail/{id}', [ApplicationController::class, 'vehicle'])->name('vehicle.detail');
 Route::get('search', [ApplicationController::class, 'search'])->name('search');
@@ -152,11 +151,8 @@ Route::post('paypalcancel', [PaymentController::class, 'cancelTransaction'])->na
 Route::post('paypalsuccess', [PaymentController::class, 'successTransaction'])->name('paypal.success');
 Route::post('payments-get', [PaymentController::class, 'get']);
 
-/** Reports */
 Route::resource('reports', ReportController::class);
 
-
-// Route::get('discounts', [VehicleController::class, 'discounts'])->name('discounts');
 
 Route::prefix('vehicles')->group(function () {
     Route::get('show/{id}', [VehicleController::class, 'show'])->name('vehicles.show');
@@ -164,9 +160,13 @@ Route::prefix('vehicles')->group(function () {
     Route::get('latest', [ApplicationController::class, 'latest'])->name('latest');
     Route::get('discounts', [ApplicationController::class, 'discountedVehicles'])->name('vehicles.discounts');
     Route::get('prices/{start}/{end?}', [ApplicationController::class, 'prices'])->name('vehicle.prices');
+    Route::get('type/{id}', [ApplicationController::class, 'vehicleTypes'])->name('type.vehicles');
+    Route::get('model/{id}', [ApplicationController::class, 'vehicleModels'])->name('model.vehicles');
+    Route::get('make/{id}', [ApplicationController::class, 'vehicleMakes'])->name('make.vehicles');
+    // Route::get('new', [ApplicationController::class, 'newArrivals'])->name('new.arrivals');
+    Route::get('new', [ApplicationController::class, 'newVehicles'])->name('new');
 });
-Route::get('vehicles/new', [ApplicationController::class, 'newArrivals'])->name('new.arrivals');
-Route::get('new-vehicles', [ApplicationController::class, 'newVehicles'])->name('new');
+
 
 Route::get('vehicles-buy/{no}', [ApplicationController::class, 'buy'])->name('buy');
 Route::get('vehicle-loan/{no}', [ApplicationController::class, 'loan'])->name('loan');

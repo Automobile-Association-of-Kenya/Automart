@@ -36,7 +36,7 @@
                                 </div>
 
                                 <div class="col-sm-6 col-md-4 col-lg-4">
-                                    <div class="megamenu-section">
+                                    <div class="megamenu-section" id="otherModels">
                                         <h6 class="megamenu-title  text-success">Others</h6>
                                         <a class="dropdown-item" href="{{ route('new') }}">New Arrivals</a>
                                         <a class="dropdown-item" href="{{ route('vehicles.discounts') }}">Discounted</a>
@@ -88,8 +88,6 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
                                 <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
-                            {{-- <li><a class="dropdown-item" href="">Logout</a></li> --}}
-
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -105,7 +103,7 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-sign-in"></i> Login / Register</a>
+                        <a class="btn btn-md btn-outline-success btn-round" href="{{ route('login') }}"><i class="fa fa-sign-in"></i> Login / Register</a>
                     </li>
                 @endauth
             </ul>
