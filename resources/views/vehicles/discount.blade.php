@@ -23,7 +23,7 @@
 
     <!-- Featured car start -->
     <div class="featured-car content-area">
-        <div class="container-fluid">
+        <div class="container">
             @include('layouts.search')
             <div class="row">
                 {{-- <div class="col-lg-3 col-md-12">

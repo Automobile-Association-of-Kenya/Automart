@@ -839,7 +839,7 @@ $(function () {
                     value.id +
                     '"><div class="custom-box"><img src="/brands/' +
                     value.logo +
-                    '" alt="brand" class="img-fluid"></div></a>';
+                    '" alt="'+value.make+'" width="100%" height="160px"></div></a>';
                 logo +=
                     '<div class="col-lg-2 mr-2"><a href="/make-vehicles"><img src="/brands/' +
                     value.logo +
@@ -884,6 +884,28 @@ $(function () {
     }
 
     modelsWithVehicles();
+
+    function highEndCars() {
+        $.getJSON('/highend', function (cars) {
+            let image = ""
+            $.each(cars, function (key, value) {
+                var images = value.images, vehicle_no = value.vehicle_no??vehicle.id;
+                image +=
+                    "<a href='vehicle/" +
+                    vehicle_no +
+                    "/highend'><img src='/vehicleimages/" +
+                    images[0].image +
+                    " alt=" +
+                    value.year +
+                    " " +
+                    value.make.make +
+                    " " +
+                    value.model.model +
+                    "></a>";
+            });
+            $("#highendVehicles").html(image);
+        });
+    }
 
     function getSocials() {
         $.getJSON("/socials", function (socials) {

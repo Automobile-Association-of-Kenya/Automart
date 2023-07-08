@@ -21,7 +21,7 @@
 
     <!-- Featured car start -->
     <div class="featured-car content-area">
-        <div class="container-fluid">
+        <div class="container">
             <div class="search-box-3">
                 <div class="container">
                     <div class="search-area-inner">

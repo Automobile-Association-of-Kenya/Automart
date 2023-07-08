@@ -20,7 +20,7 @@
     </div>
 
     <div class="featured-car content-area">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-12">
                     @include('layouts.right')
@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="col-lg-7 col-md-6 col-sm-12">
-                                {{-- <div class="sorting-options float-end">
+                                <div class="sorting-options float-end">
                                     <a href="car-list-rightside.html" class="change-view-btn float-right"><i
                                             class="fa fa-th-list"></i></a>
                                     <a href="{{ url('') }}" class="change-view-btn active-view-btn float-right"><i
@@ -50,7 +50,7 @@
                                         <option>Newest Properties</option>
                                         <option>Oldest Properties</option>
                                     </select>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -153,7 +153,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <!-- Page navigation start -->
+
                     <div class="pagination-box text-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
@@ -166,7 +166,6 @@
         </div>
     </div>
 
-    <!-- Featured car end -->
 @endsection
 
 @section('footer_scripts')
