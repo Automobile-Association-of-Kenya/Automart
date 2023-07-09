@@ -22,7 +22,7 @@ class VehicleModel extends Model
 
     public function vehicles(): HasMany
     {
-        return $this->hasMany(Vehicle::class, 'make_id', 'id');
+        return $this->hasMany(Vehicle::class, 'vehicle_model_id', 'id');
     }
 
     public function tradeInStore(): HasMany

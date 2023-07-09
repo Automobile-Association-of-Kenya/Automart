@@ -97,7 +97,6 @@
                                 </form>
                             </div>
 
-
                             <div class="row mt-2">
                                 <form action="{{ route('vehicles.store') }}" id="vehicleCreateForm">
                                     {{-- <p class="text-danger">Fields marked with * are required</p> --}}
@@ -204,7 +203,6 @@
                                                             </select>
                                                         </div>
                                                     </div>
-
 
                                                     <div class="col-md-3 form-group">
                                                         <label for="company">Mileage: <sup>*</sup></label>
@@ -365,7 +363,6 @@
                                                             <textarea name="description" id="description" class="form-control"></textarea>
                                                         </div>
                                                     </div>
-
 
                                                     <div class="col-md-4 form-group">
                                                         <label for="company">Tags:</label>
@@ -659,7 +656,6 @@
                             </div>
                         </div>
 
-
                         <div class="tab-pane fade mb-3" id="vehicleTypesTab" role="tabpanel" aria-labelledby="pop2-tab">
                             <div class="row">
                                 <div class="col-md-8">
@@ -783,7 +779,6 @@
     </main>
 @endsection
 
-
 <div class="modal fade" id="vehicleDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -817,7 +812,6 @@
   <div class=\"accordion-item\"><h2 class=\"accordion-header\" id=\"headingOne\"><button class=\"accordion-button\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapseOne\" aria-expanded=\"true\" aria-controls=\"collapseOne\">Vehicle Quotes</button></h2><div id=\"collapseOne\" class=\"accordion-collapse collapse\" aria-labelledby=\"headingOne\" data-bs-parent=\"#accordionExample\"><div class=\"accordion-body\">"+quotediv+"</div></div></div>
 </div> --}}
 
-
 @section('footer_scrips')
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/main/dataTables.buttons.min.js') }}"></script>
@@ -825,6 +819,7 @@
     <script src="{{ asset('js/main/pdfmake.min.js') }}"></script>
     <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('js/jquery_ui.js') }}"></script>
     <script src="{{ asset('js/main/vehicle.js') }}"></script>
     <script>
         (function() {

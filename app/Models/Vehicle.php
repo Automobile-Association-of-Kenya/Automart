@@ -301,7 +301,7 @@ class Vehicle extends Model
             $query->where('year', $data["year"]);
         }
         if (!is_null($data["model"])) {
-            $query->where('model_id', $data["model"]);
+            $query->where('vehicle_model_id', $data["model"]);
         }
         if (!is_null($data["transmission"])) {
             $query->where('transmission', $data["transmission"]);

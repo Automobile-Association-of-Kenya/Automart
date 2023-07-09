@@ -310,6 +310,7 @@
                         '><i class="fas fa-trash text-danger"></i></a></td></tr>';
                 }
             });
+
             vehicleModel.html(option);
             filtermodelID.html(option1);
             filterListModelID.html(option1);
@@ -575,13 +576,6 @@
                     maxFiles +
                     " files."
             );
-        }
-    });
-
-    vehicleMake.on("change", function () {
-        let make_id = $(this).val();
-        if (make_id !== "") {
-            getVehicleModels(make_id);
         }
     });
 
@@ -1557,18 +1551,15 @@
                         "#vehiclefeedback"
                     );
 
-                    $(
-                        "#vehicleDealer option[value='" +
+                    $("#vehicleDealer option[value='" +
                             vehicle.dealer?.id +
                             "']"
                     ).prop("selected", true);
 
-                    $(
-                        "#vehicleType option[value='" + vehicle.type?.id + "']"
+                    $("#vehicleType option[value='" + vehicle.type?.id + "']"
                     ).prop("selected", true);
 
-                    $(
-                        "#vehicleMake option[value='" + vehicle.make?.id + "']"
+                    $("#vehicleMake option[value='" + vehicle.make?.id + "']"
                     ).prop("selected", true);
 
                     $("#vehicleModel").html(
@@ -1578,8 +1569,7 @@
                             vehicle.model?.model +
                             "</option>"
                     );
-                    $(
-                        "#countryofOrigin option[value='" +
+                    $("#countryofOrigin option[value='" +
                             vehicle.country_of_origin +
                             "']"
                     ).prop("selected", true);
@@ -1613,31 +1603,25 @@
                         );
                     }
 
-                    $(
-                        "#yearOfManufacture option[value='" +
+                    $("#yearOfManufacture option[value='" +
                             vehicle.year +
                             "']"
                     ).prop("selected", true);
 
-                    $(
-                        "#vehicleColor option[value='" + vehicle.color + "']"
+                    $("#vehicleColor option[value='" + vehicle.color + "']"
                     ).prop("selected", true);
 
-                    $(
-                        "#interiorHtm option[value='" + vehicle.interior + "']"
+                    $("#interiorHtm option[value='" + vehicle.interior + "']"
                     ).prop("selected", true);
-                    $(
-                        "#fuelType option[value='" + vehicle.fuel_type + "']"
+                    $("#fuelType option[value='" + vehicle.fuel_type + "']"
                     ).prop("selected", true);
 
-                    $(
-                        "#transmission option[value='" +
+                    $("#transmission option[value='" +
                             vehicle.transmission +
                             "']"
                     ).prop("selected", true);
 
-                    $(
-                        "#usageCondition option[value='" + vehicle.usage + "']"
+                    $("#usageCondition option[value='" + vehicle.usage + "']"
                     ).prop("selected", true);
 
                     $.each(JSON.parse(vehicle.tags), function (key, value) {
@@ -1677,11 +1661,10 @@
                     });
                     if (vehicle.images !== "[]" && vehicle.images !== null) {
                         let previewContainer = $("#image-preview");
-                        $.each(
-                            JSON.parse(vehicle.images),
+                        $.each(vehicle.images,
                             function (key, value) {
                                 let image = $("<img>")
-                                    .attr("src", "/vehicleimages/" + value)
+                                    .attr("src", "/vehicleimages/" + value.image)
                                     .attr("width", "100%")
                                     .attr("height", "200px");
                                 let imgpreview = $('<div class="col-md-3">')
@@ -1707,7 +1690,6 @@
                                                 image: value,
                                                 photo_delete: true,
                                             };
-                                        console.log(data);
                                         $.post("/image-delete", data)
                                             .done(function (params) {
                                                 console.log(params);

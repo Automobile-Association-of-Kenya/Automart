@@ -5,6 +5,7 @@
 @endsection
 
 @section('header_styles')
+{{-- <link rel="stylesheet" href="{{ asset('css/') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}">

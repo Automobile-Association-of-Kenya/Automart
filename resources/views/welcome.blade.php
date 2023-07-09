@@ -153,7 +153,6 @@
                                         <i class="flaticon-gear"></i> {{ $item->enginecc }} cc
                                     </li>
                                     </div>
-
                                 </ul>
                             </div>
                             <div class="footer">
@@ -174,16 +173,7 @@
         </div>
     </div>
 
-    <div class="alert-success" style="padding: 40px;">
-        <div class="container text-center">
-            <h3 class="mb-2">Quickly Sort By Price</h3>
-            <a class="btn btn-light" href="{{ url('vehicles/prices/0/1000000') }}">Under 1 M</a>
-            <a class="btn btn-light" href="{{ url('vehicles/prices/1000000/2000000') }}">1 M - 2 M</a>
-            <a class="btn btn-light" href="{{ url('vehicles/prices/3000000/5000000') }}">3 M - 3 M</a>
-            <a class="btn btn-light" href="{{ url('vehicles/prices/5000000/10000000') }}">5 M - 10 M</a>
-            <a class="btn btn-light" href="{{ url('vehicles/prices/10000000') }}">Over 10 M</a>
-        </div>
-    </div>
+    @include('layouts.pricesection')
 
     <div class="featured-car content-area-21 bg-white">
         <div class="container">
@@ -301,30 +291,6 @@
                     <a class="btn-9 btn bg-white" href="{{ route('new') }}">
                         <span></span><span></span><span></span><span></span><strong>View More</strong>
                     </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="partners">
-        <div class="container">
-            <h4><strong>Sort by Brands</strong></h4>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="custom-slider slide-box-btn brands-section">
-                        <div class="text-center">
-                            <div class="lds-roller">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

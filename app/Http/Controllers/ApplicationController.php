@@ -154,7 +154,7 @@ class ApplicationController extends Controller
 
     public function modelsWithVehicles()
     {
-        $models = $this->model->whereHas('vehicles')->withCount('vehicles')->inRandomOrder()->orderBy('vehicles_count', 'desc')->get();
+        $models = $this->model->whereHas('vehicles')->withCount('vehicles')->orderBy('vehicles_count', 'desc')->get();
         return json_encode($models);
     }
 
@@ -178,6 +178,7 @@ class ApplicationController extends Controller
         $vehicles = $this->vehicle->searchpaginate($request->all());
         return view('vehicles.search', compact('vehicles'));
     }
+    
     public function vehicleModels($id)
     {
         Visit::visit(request()->server());

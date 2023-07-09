@@ -772,7 +772,8 @@ $(function () {
             $.each(vehicle.features, function (key, value) {
                 features += "<span>" + value.feature + "</span>";
             });
-            let images = vehicle.images, vehicle_no = vehicle.vehicle_no ?? vehicle.id;
+            let images = vehicle.images,
+                vehicle_no = vehicle.vehicle_no ?? vehicle.id;
 
             let vehicledata =
                 '<div class="modal-header"><div class="modal-title"><h4 id="vehicleName">' +
@@ -783,7 +784,13 @@ $(function () {
                 location +
                 '</h5></div><button type="button" class="close btn btn-warning" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><div class="row modal-raw"><div class="col-lg-6 modal-left"><div class="item active"><img src="/vehicleimages/' +
                 images[0]?.image +
-                '" alt="'+vehicle.year+' '+vehicle.make.make+' '+vehicle.model.model+'" class="img-fluid"><div class="sobuz"><div class="price-box"><span class="del-2">Kes. ' +
+                '" alt="' +
+                vehicle.year +
+                " " +
+                vehicle.make.make +
+                " " +
+                vehicle.model.model +
+                '" class="img-fluid"><div class="sobuz"><div class="price-box"><span class="del-2">Kes. ' +
                 vehiclePrice +
                 '</span></div></div></div><div class="description p-4"><h3>Description</h3><p>' +
                 vehicle.description +
@@ -835,11 +842,13 @@ $(function () {
                     value.make +
                     "</option>";
                 brand +=
-                    '<a href="vehicles/make/' +
+                    '<a href="/vehicles/make/' +
                     value.id +
                     '"><div class="custom-box"><img src="/brands/' +
                     value.logo +
-                    '" alt="'+value.make+'" width="100%" height="140px"></div></a>';
+                    '" alt="' +
+                    value.make +
+                    '" width="100%" height="140px"></div></a>';
                 logo +=
                     '<div class="col-lg-2 mr-2"><a href="/make-vehicles"><img src="/brands/' +
                     value.logo +
@@ -862,12 +871,15 @@ $(function () {
                 counter = 0,
                 link = "";
             $.each(models, function (key, value) {
-                link +=
-                    '<a class="btn btn-outline-warning btn-sm btn-round mr-2" href=\'/vehicles/model/' +
-                    value.id +
-                    ">" +
-                    value.model +
-                    "</a>";
+                if (counter < 17) {
+                    link +=
+                        '<a class="btn btn-outline-warning btn-sm btn-round mr-2" href="/vehicles/model/' +
+                        value.id +
+                        '">' +
+                        value.model +
+                        "</a>";
+                }
+
                 if (counter < 8) {
                     item +=
                         '<a class="dropdown-item" href="/vehicles/model/' +
@@ -886,10 +898,11 @@ $(function () {
     modelsWithVehicles();
 
     function highEndCars() {
-        $.getJSON('/highend', function (cars) {
-            let image = ""
+        $.getJSON("/highend", function (cars) {
+            let image = "";
             $.each(cars, function (key, value) {
-                var images = value.images, vehicle_no = value.vehicle_no??vehicle.id;
+                var images = value.images,
+                    vehicle_no = value.vehicle_no ?? vehicle.id;
                 image +=
                     "<a href='vehicle/" +
                     vehicle_no +
