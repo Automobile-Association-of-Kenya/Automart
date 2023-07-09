@@ -82,13 +82,13 @@
                                     <div class="price-box">
                                         <span>Kes: {{ number_format($item->price, 2) }}</span>
                                     </div>
-                                    @if (file_exists("{{ asset('/vehicleimages/' . $image) }}"))
+                                    {{-- @if (file_exists("{{ asset('/vehicleimages/' . $image) }}")) --}}
                                         <img class="d-block w-100" src="{{ asset('/vehicleimages/' . $image) }}"
                                             alt="{{ $item->make->make . ' ' . $item->model->model }}">
-                                    @else
+                                    {{-- @else
                                         <img class="d-block w-100" src="{{ asset('/images/default.jpg') }}"
                                             alt="{{ $item->make->make . ' ' . $item->model->model }}">
-                                    @endif
+                                    @endif --}}
                                 </a>
                                 <div class="carbox-overlap-wrapper">
                                     <div class="overlap-box">
@@ -101,7 +101,6 @@
                                             <a class="overlap-btn wishlist-btn" data-id="{{ $item->id }}">
                                                 <i class="fa fa-heart-o"></i>
                                             </a>
-
                                             <div class="car-magnify-gallery">
                                                 <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
                                                     class="overlap-btn"
@@ -112,7 +111,7 @@
                                                         alt="hidden-img">
                                                 </a>
 
-                                                @if (is_array($images))
+                                                {{-- @if (is_array($images))
                                                     @foreach ($images as $image)
                                                         <a href="{{ asset('/vehicleimages/' . $image->image . '') }}"
                                                             class="hidden"
@@ -120,15 +119,15 @@
                                                             <img src="{{ asset('/vehicleimages/' . $image->image . '') }}"
                                                                 alt="hidden-img">
                                                         </a>
-                                                    @endforeach
-                                                @endif
+                                                    @endforeach --}}
+                                                {{-- @endif --}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="detail">
+                            <div class="detail text-center">
                                 <h1 class="title">
                                     <a class="text-success"
                                         href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
@@ -146,12 +145,15 @@
                                     </li>
                                 </ul>
                                 <ul class="facilities-list clearfix">
-                                    <li>
+                                    <div class="text-center">
+                                        <li>
                                         <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km
-                                    </li>
-                                    <li>
+                                    {{-- </li>
+                                    <li> --}}
                                         <i class="flaticon-gear"></i> {{ $item->enginecc }} cc
                                     </li>
+                                    </div>
+
                                 </ul>
                             </div>
                             <div class="footer">
@@ -236,9 +238,10 @@
                                                         alt="hidden-img">
                                                 </a>
 
+
                                                 @if (is_array($images))
                                                     @foreach ($images as $image)
-                                                        <a href="{{ asset('/vehicleimages/' . $image->image . '') }}"
+                                                    <a href="{{ asset('/vehicleimages/' . $image->image . '') }}"
                                                             class="hidden"
                                                             data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                             <img src="{{ asset('/vehicleimages/' . $image->image . '') }}"
@@ -252,7 +255,7 @@
                                 </div>
                             </div>
 
-                            <div class="detail">
+                            <div class="detail text-center">
                                 <h1 class="title">
                                     <a class="text-success"
                                         href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
@@ -270,7 +273,7 @@
                                         <a href="#">{{ $item->fuel_type }}</a>
                                     </li>
                                 </ul>
-                                <ul class="facilities-list clearfix">
+                                <ul class="facilities-list clearfix text-center">
                                     <li>
                                         <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km
                                     </li>
@@ -351,14 +354,11 @@
                                             <br>
                                             <span>Kes: {{ number_format($item->current_price, 2) }}</span>
                                         </div>
-                                        @if (file_exists("{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"))
                                             <img class="d-block w-100"
                                                 src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
                                                 alt="car">
-                                        @else
-                                            <img class="d-block w-100" src="{{ asset('/images/default.jpg') }}"
-                                                alt="{{ $item->make->make . ' ' . $item->model->model }}">
-                                        @endif
+                                            {{-- <img class="d-block w-100" src="{{ asset('/images/default.jpg') }}"
+                                                alt="{{ $item->make->make . ' ' . $item->model->model }}"> --}}
                                     </a>
 
                                     <div class="carbox-overlap-wrapper">
@@ -382,6 +382,7 @@
                                                             src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
                                                             alt="hidden-img">
                                                     </a>
+
                                                     @if (is_array($images))
                                                         @foreach ($images as $image)
                                                             <a href="{{ asset('/vehicleimages/' . $image->image . '') }}"
@@ -398,7 +399,7 @@
                                     </div>
                                 </div>
 
-                                <div class="detail">
+                                <div class="detail text-center">
                                     <h3 class="title">
                                         <a class="text-success"
                                             href="{{ url('/vehicle/' . $vehicle_no . '/discount') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
@@ -416,7 +417,7 @@
                                             <a href="#">{{ $item->fuel_type }}</a>
                                         </li>
                                     </ul>
-                                    <ul class="facilities-list clearfix">
+                                    <ul class="facilities-list clearfix text-center">
                                         <li>
                                             <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km
                                         </li>

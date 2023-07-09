@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-xl-4 col-lg-3 col-md-6 col-sm-6">
                     <div class="footer-item clearfix">
-                        <h1>Automart @ AA Kenya</h1>
+                        <h1 class="text text-white">Automart</h1>
                         <div class="s-border"></div>
                         <div class="m-border"></div>
                         <div class="text">
@@ -59,7 +59,7 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('services') }}"><i class="fa fa-angle-right"></i>Services</a>
+                                <a href="{{ route('services.index') }}"><i class="fa fa-angle-right"></i>Services</a>
                             </li>
 
                             <li>

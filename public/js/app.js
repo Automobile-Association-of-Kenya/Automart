@@ -770,9 +770,9 @@ $(function () {
                         ? vehicle.yard.address
                         : vehicle.location;
             $.each(vehicle.features, function (key, value) {
-                features += "<li>" + value.feature + "</li>";
+                features += "<span>" + value.feature + "</span>";
             });
-            let images = JSON.parse(vehicle.images);
+            let images = vehicle.images, vehicle_no = vehicle.vehicle_no ?? vehicle.id;
 
             let vehicledata =
                 '<div class="modal-header"><div class="modal-title"><h4 id="vehicleName">' +
@@ -782,10 +782,12 @@ $(function () {
                 '</h4><h5 id="vehicleLocation"><i class="flaticon-pin"></i> &nbsp;' +
                 location +
                 '</h5></div><button type="button" class="close btn btn-warning" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><div class="row modal-raw"><div class="col-lg-6 modal-left"><div class="item active"><img src="/vehicleimages/' +
-                images[0] +
-                '" alt="best-car" class="img-fluid"><div class="sobuz"><div class="price-box"><span class="del-2">Kes. ' +
+                images[0]?.image +
+                '" alt="'+vehicle.year+' '+vehicle.make.make+' '+vehicle.model.model+'" class="img-fluid"><div class="sobuz"><div class="price-box"><span class="del-2">Kes. ' +
                 vehiclePrice +
-                '</span></div></div></div></div><div class="col-lg-6 modal-right"><div class="modal-right-content"><section><h3>Features</h3><div class="features"><ul class="bullets">' +
+                '</span></div></div></div><div class="description p-4"><h3>Description</h3><p>' +
+                vehicle.description +
+                '</p></div></div><div class="col-lg-6 modal-right"><div class="modal-right-content"><section><h3>Features</h3><div class="features"><ul class="bullets">' +
                 features +
                 '</ul></div></section><section><h3>Overview</h3><ul class="bullets"><li>Model</li><li>Year</li><li>Condition</li><li>Price</li><li>' +
                 vehicle.model.model +
@@ -795,11 +797,9 @@ $(function () {
                 vehicle.usage +
                 "</li><li>" +
                 vehicle.price +
-                '</li></ul></section><div class="description"><h3>Description</h3><p>' +
-                vehicle.description +
-                '</p><a href="/vehicle/' +
-                vehicle.id +
-                '" class="btn btn-md btn-round btn-theme">Show Detail</a></div></div></div></div></div>';
+                '</li></ul></section><a href="/vehicle/' +
+                vehicle_no +
+                '" class="btn btn-md btn-round btn-theme">Show Detail</a></div></div></div></div>';
             $("#vehiclePreviewSection").html(vehicledata);
         });
     });
@@ -839,7 +839,7 @@ $(function () {
                     value.id +
                     '"><div class="custom-box"><img src="/brands/' +
                     value.logo +
-                    '" alt="'+value.make+'" width="100%" height="160px"></div></a>';
+                    '" alt="'+value.make+'" width="100%" height="140px"></div></a>';
                 logo +=
                     '<div class="col-lg-2 mr-2"><a href="/make-vehicles"><img src="/brands/' +
                     value.logo +

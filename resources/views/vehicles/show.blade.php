@@ -74,21 +74,23 @@
                                     {{-- <img src="{{ '/vehicleimages/' . $vehicle->cover_photo }}" class="img-fluid w-100"
                                         alt="slider-car"> --}}
                                     @foreach ($images as $image)
-                                        <img src="{{ '/vehicleimages/' . $image }}" class="img-fluid w-100"
-                                            alt="slider-car">
+                                        <img src="{{ '/vehicleimages/' . $image->image }}" class="img-fluid w-100"
+                                            alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}">
                                     @endforeach
                                 </div>
+
                                 <div class="slider-nav">
                                     {{-- <div class="thumb-slide"><img src="{{ '/vehicleimages/' . $vehicle->cover_photo }}"
                                             class="img-fluid" alt="small-car">
                                     </div> --}}
                                     @foreach ($images as $image)
-                                        <div class="thumb-slide"><img src="{{ '/vehicleimages/' . $image }}"
-                                                class="img-fluid" alt="small-car">
+                                        <div class="thumb-slide"><img src="{{ '/vehicleimages/' . $image->image }}"
+                                                class="img-fluid" alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}">
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
+                            <p class="mt-2">{{ $vehicle->description  }}</p>
                         </div>
 
                         <div class="mb-4 card p-3">
@@ -123,6 +125,7 @@
                                 <span><strong>Try our Financing options and make the right choice.</strong></span>
                                 <i class="fa fa-caret-down float-right"></i>
                             </div>
+
                             <div class="card-body loansection">
                                 <form action="#" method="GET" enctype="multipart/form-data">
                                     <div class="row">
@@ -178,13 +181,7 @@
                     <div class="car-details-section">
                         <div class="tabbing tabbing-box mb-40">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
-                                        data-bs-target="#home" type="button" role="tab" aria-controls="home"
-                                        aria-selected="true">Description</button>
-                                </li>
-
-                                <li class="nav-item" role="presentation">
+                                <li class="nav-item active" role="presentation">
                                     <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                         data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
                                         aria-selected="false">Features</button>
@@ -197,21 +194,8 @@
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel"
-                                    aria-labelledby="home-tab">
-                                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                                        <div class="accordion-item">
-                                            <div class="car-description mb-50">
-                                                <h3 class="heading-2">
-                                                    Description
-                                                </h3>
-                                                <p>{{ $vehicle->description }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     <div class="accordion accordion-flush" id="accordionFlushExample2">
                                         <div class="accordion-item">
                                             <div class="features-info mb-50">
@@ -605,7 +589,7 @@
 
                             <div class="col-md-12">
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-md btn-warning">Submi</button>
+                                    <button type="submit" class="btn btn-md btn-warning">Submit</button>
                                 </div>
                             </div>
 
