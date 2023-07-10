@@ -84,7 +84,7 @@ class Dealer extends Model
 
     public function summary() {
         $vehiclescount = $this->initialize()->count();
-        $todaysvehiclecount = $this->initialize()->where('created_at','%like%',date('Y-m-d'))->count();
+        $todaysvehiclecount = $this->initialize()->whereDate('created_at',date('Y-m-d'))->count();
         $countvehiclessold = $this->initialize()->where('status','sold')->count();
         $soldtodaycount = $this->initialize()->where('sold_at',Carbon::today())->count();
         $views = $this->initialize()->sum('views');
