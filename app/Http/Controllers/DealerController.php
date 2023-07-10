@@ -107,6 +107,7 @@ class DealerController extends Controller
 
     public function purchasedecline(Request $request)
     {
+        return $request;
     }
 
     public function subscription()

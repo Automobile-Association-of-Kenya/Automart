@@ -211,12 +211,14 @@ Route::middleware('dealer')->prefix('dealer')->group(function () {
     Route::get('requests', [DealerController::class, 'requests'])->name('dealer.requests');
     Route::post('store', [DealerController::class, 'store'])->name('dealer.store');
     Route::get('purchase/approve/{id}', [DealerController::class, 'purchaseapprove'])->name('dealer.puchase.approve');
-    Route::post('purchase/decline', [DealerController::class, 'purchasedecline'])->name('dealer.purchase.decline');
 });
 
 Route::post('loan-request-reply', [SettingsController::class,'loanMessage'])->name('loan.message');
 Route::post('quote-request-reply', [SettingsController::class, 'quoteMessage'])->name('quote.message');
 Route::post('tradein-request-reply', [SettingsController::class, 'tradeinMessage'])->name('tradein.message');
+Route::post('sale-request-reply', [SettingsController::class,'saleMessage'])->name('sale.message');
+Route::post('purchase/decline', [DealerController::class, 'purchasedecline'])->name('purchase.decline');
+
 
 Route::get('webtraffic/{date}', [SettingsController::class, 'webtraffic']);
 

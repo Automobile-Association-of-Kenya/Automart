@@ -77,16 +77,7 @@ class SettingsController extends Controller
             $date = Carbon::createFromDate($value);
             $start = $date->startOfHour()->isoFormat('Y-m-d HH:mm:ss');
             $end = $date->endOfHour()->isoFormat('Y-m-d HH:mm:ss');
-            
             $visits = Visit::pluck('created_at');
-            // $visits = DB::table('visits')
-            // ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:00') AS formatted_date"))
-            // ->whereRaw("DATE_FORMAT(created_at, '%Y-%m-%d') = ?", [Carbon::parse($value)->subDay()->format('Y-m-d')])
-            // ->get();
-            // $visits = DB::table('visits')->select("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:00')", '>=', $start)->whereDate("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:00')",'<=',$end)->count();
-            // $visits = DB::select("SELECT * FROM `visits` WHERE `created_at`>='2023-07-02 08:00:00' AND `created_at`<='2023-07-02 18:00:00'");
-            // $obj = [date('H:i', strtotime($value)) => $visits];
-
             $results = DB::table('visits')->whereDate('created_at',$date)
             ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:00:00') AS hour, COUNT(*) AS count"))
             ->groupBy('created_at')
@@ -122,5 +113,21 @@ class SettingsController extends Controller
         }
 
         return json_encode(['status' => "success", "message" => $message]);
+    }
+
+    function loanMessage(Request $request) {
+        return $request;
+    }
+
+    function saleMessage(Request $request) {
+        return $request;
+    }
+
+    function tradeinMessage(Request $request) {
+        return $request;
+    }
+
+    function quoteMessage(Request $request) {
+        return $request;
     }
 }
