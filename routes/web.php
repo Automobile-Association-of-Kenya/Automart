@@ -153,7 +153,6 @@ Route::post('payments-get', [PaymentController::class, 'get']);
 
 Route::resource('reports', ReportController::class);
 
-
 Route::prefix('vehicles')->group(function () {
     Route::get('show/{id}', [VehicleController::class, 'show'])->name('vehicles.show');
     Route::post('store', [VehicleController::class, 'store'])->name('vehicles.store');
@@ -165,6 +164,8 @@ Route::prefix('vehicles')->group(function () {
     Route::get('make/{id}', [ApplicationController::class, 'vehicleMakes'])->name('make.vehicles');
     // Route::get('new', [ApplicationController::class, 'newArrivals'])->name('new.arrivals');
     Route::get('new', [ApplicationController::class, 'newVehicles'])->name('new');
+    Route::get('highend', [ApplicationController::class, 'highend']);
+
 });
 
 
@@ -213,6 +214,9 @@ Route::middleware('dealer')->prefix('dealer')->group(function () {
     Route::post('purchase/decline', [DealerController::class, 'purchasedecline'])->name('dealer.purchase.decline');
 });
 
+Route::post('loan-request-reply', [SettingsController::class,'loanMessage'])->name('loan.message');
+Route::post('quote-request-reply', [SettingsController::class, 'quoteMessage'])->name('quote.message');
+Route::post('tradein-request-reply', [SettingsController::class, 'tradeinMessage'])->name('tradein.message');
 
 Route::get('webtraffic/{date}', [SettingsController::class, 'webtraffic']);
 

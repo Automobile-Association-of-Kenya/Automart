@@ -1179,20 +1179,15 @@
 
         previewContainer.sortable({
             containment: "parent",
-            axis: "y",
+            axis: "x",
             update: function (event, ui) {
                 const newOrder = previewContainer.sortable();
                 const newFiles = new DataTransfer();
-                // for (let i = 0; i < newOrder.length; i++) {
-                //     const index = parseInt(newOrder[i].split("-")[1]);
-                //     newFiles.items.add(files[index]);
-                // }
-
-                // const newFileList = new DataTransfer();
-                // for (let i = 0; i < newFiles.length; i++) {
-                //     newFileList.items.add(newFiles[i]);
-                // }
-                // $("#addionalImages").prop("files", newFiles.files);
+                for (let i = 0; i < newOrder.length; i++) {
+                    const index = parseInt(newOrder[i].split("-")[1]);
+                    newFiles.items.add(files[index]);
+                }
+                $("#addionalImages").prop("files", newFiles.files);
             },
         });
     });

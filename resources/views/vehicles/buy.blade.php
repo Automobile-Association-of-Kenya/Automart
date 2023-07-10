@@ -33,14 +33,12 @@
         </div>
     </div>
 
-
-    <!-- Car details page start -->
     <div class="car-details-page mt-4 mb-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-7 mb-4">
                     <div class="intro">
-                        
+
                         <div class="introimage" style="max-height: 500px;">
                             @php
                                 $images = $vehicle->images;
@@ -200,6 +198,9 @@
             </div>
         </div>
     </div>
+
+    @include('layouts.brands')
+
 @endsection
 
 @section('footer_scripts')

@@ -869,15 +869,23 @@ $(function () {
         $.getJSON("/models-with-vehicles", function (models) {
             let item = "",
                 counter = 0,
-                link = "";
+                link = "",
+                link1 = "";
             $.each(models, function (key, value) {
                 if (counter < 17) {
                     link +=
-                        '<a class="btn btn-outline-warning btn-sm btn-round mr-2" href="/vehicles/model/' +
+                        '<a class="btn btn-outline-warning btn-sm btn-round mb-2" href="/vehicles/model/' +
                         value.id +
                         '">' +
                         value.model +
-                        "</a>";
+                        "</a>  ";
+
+                    link1 +=
+                        '<a class="btn btn-outline-warning btn-sm btn-round mb-2" href="/vehicles/model/' +
+                        value.id +
+                        '">' +
+                        value.model +
+                        "</a> | ";
                 }
 
                 if (counter < 8) {
@@ -886,10 +894,11 @@ $(function () {
                         value.id +
                         '">' +
                         value.model +
-                        "</a>";
+                        "</a> ";
                 }
                 counter++;
             });
+            $(".footer-gallery").html(link1);
             $(".shortcut-links-banner").append(link);
             $("#otherModels").append(item);
         });
@@ -898,17 +907,18 @@ $(function () {
     modelsWithVehicles();
 
     function highEndCars() {
-        $.getJSON("/highend", function (cars) {
+        $.getJSON("/vehicles/highend", function (cars) {
             let image = "";
             $.each(cars, function (key, value) {
+                console.log(value.price);
                 var images = value.images,
-                    vehicle_no = value.vehicle_no ?? vehicle.id;
+                    vehicle_no = value.vehicle_no ?? value.id;
                 image +=
                     "<a href='vehicle/" +
                     vehicle_no +
                     "/highend'><img src='/vehicleimages/" +
                     images[0].image +
-                    " alt=" +
+                    "' alt=" +
                     value.year +
                     " " +
                     value.make.make +
@@ -919,6 +929,8 @@ $(function () {
             $("#highendVehicles").html(image);
         });
     }
+
+    highEndCars();
 
     function getSocials() {
         $.getJSON("/socials", function (socials) {

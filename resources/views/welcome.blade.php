@@ -127,7 +127,7 @@
                                 </div>
                             </div>
 
-                            <div class="detail text-center">
+                            <div class="detail">
                                 <h1 class="title">
                                     <a class="text-success"
                                         href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
@@ -173,7 +173,7 @@
         </div>
     </div>
 
-    @include('layouts.pricesection')
+    @include('layouts.prices')
 
     <div class="featured-car content-area-21 bg-white">
         <div class="container">
@@ -245,7 +245,7 @@
                                 </div>
                             </div>
 
-                            <div class="detail text-center">
+                            <div class="detail">
                                 <h1 class="title">
                                     <a class="text-success"
                                         href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
@@ -263,7 +263,7 @@
                                         <a href="#">{{ $item->fuel_type }}</a>
                                     </li>
                                 </ul>
-                                <ul class="facilities-list clearfix text-center">
+                                <ul class="facilities-list clearfix">
                                     <li>
                                         <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km
                                     </li>
@@ -365,7 +365,7 @@
                                     </div>
                                 </div>
 
-                                <div class="detail text-center">
+                                <div class="detail">
                                     <h3 class="title">
                                         <a class="text-success"
                                             href="{{ url('/vehicle/' . $vehicle_no . '/discount') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
@@ -383,7 +383,7 @@
                                             <a href="#">{{ $item->fuel_type }}</a>
                                         </li>
                                     </ul>
-                                    <ul class="facilities-list clearfix text-center">
+                                    <ul class="facilities-list clearfix">
                                         <li>
                                             <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km
                                         </li>
@@ -418,7 +418,7 @@
         </div>
     @endif
 
-
+@include('layouts.brands')
 
     <div class="service-section-2">
         <div class="container">

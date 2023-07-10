@@ -213,17 +213,16 @@ class Vehicle extends Model
     {
         $query = $this->query();
         if (!is_null($except_id)) {
-            // $query->where('id', '<>', $except_id)->where('vehicle_no', '<>', $except_id);
             $query->where('id', '!=', $except_id)
             ->where('vehicle_no', '!=', $except_id);
         }
-        $newarrivals = $query->inRandomOrder()->latest()->orderBy('priority')->limit($limit)->get();
+        $newarrivals = $query->latest()->inRandomOrder()->orderBy('priority')->limit($limit)->get();
         return $newarrivals;
     }
 
     function latestrelated($except_id)
     {
-        return $this->getlatest($except_id);
+        return $this->getlatest(10,$except_id);
     }
 
     function newvehiclespaginated($paginate)
@@ -343,5 +342,10 @@ class Vehicle extends Model
             }
         }
         return $query;
+    }
+
+    function highend($limit) {
+        $vehicles = $this->where('status','!=','sold')->orderBy('price','DESC')->limit($limit)->get();
+        return $vehicles;
     }
 }

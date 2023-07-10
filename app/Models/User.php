@@ -117,7 +117,7 @@ class User extends Authenticatable
         $todayscount = Vehicle::whereDate('created_at', $today)->count();
         $salescount = Vehicle::where('status', 'sold')->count();
         $todaysales = Vehicle::whereDate('sold_at', $today)->count();
-        $dealerscount = User::where('role', '!=', 'admin')->count();
+        $dealerscount = Dealer::count();
         $todaynewdealers = User::whereDate('created_at', $today)->count();
         $tradeinscount = Tradein::count();
         $tradeinscounttoday = Tradein::whereDate('created_at', $today)->count();

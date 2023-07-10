@@ -16,11 +16,11 @@
                                 </div>
                                 <div class="clearfix">
                                     <a href="{{ route('vehicles.list') }}" class="btn-8">
-                                        <span>Buy</span>
-                                    </a>
+                                        <span>Buy a Vehicle</span>
+                                    </a>&nbsp;&nbsp;&nbsp;
 
                                     <a href="{{ route('dashboard') }}" class="btn-8">
-                                        <span>Sell Your Cars</span>
+                                        <span>Sell Your Vehicle</span>
                                     </a>
                                 </div>
                             </div>

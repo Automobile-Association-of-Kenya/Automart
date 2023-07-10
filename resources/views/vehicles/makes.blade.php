@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <!-- Featured car start -->
+
     <div class="featured-car content-area">
         <div class="container">
             <div class="search-box-3">
@@ -125,35 +125,15 @@
                 </div>
             </div>
             <div class="row">
-                {{-- <div class="col-lg-3 col-md-12">
-                    @include('layouts.right')
-                </div> --}}
+
 
                 <div class="col-md-12">
-                    <!-- Option bar start -->
                     <div class="option-bar clearfix">
                         <div class="row">
                             <div class="col-lg-5 col-md-6 col-sm-12">
                                 <div class="sorting-options2">
                                     <h5>Showing 1-20 of <span id="countResults">{{ count($vehicles) }}</span> Vehicles</h5>
                                 </div>
-                            </div>
-
-                            <div class="col-lg-7 col-md-6 col-sm-12">
-                                {{-- <div class="sorting-options float-end">
-                                    <a href="car-list-rightside.html" class="change-view-btn float-right"><i
-                                            class="fa fa-th-list"></i></a>
-                                    <a href="{{ url('') }}" class="change-view-btn active-view-btn float-right"><i class="fa fa-th-large"></i></a>
-                        </div> --}}
-                                {{-- <div class="sorting-options-3 float-end">
-                                    <select class="selectpicker search-fields" name="default-order">
-                                        <option>Default Order</option>
-                                        <option>Price High to Low</option>
-                                        <option>Price: Low to High</option>
-                                        <option>Newest Properties</option>
-                                        <option>Oldest Properties</option>
-                                    </select>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -256,21 +236,11 @@
                         @endforeach
 
                     </div>
-                    <!-- Page navigation start -->
+
                     <div class="pagination-box p-box-2 text-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination" id="pagination">
                                 {!! $vehicles->links() !!}
-                                {{-- <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-                                </li>
-
-                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-                                </li> --}}
                             </ul>
                         </nav>
                     </div>
@@ -278,8 +248,8 @@
             </div>
         </div>
     </div>
-
-    <!-- Featured car end -->
+    
+    @include('layouts.brands')
 @endsection
 
 @section('footer_scripts')

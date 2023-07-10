@@ -11,7 +11,7 @@
                         <div class="s-border"></div>
                         <div class="m-border"></div>
                         <div class="text">
-                            <P class="mb-0"></P>
+                            <P class="mb-0">You are at the right place. Our platform offers a wide selection of vehicles from trusted dealers across the country, ensuring we match buyers with the perfect fit for their needs and budget. We also provide financing options to our clients to enable them acquire or sell their dream cars with ease.</P>
                         </div>
                     </div>
                 </div>
@@ -24,19 +24,18 @@
                         <div class="m-border"></div>
                         <ul class="contact-info">
                             <li>
-                                <i class="flaticon-pin"></i>Address: 44 New Design Street,
+                                <i class="flaticon-pin"></i>8th Floor, Renaissance Corporate Park, Upper Hill, Nairobi, Kenya
                             </li>
 
                             <li>
-                                <i class="flaticon-mail"></i><a href="mailto:sales@hotelempire.com">info@themevessel.com</a>
+                                <i class="flaticon-mail"></i><a href="mailto:customercare@aakenya.co.ke">customercare@aakenya.co.ke</a>
+                            </li>
+                            <li>
+                                <i class="flaticon-phone"></i><a href="tel:+55-417-634-7071">+254709933999 </a>
                             </li>
 
                             <li>
-                                <i class="flaticon-phone"></i><a href="tel:+55-417-634-7071">+0477 85X6 552</a>
-                            </li>
-
-                            <li>
-                                <i class="flaticon-fax"></i>+0477 85X6 552
+                                <i class="flaticon-fax"></i>+254709933000
                             </li>
 
                         </ul>
@@ -83,12 +82,7 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                     <div class="footer-item clearfix">
                         <div class="footer-gallery clearfix">
-                            <h4>High End</h4>
-                            <div class="s-border"></div>
-                            <div class="m-border"></div>
-                            <ul id="highendVehicles">
 
-                            </ul>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-<div class="search-box-3 sb-7">
+<div class="search-box-3 sb-7 alert-success">
     <div class="container">
         <div class="search-area-inner">
             <div class="search-contents">

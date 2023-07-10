@@ -352,6 +352,9 @@
             </div>
         </div>
     </div>
+
+    @include('layouts.brands')
+
 @endsection
 
 <div class="modal fade" id="loanCalculatorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

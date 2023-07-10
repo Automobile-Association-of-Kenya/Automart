@@ -121,11 +121,6 @@
                         </div>
 
                         <div class="card mt-4">
-                            <div class="card-header alert-success" id="loansectiontoggle">
-                                <span><strong>Try our Financing options and make the right choice.</strong></span>
-                                <i class="fa fa-caret-down float-right"></i>
-                            </div>
-
                             <div class="card-body loansection">
                                 <form action="#" method="GET" enctype="multipart/form-data">
                                     <div class="row">

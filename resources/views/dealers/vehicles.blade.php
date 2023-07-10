@@ -5,7 +5,7 @@
 @endsection
 
 @section('header_styles')
-{{-- <link rel="stylesheet" href="{{ asset('css/') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('css/') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}">
@@ -362,7 +362,7 @@
                                                     </div>
 
                                                     <div class="col-md-4 form-group">
-                                                        <label for="company">Tags:</label>
+                                                        <label for="vehicleTags">Tags:</label>
                                                         <div class="input-group">
                                                             <select name="tags" id="vehicleTags"
                                                                 class="form-control form-control--md" multiple="multiple"
@@ -374,17 +374,21 @@
                                                             </select>
                                                         </div>
                                                     </div>
+
                                                     <div class="col-md-6">
-                                                        <label for="company">Description:</label>
+                                                        <label for="description">Description:</label>
                                                         <div class="input-group">
                                                             <textarea name="description" id="description" class="form-control"></textarea>
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-12 form-group">
+                                                        <div class="row mt-4" id="featuresSection">
+
+                                                        </div>
+                                                    </div>
                                                 </div>
 
-                                                <div class="row" id="featuresSection">
-
-                                                </div>
                                             </div>
                                         </div>
 
@@ -393,8 +397,8 @@
                                                 <div class="form-group">
                                                     <label for="documentnumber"><span id="images">Images:</label>
                                                     <div class="input-group">
-                                                        <input type="file" name="images" id="addionalImages" multiple
-                                                            required>
+                                                        <input type="file" name="images" id="addionalImages"
+                                                            multiple>
                                                     </div>
                                                     <p class="text-danger">You can upload from 1 - 20 photos</p>
                                                 </div>
@@ -575,7 +579,7 @@
     <script src="{{ asset('js/main/jszip.min.js') }}"></script>
     <script src="{{ asset('js/main/pdfmake.min.js') }}"></script>
     <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('js/jquery_ui.js') }}"></script>
+    <script src="{{ asset('js/main/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('js/main/vehicle.js') }}"></script>
     <script>

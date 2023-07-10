@@ -158,21 +158,10 @@
                         @endforeach
 
                     </div>
-                    <!-- Page navigation start -->
                     <div class="pagination-box p-box-2 text-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination" id="pagination">
                                 {!! $vehicles->links() !!}
-                                {{-- <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-left"></i></a>
-                                </li>
-
-                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
-                                </li> --}}
                             </ul>
                         </nav>
                     </div>
@@ -181,7 +170,8 @@
         </div>
     </div>
 
-    <!-- Featured car end -->
+            @include('layouts.brands')
+
 @endsection
 
 @section('footer_scripts')

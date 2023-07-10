@@ -164,6 +164,7 @@
         </div>
     </div>
 
+    @include('layouts.brands')
 @endsection
 
 @section('footer_scripts')

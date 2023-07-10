@@ -178,7 +178,12 @@ class ApplicationController extends Controller
         $vehicles = $this->vehicle->searchpaginate($request->all());
         return view('vehicles.search', compact('vehicles'));
     }
-    
+
+    public function highend() {
+        $vehicles = $this->vehicle->highend(7);
+        return json_encode($vehicles);
+    }
+
     public function vehicleModels($id)
     {
         Visit::visit(request()->server());
