@@ -2,7 +2,7 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner banner-slider-inner text-center">
             <div class="carousel-item active item-bg">
-                <img class="d-block w-100 h-100" src="img/banner/img-5.jpg" alt="banner">
+                <img class="d-block w-100 h-100" src="img/img-2.jpg" alt="banner">
                 <div class="carousel-content container banner-info-2 bi-2">
                     <div class="row bi5">
                         <div class="col-lg-7 text-start">
