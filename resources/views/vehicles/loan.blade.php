@@ -263,7 +263,7 @@
                                     <a href="{{ url('/vehicle/' . $vehicle_no) }}" class="car-img">
                                         <div class="for">{{ $item->usage }}</div>
                                         <div class="price-box">
-                                            <span>Kes: {{ number_format($item->current_price, 2) }}</span>
+                                            <span>Kes: {{ number_format($item->price, 2) }}</span>
                                         </div>
                                         @if (count($images) > 0)
                                             <img class="d-block w-100"
