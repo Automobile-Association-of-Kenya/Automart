@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="detail">
+                                    <div class="detail text-center">
                                         <h1 class="title">
                                             <a class="text-success"
                                                 href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>

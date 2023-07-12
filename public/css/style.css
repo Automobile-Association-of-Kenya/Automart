@@ -3578,6 +3578,10 @@ input[type=checkbox]:checked+label:before {
     margin-bottom: 7px;
 }
 
+.custom-list i {
+    color: #fed945;
+}
+
 .car-box-3 .custom-list li {
     font-size: 12px;
     display: inline-block;

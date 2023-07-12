@@ -56,7 +56,8 @@ class ApplicationController extends Controller
         Visit::visit(request()->server());
         $vehicle = $this->vehicle->vehicle($vehicle_no);
         $services = $this->service->get();
-        return view('vehicles.buy', compact('vehicle', 'services'));
+        $vehiclesrelated = $this->vehicle->getRelatedVehicles($vehicle);
+        return view('vehicles.buy', compact('vehicle', 'services', 'vehiclesrelated'));
     }
 
     public function purchase(Request $request)

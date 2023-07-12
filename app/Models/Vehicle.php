@@ -143,7 +143,7 @@ class Vehicle extends Model
         if (!is_null($vehicle->vehicle_model_id) && $vehicle->vehicle_model_id  !== "") {
             $query->where('vehicle_model_id', intval($vehicle->vehicle_model_id));
         }
-        $vehicles = $query->limit(10)->get();
+        $vehicles = $query->limit(9)->get();
         return $vehicles;
     }
 
