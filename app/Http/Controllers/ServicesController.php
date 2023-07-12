@@ -8,6 +8,7 @@ use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ServicesController extends Controller
 {
@@ -57,8 +58,9 @@ class ServicesController extends Controller
     function processvehicles()
     {
         // $vehicles = DB::table('caronsells')->whereIn('id',[183, 186, 200, 209, 242, 243])->get();
-        // // return $vehicles;
-        // $data = collect();
+        $vehicles = DB::table('caronsells')->get();
+
+        $data = collect();
         // foreach ($vehicles as $key => $value) {
         //     // $features = json_decode($value->features, true);
         //     // if (is_array($features)) {
@@ -76,6 +78,11 @@ class ServicesController extends Controller
         //     //     $data->push($features);
         //     // }
         //     // DB::table('table_vehicle_images')->insert(['vehicle_id' => $value->id, 'image' => $value->cover_photo]);
+        //     // if ($value->cover_photo !== "" && !is_null($value->cover_photo)) {
+        //     //     DB::table('final_images_migration')->insert(['vehicle_id'=>$value->id,'image'=>$value->cover_photo]);
+        //     // }else {
+        //     //     $data->push($value);
+        //     // }
 
         //     if (is_array($value->images)) {
         //         // $data->push($value);
@@ -85,61 +92,103 @@ class ServicesController extends Controller
         //     } else {
         //         $images = json_decode($value->images,true);
         //         if (is_array($images)) {
+        //             // $data->push($value);
         //             foreach ($images as $item) {
-        //                 DB::table('table_vehicle_images')->insert(['vehicle_id' => $value->id, 'image' => $item]);
+        //                 $data->push($item);
+        //                 if ($item !== $value->cover_photo) {
+        //                     DB::table('final_images')->insert(['vehicle_id' => $value->id, 'image' => $item]);
+        //                 }else{
+        //                     $data->push($item);
+        //                 }
         //             }
         //         } else {
+
         //             // $images = json_decode("$images", true);
-        //             // if (is_array($images)) {
-        //                 foreach ($value->images as $key => $val) {
-        //                     DB::table('table_vehicle_images')->insert(['vehicle_id' => $value->id, 'image' => $val]);
-        //                 }
+        //             // // if (is_array($images)) {
+        //             // //     foreach ($value->images as $key => $val) {
+        //             // //         DB::table('table_vehicle_images')->insert(['vehicle_id' => $value->id, 'image' => $val]);
+        //             // //     }
         //             // // }else {
         //             // //     $data->push($images);
         //             // // }
-        //             $data->push($value);
+        //             // $data->push($value);
         //         }
         //     }
         // }
-        $users = collect();
+
+        // return $data->count();
+
+        // return $data->count();
+        // $users = collect();
         $values = collect();
-        $vehicles = DB::table('caronsells')->get();
+        // $vehicles = DB::table('caronsells')->get();
+        // // return $vehicles;
         foreach ($vehicles as $key => $value) {
-            $user = User::where('id', $value->user_id)->first();
-            // if (is_null($user)) {
-            //     $values->push(['firstname' => $value->firstname, 'lastname' => $value->lastname, 'email' => $value->email, 'phone' => $value->phone]);
-            //     $user = User::where('email', $value->email)->orWhere('phone', $value->phone)->first();
-            //     // $users->push($user);
-            //     DB::table('caronsells')->update(['user_id' => $user->id]);
-            // } else {
-            // }
-
-            // DB::table('caronsells')->where('id',$value->id)->update(['dealer_id'=>$user->dealer_id]);
             $type = Type::where('type', $value->vehicle_type)->first();
-
-            DB::table('vehicles')->insert([
-                'id' => $value->id,
-                'user_id' => $value->user_id,
-                'dealer_id' => $value->dealer_id,
-                'type_id' => $type?->id,
-                'make_id' => $value->make,
-                'vehicle_model_id' => $value->model,
-                'year' => $value->year,
-                'price' => $value->price,
-                // 'location' => $value->location,
-                'color' => $value->exterior,
-                'mileage' => $value->miles,
-                'enginecc' => $value->enginecc,
-                'interior' => $value->interior,
-                'fuel_type' => $value->fuel_type,
-                'transmission' => $value->transmission,
-                'description' => $value->description,
-                'usage' => $value->usage,
-                'views' => $value->views,
-                'created_at' => $value->created_at,
-            ]);
+            $make = DB::table('car_makes')->where('car_make_id',intval($value->make))->first();
+            $makegh = DB::table('makes')->where('id',$value->make)->first();
+            // return $makegh;
+            if (!is_null($make)) {
+                $make = DB::table('makes')->where('make',$make->car_make_name)->first();
+            }else {
+                $make = DB::table('makes')->where('id', intval($value->make))->first();
+            }
+            $model = DB::table('car_models')->where('car_model_id',$value->model)->first();
+            if (!is_null($model)) {
+                $model = DB::table('vehicle_models')->where('model', $model->car_model_name)->first();
+            } else {
+                $model = DB::table('vehicle_models')->where('id', $value->model)->first();
+            }
+            if ($value->user_id !== 0 && !is_null($value->user_id)) {
+                DB::table('vehicles')->insert([
+                    'id' => $value->id,
+                    'user_id' => $value->user_id,
+                    'vehicle_no' => strtoupper(Str::random(8)),
+                    'type_id' => $type?->id,
+                    'make_id' => $make->id,
+                    'vehicle_model_id' => $model->id,
+                    'year' => $value->year,
+                    'price' => $value->price,
+                    // 'location' => $value->location,
+                    'color' => $value->exterior,
+                    'mileage' => $value->miles,
+                    'enginecc' => $value->enginecc,
+                    'interior' => $value->interior,
+                    'fuel_type' => $value->fuel_type,
+                    'transmission' => $value->transmission,
+                    'description' => $value->description,
+                    'usage' => $value->usage,
+                    'views' => $value->views,
+                    'created_at' => $value->created_at,
+                ]);
+            } else {
+                $user = User::where('email', $value->email)->orWhere('phone', $value->phone)->first();
+                DB::table('vehicles')->insert([
+                    'id' => $value->id,
+                    'user_id' => $user->id,
+                    'vehicle_no' => strtoupper(Str::random(8)),
+                    'type_id' => $type?->id,
+                    'make_id' => $make->id,
+                    'vehicle_model_id' => $model->id,
+                    'year' => $value->year,
+                    'price' => $value->price,
+                    // 'location' => $value->location,
+                    'color' => $value->exterior,
+                    'mileage' => $value->miles,
+                    'enginecc' => $value->enginecc,
+                    'interior' => $value->interior,
+                    'fuel_type' => $value->fuel_type,
+                    'transmission' => $value->transmission,
+                    'description' => $value->description,
+                    'usage' => $value->usage,
+                    'views' => $value->views,
+                    'created_at' => $value->created_at,
+                    'updated_at' => $value->created_at
+                ]);
+             }
         }
-        return $users->count();
+        return $values;
+        // return $users->count();
         // return $vehicles;
         // return $data;
         // $modelsnon = collect();

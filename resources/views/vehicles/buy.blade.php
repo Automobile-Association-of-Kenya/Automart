@@ -189,10 +189,8 @@
                         <div class="card" style="border-radius: 8px; padding:1.5em;">
                             <h5 class="card-title white">{{ $item->service }}</h5>
                             <p class="card-text white">{{ $item->description }}</p>
-
                             <a href="{{ route('services.index') }}" class="btn btn-success btn-sm">Learn More ...</a>
                         </div>
-
                     </div>
                 @endforeach
             </div>

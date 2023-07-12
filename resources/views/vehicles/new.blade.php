@@ -42,7 +42,7 @@
                                     <a href="{{ url('') }}" class="change-view-btn active-view-btn float-right"><i
                                             class="fa fa-th-large"></i></a>
                                 </div>
-                                <div class="sorting-options-3 float-end">
+                                {{-- <div class="sorting-options-3 float-end">
                                     <select class="selectpicker search-fields" name="default-order">
                                         <option>Default Order</option>
                                         <option>Price High to Low</option>
@@ -50,7 +50,7 @@
                                         <option>Newest Properties</option>
                                         <option>Oldest Properties</option>
                                     </select>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -128,9 +128,9 @@
                                                 <a href="#">{{ $item->fuel_type }}</a>
                                             </li>
                                         </ul>
-                                        <ul class="facilities-list clearfix">
+                                        <ul class="custom-list">
                                             <li>
-                                                <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km
+                                                <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km &nbsp;|&nbsp;
                                             </li>
                                             <li>
                                                 <i class="flaticon-gear"></i> {{ $item->enginecc }} cc
@@ -139,13 +139,13 @@
                                     </div>
                                     <div class="footer">
                                         <div class="buttons mb-2 text-center">
-                                            <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
+                                            <a href="#" class="btn btn-success btn-sm mt-2" id="whatsappToggle"
                                                 data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
                                                 Enquire</a>
-                                            <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm"><i
+                                            <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm mt-2"><i
                                                     class="fa fa-hand"></i> Buy</a>
                                             <a href="{{ route('loan', $vehicle_no) }}"
-                                                class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i> Apply
+                                                class="btn btn-success btn-sm mt-2"><i class="fa fa-"></i> Apply
                                                 Loan</a>
                                         </div>
                                     </div>

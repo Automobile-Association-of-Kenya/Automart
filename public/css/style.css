@@ -1,37 +1,3 @@
-/*------------------------------------------------------------------
-[Main Stylesheet]
-
-Project:    Autocar
-Version:    1.1.0
--------------------------------------------------------------------*/
-
-/*------------------------------------------------------------------
-[Table of contents]
-    1. Top Header / .top-header
-    2. Main Header / .main-header
-    3. Home Page Banner (Main Home) / .banner
-    4. Banner Search Box / .search-area
-    5. Featured Car / .featured-car
-    6. Single Page Banner / .sub-banner
-    7. Car List View / .car-box-2
-    8. Car Grid View / .car-box
-    9. Single Car Details / .car-details-page
-    10. Listing Page Sidebar /.sidebar
-    11. Testimonials / .testimonials
-    12. Pricing Table /.pricing-container
-    13. Agent Contact Form /.agent-widget
-    14. Car Comments /.car-comments
-    15. Specifications /.specifications
-    16. Application Counter / .counters
-    17. Blog /.blog-body
-    18. Contact Form /.contact-form
-    19. Signup/Login Wrapper /.form-content-box
-    20. Pagination /.pagination
-    21. Main Footer / .main-footer
-    22. Sub Footer / .sub-footer
--------------------------------------------------------------------*/
-/** Global classes**/
-
 html,
 body {
     height: 100%;
@@ -2829,7 +2795,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .car-box:hover .facilities-list {
-    width: 80%;
+    width: 95%;
     margin: 0 5%;
     bottom: 10px;
     background: #fff;
@@ -3439,7 +3405,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .car-box-2 .detail .title {
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 3px;
     font-weight: 500;
     text-transform: capitalize;
@@ -3853,7 +3819,7 @@ input[type=checkbox]:checked+label:before {
 
 .car-box-4 .facilities-list li {
     list-style: none;
-    float: left;
+    float: center;
     margin-right: 20px;
     line-height: 30px;
     font-size: 14px;

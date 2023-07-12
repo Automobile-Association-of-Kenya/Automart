@@ -45,9 +45,9 @@ class ApplicationController extends Controller
     public function welcome()
     {
         Visit::visit(request()->server());
-        $vehicles = $this->vehicle->getlatest(12);
+        $vehicles = $this->vehicle->latest()->skip(12)->limit(12)->get();
         $discounts = $this->vehicle->discounts(12);
-        $introvehicles = $this->vehicle->latest()->limit(30)->get();
+        $introvehicles = $this->vehicle->latest()->limit(12)->get();
         return view('welcome', compact('discounts', 'vehicles', 'introvehicles'));
     }
 

@@ -311,6 +311,7 @@
                                         <a class="text-success"
                                             href="{{ url('/vehicle/' . $vehicle_no) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
                                     </h1>
+
                                     <ul class="custom-list">
                                         <li>
                                             <a href="{{ url('/vehicle/' . $vehicle_no) }}">{{ $item->usage }}</a>
@@ -323,9 +324,10 @@
                                             <a href="#">{{ $item->fuel_type }}</a>
                                         </li>
                                     </ul>
-                                    <ul class="facilities-list clearfix">
+
+                                    <ul class="custom-list">
                                         <li>
-                                            <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km
+                                            <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km &nbsp;|&nbsp;
                                         </li>
                                         <li>
                                             <i class="flaticon-gear"></i> {{ $item->enginecc }} cc
@@ -334,13 +336,13 @@
                                 </div>
                                 <div class="footer">
                                     <div class="buttons mb-2 text-center">
-                                        <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
+                                        <a href="#" class="btn btn-success btn-sm mt-2" id="whatsappToggle"
                                             data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
                                             Enquire</a>
                                         <a href="{{ url('/vehicle/' . $vehicle_no . '/buy') }}"
-                                            class="btn btn-success btn-sm"><i class="fa fa-hand"></i> Buy</a>
+                                            class="btn btn-success btn-sm mt-2"><i class="fa fa-hand"></i> Buy</a>
                                         <a href="{{ url('/vehicle/' . $vehicle_no . '/loan') }}"
-                                            class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i>
+                                            class="btn btn-success btn-sm mt-2"><i class="fa fa-"></i>
                                             Apply
                                             Loan</a>
                                     </div>
