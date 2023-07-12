@@ -874,7 +874,7 @@ $(function () {
             $.each(models, function (key, value) {
                 if (counter < 17) {
                     link +=
-                        '<a class="btn btn-outline-warning btn-sm btn-round mb-2" href="/vehicles/model/' +
+                        '<a class="btn btn-outline-success btn-sm btn-round mb-2" href="/vehicles/model/' +
                         value.id +
                         '">' +
                         value.model +

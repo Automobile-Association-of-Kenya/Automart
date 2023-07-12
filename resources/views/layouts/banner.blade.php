@@ -6,11 +6,10 @@
                 <div class="carousel-content container banner-info-2 bi-2">
                     <div class="row bi5">
                         <div class="col-lg-7 text-start">
-                             {{-- style="background: rgb(175, 177, 175, 0.8);border-radius: 20px;" --}}
-                            <div class="p-3">
+                            <div class="p-3" style="background: rgb(175, 177, 175, 0.8);border-radius: 20px;">
                                 <h4 class="mb-30 text-white">Buying or Selling a Vehicle?</h4>
                                 <div class="price">
-                                    <p>You are at the right place. Our platform offers a wide selection of vehicles from
+                                    <p class="te">You are at the right place. Our platform offers a wide selection of vehicles from
                                         trusted dealers across the country, ensuring we match buyers with the perfect
                                         fit for their needs and budget. We also provide financing options to our clients
                                         to enable them acquire or sell their dream cars with ease. </p>
