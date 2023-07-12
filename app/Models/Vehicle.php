@@ -18,7 +18,7 @@ class Vehicle extends Model
         'user_id', 'dealer_id', 'type_id', 'make_id', 'vehicle_model_id', 'country_of_origin', 'country_located', 'county_id', 'vehicle_no', 'shipping_to', 'year', 'price', 'color', 'mileage', 'enginecc', 'interior', 'fuel_type', 'transmission', 'description', 'cover_photo', 'images', 'tags', 'usage', 'views', 'likes', 'dislikes', 'yard_id', 'gear',
         'speed',
         'terrain',
-        'engine',
+        'engine','seats',
         'horsepower', 'status', 'sponsored', 'priority',
     ];
 

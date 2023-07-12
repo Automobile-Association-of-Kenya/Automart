@@ -9031,9 +9031,9 @@ input[type=radio] {
     margin-top: 20px;
 }
 
-.banner-content3 {
+/* .banner-content3 {
     margin-top: 34px;
-}
+} */
 
 .search-box-4 .search-fields {
     min-height: 40px;
@@ -11698,7 +11698,6 @@ input[type="tel"] {
         top: 45%;
         margin: 5px;
     }
-
     .counter-box-1 {
         padding: 0;
         margin-bottom: 40px;
