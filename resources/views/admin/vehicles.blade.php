@@ -244,6 +244,14 @@
                                                             </select>
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-3">
+                                                        <label for="company">Description:</label>
+                                                        <div class="input-group">
+                                                            <textarea name="description" id="description" class="form-control" required></textarea>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -267,14 +275,14 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-3 form-group">
+                                                    {{-- <div class="col-md-3 form-group">
                                                         <label for="shipping_to">Shipping to:</label>
                                                         <div class="input-group">
                                                             <select name="shipping_to" id="shippingTo"
                                                                 class="form-control  chzn-select"
                                                                 style="width: 100%;"></select>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
                                                     <div class="col-md-3 form-group">
                                                         <label for="company">Color:</label>
@@ -318,6 +326,14 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
+                                                        <label for="gear">NO Seats: </label>
+                                                        <div class="input-group">
+                                                            <input type="text" name="seats" id="noOfSeats"
+                                                                class="form-control ">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3 form-group">
                                                         <label for="gear">NO of Gears: </label>
                                                         <div class="input-group">
                                                             <input type="text" name="gear" id="gear"
@@ -357,12 +373,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-3">
-                                                        <label for="company">Description:</label>
-                                                        <div class="input-group">
-                                                            <textarea name="description" id="description" class="form-control"></textarea>
-                                                        </div>
-                                                    </div>
+
 
                                                     <div class="col-md-4 form-group">
                                                         <label for="company">Tags:</label>

@@ -225,6 +225,13 @@
                                                                 class="form-control form-control--md">
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-12">
+                                                        <label for="description">Description:</label>
+                                                        <div class="input-group">
+                                                            <textarea name="description" id="description" class="form-control" required></textarea>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -240,6 +247,15 @@
 
                                             <div class="card-body" id="additionInfo">
                                                 <div class="row">
+                                                    <div class="col-md-3 form-group">
+                                                        <label for="middlename">Country of origin:</label>
+                                                        <div class="input-group">
+                                                            <select name="country_of_origin" id="countryofOrigin"
+                                                                class="form-control form-control--md chzn-select"
+                                                                style="width: 100%;"></select>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="col-md-3 form-group">
                                                         <label for="engine">Engine: </label>
                                                         <div class="input-group">
@@ -312,22 +328,20 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="middlename">Country of origin:</label>
+                                                        <label for="gear">NO Seats: </label>
                                                         <div class="input-group">
-                                                            <select name="country_of_origin" id="countryofOrigin"
-                                                                class="form-control form-control--md chzn-select"
-                                                                style="width: 100%;"></select>
+                                                            <input type="number" name="seats" id="noOfSeats" class="form-control">
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-3 form-group">
+                                                    {{-- <div class="col-md-3 form-group">
                                                         <label for="shipping_to">Shipping to:</label>
                                                         <div class="input-group">
                                                             <select name="shipping_to" id="shippingTo"
                                                                 class="form-control form-control--md chzn-select"
                                                                 style="width: 100%;"></select>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
                                                     <div class="col-md-3 form-group">
                                                         <label for="gear">NO of Gears: </label>
@@ -375,12 +389,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-6">
-                                                        <label for="description">Description:</label>
-                                                        <div class="input-group">
-                                                            <textarea name="description" id="description" class="form-control"></textarea>
-                                                        </div>
-                                                    </div>
+
 
                                                     <div class="col-md-12 form-group">
                                                         <div class="row mt-4" id="featuresSection">

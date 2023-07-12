@@ -2,10 +2,10 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner banner-slider-inner text-center">
             <div class="carousel-item active item-bg">
-                <img class="d-block w-100 h-100" src="img/img-2.jpg" alt="banner">
+                <img class="d-block w-100 h-100" src="images/automart.jpg" alt="banner">
                 <div class="carousel-content container banner-info-2 bi-2">
                     <div class="row bi5">
-                        <div class="col-lg-7 text-start">
+                        <div class="col-lg-6 text-start m-2 p-3" style="background: rgb(175, 177, 175, 0.8);border-radius: 20px;">
                             <div class="banner-content3">
                                 <h4 class="mb-30" style="color: #fed945;">Buying or Selling Car?</h4>
                                 <div class="price">
@@ -25,6 +25,7 @@
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="col-lg-5 bg-white mt-3" style="border-radius:20px; padding:10px 10px 5px 10px;">
                             <p style="margin:0;padding: 2px;"><strong class="text-success">Buy Your Vehicle from Our

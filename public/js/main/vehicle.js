@@ -1340,6 +1340,7 @@
             terrain = $("#terrain").val(),
             engine = $("#engine").val(),
             horsepower = $("#horsepower").val(),
+            seats = $("#noOfSeats").val(),
             errors = [];
 
         savevehicle.prop("disabled", true);
@@ -1371,6 +1372,7 @@
             speed: speed,
             terrain: terrain,
             engine: engine,
+            seats: seats,
             horsepower: horsepower,
         };
 
