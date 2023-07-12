@@ -848,7 +848,7 @@ $(function () {
                     value.logo +
                     '" alt="' +
                     value.make +
-                    '" width="100%" height="140px"></div></a>';
+                    '" width="100%" height="150px"></div></a>';
                 logo +=
                     '<div class="col-lg-2 mr-2"><a href="/make-vehicles"><img src="/brands/' +
                     value.logo +
