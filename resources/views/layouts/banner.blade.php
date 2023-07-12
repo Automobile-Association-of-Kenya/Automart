@@ -27,7 +27,6 @@
                             </div>
                         </div>
 
-
                         <div class="col-lg-5 bg-white m" style="border-radius:20px; padding:10px 10px 5px 10px;">
                             <p style="margin:0;padding: 2px;"><strong class="text-success">Buy Your Vehicle from Our
                                     Platform</strong></p>

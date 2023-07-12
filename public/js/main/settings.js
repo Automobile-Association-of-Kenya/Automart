@@ -627,9 +627,9 @@
         if (val === "manual" && recepient_type === "customers") {
             $.getJSON("/admin/customers", function (customers) {
                 console.log(customers);
-                let tr = "",
-                    dealer = value.dealer?.name ?? "";
+                let tr = "";
                 $.each(customers, function (key, value) {
+                    let dealer = value.dealer?.name ?? "";
                     tr +=
                         "<tr data-id=" +
                         value.id +
