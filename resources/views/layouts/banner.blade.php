@@ -8,7 +8,7 @@
                         <div class="col-lg-7 text-start">
                              {{-- style="background: rgb(175, 177, 175, 0.8);border-radius: 20px;" --}}
                             <div class="p-3">
-                                <h4 class="mb-30 text-white">Buying or Selling Car?</h4>
+                                <h4 class="mb-30 text-white">Buying or Selling a Vehicle?</h4>
                                 <div class="price">
                                     <p>You are at the right place. Our platform offers a wide selection of vehicles from
                                         trusted dealers across the country, ensuring we match buyers with the perfect
