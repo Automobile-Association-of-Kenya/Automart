@@ -114,7 +114,7 @@
                                                                 </select>
                                                             </div>
 
-                                                            <div class="col-md-12 form-group repetetive">
+                                                            <div class="col-md-12 form-group">
                                                                 <label>Priority</label>
                                                                 <select name="priority" id="subPriority"
                                                                     class="form-control form-control-md" required>
