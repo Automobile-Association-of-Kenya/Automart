@@ -180,7 +180,6 @@
                                                                 <option value="Manual">Manual</option>
                                                                 <option value="Electric">Electric</option>
                                                                 <option value="Tiptronic">Tiptronic</option>
-                                                                <option value="Tiptronic">Tiptronic</option>
                                                                 <option value="None">None</option>
                                                             </select>
                                                         </div>
