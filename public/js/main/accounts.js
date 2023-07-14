@@ -117,13 +117,14 @@
             mpesa_business_short_code = businessShortCode.val(),
             mpesa_transaction_type = transactionType.val(),
             currency = accurrency.val();
+
         let data = {
             _token: token,
             account_id: account_id,
             provider: provider,
             pp_client_id: pp_client_id,
             pp_client_secret: pp_client_secret,
-            pp_business_name: pp_business_name,
+            business_name: pp_business_name,
             pp_card_number: pp_card_number,
             expiry: expiry,
             pp_cw: pp_cw,
@@ -134,6 +135,7 @@
             mpesa_transaction_type: mpesa_transaction_type,
             currency: currency,
         };
+
         $.post("/accounts", data)
             .done(function (params) {
                 console.log(params);

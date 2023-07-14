@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('pp_cw')->nullable();
             $table->string('mpesa_secret')->unique()->nullable();
             $table->string('mpesa_customer_key')->unique()->nullable();
-            $table->string('mpesa_pass_kwy')->nullable();
+            $table->string('mpesa_pass_key')->nullable();
             $table->string('mpesa_business_short_code')->unique()->nullable();
             $table->string('mpesa_transaction_type')->nullable();
             $table->string('currency', 10)->nullable();
