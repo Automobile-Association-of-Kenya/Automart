@@ -774,7 +774,7 @@ $(function () {
         let make_id = $(this).val();
         if (make_id !== "") {
             $.getJSON("/models/" + make_id, function (models) {
-                let option = "<option value=''>All</option>";
+                let option = "<option value=''>Model</option>";
                 $.each(models, function (key, value) {
                     option +=
                         "<option value=" +
@@ -792,7 +792,7 @@ $(function () {
         let counter = 0;
         $.getJSON("/types-with-vehicles", function (types) {
             let item = "",
-                option = '<option value="">All</option>',
+                option = '<option value="">Body Type</option>',
                 li = "";
 
             $.each(types, function (key, value) {
@@ -810,7 +810,6 @@ $(function () {
                     '">' +
                     value.type +
                     "</a></li>";
-
                 option +=
                     "<option value=" +
                     value.id +
@@ -886,7 +885,7 @@ $(function () {
     function vehicleMakesWithVehicles() {
         $.getJSON("/makes-with-vehicles", function (vehicles) {
             let item = "",
-                option = "<option value=''>All</option>",
+                option = "<option value=''>Make</option>",
                 brand = "",
                 li = "",
                 logo = "",
@@ -1105,7 +1104,7 @@ $(function () {
 
     function getVehicleMakes() {
         $.getJSON("/makes", function (makes) {
-            let option = "<option value=''>All</option>";
+            let option = "<option value=''>Model</option>";
 
             $.each(makes, function (key, value) {
                 option +=

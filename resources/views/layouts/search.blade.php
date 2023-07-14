@@ -36,7 +36,7 @@
                             <div class="form-group">
                                 <select class="form-select form-select-lg border-rounded" name="year"
                                     id="filterYear">
-                                    <option value="">All</option>
+                                    <option value="">Year</option>
                                     @for ($i = date('Y'); $i >= 1990; $i--)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
