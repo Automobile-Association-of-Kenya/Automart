@@ -257,7 +257,7 @@ class Vehicle extends Model
     function vehiclecontactphone($id)
     {
         $vehicle = $this->where('id', $id)->first();
-        $phone = $vehicle->user->phone ?? $vehicle->dealer->phone;
+        $phone =  $vehicle->user->phone ?? $vehicle->dealer?->phone ?? null;
         return "+254" . substr($phone, -9);
     }
 
@@ -266,14 +266,20 @@ class Vehicle extends Model
         $vehicle = $this->where('id', $id)->with(['make:id,make', 'model:id,model'])->first();
         $social = Social::where('name', 'whatsapp')->first();
         $phone = $this->vehiclecontactphone($id);
-        $message = "Hello! I have checked  " . $vehicle->year . " " . $vehicle->make->make . " " . $vehicle->model->model . " of ref " . $vehicle->vehicle_no . "and I'm interested. Please let me know on any requirements";
-
-        if (!is_null($this->userID())) {
-            Messages::create(['user_id' => $this->userID(), 'vehicle_id' => $id, 'type' => 'whatsapp', 'destination' => $this->vehiclecontactphone($id), 'message' => $message]);
-        } else {
-            Messages::create(['vehicle_id' => $id, 'type' => 'whatsapp', 'destination' => $phone, 'message' => $message]);
+        if (is_null($phone)) {
+            $status = "error";
+            $url = "";
+        }else {
+            $status = "success";
+            $message = "Hello! I have checked  " . $vehicle->year . " " . $vehicle->make->make . " " . $vehicle->model->model . " of ref " . $vehicle->vehicle_no . " and I'm interested. Please let me know on any requirements";
+            if (!is_null($this->userID())) {
+                Messages::create(['user_id' => $this->userID(), 'vehicle_id' => $id, 'type' => 'whatsapp', 'destination' => $this->vehiclecontactphone($id), 'message' => $message]);
+            } else {
+                Messages::create(['vehicle_id' => $id, 'type' => 'whatsapp', 'destination' => $phone, 'message' => $message]);
+            }
+            $url = $social->link . "?phone=" . $phone . "&text=" . $message;
         }
-        return json_encode(['status' => "success", "url" => $social->link . "?phone=" . $phone . "&text=" . $message]);
+        return json_encode(['status' => $status, "url" => $url, $vehicle, $phone]);
     }
 
     function liked($id)

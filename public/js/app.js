@@ -58,7 +58,7 @@ $(function () {
                         header: "Warning",
                         sticky: true,
                         theme: "jnoty-warning",
-                        icon: "fa fa-check-circle",
+                        icon: "fa fa-solid fa-triangle-exclamation",
                     });
                 }
             });
@@ -70,7 +70,16 @@ $(function () {
         let vehicle_id = $(this).data("id");
         $.getJSON("/whatsapp/" + vehicle_id, function (params) {
             console.log(params);
+            if (params.status === "success") {
             window.open(params.url, "_blank");
+            } else {
+                $.jnoty("Dealer has not added phone number", {
+                    header: "Warning",
+                    sticky: true,
+                    theme: "jnoty-warning",
+                    icon: "fa fa-solid fa-triangle-exclamation",
+                });
+            }
         });
     });
 
