@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Search Results @parent
+    {{ $dealer->name.' Vehicles ' }} @parent
 @endsection
 
 @section('header_styles')
@@ -10,18 +10,18 @@
 @section('main')
     <!-- Sub banner start -->
     <div class="sub-banner">
-        <div class="container breadcrumb-area">
+        <div class="container-fluid breadcrumb-area">
             <div class="breadcrumb-areas">
                 <ul class="breadcrumbs">
                     <li><a href="{{ url('/') }}">Home</a></li>
-                    <li class="active">Search Results</li>
+                    <li class="active">{{ $dealer->name }}</li>
                 </ul>
             </div>
         </div>
     </div>
 
     <div class="featured-car content-area">
-        <div class="container">
+        <div class="container-fluid">
             @include('layouts.search')
 
             <div class="row mt-4">

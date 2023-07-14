@@ -23,6 +23,7 @@
             outline: none;
             border-radius: 5px;
         }
+
         .rangeslider__fill {
             color: #006544;
         }
@@ -33,6 +34,8 @@
     @php
         $images = json_decode($vehicle->images);
         $vehicle_no = $vehicle->vehicle_no ?? $vehicle->id;
+        $dealer = !is_null($vehicle->dealer) ? $vehicle->dealer : $vehicle->user;
+        $location = $vehicle->location ?? $vehicle->yard?->address;
     @endphp
     <div class="sub-banner">
         <div class="container breadcrumb-area">
@@ -56,8 +59,11 @@
                         <div class="heading-car clearfix">
                             <div class="pull-left">
                                 <h3>{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}</h3>
+                                <a href="#">
+                                    <i class="flaticon-user text-warning"></i> {{ $dealer->name }}
+                                </a>
                                 <p>
-                                    <i class="flaticon-pin"></i>{{ $vehicle->location ?? $vehicle->yard?->address }}
+                                    <i class="flaticon-pin"></i>{{ $location }}
                                 </p>
                             </div>
                             <div class="pull-right">
@@ -83,12 +89,13 @@
                                     </div> --}}
                                     @foreach ($images as $image)
                                         <div class="thumb-slide"><img src="{{ '/vehicleimages/' . $image->image }}"
-                                                class="img-fluid" alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}">
+                                                class="img-fluid"
+                                                alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}">
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
-                            <p class="mt-2">{{ $vehicle->description  }}</p>
+                            <p class="mt-2">{{ $vehicle->description }}</p>
                         </div>
 
                         <div class="mb-4 card p-3">
@@ -173,120 +180,95 @@
 
                     <div class="car-details-section">
                         <div class="tabbing tabbing-box mb-40">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item active" role="presentation">
-                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-                                        data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
-                                        aria-selected="false">Features</button>
-                                </li>
-
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="contact-tab-4" data-bs-toggle="tab"
-                                        data-bs-target="#contact-4" type="button" role="tab"
-                                        aria-controls="contact-4" aria-selected="false">Specifications</button>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-
-                                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    <div class="accordion accordion-flush" id="accordionFlushExample2">
-                                        <div class="accordion-item">
-                                            <div class="features-info mb-50">
-                                                <h3 class="heading-2">Features</h3>
-                                                <div class="row">
-                                                    @for ($i = 0; $i < count($vehicle->features) / 5; $i++)
-                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                                            <ul>
-                                                                <li>
-                                                                    {{ $vehicle->features[$i]->feature }}
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    @endfor
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="card">
+                                <div class="card-header bg-white">
+                                    <h3 class="heading-2">Features</h3>
                                 </div>
-
-
-                                <div class="tab-pane fade" id="contact-4" role="tabpanel"
-                                    aria-labelledby="contact-tab-4">
-                                    <div class="accordion accordion-flush" id="accordionFlushExample4">
-                                        <div class="accordion-item">
-                                            <div class="car-amenities mb-30">
-                                                <h3 class="heading-2">Specifications</h3>
-                                                <div class="row">
-
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                                        <ul class="amenities">
-                                                            <li>
-                                                                <i class="fa fa-check"></i>Top Speed:
-                                                                {{ $vehicle->speed }}
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-check"></i>Fuel Type:
-                                                                {{ $vehicle->fuel_type }}
-                                                            </li><br>
-                                                            <li>
-                                                                <i class="fa fa-check"></i>Mileage:
-                                                                {{ $vehicle->mileage }} KM
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-check"></i>Engine:
-                                                                {{ $vehicle->enginecc }}
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-check"></i>Gear: {{ $vehicle->gear }}
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                                        <ul class="amenities">
-                                                            <li>
-                                                                <i class="fa fa-check"></i>Drive Train:
-                                                                {{ $vehicle->terrain }}
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-check"></i>Body Style:
-                                                                {{ @$vehicle->type->type }}
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-check"></i>Year: {{ $vehicle->year }}
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-check"></i>Fuel Type:
-                                                                {{ $vehicle->fuel_type }}
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-check"></i>Interior Color:
-                                                                {{ $vehicle->interior }}
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                                        <ul class="amenities">
-                                                            <li>
-                                                                <i class="fa fa-check"></i>Horse Power:
-                                                                {{ $vehicle->horse_power }}
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-check"></i>Location:
-                                                                {{ $vehicle->yard->address ?? $vehicle->location }}
-                                                            </li>
-                                                            <li>
-                                                                <i class="fa fa-check"></i>Exterior Color:
-                                                                {{ $vehicle->color }}
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                <div class="card-body">
+                                    @foreach ($vehicle->features as $item)
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <ul>
+                                                <li>
+                                                    <i class="fa fa-check-circle text-success"></i> {{ $item->feature }}
+                                                </li>
+                                            </ul>
                                         </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="card mt-4">
+                                <div class="card-header bg-white">
+                                    <h3 class="heading-2">Specifications</h3>
+                                </div>
+                                <div class="card-body row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <ul class="amenities">
+                                            <li>
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Top Speed:
+                                                {{ $vehicle->speed }}
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Fuel Type:
+                                                {{ $vehicle->fuel_type }}
+                                            </li><br>
+                                            <li>
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Mileage:
+                                                {{ $vehicle->mileage }} KM
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Engine:
+                                                {{ $vehicle->enginecc }}
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Gear: {{ $vehicle->gear }}
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <ul class="amenities">
+                                            <li>
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Drive Train:
+                                                {{ $vehicle->terrain }}
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Body Style:
+                                                {{ @$vehicle->type->type }}
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Year: {{ $vehicle->year }}
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Fuel Type:
+                                                {{ $vehicle->fuel_type }}
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Interior Color:
+                                                {{ $vehicle->interior }}
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <ul class="amenities">
+                                            <li>
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Horse Power:
+                                                {{ $vehicle->horse_power }}
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Location:
+                                                {{ $vehicle->yard->address ?? $vehicle->location }}
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Exterior Color:
+                                                {{ $vehicle->color }}
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -393,14 +375,13 @@
         </div>
     </div>
 
-
     <div class="featured-car">
         <div class="container">
             <h4 class="text-success">Other Vehicles From the Same Dealer</h4>
             <div class="featured-slider row slide-box-btn slider"
                 data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
 
-                @foreach ($relatedvehicles as $item)
+                @foreach ($dealervehicles as $item)
                     @php
                         $images = $item->images;
                         $vehicle_no = $item->vehicle_no ?? $item->id;
@@ -502,7 +483,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="featured-car">
         <div class="container">
@@ -613,7 +593,6 @@
         </div>
     </div>
 
-
     <div class="modal fade" id="quoteModal" tabindex="-1" role="dialog" aria-labelledby="quoteModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -700,7 +679,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="modal fade" id="financeModal" tabindex="-1" role="dialog" aria-labelledby="financeModalLabel"
         aria-hidden="true">
@@ -796,7 +774,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="modal fade" id="tradeinModal" tabindex="-1" role="dialog" aria-labelledby="financeModalLabel"
         aria-hidden="true">

@@ -27,6 +27,7 @@ class SubscriptionController extends Controller
         $propids = $this->subsprop->pluck('id');
         $subscriptions = $this->subscription->with('properties:id,name')->orderBy('cost', 'ASC')->get();
         $data = ['properties'=>$properties, 'subscriptions'=> $subscriptions, 'propids'=> $propids];
+
         return json_encode($data);
     }
 
@@ -41,9 +42,8 @@ class SubscriptionController extends Controller
     {
         Visit::visit(request()->server());
         $title = "Subscription Plans";
-        $properties = $this->subsprop->get();
-        $propids = $this->subsprop->pluck('id')->toArray();
-        $subscriptions = $this->subscription->with('properties:id,name')->orderBy('cost', 'ASC')->get();
+        $properties = Subsproperty::get();
+        return $this->subscription->packages();
         // dd($subscriptions);
         return view('subscriptions.index', compact('title','properties', 'propids', 'subscriptions'));
     }

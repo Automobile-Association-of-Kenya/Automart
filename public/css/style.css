@@ -8339,11 +8339,11 @@ input[type=checkbox]:checked+label:before {
 
 /** Slide box btn start **/
 .slide-box-btn .slick-prev {
-    display: inline-block !important;
+    display: none !important;
 }
 
 .slide-box-btn .slick-next {
-    display: inline-block !important;
+    display: none !important;
 }
 
 .slide-box {

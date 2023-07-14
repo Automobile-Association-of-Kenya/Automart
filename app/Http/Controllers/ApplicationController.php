@@ -11,6 +11,7 @@ use App\Models\Make;
 use App\Models\Purchase;
 use App\Models\Quote;
 use App\Models\Services;
+use App\Models\Social;
 use App\Models\Tradein;
 use App\Models\Type;
 use App\Models\User;
@@ -58,6 +59,28 @@ class ApplicationController extends Controller
         $services = $this->service->get();
         $vehiclesrelated = $this->vehicle->getRelatedVehicles($vehicle);
         return view('vehicles.buy', compact('vehicle', 'services', 'vehiclesrelated'));
+    }
+
+    public function services()
+    {
+        $services = $this->service->get();
+        return json_encode($services);
+    }
+
+    function contact()
+    {
+        Visit::visit(request()->server());
+        $phones = Social::where('name', 'phone')->get();
+        $address = Social::where('name', 'address')->first();
+        $emails = Social::where('name', 'email')->get();
+        $socials = Social::where('name', 'social')->get();
+        return view('contact', compact('phones', 'address', 'emails', 'socials'));
+    }
+
+    public function socials($id = null)
+    {
+        $socials = Social::get();
+        return json_encode($socials);
     }
 
     public function purchase(Request $request)
@@ -176,8 +199,9 @@ class ApplicationController extends Controller
 
     public function search(Request $request)
     {
+        $query = $request->query();
         Visit::visit(request()->server());
-        $vehicles = $this->vehicle->searchpaginate($request->all());
+        $vehicles = $this->vehicle->searchpaginate($request->all(),$query);
         return view('vehicles.search', compact('vehicles'));
     }
 
@@ -255,6 +279,7 @@ class ApplicationController extends Controller
     {
         Visit::visit(request()->server());
         $vehicle = $this->vehicle->vehicle($id);
+
         if ($param == "discount") {
             $relatedvehicles = $this->vehicle->discountedrelated($vehicle->id ?? $vehicle->vehicle_no);
         } elseif ($param == "latest") {
@@ -262,20 +287,30 @@ class ApplicationController extends Controller
         } else {
             $relatedvehicles = $this->vehicle->getRelatedVehicles($vehicle);
         }
+        $query = $this->vehicle->query();
+        if (!is_null($vehicle->user_id)) {
+            $query->where('user_id', $vehicle->user_id);
+        }
+        if (!is_null($vehicle->dealer_id)) {
+            $query->where('dealer_id', $vehicle->dealer_id_id);
+        }
+        $dealervehicles = $query->where('id','<>',$vehicle->id)->latest()->get();
         $this->vehicle->viewed($vehicle->id);
-        return view('vehicles.show', compact('vehicle', 'relatedvehicles'));
+
+        return view('vehicles.show', compact('vehicle', 'relatedvehicles', 'dealervehicles'));
     }
+
+    // public function dealervehicles($id) {
+    //     $dealer = $this->dealer->find($id);
+    //     $vehicles = $this->vehicle->where('dealer_id',$id)->latest()->get();
+    //     return $vehicles;
+    //     return view('vehicles.dealer', compact('vehicles', 'dealer'));
+    // }
 
     public function about()
     {
         Visit::visit(request()->server());
         return view('about');
-    }
-
-    public function contact()
-    {
-        Visit::visit(request()->server());
-        return view('contact');
     }
 
     public function privacy()

@@ -368,4 +368,13 @@ class VehicleController extends Controller
         $vehicles = $query->latest()->with(['dealer:id,name', 'user:id,name', 'make:id,make', 'model:id,model', 'prices'])->get();
         return json_encode($vehicles);
     }
+
+    public function delist(Request $request) {
+        $vehicles = $request->vehicles;
+        foreach ($vehicles as $value) {
+            $vehicle = $this->vehicle->find($value);
+            $vehicle->delete();
+        }
+        return json_encode(['status'=>'success','message'=>'Vehicles delisted successfully']);
+    }
 }

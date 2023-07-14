@@ -73,11 +73,10 @@
                             <p><span class="fa fa-check-circle text-success"></span>&nbsp;Meet the seller at a safe public
                                 place.</p>
                             <p><span class="fa fa-check-circle text-success"></span>&nbsp;Don't send any pre-payments.</p>
-                            <p><span class="fa fa-check-circle text-success"></span>&nbsp;Check all documentation and only
-                                pay if you're satisfied</p>
-                            <p><span class="fa fa-check-circle text-success"></span></p>
-                            <p><span class="fa fa-check-circle text-success"></span></p>
-                            <p><span class="fa fa-check-circle text-success"></span></p>
+                            <p><span class="fa fa-check-circle text-success"></span>&nbsp;Ensure to check and verifying car documents before proceeding to transact.</p>
+                            <p><span class="fa fa-check-circle text-success"></span>Always make payments using secure and verifiable methods.</p>
+                            {{-- <p><span class="fa fa-check-circle text-success"></span></p>
+                            <p><span class="fa fa-check-circle text-success"></span></p> --}}
                         </div>
                         <div class="card-footer bg-white text-center">
                             <p>You are agreeing to to<a href="{{ route('terms') }}" class="text-success"> <strong>our terms

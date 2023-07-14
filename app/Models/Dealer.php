@@ -180,7 +180,7 @@ class Dealer extends Model
         }
         $vehicles = $this->initialize()->where('status','<>','sold')->get();
         if (is_null($vehicles) || count($vehicles) <= 0) {
-            session()->put("advertinfo", "You are have not advertised on our platform. Get a classified advertisement experience by posting your cars for sale here         <a href='dealer/vehicles'  class='btn btn-light btn-sm alert-link'>Click here</a>");
+            session()->put("advertinfo", "You have not advertised on our platform. Get a classified advertisement experience by posting your cars for sale here <a href='dealer/vehicles'  class='btn btn-light btn-sm alert-link'>Click here</a>");
         }
     }
 

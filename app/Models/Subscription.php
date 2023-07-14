@@ -28,8 +28,8 @@ class Subscription extends Model
     {
         foreach ($properties as $value) {
             DB::table('subscription_property')->insert([
-                'subscription_id'=>$id,
-                'subsproperty_id'=>$value,
+                'subscription_id' => $id,
+                'subsproperty_id' => $value,
             ]);
         }
     }
@@ -39,7 +39,7 @@ class Subscription extends Model
         $props = DB::table('subscription_property')->where('subscription_id', $id)->pluck('subsproperty_id');
         foreach ($props as $value) {
             if (!in_array($value, array_map('intval', $properties))) {
-                DB::table('subscription_property')->where('subscription_id', $id)->where('subsproperty_id',$value)->delete();
+                DB::table('subscription_property')->where('subscription_id', $id)->where('subsproperty_id', $value)->delete();
             }
         }
 
@@ -64,44 +64,53 @@ class Subscription extends Model
         $subscription = $this->find($subscription_id);
         if ($subscription->billingcycle === "Monthly") {
             $expiry = Carbon::now()->addMonth();
-        }elseif($subscription->billingcycle === "Yearly"){
+        } elseif ($subscription->billingcycle === "Yearly") {
             $expiry = Carbon::now()->addYear();
-        }else{
+        } else {
             $expiry = Carbon::now()->addDays($subscription->billingcycle);
         }
         $dealer_id = auth()->user()->dealer_id ?? null;
-        DB::table('dealer_subscription')->insert(['user_id'=>auth()->id(),'dealer_id'=>$dealer_id, 'subscription_id'=>$subscription_id, 'start_date'=>date('Y-m-d H:i:s'), 'expiry_date'=>$expiry, 'status'=>1]);
-        new EventsSubscription(auth()->user(),$subscription);
+        DB::table('dealer_subscription')->insert(['user_id' => auth()->id(), 'dealer_id' => $dealer_id, 'subscription_id' => $subscription_id, 'start_date' => date('Y-m-d H:i:s'), 'expiry_date' => $expiry, 'status' => 1]);
+        new EventsSubscription(auth()->user(), $subscription);
     }
 
-    /**
-     * The dealers that belong to the Subscription
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function dealers(): BelongsToMany
     {
         return $this->belongsToMany(Dealer::class, 'dealer_subscription', 'dealer_id', 'subscription_id');
     }
 
-    /**
-     * The users that belong to the Subscription
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'dealer_subscription', 'user_id', 'subscription_id')->withPivot('status', 'start_date', 'expiry_date')->wherePivot('status', 1);
     }
 
-    /**
-     * Get all of the payments for the Subscription
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class, 'subscription_id', 'id');
     }
 
+    function packages()
+    {
+        $propids = Subsproperty::pluck('id')->toArray();
+        $subscriptions = Subscription::with('properties:id,name')->orderBy('cost', 'ASC')->get();
+        $data = collect();
+        foreach ($subscriptions as $key => $value) {
+            $properties = collect();
+            foreach ($value->properties as $item) {
+                if (in_array($item->id,$propids)) {
+                    $properties->push(true);
+                }else{
+                    $properties->push(false);
+                }
+            }
+            $value->properties = $properties;
+            $data->push($value);
+        }
+        return $data;
+
+        // $subscriptionsWithProperties = $subscriptions->map(function ($subscription) use ($propIds) {
+        //     $subscription->isPropertyExists = in_array($subscription->properties->id, $propIds);
+        //     return $subscription;
+        // });
+    }
 }

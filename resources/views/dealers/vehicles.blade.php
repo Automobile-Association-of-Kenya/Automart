@@ -329,7 +329,8 @@
                                                     <div class="col-md-3 form-group">
                                                         <label for="gear">NO Seats: </label>
                                                         <div class="input-group">
-                                                            <input type="number" name="seats" id="noOfSeats" class="form-control">
+                                                            <input type="number" name="seats" id="noOfSeats"
+                                                                class="form-control">
                                                         </div>
                                                     </div>
 
@@ -388,8 +389,6 @@
                                                         </div>
                                                     </div>
 
-
-
                                                     <div class="col-md-12 form-group">
                                                         <div class="row mt-4" id="featuresSection">
 
@@ -421,13 +420,13 @@
                                             </div>
                                         </div>
 
+                                        <div id="vehiclefeedback"></div>
+
                                         @if (Session::has('subscriptioninfo'))
                                             <div class="alert alert-warning" role="alert">
                                                 {!! Session::get('subscriptioninfo') !!}
                                             </div>
                                         @endif
-
-                                        <div id="vehiclefeedback"></div>
 
                                         <div class="col-md-12">
                                             <button class='btn btn-success btn-md' type="submit" id='savevehicle'><i
@@ -479,6 +478,7 @@
                                     </div>
                                 </form>
                             </div>
+                            <div id="listingfeedback"></div>
 
                             <div class="col-md-12 mt-2 text-right">
                                 <div class="dropdown">
@@ -559,7 +559,6 @@
                                                                     class="form-control form-control--md">
                                                             </div>
                                                         </div>
-
                                                         <div class="col-md-12 form-group">
                                                             <button type="submit" class="btn btn-sm btn-success"><i
                                                                     class="fal fa-save fa-lg fa-fw"></i>save</button>

@@ -20,12 +20,7 @@ class UsersController extends Controller
         $this->dealer = new Dealer();
         $this->partner = new Partner();
     }
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function list($id = null)
     {
         $query = $this->user->query();

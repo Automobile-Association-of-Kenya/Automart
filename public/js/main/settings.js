@@ -56,7 +56,8 @@
     });
 
     function getSubscriptions() {
-        $.getJSON("/subscriptions", function (subscriptions) {
+        $.getJSON("/subscriptions", function (data) {
+            let subscriptions = data.subscriptions;
             if (subscriptions.length > 0) {
                 let tr = "",
                     i = 1;
@@ -145,8 +146,6 @@
             properties: properties,
             description: description,
         };
-
-        console.log(data);
 
         $.ajaxSetup({
             headers: {
@@ -546,7 +545,6 @@
             link: link,
         })
             .done(function (params) {
-                console.log(params);
                 let result = JSON.parse(params);
                 if (result.status === "success") {
                     getSocials();

@@ -267,6 +267,7 @@ class Vehicle extends Model
         $social = Social::where('name', 'whatsapp')->first();
         $phone = $this->vehiclecontactphone($id);
         $message = "Hello! I have checked  " . $vehicle->year . " " . $vehicle->make->make . " " . $vehicle->model->model . " of ref " . $vehicle->vehicle_no . "and I'm interested. Please let me know on any requirements";
+
         if (!is_null($this->userID())) {
             Messages::create(['user_id' => $this->userID(), 'vehicle_id' => $id, 'type' => 'whatsapp', 'destination' => $this->vehiclecontactphone($id), 'message' => $message]);
         } else {
@@ -290,22 +291,22 @@ class Vehicle extends Model
     function searchprefix($data)
     {
         $query = $this->query();
-        if (!is_null($data["type"])) {
+        if (isset($data["type"]) && !is_null($data["type"])) {
             $query->where('type_id', $data["type"]);
         }
-        if (!is_null($data["make"])) {
+        if (isset($data["make"]) && !is_null($data["make"])) {
             $query->where('make_id', $data["make"]);
         }
-        if (!is_null($data["year"])) {
+        if (isset($data["year"]) && !is_null($data["year"])) {
             $query->where('year', $data["year"]);
         }
-        if (!is_null($data["model"])) {
+        if (isset($data["model"]) && !is_null($data["model"])) {
             $query->where('vehicle_model_id', $data["model"]);
         }
-        if (!is_null($data["transmission"])) {
+        if (isset($data["transmission"]) && !is_null($data["transmission"])) {
             $query->where('transmission', $data["transmission"]);
         }
-        if (!is_null($data["usage"])) {
+        if (isset($data["usage"]) && !is_null($data["usage"])) {
             $query->where('usage', $data["usage"]);
         }
         if (!is_null($data["min_price"])) {
@@ -322,9 +323,9 @@ class Vehicle extends Model
         return $this->searchprefix($data);
     }
 
-    function searchpaginate($data, $paginate = 20)
+    function searchpaginate($data, $query, $paginate = 20)
     {
-        return $this->relate($data)->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
+        return $this->relate($data)->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate)->appends($query);
     }
 
     function search($data)

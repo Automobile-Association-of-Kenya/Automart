@@ -40,11 +40,6 @@ class DealerController extends Controller
         return view('dealers.create');
     }
 
-    public function add()
-    {
-        return view('dealers.add');
-    }
-
     public function vehicles()
     {
         $str = strtotime(date('Y-m-d H:i:s')) . auth()->id();

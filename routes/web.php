@@ -166,7 +166,8 @@ Route::prefix('vehicles')->group(function () {
     // Route::get('new', [ApplicationController::class, 'newArrivals'])->name('new.arrivals');
     Route::get('new', [ApplicationController::class, 'newVehicles'])->name('new');
     Route::get('highend', [ApplicationController::class, 'highend']);
-
+    Route::post('delist', [VehicleController::class,'delist'])->name('vehicle.delist');
+    Route::get('dealer', [ApplicationController::class, 'dealervehicles'])->name('dealer.listing');
 });
 
 

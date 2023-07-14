@@ -73,6 +73,7 @@
 
     function getDealers() {
         $.getJSON("/admin-dealers", function (dealers) {
+            console.log(dealers);
             var option = '<option value="">Select One</option>';
             $.each(dealers, (key, value) => {
                 let { id, name } = value;
@@ -301,7 +302,9 @@
                         make.make +
                         "</td><td>" +
                         model +
-                        '</td><td>'+vehicles_count+'</td><td><a href="#" id="editModelToggle" data-id=' +
+                        "</td><td>" +
+                        vehicles_count +
+                        '</td><td><a href="#" id="editModelToggle" data-id=' +
                         id +
                         '><i class="fas fa-edit text-warning" id="editVehicleModelToggle" data-id=' +
                         id +
@@ -667,8 +670,6 @@
                 },
                 error: function (error) {
                     submit.prop({ disabled: false });
-
-                    console.log(error);
                     if (error.status == 422) {
                         var errors = "";
                         $.each(
@@ -1548,15 +1549,18 @@
                         "#vehiclefeedback"
                     );
 
-                    $("#vehicleDealer option[value='" +
+                    $(
+                        "#vehicleDealer option[value='" +
                             vehicle.dealer?.id +
                             "']"
                     ).prop("selected", true);
 
-                    $("#vehicleType option[value='" + vehicle.type?.id + "']"
+                    $(
+                        "#vehicleType option[value='" + vehicle.type?.id + "']"
                     ).prop("selected", true);
 
-                    $("#vehicleMake option[value='" + vehicle.make?.id + "']"
+                    $(
+                        "#vehicleMake option[value='" + vehicle.make?.id + "']"
                     ).prop("selected", true);
 
                     $("#vehicleModel").html(
@@ -1566,7 +1570,8 @@
                             vehicle.model?.model +
                             "</option>"
                     );
-                    $("#countryofOrigin option[value='" +
+                    $(
+                        "#countryofOrigin option[value='" +
                             vehicle.country_of_origin +
                             "']"
                     ).prop("selected", true);
@@ -1600,25 +1605,31 @@
                         );
                     }
 
-                    $("#yearOfManufacture option[value='" +
+                    $(
+                        "#yearOfManufacture option[value='" +
                             vehicle.year +
                             "']"
                     ).prop("selected", true);
 
-                    $("#vehicleColor option[value='" + vehicle.color + "']"
+                    $(
+                        "#vehicleColor option[value='" + vehicle.color + "']"
                     ).prop("selected", true);
 
-                    $("#interiorHtm option[value='" + vehicle.interior + "']"
+                    $(
+                        "#interiorHtm option[value='" + vehicle.interior + "']"
                     ).prop("selected", true);
-                    $("#fuelType option[value='" + vehicle.fuel_type + "']"
+                    $(
+                        "#fuelType option[value='" + vehicle.fuel_type + "']"
                     ).prop("selected", true);
 
-                    $("#transmission option[value='" +
+                    $(
+                        "#transmission option[value='" +
                             vehicle.transmission +
                             "']"
                     ).prop("selected", true);
 
-                    $("#usageCondition option[value='" + vehicle.usage + "']"
+                    $(
+                        "#usageCondition option[value='" + vehicle.usage + "']"
                     ).prop("selected", true);
 
                     $.each(JSON.parse(vehicle.tags), function (key, value) {
@@ -1658,52 +1669,46 @@
                     });
                     if (vehicle.images !== "[]" && vehicle.images !== null) {
                         let previewContainer = $("#image-preview");
-                        $.each(vehicle.images,
-                            function (key, value) {
-                                let image = $("<img>")
-                                    .attr("src", "/vehicleimages/" + value.image)
-                                    .attr("width", "100%")
-                                    .attr("height", "200px");
-                                let imgpreview = $('<div class="col-md-3">')
-                                    .addClass("image-preview")
-                                    .append(image);
-                                previewContainer.append(imgpreview);
-                                const removeButton = $(
-                                    "<button class='btn btn-outline-danger' id='imgDeleteBtn' data-id='" +
-                                        vehicle.id +
-                                        "' data-image='" +
-                                        value +
-                                        "'>"
-                                )
-                                    .html(
-                                        "<i class='fal fa-trash btn-danger'></i>"
-                                    )
-                                    .on("click", function (event) {
-                                        event.preventDefault();
-                                        let $this = $(this),
-                                            data = {
-                                                _token: token,
-                                                vehicle_id: vehicle.id,
-                                                image: value,
-                                                photo_delete: true,
-                                            };
-                                        $.post("/image-delete", data)
-                                            .done(function (params) {
-                                                console.log(params);
-                                                let result = JSON.parse(params);
-                                                if (
-                                                    result.status == "success"
-                                                ) {
-                                                    imgpreview.remove();
-                                                }
-                                            })
-                                            .fail(function (error) {
-                                                console.error(error);
-                                            });
-                                    });
-                                imgpreview.append(removeButton);
-                            }
-                        );
+                        $.each(vehicle.images, function (key, value) {
+                            let image = $("<img>")
+                                .attr("src", "/vehicleimages/" + value.image)
+                                .attr("width", "100%")
+                                .attr("height", "200px");
+                            let imgpreview = $('<div class="col-md-3">')
+                                .addClass("image-preview")
+                                .append(image);
+                            previewContainer.append(imgpreview);
+                            const removeButton = $(
+                                "<button class='btn btn-outline-danger' id='imgDeleteBtn' data-id='" +
+                                    vehicle.id +
+                                    "' data-image='" +
+                                    value +
+                                    "'>"
+                            )
+                                .html("<i class='fal fa-trash btn-danger'></i>")
+                                .on("click", function (event) {
+                                    event.preventDefault();
+                                    let $this = $(this),
+                                        data = {
+                                            _token: token,
+                                            vehicle_id: vehicle.id,
+                                            image: value,
+                                            photo_delete: true,
+                                        };
+                                    $.post("/image-delete", data)
+                                        .done(function (params) {
+                                            console.log(params);
+                                            let result = JSON.parse(params);
+                                            if (result.status == "success") {
+                                                imgpreview.remove();
+                                            }
+                                        })
+                                        .fail(function (error) {
+                                            console.error(error);
+                                        });
+                                });
+                            imgpreview.append(removeButton);
+                        });
 
                         previewContainer.sortable({
                             containment: "parent",
@@ -1827,7 +1832,7 @@
                 } = value;
                 let sponsored = value.sponsored
                         ? "<i class='fa fa-check-circle text-success'></i>"
-                        : "No",
+                        : "<span class='text-danger'>&times;</span>",
                     dealer =
                         value.dealer !== null
                             ? value.dealer.name
@@ -1869,7 +1874,7 @@
                     "><i class='fas fa-eye fa-lg text-success'></i></a></td></tr>";
             });
             let table =
-                '<table class="table table-bordered hover vehicleDataTable "><thead><th>#</th><th>#</th><th>NO</th><th>Dealer</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>CC</th><th>Mileage</th><th>Fuel</th><th>Trans</th><th>created</th><th>Status</th><th>Action</th></thead><tbody' +
+                '<table class="table table-bordered hover vehicleDataTable "><thead><th>#</th><th>#</th><th>NO</th><th>Dealer</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>CC</th><th>Mileage</th><th>Fuel</th><th>Trans</th><th>created</th><th>Status</th><th>Action</th></thead><tbody id="vehiclesListTable">' +
                 tr +
                 "</tbody></table>";
             $("#vehicledatasection").html(table);
@@ -2095,5 +2100,52 @@
             //     tradeins += "";
             // });
         });
+    });
+
+    $("#vehicleDelist").on("click", function (event) {
+        event.preventDefault();
+        let vehicles = [], token = $("input[name='_token']").val();
+
+        $("#vehiclesListTable > tr").each(function (key, row) {
+            if ($(row).find("#vehicleselect").is(":checked")) {
+                vehicles.push($(row).find("#vehicleselect").data("id"));
+            }
+        });
+        if (vehicles.length > 0) {
+            let data = { _token: token, vehicles: vehicles };
+            console.log(data);
+            $.post("/vehicles/delist", data)
+                .done(function (params) {
+                    console.log(params);
+                    let result = JSON.parse(params);
+                    if (result.status == "success") {
+                        showSuccess(result.message, "#listingfeedback");
+                        $("#filterVehiclesListForm").submit();
+                    } else {
+                        showError(result.error, "#listingfeedback");
+                    }
+                })
+                .fail(function (error) {
+                    console.log(error);
+                    savevehicle.prop("disabled", false);
+                    if (error.status == 422) {
+                        var errors = "";
+                        $.each(
+                            error.responseJSON.errors,
+                            function (key, value) {
+                                errors += value + "!";
+                            }
+                        );
+                        showError(errors, "#listingfeedback");
+                    } else {
+                        showError(
+                            "Error occurred during processing",
+                            "#listingfeedback"
+                        );
+                    }
+                });
+        } else {
+            showError("No vehicles selected to delist.", "#listingfeedback");
+        }
     });
 })();

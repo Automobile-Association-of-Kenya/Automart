@@ -474,6 +474,8 @@
                                 </form>
                             </div>
 
+                            <div id="listingfeedback"></div>
+
                             <div class="col-md-12 mt-2 text-left">
                                 <div class="dropdown float-right">
                                     <button class="btn btn-success btn-sm dropdown-toggle" type="button"
@@ -485,7 +487,7 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#"><i
                                                 class="fas fa-arrow-down text-warning"></i>&nbsp;Discount</a>
-                                        <a class="dropdown-item" href="#"><i
+                                        <a class="dropdown-item" href="#" id="vehicleDelist"><i
                                                 class="fas fa-trash text-warning"></i>&nbsp;Delist</a>
                                         <a class="dropdown-item" href="#"><i
                                                 class="fas fa-trash text-danger"></i>&nbsp;Delete</a>

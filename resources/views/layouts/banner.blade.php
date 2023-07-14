@@ -33,7 +33,7 @@
                                         your budget!</small></li>
                                 <li class="list-group-item" style="padding: 5px;"><i
                                         class="fa fa-check-circle text-success"></i>&nbsp;<small>Ask financing or Buy
-                                        directly buy providing address for delivery.</small></li>
+                                        directly by providing address for delivery.</small></li>
                                 <li class="list-group-item" style="padding: 5px;"><i
                                         class="fa fa-check-circle text-success"></i>&nbsp;<small>You can also pick your
                                         Vehicle from our Dealer Yards and Pay.</small></li>
