@@ -136,6 +136,7 @@
         };
         $.post("/accounts", data)
             .done(function (params) {
+                console.log(params);
                 let result = JSON.parse(params);
                 $this.find("button[type='submit']").prop({ disabled: false });
                 if (result.status == "success") {
@@ -146,6 +147,7 @@
                 }
             })
             .fail(function (error) {
+                console.error(error);
                 $this.find("button[type='submit']").prop({ disabled: false });
                 if (error.status == 422) {
                     var errors = "";
