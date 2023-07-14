@@ -75,7 +75,8 @@ Route::get('counties/{country_id?}', [ApplicationController::class, 'counties'])
 Route::resource('settings', SettingsController::class);
 
 Route::view('about',  'about')->name("about");
-Route::view('contact', 'contact')->name("contact");
+Route::get('contact', [SettingsController::class,'contact'])->name("contact");
+Route::post('contact-us',[SettingsController::class, 'message'])->name('contactus');
 Route::view('privacy', 'privacy')->name('privacy');
 
 Route::get('auth/facebook', [AuthenticatedSessionController::class, 'redirectToFacebook'])->name('facebook.login');

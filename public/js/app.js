@@ -325,6 +325,26 @@ $(function () {
         $(".dashboard").css("top", headerHeight);
     }
 
+    function showSuccess(message, target) {
+        iziToast.success({
+            title: "OK",
+            message: message,
+            position: "center",
+            timeout: 7000,
+            target: target,
+        });
+    }
+
+    function showError(message, target) {
+        iziToast.error({
+            title: "Error",
+            message: message,
+            position: "center",
+            timeout: 7000,
+            target: target,
+        });
+    }
+
     // Page scroller initialization.
     $.scrollUp({
         scrollName: "page_scroller",
@@ -342,6 +362,49 @@ $(function () {
         activeOverlay: false,
         zIndex: 2147483647,
     });
+
+     $("#contactUsForm").on("submit", function (event) {
+         event.preventDefault();
+         let $this = $(this),
+             name = $("#fullName").val(),
+             email = $("#emailAddress").val(),
+             subject = $("#subject").val(),
+             phone = $("#phoneNumber").val(),
+             message = $("#Message").val(),
+             _token = $this.find("input[name='_token']").val();
+         let data = {
+             _token:_token,
+             name: name,
+             email: email,
+             subject: subject,
+             phone: phone,
+             message: message,
+         };
+         $.post("/contact-us", data)
+             .done(function (params) {
+                 let result = JSON.parse(params);
+                 if (result.status === "success") {
+                     showSuccess(result.message, "#contactfeedback");
+                 } else {
+                     showError('An error occurred during processing', '#contactfeedback');
+                 }
+             })
+             .fail(function (error) {
+                 console.error(error);
+                 if (error.status == 422) {
+                     var errors = "";
+                     $.each(error.responseJSON.errors, function (key, value) {
+                         errors += value + "!";
+                     });
+                     showError(errors, "#makefeedback");
+                 } else {
+                     showError(
+                         "Error occurred during processing",
+                         "#modelfeedback"
+                     );
+                 }
+             });
+     });
 
     // Counter
     function isCounterElementVisible($elementToBeChecked) {
@@ -821,6 +884,7 @@ $(function () {
                 counter = 0;
 
             $.each(vehicles, function (key, value) {
+
                 if (counter < 10) {
                     item +=
                         '<a class="dropdown-item" href="/vehicles/make/' +
@@ -842,19 +906,20 @@ $(function () {
                     value.make +
                     "</option>";
                 brand +=
-                    '<a href="/vehicles/make/' +
+                    '<div class="custom-box"><a href="/vehicles/make/' +
                     value.id +
-                    '"><div class="custom-box"><img src="/brands/' +
+                    '"><img src="/brands/' +
                     value.logo +
                     '" alt="' +
                     value.make +
-                    '" width="100%" height="150px"></div></a>';
+                    '"></a></div>';
                 logo +=
                     '<div class="col-lg-2 mr-2"><a href="/make-vehicles"><img src="/brands/' +
                     value.logo +
                     '" alt=""></a></div>';
                 counter++;
             });
+
             $("#vehicleGroupandMakes").append(item);
             $("#vehicleGroupMakes").append(li);
             $("#filterMakesID").html(option);
@@ -873,19 +938,20 @@ $(function () {
                 link1 = "";
             $.each(models, function (key, value) {
                 if (counter < 17) {
-                    link +=
-                        '<a class="btn btn-outline-success btn-sm btn-round mb-2" href="/vehicles/model/' +
-                        value.id +
-                        '">' +
-                        value.model +
-                        "</a>  ";
-
                     link1 +=
                         '<a class="btn btn-outline-warning btn-sm btn-round mb-2" href="/vehicles/model/' +
                         value.id +
                         '">' +
                         value.model +
                         "</a> | ";
+                }
+                if (counter < 11) {
+                    link +=
+                        '<a class="btn btn-outline-success btn-sm btn-round mb-2" href="/vehicles/model/' +
+                        value.id +
+                        '">' +
+                        value.model +
+                        "</a>  ";
                 }
 
                 if (counter < 8) {
@@ -906,31 +972,30 @@ $(function () {
 
     modelsWithVehicles();
 
-    function highEndCars() {
-        $.getJSON("/vehicles/highend", function (cars) {
-            let image = "";
-            $.each(cars, function (key, value) {
-                console.log(value.price);
-                var images = value.images,
-                    vehicle_no = value.vehicle_no ?? value.id;
-                image +=
-                    "<a href='vehicle/" +
-                    vehicle_no +
-                    "/highend'><img src='/vehicleimages/" +
-                    images[0].image +
-                    "' alt=" +
-                    value.year +
-                    " " +
-                    value.make.make +
-                    " " +
-                    value.model.model +
-                    "></a>";
-            });
-            $("#highendVehicles").html(image);
-        });
-    }
+    // function highEndCars() {
+    //     $.getJSON("/vehicles/highend", function (cars) {
+    //         let image = "";
+    //         $.each(cars, function (key, value) {
+    //             var images = value.images,
+    //                 vehicle_no = value.vehicle_no ?? value.id;
+    //             image +=
+    //                 "<a href='vehicle/" +
+    //                 vehicle_no +
+    //                 "/highend'><img src='/vehicleimages/" +
+    //                 images[0].image +
+    //                 "' alt=" +
+    //                 value.year +
+    //                 " " +
+    //                 value.make.make +
+    //                 " " +
+    //                 value.model.model +
+    //                 "></a>";
+    //         });
+    //         $("#highendVehicles").html(image);
+    //     });
+    // }
 
-    highEndCars();
+    // highEndCars();
 
     function getSocials() {
         $.getJSON("/socials", function (socials) {

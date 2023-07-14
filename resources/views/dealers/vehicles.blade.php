@@ -194,7 +194,6 @@
                                                                 style="width:100%;">
                                                                 <option value="">Select One</option>
                                                                 <option value="New">New</option>
-                                                                <option value="Semi-new">Semi New</option>
                                                                 <option value="Locally Used">Locally used</option>
                                                                 <option value="Foreign Used">Foreign used</option>
                                                                 <option value="Damaged">Damaged</option>

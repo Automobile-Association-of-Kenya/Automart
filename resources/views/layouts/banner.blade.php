@@ -9,18 +9,15 @@
                             <div class="p-3" style="background: rgb(175, 177, 175, 0.8);border-radius: 20px;">
                                 <h4 class="mb-30 text-white">Buying or Selling a Vehicle?</h4>
                                 <div class="price">
-                                    <p class="te">You are at the right place. Our platform offers a wide selection of vehicles from
-                                        trusted dealers across the country, ensuring we match buyers with the perfect
-                                        fit for their needs and budget. We also provide financing options to our clients
-                                        to enable them acquire or sell their dream cars with ease. </p>
+                                    <p class="te">AA Automart is an online platform designed to streamline the car buying and selling process by connecting car dealers/sellers, buyers, and various partners. It serves as a comprehensive marketplace where individuals can easily sell and buy cars, while also providing access to financing options through its network of trusted partners. </p>
                                 </div>
                                 <div class="clearfix">
                                     <a href="{{ route('vehicles.list') }}" class="btn-8">
-                                        <span>Buy a Vehicle</span>
+                                        <span>Buy a Car</span>
                                     </a>&nbsp;&nbsp;&nbsp;
 
                                     <a href="{{ route('dashboard') }}" class="btn-8">
-                                        <span>Sell Your Vehicle</span>
+                                        <span>Sell Your Car</span>
                                     </a>
                                 </div>
                             </div>

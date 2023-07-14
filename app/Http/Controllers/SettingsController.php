@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MailRequest;
 use App\Models\Maillist;
+use App\Models\Messages;
 use App\Models\Services;
 use App\Models\Social;
-use App\Models\Subscription;
-use App\Models\Subsproperty;
 use App\Models\Visit;
 use Carbon\Carbon;
 use DateTime;
@@ -22,6 +21,7 @@ class SettingsController extends Controller
         // $this->middleware('auth');
         $this->service = new Services();
         $this->maillist = new Maillist();
+        $this->message = new Messages();
     }
 
     public function index()
@@ -33,6 +33,14 @@ class SettingsController extends Controller
     {
         $services = $this->service->get();
         return json_encode($services);
+    }
+
+    function contact() {
+        $phones = Social::where('name','phone')->get();
+        $address = Social::where('name', 'address')->first();
+        $emails = Social::where('name', 'email')->get();
+        $socials = Social::where('name','social')->get();
+        return view('contact', compact('phones','address', 'emails', 'socials'));
     }
 
     public function socials($id = null)
@@ -129,5 +137,17 @@ class SettingsController extends Controller
 
     function quoteMessage(Request $request) {
         return $request;
+    }
+
+    function message(Request $request) {
+        $validated = $request->validate([
+            'name' => ['required', 'max:100'],
+            'email' => ['required', 'max:60'],
+            'phone' => ['required', 'max:16'],
+            'subject' => ['required','max:150'],
+            'message' => ['required','max:255'],
+        ]);
+        $this->message->create($validated+['type'=>'contact']);
+        return json_encode(['status'=>'success', 'message'=>'Your message was received successfully. We will check your issue and get back to you as appropriate']);
     }
 }

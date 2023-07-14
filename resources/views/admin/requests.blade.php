@@ -79,25 +79,25 @@
 
                                         <td>
                                             <li class="dropdown"><a href="#" data-toggle="dropdown"
-                                                        class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
-                                                    <ul class="dropdown-menu">
-                                                        <li class="dropdown-item"><a href="#" id="saleMessageModalToggle"
-                                                                data-target="#saleMessageModal" data-toggle="modal"
-                                                                data-id="{{ $item->id }}"><i
-                                                                    class="fa fa-envelope text-success"></i>&nbsp;Send
-                                                                Message</a>
-                                                        </li>
-                                                        <li class="dropdown-item"><a
-                                                                href="{{ route('dealer.puchase.approve', $item->id) }}"><i
-                                                                    class="fa fa-check text-success"></i>&nbsp;Approve</a>
-                                                        </li>
-                                                        <li class="dropdown-item"><a href="#" id="desclinePurchaseToggle"
-                                                                data-toggle="modal" data-target="#declinePurchaseModal"
-                                                                data-id="{{ $item->id }}"><i
-                                                                    class="fa fa-edit text-warning"></i>&nbsp;Decline</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
+                                                    class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
+                                                <ul class="dropdown-menu">
+                                                    <li class="dropdown-item"><a href="#" id="saleMessageModalToggle"
+                                                            data-target="#saleMessageModal" data-toggle="modal"
+                                                            data-id="{{ $item->id }}"><i
+                                                                class="fa fa-envelope text-success"></i>&nbsp;Send
+                                                            Message</a>
+                                                    </li>
+                                                    <li class="dropdown-item"><a
+                                                            href="{{ route('dealer.puchase.approve', $item->id) }}"><i
+                                                                class="fa fa-check text-success"></i>&nbsp;Approve</a>
+                                                    </li>
+                                                    <li class="dropdown-item"><a href="#" id="desclinePurchaseToggle"
+                                                            data-toggle="modal" data-target="#declinePurchaseModal"
+                                                            data-id="{{ $item->id }}"><i
+                                                                class="fa fa-edit text-warning"></i>&nbsp;Decline</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
                                             <p class="mt-4">{{ date('H:i d M Y', strtotime($item->created_at)) }}</p>
                                         </td>
                                     </tr>
@@ -157,7 +157,7 @@
                                                 <li class="dropdown"><a href="#" data-toggle="dropdown"
                                                         class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
                                                     <ul class="dropdown-menu">
-                                                        <li class="dropdown-item"><a href="#" id="quoteMessageModalToggle" data-toggle="modal" 
+                                                        <li class="dropdown-item"><a href="#" id="quoteMessageModalToggle" data-toggle="modal"
                                                                 data-target="#quoteMessageModal"><i
                                                                     class="fa fa-envelope text-success"></i>&nbsp;Send
                                                                 Message</a></li>
@@ -254,22 +254,18 @@
                                             </td>
 
                                             <td>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <li class="dropdown"><a href="#" data-toggle="dropdown"
-                                                                class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
-                                                            <ul class="dropdown-menu">
-                                                                <li class="dropdown-item"><a href="#" id="loanRequestModalToggle"
-                                                                        data-toggle="modal" 
-                                                                        data-target="#loanMessageModal"><i
-                                                                            class="fa fa-envelope text-success"
-                                                                            data-id="{{ $item->id }}"
-                                                                            id="loanReplyBtn"></i>&nbsp;Send
-                                                                        Message</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </div>
-                                                </div>
+                                                <li class="dropdown"><a href="#" data-toggle="dropdown"
+                                                        class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="dropdown-item"><a href="#" id="loanRequestModalToggle"
+                                                                data-toggle="modal"
+                                                                data-target="#loanMessageModal"><i
+                                                                    class="fa fa-envelope text-success"
+                                                                    data-id="{{ $item->id }}"
+                                                                    id="loanReplyBtn"></i>&nbsp;Send
+                                                                Message</a></li>
+                                                    </ul>
+                                                </li>
                                                 <p class="mt-4">{{ date('H:i d M Y', strtotime($item->created_at)) }}
                                                 </p>
                                             </td>
@@ -324,22 +320,17 @@
                                                 <p>{{ $item->vehicle->year . ' - ' . $item->vehicle->price }}</p>
                                             </td>
                                             <td>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <li class="dropdown"><a href="#" data-toggle="dropdown"
-                                                                class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
-                                                            <ul class="dropdown-menu">
-                                                                <li class="dropdown-item"><a href="#" id="tradeInMessageModalToggle"
-                                                                        data-toggle="modal"
-                                                                        data-target="#tradeInMessageModal"
-                                                                        data-id="{{ $item->id }}"><i
-                                                                            class="fa fa-envelope text-success"></i>&nbsp;Send
-                                                                        Message</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </div>
-                                                </div>
-
+                                                <li class="dropdown"><a href="#" data-toggle="dropdown"
+                                                        class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="dropdown-item"><a href="#" id="tradeInMessageModalToggle"
+                                                                data-toggle="modal"
+                                                                data-target="#tradeInMessageModal"
+                                                                data-id="{{ $item->id }}"><i
+                                                                    class="fa fa-envelope text-success"></i>&nbsp;Send
+                                                                Message</a></li>
+                                                    </ul>
+                                                </li>
                                                 <p class="mt-4">{{ date('H:i j M Y ', strtotime($item->created_at)) }}
                                                 </p>
                                             </td>
@@ -627,7 +618,7 @@
                 let quote_id = $(this).data('id');
                 $('#quoteRequestID').val(quote_id);
             });
-            
+
             $('body').on('click', '#tradeInMessageModalToggle', function(event) {
                 let tradein_id = $(this).data('id');
                 $('#tradeinRequestID').val(quote_id);

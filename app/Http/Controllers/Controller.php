@@ -37,4 +37,5 @@ class Controller extends BaseController
     protected $purchase;
     protected $loan;
     protected $industry;
+    protected $message;
 }

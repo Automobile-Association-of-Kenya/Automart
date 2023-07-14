@@ -16,21 +16,19 @@ About us @parent
         <div class="breadcrumb-areas">
             <h1>About Us</h1>
             <ul class="breadcrumbs">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{ url('/') }}">Home</a></li>
                 <li class="active">About Us</li>
             </ul>
         </div>
     </div>
 </div>
-<!-- Sub Banner end -->
 
-<!-- About car start -->
 <div class="about-car">
     <div class="container">
         <div class="row">
             <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 col-xs-12">
                 <div class="about-slider-box">
-                    <img class="d-block w-100" src="img/img-6.jpg" alt="about">
+                    <img class="d-block w-100" src="" alt="about">
                 </div>
             </div>
             <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -407,29 +405,8 @@ About us @parent
         </div>
     </div>
 </div>
-<!-- Testimonial end -->
 
-<!-- Partners strat -->
-<div class="partners">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="custom-slider slide-box-btn">
-                    <div class="custom-box"><img src="img/brand/brand-1.png" alt="brand" class="img-fluid"></div>
-                    <div class="custom-box"><img src="img/brand/brand-2.png" alt="brand" class="img-fluid"></div>
-                    <div class="custom-box"><img src="img/brand/brand-3.png" alt="brand" class="img-fluid"></div>
-                    <div class="custom-box"><img src="img/brand/brand-4.png" alt="brand" class="img-fluid"></div>
-                    <div class="custom-box"><img src="img/brand/brand-1.png" alt="brand" class="img-fluid"></div>
-                    <div class="custom-box"><img src="img/brand/brand-2.png" alt="brand" class="img-fluid"></div>
-                    <div class="custom-box"><img src="img/brand/brand-3.png" alt="brand" class="img-fluid"></div>
-                    <div class="custom-box"><img src="img/brand/brand-4.png" alt="brand" class="img-fluid"></div>
-                    <div class="custom-box"><img src="img/brand/brand-1.png" alt="brand" class="img-fluid"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Partners end -->
+@include('layouts.brands')
 @endsection
 
 @section('footer_scripts')

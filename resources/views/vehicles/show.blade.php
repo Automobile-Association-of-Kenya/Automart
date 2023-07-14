@@ -23,7 +23,6 @@
             outline: none;
             border-radius: 5px;
         }
-
         .rangeslider__fill {
             color: #006544;
         }
@@ -54,7 +53,6 @@
                 <div class="col-lg-8 col-md-12 col-xs-12">
 
                     <div class="slide car-details-section cds-2 mb-30">
-
                         <div class="heading-car clearfix">
                             <div class="pull-left">
                                 <h3>{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}</h3>
@@ -398,9 +396,7 @@
 
     <div class="featured-car">
         <div class="container">
-
-            <h4 class="text-success">Other Vehicles You May Like</h4>
-
+            <h4 class="text-success">Other Vehicles From the Same Dealer</h4>
             <div class="featured-slider row slide-box-btn slider"
                 data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
 
@@ -410,7 +406,117 @@
                         $vehicle_no = $item->vehicle_no ?? $item->id;
                         $location = $item->yard !== null ? $item->yard->address : $item->location;
                     @endphp
-                    <div class="col-lg-4 slide slide-box">
+                    <div class="col-lg-3 slide slide-box">
+                        <div class="car-box-3">
+
+                            <div class="car-thumbnail">
+                                <a href="{{ url('/vehicle/' . $vehicle_no) }}" class="car-img">
+                                    <div class="for">{{ $item->usage }}</div>
+                                    <div class="price-box">
+                                        <span>Kes: {{ number_format($item->price, 2) }}</span>
+                                    </div>
+                                    <img class="d-block w-100"
+                                        src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}" alt="car">
+                                </a>
+                                <div class="carbox-overlap-wrapper">
+                                    <div class="overlap-box">
+                                        <div class="overlap-btns-area">
+                                            <a class="overlap-btn" data-bs-toggle="modal"
+                                                data-bs-target="#vehicleDetailsModal" data-id="{{ $item->id }}"
+                                                id="vehicleDetailsModalToggle">
+                                                <i class="fa fa-eye-slash"></i>
+                                            </a>
+                                            <a class="overlap-btn wishlist-btn" data-id="{{ $item->id }}">
+                                                <i class="fa fa-heart-o"></i>
+                                            </a>
+
+                                            <div class="car-magnify-gallery">
+                                                <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                    class="overlap-btn"
+                                                    data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
+                                                    <i class="fa fa-expand"></i>
+                                                    <img class="hidden"
+                                                        src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                        alt="hidden-img">
+                                                </a>
+
+                                                @if (is_array($images))
+                                                    @foreach ($images as $image)
+                                                        <a href="{{ asset('/vehicleimages/' . $image->image . '') }}"
+                                                            class="hidden"
+                                                            data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
+                                                            <img src="{{ asset('/vehicleimages/' . $image->image . '') }}"
+                                                                alt="hidden-img">
+                                                        </a>
+                                                    @endforeach
+                                                @endif
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="detail text-center">
+                                <h1 class="title">
+                                    <a class="text-success"
+                                        href="{{ url('/vehicle/' . $vehicle_no) }}">{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}</a>
+                                </h1>
+                                <ul class="custom-list">
+                                    <li>
+                                        <a href="{{ url('/vehicle/' . $vehicle_no) }}">{{ $item->usage }}</a>
+                                        &nbsp;|&nbsp;
+                                    </li>
+                                    <li>
+                                        <a href="">{{ $item->transmission }}</a> &nbsp;|&nbsp;
+                                    </li>
+                                    <li>
+                                        <a href="#">{{ $item->fuel_type }}</a>
+                                    </li>
+                                </ul>
+                                <ul class="custom-list">
+                                    <li>
+                                        <i class="flaticon-way"></i> {{ $item->mileage ?? 0 }} km &nbsp;|&nbsp;
+                                    </li>
+                                    <li>
+                                        <i class="flaticon-gear"></i> {{ $item->enginecc }} cc
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="footer">
+                                <div class="buttons mb-2 text-center">
+                                    <a href="#" class="btn btn-success btn-sm mt-2" id="whatsappToggle"
+                                        data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
+                                        Enquire</a>
+                                    <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm mt-2"><i
+                                            class="fa fa-hand"></i> Buy</a>
+                                    <a href="{{ route('loan', $vehicle_no) }}" class="btn btn-success btn-sm mt-2"><i
+                                            class="fa fa-"></i>
+                                        Apply
+                                        Loan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+
+    <div class="featured-car">
+        <div class="container">
+            <h4 class="text-success">Other Vehicles You May Like</h4>
+            <div class="featured-slider row slide-box-btn slider"
+                data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+
+                @foreach ($relatedvehicles as $item)
+                    @php
+                        $images = $item->images;
+                        $vehicle_no = $item->vehicle_no ?? $item->id;
+                        $location = $item->yard !== null ? $item->yard->address : $item->location;
+                    @endphp
+                    <div class="col-lg-3 slide slide-box">
                         <div class="car-box-3">
 
                             <div class="car-thumbnail">

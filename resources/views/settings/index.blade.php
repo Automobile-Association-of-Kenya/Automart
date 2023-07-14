@@ -4,7 +4,6 @@
     Settings @parent
 @endsection
 
-
 @section('header_styles')
     <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
@@ -19,6 +18,11 @@
 
         table {
             width: 100%;
+        }
+
+        .phone,
+        .mail {
+            display: none;
         }
     </style>
 @endsection
@@ -160,8 +164,6 @@
                                                                         class="form-control form-control-sm"
                                                                         name="subscriptionname" id="subsPropInput">
                                                                 </div>
-
-
 
                                                                 <div class="col-md-1">
                                                                     <button class="btn btn-sm btn-success" type="button"
@@ -339,7 +341,8 @@
                                                             <div class="col-md-12">
                                                                 <label for="phone">Message</label>
                                                                 {{-- <div class="float-right box-tools"></div> --}}
-                                                                <textarea class="textarea form_editors_textarea_wysihtml form-control" name="mailMessage" id="mailMessage" placeholder="Type your message here" required></textarea>
+                                                                <textarea class="textarea form_editors_textarea_wysihtml form-control" name="mailMessage" id="mailMessage"
+                                                                    placeholder="Type your message here" required></textarea>
                                                             </div>
 
                                                             <div class="col-md-12 mt-3">
@@ -363,7 +366,6 @@
                                 </div>
 
                             </div>
-
 
                             <div class="tab-pane fade mb-3" id="emailsTab" role="tabpanel" aria-labelledby="pop2-tab">
                                 <div class="row">
@@ -455,71 +457,6 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade mb-3" id="socialTabs" role="tabpanel" aria-labelledby="pop2-tab">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <table class="table table-bordered table-sm table-striped">
-                                            <thead>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Link</th>
-                                            </thead>
-                                            <tbody id="socialTable">
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="make-create-section mt-2">
-                                            <h4 class="text text-center mb-2"><b>Socials Form</b></h4>
-                                            <div id="socialfeedback"></div>
-
-                                            <form action="{{ route('social.store') }}" method="post"
-                                                id="createSocialForm">
-                                                @csrf
-                                                <input type="hidden" name="social_id" id="socialCreateID">
-
-                                                <div class="row">
-
-                                                    <div class="col-md-12 form-group">
-                                                        <label for="type">Type</label>
-                                                        <select id="socialType" name="type" class="form-control">
-                                                            <option value="">Select One</option>
-                                                            <option value="social">Social</option>
-                                                            <option value="address">Adrress</option>
-                                                            <option value="address">Adrress</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-md-12 form-group">
-                                                        <label for="socialname">Name</label>
-                                                        <input type="text" class="form-control form-control-md"
-                                                            id="socialName" name="name" required>
-                                                    </div>
-
-                                                    <div class="col-md-12 form-group">
-                                                        <label for="social Link">Link</label>
-                                                        <input type="text" class="form-control" name="link"
-                                                            id="socialLink">
-                                                    </div>
-
-                                                    <div class="col-md-12 form-group">
-                                                        <button class='btn btn-success btn-sm' id='savesocial'><i
-                                                                class="fal fa-save fa-lg fa-fw"></i> Save
-                                                        </button>
-                                                        <button class='btn btn-outline-warning btn-sm' id='clearsocial'><i
-                                                                class="fal fa-broom fa-lg fa-fw"></i>
-                                                            Reset</button>
-                                                    </div>
-
-                                                </div>
-
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="tab-pane fade mb-3" id="servicesTab" role="tabpanel" aria-labelledby="pop2-tab">
                                 <div class="row">
                                     <div class="col-md-9 mt-2" id="servicesTableSection">
@@ -576,7 +513,6 @@
                                                             Reset</button>
                                                     </div>
 
-
                                                 </div>
 
                                             </form>
@@ -586,14 +522,89 @@
                                 </div>
                             </div>
 
+                            <div class="tab-pane fade mb-3" id="socialTabs" role="tabpanel" aria-labelledby="pop2-tab">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <table class="table table-bordered table-sm table-striped">
+                                            <thead>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Link</th>
+                                            </thead>
+                                            <tbody id="socialTable">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="make-create-section mt-2">
+                                            <h4 class="text text-center mb-2"><b>Socials Form</b></h4>
+                                            <div id="socialfeedback"></div>
+
+                                            <form action="{{ route('social.store') }}" method="post"
+                                                id="createSocialForm">
+                                                @csrf
+                                                <input type="hidden" name="social_id" id="socialCreateID">
+
+                                                <div class="row">
+
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="type">Type</label>
+                                                        <select id="socialType" name="type" class="form-control">
+                                                            <option value="">Select One</option>
+                                                            <option value="social">Social</option>
+                                                            <option value="address">Adrress</option>
+                                                            <option value="phone">Phone</option>
+                                                            <option value="email">Email</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group social">
+                                                        <label for="socialname">Name</label>
+                                                        <input type="text" class="form-control form-control-md"
+                                                            id="socialName" name="name" required>
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group social">
+                                                        <label for="social Link">Link</label>
+                                                        <input type="text" class="form-control" name="link"
+                                                            id="socialLink">
+                                                    </div>
+{{-- 
+                                                    <div class="col-md-12 form-group phone">
+                                                        <label for="contactPhone">Phone</label>
+                                                        <input type="text" class="form-control" name="phone"
+                                                            id="contactPhone">
+                                                    </div>
+
+                                                    <div class="col-md-12 form-group mail">
+                                                        <label for="contactMail">Email</label>
+                                                        <input type="mail" class="form-control" name="mail"
+                                                            id="contactMail">
+                                                    </div> --}}
+
+                                                    <div class="col-md-12 form-group">
+                                                        <button class='btn btn-success btn-sm' id='savesocial'><i
+                                                                class="fal fa-save fa-lg fa-fw"></i> Save
+                                                        </button>
+                                                        <button class='btn btn-outline-warning btn-sm' id='clearsocial'><i
+                                                                class="fal fa-broom fa-lg fa-fw"></i>
+                                                            Reset</button>
+                                                    </div>
+
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
                 </div>
     </main>
 @endsection
-
-
 
 @section('footer_scrips')
     <script>
@@ -607,6 +618,34 @@
                 if (value === "repetetive") {
                     $('.repetetive').show();
                     $('.onetime').hide();
+                }
+            });
+            let socialType = $('#socialType');
+            socialType.on('change', function(event) {
+                let type = $(this).val();
+                if (type === "social") {
+                    $('.social').show();
+                    $('.address').hide();
+                    $('.phone').hide();
+                    $('.email').hide();
+                }
+                if (type === "address") {
+                    $('.social').hide();
+                    $('.address').show();
+                    $('.phone').hide();
+                    $('.email').hide();
+                }
+                if (type === "phone") {
+                    $('.social').hide();
+                    $('.address').hide();
+                    $('.phone').show();
+                    $('.email').hide();
+                }
+                if (type === "email") {
+                    $('.social').hide();
+                    $('.address').hide();
+                    $('.phone').hide();
+                    $('.email').show();              
                 }
             });
         })()
@@ -623,7 +662,7 @@
     <script src="{{ asset('js/bootstrap3_wysihtml5.js') }}"></script>
     <script>
         (function() {
-                $(".textarea").wysihtml5();
+            $(".textarea").wysihtml5();
 
             // $('#bootstrap-editor').wysihtml5({
             //     stylesheets: [

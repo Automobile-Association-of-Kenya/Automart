@@ -19,37 +19,22 @@
             </div>
         </div>
     </div>
-    <!-- Sub Banner end -->
-
-    <!-- Featured car start -->
     <div class="featured-car content-area">
         <div class="container">
             @include('layouts.search')
-            <div class="row">
+
+            <div class="row mt-4">
 
                 <div class="col-lg-12 col-md-12">
-                    <div class="option-bar clearfix">
+                    {{-- <div class="option-bar clearfix">
                         <div class="row">
                             <div class="col-lg-5 col-md-6 col-sm-12">
                                 <div class="sorting-options2">
                                     <h5>Showing 1-20 of {{ count($vehicles) }} Vehicles</h5>
                                 </div>
                             </div>
-
-                            {{-- <div class="col-lg-7 col-md-6 col-sm-12">
-
-                                <div class="sorting-options-3 float-end">
-                                    <select class="selectpicker search-fields" name="default-order">
-                                        <option>Default Order</option>
-                                        <option>Price High to Low</option>
-                                        <option>Price: Low to High</option>
-                                        <option>Newest Properties</option>
-                                        <option>Oldest Properties</option>
-                                    </select>
-                                </div>
-                            </div> --}}
                         </div>
-                    </div>
+                    </div> --}}
 
 
                     <div class="row" id="vehiclesection">

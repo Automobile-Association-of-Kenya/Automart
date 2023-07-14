@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand company-logo-2" href="{{ url('/') }}">
             {{-- <img src="img/logos/black-logo.png" alt="logo"> --}}
@@ -7,7 +7,7 @@
         <button class="navbar-toggler" type="button" id="drawer">
             <span class="fa fa-bars"></span>
         </button>
-        <div class="navbar-collapse collapse w-100 justify-content-end" id="navbar">
+        <div class="navbar-collapse collapse justify-content-center" id="navbar">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('/') }}" aria-expanded="false">
@@ -38,7 +38,7 @@
                                 <div class="col-sm-6 col-md-4 col-lg-4">
                                     <div class="megamenu-section" id="otherModels">
                                         <h6 class="megamenu-title  text-success">Others</h6>
-                                        <a class="dropdown-item" href="{{ route('new') }}">New Arrivals</a>
+                                        <a class="dropdown-item" href="{{ route('new') }}">Brand New</a>
                                         <a class="dropdown-item" href="{{ route('vehicles.discounts') }}">Discounted</a>
                                         <a class="dropdown-item" href="{{ route('vehicles.list') }}">All Vehicles</a>
                                     </div>
@@ -50,34 +50,20 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dealer.vehicles') }}">Selling Vehicles?</a>
+                    <a class="nav-link" href="{{ route('dealer.vehicles') }}">Selling a Car?</a>
                 </li>
-
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dashboard') }}">Partner</a>
-                </li> --}}
-
-                {{-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink7"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Shop
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="shop-list.html">Shop List</a></li>
-                        <li><a class="dropdown-item" href="shop-cart.html">Shop Cart</a></li>
-                        <li><a class="dropdown-item" href="shop-checkout.html">Shop Checkout</a></li>
-                        <li><a class="dropdown-item" href="shop-details.html">Shop Details</a></li>
-                    </ul>
-                </li> --}}
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="{{ url('about') }}">About Us</a>
+                    <a class="nav-link" href="{{ url('contact') }}">Car Financing</a>
                 </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="{{ url('contact') }}">Contact Us</a>
                 </li>
+            </ul>
+        </div>
 
+        <div class="navbar-collapse collapse justify-content-end" id="navbar">
+            <ul class="navbar-nav">
                 @auth
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink6"
@@ -87,7 +73,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
-                                <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -103,7 +89,8 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="btn btn-md btn-outline-success btn-round" href="{{ route('login') }}"><i class="fa fa-sign-in"></i> Login / Register</a>
+                        <a class="btn btn-md btn-outline-success btn-round" href="{{ route('login') }}"><i
+                                class="fa fa-sign-in"></i> Login / Register</a>
                     </li>
                 @endauth
             </ul>
@@ -173,7 +160,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
-                                <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
                             {{-- <li><a class="dropdown-item" href="">Logout</a></li> --}}
 
                             <li>
@@ -191,7 +178,7 @@
                     </li>
                 @else
                     <li>
-                        <a href="{{ route('login') }}" data-toggle="modal" data-target="accountModal"> <i
+                        <a href="{{ route('login') }}" class="btn btn-outline-success"> <i
                                 class="fa fa-sign-in"></i>Login / Register</a>
                     </li>
                 @endauth

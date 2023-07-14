@@ -41,7 +41,7 @@
                                 $images = $vehicle->images;
                                 $vehicle_no = (!is_null($item->vehicle_no)) ? $item->vehicle_no : $item->id;
                             @endphp
-                            <div class="col-lg-3 col-md-6">
+                            <div class="col-lg-4 col-md-6">
                                 <div class="car-box-3">
                                     <div class="car-thumbnail">
                                         <a href="{{ url('/vehicle/' .$vehicle_no.'/discount') }}" class="car-img">
@@ -144,7 +144,7 @@
         </div>
     </div>
 
-            @include('layouts.brands')
+    @include('layouts.brands')
 
 @endsection
 

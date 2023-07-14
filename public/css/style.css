@@ -1,7 +1,7 @@
 html,
 body {
     height: 100%;
-    font-family: 'Mulish', sans-serif;
+    /* font-family: 'Mulish', sans-serif; */
     background: #f9f9f9;
 }
 
@@ -42,8 +42,8 @@ h6,
 .h4,
 .h5,
 .h6 {
-    font-family: 'Barlow Condensed', sans-serif;
-    color: #212121;
+    /* font-family: 'Barlow Condensed', sans-serif; */
+    color: #333;
 }
 
 ul {
@@ -8339,11 +8339,11 @@ input[type=checkbox]:checked+label:before {
 
 /** Slide box btn start **/
 .slide-box-btn .slick-prev {
-    display: none !important;
+    display: inline-block !important;
 }
 
 .slide-box-btn .slick-next {
-    display: none !important;
+    display: inline-block !important;
 }
 
 .slide-box {

@@ -24,57 +24,6 @@
                         $vehicle_no = $item->vehicle_no ?? $item->id;
                     @endphp
                     <div class="slide slide-box">
-                        {{-- <a href="{{ url('vehicle/' . $vehicle->vehicle_no . '/sponsored') }}"> --}}
-                        {{-- <div class="car-box">
-                                <div class="car-image">
-                                    @if (file_exists("{{ asset('/vehicleimages/' . $image) }}"))
-                                        <img class="d-block w-100" src="{{ asset('/vehicleimages/' . $image) }}"
-                                            alt="{{ $vehicle->make->make . ' ' . $vehicle->model->model }}">
-                                    @else
-                                        <img class="d-block w-100" src="{{ asset('/images/default.jpg') }}"
-                                            alt="{{ $vehicle->make->make . ' ' . $vehicle->model->model }}">
-                                    @endif
-                                    <div class="tag">Sponsored</div>
-                                    <div class="facilities-list">
-                                        <ul>
-                                            <li>
-                                                <i class="flaticon-way"></i>{{ $vehicle->mileage }} km
-                                            </li>
-
-                                            <li>
-                                                <i class="flaticon-calendar-1"></i> {{ $vehicle->year }}
-                                            </li>
-
-                                            <li>
-                                                <i class="flaticon-manual-transmission"></i>
-                                                {{ $vehicle->transmission }}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="detail">
-                                    <h1 class="title" style="text-transform: capitalize;">
-                                        <a
-                                            href="{{ url('vehicle/' . $vehicle->vehicle_no . '/sponsored') }}">{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}</a>
-                                    </h1>
-                                    <div class="pull-right">
-                                        <p>Kes. <span
-                                                class="price text-warning">{{ number_format($vehicle->price, 2) }}</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                        <a href="#" class="btn btn-success btn-sm" id="whatsappToggle"
-                                            data-id="{{ $vehicle->id }}"><i class="fa fa-whatsapp"></i>&nbsp; Enquire</a>
-                                        <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm"><i
-                                                class="fa fa-hand"></i> Buy</a>
-                                        <a href="{{ route('loan', $vehicle_no) }}"
-                                            class="btn btn-success btn-sm float-ri"><i class="fa fa-"></i> Apply
-                                            Loan</a>
-                                </div>
-                            </div> --}}
-                        {{-- </a> --}}
-
                         <div class="car-box-3">
                             <div class="car-thumbnail">
                                 <a href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}" class="car-img">
@@ -411,16 +360,7 @@
     <div class="service-section-2">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 align-self-center">
-                    <div class="main-title">
-                        <h1>Our Services</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
-                        <a class="btn-3 btn-defaults none-btn-992" href="{{ url('services') }}">
-                            Read More <i class="arrow"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-7 offset-lg-1">
+                <div class="col-lg-12">
                     <div class="row" id="servicesSection">
                         <div class="text-center">
                             <div class="lds-roller">

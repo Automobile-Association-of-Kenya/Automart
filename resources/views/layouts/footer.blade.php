@@ -3,7 +3,7 @@
 <footer class="footer">
     <div class="clearfix"></div>
     <div class="footer-inner">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-4 col-lg-3 col-md-6 col-sm-6">
                     <div class="footer-item clearfix">
@@ -11,10 +11,11 @@
                         <div class="s-border"></div>
                         <div class="m-border"></div>
                         <div class="text">
-                            <P class="mb-0">You are at the right place. Our platform offers a wide selection of vehicles from trusted dealers across the country, ensuring we match buyers with the perfect fit for their needs and budget. We also provide financing options to our clients to enable them acquire or sell their dream cars with ease.</P>
+                            <P class="mb-0">With AA Automart, car sellers have the opportunity to showcase their vehicles to a wide audience of potential buyers, maximizing their chances of making a successful sale. On the other hand, car buyers can browse through a diverse inventory of cars available for purchase, making the platform a one-stop destination for all their automotive needs.</P>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                     <div class="footer-item clearfix">
                         <h4>

@@ -10,7 +10,7 @@
 @section('main')
     <!-- Sub banner start -->
     <div class="sub-banner">
-        <div class="container breadcrumb-area">
+        <div class="container-fluid breadcrumb-area">
             <div class="breadcrumb-areas">
                 <ul class="breadcrumbs">
                     <li><a href="{{ url('/') }}">Home</a></li>
@@ -21,35 +21,13 @@
     </div>
 
     <div class="featured-car content-area">
-        <div class="container">
+        <div class="container-fluid">
             @include('layouts.search')
-            <div class="row">
+
+            <div class="row mt-4">
 
                 <div class="col-lg-12 col-md-12">
-                    <div class="option-bar clearfix">
-                        <div class="row">
-                            <div class="col-lg-5 col-md-6 col-sm-12">
-                                <div class="sorting-options2">
-                                    <h5>Showing 1-20 of {{ count($vehicles) }} Listings</h5>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-7 col-md-6 col-sm-12">
-                                <div class="sorting-options-3 float-end">
-                                    <select class="selectpicker search-fields" name="default-order">
-                                        <option>Default Order</option>
-                                        <option>Price High to Low</option>
-                                        <option>Price: Low to High</option>
-                                        <option>Newest Properties</option>
-                                        <option>Oldest Properties</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="row" id="vehiclesection">
-
                         @foreach ($vehicles as $item)
                             @php
                                 $images = $item->images;

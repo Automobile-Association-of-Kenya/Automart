@@ -10,8 +10,7 @@ class Messages extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id','vehicle_id','type', 'source', 'destination', 'message'];
-
+    protected $fillable = ['user_id','vehicle_id','type', 'source', 'destination', 'message','name', 'email', 'phone',  'subject'];
     /**
      * Get the vehicle that owns the Messages
      *
