@@ -18,7 +18,7 @@ class SettingsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('contact','socials');
         $this->service = new Services();
         $this->maillist = new Maillist();
         $this->message = new Messages();

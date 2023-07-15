@@ -74,7 +74,7 @@
                                 place.</p>
                             <p><span class="fa fa-check-circle text-success"></span>&nbsp;Don't send any pre-payments.</p>
                             <p><span class="fa fa-check-circle text-success"></span>&nbsp;Ensure to check and verifying car documents before proceeding to transact.</p>
-                            <p><span class="fa fa-check-circle text-success"></span>Always make payments using secure and verifiable methods.</p>
+                            <p><span class="fa fa-check-circle text-success"></span>&nbsp;Always make payments using secure and verifiable methods.</p>
                             {{-- <p><span class="fa fa-check-circle text-success"></span></p>
                             <p><span class="fa fa-check-circle text-success"></span></p> --}}
                         </div>

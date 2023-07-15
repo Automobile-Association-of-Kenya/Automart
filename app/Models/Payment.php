@@ -35,25 +35,24 @@ class Payment extends Model
 
     public function initiatempesa($account, $subscription, $dealer_id = null, $phone)
     {
-        $url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
+        $url = env('MPESA_URL');
         $consumer_secret = $account->mpesa_secret;
         $consumer_key = $account->mpesa_customer_key;
         $encodestring = base64_encode($consumer_key . ":" . $consumer_secret);
         $OuathString = 'Basic ' . $encodestring;
 
-        $oauthURL = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
+        $oauthURL = env('MPESA_URL').'oauth/v1/generate?grant_type=client_credentials';
         $curl = curl_init();
+
         curl_setopt($curl, CURLOPT_URL, $oauthURL);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Basic ' . $encodestring)); //setting a custom header
         curl_setopt($curl, CURLOPT_HEADER, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
         $curl_response = curl_exec($curl);
         $json = json_decode($curl_response, true);
-
         $access_token = $json['access_token'];
-        $passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
+        $passkey = $account->mpesa_pass_key;
         $timestamp = '30' . date("ymdhis");
         $password = base64_encode('174379' . $passkey . $timestamp);
         $curl = curl_init();
@@ -66,9 +65,9 @@ class Payment extends Model
             'TransactionType' => $account->mpesa_transaction_type,
             'Amount' => 1,
             'PartyA' => $phone,
-            'PartyB' => '174379',
+            'PartyB' => $account->mpesa_business_short_code,
             'PhoneNumber' => $phone,
-            'CallBackURL' => 'https://82a6-41-80-113-125.ngrok-free.app/api/mpesa-callback',
+            'CallBackURL' => env('MPESA_URL').'api/mpesa-callback',
             'AccountReference' => 'Automart AA Kenya',
             'TransactionDesc' => "Payment for " . $subscription->name . " subscription"
         );

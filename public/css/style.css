@@ -1499,7 +1499,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .banner .carousel-content.bi-2 {
-    padding-top: 30px;
+    padding-top: 75px;
 }
 
 .carousel-item .text-right {
@@ -9028,7 +9028,7 @@ input[type=radio] {
 }
 
 .bi5 {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 /* .banner-content3 {
@@ -11361,6 +11361,9 @@ input[type="tel"] {
     .sticky-header .nav-link::after {
         display: none !important;
     }
+    .bi5{
+        margin: 5em 0;
+    }
 
     .sticky-header .navbar-expand-lg .navbar-nav .nav-link {
         color: #fff;
@@ -11520,6 +11523,9 @@ input[type="tel"] {
     .content-area {
         padding: 80px 0 50px;
     }
+        .bi5 {
+            margin: 5em 0;
+        }
 
     .content-area-2 {
         margin-bottom: 80px;
@@ -12380,7 +12386,7 @@ input[type="tel"] {
 
 @media (max-width: 576px) {
     .banner {
-        margin: 2em 0;
+        margin: 10em 0;
     }
 }
 
@@ -12390,7 +12396,7 @@ input[type="tel"] {
     }
 
     .banner {
-        margin: 1em 0;
+        margin: 8em 0;
     }
 
     .intro-text h3 {
@@ -12538,7 +12544,7 @@ input[type="tel"] {
     }
 
     .banner .carousel-content.bi-2 {
-        padding-top: 25px;
+        padding-top: 50px;
     }
 
     .shop-table.cart td,

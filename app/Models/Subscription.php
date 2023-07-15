@@ -18,6 +18,7 @@ class Subscription extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'type',
         'priority',
         'cost',
         'billingcycle',

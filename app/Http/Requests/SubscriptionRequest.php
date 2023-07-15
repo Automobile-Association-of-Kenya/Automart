@@ -24,6 +24,7 @@ class SubscriptionRequest extends FormRequest
         return [
             'subscription_id' => ['nullable', 'max:30', 'exists:subscriptions,id'],
             'name' => ['required', 'max:30'],
+            'type' => ['required','max:30'],
             'priority' => ['required', 'max:30'],
             'cost' => ['required', 'max:30'],
             'billingcycle' => ['required', 'max:30'],

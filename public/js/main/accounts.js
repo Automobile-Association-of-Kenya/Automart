@@ -31,6 +31,10 @@
                 i = 1,
                 option = "<option value=''>All</option>";
             $.each(accounts, function (key, value) {
+                var balance =
+                    value.payments_sum_amount !== null
+                        ? parseFloat(value.payments_sum_amount)
+                        : 0;
                 if (value.provider === "Mpesa") {
                     option +=
                         "<option value='" +
@@ -55,7 +59,7 @@
                         value.mpesa_secret +
                         "</td><td>" +
                         value.mpesa_pass_key +
-                        '</td><td>0</td><td><li class="dropdown"><a href="#" data-toggle="dropdown" class="btn btn-success btn-sm">Action</a><ul class="dropdown-menu"><li class="dropdown-item"><a href="#" id="assignSubscriptionToggle" data-toggle="modal" data-target="#assignToSubscriptionModal" data-id=' +
+                        '</td><td>'+toMoney(balance)+'</td><td>'+value.currency+'</td><td><li class="dropdown"><a href="#" data-toggle="dropdown" class="btn btn-success btn-sm">Action</a><ul class="dropdown-menu"><li class="dropdown-item"><a href="#" id="assignSubscriptionToggle" data-toggle="modal" data-target="#assignToSubscriptionModal" data-id=' +
                         value.id +
                         '><i class="fa fa-edit text-warning"></i>&nbsp;Add subscription</a></li></ul></li></td></tr>';
                 }
@@ -172,6 +176,7 @@
 
     function getSubscription() {
         $.getJSON("/subscriptions", function (subscriptions) {
+            var subscriptions = subscriptions.subscriptions;
             let option = "<option value=''>Select One</option>";
             $.each(subscriptions, function (key, value) {
                 option +=
@@ -193,6 +198,7 @@
 
     subscriptionAssignID.on("change", function () {
     });
+
 
     accountAssignForm.on("submit", function (event) {
         event.preventDefault();

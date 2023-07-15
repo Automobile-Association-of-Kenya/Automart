@@ -254,7 +254,7 @@
                 <div class="modal-title" id="carOverviewModalLabel">
                     <h4 class="text-black">Assign account to subscription
                 </div>
-                <button type="button" class="close btn btn-warning text-danger" data-bs-dismiss="modal"
+                <button type="button" class="close btn btn-warning text-danger" data-dismiss="modal"
                     aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

@@ -160,4 +160,5 @@ class User extends Authenticatable
         // $financescounttoday = count($this->financestoday());
         // return ['vehiclescount' => $vehiclescount, 'purchasecount' => $purchasecount, 'todaysvehiclecount' => $todaysvehiclecount, 'countvehiclessold' => $countvehiclessold, 'soldtodaycount' => $soldtodaycount, 'views' => $views, 'todayviews' => $todayviews, 'income' => $income, 'incometoday' => $incometoday, 'financescount' => $financescount, 'quotescount' => $quotescount, 'tradeinscount' => $tradeinscount, 'financescounttoday' => $financescounttoday, 'quotescounttoday' => $quotescounttoday, 'tradeinscounttoday' => $tradeinscounttoday];
     }
+
 }

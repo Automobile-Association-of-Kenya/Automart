@@ -21,12 +21,7 @@ class Account extends Model
         $account = $query->where('active', 1)->first();
         return (!is_null($account)) ? $account : $this->where('provider', $type)->where('active', 1)->first();
     }
-
-    /**
-     * Get all of the payments for the Account
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+    
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class, 'account_id', 'id');

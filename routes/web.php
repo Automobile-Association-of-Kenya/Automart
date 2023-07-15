@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/password-reset/{token}', [AuthController::class, 'reset'])->name('password.reset');
+
 Route::view('time', 'dealers.timer');
 
 

@@ -1104,7 +1104,7 @@ $(function () {
 
     function getVehicleMakes() {
         $.getJSON("/makes", function (makes) {
-            let option = "<option value=''>Model</option>";
+            let option = "<option value=''>Make</option>";
 
             $.each(makes, function (key, value) {
                 option +=

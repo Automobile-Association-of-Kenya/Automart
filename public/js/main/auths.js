@@ -18,6 +18,7 @@
         $("#emailpassword-reset").hide();
         $("#partner-section").hide();
     });
+    
     $("#partnerLoginToggle").on("click", function () {
         $("#register-section").hide();
         $("#login-section").show();

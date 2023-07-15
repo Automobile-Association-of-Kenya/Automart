@@ -224,6 +224,24 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-md-6 form-group">
+                                                        <label>Location </label><span for="yard"
+                                                            class="float-right"><input type="checkbox" name="yard_check"
+                                                                id="yardToggle">&nbsp;&nbsp;Yard</span>
+
+                                                        <div class="input-group locationInput">
+                                                            <input type="text"
+                                                                class="form-control form-control--md location"
+                                                                id="location" name="location">
+                                                        </div>
+
+                                                        <div class="input-group yardInput">
+                                                            <select name="yard_id"
+                                                                id="yardID"class="form-control form-control--md location chzn-select"
+                                                                style="width: 100%;"></select>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="col-md-12">
                                                         <label for="description">Description:</label>
                                                         <div class="input-group">
@@ -279,6 +297,7 @@
                                                                 style="width: 100%;"></select>
                                                         </div>
                                                     </div>
+
                                                     <input type="hidden" name="vehicle_id" id="vehicleID"
                                                         value="">
 

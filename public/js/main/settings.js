@@ -27,7 +27,8 @@
         billingCycle = $("#billingCycle"),
         createSubscriptionForm = $("#createSubscriptionForm"),
         subsDescription = $("#subsDescription"),
-        _token = $("input[name=_token]").val();
+        _token = $("input[name=_token]").val(),
+        subscriptionType = $("#subscriptionType");
 
     let subscriptionPropertiesList = $("#subscriptionPropertiesList"),
         subsPropInput = $("#subsPropInput"),
@@ -58,11 +59,12 @@
     function getSubscriptions() {
         $.getJSON("/subscriptions", function (data) {
             let subscriptions = data.subscriptions;
+            console.log(subscriptions);
             if (subscriptions.length > 0) {
                 let tr = "",
                     i = 1;
                 $.each(subscriptions, function (key, value) {
-                    let { id, name, priority, cost, billingcycle, properties } =
+                    let { id, name, type, priority, cost, billingcycle, properties } =
                         value;
                     let td = "",
                         j = 1;
@@ -81,9 +83,11 @@
                         "</td><td>" +
                         name +
                         "</td><td>" +
+                        type +
+                        "</td><td>" +
                         priority +
                         "</td><td>" +
-                        cost +
+                        toMoney(cost) +
                         "</td><td>" +
                         billingcycle +
                         "</td><td>" +
@@ -123,6 +127,7 @@
         event.preventDefault();
         let subscription_id = subscriptionID.val(),
             name = subscriptionName.val(),
+            type = subscriptionType.val(),
             priority = subPriority.val(),
             cost = subCost.val(),
             billingcycle = billingCycle.val(),
@@ -145,7 +150,9 @@
             billingcycle: billingcycle,
             properties: properties,
             description: description,
+            type:type,
         };
+        console.log(data);
 
         $.ajaxSetup({
             headers: {
@@ -199,17 +206,15 @@
             $.getJSON(
                 "/subscriptions/" + subscription_id,
                 function (subscription) {
-                    console.log(subscription);
                     subscriptionID.val(subscription.id);
                     subscriptionName.val(subscription.name);
-                    $(
-                        "#subPriority option[value=" +
+                    subsDescription.val(subscription.description);
+                    $("#subPriority option[value=" +
                             subscription.priority +
                             "]"
                     ).prop("selected", true);
                     subCost.val(subscription.cost);
-                    $(
-                        "#billingCycle option[value=" +
+                    $("#billingCycle option[value=" +
                             subscription.billingcycle +
                             "]"
                     ).prop("selected", true);
@@ -690,6 +695,11 @@
             message = mailMessage.val();
         let data = {}
     });
+
+    function toMoney(number) {
+        let actul = parseFloat(number);
+        return actul.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+    }
 
     // selectedUser;
 })();

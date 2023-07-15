@@ -42,6 +42,7 @@ class DealerController extends Controller
 
     public function vehicles()
     {
+        $this->dealer->checkstatus();
         $str = strtotime(date('Y-m-d H:i:s')) . auth()->id();
         $vehicles = $this->dealer->dealerVehicles();
         return view('dealers.vehicles', compact('vehicles', 'str'));

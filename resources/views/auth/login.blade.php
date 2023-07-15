@@ -83,7 +83,7 @@
                                 </form>
                             </div>
 
-                            <div class="sign-up text-center">
+                            <div class="sign-up text-center mt-2">
                                 <p class="m-0">Do not have an account? <a href="#" id="signupToggle"
                                         class="text-primary">Sign Up </a></p>
                                 <p>OR</p>
@@ -113,7 +113,7 @@
                                             class="form-control form-control-md" required>
                                     </div>
 
-                                    <div class="form-group text-center mt-1">
+                                    <div class="form-group text-center mt-2">
                                         <button type="submit" class="btn btn-success" id="submitEmail">Send email password
                                             reset
                                             link</button>
@@ -191,7 +191,7 @@
                                                     policy</strong></a></small>
                                     </div>
 
-                                    <div class="form-group text-center mt-1">
+                                    <div class="form-group text-center mt-2">
                                         <button type="submit" class="btn btn-success"
                                             id="registerSubmit">Register</button>
                                     </div>
@@ -298,7 +298,7 @@
                                                     policy</strong></a></small>
                                     </div>
 
-                                    <div class="form-group text-center mt-1">
+                                    <div class="form-group text-center mt-2">
                                         <button type="submit" class="btn btn-success">Register</button>
                                     </div>
                                 </form>
@@ -315,11 +315,11 @@
 
                         <div class="login-social border-t mt-1 pt-2 mb-1 text-center">
                             <p class="mb-2">OR continue with</p>
-                            <a href="#" class="btn-google"><i class="fa fa-google" aria-hidden="true"></i>
+                            {{-- <a href="#" class="btn-google"><i class="fa fa-google" aria-hidden="true"></i>
                                 Google</a>
                             <a href="{{ route('facebook.login') }}" class="btn-facebook"><i class="fa fa-facebook"
                                     aria-hidden="true"></i>
-                                Facebook</a>
+                                Facebook</a> --}}
                         </div>
                     </div>
 

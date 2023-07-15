@@ -37,7 +37,7 @@ class AccountsController extends Controller
 
     public function get()
     {
-        $accounts = $this->account->get();
+        $accounts = $this->account->withSum('payments', 'amount')->get();
         return json_encode($accounts);
     }
 

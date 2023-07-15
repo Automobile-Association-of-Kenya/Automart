@@ -5,12 +5,22 @@
 
 
 @section('main')
-    <div class="services-2 content-area">
+<div class="sub-banner">
+        <div class="container breadcrumb-area">
+            <div class="breadcrumb-areas">
+                <ul class="breadcrumbs">
+                    <li><a href="{{ url('/') }}">Home</a></li>
+                    <li class="active">Services</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="services-2 content-area" style="margin-top: ">
         <div class="container">
             <!-- Main title -->
             <div class="main-title text-center">
                 <h1>Our Services</h1>
-                <p>To ensure quality customer experience, we provide the following services.</p>
+                <p>Dedicated to AA Kenya vision of providing all-inclusive mobility solutions, we understand how best to meet your needs. Explore our other products and services.</p>
             </div>
             <div class="row" id="servicesSection">
 
@@ -19,7 +29,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="service-info-2">
                             <div class="icon">
-                                {!! $item->caret !!}
+                                
                             </div>
                             <div class="detail">
                                 <h3><a href="services-2.html">{{ $item->service }}</a></h3>
@@ -28,6 +38,7 @@
                         </div>
                     </div>
                 @endforeach
+
             </div>
         </div>
     </div>
