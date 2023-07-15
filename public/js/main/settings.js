@@ -578,8 +578,6 @@
                     "<tr><td>" +
                     i++ +
                     "</td><td>" +
-                    value.type +
-                    "</td><td>" +
                     value.name +
                     "</td><td>" +
                     value.link +
