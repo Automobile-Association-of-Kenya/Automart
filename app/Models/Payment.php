@@ -93,7 +93,7 @@ class Payment extends Model
             ]);
             return json_encode(['status' => 'success', 'checkoutid' => $data["CheckoutRequestID"], 'message' => $data["CustomerMessage"] . ". Check your phone and enter Mpesa pin to proceed."]);
         } else {
-            return json_encode(['status' => 'error', 'message' => $data]);
+            return json_encode(['status' => 'error', 'message' => $data, 'url'=> 'https://' . request()->server()["HTTP_HOST"] . '/api/mpesa-callback']);
         }
     }
 
