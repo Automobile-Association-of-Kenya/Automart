@@ -36,15 +36,17 @@ class Payment extends Model
 
     public function initiatempesa($account, $subscription, $dealer_id = null, $phone)
     {
-        $url = env('MPESA_URL');
+        $url = 'https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
+        $access_token = '';
         $consumer_secret = $account->mpesa_secret;
         $consumer_key = $account->mpesa_customer_key;
+        // $consumer_secret = 'KEPgfS1AbNtQeRaL';
+        // $consumer_key = '9u589pJDEzppBPkYbKeYvvrtGGYPtb5F';
         $encodestring = base64_encode($consumer_key . ":" . $consumer_secret);
         $OuathString = 'Basic ' . $encodestring;
 
-        $oauthURL = env('MPESA_URL').'oauth/v1/generate?grant_type=client_credentials';
+        $oauthURL = 'https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
         $curl = curl_init();
-
         curl_setopt($curl, CURLOPT_URL, $oauthURL);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Basic ' . $encodestring)); //setting a custom header
         curl_setopt($curl, CURLOPT_HEADER, false);
@@ -52,11 +54,11 @@ class Payment extends Model
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $curl_response = curl_exec($curl);
         $json = json_decode($curl_response, true);
-        return json_encode([$json,'callback'=> request()->server()["HTTP_HOST"] . '/api/mpesa-callback']);
+
         $access_token = $json['access_token'];
         $passkey = $account->mpesa_pass_key;
         $timestamp = '30' . date("ymdhis");
-        $password = base64_encode('174379' . $passkey . $timestamp);
+        $password = base64_encode($account->mpesa_business_short_code . $passkey . $timestamp);
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization:Bearer ' . $access_token)); //setting custom header
@@ -64,21 +66,22 @@ class Payment extends Model
             'BusinessShortCode' => $account->mpesa_business_short_code,
             'Password' => $password,
             'Timestamp' => $timestamp,
-            'TransactionType' => $account->mpesa_transaction_type,
-            'Amount' => 1,
+            'TransactionType' => 'CustomerPayBillOnline',
+            'Amount' => $subscription->cost,
             'PartyA' => $phone,
             'PartyB' => $account->mpesa_business_short_code,
             'PhoneNumber' => $phone,
-            'CallBackURL' => 'https://'.request()->server()["HTTP_HOST"].'/api/mpesa-callback',
-            'AccountReference' => 'Automart AA Kenya',
-            'TransactionDesc' => "Payment for " . $subscription->name . " subscription"
+            'CallBackURL' => 'https://automart.aakenya.co.ke/api/mpesa-callback',
+            'AccountReference' => 'Parent' . auth()->id() . $timestamp,
+            'TransactionDesc' => 'Parent payment - ' . date("F")
         );
+
         $data_string = json_encode($curl_post_data);
+
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
         $curl_response = curl_exec($curl);
-        return json_encode([$curl_response, 'url'=> 'https://' . request()->server()["HTTP_HOST"] . '/api/mpesa-callback']);
         $data = json_decode($curl_response, true);
         if (isset($data["ResponseCode"]) && $data["ResponseCode"] == 0) {
             $this->create([
@@ -92,9 +95,9 @@ class Payment extends Model
                 'amount' => $subscription->amount,
                 'trans_time' => now(),
             ]);
-            return json_encode(['status' =>'success', 'url' => 'https://' . request()->server()["HTTP_HOST"] . '/api/mpesa-callback', 'checkoutid' => $data["CheckoutRequestID"], 'message' => $data["CustomerMessage"] . ". Check your phone and enter Mpesa pin to proceed."]);
+            return json_encode(['status' => 'success',  'checkoutid' => $data["CheckoutRequestID"], 'message' => $data["CustomerMessage"] . ". Check your phone and enter Mpesa pin to proceed."]);
         } else {
-            return json_encode(['status' => 'error', 'message' => $data, 'url'=> 'https://' . request()->server()["HTTP_HOST"] . '/api/mpesa-callback']);
+            return json_encode(['status' => 'error', 'message' => $data]);
         }
     }
 

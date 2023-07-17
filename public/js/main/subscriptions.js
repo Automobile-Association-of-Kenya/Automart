@@ -313,6 +313,7 @@
                             );
                         }, 7000);
                     } else {
+                        console.log(result);
                         $(".loadersection").children().remove();
                         submit.prop({ disabled: false });
                         showError(result.message, "#paymentfeedback");
