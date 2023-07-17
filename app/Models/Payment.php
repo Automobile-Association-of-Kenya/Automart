@@ -69,7 +69,7 @@ class Payment extends Model
             'PartyA' => $phone,
             'PartyB' => $account->mpesa_business_short_code,
             'PhoneNumber' => $phone,
-            'CallBackURL' => 'http://'.request()->server()["HTTP_HOST"].'/api/mpesa-callback',
+            'CallBackURL' => 'https://'.request()->server()["HTTP_HOST"].'/api/mpesa-callback',
             'AccountReference' => 'Automart AA Kenya',
             'TransactionDesc' => "Payment for " . $subscription->name . " subscription"
         );
