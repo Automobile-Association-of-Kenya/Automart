@@ -52,6 +52,7 @@ class Payment extends Model
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $curl_response = curl_exec($curl);
         $json = json_decode($curl_response, true);
+        return $json;
         $access_token = $json['access_token'];
         $passkey = $account->mpesa_pass_key;
         $timestamp = '30' . date("ymdhis");
