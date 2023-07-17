@@ -1198,4 +1198,37 @@ $(function () {
                 }
             });
     });
+
+    if ("Notification" in window) {
+        if (Notification.permission === "granted") {
+            notify();
+        } else {
+            Notification.requestPermission().then((res) => {
+                if (res === "granted") {
+                    notify();
+                } else if (res === "denied") {
+                    console.error("Notification access denied");
+                } else if (res === "default") {
+                    new Notification("Here we are");
+                }
+            });
+        }
+        console.log(Notification.permission);
+        console.log("Notification enabled");
+    } else {
+        console.error("Notification disabled");
+    }
+
+    function notify() {
+        // let notification = new Notification("New Vehicle Alert", {
+        //     body: "2022 Toyota Landcruiser V-8 twin turbo engine",
+        //     icon: "../../public/vehicleimages/img20321689394325.jpg",
+        //     image: "../../public/vehicleimages/img20321689394325.jpg",
+        //     vibrate: [200, 100, 200],
+        // });
+        // notification.addEventListener("click", () => {
+        //     window.open("http://newautomart.co.ke");
+        // });
+    }
+
 })(jQuery);

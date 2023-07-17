@@ -9020,7 +9020,7 @@ input[type=radio] {
 .search-box-4 {
     background-color: #fff;
     padding: 30px;
-    max-width: 320px !important;
+    /* max-width: 320px !important; */
     margin: 0 0 0 auto;
     width: 100%;
     z-index: 1;
@@ -11971,7 +11971,7 @@ input[type="tel"] {
     }
 
     .search-box-4 {
-        max-width: 360px !important;
+        /* max-width: 360px !important; */
         top: 7%;
         right: 6%;
     }
