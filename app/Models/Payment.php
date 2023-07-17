@@ -91,7 +91,7 @@ class Payment extends Model
                 'amount' => $subscription->amount,
                 'trans_time' => now(),
             ]);
-            return json_encode(['status' => 'success', 'checkoutid' => $data["CheckoutRequestID"], 'message' => $data["CustomerMessage"] . ". Check your phone and enter Mpesa pin to proceed."]);
+            return json_encode(['status' =>'success', 'url' => 'https://' . request()->server()["HTTP_HOST"] . '/api/mpesa-callback', 'checkoutid' => $data["CheckoutRequestID"], 'message' => $data["CustomerMessage"] . ". Check your phone and enter Mpesa pin to proceed."]);
         } else {
             return json_encode(['status' => 'error', 'message' => $data, 'url'=> 'https://' . request()->server()["HTTP_HOST"] . '/api/mpesa-callback']);
         }
