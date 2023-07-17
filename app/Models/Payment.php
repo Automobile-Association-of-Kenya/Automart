@@ -78,6 +78,7 @@ class Payment extends Model
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
         $curl_response = curl_exec($curl);
+        return json_encode([$curl_response, 'url'=> 'https://' . request()->server()["HTTP_HOST"] . '/api/mpesa-callback']);
         $data = json_decode($curl_response, true);
         if (isset($data["ResponseCode"]) && $data["ResponseCode"] == 0) {
             $this->create([
