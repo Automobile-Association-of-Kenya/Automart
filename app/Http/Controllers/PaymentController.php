@@ -64,7 +64,7 @@ class PaymentController extends Controller
     {
         $payment = $this->payment->where('crid',$checkOutId)->first();
         if ($payment->complete == 1 && !is_null($payment->trans_id)) {
-            $this->subscription->subscribe($payment->dealer_id,$payment->subscription_id);
+            $this->subscription->subscribe($payment);
         }
         return json_encode($payment);
     }

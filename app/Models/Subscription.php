@@ -60,9 +60,9 @@ class Subscription extends Model
         return $this->belongsToMany(Subsproperty::class, 'subscription_property', 'subscription_id', 'subsproperty_id');
     }
 
-    public function subscribe($user, $subscription_id)
+    public function subscribe($payment)
     {
-        $subscription = $this->find($subscription_id);
+        $subscription = $this->find($payment->subscription_id);
         if ($subscription->billingcycle === "Monthly") {
             $expiry = Carbon::now()->addMonth();
         } elseif ($subscription->billingcycle === "Yearly") {
@@ -71,8 +71,8 @@ class Subscription extends Model
             $expiry = Carbon::now()->addDays($subscription->billingcycle);
         }
         $dealer_id = auth()->user()->dealer_id ?? null;
-        DB::table('dealer_subscription')->insert(['user_id' => auth()->id(), 'dealer_id' => $dealer_id, 'subscription_id' => $subscription_id, 'start_date' => date('Y-m-d H:i:s'), 'expiry_date' => $expiry, 'status' => 1]);
-        new EventsSubscription(auth()->user(), $subscription);
+        DB::table('dealer_subscription')->insert(['user_id' => auth()->id(), 'dealer_id' => $dealer_id, 'subscription_id' => $payment->subscription_id, 'start_date' => date('Y-m-d H:i:s'), 'expiry_date' => $expiry, 'status' => 1]);
+        event(new EventsSubscription(auth()->user(), $subscription));
     }
 
     public function dealers(): BelongsToMany

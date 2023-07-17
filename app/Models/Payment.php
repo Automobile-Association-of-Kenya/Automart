@@ -101,7 +101,7 @@ class Payment extends Model
         $payment = $this->where('crid', $checkOutId)->first();
         if (!is_null($payment)) {
             $payment->update(['trans_id' => $trans_id, 'phone' => $phonenumber, 'amount' => $amount, 'complete' => 1, 'completed_at' => $completed_at]);
-            (new Subscription(auth()->user(), $payment));
+            event(new Subscription(auth()->user(), $payment));
         }
     }
 
