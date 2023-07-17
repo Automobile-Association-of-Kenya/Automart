@@ -84,7 +84,6 @@
                     </div>
                 </div>
 
-                
                 <div class="col-lg-5 col-md-12">
                     <div class="contact-info">
                         <h3 class="mb-20">Contact Info</h3>
@@ -130,10 +129,40 @@
                         <div class="social-media social-media-two">
                             <div class="social-list">
                                 @foreach ($socials as $item)
-                                    <div class="icon {{ strtolower($item?->name) }}">
-                                    <div class="tooltip">{{ $item?->name }}</div>
-                                    <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
-                                </div>
+                                    @if ($item->name == 'facebook')
+                                        <div class="icon {{ strtolower($item?->name) }}">
+                                            <div class="tooltip">{{ $item?->name }}</div>
+                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                        </div>
+                                    @endif
+                                    
+                                    @if ($item->name == 'twitter')
+                                        <div class="icon {{ strtolower($item?->name) }}">
+                                            <div class="tooltip">{{ $item?->name }}</div>
+                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                        </div>
+                                    @endif
+
+                                    @if ($item->name == 'instagram')
+                                        <div class="icon {{ strtolower($item?->name) }}">
+                                            <div class="tooltip">{{ $item?->name }}</div>
+                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                        </div>
+                                    @endif
+
+                                    @if ($item->name == 'linkedin')
+                                        <div class="icon {{ strtolower($item?->name) }}">
+                                            <div class="tooltip">{{ $item?->name }}</div>
+                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                        </div>
+                                    @endif
+
+                                    @if ($item->name == 'whatsapp')
+                                        <div class="icon {{ strtolower($item?->name) }}">
+                                            <div class="tooltip">{{ $item?->name }}</div>
+                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                        </div>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>

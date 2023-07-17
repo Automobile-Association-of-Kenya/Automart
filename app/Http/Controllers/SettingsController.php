@@ -39,7 +39,7 @@ class SettingsController extends Controller
         $phones = Social::where('name','phone')->get();
         $address = Social::where('name', 'address')->first();
         $emails = Social::where('name', 'email')->get();
-        $socials = Social::where('name','social')->get();
+        $socials = Social::where('type','social')->get();
         return view('contact', compact('phones','address', 'emails', 'socials'));
     }
 
@@ -53,10 +53,10 @@ class SettingsController extends Controller
     {
         if (!is_null($request->social_id)) {
             $social = Social::find($request->social_id);
-            $social->update(['name' => $request->name, 'link' => $request->link]);
+            $social->update(['type'=>$request->type,'name' => $request->name, 'link' => $request->link]);
             $message = 'Social updated successfully';
         } else {
-            $social = Social::create(['name' => $request->name, 'link' => $request->link]);
+            $social = Social::create(['type' => $request->type, 'name' => $request->name, 'link' => $request->link]);
             $message = 'Social created successfully';
         }
         return json_encode(['status' => 'success', 'message' => $message]);

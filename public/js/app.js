@@ -1006,80 +1006,80 @@ $(function () {
     // highEndCars();
 
     function getSocials() {
-        $.getJSON("/socials", function (socials) {
-            let li = "",
-                phone = "";
-            $.each(socials, function (key, value) {
-                if (value.type === "address") {
-                    $("#contact-info").append(
-                        '<li><i class="flaticon-pin"></i>' +
-                            value.address +
-                            "</li>"
-                    );
-                }
+        // $.getJSON("/socials", function (socials) {
+        //     let li = "",
+        //         phone = "";
+        //     $.each(socials, function (key, value) {
+        //         if (value.type === "address") {
+        //             $("#contact-info").append(
+        //                 '<li><i class="flaticon-pin"></i>' +
+        //                     value.address +
+        //                     "</li>"
+        //             );
+        //         }
 
-                if (value.type === "phone") {
-                    phone +=
-                        '<a href="tel:' +
-                        value.link +
-                        '"><i class="fa fa-phone"></i>Need Support? ' +
-                        value.link +
-                        "</a>";
-                    $("#contact-info").append(
-                        '<li><i class="flaticon-phone"></i><a href="tel:' +
-                            value.link +
-                            '">' +
-                            value.link +
-                            "</a></li>"
-                    );
-                }
+        //         if (value.type === "phone") {
+        //             phone +=
+        //                 '<a href="tel:' +
+        //                 value.link +
+        //                 '"><i class="fa fa-phone"></i>Need Support? ' +
+        //                 value.link +
+        //                 "</a>";
+        //             $("#contact-info").append(
+        //                 '<li><i class="flaticon-phone"></i><a href="tel:' +
+        //                     value.link +
+        //                     '">' +
+        //                     value.link +
+        //                     "</a></li>"
+        //             );
+        //         }
 
-                if (value.type == "mail") {
-                    phone +=
-                        '<a href="tel:' +
-                        value.link +
-                        '"><i class="fa fa-envelope"></i>' +
-                        value.link +
-                        "</a>";
-                    li +=
-                        '<li><i class="flaticon-mail"></i><a  href="mailto:' +
-                        value.link +
-                        '">' +
-                        value.link +
-                        "</a></li>";
-                }
+        //         if (value.type == "mail") {
+        //             phone +=
+        //                 '<a href="tel:' +
+        //                 value.link +
+        //                 '"><i class="fa fa-envelope"></i>' +
+        //                 value.link +
+        //                 "</a>";
+        //             li +=
+        //                 '<li><i class="flaticon-mail"></i><a  href="mailto:' +
+        //                 value.link +
+        //                 '">' +
+        //                 value.link +
+        //                 "</a></li>";
+        //         }
 
-                if (value.type === "social" && value.name === "facebook") {
-                    li +=
-                        '<div class="icon facebook"><div class="tooltip">Facebook</div><a href=\'' +
-                        value.link +
-                        "' target='_blank'><span><i class=\"fa fa-facebook\"></i></span></a></div>";
-                } else if (value.type == "social" && value.name == "twitter") {
-                    li +=
-                        '<div class="icon twitter"><div class="tooltip">Twitter</div><a href=\'' +
-                        value.link +
-                        "' target='_blank'><span><i class=\"fa fa-twitter\"></i></span></a></div>";
-                } else if (
-                    value.type === "social" &&
-                    value.name === "instagram"
-                ) {
-                    li +=
-                        '<div class="icon instagram"><div class="tooltip">Instagram</div><a href=\'' +
-                        value.link +
-                        "' target='_blank'><span><i class=\"fa fa-instagram\"></i></span></div>";
-                } else if (
-                    value.type === "social" &&
-                    value.name === "whatsapp"
-                ) {
-                    li +=
-                        '<div class="icon whatsapp"><div class="tooltip">Whatsapp</div><a href=\'' +
-                        value.link +
-                        "' target='_blank'><span><i class=\"fa fa-whatsapp\"></i></span></div>";
-                }
-            });
-            $("#socialheader").html(phone);
-            $(".social-list").html(li);
-        });
+        //         if (value.type === "social" && value.name === "facebook") {
+        //             li +=
+        //                 '<div class="icon facebook"><div class="tooltip">Facebook</div><a href=\'' +
+        //                 value.link +
+        //                 "' target='_blank'><span><i class=\"fa fa-facebook\"></i></span></a></div>";
+        //         } else if (value.type == "social" && value.name == "twitter") {
+        //             li +=
+        //                 '<div class="icon twitter"><div class="tooltip">Twitter</div><a href=\'' +
+        //                 value.link +
+        //                 "' target='_blank'><span><i class=\"fa fa-twitter\"></i></span></a></div>";
+        //         } else if (
+        //             value.type === "social" &&
+        //             value.name === "instagram"
+        //         ) {
+        //             li +=
+        //                 '<div class="icon instagram"><div class="tooltip">Instagram</div><a href=\'' +
+        //                 value.link +
+        //                 "' target='_blank'><span><i class=\"fa fa-instagram\"></i></span></div>";
+        //         } else if (
+        //             value.type === "social" &&
+        //             value.name === "whatsapp"
+        //         ) {
+        //             li +=
+        //                 '<div class="icon whatsapp"><div class="tooltip">Whatsapp</div><a href=\'' +
+        //                 value.link +
+        //                 "' target='_blank'><span><i class=\"fa fa-whatsapp\"></i></span></div>";
+        //         }
+        //     });
+        //     $("#socialheader").html(phone);
+        //     $(".social-list").html(li);
+        // });
     }
     getSocials();
 
@@ -1220,15 +1220,15 @@ $(function () {
     }
 
     function notify() {
-        // let notification = new Notification("New Vehicle Alert", {
-        //     body: "2022 Toyota Landcruiser V-8 twin turbo engine",
-        //     icon: "../../public/vehicleimages/img20321689394325.jpg",
-        //     image: "../../public/vehicleimages/img20321689394325.jpg",
-        //     vibrate: [200, 100, 200],
-        // });
-        // notification.addEventListener("click", () => {
-        //     window.open("http://newautomart.co.ke");
-        // });
+        let notification = new Notification("New Vehicle Alert", {
+            body: "2022 Toyota Landcruiser V-8 twin turbo engine",
+            icon: "../../public/vehicleimages/img20321689394325.jpg",
+            image: "../../public/vehicleimages/img20321689394325.jpg",
+            vibrate: [200, 100, 200],
+        });
+        notification.addEventListener("click", () => {
+            window.open("http://newautomart.co.ke");
+        });
     }
 
 })(jQuery);

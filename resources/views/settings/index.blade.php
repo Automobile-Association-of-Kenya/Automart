@@ -528,6 +528,7 @@
                                         <table class="table table-bordered table-sm table-striped">
                                             <thead>
                                                 <th>#</th>
+                                                <th>Type</th>
                                                 <th>Name</th>
                                                 <th>Link</th>
                                             </thead>
@@ -554,8 +555,7 @@
                                                             <option value="">Select One</option>
                                                             <option value="social">Social</option>
                                                             <option value="address">Adrress</option>
-                                                            <option value="phone">Phone</option>
-                                                            <option value="email">Email</option>
+                                                            <option value="contact">Contact</option>
                                                         </select>
                                                     </div>
 
@@ -570,7 +570,7 @@
                                                         <input type="text" class="form-control" name="link"
                                                             id="socialLink">
                                                     </div>
-{{-- 
+{{--
                                                     <div class="col-md-12 form-group phone">
                                                         <label for="contactPhone">Phone</label>
                                                         <input type="text" class="form-control" name="phone"
@@ -620,34 +620,34 @@
                     $('.onetime').hide();
                 }
             });
-            let socialType = $('#socialType');
-            socialType.on('change', function(event) {
-                let type = $(this).val();
-                if (type === "social") {
-                    $('.social').show();
-                    $('.address').hide();
-                    $('.phone').hide();
-                    $('.email').hide();
-                }
-                if (type === "address") {
-                    $('.social').hide();
-                    $('.address').show();
-                    $('.phone').hide();
-                    $('.email').hide();
-                }
-                if (type === "phone") {
-                    $('.social').hide();
-                    $('.address').hide();
-                    $('.phone').show();
-                    $('.email').hide();
-                }
-                if (type === "email") {
-                    $('.social').hide();
-                    $('.address').hide();
-                    $('.phone').hide();
-                    $('.email').show();              
-                }
-            });
+            // let socialType = $('#socialType');
+            // socialType.on('change', function(event) {
+            //     let type = $(this).val();
+            //     if (type === "social") {
+            //         $('.social').show();
+            //         $('.address').hide();
+            //         $('.phone').hide();
+            //         $('.email').hide();
+            //     }
+            //     if (type === "address") {
+            //         $('.social').hide();
+            //         $('.address').show();
+            //         $('.phone').hide();
+            //         $('.email').hide();
+            //     }
+            //     if (type === "phone") {
+            //         $('.social').hide();
+            //         $('.address').hide();
+            //         $('.phone').show();
+            //         $('.email').hide();
+            //     }
+            //     if (type === "email") {
+            //         $('.social').hide();
+            //         $('.address').hide();
+            //         $('.phone').hide();
+            //         $('.email').show();
+            //     }
+            // });
         })()
     </script>
 

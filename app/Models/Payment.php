@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Subscription;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -67,7 +68,7 @@ class Payment extends Model
             'PartyA' => $phone,
             'PartyB' => $account->mpesa_business_short_code,
             'PhoneNumber' => $phone,
-            'CallBackURL' => env('MPESA_URL').'api/mpesa-callback',
+            'CallBackURL' => request()->server()["HTTP_HOST"].'/api/mpesa-callback',
             'AccountReference' => 'Automart AA Kenya',
             'TransactionDesc' => "Payment for " . $subscription->name . " subscription"
         );
@@ -100,6 +101,7 @@ class Payment extends Model
         $payment = $this->where('crid', $checkOutId)->first();
         if (!is_null($payment)) {
             $payment->update(['trans_id' => $trans_id, 'phone' => $phonenumber, 'amount' => $amount, 'complete' => 1, 'completed_at' => $completed_at]);
+            (new Subscription(auth()->user(), $payment));
         }
     }
 
