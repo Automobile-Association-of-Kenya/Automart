@@ -69,7 +69,7 @@ class Payment extends Model
             'PartyA' => $phone,
             'PartyB' => $account->mpesa_business_short_code,
             'PhoneNumber' => $phone,
-            'CallBackURL' => request()->server()["HTTP_HOST"].'/api/mpesa-callback',
+            'CallBackURL' => 'http://'.request()->server()["HTTP_HOST"].'/api/mpesa-callback',
             'AccountReference' => 'Automart AA Kenya',
             'TransactionDesc' => "Payment for " . $subscription->name . " subscription"
         );
@@ -79,7 +79,6 @@ class Payment extends Model
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
         $curl_response = curl_exec($curl);
         $data = json_decode($curl_response, true);
-        return json_encode($data);
         if (isset($data["ResponseCode"]) && $data["ResponseCode"] == 0) {
             $this->create([
                 'user_id' => auth()->id(),
