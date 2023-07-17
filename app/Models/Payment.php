@@ -52,7 +52,7 @@ class Payment extends Model
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $curl_response = curl_exec($curl);
         $json = json_decode($curl_response, true);
-        return json_encode([$json,'callback'=> request()->server()["HTTP_HOST"] . '/api/mpesa-callback']);
+        // return json_encode([$json,'callback'=> request()->server()["HTTP_HOST"] . '/api/mpesa-callback']);
         $access_token = $json['access_token'];
         $passkey = $account->mpesa_pass_key;
         $timestamp = '30' . date("ymdhis");
@@ -79,6 +79,7 @@ class Payment extends Model
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
         $curl_response = curl_exec($curl);
         $data = json_decode($curl_response, true);
+        return json_encode($data);
         if (isset($data["ResponseCode"]) && $data["ResponseCode"] == 0) {
             $this->create([
                 'user_id' => auth()->id(),
