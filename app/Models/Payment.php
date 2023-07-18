@@ -107,8 +107,14 @@ class Payment extends Model
     {
         $payment = $this->where('crid', $checkOutId)->first();
         if (!is_null($payment)) {
-            $payment->update(['trans_id' => $trans_id, 'phone' => $phonenumber, 'amount' => $amount, 'complete' => 1, 'completed_at' => $completed_at]);
-            event(new Subscription(auth()->user(), $payment));
+            // 'phone' => $phonenumber,
+            $payment->update(['trans_id' => $trans_id, 'amount' => $amount, 'complete' => 1, 'completed_at' => $completed_at]);
+            // event(new Subscription(auth()->user(), $payment));
+            $query = Vehicle::query();
+            if (!is_null($this->user->dealer_id)) {
+                $query->where('dealer_id', $this->user->dealer_id);
+            }
+            $query->orWhere('user_id', $this->user->id)->update(['priority' => $this->plan->priority, 'sponsored' => 1]);
         }
     }
 

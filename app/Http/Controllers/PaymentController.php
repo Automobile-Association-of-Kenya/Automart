@@ -38,7 +38,6 @@ class PaymentController extends Controller
         $data = file_get_contents('php://input');
         $json = json_decode($data);
         $Body = $json->Body;
-        
         Log::notice($data);
         $stkCallback = $Body->stkCallback;
         $ResultCode = $stkCallback->ResultCode;
@@ -52,7 +51,7 @@ class PaymentController extends Controller
             $amount = $Item[0]->Value;
             $trans_id = $Item[1]->Value;
             $completed_at = $Item[2]->Value;
-            $phonenumber = $Item[3]->Value;
+            $phonenumber = $Item[3]?->Value;
             $this->mpesaconfirm($checkOutId,$trans_id, $phonenumber,$amount,$completed_at);
         }
     }
