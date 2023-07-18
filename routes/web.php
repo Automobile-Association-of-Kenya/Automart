@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/email/verify/{id}/{hash}', [ProfileController::class,'verify'])->middleware(['signed'])->name('verification.verify');
+
 Route::get('/password-reset/{token}', [AuthController::class, 'reset'])->name('password.reset');
 
 Route::view('time', 'dealers.timer');

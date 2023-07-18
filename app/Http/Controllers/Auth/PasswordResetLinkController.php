@@ -42,19 +42,29 @@ class PasswordResetLinkController extends Controller
         //     $request->only('email')
         // );
 
-        $mail = new Mailer();
-        $email = $request->email;
-        $user = $this->user->getUserBy('email', $email);
-        if (!is_null($user)) {
-            $token = Str::random(20);
-            $this->user->createPasswordReset($email, $token);
-            $mail->sendPasswordRecoveryEmail($email, $token);
-        } else {
-            return back()->withErrors('email', 'User with that email address does not exist');
+        // $mail = new Mailer();
+        // $email = $request->email;
+        // $user = $this->user->getUserBy('email', $email);
+        // if (!is_null($user)) {
+        //     $token = Str::random(20);
+        //     $this->user->createPasswordReset($email, $token);
+        //     $mail->sendPasswordRecoveryEmail($email, $token);
+        // } else {
+        //     return back()->withErrors('email', 'User with that email address does not exist');
+        // }
+        // return redirect()->back()->with('success', 'Password reset link has been sent to your email. Click on the link and create a new password');
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        if ($status == Password::RESET_LINK_SENT) {
+            $val = "success";
+            $message = "Request success. A password reset link has been sent to your email. Please click the link to reset your password";
+        }else {
+            $val = "error";
+            $message = __($status);
         }
-        return redirect()->back()->with('success', 'Password reset link has been sent to your email. Click on the link and create a new password');
-
-
-        // return json_encode(['status'=>"success", 'message'=>"Request success. A password reset link has been sent to your email. Please click the link to reset your password"]);
+        return json_encode(['status' => $status, 'message' => $message]);
     }
 }

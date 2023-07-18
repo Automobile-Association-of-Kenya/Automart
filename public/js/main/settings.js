@@ -59,7 +59,6 @@
     function getSubscriptions() {
         $.getJSON("/subscriptions", function (data) {
             let subscriptions = data.subscriptions;
-            console.log(subscriptions);
             if (subscriptions.length > 0) {
                 let tr = "",
                     i = 1;
@@ -152,7 +151,6 @@
             description: description,
             type:type,
         };
-        console.log(data);
 
         $.ajaxSetup({
             headers: {
@@ -164,7 +162,6 @@
             type: "POST",
             data: data,
             success: function (params) {
-                console.log(params);
                 let result = JSON.parse(params);
                 submit.prop("disabled", false);
                 if (result.status == "success") {
@@ -181,7 +178,6 @@
                 }
             },
             error: function (error) {
-                console.log(error);
                 submit.prop("disabled", false);
                 if (error.status == 422) {
                     var errors = "";
@@ -312,7 +308,6 @@
             port: port,
             status: "default",
         };
-        console.log(data);
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": _token,
@@ -323,7 +318,6 @@
             url: "/mails",
             data: data,
             success: function (params) {
-                console.log(params);
                 let result = JSON.parse(params);
                 if (result.status == "success") {
                     $this.trigger("reset");
@@ -337,7 +331,6 @@
                 }
             },
             error: function (error) {
-                console.log(error);
                 if (error.status == 422) {
                     var errors = "";
                     $.each(error.responseJSON.errors, function (key, value) {
@@ -430,13 +423,11 @@
                     "X-CSRF-TOKEN": _token,
                 },
             });
-            console.log(data);
             $.ajax({
                 type: "POST",
                 url: "/services",
                 data: data,
                 success: function (params) {
-                    console.log(params);
                     saveservice.prop("disabled", false);
                     let result = JSON.parse(params);
                     if (result.status == "success") {
@@ -453,7 +444,6 @@
                 },
                 error: function (error) {
                     saveservice.prop("disabled", false);
-                    console.log(error);
                     if (error.status == 422) {
                         var errors = "";
                         $.each(
@@ -480,7 +470,6 @@
                 i = 1;
             $.each(services, function (key, value) {
                 let { id, service, description, caret } = value;
-                console.log(caret);
                 tr +=
                     "<tr><td>" +
                     i++ +
@@ -594,7 +583,6 @@
     getSocials();
 
     $("body").on("click", "#editSocialToggle", function (event) {
-        event.preventDefault();
         let id = $(this).data("id");
         $.getJSON("/socials/" + id, function (social) {
             if (social.length > 0) {
@@ -602,6 +590,7 @@
                     "Request accepted for processing. Make changes then save",
                     "#socialfeedback"
                 );
+                $("#socialType option[value=" + social[0].type + "]").prop("selected",true);
                 socialCreateID.val(social[0].id);
                 socialName.val(social[0].name);
                 socialLink.val(social[0].link);
@@ -621,13 +610,12 @@
         socialLink.val("");
     });
 
+
     $("#sendRange").on("change", function (event) {
         let val = $(this).val();
-        console.log(val);
         let recepient_type = $("#recepientType").val();
         if (val === "manual" && recepient_type === "customers") {
             $.getJSON("/admin/customers", function (customers) {
-                console.log(customers);
                 let tr = "";
                 $.each(customers, function (key, value) {
                     let dealer = value.dealer?.name ?? "";
@@ -652,7 +640,6 @@
             });
         } else if (val === "manual" && recepient_type === "partners") {
             $.getJSON("/partners", function (partners) {
-                console.log(partners);
                 let tr = "",
                     partner = value.partner?.name ?? "";
                 $.each(partners, function (key, value) {

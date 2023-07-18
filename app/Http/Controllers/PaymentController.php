@@ -99,7 +99,6 @@ class PaymentController extends Controller
             $query->where('created_at', '<=', $request->end_date);
         }
         $payments = $query->with('subscription:id,name','user:id,name', 'dealer:id,name', 'account:id,provider,mpesa_business_short_code')->latest()->get();
-
         return json_encode($payments);
     }
 

@@ -45,7 +45,12 @@ class SettingsController extends Controller
 
     public function socials($id = null)
     {
-        $socials = Social::get();
+        $query = Social::query();
+        if (!is_null($id)) {
+            $query->where('id',$id);
+        }
+        $socials = $query->get();
+
         return json_encode($socials);
     }
 

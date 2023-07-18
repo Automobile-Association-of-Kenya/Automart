@@ -7,11 +7,12 @@
 				<p>We have received a password request from you.</p>
 				<p>Click on the button below to reset your password.</p>
 				<p>If you did not make this request, please ignore the message.</p>
-                <a href="{{ Link }}" style="background-color: #256b28;border: none; color: white; padding: 12px 24px;text-align: center;text-decoration: none; display: inline-block; font-size: 16px; margin: 10px; cursor: pointer; border-radius: 4px;transition: background-color 0.3s ease;">{{ Button }}</a>
+                <a href="{{ Link }}" style="background-color: #006544;border: none; color: white; padding: 12px 24px;text-align: center;text-decoration: none; display: inline-block; font-size: 16px; margin: 10px; cursor: pointer; border-radius: 4px;transition: background-color 0.3s ease;">{{ Button }}</a>
                 <p>
                     Thank you.
                 </p>
                 <br><br><br>
+                
                 <p>Automart @ AA Kenya Limited</p>
             </td>
 		</tr>

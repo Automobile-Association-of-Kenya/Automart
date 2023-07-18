@@ -50,7 +50,6 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-        // SendEmailVerificationNotification::dispatch($user)->onQueue('emails');
 
         return json_encode(['status' => 'success', 'message' => 'Account created successfully and a verification email has been sent to your email.']);
     }
