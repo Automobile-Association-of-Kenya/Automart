@@ -6,6 +6,7 @@ use App\Events\Subscription;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Log;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class Payment extends Model
@@ -54,7 +55,7 @@ class Payment extends Model
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $curl_response = curl_exec($curl);
         $json = json_decode($curl_response, true);
-
+        Log::notice($json);
         $access_token = $json['access_token'];
         $passkey = $account->mpesa_pass_key;
         $timestamp = '30' . date("ymdhis");
@@ -82,6 +83,7 @@ class Payment extends Model
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
         $curl_response = curl_exec($curl);
+        Log::notice($curl_response);
         $data = json_decode($curl_response, true);
         if (isset($data["ResponseCode"]) && $data["ResponseCode"] == 0) {
             $this->create([
