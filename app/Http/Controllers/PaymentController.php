@@ -38,6 +38,7 @@ class PaymentController extends Controller
         $data = file_get_contents('php://input');
         $json = json_decode($data);
         $Body = $json->Body;
+        Log::notice($Body);
         $stkCallback = $Body->stkCallback;
         $ResultCode = $stkCallback->ResultCode;
         if ($ResultCode != 0) {

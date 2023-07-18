@@ -11,6 +11,7 @@
         border-radius: 50%;
         width: 50%;
         height: 50%;
+        float: center;
     }
 </style>
 @endsection
@@ -24,7 +25,7 @@
 @section('main')
     <main>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 text-center">
                 <div class="card">
                     <img src="{{ asset('images/avatar.png') }}" alt="" class="card-img-top">
                     <div class="card-body">
