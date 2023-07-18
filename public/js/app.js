@@ -69,7 +69,6 @@ $(function () {
         event.preventDefault();
         let vehicle_id = $(this).data("id");
         $.getJSON("/whatsapp/" + vehicle_id, function (params) {
-            console.log(params);
             if (params.status === "success") {
             window.open(params.url, "_blank");
             } else {

@@ -52,17 +52,24 @@
                     </a>
                 </li>
 
-                {{-- <li>
+                <li class="{{ Request::is('profile') ? 'active' : '' }}">
+                    <a href="{{ route('profile') }}" class='validation'>
+                        <span><i class="fal fa-user"></i></span>
+                        <span>My profile</span>
+                    </a>
+                </li>
+
+                <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <a class="dropdown-item" :href="route('logout')"
+                        <a class="validation text-warning" :href="route('logout')"
                             onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                             <span><i class="fal fa-sign-out-alt"></i></span>
                             <span>{{ __('Log Out') }}</span>
                         </a>
                     </form>
-                </li> --}}
+                </li>
             </ul>
         </div>
     </div>

@@ -36,7 +36,7 @@ class Payment extends Model
 
     public function initiatempesa($account, $subscription, $dealer_id = null, $phone)
     {
-        $url = 'https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
+        $url = env('MPESA_PROCESS_URL');
         $access_token = '';
         $consumer_secret = $account->mpesa_secret;
         $consumer_key = $account->mpesa_customer_key;
@@ -45,7 +45,7 @@ class Payment extends Model
         $encodestring = base64_encode($consumer_key . ":" . $consumer_secret);
         $OuathString = 'Basic ' . $encodestring;
 
-        $oauthURL = 'https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
+        $oauthURL = env('MPESA_OAUTH_URL');
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $oauthURL);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Basic ' . $encodestring)); //setting a custom header
@@ -67,13 +67,13 @@ class Payment extends Model
             'Password' => $password,
             'Timestamp' => $timestamp,
             'TransactionType' => 'CustomerPayBillOnline',
-            'Amount' => $subscription->cost,
+            'Amount' => 1,
             'PartyA' => $phone,
             'PartyB' => $account->mpesa_business_short_code,
             'PhoneNumber' => $phone,
-            'CallBackURL' => 'https://automart.aakenya.co.ke/api/mpesa-callback',
-            'AccountReference' => 'Parent' . auth()->id() . $timestamp,
-            'TransactionDesc' => 'Parent payment - ' . date("F")
+            'CallBackURL' => env("MPESA_CALLBACK_URL"),
+            'AccountReference' => auth()->id().'SUB'.date(date("ymdhis")),
+            'TransactionDesc' => $subscription->name.' Subscription payment - ' . date("F")
         );
 
         $data_string = json_encode($curl_post_data);

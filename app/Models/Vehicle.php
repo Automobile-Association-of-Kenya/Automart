@@ -277,7 +277,7 @@ class Vehicle extends Model
             } else {
                 Messages::create(['vehicle_id' => $id, 'type' => 'whatsapp', 'destination' => $phone, 'message' => $message]);
             }
-            $url = $social->link . "?phone=" . $phone . "&text=" . $message;
+            $url = '/'.$social->link . "?phone=" . $phone . "&text=" . $message;
         }
         return json_encode(['status' => $status, "url" => $url, $vehicle, $phone]);
     }

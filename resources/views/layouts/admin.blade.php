@@ -87,10 +87,15 @@
                 </li>
 
                 <li>
-                    <a href="#" id="logoutuser">
-                        <span><i class="fal fa-sign-out-alt"></i></span>
-                        <span>Logout</span>
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a class="validation text-warning" :href="route('logout')"
+                            onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                            <span><i class="fal fa-sign-out-alt"></i></span>
+                            <span>{{ __('Log Out') }}</span>
+                        </a>
+                    </form>
                 </li>
 
             </ul>
@@ -120,12 +125,8 @@
                             class="profilephoto">{{ auth()->user()->name }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
-                        @if (auth()->user()->role === 'admin' && auth()->user()->role === 'dealer')
-                            <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
-                        @endif
-                        {{-- <li><a class="dropdown-item" href="">Logout</a></li> --}}
-
+                        {{-- <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li> --}}
+                        <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
