@@ -95,7 +95,9 @@
                     value.billingcycle +
                     '</span> </div></div><div class="plan-list"><ul>' +
                     li +
-                    '</ul><div class="plan-button text-center"><a href="subscription/'+value.id+'" id="subscriptionSelect" class="btn pricing-btn" data-id="' +
+                    '</ul><div class="plan-button text-center"><a href="subscription/' +
+                    value.id +
+                    '" id="subscriptionSelect" class="btn pricing-btn" data-id="' +
                     value.id +
                     '">Get Started</a></div></div></div></div>';
             });
@@ -113,47 +115,47 @@
     //             li += "<li class='list-group-item'>" + value.name + "</li>";
     //         });
 
-            // console.log(subscriptions);
-            // console.log(properties);
-            // subscriptions.forEach(element => {
-            //     let subs = element.properties
-            //     subs.forEach((element1) => {
-            //         let subPropId = element1.pivot.subsproperty_id;
+    // console.log(subscriptions);
+    // console.log(properties);
+    // subscriptions.forEach(element => {
+    //     let subs = element.properties
+    //     subs.forEach((element1) => {
+    //         let subPropId = element1.pivot.subsproperty_id;
 
-            //         if ($.inArray(subPropId, propids) !== -1) {
-            //             console.log(subPropId)
-            //         }
-            //     });
-            // });
-//             console.log(propids);
+    //         if ($.inArray(subPropId, propids) !== -1) {
+    //             console.log(subPropId)
+    //         }
+    //     });
+    // });
+    //             console.log(propids);
 
-            // $.each(subscriptions, function (key, value) {
-            //     let lii = "";
-            //     $.each(value.properties, function (key, value) {
-            //         if ($.inArray(value.pivot.subsproperty_id, propids) !== -1) {
-            //             lii +=
-            //                 '<li><i class="fa fa-check-circle fa-1x text-success"></i>&nbsp;' +
-            //                 value.name +
-            //                 "</li>";
-            //         } else {
-            //             lii += "<li class='text-center'>&times;</li>";
-            //         }
-            //     });
-            //     plan +=
-            //         '<div class="col-xl-4 col-lg-4 col-md-12"><div class="pricing-1 plan"><div class="plan-header"><h5>' +
-            //         value.name +
-            //         "</h5><p>" +
-            //         value.description +
-            //         '</p><div class="plan-price"><sup>Kes</sup>' +
-            //         value.cost +
-            //         "<span>/" +
-            //         value.billingcycle +
-            //         '</span> </div></div><div class="plan-list"><ul>' +
-            //         lii +
-            //         '</ul><div class="plan-button text-center"><a href="#" id="subscriptionSelect" data-bs-toggle="modal" data-bs-target="#" class="btn btn-success btn-sm" data-id="' +
-            //         value.id +
-            //         '">Get Started</a></div></div></div></div>';
-            // });
+    // $.each(subscriptions, function (key, value) {
+    //     let lii = "";
+    //     $.each(value.properties, function (key, value) {
+    //         if ($.inArray(value.pivot.subsproperty_id, propids) !== -1) {
+    //             lii +=
+    //                 '<li><i class="fa fa-check-circle fa-1x text-success"></i>&nbsp;' +
+    //                 value.name +
+    //                 "</li>";
+    //         } else {
+    //             lii += "<li class='text-center'>&times;</li>";
+    //         }
+    //     });
+    //     plan +=
+    //         '<div class="col-xl-4 col-lg-4 col-md-12"><div class="pricing-1 plan"><div class="plan-header"><h5>' +
+    //         value.name +
+    //         "</h5><p>" +
+    //         value.description +
+    //         '</p><div class="plan-price"><sup>Kes</sup>' +
+    //         value.cost +
+    //         "<span>/" +
+    //         value.billingcycle +
+    //         '</span> </div></div><div class="plan-list"><ul>' +
+    //         lii +
+    //         '</ul><div class="plan-button text-center"><a href="#" id="subscriptionSelect" data-bs-toggle="modal" data-bs-target="#" class="btn btn-success btn-sm" data-id="' +
+    //         value.id +
+    //         '">Get Started</a></div></div></div></div>';
+    // });
     //         $("#planSubsSummary").append(plan);
 
     //         $("#subscriptionprops").html(li);
@@ -161,7 +163,6 @@
     // }
 
     // getSubscriptionsSummary();
-
 
     // $("body").on("click", "#subscriptionSelect", function (event) {
     //     event.preventDefault();
@@ -279,39 +280,48 @@
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#paymentfeedback");
-                        window.setInterval(() => {
-                            $.getJSON(
-                                "/paymentconfirm/" + result.checkoutid,
-                                function (payment) {
-                                    if (
-                                        payment.complete === 1 &&
-                                        payment.trans_id !== null
-                                    ) {
-                                        showSuccess(
-                                            "Thank you. Payment received successfully. Please proceed to enjoy unleaded advertisement experience on our platform.",
-                                            "#paymentfeedback"
-                                        );
-                                        let attempts = 0
-                                        $(".loadersection").children().remove();
-                                        submit.prop({ disabled: false });
-                                        setTimeout(() => {
-                                            attempts += 1;
-                                            window.location.href = "/dealers";
-                                        }, 3000);
-                                        console.log(attempts);
-                                        if (attempts >= 5) {
-                                            $(".loadersection").children().remove();
-                                            submit.prop("disabled", false);
-                                            showError(
-                                                "We have received 0 from you. Please click on this button and retry",
+                        let counter = 0;
+                        if (counter <= 6) {
+                            window.setInterval(() => {
+                                $.getJSON(
+                                    "/paymentconfirm/" + result.checkoutid,
+                                    function (payment) {
+                                        if (
+                                            payment.complete === 1 &&
+                                            payment.trans_id !== null
+                                        ) {
+                                            showSuccess(
+                                                "Thank you. Payment received successfully. Please proceed to enjoy unleaded advertisement experience on our platform.",
                                                 "#paymentfeedback"
                                             );
-                                            return false;
+                                            let attempts = 0;
+                                            $(".loadersection")
+                                                .children()
+                                                .remove();
+                                            submit.prop({ disabled: false });
+                                            setTimeout(() => {
+                                                attempts += 1;
+                                                window.location.href =
+                                                    "/dealers";
+                                            }, 3000);
+                                            console.log(attempts);
+                                            if (attempts >= 5) {
+                                                $(".loadersection")
+                                                    .children()
+                                                    .remove();
+                                                submit.prop("disabled", false);
+                                                showError(
+                                                    "We have received 0 from you. Please click on this button and retry",
+                                                    "#paymentfeedback"
+                                                );
+                                                return false;
+                                            }
                                         }
                                     }
-                                }
-                            );
-                        }, 7000);
+                                );
+                            }, 7000);
+                            counter++;
+                        }
                     } else {
                         console.log(result);
                         $(".loadersection").children().remove();
@@ -343,58 +353,58 @@
     });
 
     // paypal.Buttons({
-        // Order is created on the server and the order id is returned
-            // createOrder() {
-            //     return fetch("/my-server/create-paypal-order", {
-            //         method: "POST",
-            //         headers: {
-            //             "Content-Type": "application/json",
-            //             ''
-            //         },
-            //         // use the "body" param to optionally pass additional order information
-            //         // like product skus and quantities
-            //         body: JSON.stringify({
-            //             cart: [
-            //                 {
-            //                     sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
-            //                     quantity: 1,
-            //                 },
-            //             ],
-            //         }),
-            //     })
-            //         .then((response) => response.json())
-            //         .then((order) => order.id);
-            // },
-            // // Finalize the transaction on the server after payer approval
-            // onApprove(data) {
-            //     return fetch("/my-server/capture-paypal-order", {
-            //         method: "POST",
-            //         headers: {
-            //             "Content-Type": "application/json",
-            //         },
-            //         body: JSON.stringify({
-            //             orderID: data.orderID,
-            //         }),
-            //     })
-            //         .then((response) => response.json())
-            //         .then((orderData) => {
-            //             // Successful capture! For dev/demo purposes:
-            //             console.log(
-            //                 "Capture result",
-            //                 orderData,
-            //                 JSON.stringify(orderData, null, 2)
-            //             );
-            //             const transaction =
-            //                 orderData.purchase_units[0].payments.captures[0];
-            //             alert(
-            //                 `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`
-            //             );
-            //             // When ready to go live, remove the alert and show a success message within this page. For example:
-            //             // const element = document.getElementById('paypal-button-container');
-            //             // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-            //             // Or go to another URL:  window.location.href = 'thank_you.html';
-            //         });
-            // },
-        // })
-        // .render("#paypal-button-container");
+    // Order is created on the server and the order id is returned
+    // createOrder() {
+    //     return fetch("/my-server/create-paypal-order", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             ''
+    //         },
+    //         // use the "body" param to optionally pass additional order information
+    //         // like product skus and quantities
+    //         body: JSON.stringify({
+    //             cart: [
+    //                 {
+    //                     sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
+    //                     quantity: 1,
+    //                 },
+    //             ],
+    //         }),
+    //     })
+    //         .then((response) => response.json())
+    //         .then((order) => order.id);
+    // },
+    // // Finalize the transaction on the server after payer approval
+    // onApprove(data) {
+    //     return fetch("/my-server/capture-paypal-order", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //             orderID: data.orderID,
+    //         }),
+    //     })
+    //         .then((response) => response.json())
+    //         .then((orderData) => {
+    //             // Successful capture! For dev/demo purposes:
+    //             console.log(
+    //                 "Capture result",
+    //                 orderData,
+    //                 JSON.stringify(orderData, null, 2)
+    //             );
+    //             const transaction =
+    //                 orderData.purchase_units[0].payments.captures[0];
+    //             alert(
+    //                 `Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`
+    //             );
+    //             // When ready to go live, remove the alert and show a success message within this page. For example:
+    //             // const element = document.getElementById('paypal-button-container');
+    //             // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+    //             // Or go to another URL:  window.location.href = 'thank_you.html';
+    //         });
+    // },
+    // })
+    // .render("#paypal-button-container");
 })();
