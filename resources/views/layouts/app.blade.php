@@ -47,6 +47,8 @@
 </head>
 
 <body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&appId=252559983962502&autoLogAppEvents=1" nonce="szqnHbC5"></script>
     <header class="main-header sticky-header sh-2">
         @include('layouts.header')
     </header>

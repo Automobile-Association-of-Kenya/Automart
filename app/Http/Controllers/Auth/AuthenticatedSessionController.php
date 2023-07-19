@@ -105,7 +105,37 @@ class AuthenticatedSessionController extends Controller
         return redirect('/home');
     }
 
+    function parse_signed_request($signed_request)
+    {
+        list($encoded_sig, $payload) = explode('.', $signed_request, 2);
+
+        $secret = "appsecret";
+        $sig = $this->base64_url_decode($encoded_sig);
+        $data = json_decode($this->base64_url_decode($payload), true);
+
+        $expected_sig = hash_hmac('sha256', $payload, $secret, $raw = true);
+        if ($sig !== $expected_sig) {
+            error_log('Bad Signed JSON signature!');
+            return null;
+        }
+        return $data;
+    }
+
+    function base64_url_decode($input)
+    {
+        return base64_decode(strtr($input, '-_', '+/'));
+    }
+
     public function deleteFacebook(Request $request) {
-        return $request;
+        $signed_request = $request->signed_request;
+        $data = $this->parse_signed_request($signed_request);
+        $user_id = $data['user_id'];
+        $confirmation_code = strtotime(date('Y-m-d H:i:s')) . Str::random(4); // unique code for the deletion request
+        $status_url = 'https://automart.aakenya.co.ke/facebook-deletion?id='. $confirmation_code; // URL to track the deletion
+        $data = array(
+                'url' => $status_url,
+                'confirmation_code' => $confirmation_code
+            );
+        return json_encode($data);
     }
 }
