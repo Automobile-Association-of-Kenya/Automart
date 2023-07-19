@@ -70,7 +70,7 @@ $(function () {
         let vehicle_id = $(this).data("id");
         $.getJSON("/whatsapp/" + vehicle_id, function (params) {
             if (params.status === "success") {
-            window.open('/'.params.url, "_blank");
+            window.open('/'+params.url, "_blank");
             } else {
                 $.jnoty("Dealer has not added phone number", {
                     header: "Warning",
