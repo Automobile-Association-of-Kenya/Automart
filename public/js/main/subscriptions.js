@@ -280,8 +280,9 @@
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#paymentfeedback");
-                        let counter = 0;
-                        if (counter <= 6) {
+                        // let counter = 0;
+                        // console.log(counter);
+                        // if (counter <= 4) {
                             window.setInterval(() => {
                                 $.getJSON(
                                     "/paymentconfirm/" + result.checkoutid,
@@ -320,8 +321,14 @@
                                     }
                                 );
                             }, 7000);
-                            counter++;
-                        }
+                        // } else {
+                        //     $(".loadersection").children().remove();
+                        //     submit.prop("disabled", false);
+                        //     showError(
+                        //         "We have received 0 from you. Please click on this button and retry",
+                        //         "#paymentfeedback"
+                        //     );
+                        // }
                     } else {
                         console.log(result);
                         $(".loadersection").children().remove();

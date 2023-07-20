@@ -105,10 +105,9 @@ Route::get('subscription-plans', [SubscriptionController::class, 'plans'])->name
 Route::get('subscription-features', [SubscriptionController::class, 'features']);
 Route::post('subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
 Route::get('/subscriptions-shortcut', [SubscriptionController::class, 'shortcut']);
-
 Route::get('mpesaconfirm/{recc}/{checjc}', [PaymentController::class, 'mpesaconfirm']);
-/** Subscriptions */
 
+/** Subscriptions */
 Route::controller(SettingsController::class)->group(function () {
     Route::get('mails/{id?}', 'mails');
     Route::post('mails', 'mailCreate');
@@ -124,7 +123,7 @@ Route::get('accounts-get/{id?}', [AccountsController::class, 'get']);
 Route::post('accounts-subscribe', [AccountsController::class, 'subscribe'])->name('accounts.subscribe');
 
 Route::view('terms', 'terms')->name('terms');
-
+Route::get('financing',[ApplicationController::class, 'financing']);
 /** Vehicles grouping routes */
 
 

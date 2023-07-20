@@ -201,7 +201,7 @@ class ApplicationController extends Controller
     {
         $query = $request->query();
         Visit::visit(request()->server());
-        $vehicles = $this->vehicle->searchpaginate($request->all(),$query);
+        $vehicles = $this->vehicle->searchpaginate($request->all(), $query);
         return view('vehicles.search', compact('vehicles'));
     }
 
@@ -224,13 +224,13 @@ class ApplicationController extends Controller
         Visit::visit(request()->server());
         $make = $this->make->find($id);
         $data = collect();
-        $models = $this->model->where('make_id', $make->id)->whereHas('vehicles')->withCount('vehicles')->orderBy('vehicles_count','desc')->get();
+        $models = $this->model->where('make_id', $make->id)->whereHas('vehicles')->withCount('vehicles')->orderBy('vehicles_count', 'desc')->get();
         foreach ($models as $key => $value) {
-            $vehicle = $this->vehicle->where('vehicle_model_id',$value->id)->orderBy('priority','asc')->latest()->first();
-            $data->push(['model'=>$value,'vehicle'=>$vehicle]);
+            $vehicle = $this->vehicle->where('vehicle_model_id', $value->id)->orderBy('priority', 'asc')->latest()->first();
+            $data->push(['model' => $value, 'vehicle' => $vehicle]);
         }
         // $vehicles = $this->vehicle->vehiclesbymake($id, 20);
-        return view('vehicles.makes', compact('make', 'models','data'));
+        return view('vehicles.makes', compact('make', 'models', 'data'));
     }
 
     function like($id)
@@ -294,7 +294,7 @@ class ApplicationController extends Controller
         if (!is_null($vehicle->dealer_id)) {
             $query->where('dealer_id', $vehicle->dealer_id_id);
         }
-        $dealervehicles = $query->where('id','<>',$vehicle->id)->latest()->get();
+        $dealervehicles = $query->where('id', '<>', $vehicle->id)->latest()->get();
         $this->vehicle->viewed($vehicle->id);
 
         return view('vehicles.show', compact('vehicle', 'relatedvehicles', 'dealervehicles'));
@@ -331,5 +331,10 @@ class ApplicationController extends Controller
     {
         $vehicles = $this->vehicle->sortbyprices($start, $end);
         return view('vehicles.prices', compact('vehicles'));
+    }
+
+    public function financing()
+    {
+        return view('financing');
     }
 }
