@@ -26,7 +26,7 @@
 
             <div class="row mt-4">
                 <div class="col-lg-12 col-md-12">
-                    
+
                     <div class="row" id="vehiclesection">
 
                         @foreach ($vehicles as $item)
@@ -116,9 +116,9 @@
                                             <a href="#" class="btn btn-success btn-sm mt-2" id="whatsappToggle"
                                                 data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
                                                 Enquire</a>
-                                            <a href="{{ url('buy', $vehicle_no) }}"
+                                            <a href="{{ route('buy', $vehicle_no) }}"
                                                 class="btn btn-success btn-sm mt-2"><i class="fa fa-hand"></i> Buy</a>
-                                            <a href="{{ url('loan', $vehicle_no) }}"
+                                            <a href="{{ route('loan', $vehicle_no) }}"
                                                 class="btn btn-success btn-sm mt-2"><i class="fa fa-"></i>
                                                 Apply
                                                 Loan</a>

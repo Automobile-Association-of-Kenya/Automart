@@ -38,11 +38,11 @@ class Payment extends Model
     public function initiatempesa($account, $subscription, $dealer_id = null, $phone)
     {
         $url = env('MPESA_PROCESS_URL');
-        $access_token = '';
-        $consumer_secret = $account->mpesa_secret;
-        $consumer_key = $account->mpesa_customer_key;
-        // $consumer_secret = 'KEPgfS1AbNtQeRaL';
-        // $consumer_key = '9u589pJDEzppBPkYbKeYvvrtGGYPtb5F';
+        // $consumer_secret = $account->mpesa_secret;
+        // $consumer_key = $account->mpesa_customer_key;
+        $consumer_secret = 'KEPgfS1AbNtQeRaL';
+        $consumer_key = '9u589pJDEzppBPkYbKeYvvrtGGYPtb5F';
+
         $encodestring = base64_encode($consumer_key . ":" . $consumer_secret);
         $OuathString = 'Basic ' . $encodestring;
 
@@ -57,20 +57,24 @@ class Payment extends Model
         $json = json_decode($curl_response, true);
         Log::notice($json);
         $access_token = $json['access_token'];
-        $passkey = $account->mpesa_pass_key;
+        $passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
+        // $passkey = $account->mpesa_pass_key;
         $timestamp = '30' . date("ymdhis");
-        $password = base64_encode($account->mpesa_business_short_code . $passkey . $timestamp);
+        // $password = base64_encode($account->mpesa_business_short_code . $passkey . $timestamp);
+        $password = base64_encode("174379" . $passkey . $timestamp);
         $curl = curl_init();
+        // $account->mpesa_business_short_code
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization:Bearer ' . $access_token)); //setting custom header
         $curl_post_data = array(
-            'BusinessShortCode' => $account->mpesa_business_short_code,
+            'BusinessShortCode' => "174379",
             'Password' => $password,
             'Timestamp' => $timestamp,
             'TransactionType' => 'CustomerPayBillOnline',
             'Amount' => 1,
             'PartyA' => $phone,
-            'PartyB' => $account->mpesa_business_short_code,
+            // 'PartyB' => $account->mpesa_business_short_code,
+            'PartyB' => "174379",
             'PhoneNumber' => $phone,
             'CallBackURL' => env("MPESA_CALLBACK_URL"),
             'AccountReference' => auth()->id().'SUB'.date(date("ymdhis")),
@@ -105,16 +109,17 @@ class Payment extends Model
 
     public function confirm($checkOutId, $trans_id, $phonenumber, $amount, $completed_at)
     {
+        $user = auth()->user();
         $payment = $this->where('crid', $checkOutId)->first();
         if (!is_null($payment)) {
             // 'phone' => $phonenumber,
             $payment->update(['trans_id' => $trans_id, 'amount' => $amount, 'complete' => 1, 'completed_at' => $completed_at]);
             // event(new Subscription(auth()->user(), $payment));
             $query = Vehicle::query();
-            if (!is_null($this->user->dealer_id)) {
-                $query->where('dealer_id', $this->user->dealer_id);
+            if (!is_null($user->dealer_id)) {
+                $query->where('dealer_id', $user->dealer_id);
             }
-            $query->orWhere('user_id', $this->user->id)->update(['priority' => $this->plan->priority, 'sponsored' => 1]);
+            $query->orWhere('user_id', $user->id)->update(['priority' => $this->plan->priority, 'sponsored' => 1]);
         }
     }
 

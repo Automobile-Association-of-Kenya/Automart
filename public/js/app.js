@@ -1219,15 +1219,15 @@ $(function () {
     }
 
     function notify() {
-        let notification = new Notification("New Vehicle Alert", {
-            body: "2022 Toyota Landcruiser V-8 twin turbo engine",
-            icon: "../../public/vehicleimages/img20321689394325.jpg",
-            image: "../../public/vehicleimages/img20321689394325.jpg",
-            vibrate: [200, 100, 200],
-        });
-        notification.addEventListener("click", () => {
-            window.open("http://newautomart.co.ke");
-        });
+        // let notification = new Notification("New Vehicle Alert", {
+        //     body: "2022 Toyota Landcruiser V-8 twin turbo engine",
+        //     icon: "../../public/vehicleimages/img20321689394325.jpg",
+        //     image: "../../public/vehicleimages/img20321689394325.jpg",
+        //     vibrate: [200, 100, 200],
+        // });
+        // notification.addEventListener("click", () => {
+        //     window.open("http://newautomart.co.ke");
+        // });
     }
 
 })(jQuery);

@@ -29,6 +29,7 @@
         .rangeslider__fill {
             color: #006544;
         }
+
         .loancalcsection {
             background: #fff;
             padding: 1em;
@@ -59,7 +60,6 @@
         </div>
     </div>
 
-
     <!-- Car details page start -->
     <div class="car-details-page mb-4 mt-4">
         <div class="container">
@@ -70,9 +70,11 @@
                             <div class="intro">
                                 <div class="introimage" style="max-height: 500px;">
                                     @if (count($images) > 0)
-                                        <img src="{{ asset('vehicleimages/' . @$images[0]->image) }}"
-                                            alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}"
-                                            width="100%">
+                                        @if (Storage::has('/vehicleimages/' . @$images[0]->image))
+                                            <img src="{{ asset('vehicleimages/' . @$images[0]->image) }}"
+                                                alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}"
+                                                width="100%">
+                                        @endif
                                     @endif
                                 </div>
                                 <div class="introtext mt-2">
@@ -209,11 +211,11 @@
                             <div class="loancalcsection">
                                 <div class="row">
                                     @foreach ($vehicle->features as $item)
-                                    {{-- <span class="mb-2 bg-grey p-2">{{ $item->feature }}</span> --}}
-                                    <div class="col-md-6">
-                                        <p class="bg-grey p-2">{{ $item->feature }}</p>
-                                    </div>
-                                @endforeach
+                                        {{-- <span class="mb-2 bg-grey p-2">{{ $item->feature }}</span> --}}
+                                        <div class="col-md-6">
+                                            <p class="bg-grey p-2">{{ $item->feature }}</p>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
 
@@ -223,11 +225,9 @@
             </div>
         </section>
 
-        <div class="featured-car">
+        {{-- <div class="featured-car">
             <div class="container">
-                <div class="main-title">
-                    <h4 class="text-success">Reasons to Finance Your Vehicles on our Plartform.</h4>
-                </div>
+
                 <div class="featured-slider row slide-box-btn"
                     data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
 
@@ -235,7 +235,7 @@
                         <div class="col-md-4 slide slide-box">
                             <div class="card" style="border-radius: 8px; padding:1.5em;">
                                 <h5 class="card-title white">{{ $item->service }}</h5>
-                                <p class="card-text white">{{ $item->description }}</p>
+                                <p style="font-size: 24px; word-spacing: 1px;">{{ $item->description }}</p>
 
                                 <a href="{{ route('services.index') }}" class="btn btn-success btn-sm">Learn More</a>
                             </div>
@@ -243,9 +243,40 @@
                     @endforeach
                 </div>
             </div>
+        </div> --}}
+
+        <div class="service-section-2">
+            <div class="container">
+                <div class="main-title">
+                    <h4 class="text-success">Reasons to Finance Your Vehicles on our Plartform.</h4>
+                </div>
+                <div class="row">
+                        <div class="row">
+                            @foreach ($services as $item)
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="single-info">
+                                        <div class="number">{{ $loop->iteration }}</div>
+                                        <div class="icon">
+                                            <div class="icon-inner">
+                                                @if (!is_null($item->carret))
+                                                    {{ $item->carret }}
+                                                @else
+                                                    <i class="flaticon-shield"></i>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <h2>
+                                            <a href="#">{{ $item->service }}</a>
+                                        </h2>
+                                        <p>{{ $item->description }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                </div>
+            </div>
         </div>
         <br>
-
 
         <div class="featured-car mt-4">
             <div class="container">
@@ -267,7 +298,8 @@
                                         </div>
                                         @if (count($images) > 0)
                                             <img class="d-block w-100"
-                                                src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}" alt="car">
+                                                src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                alt="car">
                                         @endif
                                     </a>
                                     <div class="carbox-overlap-wrapper">
@@ -597,8 +629,6 @@
                                         </select>
                                     </div>
 
-
-
                                     <div class="col-md-6 form-group employment">
                                         <label for="employerName">Proffession <sup>*</sup></label>
                                         <input type="text" name="proffession" id="proffession"
@@ -640,7 +670,6 @@
                                             </label>
                                         </div>
                                     </div>
-
 
                                     <div class="col-md-6 form-group business">
                                         <label for="businessowner" class="control-label">Are you the owner of the

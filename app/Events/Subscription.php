@@ -34,11 +34,11 @@ class Subscription
      */
     public function broadcastOn(): void
     {
-        $query = Vehicle::query();
-        if (!is_null($this->user->dealer_id)) {
-            $query->where('dealer_id',$this->user->dealer_id);
-        }
-        $query->orWhere('user_id',$this->user->id)->update(['priority'=>$this->plan->priority,'sponsored'=>1]);
+        // $query = Vehicle::query();
+        // if (!is_null($this->user->dealer_id)) {
+        //     $query->where('dealer_id',$this->user->dealer_id);
+        // }
+        // $query->orWhere('user_id',$this->user->id)->update(['priority'=>$this->plan->priority,'sponsored'=>1]);
     // subscribe and send new subscription notification with validity and expiry of the subscription package
     }
 }

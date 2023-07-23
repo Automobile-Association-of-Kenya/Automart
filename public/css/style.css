@@ -4695,7 +4695,7 @@ input[type=checkbox]:checked+label:before {
     position: absolute;
     top: 45%;
     right: 0;
-    padding: 0 15px;
+    padding: 15px 15px;
     left: 0;
 }
 
@@ -6814,7 +6814,7 @@ input[type=checkbox]:checked+label:before {
     background: rgba(0, 0, 0, 0.04) url(../img/bg-img-6.jpg) top left repeat;
     background-size: cover;
     width: 100%;
-    padding: 100px 0 70px;
+    padding: 50px 0 40px;
 }
 
 .service-section-2 .main-title {
@@ -11876,7 +11876,7 @@ input[type="tel"] {
     }
 
     .service-section-2 {
-        padding: 80px 0 50px;
+        padding: 40px 0 30px;
     }
 
     .banner h5 {

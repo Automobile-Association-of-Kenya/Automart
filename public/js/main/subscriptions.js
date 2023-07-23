@@ -280,13 +280,15 @@
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#paymentfeedback");
-                        // let counter = 0;
-                        // console.log(counter);
-                        // if (counter <= 4) {
+                        let counter = 0;
+                        console.log(counter);
+                        if (counter <= 4) {
                             window.setInterval(() => {
                                 $.getJSON(
                                     "/paymentconfirm/" + result.checkoutid,
                                     function (payment) {
+                                        console.log(payment);
+                                        counter += 1;
                                         if (
                                             payment.complete === 1 &&
                                             payment.trans_id !== null
@@ -295,40 +297,18 @@
                                                 "Thank you. Payment received successfully. Please proceed to enjoy unleaded advertisement experience on our platform.",
                                                 "#paymentfeedback"
                                             );
-                                            let attempts = 0;
-                                            $(".loadersection")
-                                                .children()
-                                                .remove();
-                                            submit.prop({ disabled: false });
-                                            setTimeout(() => {
-                                                attempts += 1;
-                                                window.location.href =
-                                                    "/dealers";
-                                            }, 3000);
-                                            console.log(attempts);
-                                            if (attempts >= 5) {
-                                                $(".loadersection")
-                                                    .children()
-                                                    .remove();
-                                                submit.prop("disabled", false);
-                                                showError(
-                                                    "We have received 0 from you. Please click on this button and retry",
-                                                    "#paymentfeedback"
-                                                );
-                                                return false;
-                                            }
                                         }
                                     }
                                 );
                             }, 7000);
-                        // } else {
-                        //     $(".loadersection").children().remove();
-                        //     submit.prop("disabled", false);
-                        //     showError(
-                        //         "We have received 0 from you. Please click on this button and retry",
-                        //         "#paymentfeedback"
-                        //     );
-                        // }
+                        } else {
+                            $(".loadersection").children().remove();
+                            submit.prop("disabled", false);
+                            showError(
+                                "We have received 0 from you. Please click on this button and retry",
+                                "#paymentfeedback"
+                            );
+                        }
                     } else {
                         console.log(result);
                         $(".loadersection").children().remove();
