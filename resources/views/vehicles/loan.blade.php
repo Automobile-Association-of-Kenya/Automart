@@ -70,11 +70,11 @@
                             <div class="intro">
                                 <div class="introimage" style="max-height: 500px;">
                                     @if (count($images) > 0)
-                                        @if (Storage::has('/vehicleimages/' . @$images[0]->image))
+                                        {{-- @if (Storage::has('/vehicleimages/' . @$images[0]->image)) --}}
                                             <img src="{{ asset('vehicleimages/' . @$images[0]->image) }}"
                                                 alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}"
                                                 width="100%">
-                                        @endif
+                                        {{-- @endif --}}
                                     @endif
                                 </div>
                                 <div class="introtext mt-2">
