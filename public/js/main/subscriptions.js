@@ -278,41 +278,17 @@
                 .done(function (params) {
                     console.log(params);
                     let result = JSON.parse(params);
+                    console.log(result);
+                    submit.prop({ disabled: false });
                     if (result.status == "success") {
-                        showSuccess(result.message, "#paymentfeedback");
-                        let counter = 0;
-                        console.log(counter);
-                        if (counter <= 4) {
-                            window.setInterval(() => {
-                                $.getJSON(
-                                    "/paymentconfirm/" + result.checkoutid,
-                                    function (payment) {
-                                        console.log(payment);
-                                        counter += 1;
-                                        if (
-                                            payment.complete === 1 &&
-                                            payment.trans_id !== null
-                                        ) {
-                                            showSuccess(
-                                                "Thank you. Payment received successfully. Please proceed to enjoy unleaded advertisement experience on our platform.",
-                                                "#paymentfeedback"
-                                            );
-                                        }
-                                    }
-                                );
-                            }, 7000);
-                        } else {
-                            $(".loadersection").children().remove();
-                            submit.prop("disabled", false);
-                            showError(
-                                "We have received 0 from you. Please click on this button and retry",
-                                "#paymentfeedback"
-                            );
-                        }
-                    } else {
-                        console.log(result);
+                        $("#checkOutId").val(result.checkoutid);
+                        $('#completePayment').show();
+                        $('#retryPayment').show();
+                        $('#mpesa-submit-button').hide();
                         $(".loadersection").children().remove();
-                        submit.prop({ disabled: false });
+                        showSuccess(result.message, "#paymentfeedback");
+                    } else {
+                        $(".loadersection").children().remove();
                         showError(result.message, "#paymentfeedback");
                     }
                 })
@@ -330,12 +306,33 @@
                         );
                         showError(errors, "#paymentfeedback");
                     } else {
-                        showError(
-                            "Error occurred during processing",
-                            "#paymentfeedback"
-                        );
+                        showError("Error occurred during processing","#paymentfeedback");
                     }
                 });
+        }
+    });
+
+    $("#completePayment").on('click', function(event) {
+        event.preventDefault();
+        let checkoutid = $("#checkOutId").val();
+        if (checkoutid !== "" && checkoutid !== null) {
+            $.getJSON("/paymentconfirm/" + checkoutid, function (payment) {
+                console.log(payment);
+                if (payment.complete === "1" && payment.trans_id !== null) {
+                    showSuccess(
+                        "Thank you. Payment received successfully. Please proceed to enjoy unleaded advertisement experience on our platform.",
+                        "#paymentfeedback"
+                    );
+                    window.setTimeout(function () {
+                        window.location.href = "/dashboard";
+                    }, 5000);
+                }
+            });
+        } else {
+            $("#completePayment").hide();
+            $("#retryPayment").hide();
+            $("#mpesa-submit-button").show();
+            showError("Invalid request! ", "#paymentfeedback");
         }
     });
 

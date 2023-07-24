@@ -54,9 +54,9 @@
                                 <a href="#"><i class="fa fa-angle-right"></i>Home</a>
                             </li>
 
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('about') }}"><i class="fa fa-angle-right"></i>About Us</a>
-                            </li>
+                            </li> --}}
 
                             <li>
                                 <a href="{{ route('services.index') }}"><i class="fa fa-angle-right"></i>Services</a>

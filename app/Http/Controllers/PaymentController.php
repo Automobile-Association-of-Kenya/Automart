@@ -13,6 +13,7 @@ class PaymentController extends Controller
 {
     public function __construct()
     {
+        // $this->middleware('auth');
         $this->payment = new Payment();
         $this->account = new Account();
         $this->subscription = new Subscription();
@@ -20,6 +21,7 @@ class PaymentController extends Controller
 
     public function store(Request $request)
     {
+
         $subscription = $this->subscription->find($request->subscription_id);
         $account = $this->account->getfortransaction($request->type,$request->subscription_id);
         if (is_null($account)) {

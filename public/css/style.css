@@ -6624,8 +6624,8 @@ input[type=checkbox]:checked+label:before {
     margin-bottom: 20px;
     background: #fff;
     text-align: center;
-    /* -webkit-transition: all 0.5s; */
-    /* transition: all 0.9s; */
+    -webkit-transition: all 0.5s;
+    transition: all 0.9s;
     position: relative;
     border-radius: 4px;
     z-index: 1;
@@ -6693,8 +6693,8 @@ input[type=checkbox]:checked+label:before {
 }
 
 .service-info-2:hover {
-    /* -webkit-transform: translateY(-5px);
-    transform: translateY(-5px); */
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
 }
 
 .service-info-2:hover::before {

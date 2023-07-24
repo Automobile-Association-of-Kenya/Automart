@@ -362,7 +362,7 @@ input[type=checkbox]:checked + label:before {
 }
 
 .service-info-2::before {
-    /* background: #fed945; */
+    background: #fed945;
 }
 
 .blog-1:hover .date-box span{

@@ -70,8 +70,8 @@ class Subscription extends Model
         } else {
             $expiry = Carbon::now()->addDays($subscription->billingcycle);
         }
-        $dealer_id = auth()->user()->dealer_id ?? null;
-        DB::table('dealer_subscription')->insert(['user_id' => auth()->id(), 'dealer_id' => $dealer_id, 'subscription_id' => $payment->subscription_id, 'start_date' => date('Y-m-d H:i:s'), 'expiry_date' => $expiry, 'status' => 1]);
+        $dealer_id = $payment->dealer_id ?? null;
+        DB::table('dealer_subscription')->insert(['user_id' => $payment->user_id, 'dealer_id' => $dealer_id, 'subscription_id' => $payment->subscription_id, 'start_date' => date('Y-m-d H:i:s'), 'expiry_date' => $expiry, 'status' => 1]);
         event(new EventsSubscription(auth()->user(), $subscription));
     }
 

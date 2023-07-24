@@ -8,6 +8,14 @@
     {{-- <link rel="stylesheet" href="{{ asset('css/component.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    <style>
+        #completePayment {
+            display: none;
+        }
+        #retryPayment {
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('main')
@@ -93,9 +101,20 @@
 
                                             <div class="loadersection"></div>
                                             <div id="paymentfeedback"></div>
+                                            <input type="hidden" name="checkOutId" id="checkOutId" value="">
 
-                                            <button type="submit" class="btn btn-success" id="mpesa-submit-button"><i
+                                            <div class="btn-group-md">
+                                                <button type="button" class="btn btn-sm btn-success mr-2" id="completePayment">
+                                                    <i class="fa fa-save fa-lg fa-fw"></i> Complete
+                                                </button>
+
+                                                <button type="submit" class="btn btn-sm btn-warning mr-2" id="retryPayment">
+                                                    <i class="fa fa-save fa-lg fa-fw"></i> Retry
+                                                </button>
+
+                                                <button type="submit" class="btn btn-sm btn-success" id="mpesa-submit-button"><i
                                                     class="fa fa-save fa-lg fa-fw"></i> Process</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>

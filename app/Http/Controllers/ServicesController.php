@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Feature;
 use App\Models\Services;
+use App\Models\Social;
 use App\Models\Type;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -31,7 +32,11 @@ class ServicesController extends Controller
     public function index()
     {
         $services = $this->service->get();
-        return view('services.index', compact('services'));
+        $phones = Social::where('name', 'phone')->get();
+        $address = Social::where('name', 'address')->first();
+        $emails = Social::where('name', 'email')->get();
+        $socials = Social::where('type', 'social')->get();
+        return view('services.index', compact('services', 'phones', 'address', 'emails', 'socials'));
     }
 
 

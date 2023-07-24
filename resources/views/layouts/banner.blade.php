@@ -20,7 +20,7 @@
                                         <span>Buy a Car</span>
                                     </a>&nbsp;&nbsp;&nbsp;
 
-                                    <a href="{{ route('dashboard') }}" class="btn-8">
+                                    <a href="{{ route('dealer.vehicles') }}" class="btn-8">
                                         <span>Sell Your Car</span>
                                     </a>
                                 </div>

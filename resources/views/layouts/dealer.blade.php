@@ -138,8 +138,7 @@
                     id="dealerForm">
                     @csrf
                     <div class="row">
-                        <input type="hidden" name="dealer_id" id="dealerID" value="">
-
+                        <input type="hidden" name="dealer_id" id="dealerID" value="{{ auth()->user()->dealer?->id }}">
                         <div class="col-md-6 form-group">
                             <label for="name">Business Name</label>
                             <div class="form-group">

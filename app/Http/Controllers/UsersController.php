@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Jobs\SendEmailVerificationNotification;
 use App\Models\Dealer;
 use App\Models\Partner;
@@ -20,7 +21,7 @@ class UsersController extends Controller
         $this->dealer = new Dealer();
         $this->partner = new Partner();
     }
-    
+
     public function list($id = null)
     {
         $query = $this->user->query();
@@ -73,9 +74,6 @@ class UsersController extends Controller
         return json_encode(['status' => 'success', 'message' => $message]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -145,20 +143,16 @@ class UsersController extends Controller
         return json_encode(['status' => 'success', 'message' => $message]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, string $id)
     {
-        //
+        $user = $this->user->find($id);
+        $user->update($request->validated());
+        return json_encode(['status'=>'success','message'=>'Your details have been updated successfully']);
     }
 
     /**

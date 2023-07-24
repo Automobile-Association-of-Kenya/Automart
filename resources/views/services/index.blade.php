@@ -15,6 +15,7 @@
             </div>
         </div>
     </div>
+
     <div class="services-2 content-area" style="margin-top: ">
         <div class="container">
             <!-- Main title -->
@@ -26,10 +27,10 @@
 
 
                 @foreach ($services as $item)
-                    <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="service-info-2">
                             <div class="icon">
-                                
+                                <i class="flaticon-shield"></i>
                             </div>
                             <div class="detail">
                                 <h3><a href="services-2.html">{{ $item->service }}</a></h3>
@@ -104,67 +105,85 @@
                 <div class="col-lg-5 col-md-12">
                     <div class="contact-info">
                         <h3 class="mb-20">Contact Info</h3>
+
                         <div class="ci-box d-flex mb-30">
                             <div class="icon">
                                 <i class="flaticon-pin"></i>
                             </div>
                             <div class="detail align-self-center">
                                 <h4>Address</h4>
-                                <p>Moonshine St. 14/05 Light City, London, United Kingdom</p>
+                                <p>{{ $address?->link }}</p>
                             </div>
                         </div>
+
                         <div class="ci-box d-flex mb-30">
                             <div class="icon">
                                 <i class="flaticon-phone"></i>
                             </div>
                             <div class="detail align-self-center">
                                 <h4>Phone Number</h4>
-                                <p>
-                                    <a href="tel:0477-0477-8556-552">+0477 8556 552</a>
-                                </p>
-                                <p>
-                                    <a href="tel:0477-0477-8556-552">+0422 8552 588</a>
-                                </p>
+                                @foreach ($phones as $item)
+                                    <p>
+                                        <a href="tel:{{ $item?->link }}">{{ $item?->link }}</a>
+                                    </p>
+                                @endforeach
                             </div>
                         </div>
+
                         <div class="ci-box d-flex mb-40">
                             <div class="icon">
                                 <i class="flaticon-mail"></i>
                             </div>
                             <div class="detail align-self-center">
                                 <h4>Email Address</h4>
-                                <p>
-                                    <a href="mailto:info@themevessel.com">info@themevessel.com</a>
-                                </p>
-                                <p>
-                                    <a href="mailto:info@themevessel.com">mdsobuzvaddro@gmail.com</a>
-                                </p>
+                                @foreach ($emails as $item)
+                                    <p>
+                                        <a href="mailto:{{ $item?->link }}">{{ $item?->link }}</a>
+                                    </p>
+                                @endforeach
                             </div>
                         </div>
+
 
                         <h3 class="mb-20">Follow Us</h3>
                         <div class="social-media social-media-two">
                             <div class="social-list">
-                                <div class="icon facebook">
-                                    <div class="tooltip">Facebook</div>
-                                    <span><i class="fa fa-facebook"></i></span>
-                                </div>
-                                <div class="icon twitter">
-                                    <div class="tooltip">Twitter</div>
-                                    <span><i class="fa fa-twitter"></i></span>
-                                </div>
-                                <div class="icon instagram">
-                                    <div class="tooltip">Instagram</div>
-                                    <span><i class="fa fa-instagram"></i></span>
-                                </div>
-                                <div class="icon github">
-                                    <div class="tooltip">Github</div>
-                                    <span><i class="fa fa-github"></i></span>
-                                </div>
-                                <div class="icon youtube mr-0">
-                                    <div class="tooltip">Youtube</div>
-                                    <span><i class="fa fa-youtube"></i></span>
-                                </div>
+                                @foreach ($socials as $item)
+                                    @if ($item->name == 'facebook')
+                                        <div class="icon {{ strtolower($item?->name) }}">
+                                            <div class="tooltip">{{ $item?->name }}</div>
+                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                        </div>
+                                    @endif
+
+                                    @if ($item->name == 'twitter')
+                                        <div class="icon {{ strtolower($item?->name) }}">
+                                            <div class="tooltip">{{ $item?->name }}</div>
+                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                        </div>
+                                    @endif
+
+                                    @if ($item->name == 'instagram')
+                                        <div class="icon {{ strtolower($item?->name) }}">
+                                            <div class="tooltip">{{ $item?->name }}</div>
+                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                        </div>
+                                    @endif
+
+                                    @if ($item->name == 'linkedin')
+                                        <div class="icon {{ strtolower($item?->name) }}">
+                                            <div class="tooltip">{{ $item?->name }}</div>
+                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                        </div>
+                                    @endif
+
+                                    @if ($item->name == 'whatsapp')
+                                        <div class="icon {{ strtolower($item?->name) }}">
+                                            <div class="tooltip">{{ $item?->name }}</div>
+                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>

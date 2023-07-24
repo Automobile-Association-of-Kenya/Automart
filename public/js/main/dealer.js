@@ -31,26 +31,31 @@
         dealerAltPhone = $("#dealerAltPhone"),
         postolAddress = $("#postolAddress"),
         dealerAddress = $("#dealerAddress"),
-        dealerCity = $("#dealerCity");
+        dealerCity = $("#dealerCity"),
+        dealerID = $("#dealerID");
 
     dealerForm.on("submit", function (event) {
         event.preventDefault();
-        let $this = $(this),
+ let $this = $(this),
             token = $this.find("input[name='_token']").val(),
-            submit = $this.find("button[type='submit']"),
-            data = {
-                _token: token,
-                name: dealerName.val(),
-                email: dealerEmail.val(),
-                phone: dealerPhone.val(),
-                alt_phone: dealerAltPhone.val(),
-                address: dealerAddress.val(),
-                postal_address: postolAddress.val(),
-                city: dealerCity.val(),
-            };
+            submit = $this.find("button[type='submit']");
+        var formData = new FormData();
+        var fileInput = document.getElementById("dealerLogo");
+        var file = fileInput.files[0];
+        formData.append("logo", file);
+        formData.append("name", dealerName.val());
+        formData.append("email", dealerEmail.val());
+        formData.append("phone", dealerPhone.val());
+        formData.append("alt_phone", dealerAltPhone.val());
+        formData.append("address", dealerAddress.val());
+        formData.append("postal_address", postolAddress.val());
+        formData.append("city", dealerCity.val());
+        formData.append("dealer_id", dealerID.val());
+        formData.append("_token", token);
+
         submit.prop("disabled", true);
 
-        $.post("/dealer/store", data)
+        $.post("/dealer/store", formData)
             .done(function (params) {
                 console.log(params);
                 let result = JSON.parse(params);
@@ -129,6 +134,7 @@
     let subsPromise = new Promise(function (resolve, reject) {
         $.getJSON("/dealer/subscription", function (subscription) {
             resolve(subscription?.expiry_date);
+            console.log(subscription);
         });
     });
     Promise.resolve(subsPromise).then((result) => {
@@ -149,7 +155,7 @@
                     (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
                 );
                 var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-                
+
                 let day =
                     days > 1
                         ? days + " days, "
@@ -166,7 +172,8 @@
                     seconds;
                 if (timeDifference < 0) {
                     clearInterval(countdownInterval);
-                    countdownElement.innerHTML = "Countdown is over!";
+                    countdownElement.innerHTML =
+                        "<a href='/subscription-plans' _target='_blank' class='btn btn-light btn-sm alert-link'>&nbsp;Promote your ads</a>";
                 }
             } else {
                 countdownElement.innerHTML =
