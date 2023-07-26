@@ -41,68 +41,72 @@
                         @include('layouts.alert')
                         <div class="tab-pane fade show active" id="purchasesTab" role="tabpanel">
                             <table class="table">
-                                <td><b>Customer</b></td>
-                                <td><b>Residence</b></td>
-                                <td><b>Vehicle</b></td>
-                                <td><b>Action</b></td>
+                                <thead>
+                                    <td><b>Customer</b></td>
+                                    <td><b>Residence</b></td>
+                                    <td><b>Vehicle</b></td>
+                                    <td><b>Action</b></td>
+                                </thead>
+                                <tbody>
+                                    @foreach ($purchases as $item)
+                                        @php
+                                            $dealer = $item->vehicle?->dealer?->name ?? $item->vehicle?->user?->name;
+                                            $dealerphone = $item->vehicle?->dealer?->phone ?? $item->vehicle?->user?->phone;
+                                            $dealeremail = $item->vehilce?->dealer?->email ?? $item->vehicle?->user?->email;
+                                        @endphp
+                                        <tr>
+                                            <td>
+                                                <p><b>Name: </b>{{ $item->name }}</p>
+                                                <p><b>ID: </b>{{ $item->id_no }}</p>
+                                                <p><b>Email: </b>{{ $item->email }}</p>
+                                                <p><b>Phone: </b>{{ $item->phone }}</p>
+                                            </td>
+                                            <td>
+                                                <p><b>Pickup: </b>{{ $item->pickup }}</p>
+                                                <p><b>Estate: </b>{{ $item->estate }}</p>
+                                                <p><b>Hs NO: </b>{{ $item->housenumber }}</p>
+                                            </td>
+
+                                            <td>
+                                                <p>{{ $item->vehicle?->year . ' ' . $item->vehicle?->make->make . ' ' . $item->vehicle?->model->model }}
+                                                </p>
+                                                <p><b>Ref NO: </b>{!! $item->vehicle?->vehicle_no . ' <b>Price: </b> ' . number_format($item->vehicle?->price, 2) !!}</p>
+                                                <p><b>Mile age: </b>{!! $item->vehicle?->mileage . ' <b>CC: </b> ' . $item->vehicle?->enginecc !!}</p>
+                                                <p class="mt-2">
+                                                <p><b>Dealer: </b>&nbsp; {{ $dealer }}</p>
+                                                <p><b>Email:</b>&nbsp;{{ $dealeremail }}</p>
+                                                <p><b>Phone: </b>&nbsp;{{ $dealerphone }}</p>
+                                            </td>
+
+                                            <td>
+                                                <li class="dropdown"><a href="#" data-toggle="dropdown"
+                                                        class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="dropdown-item"><a href="#"
+                                                                id="saleMessageModalToggle" data-target="#saleMessageModal"
+                                                                data-toggle="modal" data-id="{{ $item->id }}"><i
+                                                                    class="fa fa-envelope text-success"></i>&nbsp;Send
+                                                                Message</a>
+                                                        </li>
+                                                        <li class="dropdown-item"><a
+                                                                href="{{ route('dealer.puchase.approve', $item->id) }}"><i
+                                                                    class="fa fa-check text-success"></i>&nbsp;Approve</a>
+                                                        </li>
+                                                        <li class="dropdown-item"><a href="#"
+                                                                id="desclinePurchaseToggle" data-toggle="modal"
+                                                                data-target="#declinePurchaseModal"
+                                                                data-id="{{ $item->id }}"><i
+                                                                    class="fa fa-edit text-warning"></i>&nbsp;Decline</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <p class="mt-4">{{ date('H:i d M Y', strtotime($item->created_at)) }}</p>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
-                            @foreach ($purchases as $item)
-                                @php
-                                    $dealer = $item->vehicle?->dealer?->name ?? $item->vehicle?->user?->name;
-                                    $dealerphone = $item->vehicle?->dealer?->phone ?? $item->vehicle?->user?->phone;
-                                    $dealeremail = $item->vehilce?->dealer?->email ?? $item->vehicle?->user?->email;
-                                @endphp
-                                <table class="table table-hover">
-                                    <tr>
-                                        <td>
-                                            <p><b>Name: </b>{{ $item->name }}</p>
-                                            <p><b>ID: </b>{{ $item->id_no }}</p>
-                                            <p><b>Email: </b>{{ $item->email }}</p>
-                                            <p><b>Phone: </b>{{ $item->phone }}</p>
-                                        </td>
-                                        <td>
-                                            <p><b>Pickup: </b>{{ $item->pickup }}</p>
-                                            <p><b>Estate: </b>{{ $item->estate }}</p>
-                                            <p><b>Hs NO: </b>{{ $item->housenumber }}</p>
-                                        </td>
 
-                                        <td>
-                                            <p>{{ $item->vehicle?->year . ' ' . $item->vehicle?->make->make . ' ' . $item->vehicle?->model->model }}
-                                            </p>
-                                            <p><b>Ref NO: </b>{!! $item->vehicle?->vehicle_no . ' <b>Price: </b> ' . number_format($item->vehicle?->price, 2) !!}</p>
-                                            <p><b>Mile age: </b>{!! $item->vehicle?->mileage . ' <b>CC: </b> ' . $item->vehicle?->enginecc !!}</p>
-                                            <p class="mt-2">
-                                            <p><b>Dealer: </b>&nbsp; {{ $dealer }}</p>
-                                            <p><b>Email:</b>&nbsp;{{ $dealeremail }}</p>
-                                            <p><b>Phone: </b>&nbsp;{{ $dealerphone }}</p>
-                                        </td>
-
-                                        <td>
-                                            <li class="dropdown"><a href="#" data-toggle="dropdown"
-                                                    class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="dropdown-item"><a href="#" id="saleMessageModalToggle"
-                                                            data-target="#saleMessageModal" data-toggle="modal"
-                                                            data-id="{{ $item->id }}"><i
-                                                                class="fa fa-envelope text-success"></i>&nbsp;Send
-                                                            Message</a>
-                                                    </li>
-                                                    <li class="dropdown-item"><a
-                                                            href="{{ route('dealer.puchase.approve', $item->id) }}"><i
-                                                                class="fa fa-check text-success"></i>&nbsp;Approve</a>
-                                                    </li>
-                                                    <li class="dropdown-item"><a href="#" id="desclinePurchaseToggle"
-                                                            data-toggle="modal" data-target="#declinePurchaseModal"
-                                                            data-id="{{ $item->id }}"><i
-                                                                class="fa fa-edit text-warning"></i>&nbsp;Decline</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <p class="mt-4">{{ date('H:i d M Y', strtotime($item->created_at)) }}</p>
-                                        </td>
-                                    </tr>
-                                </table>
-                            @endforeach
                             <div class="text-center">
                                 {{ $purchases->links() }}
                             </div>
@@ -157,7 +161,8 @@
                                                 <li class="dropdown"><a href="#" data-toggle="dropdown"
                                                         class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
                                                     <ul class="dropdown-menu">
-                                                        <li class="dropdown-item"><a href="#" id="quoteMessageModalToggle" data-toggle="modal"
+                                                        <li class="dropdown-item"><a href="#"
+                                                                id="quoteMessageModalToggle" data-toggle="modal"
                                                                 data-target="#quoteMessageModal"><i
                                                                     class="fa fa-envelope text-success"></i>&nbsp;Send
                                                                 Message</a></li>
@@ -257,8 +262,8 @@
                                                 <li class="dropdown"><a href="#" data-toggle="dropdown"
                                                         class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
                                                     <ul class="dropdown-menu">
-                                                        <li class="dropdown-item"><a href="#" id="loanRequestModalToggle"
-                                                                data-toggle="modal"
+                                                        <li class="dropdown-item"><a href="#"
+                                                                id="loanRequestModalToggle" data-toggle="modal"
                                                                 data-target="#loanMessageModal"><i
                                                                     class="fa fa-envelope text-success"
                                                                     data-id="{{ $item->id }}"
@@ -323,8 +328,8 @@
                                                 <li class="dropdown"><a href="#" data-toggle="dropdown"
                                                         class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
                                                     <ul class="dropdown-menu">
-                                                        <li class="dropdown-item"><a href="#" id="tradeInMessageModalToggle"
-                                                                data-toggle="modal"
+                                                        <li class="dropdown-item"><a href="#"
+                                                                id="tradeInMessageModalToggle" data-toggle="modal"
                                                                 data-target="#tradeInMessageModal"
                                                                 data-id="{{ $item->id }}"><i
                                                                     class="fa fa-envelope text-success"></i>&nbsp;Send
@@ -385,7 +390,8 @@
 
                         <div class="col-md-12">
                             <div class="text-center">
-                                <button type="submit" class="btn btn-md btn-success"><i class="fa fa-paper-plane"></i>Send</button>
+                                <button type="submit" class="btn btn-md btn-success"><i
+                                        class="fa fa-paper-plane"></i>Send</button>
                             </div>
                         </div>
                     </div>
@@ -434,7 +440,8 @@
 
                         <div class="col-md-12">
                             <div class="text-center">
-                                <button type="submit" class="btn btn-md btn-success"><i class="fas fa-paper-plane"></i>&nbsp;Send</button>
+                                <button type="submit" class="btn btn-md btn-success"><i
+                                        class="fas fa-paper-plane"></i>&nbsp;Send</button>
                             </div>
                         </div>
                     </div>
@@ -483,7 +490,8 @@
 
                         <div class="col-md-12">
                             <div class="text-center">
-                                <button type="submit" class="btn btn-md btn-success"><i class="fas fa-paper-plane"></i>&nbsp;Send</button>
+                                <button type="submit" class="btn btn-md btn-success"><i
+                                        class="fas fa-paper-plane"></i>&nbsp;Send</button>
                             </div>
                         </div>
                     </div>
@@ -534,7 +542,8 @@
 
                         <div class="col-md-12">
                             <div class="text-center">
-                                <button type="submit" class="btn btn-md btn-success"><i class="fa fa-paper-plane"></i>&nbsp;Send</button>
+                                <button type="submit" class="btn btn-md btn-success"><i
+                                        class="fa fa-paper-plane"></i>&nbsp;Send</button>
                             </div>
                         </div>
                     </div>
@@ -565,7 +574,8 @@
                     id="loanMessageForm">
                     @csrf
                     <div class="row">
-                        <input type="hidden" name="purchase_decline_request_id" id="purchaseRequestDeclineID" value="">
+                        <input type="hidden" name="purchase_decline_request_id" id="purchaseRequestDeclineID"
+                            value="">
 
                         {{-- <div class="col-md-2 form-group mb-2">
                             <label for="purchaseDeclineMessageType">Message Type</label>
@@ -585,7 +595,8 @@
 
                         <div class="col-md-12">
                             <div class="text-center">
-                                <button type="submit" class="btn btn-md btn-danger"><i class="fa fa-stop"></i>&nbsp;Send</button>
+                                <button type="submit" class="btn btn-md btn-danger"><i
+                                        class="fa fa-stop"></i>&nbsp;Send</button>
                             </div>
                         </div>
                     </div>
@@ -597,7 +608,7 @@
 
 @section('footer_scrips')
     <script>
-         (function() {
+        (function() {
             $('body').on('click', '#loanRequestModalToggle', function(event) {
                 let loan_id = $(this).data('id');
                 console.log(loan_id);
