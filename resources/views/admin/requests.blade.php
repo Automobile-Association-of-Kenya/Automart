@@ -48,9 +48,9 @@
                             </table>
                             @foreach ($purchases as $item)
                                 @php
-                                    $dealer = $item->vehicle->dealer?->name ?? $item->vehicle->user?->name;
-                                    $dealerphone = $item->vehicle->dealer?->phone ?? $item->vehicle->user?->phone;
-                                    $dealeremail = $item->vehilce->dealer?->email ?? $item->vehicle->user?->email;
+                                    $dealer = $item->vehicle?->dealer?->name ?? $item->vehicle?->user?->name;
+                                    $dealerphone = $item->vehicle?->dealer?->phone ?? $item->vehicle?->user?->phone;
+                                    $dealeremail = $item->vehilce?->dealer?->email ?? $item->vehicle?->user?->email;
                                 @endphp
                                 <table class="table table-hover">
                                     <tr>
@@ -67,10 +67,10 @@
                                         </td>
 
                                         <td>
-                                            <p>{{ $item->vehicle->year . ' ' . $item->vehicle->make->make . ' ' . $item->vehicle->model->model }}
+                                            <p>{{ $item->vehicle?->year . ' ' . $item->vehicle?->make->make . ' ' . $item->vehicle?->model->model }}
                                             </p>
-                                            <p><b>Ref NO: </b>{!! $item->vehicle->vehicle_no . ' <b>Price: </b> ' . number_format($item->vehicle->price, 2) !!}</p>
-                                            <p><b>Mile age: </b>{!! $item->vehicle->mileage . ' <b>CC: </b> ' . $item->vehicle->enginecc !!}</p>
+                                            <p><b>Ref NO: </b>{!! $item->vehicle?->vehicle_no . ' <b>Price: </b> ' . number_format($item->vehicle?->price, 2) !!}</p>
+                                            <p><b>Mile age: </b>{!! $item->vehicle?->mileage . ' <b>CC: </b> ' . $item->vehicle?->enginecc !!}</p>
                                             <p class="mt-2">
                                             <p><b>Dealer: </b>&nbsp; {{ $dealer }}</p>
                                             <p><b>Email:</b>&nbsp;{{ $dealeremail }}</p>
@@ -120,9 +120,9 @@
                                 <tbody>
                                     @foreach ($quotes as $item)
                                         @php
-                                            $dealer = $item->vehicle->dealer?->name ?? $item->vehicle->user?->name;
-                                            $dealerphone = $item->vehicle->dealer?->phone ?? $item->vehicle->user?->phone;
-                                            $dealeremail = $item->vehilce->dealer?->email ?? $item->vehicle->user?->email;
+                                            $dealer = $item->vehicle?->dealer?->name ?? $item->vehicle?->user?->name;
+                                            $dealerphone = $item->vehicle?->dealer?->phone ?? $item->vehicle?->user?->phone;
+                                            $dealeremail = $item->vehilce?->dealer?->email ?? $item->vehicle?->user?->email;
                                         @endphp
                                         <tr>
                                             <td>
@@ -133,13 +133,13 @@
                                             </td>
 
                                             <td>
-                                                <p>{{ $item->vehicle->year . ' ' . $item->vehicle->make->make . ' ' . $item->vehicle->model->model }}
+                                                <p>{{ $item->vehicle?->year . ' ' . $item->vehicle?->make->make . ' ' . $item->vehicle?->model->model }}
                                                 </p>
-                                                <p><b>Ref NO: </b>{!! $item->vehicle->vehicle_no !!}</p>
+                                                <p><b>Ref NO: </b>{!! $item->vehicle?->vehicle_no !!}</p>
                                                 <p><b>Price:
-                                                    </b>{{ number_format($item->vehicle->price, 2) }}</p>
-                                                <p><b>Mile age: </b>{!! $item->vehicle->mileage !!}</p>
-                                                <p><b>CC: </b> {{ $item->vehicle->enginecc }}</p>
+                                                    </b>{{ number_format($item->vehicle?->price, 2) }}</p>
+                                                <p><b>Mile age: </b>{!! $item->vehicle?->mileage !!}</p>
+                                                <p><b>CC: </b> {{ $item->vehicle?->enginecc }}</p>
                                                 <p class="mt-2">
                                                 <p><b>Dealer: </b>&nbsp; {{ $dealer }}
                                                 </p>
@@ -295,7 +295,7 @@
                                     @endphp
                                     @foreach ($tradeins as $item)
                                         @php
-                                            $dealer = $item->vehicle->dealer ?? $item->vehicle->user;
+                                            $dealer = $item->vehicle?->dealer ?? $item->vehicle?->user;
                                         @endphp
                                         <tr>
                                             <td>{{ $i++ }}</td>
@@ -315,9 +315,9 @@
                                                 <p>{{ $item->year . ' - ' . $item->reg_no }}</p>
                                             </td>
                                             <td>
-                                                <p>{{ $item->vehicle->make->make }}</p>
-                                                <p>{{ $item->vehicle->model->model }}</p>
-                                                <p>{{ $item->vehicle->year . ' - ' . $item->vehicle->price }}</p>
+                                                <p>{{ $item->vehicle?->make->make }}</p>
+                                                <p>{{ $item->vehicle?->model->model }}</p>
+                                                <p>{{ $item->vehicle?->year . ' - ' . $item->vehicle?->price }}</p>
                                             </td>
                                             <td>
                                                 <li class="dropdown"><a href="#" data-toggle="dropdown"

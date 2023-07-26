@@ -67,7 +67,7 @@
                                                 </p>
                                                 <p><b>Ref NO: </b>{!! $item->vehicle->vehicle_no . ' <b>Price: </b> ' . number_format($item->vehicle->price, 2) !!}</p>
                                                 <p><b>Mile age: </b>{!! $item->vehicle->mileage . ' <b>CC: </b> ' . $item->vehicle->enginecc !!}</p>
-                                                
+
                                             </td>
 
                                             <td>
@@ -113,7 +113,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($quotes as $item)
-                                        
+
                                         <tr>
                                             <td>
                                                 <p><b>Name: </b>{{ $item->name }}</p>
@@ -171,7 +171,7 @@
                                     @endphp
                                     @foreach ($tradeins as $item)
                                         @php
-                                            $dealer = $item->vehicle->dealer ?? $item->vehicle->user;
+                                            $dealer = $item->vehicle?->dealer ?? $item->vehicle?->user;
                                         @endphp
                                         <tr>
                                             <td>{{ $i++ }}</td>
@@ -446,7 +446,7 @@
                 let quote_id = $(this).data('id');
                 $('#quoteRequestID').val(quote_id);
             });
-            
+
             $('body').on('click', '#tradeInMessageModalToggle', function(event) {
                 let tradein_id = $(this).data('id');
                 $('#tradeinRequestID').val(quote_id);
