@@ -48,9 +48,9 @@
                             </table>
                             @foreach ($purchases as $item)
                                 @php
-                                    $dealer = $item->vehicle->dealer?->name ?? $item->vehicle->user->name;
-                                    $dealerphone = $item->vehicle->dealer?->phone ?? $item->vehicle->user->phone;
-                                    $dealeremail = $item->vehilce->dealer?->email ?? $item->vehicle->user->email;
+                                    $dealer = $item->vehicle->dealer?->name ?? $item->vehicle->user?->name;
+                                    $dealerphone = $item->vehicle->dealer?->phone ?? $item->vehicle->user?->phone;
+                                    $dealeremail = $item->vehilce->dealer?->email ?? $item->vehicle->user?->email;
                                 @endphp
                                 <table class="table table-hover">
                                     <tr>
@@ -120,9 +120,9 @@
                                 <tbody>
                                     @foreach ($quotes as $item)
                                         @php
-                                            $dealer = $item->vehicle->dealer->name ?? $item->vehicle->user->name;
-                                            $dealerphone = $item->vehicle->dealer->phone ?? $item->vehicle->user->phone;
-                                            $dealeremail = $item->vehilce->dealer->email ?? $item->vehicle->user->email;
+                                            $dealer = $item->vehicle->dealer?->name ?? $item->vehicle->user?->name;
+                                            $dealerphone = $item->vehicle->dealer?->phone ?? $item->vehicle->user?->phone;
+                                            $dealeremail = $item->vehilce->dealer?->email ?? $item->vehicle->user?->email;
                                         @endphp
                                         <tr>
                                             <td>
@@ -300,9 +300,9 @@
                                         <tr>
                                             <td>{{ $i++ }}</td>
                                             <td>
-                                                <p><strong>{{ $dealer->name }}</strong></p>
-                                                <p>{{ $dealer->email }}</p>
-                                                <p>{{ $dealer->phone }}</p>
+                                                <p><strong>{{ $dealer?->name }}</strong></p>
+                                                <p>{{ $dealer?->email }}</p>
+                                                <p>{{ $dealer?->phone }}</p>
                                             </td>
                                             <td>
                                                 <p><strong>{{ $item->name }}</strong></p>

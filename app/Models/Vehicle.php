@@ -208,6 +208,7 @@ class Vehicle extends Model
         return $this->orderBy('priority')->inRandomOrder()->latest()->paginate($paginate);
     }
 
+// Hello, I am interested in make , year, color on AA Kenya Automart vehicle_link. Is it available.
     public function getlatest($limit, $except_id = null)
     {
         $query = $this->query();
@@ -270,7 +271,8 @@ class Vehicle extends Model
             $url = "";
         }else {
             $status = "success";
-            $message = "Hello! I have checked  " . $vehicle->year . " " . $vehicle->make->make . " " . $vehicle->model->model . " of ref " . $vehicle->vehicle_no . " and I'm interested. Please let me know on any requirements";
+            $message = "Hello, I am interested in " . $vehicle->year . " " . $vehicle->make->make . " " . $vehicle->model->model . " on AA Kenya Automart ".route('vehicle.data', $vehicle->vehicle_no).". Is it available.";
+            // $message = "Hello! I have checked  " . $vehicle->year . " " . $vehicle->make->make . " " . $vehicle->model->model . " of ref " . $vehicle->vehicle_no . " and I'm interested. Please let me know on any requirements";
             if (!is_null($this->userID())) {
                 Messages::create(['user_id' => $this->userID(), 'vehicle_id' => $id, 'type' => 'whatsapp', 'destination' => $this->vehiclecontactphone($id), 'message' => $message]);
             } else {

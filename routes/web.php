@@ -135,7 +135,7 @@ Route::get('models-with-vehicles', [ApplicationController::class, 'modelsWithVeh
 Route::get('search', [ApplicationController::class, 'vehicleSearch']);
 Route::get('vehicle-detail/{id}', [ApplicationController::class, 'vehicle'])->name('vehicle.detail');
 Route::get('search', [ApplicationController::class, 'search'])->name('search');
-Route::get('vehicle/{id}/{tag?}', [ApplicationController::class, 'vehicleDetails']);
+Route::get('vehicle/{id}/{tag?}', [ApplicationController::class, 'vehicleDetails'])->name('vehicle.data');
 
 require __DIR__ . '/auth.php';
 
