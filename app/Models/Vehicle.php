@@ -19,10 +19,10 @@ class Vehicle extends Model
         'speed',
         'terrain',
         'engine','seats',
-        'horsepower', 'status', 'sponsored', 'priority',
+        'horsepower', 'status', 'sponsored', 'priority','location'
     ];
 
-    public $with = ['user:id,phone','make:id,make', 'model:id,model', 'images:id,vehicle_id,image', 'dealer:id,name,phone,email', 'type:id,type', 'prices:id,price', 'yard:id,yard,address', 'features:id,feature'];
+    public $with = ['user:id,name,email,phone','make:id,make', 'model:id,model', 'images:id,vehicle_id,image', 'dealer:id,name,phone,email', 'type:id,type', 'prices:id,price', 'yard:id,yard,address', 'features:id,feature'];
 
     public function dealer(): BelongsTo
     {
@@ -205,7 +205,7 @@ class Vehicle extends Model
 
     public function getvehiclespaginate($paginate)
     {
-        $vehicles = $this->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
+        $vehicles = $this->orderBy('priority')->inRandomOrder()->latest()->paginate($paginate);
         return json_encode($vehicles);
     }
 
@@ -216,7 +216,7 @@ class Vehicle extends Model
             $query->where('id', '!=', $except_id)
             ->where('vehicle_no', '!=', $except_id);
         }
-        $newarrivals = $query->latest()->inRandomOrder()->orderBy('priority')->limit($limit)->get();
+        $newarrivals = $query->latest()->orderBy('priority')->inRandomOrder()->limit($limit)->get();
         return $newarrivals;
     }
 
@@ -227,13 +227,13 @@ class Vehicle extends Model
 
     function newvehiclespaginated($paginate)
     {
-        $newvehicles = $this->where('usage', 'new')->inRandomOrder()->orderBy('priority')->paginate($paginate);
+        $newvehicles = $this->where('usage', 'new')->orderBy('priority')->inRandomOrder()->paginate($paginate);
         return $newvehicles;
     }
 
     function vehiclesbymake($make_id, $paginate)
     {
-        $vehicles = $this->where('make_id', intval($make_id))->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate);
+        $vehicles = $this->where('make_id', intval($make_id))->orderBy('priority')->inRandomOrder()->latest()->paginate($paginate);
         return $vehicles;
     }
 
@@ -263,7 +263,7 @@ class Vehicle extends Model
 
     function whatsapp($id)
     {
-        $vehicle = $this->where('id', $id)->with(['make:id,make', 'model:id,model'])->first();
+        $vehicle = $this->where('id', $id)->first();
         $social = Social::where('name', 'whatsapp')->first();
         $phone = $this->vehiclecontactphone($id);
         if (is_null($phone)) {
@@ -331,12 +331,12 @@ class Vehicle extends Model
 
     function searchpaginate($data, $query, $paginate = 20)
     {
-        return $this->relate($data)->inRandomOrder()->orderBy('priority')->latest()->paginate($paginate)->appends($query);
+        return $this->relate($data)->orderBy('priority')->inRandomOrder()->latest()->paginate($paginate)->appends($query);
     }
 
     function search($data)
     {
-        return $this->relate($data)->inRandomOrder()->orderBy('priority')->latest()->get();
+        return $this->relate($data)->orderBy('priority')->inRandomOrder()->latest()->get();
     }
 
     function initialize() {

@@ -6,8 +6,11 @@ use App\Models\Finance;
 use App\Models\Loan;
 use App\Models\Purchase;
 use App\Models\Quote;
+use App\Models\Subscription;
 use App\Models\Tradein;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -20,6 +23,7 @@ class AdminController extends Controller
         $this->user = new User();
         $this->loan = new Loan();
         $this->purchase = new Purchase();
+        $this->subscription = new Subscription();
     }
 
     public function index()
@@ -62,6 +66,30 @@ class AdminController extends Controller
     public function reports()
     {
         return view('admin.reports');
+    }
+
+    public function subscriptions() {
+        $data = collect();
+        $date = Carbon::now();
+        $subscriptions = DB::table('dealer_subscription')
+        ->select('subscription_id', DB::raw('COUNT(*) AS subscriptions'))
+        ->where('expiry_date', '>', $date)
+            ->groupBy('subscription_id')
+            ->get();
+        foreach ($subscriptions as $key => $value) {
+            $subscription = $this->subscription->find($value->subscription_id);
+            $data->push(['subscription'=>$subscription->name, 'subscriptions'=>$value->subscriptions]);
+        }
+        return $data;
+    }
+
+    public function dealersWithSubscriptions() {
+        $date = Carbon::now();
+        $subscriptions =  DB::table('dealer_subscription')
+        ->select('subscription_id')
+        ->where('expiry_date', '>', $date)
+            ->groupBy('subscription_id')
+            ->get();
     }
 
 }

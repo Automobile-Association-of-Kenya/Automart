@@ -249,6 +249,7 @@ class VehicleController extends Controller
                 $dealer = null;
             }
         }
+
         $name = (!is_null($dealer)) ? $dealer->name : auth()->user()->name;
 
         if (isset($request->vehicle_id) && $request->vehicle_id !== null) {
@@ -261,6 +262,14 @@ class VehicleController extends Controller
             $images = [];
         }
 
+        if (!is_null($dealer) || auth()->user()->role !== "admin") {
+            $dealer_id = $dealer->id ?? auth()->id();
+            $plan = $this->dealer->subscription($dealer_id);
+            if (!is_null($plan)) {
+                $validated["sponsored"] = 1;
+                $validated["priority"] = $plan["priority"];
+            }
+        }
 
         if (session()->has($strkey . 'images')) {
             foreach (session($strkey . 'images') as $key => $value) {
@@ -299,7 +308,9 @@ class VehicleController extends Controller
             VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
             $message = "Vehicle added successfully";
         }
-        VehicleImage::new($vehicle->id, $images);
+        if (!empty($images)) {
+            VehicleImage::new($vehicle->id, $images);
+        }
         DB::commit();
         session()->forget($strkey . "images");
         session()->forget($strkey . 'cover');
@@ -329,18 +340,13 @@ class VehicleController extends Controller
 
     public function imageDelete(Request $request)
     {
-        $vehicle = $this->vehicle->find($request->vehicle_id);
+        $image = $request->image;
         if (isset($request->photo_delete) && $request->photo_delete) {
-            $image = $request->image;
-            $images = array_filter(json_decode($vehicle->images, true), function ($value) use ($image) {
-                return $value !== $image;
-            });
-            if (File::exists(public_path('vehicleimages/' . $request->image))) {
-                Storage::delete('vehicleimages/' . $request->image);
+            if (File::exists(public_path('vehicleimages/' . $image["image"]))) {
+                Storage::delete('vehicleimages/' . $image["image"]);
             }
-            $vehicle->images = json_encode($images);
-            $vehicle->update();
         }
+        DB::table('vehicle_images')->where('id',$image["id"])->delete();
         return json_encode(['status' => 'success', 'message' => 'Image deleted successfully']);
     }
 
@@ -376,5 +382,14 @@ class VehicleController extends Controller
             $vehicle->delete();
         }
         return json_encode(['status'=>'success','message'=>'Vehicles delisted successfully']);
+    }
+
+    public function sold(Request $request) {
+        $vehicles = $request->vehicles;
+        foreach ($vehicles as $value) {
+            $vehicle = $this->vehicle->find($value);
+            $vehicle->update(['status'=>'sold', 'sold_at'=>date('Y-m-d H:i:s')]);
+        }
+        return json_encode(['status' => 'success', 'message' => 'Vehicles delisted successfully']);
     }
 }

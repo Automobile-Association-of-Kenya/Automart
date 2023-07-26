@@ -95,17 +95,17 @@ $(function () {
 
     // Comon slick strat
     $(".slick").slick({
-        dots: false,
+        dots: true,
         infinite: true,
         touchThreshold: 100,
         speed: 300,
         slidesToShow: 3,
         slidesToScroll: 3,
         centerMode: true,
-        nextArrow:
-            '<button class="slick-next"><i class="fas fa-chevron-right"></i></button>',
-        prevArrow:
-            '<button class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
+        // nextArrow:
+        //     '<button class="slick-next"><i class="fas fa-chevron-right"></i></button>',
+        // prevArrow:
+        //     '<button class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
     });
 
     // Partners strat
@@ -130,7 +130,7 @@ $(function () {
     $(".slider-fors").slick({
         slidesToShow: 1,
         slidesToScroll: 1,
-        arrows: false,
+        arrows: true,
         fade: true,
         asNavFor: ".slider-navs",
     });
@@ -174,7 +174,7 @@ $(function () {
     $(".slider-for").slick({
         slidesToShow: 1,
         slidesToScroll: 1,
-        arrows: false,
+        arrows: true,
         fade: true,
         asNavFor: ".slider-nav",
     });
@@ -649,7 +649,7 @@ $(function () {
         $(this).slick({
             infinite: true,
             dots: false,
-            arrows: false,
+            arrows: true,
             centerMode: true,
             centerPadding: "0",
         });

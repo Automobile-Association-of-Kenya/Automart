@@ -132,7 +132,7 @@ class User extends Authenticatable
         $loanscount = Loan::count();
         $todayloanscount = Loan::whereDate('created_at', date('Y-m-d'))->count();
         $visitstoday = Visit::whereDate('time', date('Y-m-d'))->count();
-        $activesubscriptions = DB::table('dealer_subscription')->whereTime('expiry_date', '>', date('Y-m-d H:i:s'))->count();
+        $activesubscriptions = DB::table('dealer_subscription')->where('expiry_date', '>', date('Y-m-d H:i:s'))->count();
 
         return [
             'vehiclescount' => $vehiclescount,

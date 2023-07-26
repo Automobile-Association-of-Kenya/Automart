@@ -507,13 +507,13 @@
                                     </button>
 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#"><i
+                                        <a class="dropdown-item" href="#" id="markAsSold"><i
                                                 class="fas fa-thumbs-up text-warning"></i>&nbsp;Mark as sold</a>
-                                        <a class="dropdown-item" href="#"><i
+                                        <a class="dropdown-item" href="#" id="discountVehicles"><i
                                                 class="fas fa-arrow-down text-warning"></i>&nbsp;Discount</a>
-                                        <a class="dropdown-item" href="#"><i
+                                        <a class="dropdown-item" href="#" id="vehicleDelist"><i
                                                 class="fas fa-trash text-warning"></i>&nbsp;Delist</a>
-                                        <a class="dropdown-item" href="#"><i
+                                        <a class="dropdown-item" href="#" id="deleteVehicles"><i
                                                 class="fas fa-trash text-danger"></i>&nbsp;Delete</a>
                                     </div>
                                 </div>

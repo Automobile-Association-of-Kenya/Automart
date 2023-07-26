@@ -60,10 +60,11 @@
                             <div class="pull-left">
                                 <h3>{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}</h3>
                                 <a href="#">
-                                    <i class="flaticon-user text-warning"></i> {{ $dealer->name }}
+                                    <i class="flaticon-user text-warning"></i> &nbsp;{{ $dealer->name }}
                                 </a>
+                                <hr>
                                 <p>
-                                    <i class="flaticon-pin"></i>{{ $location }}
+                                    <i class="flaticon-pin"></i> &nbsp;; {{ $location }}
                                 </p>
                             </div>
                             <div class="pull-right">
@@ -208,6 +209,7 @@
                                                 <i class="fa fa-check-circle text-success"></i>&nbsp;Top Speed:
                                                 {{ $vehicle->speed }}
                                             </li>
+
                                             <li>
                                                 <i class="fa fa-check-circle text-success"></i>&nbsp;Fuel Type:
                                                 {{ $vehicle->fuel_type }}
@@ -216,10 +218,12 @@
                                                 <i class="fa fa-check-circle text-success"></i>&nbsp;Mileage:
                                                 {{ $vehicle->mileage }} KM
                                             </li>
+
                                             <li>
-                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Engine:
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Engine CC:
                                                 {{ $vehicle->enginecc }}
                                             </li>
+
                                             <li>
                                                 <i class="fa fa-check-circle text-success"></i>&nbsp;Gear:
                                                 {{ $vehicle->gear }}
@@ -246,7 +250,7 @@
                                                 {{ $vehicle->fuel_type }}
                                             </li>
                                             <li>
-                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Interior Color:
+                                                <i class="fa fa-check-circle text-success"></i>&nbsp;Interior:
                                                 {{ $vehicle->interior }}
                                             </li>
                                         </ul>
@@ -284,42 +288,45 @@
                             <div class="m-border"></div>
                             <ul>
                                 <li>
-                                    <span>Make </span>{{ $vehicle->make->make }}
+                                    <span>Make </span>{{ $vehicle->make->make ?? '__'}}
                                 </li>
                                 <li>
-                                    <span>Model</span> {{ $vehicle->model->model }}
+                                    <span>Model</span> {{ $vehicle->model->model ?? '__'}}
                                 </li>
                                 <li>
-                                    <span>Body Style</span> {{ @$vehicle->type->type }}
+                                    <span>Body Style</span> {{ @$vehicle->type->type ?? '__' }}
                                 </li>
                                 <li>
-                                    <span>Year</span> {{ $vehicle->year }}
+                                    <span>Year</span> {{ $vehicle->year ?? '__' }}
                                 </li>
                                 <li>
-                                    <span>Condition</span>{{ $vehicle->usage ?? 'new' }}
+                                    <span>Condition</span>{{ $vehicle->usage ?? '__' }}
                                 </li>
 
                                 <li>
                                     <span>Mileage</span>{{ $vehicle->mileage }} Km
                                 </li>
                                 <li>
-                                    <span>Interior Color</span>{{ $vehicle->interior }}
+                                    <span>Interior</span>{{ $vehicle->interior ?? "___" }}
                                 </li>
                                 <li>
-                                    <span>Transmission</span> {{ $vehicle->transmission ?? 'Automatic' }}
+                                    <span>Transmission</span> {{ $vehicle->transmission ?? '__' }}
                                 </li>
                                 <li>
-                                    <span>Engine</span> {{ $vehicle->engine ?? 'V-8' }}
+                                    <span>Engine CC</span> {{ $vehicle->enginecc ?? '__' }} cc
                                 </li>
                                 <li>
-                                    <span>No. of Gears:</span> {{ $vehicle->gears ?? 4 }}
+                                    <span>Engine</span> {{ $vehicle->engine ?? '__' }}
+                                </li>
+                                <li>
+                                    <span>No. of Gears:</span> {{ $vehicle->gears ?? "__" }}
                                 </li>
                                 <li>
                                     <span>Location</span>
-                                    {{ $vehicle->yard?->address ?? ($vehicle->location ?? 'Nairobi') }}
+                                    {{ $vehicle->yard?->address ?? ($vehicle->location ?? '__') }}
                                 </li>
                                 <li>
-                                    <span>Fuel Type</span>{{ $vehicle->fuel_type ?? 'Petrol' }}
+                                    <span>Fuel Type</span>{{ $vehicle->fuel_type ?? '__' }}
                                 </li>
                             </ul>
                         </div>

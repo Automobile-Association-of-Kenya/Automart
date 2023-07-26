@@ -63,7 +63,11 @@ class Dealer extends Model
 
     public function subscription($dealer_id)
     {
-        return DB::table('dealer_subscription')->where('dealer_id', $dealer_id)->where('status', 'active')->latest()->first();
+        $subs = DB::table('dealer_subscription')->where('dealer_id', $dealer_id)->orWhere('user_id',$dealer_id)->where('expiry_date', '>', Carbon::now())->latest()->first();
+        if (!is_null($subs)) {
+            $plan = Subscription::where('id',$subs->subscription_id)->first();
+            return $plan;
+        }
     }
 
     /**

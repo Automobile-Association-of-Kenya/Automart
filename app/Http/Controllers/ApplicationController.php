@@ -118,7 +118,6 @@ class ApplicationController extends Controller
     {
         Visit::visit(request()->server());
         $vehicles = $this->vehicle->getvehiclespaginate(40);
-        // return $vehicles;
         return view('index', compact('vehicles'));
     }
 
@@ -187,7 +186,7 @@ class ApplicationController extends Controller
     {
         Visit::visit(request()->server());
         $type = $this->type->find($id);
-        $vehicles = $this->vehicle->where('type_id', $type->id)->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices'])->latest()->paginate(20);
+        $vehicles = $this->vehicle->where('type_id', $type->id)->orderBy('priority')->inRandomOrder()->paginate(20);
         return view('vehicles.types', compact('type', 'vehicles'));
     }
 
@@ -215,7 +214,7 @@ class ApplicationController extends Controller
     {
         Visit::visit(request()->server());
         $model = $this->model->find($id);
-        $vehicles = $this->vehicle->where('vehicle_model_id', $model->id)->with(['dealer:id,name', 'type:id,type', 'make:id,make', 'model:id,model', 'prices'])->paginate(20);
+        $vehicles = $this->vehicle->where('vehicle_model_id', $model->id)->orderBy('priority')->inRandomOrder()->paginate(20);
         return view('vehicles.models', compact('model', 'vehicles'));
     }
 

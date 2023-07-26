@@ -96,7 +96,7 @@
                                             <div class="form-group mb-2">
                                                 <input type="text" class="form-control form-control-lg mb-2"
                                                     name="phone" id="phoneNumber" placeholder="2547xxxxxxxx"
-                                                    value="{{ intval(auth()->user()->phone) }}">
+                                                    value="{{ "254".substr(auth()->user()->phone,-9) }}">
                                             </div>
 
                                             <div class="loadersection"></div>
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            {{-- <div class="card">
                                 <div class="card-header" id="headingTwo">
                                     <h2 class="mb-0">
                                         <button class="btn collapsed" data-toggle="collapse"
@@ -137,7 +137,7 @@
                                         <div id="paypal-button-container"></div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

@@ -247,9 +247,11 @@
 
         <div class="service-section-2">
             <div class="container">
+                
                 <div class="main-title">
-                    <h4 class="text-success">Reasons to Finance Your Vehicles on our Plartform.</h4>
+                    <h4 style="color: #fff;"><b>Reasons to Finance Your Vehicles on our Plartform.</b></h4>
                 </div>
+
                 <div class="row">
                         <div class="row">
                             @foreach ($services as $item)

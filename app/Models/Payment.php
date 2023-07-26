@@ -39,8 +39,10 @@ class Payment extends Model
     public function initiatempesa($account, $subscription, $dealer_id = null, $phone)
     {
         $url = env('MPESA_PROCESS_URL');
-        $consumer_secret = $account->mpesa_secret;
-        $consumer_key = $account->mpesa_customer_key;
+        // $consumer_secret = $account->mpesa_secret;
+        // $consumer_key = $account->mpesa_customer_key;
+        $consumer_secret = 'KEPgfS1AbNtQeRaL';
+        $consumer_key = '9u589pJDEzppBPkYbKeYvvrtGGYPtb5F';
         $encodestring = base64_encode($consumer_key . ":" . $consumer_secret);
         $OuathString = 'Basic ' . $encodestring;
 
@@ -56,23 +58,29 @@ class Payment extends Model
         Log::notice($json);
         if (!is_null($json)) {
             $access_token = $json['access_token'];
-            $passkey = $account->mpesa_pass_key;
+            // $passkey = $account->mpesa_pass_key;
+            $passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
+
             $timestamp = '30' . date("ymdhis");
-            $password = base64_encode($account->mpesa_business_short_code . $passkey . $timestamp);
+            $password = base64_encode("174379" . $passkey . $timestamp);
+            // $password = base64_encode($account->mpesa_business_short_code . $passkey . $timestamp);
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization:Bearer ' . $access_token)); //setting custom header
             $curl_post_data = array(
-                'BusinessShortCode' => $account->mpesa_business_short_code,
+                'BusinessShortCode' => "174379",
+                // 'BusinessShortCode' => $account->mpesa_business_short_code,
                 'Password' => $password,
                 'Timestamp' => $timestamp,
                 'TransactionType' => 'CustomerPayBillOnline',
-                'Amount' => $subscription->cost,
+                'Amount' => 1,
+                // 'Amount' => $subscription->cost,
                 'PartyA' => $phone,
-                'PartyB' => $account->mpesa_business_short_code,
+                'PartyB' => "174379",
+                // 'PartyB' => $account->mpesa_business_short_code,
                 'PhoneNumber' => $phone,
                 'CallBackURL' => env("MPESA_CALLBACK_URL"),
-                'AccountReference' => auth()->id() . 'SUB' . date(date("ymdhis")),
+                'AccountReference' => auth()->id() . 'SUB' . date(date("ym")),
                 'TransactionDesc' => $subscription->name . ' Subscription payment - ' . date("F")
             );
             $data_string = json_encode($curl_post_data);

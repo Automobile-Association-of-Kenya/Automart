@@ -123,10 +123,6 @@ Route::get('accounts-get/{id?}', [AccountsController::class, 'get']);
 Route::post('accounts-subscribe', [AccountsController::class, 'subscribe'])->name('accounts.subscribe');
 
 Route::view('terms', 'terms')->name('terms');
-Route::get('financing',[ApplicationController::class, 'financing']);
-/** Vehicles grouping routes */
-
-
 
 // Route::get('vehicle-types',[ApplicationController::class, 'vehicleTypesWithVehicles'])->name('');
 Route::get('types-with-vehicles', [ApplicationController::class, 'vehicleTypesWithVehicles']);
@@ -171,7 +167,9 @@ Route::prefix('vehicles')->group(function () {
     Route::get('new', [ApplicationController::class, 'newVehicles'])->name('new');
     Route::get('highend', [ApplicationController::class, 'highend']);
     Route::post('delist', [VehicleController::class,'delist'])->name('vehicle.delist');
+    Route::post('sold',[VehicleController::class,'sold']);
     Route::get('dealer', [ApplicationController::class, 'dealervehicles'])->name('dealer.listing');
+    Route::get('financing',[ApplicationController::class, 'financing'])->name('financing');
 });
 
 
@@ -205,6 +203,7 @@ Route::prefix('admin')->group(function () {
     Route::get('settings', [SettingsController::class, 'index'])->name('admin.settings');
     Route::get('reports', [AdminController::class, 'reports'])->name('admin.reports');
     Route::get('customers', [UsersController::class, 'customers']);
+    Route::get('subscriptions',[AdminController::class, 'subscriptions']);
 });
 
 Route::get('dealers-get', [DealerController::class, 'getDealers']);
@@ -227,5 +226,3 @@ Route::post('purchase/decline', [DealerController::class, 'purchasedecline'])->n
 
 
 Route::get('webtraffic/{date}', [SettingsController::class, 'webtraffic']);
-
-Route::get('processvehicles', [ServicesController::class, 'processvehicles']);

@@ -48,6 +48,7 @@ class VehicleRequest extends FormRequest
             'tags' => ['max:255', 'nullable', 'array'],
             'features' => ['nullable', 'array'],
             'seats' => ['nullable', 'max:20'],
+            'location' => ['nullable', 'max:250'],
             'usage' => ['required','max:50']
         ];
     }

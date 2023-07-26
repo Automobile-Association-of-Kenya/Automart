@@ -108,7 +108,13 @@ class DealerController extends Controller
 
     public function subscription()
     {
-        $subscription = DB::table('dealer_subscription')->where('user_id', auth()->id())->orWhere('dealer_id', auth()->user()?->dealer_id)->where('expiry_date', '>', date('Y-m-d H:I:s'))->latest()->first();
+        $query = DB::table('dealer_subscription');
+        if (!is_null(auth()->user()?->dealer_id)) {
+            $query->where('dealer_id', auth()->user()?->dealer_id);
+        }else {
+            $query->where('user_id', auth()->id());
+        }
+        $subscription = $query->where('expiry_date', '>', date('Y-m-d H:I:s'))->latest()->first();
         return json_encode($subscription);
     }
 

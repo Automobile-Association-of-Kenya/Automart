@@ -1403,6 +1403,9 @@
         if (mileage.length > 6) {
             errors.push("Mileage cannot be greater than 6 characters");
         }
+        if (data.description.length > 255) {
+            errors.push("Description cannot be greater than 250 characters. ");
+        }
         if (errors.length > 0) {
             p = "";
             $.each(errors, (key, value) => {
@@ -1508,7 +1511,6 @@
                         error: function (error) {
                             console.error(error);
                             savevehicle.prop("disabled", false);
-
                             if (error.status == 422) {
                                 var errors = "";
                                 $.each(
@@ -1695,6 +1697,7 @@
                                             image: value,
                                             photo_delete: true,
                                         };
+                                    console.log(data);
                                     $.post("/image-delete", data)
                                         .done(function (params) {
                                             console.log(params);
@@ -2126,7 +2129,6 @@
                     }
                 })
                 .fail(function (error) {
-                    console.log(error);
                     savevehicle.prop("disabled", false);
                     if (error.status == 422) {
                         var errors = "";
@@ -2147,5 +2149,57 @@
         } else {
             showError("No vehicles selected to delist.", "#listingfeedback");
         }
+    });
+    
+    $("#markAsSold").on("click", function (event) {
+        event.preventDefault();
+        let vehicles = [],
+            token = $("input[name='_token']").val();
+
+        $("#vehiclesListTable > tr").each(function (key, row) {
+            if ($(row).find("#vehicleselect").is(":checked")) {
+                vehicles.push($(row).find("#vehicleselect").data("id"));
+            }
+        });
+        if (vehicles.length > 0) {
+            let data = { _token: token, vehicles: vehicles };
+            console.log(data);
+            $.post("/vehicles/delist", data)
+                .done(function (params) {
+                    console.log(params);
+                    let result = JSON.parse(params);
+                    if (result.status == "success") {
+                        showSuccess(result.message, "#listingfeedback");
+                        $("#filterVehiclesListForm").submit();
+                    } else {
+                        showError(result.error, "#listingfeedback");
+                    }
+                })
+                .fail(function (error) {
+                    savevehicle.prop("disabled", false);
+                    if (error.status == 422) {
+                        var errors = "";
+                        $.each(
+                            error.responseJSON.errors,
+                            function (key, value) {
+                                errors += value + "!";
+                            }
+                        );
+                        showError(errors, "#listingfeedback");
+                    } else {
+                        showError(
+                            "Error occurred during processing",
+                            "#listingfeedback"
+                        );
+                    }
+                });
+        } else {
+            showError("No vehicles selected to delist.", "#listingfeedback");
+        }
+    });
+
+    $("#discountVehicles").on('click', function(event) {
+        event.preventDefault();
+        $('#vehicleDiscountRateModal').modal('toggle');
     });
 })();

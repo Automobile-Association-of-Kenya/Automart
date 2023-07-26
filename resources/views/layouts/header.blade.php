@@ -53,8 +53,8 @@
                     <a class="nav-link" href="{{ route('dealer.vehicles') }}">Selling a Car?</a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="{{ url('contact') }}">Car Financing</a>
+                <li class="nav-item dropdown {{ Request::is('vehicles/financing') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('financing') }}">Car Financing</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="{{ url('contact') }}">Contact Us</a>
@@ -144,7 +144,7 @@
                 </li>
 
                 <li>
-                    <a class="nav-link" href="{{ route('dashboard') }}">Partner</a>
+                    <a class="nav-link" href="{{ route('financing') }}">Car Financing</a>
                 </li>
 
                 <li>

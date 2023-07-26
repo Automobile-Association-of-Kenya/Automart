@@ -316,7 +316,11 @@
         event.preventDefault();
         let checkoutid = $("#checkOutId").val();
         if (checkoutid !== "" && checkoutid !== null) {
+            $(".loadersection").html(
+                '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
+            );
             $.getJSON("/paymentconfirm/" + checkoutid, function (payment) {
+                $(".loadersection").children().remove();
                 console.log(payment);
                 if (payment.complete === "1" && payment.trans_id !== null) {
                     showSuccess(
@@ -326,6 +330,8 @@
                     window.setTimeout(function () {
                         window.location.href = "/dashboard";
                     }, 5000);
+                } else {
+                    showError("We have not received any amount from you. Please retry.", "#paymentfeedback");
                 }
             });
         } else {
