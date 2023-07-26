@@ -33,29 +33,40 @@ class NewPasswordController extends Controller
     {
         $request->validate([
             'token' => ['required'],
-            // 'email' => ['required', 'email'],
+            'email' => ['required', 'email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $passwordreset = DB::table('password_reset_tokens')->where('token', $request->token)->first();
 
-        // Here we will attempt to reset the user's password. If it is successful we
-        // will update the password on an actual user model and persist it to the
-        // database. Otherwise we will parse the error and return the response.
-        // $status = Password::reset(
-        //     $request->only('password', 'password_confirmation', 'token'),
-        //     function ($user) use ($request) {
-        if (!is_null($passwordreset)) {
-            $user = User::where('email', $passwordreset->email)->first();
-            $user->forceFill([
-                'password' => Hash::make($request->password),
-                'remember_token' => Str::random(60),
-            ])->save();
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user) use ($request) {
+                $user->forceFill([
+                    'password' => Hash::make($request->password),
+                    'remember_token' => Str::random(60),
+                ])->save();
 
-            event(new PasswordReset($user));
-            return redirect()->route('login')->with('success', 'Password reset was successful');
-        } else {
-            return redirect()->route('login')->with('error', 'Password reset was successful');
+                event(new PasswordReset($user));
+            }
+        );
+        if ($status == Password::PASSWORD_RESET) {
+            return redirect()->route('login')->with('success', __($status));
+        }else {
+            return redirect()->back()->with('errors', 'Password reset was successful');
         }
+
+        // if (!is_null($passwordreset)) {
+        //     $user = User::where('email', $passwordreset->email)->first();
+        //     $user->forceFill([
+        //         'password' => Hash::make($request->password),
+        //         'remember_token' => Str::random(60),
+        //     ])->save();
+
+        //     event(new PasswordReset($user));
+        //     return redirect()->route('login')->with('success', 'Password reset was successful');
+        // } else {
+        //     return redirect()->route('login')->with('error', 'Password reset was successful');
+        // }
     }
 }

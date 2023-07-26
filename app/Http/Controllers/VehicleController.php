@@ -390,6 +390,6 @@ class VehicleController extends Controller
             $vehicle = $this->vehicle->find($value);
             $vehicle->update(['status'=>'sold', 'sold_at'=>date('Y-m-d H:i:s')]);
         }
-        return json_encode(['status' => 'success', 'message' => 'Vehicles delisted successfully']);
+        return json_encode(['status' => 'success', 'message' => 'Vehicles marked as sold successfully']);
     }
 }

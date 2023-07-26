@@ -10,7 +10,7 @@
                 <div class="col-lg-7 col-md-12 bg-img" style="text-align: center;margin:auto;">
                     <div class="informeson">
                         <div class="typing">
-                            <h1 class="text-success">AutoMart AA Kenya Limited</h1>
+                            <h1 class="text-success">AutoMart AA Kenya</h1>
                         </div>
                         <p class="text-success">At our platform, we bring together a vast selection of high-quality cars and a wide range of
                             accessories from trusted manufacturers and sellers. From sleek sedans to rugged SUVs, we offer a
@@ -33,6 +33,7 @@
                                 <form action="{{ route('password.store') }}" method="POST" id="passwordSetForm">
                                     @csrf
                                     <input type="hidden" name="token" value="{{ $request->route('token') }}">
+                                    <input type="hidden" name="email" value="{{ $request->email }}">
 
                                     <div class="form-group">
                                         <label class="float-left" for="passwordReset">Password</label>
@@ -51,7 +52,7 @@
                                     <div class="form-group">
 
                                         <label class="float-left" for="passwordConfirmationReset">Confirm Password</label>
-                                        
+
                                         <div class="input-group">
                                             <input type="password" name="password_confirmation" id="passwordConfirmationReset"
                                                 class="form-control" autocomplete>
