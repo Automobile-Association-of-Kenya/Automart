@@ -31,6 +31,13 @@
 
         <div class="sidebar-menu">
             <ul>
+                <li>
+                    <a href="{{ url('/') }}">
+                        <span><i class="fal fa-home"></i></span>
+                        <span>Home</span>
+                    </a>
+                </li>
+
                 <li class="{{ Request::is('dealer') ? 'active' : '' }}">
                     <a href="{{ route('dealer.index') }}">
                         <span><i class="fal fa-tachometer"></i></span>

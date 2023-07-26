@@ -37,6 +37,12 @@
 
         <div class="sidebar-menu">
             <ul>
+                <li>
+                    <a href="{{ url('/') }}">
+                        <span><i class="fal fa-home"></i></span>
+                        <span>Home</span>
+                    </a>
+                </li>
                 <li class="{{ Request::is('admin') ? 'active' : '' }}">
                     <a href="{{ route('admin.index') }}">
                         <span><i class="fal fa-tachometer"></i></span>
@@ -130,7 +136,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <li><a class="dropdown-item" :href="route('logout')"
+                            <li><a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                     {{ __('Log Out') }}

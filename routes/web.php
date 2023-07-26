@@ -204,6 +204,7 @@ Route::prefix('admin')->group(function () {
     Route::get('reports', [AdminController::class, 'reports'])->name('admin.reports');
     Route::get('customers', [UsersController::class, 'customers']);
     Route::get('subscriptions',[AdminController::class, 'subscriptions']);
+    Route::get('dealer/subscriptions',[AdminController::class, 'dealersWithSubscriptions']);
 });
 
 Route::get('dealers-get', [DealerController::class, 'getDealers']);

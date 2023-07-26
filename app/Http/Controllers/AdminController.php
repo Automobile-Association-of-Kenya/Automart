@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dealer;
 use App\Models\Finance;
 use App\Models\Loan;
 use App\Models\Purchase;
@@ -89,7 +90,9 @@ class AdminController extends Controller
         ->select('subscription_id')
         ->where('expiry_date', '>', $date)
             ->groupBy('subscription_id')
-            ->get();
+            ->count();
+        $dealers = User::count();
+        return json_encode(['dealers'=>$dealers,'acitivesubscriptions'=>$subscriptions]);
     }
 
 }
