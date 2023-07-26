@@ -76,7 +76,7 @@
                             </div>
                             <div class="card-footer bg-white">
                                 @if (Route::has('password.request'))
-                                    <a href="{{ route('password.request') }}">Forgot Password</a>
+                                    <a href="{{ route('login') }}">Login</a>
                                 @endif
                             </div>
                         </div>

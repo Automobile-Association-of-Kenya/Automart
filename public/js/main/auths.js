@@ -18,7 +18,7 @@
         $("#emailpassword-reset").hide();
         $("#partner-section").hide();
     });
-    
+
     $("#partnerLoginToggle").on("click", function () {
         $("#register-section").hide();
         $("#login-section").show();
@@ -327,17 +327,16 @@
                 url: "/forgot-password",
                 data: { email: email },
                 success: function (params) {
-                    console.log(params);
+                    submitEmail.prop({ disabled: false });
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#forgotauthfeedback");
                     } else {
                         showError(result.error, "#forgotauthfeedback");
                     }
-                    submitEmail.prop({ disabled: false });
                 },
                 error: function (error) {
-                    console.log(error);
+                    submitEmail.prop({ disabled: false });
                     if (error.status == 422) {
                         var errors = "";
                         $.each(
@@ -353,12 +352,11 @@
                             "#forgotauthfeedback"
                         );
                     }
-                    submitEmail.prop({ disabled: false });
-
                     $this.find("#loginUser").prop({ disabled: false });
                 },
             });
         } else {
+                    submitEmail.prop({ disabled: false });
             showError("Email address is required");
         }
     });
