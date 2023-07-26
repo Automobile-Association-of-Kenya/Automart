@@ -72,6 +72,9 @@ class Subscription extends Model
         }
         $dealer_id = $payment->dealer_id ?? null;
         DB::table('dealer_subscription')->insert(['user_id' => $payment->user_id, 'dealer_id' => $dealer_id, 'subscription_id' => $payment->subscription_id, 'start_date' => date('Y-m-d H:i:s'), 'expiry_date' => $expiry, 'status' => 1]);
+        if (session()->has('subscriptioninfo')) {
+            session()->forget('subscriptioninfo');
+        }
         event(new EventsSubscription(auth()->user(), $subscription));
     }
 

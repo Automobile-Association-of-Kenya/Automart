@@ -214,7 +214,7 @@
                                                     <div class="col-md-3 form-group">
                                                         <label for="company">Price: <sup>*</sup></label>
                                                         <div class="input-group">
-                                                            <input type="text" name="price" id="vehiclePrice"
+                                                            <input type="number" name="price" id="vehiclePrice"
                                                                 class="form-control " required>
                                                         </div>
                                                     </div>
@@ -222,7 +222,7 @@
                                                     <div class="col-md-3 form-group">
                                                         <label for="enginecc">Engine CC: <sup>*</sup></label>
                                                         <div class="input-group">
-                                                            <input type="text" name="enginecc" id="engineCC"
+                                                            <input type="number" name="enginecc" id="engineCC"
                                                                 class="form-control " required>
                                                         </div>
                                                     </div>

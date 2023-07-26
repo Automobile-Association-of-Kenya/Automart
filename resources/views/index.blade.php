@@ -132,24 +132,15 @@
     <div class="featured-car content-area-18">
         <div class="container">
             <div class="row">
-                @php
+                {{-- @php
                     $vehicles = json_decode($vehicles);
-                @endphp
+                @endphp --}}
                 <div class="col-lg-12 col-md-12">
-                    {{-- <div class="option-bar clearfix">
-                        <div class="row">
-                            <div class="col-lg-5 col-md-6 col-sm-12">
-                                <div class="sorting-options2">
-                                    <h5>Showing 1-20 of <span id="countResults">{{ count($vehicles->data) }}</span> Vehicles
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
+                    
 
                     <div class="row" id="vehiclesection">
                         
-                        @foreach ($vehicles->data as $item)
+                        @foreach ($vehicles as $item)
                             @php
                                 $images = $item->images;
                                 $vehicle_no = $item->vehicle_no ?? $item->id;
@@ -252,7 +243,7 @@
                     <div class="pagination-box p-box-2 text-center">
                         <nav>
                             <ul class="pagination" id="pagination">
-                                {{-- {!! $vehicles->links() !!} --}}
+                                {!! $vehicles->links() !!}
                             </ul>
                         </nav>
                     </div>

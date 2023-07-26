@@ -205,8 +205,7 @@ class Vehicle extends Model
 
     public function getvehiclespaginate($paginate)
     {
-        $vehicles = $this->orderBy('priority')->inRandomOrder()->latest()->paginate($paginate);
-        return json_encode($vehicles);
+        return $this->orderBy('priority')->inRandomOrder()->latest()->paginate($paginate);
     }
 
     public function getlatest($limit, $except_id = null)
