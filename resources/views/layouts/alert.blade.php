@@ -9,7 +9,7 @@
     </div>
 @endif
 
-@if ($errors->any())
+@if (Session::has('errors'))
     <div class="col-lg">
         <div class="alert alert-danger alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
