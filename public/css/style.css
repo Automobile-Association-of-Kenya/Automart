@@ -11463,6 +11463,7 @@ input[type="tel"] {
         font-size: 40px;
     }
 
+
     .contact-section .informeson {
         margin: 0 auto 0 0;
     }
@@ -11537,6 +11538,9 @@ input[type="tel"] {
         .bi5 {
             margin: 5em 0;
         }
+    .bg-img {
+        display: none;
+    }
 
     .content-area-2 {
         margin-bottom: 80px;

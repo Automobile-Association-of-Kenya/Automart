@@ -162,9 +162,7 @@
                         : days < 1
                         ? ""
                         : days + " day, ";
-                countdownElement.innerHTML =
-                    "Subscription rem: " +
-                    day +
+                countdownElement.innerHTML = day +
                     hours +
                     " : " +
                     minutes +

@@ -2110,16 +2110,16 @@
         let vehicles = [], token = $("input[name='_token']").val();
 
         $("#vehiclesListTable > tr").each(function (key, row) {
-            if ($(row).find("#vehicleselect").is(":checked")) {
-                vehicles.push($(row).find("#vehicleselect").data("id"));
+            if ($(row).find("#vehicleSelect").is(':checked')) {
+                console.log($(row).find("#vehicleSelect"));
+
+                vehicles.push($(row).find("#vehicleSelect:checked").data("id"));
             }
         });
         if (vehicles.length > 0) {
             let data = { _token: token, vehicles: vehicles };
-            console.log(data);
             $.post("/vehicles/delist", data)
                 .done(function (params) {
-                    console.log(params);
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#listingfeedback");
@@ -2150,21 +2150,20 @@
             showError("No vehicles selected to delist.", "#listingfeedback");
         }
     });
-    
+
     $("#markAsSold").on("click", function (event) {
         event.preventDefault();
         let vehicles = [],
             token = $("input[name='_token']").val();
-
         $("#vehiclesListTable > tr").each(function (key, row) {
-            if ($(row).find("#vehicleselect").is(":checked")) {
-                vehicles.push($(row).find("#vehicleselect").data("id"));
+            if ($(row).find("#vehicleSelect").is(":checked")) {
+                vehicles.push($(row).find("#vehicleSelect:checked").data("id"));
             }
         });
+
         if (vehicles.length > 0) {
             let data = { _token: token, vehicles: vehicles };
-            console.log(data);
-            $.post("/vehicles/delist", data)
+            $.post("/vehicles/sold", data)
                 .done(function (params) {
                     console.log(params);
                     let result = JSON.parse(params);

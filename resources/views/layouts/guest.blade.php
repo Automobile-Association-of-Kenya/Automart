@@ -18,33 +18,7 @@
 </head>
 
 <body>
-    <div class="contact-section">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-7 col-md-12 bg-img">
-                    <div class="informeson">
-                        <div class="typing">
-                            <h1 class="text-white">Welcome To AutoMart</h1>
-                        </div>
-                        <p>At our platform, we bring together a vast selection of high-quality cars and a wide range of accessories from trusted manufacturers and sellers. From sleek sedans to rugged SUVs, we offer a diverse inventory of vehicles to suit every style and preference. </p>
-                        <div class="social-list">
-                            <div class="buttons">
-                                <a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a>
-                                <a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a>
-                                <a href="#" class="google-bg"><i class="fa fa-google"></i></a>
-                                <a href="#" class="dribbble-bg"><i class="fa fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                @yield('main')
-
-            </div>
-        </div>
-    </div>
-    </div>
-
+    @yield('main')
 </body>
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/iziToast.min.js') }}"></script>

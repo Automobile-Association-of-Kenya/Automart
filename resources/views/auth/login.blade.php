@@ -47,7 +47,7 @@
                             </div>
 
                             <div class="card-body">
-
+                                @include('layouts.alert')
                                 <form action="{{ route('login') }}" id="loginForm" method="POST">
                                     @csrf
                                     <div class="form-group">
@@ -103,10 +103,10 @@
                             </div>
 
                             <div class="card-body">
-
+                                @include('layouts.alert')
                                 <form action="{{ route('password.email') }}" id="passwordResetForm" method="POST">
                                     @csrf
-
+                                    <div id="forgotauthfeedback"></div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="email" name="email" id="resetEmail"
@@ -137,6 +137,7 @@
                             </div>
 
                             <div class="card-body">
+                                @include('layouts.alert')
                                 <form action="{{ route('register') }}" id="registerForm" method="POST">
                                     @csrf
 
@@ -217,6 +218,7 @@
                             </div>
 
                             <div class="card-body">
+                                @include('layouts.alert')
                                 <form action="{{ route('partner.store') }}" id="partnerForm" method="POST">
                                     @csrf
                                     <div class="form-group">
@@ -311,8 +313,7 @@
                         </div>
 
                         <div id="authfeedback"></div>
-
-
+                        
                         <div class="login-social border-t mt-1 pt-2 mb-1 text-center">
                             <p class="mb-2">OR continue with</p>
                             <div class="fb-login-button" data-width="" data-size="" data-button-type="" data-layout="" data-auto-logout-link="true" data-use-continue-as="true"></div>

@@ -76,7 +76,6 @@
             passwordField.attr("type", "password");
             $(".show-passwordRe").html('<i class="fa fa-eye"></i>');
         }
-
         if (passwordCType == "password") {
             passwordCField.attr("type", "text");
             $(".show-passwordRe").html('<i class="fa fa-eye-slash"></i>');
@@ -86,9 +85,10 @@
         }
     });
 
+
     $("body").on("click", ".show-passwordReset", function () {
-        var passwordField = $("#passwordRe");
-        var passwordCField = $("#passwordConfirmationRe");
+        var passwordField = $("#passwordReset");
+        var passwordCField = $("#passwordConfirmationReset");
         var passwordCType = passwordCField.attr("type");
         var passwordFieldType = passwordField.attr("type");
         if (passwordFieldType == "password") {
@@ -330,9 +330,9 @@
                     console.log(params);
                     let result = JSON.parse(params);
                     if (result.status == "success") {
-                        showSuccess(result.message, "#authfeedback");
+                        showSuccess(result.message, "#forgotauthfeedback");
                     } else {
-                        showError(result.error, "#authfeedback");
+                        showError(result.error, "#forgotauthfeedback");
                     }
                     submitEmail.prop({ disabled: false });
                 },
@@ -346,11 +346,11 @@
                                 errors += value + "!";
                             }
                         );
-                        showError(errors, "#authfeedback");
+                        showError(errors, "#forgotauthfeedback");
                     } else {
                         showError(
                             "Error occurred during processing",
-                            "#authfeedback"
+                            "#forgotauthfeedback"
                         );
                     }
                     submitEmail.prop({ disabled: false });
@@ -363,65 +363,66 @@
         }
     });
 
-    $("#passwordSetForm").on("submit", function (event) {
-        event.preventDefault();
-        console.log("there");
-        let $this = $(this),
-            passwordRE = $("#passwordRe").val(),
-            passwordConfirmationRe = $("#passwordConfirmationRe").val(),
-            token = $this.find("input[name='_token']").val(),
-            submitReset = $("#submitReset");
-        submitReset.prop({ disabled: true });
-        if (passwordRE !== passwordConfirmationRe) {
-            showError("Password mismatch. Please check and retry");
-        } else {
-            $.ajaxSetup({
-                headers: {
-                    "X-CSRF-TOKEN": token,
-                },
-            });
-            $.ajax({
-                type: "POST",
-                url: "/password-store",
-                data: {
-                    password: passwordRE,
-                    password_confirmation: passwordConfirmationRe,
-                },
-                success: function (params) {
-                    console.log(params);
-                    let result = JSON.parse(params);
-                    if (result.status == "success") {
-                        showSuccess(result.message, "#authfeedback");
-                    } else {
-                        showError(result.error, "#authfeedback");
-                    }
-                    submitReset.prop({ disabled: false });
-                    window.setTimeout(function () {
-                        window.location.href = "login";
-                    }, 7000);
-                },
-                error: function (error) {
-                    console.log(error);
-                    if (error.status == 422) {
-                        var errors = "";
-                        $.each(
-                            error.responseJSON.errors,
-                            function (key, value) {
-                                errors += value + "!";
-                            }
-                        );
-                        showError(errors, "#authfeedback");
-                    } else {
-                        showError(
-                            "Error occurred during processing",
-                            "#authfeedback"
-                        );
-                    }
-                    submitReset.prop({ disabled: false });
-                },
-            });
-        }
-    });
+
+    // $("#passwordSetForm").on("submit", function (event) {
+    //     event.preventDefault();
+    //     console.log("there");
+    //     let $this = $(this),
+    //         passwordRE = $("#passwordRe").val(),
+    //         passwordConfirmationRe = $("#passwordConfirmationRe").val(),
+    //         token = $this.find("input[name='_token']").val(),
+    //         submitReset = $("#submitReset");
+    //     submitReset.prop({ disabled: true });
+    //     if (passwordRE !== passwordConfirmationRe) {
+    //         showError("Password mismatch. Please check and retry");
+    //     } else {
+    //         $.ajaxSetup({
+    //             headers: {
+    //                 "X-CSRF-TOKEN": token,
+    //             },
+    //         });
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "/reset-password",
+    //             data: {
+    //                 password: passwordRE,
+    //                 password_confirmation: passwordConfirmationRe,
+    //             },
+    //             success: function (params) {
+    //                 console.log(params);
+    //                 let result = JSON.parse(params);
+    //                 if (result.status == "success") {
+    //                     showSuccess(result.message, "#authfeedback");
+    //                 } else {
+    //                     showError(result.error, "#authfeedback");
+    //                 }
+    //                 submitReset.prop({ disabled: false });
+    //                 window.setTimeout(function () {
+    //                     window.location.href = "login";
+    //                 }, 7000);
+    //             },
+    //             error: function (error) {
+    //                 console.log(error);
+    //                 if (error.status == 422) {
+    //                     var errors = "";
+    //                     $.each(
+    //                         error.responseJSON.errors,
+    //                         function (key, value) {
+    //                             errors += value + "!";
+    //                         }
+    //                     );
+    //                     showError(errors, "#authfeedback");
+    //                 } else {
+    //                     showError(
+    //                         "Error occurred during processing",
+    //                         "#authfeedback"
+    //                     );
+    //                 }
+    //                 submitReset.prop({ disabled: false });
+    //             },
+    //         });
+    //     }
+    // });
 
     function showSuccess(message, target) {
         iziToast.success({

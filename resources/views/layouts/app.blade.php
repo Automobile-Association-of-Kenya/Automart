@@ -160,23 +160,6 @@
         </div>
     </div>
 
-    {{-- <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-submenu.js') }}"></script>
-    <script src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
-    <script src="{{ asset('js/jquery.scrollUp.js') }}"></script>
-    <script src="{{ asset('js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-    <script src="{{ asset('js/slick.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('js/rangeslider.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.mousewheel.min.js') }}"></script>
-    <script src="{{ asset('js/lightgallery-all.js') }}"></script>
-    <script src="{{ asset('js/jnoty.js') }}"></script>
-    <script src="{{ asset('js/sidebar.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script> --}}
-
-
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
