@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
@@ -53,7 +54,8 @@ class NewPasswordController extends Controller
         if ($status == Password::PASSWORD_RESET) {
             return redirect()->route('login')->with('success', __($status));
         }else {
-            return redirect()->back()->with('errors', 'Password reset was successful');
+            Log::notice($status);
+            return redirect()->back()->withErrors(__($status));
         }
 
         // if (!is_null($passwordreset)) {

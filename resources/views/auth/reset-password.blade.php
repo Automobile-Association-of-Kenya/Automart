@@ -68,7 +68,7 @@
                                     </div>
 
                                     <div class="">
-                                        <button type="submit" class="btn btn-md btn-warning" id="submitReset">Reset
+                                        <button type="submit" class="btn btn-md btn-success" id="submitReset">Reset
                                             Password</button>
                                     </div>
 
