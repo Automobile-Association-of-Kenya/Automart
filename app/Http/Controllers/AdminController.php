@@ -10,6 +10,7 @@ use App\Models\Quote;
 use App\Models\Subscription;
 use App\Models\Tradein;
 use App\Models\User;
+use App\Models\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -25,6 +26,7 @@ class AdminController extends Controller
         $this->loan = new Loan();
         $this->purchase = new Purchase();
         $this->subscription = new Subscription();
+        $this->vehicle = new Vehicle();
     }
 
     public function index()
@@ -93,6 +95,34 @@ class AdminController extends Controller
             ->count();
         $dealers = User::count();
         return json_encode(['dealers'=>$dealers,'acitivesubscriptions'=>$subscriptions]);
+    }
+
+    public function vehiclesWithSubscription() {
+        $vehicles = $this->vehicle->where('status','!=','sold')->count();
+        $sponsored = $this->vehicle->where('sponsored',"1")->count();
+        return json_encode(['vehicles'=>$vehicles,'sponsored'=>$sponsored]);
+    }
+
+    public function webtraffic($date = null) {
+        $startTime = '07:00:00';
+        $endTime = '18:00:00';
+        $date = $date ?? date('Y-m-d');
+        $query = DB::table('visits')->where('created_at',$date)->whereTime('created_at', '>=', $startTime)->whereTime('created_at', '<=', $endTime);
+
+        // Loop through each hour from 8 to 18 (06:00 PM)
+        for ($hour = 8; $hour <= 18; $hour++) {
+            $startTime = sprintf('%02d:00:00', $hour); // Format the hour with leading zeros
+            $endTime = sprintf('%02d:59:59', $hour);   // End time is the last minute of the hour
+
+            // Add the query for the current hour using unionAll
+            $query->unionAll(function ($query) use ($startTime, $endTime) {
+                $query->whereTime('created_at', '>=', $startTime)->whereTime('created_at', '<=', $endTime);
+            });
+        }
+
+        // Get the final result
+        $data = $query->get();
+        return $data;
     }
 
 }

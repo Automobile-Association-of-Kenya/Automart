@@ -112,30 +112,31 @@
                 </div>
             </div>
 
-            <div class="col-md-4 mb-2">
+            <div class="col-md-3 mb-2">
                 <div class="card">
                     <div class="card-header">
                         <span class="text-left font-weight-bold">Dealers</span>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <canvas id="dealersgraph"></canvas>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4 mb-2">
+            <div class="col-md-3 mb-2">
                 <div class="card">
                     <div class="card-header">
                         <span class="text-left font-weight-bold">Vehicles on Subscriptions</span>
                     </div>
                     <div class="card-body">
-                        <canvas id="peoplebyrole"></canvas>
+                        <canvas id="vehiclesonsubsgraph"></canvas>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row mt-2 mb-4 p-2">
+
             <div class="col-md-6">
                 <div class="card peoplebyregtrend">
                     <div class="card-header bg-warning">
@@ -158,7 +159,6 @@
                     </div>
                 </div>
             </div>
-
 
         </div>
     </main>

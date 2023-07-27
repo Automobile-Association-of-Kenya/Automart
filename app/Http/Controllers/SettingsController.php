@@ -69,35 +69,22 @@ class SettingsController extends Controller
 
     public function webtraffic($date = null)
     {
-        if (is_null($date)) {
-            $date = date('Y-m-d');
+        $startTime = '07:00:00';
+        $endTime = '18:00:00';
+        $date = $date ?? date('Y-m-d');
+        $query = DB::table('visits')->where('created_at', $date)->whereTime('created_at', '>=', $startTime)->whereTime('created_at', '<=', $endTime);
+        for ($hour = 8; $hour <= 18; $hour++) {
+            $startTime = sprintf('%02d:00:00', $hour);
+            $endTime = sprintf('%02d:59:59',
+                $hour
+            );
+
+            // $query->unionAll(function ($query) use ($startTime, $endTime) {
+            //     $query->whereTime('created_at', '>=', $startTime)->whereTime('created_at', '<=', $endTime);
+            // });
         }
-        $start_date = $date . ' 07:00:00';
-        $end_time = $date . ' 18:00:00';
-        $startTime = Carbon::createFromDate($start_date);
-        $endTime = Carbon::createFromDate($end_time);
-        $times =  new Collection();
-        $currentTime = $startTime->copy();
-        while ($currentTime <= $endTime) {
-            $times->push($currentTime->format('Y-m-d H:i:s'));
-            $currentTime->addHour();
-        }
-        $data = [];
-        foreach ($times as $value) {
-            $time = new DateTime($value);
-            $time->modify('+1 hour');
-            $end = $time->format('Y-m-d H:i:s');
-            $date = Carbon::createFromDate($value);
-            $start = $date->startOfHour()->isoFormat('Y-m-d HH:mm:ss');
-            $end = $date->endOfHour()->isoFormat('Y-m-d HH:mm:ss');
-            $visits = Visit::pluck('created_at');
-            $results = DB::table('visits')->whereDate('created_at',$date)
-            ->select(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:00:00') AS hour, COUNT(*) AS count"))
-            ->groupBy('created_at')
-            ->get();
-            array_push($data, $results);
-        }
-        return json_encode($data);
+        $data = $query->get();
+        return $data;
     }
 
 
