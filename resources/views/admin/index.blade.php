@@ -8,6 +8,11 @@
 @endsection
 
 @section('header_styles')
+<style>
+    canvas {
+        width: 100%;
+    }
+</style>
 @endsection
 
 @section('page')
@@ -112,7 +117,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3 mb-2">
+            <div class="col-md-4 mb-2">
                 <div class="card">
                     <div class="card-header">
                         <span class="text-left font-weight-bold">Dealers</span>
@@ -123,7 +128,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3 mb-2">
+            <div class="col-md-4 mb-2">
                 <div class="card">
                     <div class="card-header">
                         <span class="text-left font-weight-bold">Vehicles on Subscriptions</span>
@@ -141,9 +146,16 @@
                 <div class="card peoplebyregtrend">
                     <div class="card-header bg-warning">
                         <span class="text-left font-weight-bold">Revenue</span>
+                        <select class="form-select" name="revenueyear" id="revenueYear">
+                            @for ($i = 2023; $i < 2030; $i++)
+                            <option value="{{ $i }}" {{ ($i==date('Y') ? 'selected' : '') }}>
+                                {{ $i }}
+                            </option>
+                            @endfor
+                        </select>
                     </div>
                     <div class="card-body">
-                        <canvas id="peoplebyregtrend"></canvas>
+                        <canvas id="revenuegraph"></canvas>
                     </div>
                 </div>
             </div>

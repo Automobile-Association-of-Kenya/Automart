@@ -120,9 +120,25 @@ class AdminController extends Controller
             });
         }
 
-        // Get the final result
         $data = $query->get();
         return $data;
+    }
+
+    public function revenue($year = null) {
+        $months = collect();
+        $data = collect();
+        $year = $year ?? date('Y');
+        for ($month = 1; $month <= 12; $month++) {
+            $date = Carbon::create($year, $month, 1);
+            $months->push($date->format('Y-m'));
+        }
+        foreach ($months as $month) {
+            $startTime = $month . '-01 00:00:00';
+            $endTime = Carbon::createFromFormat('Y-m', $month)->endOfMonth()->format('Y-m-d') . ' 23:59:59';
+            $subscription = DB::select("SELECT SUM(`cost`) AS cost FROM `subscriptions` WHERE `id` IN(SELECT `subscription_id` FROM `dealer_subscription` WHERE `start_date`>='$startTime' AND `start_date`<='$endTime')");
+            $data->push(["month"=>date('M',strtotime($month)), "income"=>$subscription[0]->cost??0]);
+        }
+        return json_encode($data);
     }
 
 }

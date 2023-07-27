@@ -1,10 +1,10 @@
-(function(){
-    $("#trafficDate").on('change', function() {
+(function () {
+    $("#trafficDate").on("change", function () {
         getWebTraffic();
     });
     function getWebTraffic() {
         let date = $("#trafficDate").val();
-        $.getJSON('/webtraffic/' + date, function (data) {
+        $.getJSON("/webtraffic/" + date, function (data) {
             console.log(data);
         });
     }
@@ -108,43 +108,82 @@
         });
     });
 
+    function getWebTraffic() {
+        let date = $("#trafficDate").val();
+        $.getJSON("/webtraffic/" + date, function (data) {
+            const ctx = document.getElementById("webtraffic");
+            if (Chart.getChart(ctx) !== undefined) {
+                Chart.getChart(ctx).destroy();
+            }
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    datasets: [
+                        {
+                            label: " visits",
+                            data: data.map((value) => value.visits),
+                            borderWidth: 2,
+                            backgroundColor: ["#fed945"],
+                        },
+                    ],
+                    labels: data.map((value) => value.hour + ":00"),
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: "bottom",
+                            align: "end",
+                        },
+                    },
+                },
+            });
+        });
+    }
 
-    $.getJSON("/webtraffic/", function (data) {
-        console.log(data);
+    getWebTraffic();
 
-        // let labels = ["Sponsored", "Non Sponsored"],
-        //     data = [
-        //         parseFloat(subscriptions.sponsored),
-        //         parseFloat(subscriptions.vehicles) -
-        //             parseFloat(subscriptions.sponsored),
-        //     ];
-        // const ctx = document.getElementById("vehiclesonsubsgraph");
-        // new Chart(ctx, {
-        //     type: "pie",
-        //     data: {
-        //         datasets: [
-        //             {
-        //                 label: " vehicles",
-        //                 data: data,
-        //                 borderWidth: 2,
-        //                 backgroundColor: ["#006544", "#fed945"],
-        //             },
-        //         ],
-        //         labels: labels,
-        //     },
-        //     options: {
-        //         responsive: true,
-        //         plugins: {
-        //             legend: {
-        //                 position: "bottom",
-        //                 align: "end",
-        //             },
-        //         },
-        //     },
-        // });
+    $("#trafficDate").on("change", function () {
+        getWebTraffic();
     });
 
+    function getRevenue() {
+        let year = $("#revenueYear").val();
+        $.getJSON("/admin/revenue/" + year, function (data) {
+            const ctx = document.getElementById("revenuegraph");
+            if (Chart.getChart(ctx) !== undefined) {
+                Chart.getChart(ctx).destroy();
+            }
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    datasets: [
+                        {
+                            label: " Ksh",
+                            data: data.map((value) => value.income),
+                            borderWidth: 2,
+                            backgroundColor: ["#006544"],
+                        },
+                    ],
+                    labels: data.map((value) => value.month),
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: "bottom",
+                            align: "end",
+                        },
+                    },
+                },
+            });
+        });
+    }
+    getRevenue();
 
+    $("#revenueYear").on('change', function() {
+        getRevenue();
+    });
     // const config = {
     //     type: "pie",
     //     data: data,
@@ -250,6 +289,4 @@
     //         },
     //     },
     // ];
-
-
-})()
+})();

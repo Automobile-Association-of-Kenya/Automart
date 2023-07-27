@@ -22,6 +22,7 @@ class SettingsController extends Controller
         $this->service = new Services();
         $this->maillist = new Maillist();
         $this->message = new Messages();
+        $this->visit =new Visit();
     }
 
     public function index()
@@ -69,24 +70,18 @@ class SettingsController extends Controller
 
     public function webtraffic($date = null)
     {
-        $startTime = '07:00:00';
-        $endTime = '18:00:00';
+        $data = collect();
         $date = $date ?? date('Y-m-d');
-        $query = DB::table('visits')->where('created_at', $date)->whereTime('created_at', '>=', $startTime)->whereTime('created_at', '<=', $endTime);
-        for ($hour = 8; $hour <= 18; $hour++) {
-            $startTime = sprintf('%02d:00:00', $hour);
-            $endTime = sprintf('%02d:59:59',
+        for ($hour = 7; $hour <= 18; $hour++) {
+            $startTime = $date.' '.sprintf('%02d:00:00', $hour);
+            $endTime = $date . ' ' . sprintf('%02d:59:59',
                 $hour
             );
-
-            // $query->unionAll(function ($query) use ($startTime, $endTime) {
-            //     $query->whereTime('created_at', '>=', $startTime)->whereTime('created_at', '<=', $endTime);
-            // });
+            $visits = DB::select("SELECT COUNT(1) AS count FROM visits WHERE `created_at` BETWEEN '$startTime' AND '$endTime'");
+            $data->push(['hour'=>$hour,'start'=> $startTime,'end'=>$endTime, 'visits'=>$visits[0]->count]);
         }
-        $data = $query->get();
-        return $data;
+        return json_encode($data);
     }
-
 
     public function mails($id = null)
     {
