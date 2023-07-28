@@ -91,14 +91,14 @@
                 @yield('page')
             </h2>
 
-            <li class="nav-item" id="subscriptionCountdowntimer" style="position: absolute;"></li>
+            <li class="nav-item" id="subscriptionCountdowntimer" style="position: absolute; top:60%; left:30%;"></li>
 
             @auth
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink6" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <img src="{{ asset('images/avatar.png') }}" height="30px" width="30px"alt=""
-                            class="profilephoto">{{ auth()->user()->name }}
+                            class="profilephoto">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
