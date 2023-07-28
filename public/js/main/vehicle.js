@@ -648,6 +648,7 @@
                     "X-CSRF-TOKEN": token,
                 },
             });
+            
             $.ajax({
                 type: "POST",
                 url: "/makes",
@@ -2104,6 +2105,7 @@
             // });
         });
     });
+
 
     $("#vehicleDelist").on("click", function (event) {
         event.preventDefault();

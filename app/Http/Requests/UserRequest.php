@@ -18,6 +18,7 @@ class UserRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:60', 'unique:' . User::class],
             'phone' => ['nullable', 'string', 'max:16', 'unique:' . User::class],
             'alt_phone' => ['nullable', 'string', 'max:18'],
+            'profile' => ['file','nullable','max:200']
         ];
     }
 }

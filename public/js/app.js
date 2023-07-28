@@ -93,6 +93,7 @@ $(function () {
         placedDashboard();
     });
 
+
     // Comon slick strat
     $(".slick").slick({
         dots: true,

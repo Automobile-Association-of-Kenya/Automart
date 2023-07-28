@@ -143,16 +143,27 @@ class UsersController extends Controller
         return json_encode(['status' => 'success', 'message' => $message]);
     }
 
-    public function edit(string $id)
-    {
-        
-    }
 
-    public function update(UserRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
+        return $request;
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:60', 'unique:users,email,' . $id],
+            'phone' => ['required', 'string', 'max:16', 'unique:users,phone,'.$id],
+            'alt_phone' => ['nullable', 'string', 'max:18'],
+            'profile' => ['file', 'nullable', 'max:200']
+        ]);
         $user = $this->user->find($id);
-        $user->update($request->validated());
-        return json_encode(['status'=>'success','message'=>'Your details have been updated successfully']);
+        $fileName = "";
+        if ($request->hasFile('profile')) {
+            $profile = $request->file('profile');
+            $fileName .= uniqid() . '.' . $profile->getClientOriginalExtension();
+            $profile->move("profiles/", $fileName);
+        }
+        $user->update($validated()+['profile'=>$fileName]);
+        return redirect()->back()->with('success','User details updated successfully');
+        // return json_encode(['status'=>'success','message'=>'Your details have been updated successfully']);
     }
 
     /**

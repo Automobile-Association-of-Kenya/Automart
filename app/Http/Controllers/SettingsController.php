@@ -72,7 +72,7 @@ class SettingsController extends Controller
     {
         $data = collect();
         $date = $date ?? date('Y-m-d');
-        for ($hour = 7; $hour <= 18; $hour++) {
+        for ($hour = 0; $hour <= 24; $hour++) {
             $startTime = $date.' '.sprintf('%02d:00:00', $hour);
             $endTime = $date . ' ' . sprintf('%02d:59:59',
                 $hour

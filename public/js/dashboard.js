@@ -84,7 +84,7 @@
             ];
         const ctx = document.getElementById("vehiclesonsubsgraph");
         new Chart(ctx, {
-            type: "pie",
+            type: "doughnut",
             data: {
                 datasets: [
                     {

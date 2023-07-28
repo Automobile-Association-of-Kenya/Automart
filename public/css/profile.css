@@ -17,7 +17,7 @@
 }
 
 .dashboard-form {
-    background: #fff;
+    /* background: #fff; */
     padding: 30px;
     box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.06);
     position: relative;
@@ -62,27 +62,10 @@
     width: auto;
 }
 
-.photoUpload {
-    position: relative;
-    overflow: hidden;
-    padding: 3px 12px;
-    cursor: pointer;
-}
-
-.photoUpload input.upload {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
-    cursor: pointer;
-    opacity: 0;
-    filter: alpha(opacity=0);
-}
 
 .change-photo-btn:hover {
     color: #fff;
-    background-color: #66676b;
+    background-color: #006544;
 }
 
 .change-photo-btn i {
@@ -114,6 +97,7 @@
 
 .dashboard-wrapper.dash-add .edit-profile-photo img {
     max-width: 100%;
+        border-radius: 50%;
 }
 
 /* #updateDealerButton {

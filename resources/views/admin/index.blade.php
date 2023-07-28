@@ -111,7 +111,7 @@
                     <div class="card-header">
                         <span class="text-left font-weight-bold">Subscriptions</span>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="width: 100%;height: auto;">
                         <canvas id="subscriptionsgraph"></canvas>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                     <div class="card-header">
                         <span class="text-left font-weight-bold">Dealers</span>
                     </div>
-                    <div class="card-body text-center">
+                    <div class="card-body"  style="width: 100%;height: auto;">
                         <canvas id="dealersgraph"></canvas>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                     <div class="card-header">
                         <span class="text-left font-weight-bold">Vehicles on Subscriptions</span>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="width: 100%;height: auto;">
                         <canvas id="vehiclesonsubsgraph"></canvas>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                             @endfor
                         </select>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="width: 100%;height: auto;">
                         <canvas id="revenuegraph"></canvas>
                     </div>
                 </div>
@@ -166,7 +166,7 @@
                         <span class="text-left font-weight-bold text-white">Web Traffic</span> <input type="date"
                             class="float-right" name="traffic" id="trafficDate" value="{{ date('Y-m-d') }}">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="width: 100%;height: auto;">
                         <canvas id="webtraffic"></canvas>
                     </div>
                 </div>

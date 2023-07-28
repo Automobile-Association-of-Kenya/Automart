@@ -202,6 +202,13 @@
                             </div>
                         </div>
 
+                        <div class="col-md-6 form-group">
+                            <label for="phone">Logo</label>
+                            <div class="form-group number">
+                                <input type="file" name="logo" id="dealerLogo">
+                            </div>
+                        </div>
+
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12">

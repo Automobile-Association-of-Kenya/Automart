@@ -103,26 +103,6 @@ class AdminController extends Controller
         return json_encode(['vehicles'=>$vehicles,'sponsored'=>$sponsored]);
     }
 
-    public function webtraffic($date = null) {
-        $startTime = '07:00:00';
-        $endTime = '18:00:00';
-        $date = $date ?? date('Y-m-d');
-        $query = DB::table('visits')->where('created_at',$date)->whereTime('created_at', '>=', $startTime)->whereTime('created_at', '<=', $endTime);
-
-        // Loop through each hour from 8 to 18 (06:00 PM)
-        for ($hour = 8; $hour <= 18; $hour++) {
-            $startTime = sprintf('%02d:00:00', $hour); // Format the hour with leading zeros
-            $endTime = sprintf('%02d:59:59', $hour);   // End time is the last minute of the hour
-
-            // Add the query for the current hour using unionAll
-            $query->unionAll(function ($query) use ($startTime, $endTime) {
-                $query->whereTime('created_at', '>=', $startTime)->whereTime('created_at', '<=', $endTime);
-            });
-        }
-
-        $data = $query->get();
-        return $data;
-    }
 
     public function revenue($year = null) {
         $months = collect();

@@ -131,8 +131,10 @@
                             class="profilephoto">{{ auth()->user()->name }}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        {{-- <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li> --}}
+                        <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
                         <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
+                        {{-- <li><a class="dropdown-item" href="">Logout</a></li> --}}
+
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
