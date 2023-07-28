@@ -91,7 +91,7 @@
                 @yield('page')
             </h2>
 
-            <li class="nav-item" id="subscriptionCountdowntimer"></li>
+            <li class="nav-item" id="subscriptionCountdowntimer" style="position: absolute;"></li>
 
             @auth
                 <li class="nav-item dropdown">
