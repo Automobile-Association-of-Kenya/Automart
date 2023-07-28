@@ -43,12 +43,15 @@
     });
 
     $.getJSON("/admin/dealer/subscriptions", function (subscriptions) {
-        let labels = ["Dealers with ", "Dealers without "],
-            data = [
-                parseFloat(subscriptions.acitivesubscriptions),
+        let subscribed = parseFloat(subscriptions.acitivesubscriptions),
+            unsubscribed =
                 parseFloat(subscriptions.dealers) -
-                    parseFloat(subscriptions.acitivesubscriptions),
-            ];
+                parseFloat(subscriptions.acitivesubscriptions),
+            labels = [
+                subscribed + " Dealers subscribed ",
+                unsubscribed + " Dealers not subscribed",
+            ],
+            data = [subscribed, unsubscribed];
         const ctx = document.getElementById("dealersgraph");
         new Chart(ctx, {
             type: "pie",
@@ -76,12 +79,12 @@
     });
 
     $.getJSON("/admin/vehicles/subscriptions", function (subscriptions) {
-        let labels = ["Sponsored", "Non Sponsored"],
-            data = [
-                parseFloat(subscriptions.sponsored),
+        let sponsored = parseFloat(subscriptions.sponsored),
+            unsponsored =
                 parseFloat(subscriptions.vehicles) -
-                    parseFloat(subscriptions.sponsored),
-            ];
+                parseFloat(subscriptions.sponsored),
+            labels = [sponsored+" Sponsored", unsponsored+" Non Sponsored"],
+            data = [sponsored, unsponsored];
         const ctx = document.getElementById("vehiclesonsubsgraph");
         new Chart(ctx, {
             type: "doughnut",

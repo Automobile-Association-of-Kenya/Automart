@@ -5,6 +5,9 @@
 @endsection
 
 @section('header_styles')
+    <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}">
     <style>
         p {
             padding: 0 5px;
@@ -179,7 +182,7 @@
 
                         <div class="tab-pane fade" id="finacesTab" role="tabpanel">
 
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="loanApplicationsTable">
                                 <thead class="table">
                                     <td>Vehicle</td>
                                     <td>Customer</td>
@@ -607,6 +610,13 @@
 </div>
 
 @section('footer_scrips')
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/main/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('js/main/jszip.min.js') }}"></script>
+    <script src="{{ asset('js/main/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
+
     <script>
         (function() {
             $('body').on('click', '#loanRequestModalToggle', function(event) {
@@ -634,6 +644,30 @@
                 let tradein_id = $(this).data('id');
                 $('#tradeinRequestID').val(quote_id);
             });
+
+            // $('#')
+            // if ($.fn.DataTable.isDataTable("#loanApplicationsTable")) {
+            //         $("#loanApplicationsTable").destroy();
+            //         $("#loanApplicationsTable").DataTable({
+            //             dom: "Bfrtip",
+            //             buttons: [
+            //                 "copyHtml5",
+            //                 "excelHtml5",
+            //                 "csvHtml5",
+            //                 "pdfHtml5",
+            //             ],
+            //         });
+            //     } else {
+            //         $("#loanApplicationsTable").DataTable({
+            //             dom: "Bfrtip",
+            //             buttons: [
+            //                 "copyHtml5",
+            //                 "excelHtml5",
+            //                 "csvHtml5",
+            //                 "pdfHtml5",
+            //             ],
+            //         });
+            //     }
         })()
     </script>
 @endsection

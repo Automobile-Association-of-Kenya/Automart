@@ -25,81 +25,82 @@
         <div class="row mt-2 p-2">
 
             <div class="col-md-3 mb-2">
-                <div class="badge bg-primary" style="width: 98%;">
+                <div class="badge bg-success" style="width: 98%;">
                     <h4 class="text-white text-start" style="padding: .4em;">Vehicles</h4>
-                    {{-- <span class="badge">New {{ $summary["todaysvehiclecount"] }}</span> --}}
                     <div class="number" style="display: inline-block" id=''>
                         {{ $summary['vehiclescount'] }}<br>
                     </div>
+                    <p class="text-start ml-3">{{ $summary["todaysvehiclecount"] }} Uploaded Today</p>
                 </div>
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="badge bg-info" style="width: 98%;">
+                <div class="badge bg-success" style="width: 98%;">
                     <h4 class="text-white text-start" style="padding: .4em;">Sales</h4>
-                    {{-- <span class="badge">new {{ $summary["todaysales"] }}</span> --}}
                     <div class="number" style="display: inline-block" id="">
                         {{ $summary['salescount'] }}<br>
                     </div>
+                    <p class="text-start ml-3">{{ $summary["todaysales"] }} Made Today</p>
                 </div>
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="badge bg-warning" style="width: 98%;">
+                <div class="badge bg-success" style="width: 98%;">
                     <h4 class="text-white text-start" style="padding: .4em;">Dealers</h4>
-                    {{-- <span class="badge">New {{ $summary["todaynewdealers"] }}</span> --}}
                     <div class="number" style="display: inline-block" id="">
                         {{ $summary['dealerscount'] }}<br>
                     </div>
+                    <p class="text-start ml-3">{{ $summary["todaynewdealers"] }} Signup Today</p>
                 </div>
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="badge alert-warning" style="width: 98%;">
-                    <h4 class="text-start" style="padding: .4em;">Purchase Requests</h4>
-                    {{-- <span class="badge">New {{ $summary["todaypurchasecount"] }}</span> --}}
+                <div class="badge bg-success" style="width: 98%;">
+                    <h4 class="text-start text-white" style="padding: .4em;">Purchase Requests</h4>
                     <div class="number" style="display: inline-block" id="">
                         {{ $summary['purchasecount'] }}<br>
                     </div>
+                    <p class="text-start ml-3">{{ $summary["todaypurchasecount"] }} Today</p>
                 </div>
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="badge alert-primary" style="width: 98%;">
-                    <h4 class="text-start" style="padding: .4em;">Quote Requests</h4>
-                    {{-- <span class="badge">New {{ $summary["quotescounttoday"] }}</span> --}}
+                <div class="badge bg-success" style="width: 98%;">
+                    <h4 class="text-start text-white" style="padding: .4em;">Quote Requests</h4>
                     <div class="number" style="display: inline-block" id=''>
                         {{ $summary['quotescount'] }}<br>
                     </div>
+                    <p class="text-start ml-3">{{ $summary["quotescounttoday"] }} Today</p>
                 </div>
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="badge alert-info" style="width: 98%;">
-                    <h4 class="text-start" style="padding: .4em;">Trade in Requests</h4>
-                    {{-- <span class="badge">New {{ $summary["tradeinscounttoday"] }}</span> --}}
+                <div class="badge bg-success" style="width: 98%;">
+                    <h4 class="text-start text-white" style="padding: .4em;">Trade in Requests</h4>
                     <div class="number" style="display: inline-block" id=''>
                         {{ $summary['tradeinscount'] }}<br>
                     </div>
+                    <p class="text-start ml-3"> {{ $summary["tradeinscounttoday"] }}  Today</p>
                 </div>
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="badge alert-info" style="width: 98%;">
-                    <h4 class="text-start" style="padding: .4em;">Loan Applications</h4>
-                    {{-- <span class="badge">New {{ $summary["tradeinscounttoday"] }}</span> --}}
+                <div class="badge bg-success" style="width: 98%;">
+                    <h4 class="text-start text-white" style="padding: .4em;">Loan Applications</h4>
                     <div class="number" style="display: inline-block" id=''>
                         {{ $summary['loanscount'] }}<br>
                     </div>
+                    <p class="text-start ml-3">{{ $summary["todayloanscount"] }}  Today</p>
                 </div>
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="badge alert-info" style="width: 98%;">
-                    <h4 class="text-start" style="padding: .4em;">Active subscriptions</h4>
+                <div class="badge bg-success" style="width: 98%;">
+                    <h4 class="text-start text-white" style="padding: .4em;">Active subscriptions</h4>
                     <div class="number" style="display: inline-block" id=''>
                         {{ $summary['activesubscriptions'] }}<br>
                     </div>
+                <p class="text-start ml-3">{{ $summary["todayloanscount"] }} Today</p>
                 </div>
             </div>
 
