@@ -128,7 +128,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink6" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <img src="{{ asset('images/avatar.png') }}" height="30px" width="30px"alt=""
-                            class="profilephoto">{{ auth()->user()->name }}
+                            class="profilephoto">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>

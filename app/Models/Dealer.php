@@ -16,14 +16,31 @@ class Dealer extends Model
     use HasFactory;
 
     protected $fillable = [
-        "name",
-        "email",
-        "phone",
-        "alt_phone",
-        "address",
+        'name',
+        'email',
+        'postal_address',
+        'address',
+        'phone',
+        'alt_phone',
+        'profile',
     ];
 
     public function add($request) {
+        $request->validate([
+            'name' => ['required','string','max:100'],
+            'email' => ['nullable','email','max:60'],
+            'postal_address' => ['nullable','string','max:100'],
+            'address' => ['nullable','string','max:100'],
+            'phone' => ['required', 'max:15'],
+            'alt_phone' => ['nullable', 'max:15'],
+            'profile' => ['nullable', 'file', 'mimes:jpeg,png,jpg|max:500']
+        ]);
+        $fileName = "";
+        if ($request->hasFile("logo")) {
+            $logo = $request->file('logo');
+            $fileName .= uniqid() . '.' . $logo->getClientOriginalExtension();
+            $logo->move("brands/", $fileName);
+        }
         $dealer = $this->create([
             'name' => $request->name,
             'email' => $request->email,
@@ -32,6 +49,7 @@ class Dealer extends Model
             'postal_address' => $request->postal_address,
             'address' => $request->address,
             'city' => $request->city,
+            'logo' => $fileName
         ]);
         return $dealer;
     }

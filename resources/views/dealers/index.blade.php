@@ -24,7 +24,7 @@
                 Advertise</a></div>
         <div class="row mt-2 p-2">
             <div class="col-md-3 mb-2">
-                <div class="badge bg-primary" style="width: 98%;">
+                <div class="badge bg-success" style="width: 98%;">
                     <h4 class="text-white text-start" style="padding: .4em;">My Vehicles</h4>
                     <div class="number" style="display: inline-block" id='loanAppliedlabel'>
                         {{ $summary['vehiclescount'] }}<br>
@@ -33,7 +33,7 @@
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="badge bg-info" style="width: 98%;">
+                <div class="badge bg-success" style="width: 98%;">
                     <h4 class="text-white text-start" style="padding: .4em;">Sales</h4>
                     <div class="number" style="display: inline-block" id="activeLoanslabel">
                         {{ $summary['countvehiclessold'] }}<br>
@@ -42,7 +42,7 @@
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="badge bg-warning" style="width: 98%;">
+                <div class="badge bg-success" style="width: 98%;">
                     <h4 class="text-white text-start" style="padding: .4em;">Revenue</h4>
                     <i>Ksh</i>
                     <div class="number" style="display: inline-block" id="vehiclesFundedlabel">
@@ -52,8 +52,8 @@
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="badge alert-warning" style="width: 98%;">
-                    <h4 class="text-start" style="padding: .4em;">Purchase Requests</h4>
+                <div class="badge bg-success" style="width: 98%;">
+                    <h4 class="text-start text-white" style="padding: .4em;">Purchase Requests</h4>
                     <div class="number" style="display: inline-block" id="vehiclesFundedlabel">
                         {{ $summary['purchasecount'] }}<br>
                     </div>
@@ -61,8 +61,8 @@
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="badge alert-primary" style="width: 98%;">
-                    <h4 class="text-start" style="padding: .4em;">Quote Requests</h4>
+                <div class="badge bg-success" style="width: 98%;">
+                    <h4 class="text-start text-white" style="padding: .4em;">Quote Requests</h4>
                     <div class="number" style="display: inline-block" id='loanAppliedlabel'>
                         {{ $summary['quotescount'] }}<br>
                     </div>
@@ -70,8 +70,8 @@
             </div>
 
             <div class="col-md-3 mb-2">
-                <div class="badge alert-info" style="width: 98%;">
-                    <h4 class="text-start" style="padding: .4em;">Trade in Requests</h4>
+                <div class="badge bg-success" style="width: 98%;">
+                    <h4 class="text-start text-white" style="padding: .4em;">Trade in Requests</h4>
                     <div class="number" style="display: inline-block" id='loanAppliedlabel'>
                         {{ $summary['tradeinscount'] }}<br>
                     </div>
@@ -94,7 +94,8 @@
                         <h5 class="text-white font-weight-bold mt-2 mb-2">Ads stats</h5><input type="date"
                             class="float-right" name="traffic" id="trafficDate" value="{{ date('Y-m-d') }}">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="width: 100%;height: auto;">
+                        <canvas id="webtraffic"></canvas>
                     </div>
                 </div>
             </div>

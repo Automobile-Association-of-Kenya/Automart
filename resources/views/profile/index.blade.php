@@ -26,11 +26,11 @@
                             <div class="dashboard-list-static">
 
                                 <div class="edit-profile-photo">
-                                    @if (!is_null($user->profile) && Storage::has($user->profile))
+                                    {{-- @if (!is_null($user->profile) && Storage::has($user->profile)) --}}
                                         <img src="{{ asset('profiles/' . $user->profile) }}" alt="">
-                                    @else
+                                    {{-- @else
                                         <img src="{{ asset('images/avatar.png') }}" alt="">
-                                    @endif
+                                    @endif --}}
                                 </div>
 
                                 <div class="my-profile">
@@ -48,16 +48,14 @@
                     <div class="col-lg-8 col-md-6 col-xs-12 padding-left-30">
                         <div class="dashboard-list  bg-white p-2">
                             <h4 class="gray">Dealership Information </h4>
-                            {{-- <button type="button" class="btn btn-success btn-sm mt-1 mb-1 btn-floated float-right"
-                                    id="filterToggle"><i class="fa fa-edit fa-1x text-warning"></i></button> --}}
                             <div class="dashboard-list-static">
                                 <div class="my-profile">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="edit-profile-photo">
-                                                @if (!is_null($user->dealer?->logo) && Storage::has('dealers' . $user->dealer?->logo))
-                                                    <img src="{{ asset('dealers/' . $user->dealer?->logo) }}" alt="">
-                                                @endif
+                                                {{-- @if (!is_null($user->dealer?->logo) && Storage::has('brands' . $user->dealer?->logo)) --}}
+                                                    <img src="{{ asset('brands/' . $user->dealer?->logo) }}" alt="{{ $user->dealer?->name }}">
+                                                {{-- @endif --}}
                                             </div>
                                         </div>
                                         <div class="col-md-8">
@@ -103,7 +101,7 @@
             </div>
 
             <div class="modal-body">
-                <form action="{{ route('users.update', auth()->id()) }}" method="PUT" id="userupdateForm">
+                <form action="{{ route('profile.update', auth()->id()) }}" method="POST" enctype="multipart/form-data" id="userupdateForm">
                     @csrf
                     <input type="hidden" name="user_id" id="userId" value="{{ auth()->id() }}">
 
@@ -134,7 +132,7 @@
                     <div class="form-group">
                         <label>Profile Photo </label><br>
                         <div class="input-group">
-                            <input type="file" name="profile">
+                            <input type="file" name="profile" id="profilePhoto">
                         </div>
                     </div>
 
@@ -208,7 +206,7 @@
                         <div class="col-md-6 form-group">
                             <label for="phone">Zip/Postal Address</label>
                             <div class="form-group number">
-                                <input type="text" class="form-control" name="postol" id="postolAddress"
+                                <input type="text" class="form-control" name="postal_address" id="postolAddress"
                                     value="{{ $user->dealer?->postal_address }}">
                             </div>
                         </div>

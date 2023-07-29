@@ -15,24 +15,16 @@
             max-height: 300px;
             overflow-y: auto;
         }
-
         table {
             width: 100%;
         }
-
         .phone,
         .mail {
             display: none;
         }
-    </style>
-@endsection
-
-@section('header_styles')
-    <style>
         .onetime {
             display: none;
         }
-
         .repetetive {
             display: none;
         }
@@ -307,7 +299,7 @@
 
                                                             <div class="col-md-12 mail">
                                                                 <label for="name">Email Type</label>
-                                                                <select name="account_type" id="accountType"
+                                                                <select name="email_type" id="emailType"
                                                                     class="form-control form-control-sm" required>
                                                                     <option value="">Select one</option>
                                                                     <option value="Authentication">Authentication / User

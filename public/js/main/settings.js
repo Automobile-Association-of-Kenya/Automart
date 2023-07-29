@@ -63,8 +63,15 @@
                 let tr = "",
                     i = 1;
                 $.each(subscriptions, function (key, value) {
-                    let { id, name, type, priority, cost, billingcycle, properties } =
-                        value;
+                    let {
+                        id,
+                        name,
+                        type,
+                        priority,
+                        cost,
+                        billingcycle,
+                        properties,
+                    } = value;
                     let td = "",
                         j = 1;
                     properties.forEach((element) => {
@@ -149,7 +156,7 @@
             billingcycle: billingcycle,
             properties: properties,
             description: description,
-            type:type,
+            type: type,
         };
 
         $.ajaxSetup({
@@ -205,12 +212,14 @@
                     subscriptionID.val(subscription.id);
                     subscriptionName.val(subscription.name);
                     subsDescription.val(subscription.description);
-                    $("#subPriority option[value=" +
+                    $(
+                        "#subPriority option[value=" +
                             subscription.priority +
                             "]"
                     ).prop("selected", true);
                     subCost.val(subscription.cost);
-                    $("#billingCycle option[value=" +
+                    $(
+                        "#billingCycle option[value=" +
                             subscription.billingcycle +
                             "]"
                     ).prop("selected", true);
@@ -566,7 +575,9 @@
                 tr +=
                     "<tr><td>" +
                     i++ +
-                    "</td><td>"+value.type+"</td><td>" +
+                    "</td><td>" +
+                    value.type +
+                    "</td><td>" +
                     value.name +
                     "</td><td>" +
                     value.link +
@@ -590,7 +601,10 @@
                     "Request accepted for processing. Make changes then save",
                     "#socialfeedback"
                 );
-                $("#socialType option[value=" + social[0].type + "]").prop("selected",true);
+                $("#socialType option[value=" + social[0].type + "]").prop(
+                    "selected",
+                    true
+                );
                 socialCreateID.val(social[0].id);
                 socialName.val(social[0].name);
                 socialLink.val(social[0].link);
@@ -609,7 +623,6 @@
         socialName.val("");
         socialLink.val("");
     });
-
 
     $("#sendRange").on("change", function (event) {
         let val = $(this).val();
@@ -633,7 +646,7 @@
                         "</td></tr>";
                 });
                 let table =
-                    "<table class='table table-bordered table-sm'><thead style='position:sticky;'><th>#</th><th>User</th><th>Email</th><th>Phone</th><th>Dealer</th></thead><tbody>" +
+                    "<table class='table table-bordered table-sm'><thead style='position:sticky;'><th>#</th><th>User</th><th>Email</th><th>Phone</th><th>Dealer</th></thead><tbody id='maualUsersSelect'>" +
                     tr +
                     "</tbody></table>";
                 $("#mailingSections").html(table);
@@ -667,18 +680,37 @@
 
     let sendMailForm = $("#sendMailForm"),
         sendMailUsage = $("#sendMailUsage"),
-        accountType = $("#accountType"),
+        // accountType = $("#accountType"),
         recepientType = $("#recepientType"),
         sendRange = $("#sendRange"),
         mailMessage = $("#mailMessage");
-    sendMailForm.on('submit', function(event) {
+    sendMailForm.on("submit", function (event) {
         event.preventDefault();
         let usage = sendMailUsage.val(),
-            account_type = accountType.val(),
+            // account_type = accountType.val(),
             recipient_type = recepientType.val(),
             sendrange = sendRange.val(),
-            message = mailMessage.val();
-        let data = {}
+            message = mailMessage.val(), users = [];
+        if (sendrange == "manual") {
+            $("#maualUsersSelect > tr").each(function (row) {
+                if ($(row).find("#selectedUser").is(':checked')) {
+                    users.push($(row).find("#selectedUser").data('id'));
+                }
+            });
+        }
+        let data = {
+            usage: usage,
+            // account_type: account_type,
+            recipient_type: recipient_type,
+            sendrange: sendrange,
+            message: message,
+            users: users,
+        };
+        // $.post('/',function(params) {
+        //     console.log(params);
+        // });
+        console.log(data);
+
     });
 
     function toMoney(number) {
