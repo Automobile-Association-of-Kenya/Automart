@@ -60,22 +60,16 @@ class AuthenticatedSessionController extends Controller
     public function handleFacebookCallback()
     {
         $user = Socialite::driver('facebook')->user();
-
-        // Check if the user already exists in the database
         $existingUser = User::where('email', $user->email)->first();
 
         if ($existingUser) {
-            // Log in the existing user
             Auth::login($existingUser);
         } else {
-            // Create a new user
             $newUser = new User();
             $newUser->name = $user->name;
             $newUser->email = $user->email;
             $newUser->password = Hash::make(Str::random(24));
             $newUser->save();
-
-            // Log in the new user
             Auth::login($newUser);
         }
 
@@ -91,12 +85,9 @@ class AuthenticatedSessionController extends Controller
     public function handleGoogleCallback()
     {
         $user = Socialite::driver('google')->user();
-
-        // Check if the user already exists in the database
         $existingUser = User::where('email', $user->email)->first();
 
         if ($existingUser) {
-            // Log in the existing user
             Auth::login($existingUser);
         } else {
             // Create a new user
@@ -105,8 +96,6 @@ class AuthenticatedSessionController extends Controller
             $newUser->email = $user->email;
             $newUser->password = Hash::make(Str::random(24));
             $newUser->save();
-
-            // Log in the new user
             Auth::login($newUser);
         }
 

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('gauth_id')->nullable();
             $table->string('gauth_type')->nullable();
+            $table->string('facebook_id')->nullable();
+            
         });
     }
 
