@@ -75,6 +75,7 @@
                                                             <th>Type</th>
                                                             <th>Priority</th>
                                                             <th>Cost</th>
+                                                            <th>ADS Limit</th>
                                                             <th>Billing Cycle</th>
                                                             <th>Properties</th>
                                                             <th>Action</th>
@@ -127,6 +128,12 @@
                                                                 <label>Cost</label>
                                                                 <input type="number" name="cost" id="subCost"
                                                                     class="form-control" required>
+                                                            </div>
+
+                                                            <div class="col-md-12 form-group">
+                                                                <label for="adsLimit">Ads Limit</label>
+                                                                <input type="number" name="ads_limit" id="adsLimit"
+                                                                    class="form-control">
                                                             </div>
 
                                                             <div class="col-md-12 form-group">

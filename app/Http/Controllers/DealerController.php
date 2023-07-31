@@ -73,7 +73,7 @@ class DealerController extends Controller
             'name' => ['required', 'max:80'],
             'phone' => ['required', 'max:14', 'unique:dealers,phone,'. $request->dealer_id],
             'alt_phone' => ['required', 'max:14'],
-            'email' => ['required', 'max:60', 'unique:dealers,email,'. $request->dealer_id],
+            'email' => ['nullable', 'max:60', 'unique:dealers,email,'. $request->dealer_id],
             'postal_address' => ['nullable', 'max:100'],
             'address' => ['nullable', 'max:100'],
             'city' => ['nullable', 'max:80'],

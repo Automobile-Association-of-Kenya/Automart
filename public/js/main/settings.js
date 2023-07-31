@@ -24,6 +24,7 @@
         subscriptionName = $("#subscriptionName"),
         subPriority = $("#subPriority"),
         subCost = $("#subCost"),
+        adsLimit = $("#adsLimit"),
         billingCycle = $("#billingCycle"),
         createSubscriptionForm = $("#createSubscriptionForm"),
         subsDescription = $("#subsDescription"),
@@ -68,7 +69,7 @@
                         name,
                         type,
                         priority,
-                        cost,
+                        cost, ads_limit,
                         billingcycle,
                         properties,
                     } = value;
@@ -92,6 +93,8 @@
                         type +
                         "</td><td>" +
                         priority +
+                        "</td><td>" +
+                        ads_limit +
                         "</td><td>" +
                         toMoney(cost) +
                         "</td><td>" +
@@ -136,6 +139,7 @@
             type = subscriptionType.val(),
             priority = subPriority.val(),
             cost = subCost.val(),
+            ads_limit = adsLimit.val(),
             billingcycle = billingCycle.val(),
             submit = $(this).find("button[type='submit']"),
             properties = [],
@@ -153,6 +157,7 @@
             name: name,
             priority: priority,
             cost: cost,
+            ads_limit:ads_limit,
             billingcycle: billingcycle,
             properties: properties,
             description: description,

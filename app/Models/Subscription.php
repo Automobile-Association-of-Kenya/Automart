@@ -21,6 +21,7 @@ class Subscription extends Model
         'type',
         'priority',
         'cost',
+        'ads_limit',
         'billingcycle',
         'description'
     ];
