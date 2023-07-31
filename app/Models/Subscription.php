@@ -68,7 +68,9 @@ class Subscription extends Model
             $expiry = Carbon::now()->addMonth();
         } elseif ($subscription->billingcycle === "Yearly") {
             $expiry = Carbon::now()->addYear();
-        } else {
+        } elseif($subscription->billingcycle === "Weekly"){
+            $expiry = Carbon::now()->addWeek();
+        }else {
             $expiry = Carbon::now()->addDays($subscription->billingcycle);
         }
         $dealer_id = $payment->dealer_id ?? null;

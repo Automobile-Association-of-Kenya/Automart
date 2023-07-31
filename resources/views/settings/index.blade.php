@@ -141,6 +141,7 @@
                                                                 <select name="billingcycle" id="billingCycle"
                                                                     class="form-control form-control-md" required>
                                                                     <option value="">Select One</option>
+                                                                    <option value="Weekly">Weekly</option>
                                                                     <option value="Monthly">Monthly</option>
                                                                     <option value="Quarterly">Quarterly</option>
                                                                     <option value="Annually">Annually</option>
