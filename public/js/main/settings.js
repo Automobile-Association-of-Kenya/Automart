@@ -94,9 +94,9 @@
                         "</td><td>" +
                         priority +
                         "</td><td>" +
-                        ads_limit +
-                        "</td><td>" +
                         toMoney(cost) +
+                        "</td><td>" +
+                        ads_limit +
                         "</td><td>" +
                         billingcycle +
                         "</td><td>" +
