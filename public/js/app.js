@@ -1228,7 +1228,7 @@ $(function () {
         //     vibrate: [200, 100, 200],
         // });
         // notification.addEventListener("click", () => {
-        //     window.open("http://newautomart.co.ke");
+        //     window.open("http://automart.aakenya.co.ke");
         // });
     }
 
