@@ -36,7 +36,15 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
-
+        if (session()->has('dealerinfo')) {
+            session()->forget('dealerinfo');
+        }
+        if (session()->has('subscriptioninfo')) {
+            session()->forget('subscriptioninfo');
+        }
+        if (session()->has('advertinfo')) {
+            session()->forget('advertinfo');
+        }
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();

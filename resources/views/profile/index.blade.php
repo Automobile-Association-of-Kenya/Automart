@@ -26,11 +26,11 @@
                             <div class="dashboard-list-static">
 
                                 <div class="edit-profile-photo">
-                                    {{-- @if (!is_null($user->profile) && Storage::has($user->profile)) --}}
+                                    @if (!is_null($user->profile) && Storage::exists(public_path('profiles/' . $user->profile)))
                                         <img src="{{ asset('profiles/' . $user->profile) }}" alt="">
-                                    {{-- @else
+                                    @else
                                         <img src="{{ asset('images/avatar.png') }}" alt="">
-                                    @endif --}}
+                                    @endif
                                 </div>
 
                                 <div class="my-profile">
@@ -45,41 +45,45 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-8 col-md-6 col-xs-12 padding-left-30">
-                        <div class="dashboard-list  bg-white p-2">
-                            <h4 class="gray">Dealership Information </h4>
-                            <div class="dashboard-list-static">
-                                <div class="my-profile">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="edit-profile-photo">
-                                                {{-- @if (!is_null($user->dealer?->logo) && Storage::has('brands' . $user->dealer?->logo)) --}}
-                                                    <img src="{{ asset('brands/' . $user->dealer?->logo) }}" alt="{{ $user->dealer?->name }}">
-                                                {{-- @endif --}}
+                    @if (auth()->user()->role !== 'admin')
+                        <div class="col-lg-8 col-md-6 col-xs-12 padding-left-30">
+                            <div class="dashboard-list  bg-white p-2">
+                                <h4 class="gray">Dealership Information </h4>
+                                <div class="dashboard-list-static">
+                                    <div class="my-profile">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="edit-profile-photo">
+                                                    @if (!is_null($user->dealer?->logo) && Storage::exists(public_path('brands' . $user->dealer?->logo)))
+                                                        <img src="{{ asset('brands/' . $user->dealer?->logo) }}"
+                                                            alt="{{ $user->dealer?->name }}">
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p><strong>Business &nbsp;</strong>{{ $user->dealer?->name }}</p>
+                                                <hr>
+                                                <p><strong>Business Email &nbsp;</strong>{{ $user->dealer?->email }}</p>
+                                                <hr>
+                                                <p><strong>Business Phone
+                                                        &nbsp;</strong>{{ $user->dealer?->phone . ' / ' . $user->dealer?->alt_phone }}
+                                                </p>
+                                                <hr>
+                                                <p><strong>Postal &nbsp;</strong>{{ $user->dealer?->postal_address }}</p>
+                                                <hr>
+                                                <p><strong>Address
+                                                        &nbsp;</strong>{{ $user->dealer?->address . ', ' . $user->dealer?->city }}
+                                                </p>
+                                                <hr>
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
-                                            <p><strong>Business &nbsp;</strong>{{ $user->dealer?->name }}</p>
-                                            <hr>
-                                            <p><strong>Business Email &nbsp;</strong>{{ $user->dealer?->email }}</p>
-                                            <hr>
-                                            <p><strong>Business Phone
-                                                    &nbsp;</strong>{{ $user->dealer?->phone . ' / ' . $user->dealer?->alt_phone }}
-                                            </p>
-                                            <hr>
-                                            <p><strong>Postal &nbsp;</strong>{{ $user->dealer?->postal_address }}</p>
-                                            <hr>
-                                            <p><strong>Address
-                                                    &nbsp;</strong>{{ $user->dealer?->address . ', ' . $user->dealer?->city }}
-                                            </p>
-                                            <hr>
-                                        </div>
                                     </div>
+                                    <a href="#" class="btn btn-md btn-block btn-success btn-round" data-toggle="modal"
+                                        data-target="#addBusinessModal">Update Business Information</a>
                                 </div>
-                                <a href="#" class="btn btn-md btn-block btn-success btn-round" data-toggle="modal" data-target="#addBusinessModal">Update Business Information</a>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -101,7 +105,8 @@
             </div>
 
             <div class="modal-body">
-                <form action="{{ route('profile.update', auth()->id()) }}" method="POST" enctype="multipart/form-data" id="userupdateForm">
+                <form action="{{ route('profile.update', auth()->id()) }}" method="POST" enctype="multipart/form-data"
+                    id="userupdateForm">
                     @csrf
                     <input type="hidden" name="user_id" id="userId" value="{{ auth()->id() }}">
 
@@ -136,15 +141,15 @@
                         </div>
                     </div>
 
-                        <div class="form-group">
-                                <button class='btn btn-success btn-md' type="submit" id='savedealer'><i
-                                        class="fal fa-save fa-lg fa-fw"></i>
-                                    Save
-                                </button>
-                                <button class='btn btn-outline-warning btn-md' id='cleardealer'><i
-                                        class="fal fa-broom fa-lg fa-fw"></i>
-                                    Clear Fields</button>
-                        </div>
+                    <div class="form-group">
+                        <button class='btn btn-success btn-md' type="submit" id='savedealer'><i
+                                class="fal fa-save fa-lg fa-fw"></i>
+                            Save
+                        </button>
+                        <button class='btn btn-outline-warning btn-md' id='cleardealer'><i
+                                class="fal fa-broom fa-lg fa-fw"></i>
+                            Clear Fields</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -166,11 +171,11 @@
 
             <div class="modal-body">
                 <div id="businessfeedback"></div>
-                <form action="{{ route('dealer.store') }}" method="POST" enctype="multipart/form-data"
-                    id="dealerForm">
+                <form action="{{ route('dealer.update', $user->dealer?->id) }}" method="POST"
+                    enctype="multipart/form-data" id="dealerForm">
                     @csrf
                     <div class="row">
-                        <input type="hidden" name="dealer_id" id="dealerID" value="{{ $user->dealer?->id }}">
+                        <input type="hidden" name="dealer_id" value="{{ $user->dealer?->id }}">
                         <div class="col-md-6 form-group">
                             <label for="name">Business Name</label>
                             <div class="form-group">

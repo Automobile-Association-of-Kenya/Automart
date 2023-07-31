@@ -146,13 +146,12 @@ class UsersController extends Controller
 
     public function update(Request $request, string $id)
     {
-        return $request;
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:60', 'unique:users,email,' . $id],
             'phone' => ['required', 'string', 'max:16', 'unique:users,phone,'.$id],
             'alt_phone' => ['nullable', 'string', 'max:18'],
-            'profile' => ['file', 'nullable', 'max:200']
+            'profile' => ['file', 'nullable', 'max:200', 'mimes:jpeg,png'],
         ]);
         $user = $this->user->find($id);
         $fileName = "";

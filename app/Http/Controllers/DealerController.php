@@ -68,6 +68,43 @@ class DealerController extends Controller
         return json_encode(['status' => 'success', 'message' => 'Dealer account created successfully. And verification link has been sent to your email.']);
     }
 
+    public function update(Request $request) {
+        $validated = $request->validate([
+            'name' => ['required', 'max:80'],
+            'phone' => ['required', 'max:14', 'unique:dealers,phone,'. $request->dealer_id],
+            'alt_phone' => ['required', 'max:14'],
+            'email' => ['required', 'max:60', 'unique:dealers,email,'. $request->dealer_id],
+            'postal_address' => ['nullable', 'max:100'],
+            'address' => ['nullable', 'max:100'],
+            'city' => ['nullable', 'max:80'],
+            'logo' => ['nullable', 'file', 'mimes:jpeg,png', 'max:200'],
+        ]);
+        $fileName = "";
+        if ($request->hasFile('logo')) {
+            $logo = $request->file('logo');
+            $fileName .= uniqid() . '.' . $logo->getClientOriginalExtension();
+            $logo->move("brands/", $fileName);
+            $validated["logo"] = $fileName;
+        }
+        // return $validated["logo"];
+        if (isset($request->dealer_id)) {
+            $dealer = $this->dealer->find($request->dealer_id);
+            $fileName = (strlen($fileName > 2)) ? $fileName : $dealer->logo;
+            if (!is_null($dealer)) {
+                $dealer->update($validated);
+            }
+            $message = "Dealer Info updated successfully";
+        } else {
+            $dealer = $this->dealer->create($validated);
+            new EventsDealer($dealer, auth()->user());
+            $message = "Dealer Info created successfully";
+        }
+        return redirect()->back()->with('success',$message);
+        // return redirect()->back()->with('success',$message);
+        // return json_encode(["status"=>'success','message'=>$message]);
+
+    }
+
     public function summary()
     {
         $vehicles = $this->dealer->dealerVehicles();

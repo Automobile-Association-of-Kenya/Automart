@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    <input type="checkbox" name="nav-toggle" id="nav-toggle" checked>
+    <input type="checkbox" name="nav-toggle" id="nav-toggle">
     <div class="sidebar">
 
         <div class="sidebar-brand">

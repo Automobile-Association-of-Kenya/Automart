@@ -219,6 +219,7 @@ Route::middleware('dealer')->prefix('dealer')->group(function () {
     Route::get('requests', [DealerController::class, 'requests'])->name('dealer.requests');
     Route::post('store', [DealerController::class, 'store'])->name('dealer.store');
     Route::get('purchase/approve/{id}', [DealerController::class, 'purchaseapprove'])->name('dealer.puchase.approve');
+    Route::post('update/{id?}', [DealerController::class, 'update'])->name('dealer.update');
 });
 
 Route::post('loan-request-reply', [SettingsController::class,'loanMessage'])->name('loan.message');

@@ -73,7 +73,6 @@
 
     function getDealers() {
         $.getJSON("/admin-dealers", function (dealers) {
-            console.log(dealers);
             var option = '<option value="">Select One</option>';
             $.each(dealers, (key, value) => {
                 let { id, name } = value;
@@ -648,7 +647,7 @@
                     "X-CSRF-TOKEN": token,
                 },
             });
-            
+
             $.ajax({
                 type: "POST",
                 url: "/makes",
@@ -657,8 +656,6 @@
                 contentType: false,
                 success: function (params) {
                     submit.prop({ disabled: false });
-
-                    console.log(params);
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#makefeedback");
@@ -1449,7 +1446,6 @@
                                 image: compressedDataUrl,
                             })
                                 .done(function (params) {
-                                    console.log(params);
                                     if (params == "success") {
                                         resolve();
                                         $('img[src="' + img.src + '"]')
@@ -1480,7 +1476,6 @@
 
             Promise.all(imagesUploadPromises)
                 .then((result) => {
-                    console.log(data);
                     $.ajaxSetup({
                         headers: {
                             "X-CSRF-TOKEN": token,
@@ -1491,7 +1486,6 @@
                         url: "/vehicles/store",
                         data: data,
                         success: function (params) {
-                            console.log(params);
                             savevehicle.prop("disabled", false);
                             let result = JSON.parse(params);
                             if (result.status == "success") {
@@ -1545,7 +1539,6 @@
             $("#coverPhotoPreview").children().remove();
 
             $.getJSON("/vehicles/show/" + vehicle_id, function (vehicle) {
-                console.log(vehicle);
                 if (vehicle !== null) {
                     showSuccess(
                         "Vehicle accepted for editing, You can make changes and click save to save changes",
@@ -1698,10 +1691,8 @@
                                             image: value,
                                             photo_delete: true,
                                         };
-                                    console.log(data);
                                     $.post("/image-delete", data)
                                         .done(function (params) {
-                                            console.log(params);
                                             let result = JSON.parse(params);
                                             if (result.status == "success") {
                                                 imgpreview.remove();
@@ -1927,7 +1918,6 @@
     $("body").on("click", "#vehicleDetailsToggle", function () {
         let vehicle_id = $(this).data("id");
         $.getJSON("/vehicles/show/" + vehicle_id, function (vehicle) {
-            console.log(vehicle);
             let header =
                 "<h3><strong>" +
                 vehicle.usage +
@@ -2113,8 +2103,6 @@
 
         $("#vehiclesListTable > tr").each(function (key, row) {
             if ($(row).find("#vehicleSelect").is(':checked')) {
-                console.log($(row).find("#vehicleSelect"));
-
                 vehicles.push($(row).find("#vehicleSelect:checked").data("id"));
             }
         });
@@ -2167,7 +2155,6 @@
             let data = { _token: token, vehicles: vehicles };
             $.post("/vehicles/sold", data)
                 .done(function (params) {
-                    console.log(params);
                     let result = JSON.parse(params);
                     if (result.status == "success") {
                         showSuccess(result.message, "#listingfeedback");

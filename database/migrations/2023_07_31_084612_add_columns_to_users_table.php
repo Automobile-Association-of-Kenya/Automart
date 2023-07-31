@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('dealers', function (Blueprint $table) {
-            $table->string('logo',100)->after('city')->nullable();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('gauth_id')->nullable();
+            $table->string('gauth_type')->nullable();
         });
     }
 
@@ -21,8 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('dealers', function (Blueprint $table) {
-
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('gauth_id');
+            $table->dropColumn('gauth_type');
         });
     }
 };

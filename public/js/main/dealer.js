@@ -24,15 +24,15 @@
         });
     }
 
-    let dealerForm = $("#dealerForm"),
-        dealerName = $("#dealerName"),
-        dealerEmail = $("#dealerEmail"),
-        dealerPhone = $("#dealerPhone"),
-        dealerAltPhone = $("#dealerAltPhone"),
-        postolAddress = $("#postolAddress"),
-        dealerAddress = $("#dealerAddress"),
-        dealerCity = $("#dealerCity"),
-        dealerID = $("#dealerID");
+    // let dealerForm = $("#dealerForm"),
+    //     dealerName = $("#dealerName"),
+    //     dealerEmail = $("#dealerEmail"),
+    //     dealerPhone = $("#dealerPhone"),
+    //     dealerAltPhone = $("#dealerAltPhone"),
+    //     postolAddress = $("#postolAddress"),
+    //     dealerAddress = $("#dealerAddress"),
+    //     dealerCity = $("#dealerCity"),
+    //     dealerID = $("#dealerID");
 
     // dealerForm.on("submit", function (event) {
     //     event.preventDefault();
@@ -63,7 +63,7 @@
     //             if (result.status === "data") {
     //                 if (confirm(result.message)) {
     //                     data.continue = true;
-    //                     $.post("/dealer/store", data)
+    //                     $.post("/dealer/store", formData)
     //                         .done(function (params) {
     //                             console.log(params);
     //                             let result = JSON.parse(params);
@@ -82,7 +82,6 @@
     //                             }
     //                         })
     //                         .fail(function (error) {
-    //                             console.log(error);
     //                             submit.prop({ disabled: false });
     //                             if (error.status == 422) {
     //                                 var errors = "";

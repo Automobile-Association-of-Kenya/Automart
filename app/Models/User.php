@@ -30,7 +30,8 @@ class User extends Authenticatable
         'alt_phone',
         'role',
         'password',
-        'google_id'
+        'google_id',
+        'profile',
     ];
 
     protected $hidden = [
@@ -40,6 +41,10 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+    ];
+
+    protected $appends = [
+        'profile_photo_url',
     ];
 
     public function getUserBy($key, $value)
