@@ -72,7 +72,6 @@ class AuthenticatedSessionController extends Controller
             $newUser->save();
             Auth::login($newUser);
         }
-
         return redirect('/home');
     }
 

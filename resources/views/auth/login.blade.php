@@ -317,9 +317,9 @@
                         <div class="login-social border-t mt-1 pt-2 mb-1 text-center">
                             {{-- <p class="mb-2">OR continue with</p> --}}
                             {{-- <div class="fb-login-button" data-width="" data-size="" data-button-type="" data-layout="" data-auto-logout-link="true" data-use-continue-as="true"></div> --}}
-                            <div class="fb-login-button" data-width="60%" data-size="" data-button-type="" data-layout="" data-auto-logout-link="true" data-use-continue-as="true"></div>
-                            {{-- <a href="{{ route('google.login') }}" class="btn-google"><i class="fa fa-google" aria-hidden="true"></i>
-                                Google</a> --}}
+                            {{-- <div class="fb-login-button" data-width="60%" data-size="" data-button-type="" data-layout="" data-auto-logout-link="true" data-use-continue-as="true"></div> --}}
+                            <a href="{{ route('google.login') }}" class="btn-google"><i class="fa fa-google" aria-hidden="true"></i>
+                                Google</a>
                             {{-- <a href="{{ route('facebook.login') }}" class="btn-facebook"><i class="fa fa-facebook"
                                     aria-hidden="true"></i>
                                 Facebook</a> --}}

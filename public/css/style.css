@@ -6811,7 +6811,7 @@ input[type=checkbox]:checked+label:before {
 
 /** Advantages 3 start **/
 .service-section-2 {
-    background:  url(../img/banner/img-7.jpg) rgba(0, 0, 0, 0.15) top left repeat;
+    background:  url(../img/banner/img-7.jpg) rgba(0, 65, 44, 0.15) top left repeat;
     background-size: cover;
     width: 100%;
     padding: 50px 0 40px;
@@ -12152,6 +12152,7 @@ input[type="tel"] {
 
     .main-title {
         margin-bottom: 40px;
+        margin-top: 40px;
     }
 
     .main-title-2 {

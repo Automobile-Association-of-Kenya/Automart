@@ -101,8 +101,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Subscription::class, 'dealer_subscription', 'dealer_id', 'subscription_id')->withPivot('status', 'start_date', 'expiry_date')->wherePivot('status', 1);
     }
-
-
+    
     function redirect()
     {
         if (auth()->user()) {

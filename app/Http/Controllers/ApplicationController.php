@@ -334,6 +334,7 @@ class ApplicationController extends Controller
 
     public function financing()
     {
-        return view('financing');
+        $vehicles = $this->vehicle->orderBy('priority')->inRandomOrder()->latest()->limit(12)->get();
+        return view('financing', compact('vehicles'));
     }
 }
