@@ -17,8 +17,10 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 // class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable,
-    CanResetPassword;
+    use HasApiTokens,
+        HasFactory,
+        Notifiable,
+        CanResetPassword;
 
     protected $fillable = [
         'dealer_id',
@@ -50,6 +52,11 @@ class User extends Authenticatable
     public function getUserBy($key, $value)
     {
         return $this->where("$key", "$value")->first();
+    }
+
+    public function getProfilePhotoUrlAttribute()
+    {
+        return $this->profile;
     }
 
     /**
@@ -158,5 +165,4 @@ class User extends Authenticatable
             'todayloanscount' => $todayloanscount
         ];
     }
-
 }
