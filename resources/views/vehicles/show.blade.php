@@ -43,7 +43,7 @@
                 <ul class="breadcrumbs">
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li><a href="{{ route('vehicles.list') }}">Vehicles</a></li>
-                    <li class="active">{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}</li>
+                    <li class="active">{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model.' Ref no '.$vehicle->vehicle_no }}</li>
                 </ul>
             </div>
         </div>
