@@ -72,7 +72,7 @@ class AuthenticatedSessionController extends Controller
             $newUser->save();
             Auth::login($newUser);
         }
-        return redirect('/home');
+        return redirect('/dashboard');
     }
 
 
@@ -98,7 +98,7 @@ class AuthenticatedSessionController extends Controller
             Auth::login($newUser);
         }
 
-        return redirect('/home');
+        return redirect('/dashboard');
     }
 
     function parse_signed_request($signed_request)
