@@ -1607,8 +1607,8 @@ input[type=checkbox]:checked+label:before {
 }
 
 .banner .carousel-bg .carousel-item {
-    height: 100vh;
-    background: #3e4a5b;
+    height: 60vh;
+    background: #fed945;
 }
 
 .banner_video_bg {
@@ -1725,7 +1725,7 @@ input[type=checkbox]:checked+label:before {
 
 
 .banner_video_bg .carousel-item {
-    height: 100vh;
+    height: 70vh;
 }
 
 #particles-banner {
@@ -10398,7 +10398,7 @@ input[type="tel"] {
 
 .faq-info .accordion:after {
     content: '\002B';
-    color: #1f1f1f;
+    color: #fff;
     font-weight: 400;
     float: right;
     font-size: 20px;

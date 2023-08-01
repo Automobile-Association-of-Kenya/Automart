@@ -101,7 +101,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Subscription::class, 'dealer_subscription', 'dealer_id', 'subscription_id')->withPivot('status', 'start_date', 'expiry_date')->wherePivot('status', 1);
     }
-    
+
     function redirect()
     {
         if (auth()->user()) {
@@ -157,15 +157,6 @@ class User extends Authenticatable
             'loanscount' => $loanscount,
             'todayloanscount' => $todayloanscount
         ];
-
-        // $views = ->sum('views');
-        // $todayviews = count($this->todayviews());
-        // $income = $this->initialize()->where('status', 'sold')->sum('price');
-        // $incometoday = $this->initialize()->where('sold_at', Carbon::today())->sum('price');
-        // $financescount = count($this->finances());
-        // $tradeinscount = count($this->tradeins());
-        // $financescounttoday = count($this->financestoday());
-        // return ['vehiclescount' => $vehiclescount, 'purchasecount' => $purchasecount, 'todaysvehiclecount' => $todaysvehiclecount, 'countvehiclessold' => $countvehiclessold, 'soldtodaycount' => $soldtodaycount, 'views' => $views, 'todayviews' => $todayviews, 'income' => $income, 'incometoday' => $incometoday, 'financescount' => $financescount, 'quotescount' => $quotescount, 'tradeinscount' => $tradeinscount, 'financescounttoday' => $financescounttoday, 'quotescounttoday' => $quotescounttoday, 'tradeinscounttoday' => $tradeinscounttoday];
     }
 
 }

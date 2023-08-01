@@ -320,9 +320,9 @@
                             {{-- <div class="fb-login-button" data-width="60%" data-size="" data-button-type="" data-layout="" data-auto-logout-link="true" data-use-continue-as="true"></div> --}}
                             <a href="{{ route('google.login') }}" class="btn-google"><i class="fa fa-google" aria-hidden="true"></i>
                                 Google</a>
-                            {{-- <a href="{{ route('facebook.login') }}" class="btn-facebook"><i class="fa fa-facebook"
+                            <a href="{{ route('facebook.login') }}" class="btn-facebook"><i class="fa fa-facebook"
                                     aria-hidden="true"></i>
-                                Facebook</a> --}}
+                                Facebook</a>
                         </div>
                     </div>
 

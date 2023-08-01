@@ -12,14 +12,19 @@
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner banner-slider-inner text-center">
                 <div class="carousel-item active item-bg">
-                    <img class="d-block w-100" src="images/automart.jpg" alt="banner">
+                    {{-- <img class="d-block w-100" src="images/automart.jpg" alt="banner"> --}}
                     <div class="carousel-content container banner-info-2">
                         <div class="row">
                             <div class="col-lg-7 text-start">
-                                <div class="p-3" style="background: rgb(175, 177, 175, 0.8);border-radius: 5px;">
+                                <div class="p-3" style="background: rgb(0, 65, 44, 0.8);border-radius: 5px;">
                                     <h4 class="mb-30 text-white">Vehicle Financing</h4>
                                     <div class="price">
-                                        <p></p>
+                                        <p>With our Financing Product, owning the car of your dreams has never been easier. You can find
+your ideal car on our platform and secure the financing you need seamlessly, all in one place. We
+have partnered with reputable financial institutions to bring you the best-in-class financing
+solutions, tailored to your specific needs. Take the first step towards your new car journey with
+AA Automart.We are committed to making car ownership an exciting and enjoyable experience
+for you. Happy car shopping!</p>
                                     </div>
                                 </div>
                             </div>
@@ -38,31 +43,31 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="faq-info">
-                        <button class="accordion">Competitive Interest Rates</button>
-                        <div class="panel">
+                        <button class="accordion bg-success text-white">Competitive Interest Rates</button>
+                        <div class="panel bg-success text-white">
                             <div class="compare-table">
-                                <p>Our financial partners offer highly competitive interest  rates, ensuring that you get the best deal possible on your car financing.</p>
+                                <p class="text-white">Our financial partners offer highly competitive interest  rates, ensuring that you get the best deal possible on your car financing.</p>
                             </div>
                         </div>
 
-                        <button class="accordion">Easy Application Process</button>
-                        <div class="panel">
+                        <button class="accordion bg-success text-white">Easy Application Process</button>
+                        <div class="panel bg-success text-white">
                             <div class="compare-table">
-                                <p>Applying for financing through our platform is quick and straightforward. You can complete the application online, saving you time and effort.</p>
+                                <p class="text-white">Applying for financing through our platform is quick and straightforward. You can complete the application online, saving you time and effort.</p>
                             </div>
                         </div>
 
-                        <button class="accordion">Flexible Repayment Terms</button>
-                        <div class="panel">
+                        <button class="accordion bg-success text-white">Flexible Repayment Terms</button>
+                        <div class="panel bg-success text-white">
                             <div class="compare-table">
-                                <p>We offer flexible repayment terms, so you can choose a plan that suits your budget and lifestyle.</p>
+                                <p class="text-white">We offer flexible repayment terms, so you can choose a plan that suits your budget and lifestyle.</p>
                             </div>
                         </div>
 
-                        <button class="accordion">Fast Approval</button>
-                        <div class="panel">
+                        <button class="accordion bg-success text-white">Fast Approval</button>
+                        <div class="panel bg-success text-white">
                             <div class="compare-table">
-                                <p>Say goodbye to long approval waiting times. Thanks to our efficient system, you&#39;ll receive fast approval for your car financing
+                                <p class="text-white">Say goodbye to long approval waiting times. Thanks to our efficient system, you&#39;ll receive fast approval for your car financing
                                                 application.Fast Approval: Say goodbye to long approval waiting times.
                                                 Thanks to our efficient
                                                 system, you&#39;ll receive fast approval for your car financing
@@ -70,17 +75,17 @@
                             </div>
                         </div>
 
-                        <button class="accordion">No Hidden Charges</button>
-                        <div class="panel">
+                        <button class="accordion bg-success text-white">No Hidden Charges</button>
+                        <div class="panel  bg-success text-white">
                             <div class="compare-table">
-                                <p>Transparency is crucial to us. Rest assured, there are no hidden fees or surprises with our financing product.</p>
+                                <p class="text-white">Transparency is crucial to us. Rest assured, there are no hidden fees or surprises with our financing product.</p>
                             </div>
                         </div>
 
-                        <button class="accordion">Dedicated Support</button>
-                        <div class="panel">
+                        <button class="accordion bg-success text-white">Dedicated Support</button>
+                        <div class="panel bg-success text-white">
                             <div class="compare-table">
-                                <p>Our customer support team is always ready to assist you throughout the financing process, ensuring a smooth and pleasant experience.</p>
+                                <p class="text-white">Our customer support team is always ready to assist you throughout the financing process, ensuring a smooth and pleasant experience.</p>
                             </div>
                         </div>
                     </div>
