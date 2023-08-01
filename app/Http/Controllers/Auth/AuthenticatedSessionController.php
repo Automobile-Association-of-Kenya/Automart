@@ -65,7 +65,10 @@ class AuthenticatedSessionController extends Controller
         if ($existingUser) {
             Auth::login($existingUser);
         } else {
+            $last = User::latest()->first();
+            $ref_no = (!is_null($last)) ? strtotime(now()) . '-' . $last->id + 1 : strtotime(now()) . '-1';
             $newUser = new User();
+            $newUser->ref_no = $ref_no;
             $newUser->name = $user->name;
             $newUser->email = $user->email;
             $newUser->password = Hash::make(Str::random(24));
@@ -89,8 +92,10 @@ class AuthenticatedSessionController extends Controller
         if ($existingUser) {
             Auth::login($existingUser);
         } else {
-            // Create a new user
+            $last = User::latest()->first();
+            $ref_no = (!is_null($last)) ? strtotime(now()) . '-' . $last->id + 1 : strtotime(now()) . '-1';
             $newUser = new User;
+            $newUser->ref_no = $ref_no;
             $newUser->name = $user->name;
             $newUser->email = $user->email;
             $newUser->password = Hash::make(Str::random(24));
