@@ -636,7 +636,7 @@
             $.getJSON("/admin/customers", function (customers) {
                 let tr = "";
                 $.each(customers, function (key, value) {
-                    let dealer = value.dealer?.name ?? "";
+                    // let dealer = value.dealer?.name ?? "";
                     tr +=
                         "<tr data-id=" +
                         value.id +
@@ -646,12 +646,10 @@
                         value.email +
                         "</td><td>" +
                         value.phone +
-                        "</td><td>" +
-                        dealer +
                         "</td></tr>";
                 });
                 let table =
-                    "<table class='table table-bordered table-sm'><thead style='position:sticky;'><th>#</th><th>User</th><th>Email</th><th>Phone</th><th>Dealer</th></thead><tbody id='maualUsersSelect'>" +
+                    "<table class='table table-bordered table-sm'><thead style='position:sticky;'><th>#</th><th>User</th><th>Email</th><th>Phone</th></thead><tbody id='maualUsersSelect'>" +
                     tr +
                     "</tbody></table>";
                 $("#mailingSections").html(table);
@@ -685,36 +683,37 @@
 
     let sendMailForm = $("#sendMailForm"),
         sendMailUsage = $("#sendMailUsage"),
-        // accountType = $("#accountType"),
         recepientType = $("#recepientType"),
         sendRange = $("#sendRange"),
         mailMessage = $("#mailMessage");
     sendMailForm.on("submit", function (event) {
         event.preventDefault();
-        let usage = sendMailUsage.val(),
-            // account_type = accountType.val(),
+        let $this = $(this), usage = sendMailUsage.val(),
             recipient_type = recepientType.val(),
             sendrange = sendRange.val(),
-            message = mailMessage.val(), users = [];
+            message = mailMessage.val(), token = $this.find("input[name='_token']").val(), users = [];
         if (sendrange == "manual") {
             $("#maualUsersSelect > tr").each(function (row) {
-                if ($(row).find("#selectedUser").is(':checked')) {
-                    users.push($(row).find("#selectedUser").data('id'));
+                if ($(row).children().find("#selectedUser").is(':checked')) {
+                    console.log($(row).find("#selectedUser").is(":checked"));
+                    users.push($(row).children().find("#selectedUser").data('id'));
                 }
             });
         }
         let data = {
+            _token: token,
             usage: usage,
-            // account_type: account_type,
             recipient_type: recipient_type,
             sendrange: sendrange,
             message: message,
             users: users,
         };
-        // $.post('/',function(params) {
-        //     console.log(params);
-        // });
         console.log(data);
+        $.post('/bulk-mail').done(function(params) {
+            console.log(params);
+        }).fail(function (error) {
+            console.error(error);
+        });
 
     });
 

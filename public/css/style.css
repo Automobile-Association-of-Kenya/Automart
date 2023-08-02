@@ -6811,7 +6811,7 @@ input[type=checkbox]:checked+label:before {
 
 /** Advantages 3 start **/
 .service-section-2 {
-    background:  url(../img/banner/img-7.jpg) rgba(0, 65, 44, 0.15) top left repeat;
+    background: url(../img/banner/img-7.jpg) rgba(0, 65, 44, 0.15) top left repeat;
     background-size: cover;
     width: 100%;
     padding: 50px 0 40px;
@@ -8240,6 +8240,7 @@ input[type=checkbox]:checked+label:before {
 .content-area-18 {
     padding: 50px 0 100px;
 }
+
 .form-group {
     margin-bottom: .45rem;
 }
@@ -11372,7 +11373,8 @@ input[type="tel"] {
     .sticky-header .nav-link::after {
         display: none !important;
     }
-    .bi5{
+
+    .bi5 {
         margin: 5em 0;
     }
 
@@ -11535,9 +11537,11 @@ input[type="tel"] {
     .content-area {
         padding: 80px 0 50px;
     }
-        .bi5 {
-            margin: 5em 0;
-        }
+
+    .bi5 {
+        margin: 5em 0;
+    }
+
     .bg-img {
         display: none;
     }
@@ -11719,6 +11723,7 @@ input[type="tel"] {
         top: 45%;
         margin: 5px;
     }
+
     .counter-box-1 {
         padding: 0;
         margin-bottom: 40px;
@@ -13299,11 +13304,8 @@ input[type="tel"] {
     padding: 6px 20px;
 
     color: #fff;
-
     background: #ccc;
-
     display: inline-block;
-
     border: 1px solid #395899;
 }
 
@@ -13334,8 +13336,9 @@ input[type="tel"] {
 }
 
 .login-social a.btn-google {
-    background: #db3236;
-    border-color: #db3236;
+    background: #fff;
+    border-color: blue;
+    border-radius: 5px;
 }
 
 .box-shadow {

@@ -1833,7 +1833,7 @@
                             ? value.dealer.name
                             : value.user !== null
                             ? value.user.name
-                            : "";
+                            : "", phone = value.dealer?.phone ?? value.user?.phone;
                 tr +=
                     "<tr><td><input type='checkbox' class='vehicleselect' id='vehicleSelect' data-id=" +
                     id +
@@ -1844,7 +1844,7 @@
                     vehicle_no +
                     "</td><td>" +
                     dealer +
-                    "</td><td>" +
+                    "</td><td>"+phone+"</td><td>" +
                     make.make +
                     "</td><td>" +
                     model.model +
@@ -1869,7 +1869,7 @@
                     "><i class='fas fa-eye fa-lg text-success'></i></a></td></tr>";
             });
             let table =
-                '<table class="table table-bordered hover vehicleDataTable "><thead><th>#</th><th>#</th><th>NO</th><th>Dealer</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>CC</th><th>Mileage</th><th>Fuel</th><th>Trans</th><th>created</th><th>Status</th><th>Action</th></thead><tbody id="vehiclesListTable">' +
+                '<table class="table table-bordered hover vehicleDataTable "><thead><th>#</th><th>#</th><th>NO</th><th>Dealer</th><th>Phone</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>CC</th><th>Mileage</th><th>Fuel</th><th>Trans</th><th>created</th><th>Status</th><th>Action</th></thead><tbody id="vehiclesListTable">' +
                 tr +
                 "</tbody></table>";
             $("#vehicledatasection").html(table);

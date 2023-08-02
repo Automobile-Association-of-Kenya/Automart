@@ -244,7 +244,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-12">
                                                         <label for="company">Description:</label>
                                                         <div class="input-group">
                                                             <textarea name="description" id="description" class="form-control" required></textarea>
@@ -497,7 +497,6 @@
                             <div id="vehicledatasection">
 
                             </div>
-
                         </div>
 
                         <div class="tab-pane fade mb-3" id="makesTab" role="tabpanel" aria-labelledby="pop2-tab">

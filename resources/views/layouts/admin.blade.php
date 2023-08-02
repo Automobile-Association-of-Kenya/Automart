@@ -29,8 +29,7 @@
     <div class="sidebar">
 
         <div class="sidebar-brand">
-            <a href="{{ url('/') }}"><i class="fas fa-home fa-2x text-white"></i><b><span class="text-white">AA
-                            KENYA</span></b></a>
+            <a href="{{ url('/') }}"><i class="fas fa-home fa-2x text-white"></i><b><span class="text-white">Automart</span></b></a>
         </div>
 
         <div class="sidebar-menu">

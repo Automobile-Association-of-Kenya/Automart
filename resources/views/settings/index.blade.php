@@ -620,34 +620,10 @@
                     $('.onetime').hide();
                 }
             });
-            // let socialType = $('#socialType');
-            // socialType.on('change', function(event) {
-            //     let type = $(this).val();
-            //     if (type === "social") {
-            //         $('.social').show();
-            //         $('.address').hide();
-            //         $('.phone').hide();
-            //         $('.email').hide();
-            //     }
-            //     if (type === "address") {
-            //         $('.social').hide();
-            //         $('.address').show();
-            //         $('.phone').hide();
-            //         $('.email').hide();
-            //     }
-            //     if (type === "phone") {
-            //         $('.social').hide();
-            //         $('.address').hide();
-            //         $('.phone').show();
-            //         $('.email').hide();
-            //     }
-            //     if (type === "email") {
-            //         $('.social').hide();
-            //         $('.address').hide();
-            //         $('.phone').hide();
-            //         $('.email').show();
-            //     }
-            // });
+
+            $('#sendMailUsage').on('change', function() {
+                $('.'+$(this).val()).show();
+            });
         })()
     </script>
 
