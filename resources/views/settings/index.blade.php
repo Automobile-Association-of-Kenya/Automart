@@ -57,6 +57,8 @@
 
                                 <a class="nav-item nav-link" id="social-tab" data-toggle="tab" href="#socialTabs"
                                     role="tab" aria-controls="pop2" aria-selected="false">Socials</a>
+                                <a class="nav-item nav-link" id="social-tab" data-toggle="tab" href="#visitorsTabs"
+                                    role="tab" aria-controls="pop2" aria-selected="false">Visitors</a>
                             </div>
                         </nav>
 
@@ -597,6 +599,13 @@
                                             </form>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade mb-3" id="visitorsTabs" role="tabpanel" aria-labelledby="pop2-tab">
+                                <input type="date" class="float-right" name="visitorsdate" id="visitorsDate" value="{{ date('Y-m-d') }}"><br><br>
+                                <div id="visitsSection">
+
                                 </div>
                             </div>
 

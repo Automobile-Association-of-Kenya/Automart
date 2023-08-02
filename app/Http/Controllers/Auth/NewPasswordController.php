@@ -57,18 +57,5 @@ class NewPasswordController extends Controller
             Log::notice($status);
             return redirect()->back()->withErrors(__($status));
         }
-
-        // if (!is_null($passwordreset)) {
-        //     $user = User::where('email', $passwordreset->email)->first();
-        //     $user->forceFill([
-        //         'password' => Hash::make($request->password),
-        //         'remember_token' => Str::random(60),
-        //     ])->save();
-
-        //     event(new PasswordReset($user));
-        //     return redirect()->route('login')->with('success', 'Password reset was successful');
-        // } else {
-        //     return redirect()->route('login')->with('error', 'Password reset was successful');
-        // }
     }
 }

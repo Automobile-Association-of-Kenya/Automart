@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MailRequest;
+use App\Mail\Marketing;
 use App\Models\Maillist;
 use App\Models\Messages;
 use App\Models\Services;
 use App\Models\Social;
+use App\Models\User;
 use App\Models\Visit;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class SettingsController extends Controller
 {
@@ -23,6 +27,7 @@ class SettingsController extends Controller
         $this->maillist = new Maillist();
         $this->message = new Messages();
         $this->visit =new Visit();
+        $this->user =new User();
     }
 
     public function index()
@@ -137,4 +142,30 @@ class SettingsController extends Controller
         $this->message->create($validated+['type'=>'contact']);
         return json_encode(['status'=>'success', 'message'=>'Your message was received successfully. We will check your issue and get back to you as appropriate']);
     }
+
+    public function bulkMail(Request $request) {
+        if ($request->sendrange == "manual") {
+            if (count($request->users) > 0) {
+                foreach ($request->users as $value) {
+                    $user = $this->user->find($value);
+                    (new MailMessage)
+                    ->subject($request->subject)
+                    ->line('Please click the button below to verify your email address.')
+                    ->line('If you did not create an account, no further action is required.');
+                }
+            }else {
+                return json_encode(['status'=>"error", 'message'=>"No users selected to email"]);
+            }
+        }else {
+            // if () {
+            //     # code...
+            // }
+        }
+    }
+
+    public function visits($date) {
+        $visits = $this->visit->whereDate('created_at',$date)->latest()->get();
+        return json_encode($visits);
+    }
+
 }

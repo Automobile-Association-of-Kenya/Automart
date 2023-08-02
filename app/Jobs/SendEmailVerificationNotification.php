@@ -31,7 +31,6 @@ class SendEmailVerificationNotification implements ShouldQueue
      */
     public function handle(): void
     {
-        $user = $this->user;
         VerifyEmail::toMailUsing(function ($notifiable) {
             $verifyUrl = URL::temporarySignedRoute(
                 'verification.verify',

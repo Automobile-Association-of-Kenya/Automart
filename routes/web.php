@@ -210,7 +210,8 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('dealers-get', [DealerController::class, 'getDealers']);
-
+Route::post('bulk-mail', [SettingsController::class, 'bulkMail']);
+Route::view('mail','mail');
 // dd(auth()->user());
 Route::middleware('dealer')->prefix('dealer')->group(function () {
     Route::get('/', [DealerController::class, 'index'])->name('dealer.index');
@@ -230,3 +231,4 @@ Route::post('purchase/decline', [DealerController::class, 'purchasedecline'])->n
 
 
 Route::get('webtraffic/{date?}', [SettingsController::class, 'webtraffic']);
+Route::get('visits/{date?}', [SettingsController::class,'visits']);

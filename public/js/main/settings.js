@@ -69,7 +69,8 @@
                         name,
                         type,
                         priority,
-                        cost, ads_limit,
+                        cost,
+                        ads_limit,
                         billingcycle,
                         properties,
                     } = value;
@@ -157,7 +158,7 @@
             name: name,
             priority: priority,
             cost: cost,
-            ads_limit:ads_limit,
+            ads_limit: ads_limit,
             billingcycle: billingcycle,
             properties: properties,
             description: description,
@@ -640,7 +641,9 @@
                     tr +=
                         "<tr data-id=" +
                         value.id +
-                        "><td><input type='checkbox' id='selectedUser'></td><td>" +
+                        "><td><input type='checkbox' name='selected_user' data-value=" +
+                        value.id +
+                        "></td><td>" +
                         value.name +
                         "</td><td>" +
                         value.email +
@@ -662,7 +665,7 @@
                     tr +=
                         "<tr data-id=" +
                         value.id +
-                        "><td><input type='checkbox' id='selectedUser'></td><td>" +
+                        "><td><input type='checkbox' name='selected_user'></td><td>" +
                         value.name +
                         "</td><td>" +
                         value.email +
@@ -688,16 +691,19 @@
         mailMessage = $("#mailMessage");
     sendMailForm.on("submit", function (event) {
         event.preventDefault();
-        let $this = $(this), usage = sendMailUsage.val(),
+        let $this = $(this),
+            usage = sendMailUsage.val(),
             recipient_type = recepientType.val(),
             sendrange = sendRange.val(),
-            message = mailMessage.val(), token = $this.find("input[name='_token']").val(), users = [];
+            message = mailMessage.val(),
+            token = $this.find("input[name='_token']").val(),
+            users = [];
         if (sendrange == "manual") {
-            $("#maualUsersSelect > tr").each(function (row) {
-                if ($(row).children().find("#selectedUser").is(':checked')) {
-                    console.log($(row).find("#selectedUser").is(":checked"));
-                    users.push($(row).children().find("#selectedUser").data('id'));
-                }
+            $("input[name='selected_user']:checked").each(function (
+                key,
+                input
+            ) {
+                users.push($(input).data("value"));
             });
         }
         let data = {
@@ -709,12 +715,13 @@
             users: users,
         };
         console.log(data);
-        $.post('/bulk-mail').done(function(params) {
-            console.log(params);
-        }).fail(function (error) {
-            console.error(error);
-        });
-
+        $.post("/bulk-mail", data)
+            .done(function (params) {
+                console.log(params);
+            })
+            .fail(function (error) {
+                console.error(error);
+            });
     });
 
     function toMoney(number) {
@@ -722,5 +729,58 @@
         return actul.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
     }
 
-    // selectedUser;
+    function getVisits() {
+        let date = $("#visitorsDate").val();
+        $.getJSON("/visits/" + date, function (visitors) {
+            console.log(visitors);
+            let tr = "",
+                i = 1;
+            $.each(visitors, function (key, value) {
+                tr +=
+                    "<tr><td>" +
+                    i++ +
+                    "</td><td>" +
+                    value.url +
+                    "</td><td>" +
+                    value.user_agent +
+                    "</td><td>" +
+                    value.platform +
+                    "</td><td>" +
+                    moment(value.created_at).format("D MMM, YYYY H:mm:s") +
+                    "</td></tr>";
+            });
+            let table =
+                "<table class='table table-bordered table-sm' id='visitstable'><thead><th>#</th><th>Page</th><th>Origin</th><th>Device</th><th>Visited at</th></thead><tbody>" +
+                tr +
+                "</tbody></table>";
+            $("#visitsSection").html(table);
+            if ($.fn.DataTable.isDataTable("#visitstable")) {
+                $("#visitstable").destroy();
+                $("#visitstable").DataTable({
+                    dom: "Bfrtip",
+                    buttons: [
+                        "copyHtml5",
+                        "excelHtml5",
+                        "csvHtml5",
+                        "pdfHtml5",
+                    ],
+                });
+            } else {
+                $("#visitstable").DataTable({
+                    dom: "Bfrtip",
+                    buttons: [
+                        "copyHtml5",
+                        "excelHtml5",
+                        "csvHtml5",
+                        "pdfHtml5",
+                    ],
+                });
+            }
+        });
+    }
+    getVisits();
+
+    $("#visitorsdate").on("change", function () {
+        getVisits();
+    });
 })();

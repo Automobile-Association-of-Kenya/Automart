@@ -115,6 +115,7 @@
                     address,
                     vehicles_count,
                     users,
+                    created_at,
                 } = value;
                 // let user = (users[0] !== null && users[0] !== undefined) ? users[0].name : "";
                 {
@@ -135,6 +136,8 @@
                     address +
                     "</td><td>" +
                     vehicles_count +
+                    "</td><td>" +
+                    moment(created_at).format("D MMM, YYYY H:mm:s") +
                     '</td><td><a href="#" id="editDealerToggle" data-id=' +
                     id +
                     '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteDealerToggle" data-id=' +
@@ -142,7 +145,7 @@
                     '><i class="fas fa-trash text-danger"></i></a></td></tr>';
             });
             let table =
-                '<table class="dealersDataTable"><thead><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Alt Phone</th><th>Address</th><th>Vehicles</th><th>Action</th></thead><tbody>' +
+                '<table class="dealersDataTable"><thead><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Alt Phone</th><th>Address</th><th>Vehicles</th><th>Created</th><th>Action</th></thead><tbody>' +
                 tr +
                 "</tbody></table>";
             $("#dealersTableSection").html(table);
@@ -180,15 +183,8 @@
             let tr = "",
                 i = 1;
             $.each(partners, function (key, value) {
-                let {
-                    id,
-                    name,
-                    email,
-                    phone,
-                    alt_phone,
-                    address,
-                    users,
-                } = value;
+                let { id, name, email, phone, alt_phone, address, users } =
+                    value;
                 // let user = (users[0] !== null && users[0] !== undefined) ? users[0].name : "";
                 {
                     /* <td>" + user + '"</td>; */
@@ -478,11 +474,12 @@
         let partner_id = $(this).data("id");
 
         if (partner_id !== "" && partner_id !== null) {
-            $.getJSON("/partners/"+partner_id, function (partners) {
+            $.getJSON("/partners/" + partner_id, function (partners) {
                 console.log(partners);
                 let partner = partners[0];
                 if (partner !== null) {
-                    let { id, name, email, phone, alt_phone, address, users } = partner;
+                    let { id, name, email, phone, alt_phone, address, users } =
+                        partner;
                     partnerCreateID.val(id);
                     partnerName.val(name);
                     partnerEmail.val(email);

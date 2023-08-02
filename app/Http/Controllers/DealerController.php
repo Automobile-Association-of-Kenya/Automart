@@ -122,7 +122,7 @@ class DealerController extends Controller
 
     public function getDealers()
     {
-        $dealers = $this->dealer->withCount('vehicles')->get();
+        $dealers = $this->dealer->withCount('vehicles')->latest()->get();
         return json_encode($dealers);
     }
 
