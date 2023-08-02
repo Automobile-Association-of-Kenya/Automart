@@ -83,7 +83,7 @@
             unsponsored =
                 parseFloat(subscriptions.vehicles) -
                 parseFloat(subscriptions.sponsored),
-            labels = [sponsored+" Sponsored", unsponsored+" Non Sponsored"],
+            labels = [sponsored + " Sponsored", unsponsored + " Non Sponsored"],
             data = [sponsored, unsponsored];
         const ctx = document.getElementById("vehiclesonsubsgraph");
         new Chart(ctx, {
@@ -118,12 +118,16 @@
             if (Chart.getChart(ctx) !== undefined) {
                 Chart.getChart(ctx).destroy();
             }
+            let sum = 0;
+            data.forEach((value) => {
+                sum += parseFloat(value.visits);
+            });
             new Chart(ctx, {
                 type: "bar",
                 data: {
                     datasets: [
                         {
-                            label: " visits",
+                            label: sum + " visits",
                             data: data.map((value) => value.visits),
                             borderWidth: 2,
                             backgroundColor: ["#fed945"],
@@ -184,7 +188,7 @@
     }
     getRevenue();
 
-    $("#revenueYear").on('change', function() {
+    $("#revenueYear").on("change", function () {
         getRevenue();
     });
     // const config = {

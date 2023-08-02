@@ -19,14 +19,16 @@ class Visit extends Model
     ];
 
     static function visit($server) {
-        self::create([
-            'ip_address'=>$server["REMOTE_ADDR"],
-            'port'=>$server["REMOTE_PORT"] ?? null,
-            'url'=>$server["REQUEST_URI"],
-            'method'=>$server["REQUEST_METHOD"],
-            'user_agent'=>$server["HTTP_USER_AGENT"],
-            'platform'=>$server["HTTP_SEC_CH_UA_PLATFORM"] ?? null,
-            'time'=>$server["REQUEST_TIME"],
-        ]);
+        if (!stristr($server["HTTP_USER_AGENT"],"bot")) {
+            self::create([
+                'ip_address' => $server["REMOTE_ADDR"],
+                'port' => $server["REMOTE_PORT"] ?? null,
+                'url' => $server["REQUEST_URI"],
+                'method' => $server["REQUEST_METHOD"],
+                'user_agent' => $server["HTTP_USER_AGENT"],
+                'platform' => $server["HTTP_SEC_CH_UA_PLATFORM"] ?? null,
+                'time' => $server["REQUEST_TIME"],
+            ]);
+        }
     }
 }
