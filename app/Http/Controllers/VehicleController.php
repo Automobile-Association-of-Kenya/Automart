@@ -175,8 +175,8 @@ class VehicleController extends Controller
         if (!is_null($id)) {
             $query->where('id', $id);
         }
-        if (auth()->user()->role === "dealer") {
-            $query->where('dealer_id', auth()->user()->dealer_id);
+        if (auth()->user()->role !== "admin") {
+            $query->where('user_id',auth()->id())->orWhere('dealer_id', auth()->user()->dealer_id);
         }
         $yards = $query->with('dealer')->get();
 
