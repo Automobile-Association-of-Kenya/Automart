@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Bulk;
 use App\Models\Country;
 use App\Models\County;
 use App\Models\Finance;
@@ -20,6 +21,7 @@ use App\Models\VehicleModel;
 use App\Models\VehiclePrice;
 use App\Models\Visit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
@@ -58,6 +60,7 @@ class ApplicationController extends Controller
         $vehicle = $this->vehicle->vehicle($vehicle_no);
         $services = $this->service->get();
         $vehiclesrelated = $this->vehicle->getRelatedVehicles($vehicle);
+
         return view('vehicles.buy', compact('vehicle', 'services', 'vehiclesrelated'));
     }
 
@@ -86,9 +89,13 @@ class ApplicationController extends Controller
     public function purchase(Request $request)
     {
         $validated = $request->validate(['vehicle_id' => ['required', 'exists:vehicles,id'], 'name' => ['required', 'max:80'], 'id_no' => ['required', 'max:10'], 'phone' => ['required', 'max:16'], 'email' => ['required', 'max:80'], 'pickup' => ['required', 'max:80'], 'estate' => ['nullable', 'max:80'], 'housenumber' => ['nullable', 'max:80'], 'payment_method' => ['required', 'max:80']]);
+        $vehicle = $this->vehicle->findOrFail($validated["vehicle_id"]);
+        $email = $vehicle->dealer?->email ?? $vehicle->user?->email;
         $validated['user_id'] = auth()->id() ?? null;
         $purchase = $this->purchase->create($validated);
-
+        $subject = "Purchase Request on " . $vehicle->year . " " . $vehicle->make->make . " " . $vehicle->model->model . " ref No " . $vehicle->vehicle_no;
+        $message = "";
+        // Mail::to($email,$)->send(new Bulk($subject,$message));
         return json_encode(['status' => 'success', 'message' => 'Purchase request captured successfully']);
     }
 

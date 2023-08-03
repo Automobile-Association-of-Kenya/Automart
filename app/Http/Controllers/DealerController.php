@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Events\Dealer as EventsDealer;
 use App\Events\Purchase as EventsPurchase;
+use App\Mail\Purchase as MailPurchase;
 use App\Models\Dealer;
 use App\Models\Purchase;
 use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class DealerController extends Controller
 {
@@ -100,9 +102,6 @@ class DealerController extends Controller
             $message = "Dealer Info created successfully";
         }
         return redirect()->back()->with('success',$message);
-        // return redirect()->back()->with('success',$message);
-        // return json_encode(["status"=>'success','message'=>$message]);
-
     }
 
     public function summary()
@@ -126,21 +125,27 @@ class DealerController extends Controller
         return json_encode($dealers);
     }
 
-    public function purchaseapprove($id)
+    public function purchaseapprove(Request $request)
     {
-        $purchase = $this->purchase->with('vehicle')->find($id);
+        $purchase = $this->purchase->with('vehicle')->find($request->purchase_approve_request_id);
         $vehicle = $purchase->vehicle;
         DB::beginTransaction();
         $vehicle->update(['status' => 'sold', 'sold_at' => date('Y-m-d H:i:s')]);
-        $purchase->update(['status' => 'approved']);
+        $purchase->update(['status' => 'approved', 'completed_at' => date('Y-m-d H:i:s')]);
         DB::commit();
-        new EventsPurchase('approval', $purchase);
+        $subject = "Purchase Approval Mail";
+        Mail::to($purchase->email,$purchase->name)->send(new MailPurchase($purchase,$subject, $request->message));
         return redirect()->back()->with('success', 'Purchase approval was successful.');
     }
 
     public function purchasedecline(Request $request)
     {
-        return $request;
+        $subject = 'Purchase Request Decline Email';
+        $purchase = $this->purchase->with('vehicle')->findOrFail($request->purchase_decline_request_id);
+        if (!is_null($purchase->email)) {
+            Mail::to($purchase->email, $purchase->name)->send(new MailPurchase($purchase, $subject, $request->message));
+        }
+        return redirect()->back()->with('success', 'Decline message sent successfully.');
     }
 
     public function subscription()
@@ -154,8 +159,4 @@ class DealerController extends Controller
         $subscription = $query->where('expiry_date', '>', date('Y-m-d H:I:s'))->latest()->first();
         return json_encode($subscription);
     }
-
-    // function FunctionName() : Returntype {
-
-    // }
 }

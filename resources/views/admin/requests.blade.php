@@ -43,7 +43,7 @@
                     <div class="card-body tab-content">
                         @include('layouts.alert')
                         <div class="tab-pane fade show active" id="purchasesTab" role="tabpanel">
-                            <table class="table">
+                            <table class="table" id="purchasesTable">
                                 <thead>
                                     <td><b>Customer</b></td>
                                     <td><b>Residence</b></td>
@@ -92,7 +92,7 @@
                                                                 Message</a>
                                                         </li>
                                                         <li class="dropdown-item"><a
-                                                                href="{{ route('dealer.puchase.approve', $item->id) }}"><i
+                                                                href="#" data-toggle="modal" data-target="#approvePurchaseModal" id="approvePurchaseToggle" data-id="{{ $item->id }}"><i
                                                                     class="fa fa-check text-success"></i>&nbsp;Approve</a>
                                                         </li>
                                                         <li class="dropdown-item"><a href="#"
@@ -117,7 +117,7 @@
 
                         <div class="tab-pane fade" id="quotesTab" role="tabpanel">
 
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="quotesTable">
                                 <thead>
                                     <td><b>Customer</b></td>
                                     <td><b>Vehicle</b></td>
@@ -166,7 +166,7 @@
                                                     <ul class="dropdown-menu">
                                                         <li class="dropdown-item"><a href="#"
                                                                 id="quoteMessageModalToggle" data-toggle="modal"
-                                                                data-target="#quoteMessageModal"><i
+                                                                data-target="#quoteMessageModal" data-id="{{ $item->id }}"><i
                                                                     class="fa fa-envelope text-success"></i>&nbsp;Send
                                                                 Message</a></li>
                                                     </ul>
@@ -265,12 +265,8 @@
                                                 <li class="dropdown"><a href="#" data-toggle="dropdown"
                                                         class="btn btn-success btn-round btn-sm btn-floated"><b>...</b></a>
                                                     <ul class="dropdown-menu">
-                                                        <li class="dropdown-item"><a href="#"
-                                                                id="loanRequestModalToggle" data-toggle="modal"
-                                                                data-target="#loanMessageModal"><i
-                                                                    class="fa fa-envelope text-success"
-                                                                    data-id="{{ $item->id }}"
-                                                                    id="loanReplyBtn"></i>&nbsp;Send
+                                                        <li class="dropdown-item"><a href="#" id="loanRequestModalToggle" data-val="{{ $item->id }}" data-toggle="modal"
+                                                                data-target="#loanMessageModal"><i class="fa fa-envelope text-success"></i>&nbsp;Send
                                                                 Message</a></li>
                                                     </ul>
                                                 </li>
@@ -288,7 +284,7 @@
                         </div>
 
                         <div class="tab-pane fade show" id="tradeinsTab" role="tabpanel">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover" id="tradeinsTable">
                                 <thead>
                                     <th>#</th>
                                     <th>Dealer</th>
@@ -378,10 +374,10 @@
                         <div class="col-md-2 form-group mb-2">
                             <label for="saleMessageType">Message Type</label>
                             <label for=""></label>
-                            <label class="custom-control custom-radio"><input type="checkbox" value="sms"
-                                    class="saleMessageType" name="messagetype[]">&nbsp;SMS</label>
+                            {{-- <label class="custom-control custom-radio"><input type="checkbox" value="sms"
+                                    class="saleMessageType" name="messagetype[]">&nbsp;SMS</label> --}}
                             <label class="custom-control custom-radio"><input type="checkbox" value="mail"
-                                    class="saleMessageType" name="messagetype[]">&nbsp;Mail</label>
+                                    class="saleMessageType" name="messagetype[]" checked>&nbsp;Mail</label>
                         </div>
 
                         <div class="col-md-10 form-group mb-2">
@@ -419,8 +415,7 @@
             </div>
 
             <div class="modal-body">
-                <form action="{{ route('loan.message') }}" method="POST" enctype="multipart/form-data"
-                    id="quoteMessageForm">
+                <form action="{{ route('loan.message') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <input type="hidden" name="loan_request_id" id="loanRequestID" value="">
@@ -428,10 +423,10 @@
                         <div class="col-md-2 form-group mb-2">
                             <label for="loanMessage">Message Type</label>
                             <label for=""></label>
-                            <label class="custom-control custom-radio"><input type="checkbox" value="sms"
-                                    class="loanMessageType" name="messagetype[]">&nbsp;SMS</label>
+                            {{-- <label class="custom-control custom-radio"><input type="checkbox" value="sms"
+                                    class="loanMessageType" name="messagetype[]">&nbsp;SMS</label> --}}
                             <label class="custom-control custom-radio"><input type="checkbox" value="mail"
-                                    class="loanMessageType" name="messagetype[]">&nbsp;Mail</label>
+                                    class="loanMessageType" name="messagetype[]" checked>&nbsp;Mail</label>
                         </div>
 
                         <div class="col-md-10 form-group mb-2">
@@ -478,10 +473,10 @@
                         <div class="col-md-2 form-group mb-2">
                             <label for="quoteMessageType">Message Type</label>
                             <label for=""></label>
-                            <label class="custom-control custom-radio"><input type="checkbox" value="sms"
-                                    class="quoteMessageType" name="messagetype[]">&nbsp;SMS</label>
+                            {{-- <label class="custom-control custom-radio"><input type="checkbox" value="sms"
+                                    class="quoteMessageType" name="messagetype[]">&nbsp;SMS</label> --}}
                             <label class="custom-control custom-radio"><input type="checkbox" value="mail"
-                                    class="quoteMessageType" name="messagetype[]">&nbsp;Mail</label>
+                                    class="quoteMessageType" name="messagetype[]" checked>&nbsp;Mail</label>
                         </div>
 
                         <div class="col-md-10 form-group mb-2">
@@ -530,10 +525,10 @@
                         <div class="col-md-2 form-group mb-2">
                             <label for="tradeInMessageType">Message Type</label>
                             <label for=""></label>
-                            <label class="custom-control custom-radio"><input type="checkbox" value="sms"
-                                    class="tradeInMessageType" name="messagetype[]">&nbsp;SMS</label>
+                            {{-- <label class="custom-control custom-radio"><input type="checkbox" value="sms"
+                                    class="tradeInMessageType" name="messagetype[]">&nbsp;SMS</label> --}}
                             <label class="custom-control custom-radio"><input type="checkbox" value="mail"
-                                    class="tradeInMessageType" name="messagetype[]">&nbsp;Mail</label>
+                                    class="tradeInMessageType" name="messagetype[]" checked>&nbsp;Mail</label>
                         </div>
 
                         <div class="col-md-10 form-group mb-2">
@@ -599,7 +594,7 @@
                         <div class="col-md-12">
                             <div class="text-center">
                                 <button type="submit" class="btn btn-md btn-danger"><i
-                                        class="fa fa-stop"></i>&nbsp;Send</button>
+                                        class="fa fa-paper-plane"></i>&nbsp;Send</button>
                             </div>
                         </div>
                     </div>
@@ -608,6 +603,51 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="approvePurchaseModal" tabindex="-1" role="dialog" aria-labelledby="financeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" id="vehiclePreviewSection">
+            <div class="modal-header bg-success">
+
+                <div class="modal-title" id="carOverviewModalLabel">
+                    <h4 class="text-white">Purchase Approval</h4>
+                </div>
+
+                <button type="button" class="close btn btn-warning text-danger" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form action="{{ route('dealer.puchase.approve') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <input type="hidden" name="purchase_approve_request_id" id="purchaseRequestApproveID"
+                            value="">
+
+                        <div class="col-md-12 form-group mb-2">
+                            <label for="purchaseApproveMessage">Approval Message</label>
+                            <div class="form-group subject">
+                                <textarea name="message" id="purchaseApproveMessage" class="form-control form-control-lg"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-md btn-success"><i
+                                        class="fa fa-paper-plane"></i>&nbsp;Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 @section('footer_scrips')
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
@@ -620,8 +660,9 @@
     <script>
         (function() {
             $('body').on('click', '#loanRequestModalToggle', function(event) {
-                let loan_id = $(this).data('id');
+                let loan_id = $(this).data('val');
                 console.log(loan_id);
+                console.log("loan_id");
                 $('#loanRequestID').val(loan_id);
             });
 
@@ -642,32 +683,111 @@
 
             $('body').on('click', '#tradeInMessageModalToggle', function(event) {
                 let tradein_id = $(this).data('id');
-                $('#tradeinRequestID').val(quote_id);
+                $('#tradeinRequestID').val(tradein_id);
             });
 
-            // $('#')
-            // if ($.fn.DataTable.isDataTable("#loanApplicationsTable")) {
-            //         $("#loanApplicationsTable").destroy();
-            //         $("#loanApplicationsTable").DataTable({
-            //             dom: "Bfrtip",
-            //             buttons: [
-            //                 "copyHtml5",
-            //                 "excelHtml5",
-            //                 "csvHtml5",
-            //                 "pdfHtml5",
-            //             ],
-            //         });
-            //     } else {
-            //         $("#loanApplicationsTable").DataTable({
-            //             dom: "Bfrtip",
-            //             buttons: [
-            //                 "copyHtml5",
-            //                 "excelHtml5",
-            //                 "csvHtml5",
-            //                 "pdfHtml5",
-            //             ],
-            //         });
-            //     }
+            $('body').on('click', '#tradeInMessageModalToggle', function(event) {
+                let tradein_id = $(this).data('id');
+                $('#tradeinRequestID').val(tradein_id);
+            });
+
+            $('body').on('click', '#approvePurchaseToggle', function(event) {
+                let purchase_id = $(this).data('id');
+                $('#purchaseRequestApproveID').val(purchase_id);
+            });
+
+            // purchase_approve_request_id
+
+            if ($.fn.DataTable.isDataTable("#loanApplicationsTable")) {
+                    $("#loanApplicationsTable").destroy();
+                    $("#loanApplicationsTable").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            "copyHtml5",
+                            "excelHtml5",
+                            "csvHtml5",
+                            "pdfHtml5",
+                        ],
+                    });
+                } else {
+                    $("#loanApplicationsTable").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            "copyHtml5",
+                            "excelHtml5",
+                            "csvHtml5",
+                            "pdfHtml5",
+                        ],
+                    });
+                }
+            if ($.fn.DataTable.isDataTable("#purchasesTable")) {
+                    $("#purchasesTable").destroy();
+                    $("#purchasesTable").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            "copyHtml5",
+                            "excelHtml5",
+                            "csvHtml5",
+                            "pdfHtml5",
+                        ],
+                    });
+                } else {
+                    $("#purchasesTable").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            "copyHtml5",
+                            "excelHtml5",
+                            "csvHtml5",
+                            "pdfHtml5",
+                        ],
+                    });
+                }
+
+            if ($.fn.DataTable.isDataTable("#quotesTable")) {
+                    $("#quotesTable").destroy();
+                    $("#quotesTable").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            "copyHtml5",
+                            "excelHtml5",
+                            "csvHtml5",
+                            "pdfHtml5",
+                        ],
+                    });
+                } else {
+                    $("#quotesTable").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            "copyHtml5",
+                            "excelHtml5",
+                            "csvHtml5",
+                            "pdfHtml5",
+                        ],
+                    });
+                }
+
+            if ($.fn.DataTable.isDataTable("#tradeinsTable")) {
+                    $("#tradeinsTable").destroy();
+                    $("#tradeinsTable").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            "copyHtml5",
+                            "excelHtml5",
+                            "csvHtml5",
+                            "pdfHtml5",
+                        ],
+                    });
+                } else {
+                    $("#tradeinsTable").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            "copyHtml5",
+                            "excelHtml5",
+                            "csvHtml5",
+                            "pdfHtml5",
+                        ],
+                    });
+                }
         })()
     </script>
 @endsection

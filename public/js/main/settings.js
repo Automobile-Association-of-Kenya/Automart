@@ -718,9 +718,34 @@
         $.post("/bulk-mail", data)
             .done(function (params) {
                 console.log(params);
+                let result = JSON.parse(params);
+                if (result.status == "success") {
+                    showSuccess(result.message, "#mailfeedback");
+                    getServices();
+                } else {
+                    showError(
+                        "Error occured during processing",
+                        "#mailfeedback"
+                    );
+                }
             })
             .fail(function (error) {
                 console.error(error);
+                if (error.status == 422) {
+                    var errors = "";
+                    $.each(
+                        error.responseJSON.errors,
+                        function (key, value) {
+                            errors += value + "!";
+                        }
+                    );
+                    showError(errors, "#mailfeedback");
+                } else {
+                    showError(
+                        "Error occurred during processing",
+                        "#mailfeedback"
+                    );
+                }
             });
     });
 

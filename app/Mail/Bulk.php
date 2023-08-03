@@ -9,16 +9,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class Marketing extends Mailable
+class Bulk extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public $subject,public $message)
     {
-        //
+
     }
 
     /**
@@ -27,7 +27,7 @@ class Marketing extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Automart Email Notifications. ',
+            subject: $this->subject,
         );
     }
 
@@ -37,7 +37,10 @@ class Marketing extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.verify',
+            markdown: 'emails.Bulk',
+            with: [
+                'message' => $this->message,
+            ]
         );
     }
 

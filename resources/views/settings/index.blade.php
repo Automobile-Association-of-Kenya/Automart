@@ -335,9 +335,14 @@
                                                                 <label for="email">Range</label>
                                                                 <select name="sendrange" id="sendRange"
                                                                     class="form-control" required>
-                                                                    <option value="">All</option>
+                                                                    <option value="all">All</option>
                                                                     <option value="manual">Manually Select</option>
                                                                 </select>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <label for="subject">Subject</label>
+                                                                <textarea name="subject" id="mailSubject" class="form-control form-control-md" required></textarea>
                                                             </div>
 
                                                             <div class="col-md-12">
@@ -346,6 +351,9 @@
                                                                 <textarea class="textarea form_editors_textarea_wysihtml form-control" name="mailMessage" id="mailMessage"
                                                                     placeholder="Type your message here" required></textarea>
                                                             </div>
+
+                                                            <div class="mailfeedback" id="mailfeedback"></div>
+
 
                                                             <div class="col-md-12 mt-3">
                                                                 <button class='btn btn-success btn-md' id='sendmail'><i

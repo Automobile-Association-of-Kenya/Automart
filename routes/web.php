@@ -219,7 +219,7 @@ Route::middleware('dealer')->prefix('dealer')->group(function () {
     Route::get('vehicles', [DealerController::class, 'vehicles'])->name('dealer.vehicles');
     Route::get('requests', [DealerController::class, 'requests'])->name('dealer.requests');
     Route::post('store', [DealerController::class, 'store'])->name('dealer.store');
-    Route::get('purchase/approve/{id}', [DealerController::class, 'purchaseapprove'])->name('dealer.puchase.approve');
+    Route::post('purchase/approve', [DealerController::class, 'purchaseapprove'])->name('dealer.puchase.approve');
     Route::post('update/{id?}', [DealerController::class, 'update'])->name('dealer.update');
 });
 

@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MailRequest;
-use App\Mail\Marketing;
+use App\Mail\Bulk;
+use App\Mail\Loan as MailLoan;
+use App\Mail\Purchase as MailPurchase;
+use App\Mail\Quote as MailQuote;
+use App\Mail\Tradein;
+use App\Models\Loan;
 use App\Models\Maillist;
 use App\Models\Messages;
+use App\Models\Partner;
+use App\Models\Purchase;
+use App\Models\Quote;
 use App\Models\Services;
 use App\Models\Social;
+use App\Models\Tradein as ModelsTradein;
 use App\Models\User;
 use App\Models\Visit;
-use Carbon\Carbon;
-use DateTime;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +34,12 @@ class SettingsController extends Controller
         $this->message = new Messages();
         $this->visit =new Visit();
         $this->user =new User();
+        $this->purchase = new Purchase();
+        $this->tradein = new ModelsTradein();
+        $this->quote = new Quote();
+        $this->loan = new Loan();
+        $this->partner = new Partner();
+        $this->user = new User();
     }
 
     public function index()
@@ -115,23 +127,47 @@ class SettingsController extends Controller
         return json_encode(['status' => "success", "message" => $message]);
     }
 
-    function loanMessage(Request $request) {
-        return $request;
+    public function loanMessage(Request $request) {
+        $request->user()->email = "magaben33@gmail.com";
+        $subject = 'Loan Application Follow Up Email';
+        $loan = $this->loan->with('vehicle')->findOrFail($request->loan_request_id);
+        if (!is_null($loan->email)) {
+            Mail::to($loan->email, $loan->name)->send(new MailLoan($loan, $subject, $request->message));
+        }
+        return redirect()->back()->with('success','Message sent successfully.');
     }
 
-    function saleMessage(Request $request) {
-        return $request;
+    public function saleMessage(Request $request) {
+        $request->user()->email = "magaben33@gmail.com";
+        $subject = 'Purchase Request Follow Up Email';
+        $purchase = $this->purchase->with('vehicle')->findOrFail($request->sale_request_id);
+        if (!is_null($purchase->email)) {
+            Mail::to($purchase->email, $purchase->name)->send(new MailPurchase($purchase,$subject,$request->message));
+        }
+        return redirect()->back()->with('success', 'Message sent successfully.');
     }
 
-    function tradeinMessage(Request $request) {
-        return $request;
+    public function tradeinMessage(Request $request) {
+        $request->user()->email = "magaben33@gmail.com";
+        $subject = 'Trade In Request Follow Up Email';
+        $tradein = $this->tradein->with('vehicle')->findOrFail($request->tradein_request_id);
+        if (!is_null($tradein->email)) {
+            Mail::to($tradein->email, $tradein->name)->send(new Tradein($tradein, $subject, $request->message));
+        }
+        return redirect()->back()->with('success', 'Message sent successfully.');
     }
 
-    function quoteMessage(Request $request) {
-        return $request;
+    public function quoteMessage(Request $request) {
+        $request->user()->email = "magaben33@gmail.com";
+        $subject = 'Quote Request Follow Up Email';
+        $quote = $this->quote->with('vehicle')->findOrFail($request->quote_request_id);
+        if (!is_null($quote->email)) {
+            Mail::to($quote->email, $quote->name)->send(new MailQuote($quote, $subject, $request->message));
+        }
+        return redirect()->back()->with('success', 'Message sent successfully.');
     }
 
-    function message(Request $request) {
+    public function message(Request $request) {
         $validated = $request->validate([
             'name' => ['required', 'max:100'],
             'email' => ['required', 'max:60'],
@@ -148,19 +184,22 @@ class SettingsController extends Controller
             if (count($request->users) > 0) {
                 foreach ($request->users as $value) {
                     $user = $this->user->find($value);
-                    (new MailMessage)
-                    ->subject($request->subject)
-                    ->line('Please click the button below to verify your email address.')
-                    ->line('If you did not create an account, no further action is required.');
+                    Mail::to($user,$user->name)->queue(new Bulk($request->subject, $request->message));
                 }
             }else {
                 return json_encode(['status'=>"error", 'message'=>"No users selected to email"]);
             }
         }else {
-            // if () {
-            //     # code...
-            // }
+            if ($request->recepient_type === "customers") {
+                $emails =  $this->user->where('role','<>','admin')->pluck('email');
+                Mail::to($emails)->queue(new Bulk($request->subject, $request->message));
+            }
+            if ($request->recepient_type === "partners") {
+                $emails =  $this->partner->pluck('email');
+                Mail::to($emails)->queue(new Bulk($request->subject, $request->message));
+            }
         }
+        
     }
 
     public function visits($date) {
