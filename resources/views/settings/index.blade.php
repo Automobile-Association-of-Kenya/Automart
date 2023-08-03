@@ -352,8 +352,19 @@
                                                                     placeholder="Type your message here" required></textarea>
                                                             </div>
 
+
                                                             <div class="mailfeedback" id="mailfeedback"></div>
 
+                                                            <div class="lds-roller">
+                                                                <div></div>
+                                                                <div></div>
+                                                                <div></div>
+                                                                <div></div>
+                                                                <div></div>
+                                                                <div></div>
+                                                                <div></div>
+                                                                <div></div>
+                                                            </div>
 
                                                             <div class="col-md-12 mt-3">
                                                                 <button class='btn btn-success btn-md' id='sendmail'><i

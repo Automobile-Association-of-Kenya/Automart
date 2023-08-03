@@ -184,7 +184,7 @@ class SettingsController extends Controller
             if (count($request->users) > 0) {
                 foreach ($request->users as $value) {
                     $user = $this->user->find($value);
-                    Mail::to($user,$user->name)->queue(new Bulk($request->subject, $request->message));
+                    Mail::to($user,$user->name)->send(new Bulk($request->subject, $request->message));
                 }
             }else {
                 return json_encode(['status'=>"error", 'message'=>"No users selected to email"]);
@@ -192,14 +192,15 @@ class SettingsController extends Controller
         }else {
             if ($request->recepient_type === "customers") {
                 $emails =  $this->user->where('role','<>','admin')->pluck('email');
-                Mail::to($emails)->queue(new Bulk($request->subject, $request->message));
+                Mail::to($emails)->send(new Bulk($request->subject, $request->message));
             }
             if ($request->recepient_type === "partners") {
                 $emails =  $this->partner->pluck('email');
-                Mail::to($emails)->queue(new Bulk($request->subject, $request->message));
+                Mail::to($emails)->send(new Bulk($request->subject, $request->message));
             }
         }
-        
+
+        return json_encode(['status'=>'success','message'=>'Messages sent successfully.']);
     }
 
     public function visits($date) {

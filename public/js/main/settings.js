@@ -688,14 +688,18 @@
         sendMailUsage = $("#sendMailUsage"),
         recepientType = $("#recepientType"),
         sendRange = $("#sendRange"),
+        mailSubject = $("#mailSubject"),
         mailMessage = $("#mailMessage");
     sendMailForm.on("submit", function (event) {
+        $(".lds-roller").show();
         event.preventDefault();
+        $("#sendmail").prop('disabled',true);
         let $this = $(this),
             usage = sendMailUsage.val(),
             recipient_type = recepientType.val(),
             sendrange = sendRange.val(),
             message = mailMessage.val(),
+            subject = mailSubject.val(),
             token = $this.find("input[name='_token']").val(),
             users = [];
         if (sendrange == "manual") {
@@ -713,15 +717,18 @@
             sendrange: sendrange,
             message: message,
             users: users,
+            subject: subject,
         };
-        console.log(data);
         $.post("/bulk-mail", data)
             .done(function (params) {
+                $("#sendmail").prop("disabled", false);
                 console.log(params);
+                $(".lds-roller").hide();
                 let result = JSON.parse(params);
                 if (result.status == "success") {
                     showSuccess(result.message, "#mailfeedback");
                     getServices();
+                    $(this).trigger('reset');
                 } else {
                     showError(
                         "Error occured during processing",
@@ -730,7 +737,9 @@
                 }
             })
             .fail(function (error) {
+                $("#sendmail").prop("disabled", false);
                 console.error(error);
+                $(".lds-roller").hide();
                 if (error.status == 422) {
                     var errors = "";
                     $.each(
