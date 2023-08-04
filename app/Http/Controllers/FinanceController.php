@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\QuoteRequest;
 use App\Models\Finance;
+use App\Models\Notification;
 use App\Models\Tradein;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class FinanceController extends Controller
 {
@@ -12,6 +16,7 @@ class FinanceController extends Controller
     {
         $this->finance = new Finance();
         $this->tradein = new Tradein();
+        $this->vehicle = new Vehicle();
     }
 
     /**
@@ -64,6 +69,14 @@ class FinanceController extends Controller
         ]);
         $validated["user_id"] = auth()->id() ?? null;
         $tradein = $this->tradein->create($validated);
+        $vehicle = $this->vehicle->find($validated["vehicle_id"]);
+        $email = $vehicle->dealer?->email ?? $vehicle->user?->email;
+        $name = $vehicle->dealer?->name ?? $vehicle->user?->name;
+        $message = "Trade In Request From " . $request->name . ", " . $request->phone . ", " . $request->email . " for ".$tradein->year." ".$tradein->vehicle->make->make.' '.$tradein->Vehicle->model->model.' '.$tradein->reg_no;
+        $subject = "New Trade in Request on Vehicle Ref " . $vehicle->vehicle_no .' '.$vehicle->year.' '.$vehicle->make->make.' '.$vehicle->model->model;
+        Notification::create(['source' => 'Trade In', 'subject' => $subject, 'message' => $message]);
+        Mail::to("magaben33@gmail.com", $name)->send(new QuoteRequest($vehicle, $subject, $message));
+
         return json_encode(['status'=>'success', 'message'=>'Trade in request submitted successfully']);
     }
 

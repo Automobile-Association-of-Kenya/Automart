@@ -348,8 +348,9 @@
                                                             <div class="col-md-12">
                                                                 <label for="phone">Message</label>
                                                                 {{-- <div class="float-right box-tools"></div> --}}
-                                                                <textarea class="textarea form_editors_textarea_wysihtml form-control" name="mailMessage" id="mailMessage"
-                                                                    placeholder="Type your message here" required></textarea>
+                                                                <div id="mailMessage"></div>
+                                                                {{-- <textarea class="textarea form_editors_textarea_wysihtml form-control" name="mailMessage" id="mailMessage"
+                                                                    placeholder="Type your message here" required></textarea> --}}
                                                             </div>
 
 
@@ -662,39 +663,13 @@
     <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('js/main/settings.js') }}"></script>
-    <script src="{{ asset('bootstrap3-wysihtml5-bower/js/bootstrap3-wysihtml5.all.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap3_wysihtml5.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
     <script>
-        (function() {
-            $(".textarea").wysihtml5();
-
-            // $('#bootstrap-editor').wysihtml5({
-            //     stylesheets: [
-            //         '/bootstrap-wysihtml5/stylesheets/bootstrap-wysihtml5wysiwyg-color.css'
-            //     ]
-            // });
-            $(".wysihtml5-toolbar li:nth-child(3) a").addClass("btn-outline-primary");
-            $(".wysihtml5-toolbar li:nth-child(4) a").addClass("btn-outline-primary");
-            $(".wysihtml5-toolbar li:nth-child(5) a").addClass("btn-outline-primary");
-            $(".wysihtml5-toolbar li:nth-child(6) a").addClass("btn-outline-primary");
-            $(".wysihtml5-toolbar .btn-group:eq(1) a:first-child").addClass("fas fa-list");
-            $(".wysihtml5-toolbar .btn-group:eq(1) a:nth-child(2)").addClass("fas fa-th-list");
-            $(".wysihtml5-toolbar .btn-group:eq(1) a:nth-child(3)").addClass("fas fa-align-left");
-            $(".wysihtml5-toolbar .btn-group:eq(1) a:nth-child(4)").addClass("fas fa-align-right");
-            $(".wysihtml5-toolbar .btn-group:eq(3) a:first-child").addClass("fas fa-list");
-            $(".wysihtml5-toolbar .btn-group:eq(3) a:nth-child(2)").addClass("fas fa-th-list");
-            $(".wysihtml5-toolbar .btn-group:eq(3) a:nth-child(3)").addClass("fas fa-align-left");
-            $(".wysihtml5-toolbar .btn-group:eq(3) a:nth-child(4)").addClass("fas fa-align-right");
-            $(".wysihtml5-toolbar li:nth-child(5) span").addClass("fas fa-share");
-            $(".wysihtml5-toolbar li:nth-child(6) span").addClass("fas fa-picture-o");
-            $("[data-wysihtml5-command='formatBlock'] span").css("position", "relative").css("top", "-5px").css("left",
-                "-5px");
-            $(".note-toolbar button").removeClass('btn-default').addClass('btn-light');
-            $(".wysihtml5-toolbar li:nth-child(2) a").removeClass('btn-default').addClass('btn-light');
-            $(".note-editor .note-editing-area").addClass('note-editing-area1');
-            $(".note-btn .note-icon-arrows-alt").click(function() {
-                $(".note-editing-area").removeClass('note-editing-area1');
-            })
-        })()
+        ClassicEditor
+        .create( document.querySelector( '#mailMessage' ) )
+        .catch( error => {
+        console.error( error );
+        });
     </script>
 @endsection

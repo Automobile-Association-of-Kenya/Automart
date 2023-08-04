@@ -19,7 +19,7 @@ class Visit extends Model
     ];
 
     static function visit($server) {
-        if (!stristr($server["HTTP_USER_AGENT"],"bot")) {
+        if (!stristr($server["HTTP_USER_AGENT"],"bot") && isset($server["HTTP_SEC_CH_UA_PLATFORM"]) && $server["HTTP_SEC_CH_UA_PLATFORM"] !== null) {
             self::create([
                 'user_id'=> auth()->id(),
                 'ip_address' => $server["REMOTE_ADDR"],

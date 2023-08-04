@@ -722,7 +722,6 @@
         $.post("/bulk-mail", data)
             .done(function (params) {
                 $("#sendmail").prop("disabled", false);
-                console.log(params);
                 $(".lds-roller").hide();
                 let result = JSON.parse(params);
                 if (result.status == "success") {
@@ -738,7 +737,6 @@
             })
             .fail(function (error) {
                 $("#sendmail").prop("disabled", false);
-                console.error(error);
                 $(".lds-roller").hide();
                 if (error.status == 422) {
                     var errors = "";
@@ -766,7 +764,6 @@
     function getVisits() {
         let date = $("#visitorsDate").val();
         $.getJSON("/visits/" + date, function (visitors) {
-            console.log(visitors);
             let tr = "",
                 i = 1;
             $.each(visitors, function (key, value) {

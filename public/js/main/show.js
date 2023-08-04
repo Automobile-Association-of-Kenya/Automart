@@ -39,6 +39,9 @@
 
     quotationForm.on("submit", function (event) {
         event.preventDefault();
+        $("#quotefeeback").html(
+            '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
+        );
         let $this = $(this),
             vehicle_id = vehicleID.val(),
             name = quoteName.val(),
@@ -47,7 +50,7 @@
             subject = quoteSubject.val(),
             message = quoteMessage.val(),
             token = $this.find("input[name='_token']").val();
-
+        $this.find("#quoteSubmitDetails").prop('disabled',true);
         let data = {
             _token: token,
             vehicle_id: vehicle_id,
@@ -57,14 +60,14 @@
             subject: subject,
             message: message,
         };
-        console.log(data);
+
         $.post("/quotes", data)
             .done(function (params) {
-                console.log(params);
+                $("#quotefeeback").find(".lds-roller").remove();
+                $this.find("#quoteSubmitDetails").prop('disabled',false);
                 let result = JSON.parse(params);
                 if (result.status == "success") {
                     $this.trigger("reset");
-
                     showSuccess(result.message, "#quotefeeback");
                 } else {
                     showError(
@@ -74,7 +77,8 @@
                 }
             })
             .fail(function (error) {
-                console.log(error);
+                $("#quotefeeback").find(".lds-roller").remove();
+                $this.find("#quoteSubmitDetails").prop("disabled", false);
                 if (error.status == 422) {
                     var errors = "";
                     $.each(error.responseJSON.errors, function (key, value) {
@@ -162,6 +166,9 @@
         regNO = $("#regNO");
     tradeinForm.on("submit", function (event) {
         event.preventDefault();
+        $("#tradeinfeeback").html(
+            '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
+        );
         let vehicle_id = vehicletradeinID.val(),
             name = tradeinName.val(),
             email = tradeinEmail.val(),
@@ -172,7 +179,7 @@
             reg_no = regNO.val(),
             $this = $(this),
             token = $this.find("input[name='_token']").val();
-
+        $this.find("#tradeinSubmitDetails").prop("disabled", true);
         let data = {
             _token: token,
             vehicle_id:vehicle_id,
@@ -184,10 +191,14 @@
             year: year,
             reg_no: reg_no,
         };
+        console.log(data);
 
         $.post("/tradein-store", data)
             .done(function (params) {
                 console.log(params);
+                $("#tradeinfeeback").find(".lds-roller").remove();
+                $this.find("#tradeinSubmitDetails").prop("disabled", true);
+                $this.find("#tradeinSubmitDetails").prop("disabled", false);
                 let result = JSON.parse(params);
                 if (result.status == "success") {
                     $this.trigger("reset");
@@ -201,6 +212,8 @@
             })
             .fail(function (error) {
                 console.log(error);
+                $("#tradeinfeeback").find(".lds-roller").remove();
+                $this.find("#tradeinSubmitDetails").prop("disabled", false);
                 if (error.status == 422) {
                     var errors = "";
                     $.each(error.responseJSON.errors, function (key, value) {

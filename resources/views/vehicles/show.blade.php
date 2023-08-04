@@ -677,14 +677,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-12" id="quoteFeedbackDiv">
                                 <div id="quotefeeback"></div>
-
                             </div>
-
                             <div class="col-md-12">
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-md btn-warning">Submit</button>
+                                    <button type="submit" class="btn btn-md btn-warning" id="quoteSubmitDetails">Submit</button>
                                 </div>
                             </div>
 
@@ -883,7 +881,7 @@
 
                             <div class="col-md-12">
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-md btn-warning">Submit</button>
+                                    <button type="submit" class="btn btn-md btn-warning" id="tradeinSubmitDetails">Submit</button>
                                 </div>
                             </div>
 
@@ -895,6 +893,7 @@
         </div>
     </div>
 @endsection
+
 
 @section('footer_scripts')
     <script src="{{ asset('js/main/show.js') }}"></script>
