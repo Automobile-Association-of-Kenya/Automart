@@ -210,7 +210,7 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('dealers-get', [DealerController::class, 'getDealers']);
-Route::post('bulk-mail', [SettingsController::class, 'bulkMail']);
+Route::post('bulk-mail', [SettingsController::class, 'bulkMail'])->name('bulk.mail');
 Route::view('mail','mail');
 // dd(auth()->user());
 Route::middleware('dealer')->prefix('dealer')->group(function () {

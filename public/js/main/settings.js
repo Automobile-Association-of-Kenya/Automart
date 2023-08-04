@@ -684,77 +684,78 @@
         }
     });
 
-    let sendMailForm = $("#sendMailForm"),
-        sendMailUsage = $("#sendMailUsage"),
-        recepientType = $("#recepientType"),
-        sendRange = $("#sendRange"),
-        mailSubject = $("#mailSubject"),
-        mailMessage = $("#mailMessage");
-    sendMailForm.on("submit", function (event) {
-        $(".lds-roller").show();
-        event.preventDefault();
-        $("#sendmail").prop('disabled',true);
-        let $this = $(this),
-            usage = sendMailUsage.val(),
-            recipient_type = recepientType.val(),
-            sendrange = sendRange.val(),
-            message = mailMessage.val(),
-            subject = mailSubject.val(),
-            token = $this.find("input[name='_token']").val(),
-            users = [];
-        if (sendrange == "manual") {
-            $("input[name='selected_user']:checked").each(function (
-                key,
-                input
-            ) {
-                users.push($(input).data("value"));
-            });
-        }
-        let data = {
-            _token: token,
-            usage: usage,
-            recipient_type: recipient_type,
-            sendrange: sendrange,
-            message: message,
-            users: users,
-            subject: subject,
-        };
-        $.post("/bulk-mail", data)
-            .done(function (params) {
-                $("#sendmail").prop("disabled", false);
-                $(".lds-roller").hide();
-                let result = JSON.parse(params);
-                if (result.status == "success") {
-                    showSuccess(result.message, "#mailfeedback");
-                    getServices();
-                    $(this).trigger('reset');
-                } else {
-                    showError(
-                        "Error occured during processing",
-                        "#mailfeedback"
-                    );
-                }
-            })
-            .fail(function (error) {
-                $("#sendmail").prop("disabled", false);
-                $(".lds-roller").hide();
-                if (error.status == 422) {
-                    var errors = "";
-                    $.each(
-                        error.responseJSON.errors,
-                        function (key, value) {
-                            errors += value + "!";
-                        }
-                    );
-                    showError(errors, "#mailfeedback");
-                } else {
-                    showError(
-                        "Error occurred during processing",
-                        "#mailfeedback"
-                    );
-                }
-            });
-    });
+    // let sendMailForm = $("#sendMailForm"),
+    //     sendMailUsage = $("#sendMailUsage"),
+    //     recepientType = $("#recepientType"),
+    //     sendRange = $("#sendRange"),
+    //     mailSubject = $("#mailSubject"),
+    //     mailMessage = $("#mailMessage");
+    // sendMailForm.on("submit", function (event) {
+    //     $(".lds-roller").show();
+    //     event.preventDefault();
+    //     $("#sendmail").prop('disabled',true);
+    //     let $this = $(this),
+    //         usage = sendMailUsage.val(),
+    //         recipient_type = recepientType.val(),
+    //         sendrange = sendRange.val(),
+    //         message = mailMessage.val(),
+    //         subject = mailSubject.val(),
+    //         token = $this.find("input[name='_token']").val(),
+    //         users = [];
+    //     if (sendrange == "manual") {
+    //         $("input[name='selected_user']:checked").each(function (
+    //             key,
+    //             input
+    //         ) {
+    //             users.push($(input).data("value"));
+    //         });
+    //     }
+    //     let data = {
+    //         _token: token,
+    //         usage: usage,
+    //         recipient_type: recipient_type,
+    //         sendrange: sendrange,
+    //         message: message,
+    //         users: users,
+    //         subject: subject,
+    //     };
+    //     console.log(data);
+    //     $.post("/bulk-mail", data)
+    //         .done(function (params) {
+    //             $("#sendmail").prop("disabled", false);
+    //             $(".lds-roller").hide();
+    //             let result = JSON.parse(params);
+    //             if (result.status == "success") {
+    //                 showSuccess(result.message, "#mailfeedback");
+    //                 getServices();
+    //                 $(this).trigger('reset');
+    //             } else {
+    //                 showError(
+    //                     "Error occured during processing",
+    //                     "#mailfeedback"
+    //                 );
+    //             }
+    //         })
+    //         .fail(function (error) {
+    //             $("#sendmail").prop("disabled", false);
+    //             $(".lds-roller").hide();
+    //             if (error.status == 422) {
+    //                 var errors = "";
+    //                 $.each(
+    //                     error.responseJSON.errors,
+    //                     function (key, value) {
+    //                         errors += value + "!";
+    //                     }
+    //                 );
+    //                 showError(errors, "#mailfeedback");
+    //             } else {
+    //                 showError(
+    //                     "Error occurred during processing",
+    //                     "#mailfeedback"
+    //                 );
+    //             }
+    //         });
+    // });
 
     function toMoney(number) {
         let actul = parseFloat(number);

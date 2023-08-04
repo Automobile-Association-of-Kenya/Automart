@@ -180,6 +180,7 @@ class SettingsController extends Controller
     }
 
     public function bulkMail(Request $request) {
+        return $request;
         if ($request->sendrange == "manual") {
             if (count($request->users) > 0) {
                 foreach ($request->users as $value) {

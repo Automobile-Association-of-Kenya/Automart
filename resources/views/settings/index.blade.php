@@ -293,7 +293,7 @@
                                                     <h4 class="text text-center mb-2">Notification Form</h4>
                                                     <div id="mailsfeedback"></div>
 
-                                                    <form action="#" method="post" id="sendMailForm">
+                                                    <form action="{{ route('bulk.mail') }}" method="post" id="sendMailForm">
                                                         @csrf
                                                         <div class="row">
 
@@ -353,7 +353,6 @@
                                                                     placeholder="Type your message here" required></textarea> --}}
                                                             </div>
 
-
                                                             <div class="mailfeedback" id="mailfeedback"></div>
 
                                                             <div class="lds-roller">
@@ -378,7 +377,6 @@
                                                                     Fields</button>
                                                             </div>
                                                         </div>
-
                                                     </form>
                                                 </div>
                                             </div>
@@ -663,8 +661,6 @@
     <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('js/main/settings.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
         .create( document.querySelector( '#mailMessage' ) )
