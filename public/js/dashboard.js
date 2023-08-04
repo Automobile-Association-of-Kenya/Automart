@@ -2,6 +2,7 @@
     $("#trafficDate").on("change", function () {
         getWebTraffic();
     });
+
     function getWebTraffic() {
         let date = $("#trafficDate").val();
         $.getJSON("/webtraffic/" + date, function (data) {
@@ -13,10 +14,11 @@
 
     $.getJSON("/admin/subscriptions", function (subscriptions) {
         let labels = [],
-            data = [];
+            data = [], active = 0;
         $.each(subscriptions, function (key, value) {
             labels.push(value.subscription);
             data.push(value.subscriptions);
+            active += parseFloat(value.subscriptions);
         });
         const ctx = document.getElementById("subscriptionsgraph");
         new Chart(ctx, {
@@ -25,7 +27,7 @@
                 labels: labels,
                 datasets: [
                     {
-                        label: " NO of subscriptions",
+                        label: active+" NO of active subscriptions",
                         data: data,
                         borderWidth: 1,
                         backgroundColor: ["#006544"],
@@ -36,6 +38,13 @@
                 scales: {
                     y: {
                         beginAtZero: true,
+                    },
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "bottom",
+                        align: "end",
                     },
                 },
             },
@@ -161,12 +170,17 @@
             if (Chart.getChart(ctx) !== undefined) {
                 Chart.getChart(ctx).destroy();
             }
+            let total = 0;
+            $.each(data, function (key, value) {
+                total += parseFloat(value.income);
+            });
+
             new Chart(ctx, {
                 type: "bar",
                 data: {
                     datasets: [
                         {
-                            label: " Ksh",
+                            label: money(total) + " Ksh",
                             data: data.map((value) => value.income),
                             borderWidth: 2,
                             backgroundColor: ["#006544"],
@@ -187,6 +201,11 @@
         });
     }
     getRevenue();
+
+    function money(value) {
+        let actul = parseFloat(value);
+        return actul.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+    }
 
     $("#revenueYear").on("change", function () {
         getRevenue();
