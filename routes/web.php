@@ -153,7 +153,7 @@ Route::post('paypalsuccess', [PaymentController::class, 'successTransaction'])->
 Route::post('payments-get', [PaymentController::class, 'get']);
 
 Route::resource('reports', ReportController::class);
-Route::post('reports-filter', [ReportController::class, 'filter']);
+Route::post('reports-filter', [ReportController::class, 'filter'])->name('reports.filter');
 
 Route::prefix('vehicles')->group(function () {
     Route::get('show/{id}', [VehicleController::class, 'show'])->name('vehicles.show');
@@ -200,7 +200,7 @@ Route::prefix('admin')->group(function () {
     Route::get('vehicles', [AdminController::class, 'vehicles'])->name('admin.vehicles');
     Route::get('users', [AdminController::class, 'users'])->name('admin.users');
     Route::get('accounts', [AdminController::class, 'accounts'])->name('admin.accounts');
-    Route::get('requests', [AdminController::class, 'requests'])->name('admin.requests');
+    Route::get('requests', [AdminController::class, 'requefsts'])->name('admin.requests');
     Route::get('settings', [SettingsController::class, 'index'])->name('admin.settings');
     Route::get('reports', [AdminController::class, 'reports'])->name('admin.reports');
     Route::get('customers', [UsersController::class, 'customers']);
