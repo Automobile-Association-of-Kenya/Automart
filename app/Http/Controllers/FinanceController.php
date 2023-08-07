@@ -55,6 +55,7 @@ class FinanceController extends Controller
         return json_encode(['status'=>'success','message'=>'Financial support application received successfully']);
     }
 
+
     public function tradeInStore(Request $request)
     {
         $validated = $request->validate([
@@ -75,8 +76,7 @@ class FinanceController extends Controller
         $message = "Trade In Request From " . $request->name . ", " . $request->phone . ", " . $request->email . " for ".$tradein->year." ".$tradein->vehicle->make->make.' '.$tradein->Vehicle->model->model.' '.$tradein->reg_no;
         $subject = "New Trade in Request on Vehicle Ref " . $vehicle->vehicle_no .' '.$vehicle->year.' '.$vehicle->make->make.' '.$vehicle->model->model;
         Notification::create(['source' => 'Trade In', 'subject' => $subject, 'message' => $message]);
-        Mail::to("magaben33@gmail.com", $name)->send(new QuoteRequest($vehicle, $subject, $message));
-
+        Mail::to("magaben33@gmail.com", $name)->send(new QuoteRequest($vehicle, $subject, $message,$validated["email"],$validated["name"]));
         return json_encode(['status'=>'success', 'message'=>'Trade in request submitted successfully']);
     }
 

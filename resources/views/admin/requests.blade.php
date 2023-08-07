@@ -698,96 +698,96 @@
 
             // purchase_approve_request_id
 
-            if ($.fn.DataTable.isDataTable("#loanApplicationsTable")) {
-                    $("#loanApplicationsTable").destroy();
-                    $("#loanApplicationsTable").DataTable({
-                        dom: "Bfrtip",
-                        buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
-                        ],
-                    });
-                } else {
-                    $("#loanApplicationsTable").DataTable({
-                        dom: "Bfrtip",
-                        buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
-                        ],
-                    });
-                }
-            if ($.fn.DataTable.isDataTable("#purchasesTable")) {
-                    $("#purchasesTable").destroy();
-                    $("#purchasesTable").DataTable({
-                        dom: "Bfrtip",
-                        buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
-                        ],
-                    });
-                } else {
-                    $("#purchasesTable").DataTable({
-                        dom: "Bfrtip",
-                        buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
-                        ],
-                    });
-                }
+        //     if ($.fn.DataTable.isDataTable("#loanApplicationsTable")) {
+        //             $("#loanApplicationsTable").destroy();
+        //             $("#loanApplicationsTable").DataTable({
+        //                 dom: "Bfrtip",
+        //                 buttons: [
+        //                     "copyHtml5",
+        //                     "excelHtml5",
+        //                     "csvHtml5",
+        //                     "pdfHtml5",
+        //                 ],
+        //             });
+        //         } else {
+        //             $("#loanApplicationsTable").DataTable({
+        //                 dom: "Bfrtip",
+        //                 buttons: [
+        //                     "copyHtml5",
+        //                     "excelHtml5",
+        //                     "csvHtml5",
+        //                     "pdfHtml5",
+        //                 ],
+        //             });
+        //         }
+        //     if ($.fn.DataTable.isDataTable("#purchasesTable")) {
+        //             $("#purchasesTable").destroy();
+        //             $("#purchasesTable").DataTable({
+        //                 dom: "Bfrtip",
+        //                 buttons: [
+        //                     "copyHtml5",
+        //                     "excelHtml5",
+        //                     "csvHtml5",
+        //                     "pdfHtml5",
+        //                 ],
+        //             });
+        //         } else {
+        //             $("#purchasesTable").DataTable({
+        //                 dom: "Bfrtip",
+        //                 buttons: [
+        //                     "copyHtml5",
+        //                     "excelHtml5",
+        //                     "csvHtml5",
+        //                     "pdfHtml5",
+        //                 ],
+        //             });
+        //         }
 
-            if ($.fn.DataTable.isDataTable("#quotesTable")) {
-                    $("#quotesTable").destroy();
-                    $("#quotesTable").DataTable({
-                        dom: "Bfrtip",
-                        buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
-                        ],
-                    });
-                } else {
-                    $("#quotesTable").DataTable({
-                        dom: "Bfrtip",
-                        buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
-                        ],
-                    });
-                }
+        //     if ($.fn.DataTable.isDataTable("#quotesTable")) {
+        //             $("#quotesTable").destroy();
+        //             $("#quotesTable").DataTable({
+        //                 dom: "Bfrtip",
+        //                 buttons: [
+        //                     "copyHtml5",
+        //                     "excelHtml5",
+        //                     "csvHtml5",
+        //                     "pdfHtml5",
+        //                 ],
+        //             });
+        //         } else {
+        //             $("#quotesTable").DataTable({
+        //                 dom: "Bfrtip",
+        //                 buttons: [
+        //                     "copyHtml5",
+        //                     "excelHtml5",
+        //                     "csvHtml5",
+        //                     "pdfHtml5",
+        //                 ],
+        //             });
+        //         }
 
-            if ($.fn.DataTable.isDataTable("#tradeinsTable")) {
-                    $("#tradeinsTable").destroy();
-                    $("#tradeinsTable").DataTable({
-                        dom: "Bfrtip",
-                        buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
-                        ],
-                    });
-                } else {
-                    $("#tradeinsTable").DataTable({
-                        dom: "Bfrtip",
-                        buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
-                        ],
-                    });
-                }
+        //     if ($.fn.DataTable.isDataTable("#tradeinsTable")) {
+        //             $("#tradeinsTable").destroy();
+        //             $("#tradeinsTable").DataTable({
+        //                 dom: "Bfrtip",
+        //                 buttons: [
+        //                     "copyHtml5",
+        //                     "excelHtml5",
+        //                     "csvHtml5",
+        //                     "pdfHtml5",
+        //                 ],
+        //             });
+        //         } else {
+        //             $("#tradeinsTable").DataTable({
+        //                 dom: "Bfrtip",
+        //                 buttons: [
+        //                     "copyHtml5",
+        //                     "excelHtml5",
+        //                     "csvHtml5",
+        //                     "pdfHtml5",
+        //                 ],
+        //             });
+        //         }
         })()
     </script>
 @endsection

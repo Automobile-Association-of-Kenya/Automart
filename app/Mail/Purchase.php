@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -16,7 +17,7 @@ class Purchase extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(protected $purchase, public $subject, protected $message)
+    public function __construct(protected $purchase, public $subject, protected $message, protected $replyto, protected $replytoname)
     {
 
     }
@@ -27,6 +28,10 @@ class Purchase extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new Address('automart@aakenya.co.ke', 'Automart AA Kenya Limited'),
+            replyTo: [
+                new Address($this->replyto, $this->replytoname),
+            ],
             subject: $this->subject,
         );
     }

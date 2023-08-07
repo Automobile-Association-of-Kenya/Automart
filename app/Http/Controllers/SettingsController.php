@@ -128,7 +128,6 @@ class SettingsController extends Controller
     }
 
     public function loanMessage(Request $request) {
-        $request->user()->email = "magaben33@gmail.com";
         $subject = 'Loan Application Follow Up Email';
         $loan = $this->loan->with('vehicle')->findOrFail($request->loan_request_id);
         if (!is_null($loan->email)) {
@@ -138,31 +137,46 @@ class SettingsController extends Controller
     }
 
     public function saleMessage(Request $request) {
-        $request->user()->email = "magaben33@gmail.com";
         $subject = 'Purchase Request Follow Up Email';
         $purchase = $this->purchase->with('vehicle')->findOrFail($request->sale_request_id);
         if (!is_null($purchase->email)) {
-            Mail::to($purchase->email, $purchase->name)->send(new MailPurchase($purchase,$subject,$request->message));
+            Mail::to($purchase->email, $purchase->name)->send(new MailPurchase($purchase,$subject,$request->message,$this->replyemail(),$this->replyname()));
         }
         return redirect()->back()->with('success', 'Message sent successfully.');
     }
 
+    public function replyemail() {
+        if (auth()->user()->role === "admin") {
+            $email = "automart@aakenya.co.ke";
+        } else {
+            $email = auth()->user()->dealer?->email ?? auth()->user()->email;
+        }
+        return $email;
+    }
+
+    public function replyname() {
+        if (auth()->user()->role === "admin") {
+            $name = "Automart AA Kenya Limited";
+        } else {
+            $name = auth()->user()->dealer?->name ?? auth()->user()->name;
+        }
+        return $name;
+    }
+
     public function tradeinMessage(Request $request) {
-        $request->user()->email = "magaben33@gmail.com";
         $subject = 'Trade In Request Follow Up Email';
         $tradein = $this->tradein->with('vehicle')->findOrFail($request->tradein_request_id);
         if (!is_null($tradein->email)) {
-            Mail::to($tradein->email, $tradein->name)->send(new Tradein($tradein, $subject, $request->message));
+            Mail::to($tradein->email, $tradein->name)->send(new Tradein($tradein, $subject, $request->message,$this->replyemail(),$this->replyname()));
         }
         return redirect()->back()->with('success', 'Message sent successfully.');
     }
 
     public function quoteMessage(Request $request) {
-        $request->user()->email = "magaben33@gmail.com";
         $subject = 'Quote Request Follow Up Email';
         $quote = $this->quote->with('vehicle')->findOrFail($request->quote_request_id);
         if (!is_null($quote->email)) {
-            Mail::to($quote->email, $quote->name)->send(new MailQuote($quote, $subject, $request->message));
+            Mail::to($quote->email, $quote->name)->send(new MailQuote($quote, $subject, $request->message,$this->replyemail(),$this->replyname()));
         }
         return redirect()->back()->with('success', 'Message sent successfully.');
     }
@@ -180,12 +194,19 @@ class SettingsController extends Controller
     }
 
     public function bulkMail(Request $request) {
-        return $request;
+        $files = collect();
+        if ($request->hasFile('attachments')) {
+            foreach ($request->file('attachments') as $file) {
+                $filepath = $file->store('public/attachments');
+                $files->push($filepath);
+            }
+        }
+        // return $files;
         if ($request->sendrange == "manual") {
             if (count($request->users) > 0) {
                 foreach ($request->users as $value) {
                     $user = $this->user->find($value);
-                    Mail::to($user,$user->name)->send(new Bulk($request->subject, $request->message));
+                    Mail::to($user,$user->name)->send(new Bulk($request->subject, $request->message,$files));
                 }
             }else {
                 return json_encode(['status'=>"error", 'message'=>"No users selected to email"]);
@@ -193,11 +214,11 @@ class SettingsController extends Controller
         }else {
             if ($request->recepient_type === "customers") {
                 $emails =  $this->user->where('role','<>','admin')->pluck('email');
-                Mail::to($emails)->send(new Bulk($request->subject, $request->message));
+                Mail::to($emails)->send(new Bulk($request->subject, $request->message,$files));
             }
             if ($request->recepient_type === "partners") {
                 $emails =  $this->partner->pluck('email');
-                Mail::to($emails)->send(new Bulk($request->subject, $request->message));
+                Mail::to($emails)->send(new Bulk($request->subject, $request->message,$files));
             }
         }
 

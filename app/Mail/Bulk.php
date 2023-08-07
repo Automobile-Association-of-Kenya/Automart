@@ -16,7 +16,7 @@ class Bulk extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public $subject,public $message)
+    public function __construct(public $subject,public $message, public $attachements)
     {
 
     }
@@ -51,6 +51,10 @@ class Bulk extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        $files = [];
+        foreach ($this->attachements as $value) {
+            array_push($files, public_path($value));
+        }
+        return $files;
     }
 }

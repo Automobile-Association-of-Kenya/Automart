@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -27,6 +28,10 @@ class Loan extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new Address('automart@aakenya.co.ke', 'Automart AA Kenya Limited'),
+            replyTo: [
+                new Address('taylor@example.com', 'Taylor Otwell'),
+            ],
             subject: $this->subject,
         );
     }

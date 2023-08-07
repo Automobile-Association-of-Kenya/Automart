@@ -55,7 +55,7 @@ class QuoteController extends Controller
         $subject = "New Quote Request on Vehicle Ref " . $vehicle->vehicle_no;
         Notification::create(['source' => 'Quotation', 'subject' => $subject, 'message' => $message]);
         $this->quote->create($validated);
-        Mail::to($email, $name)->send(new QuoteRequest($vehicle,$subject,$message));
+        Mail::to($email, $name)->send(new QuoteRequest($vehicle,$subject,$message,$validated["email"],$validated["name"]));
         return json_encode(['status'=>'success', 'message'=>'Quote request captured successfully']);
     }
 
