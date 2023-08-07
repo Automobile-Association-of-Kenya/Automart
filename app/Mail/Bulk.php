@@ -40,6 +40,7 @@ class Bulk extends Mailable
             markdown: 'emails.Bulk',
             with: [
                 'message' => $this->message,
+                'attachments' => $this->attachements,
             ]
         );
     }
@@ -51,10 +52,6 @@ class Bulk extends Mailable
      */
     public function attachments(): array
     {
-        $files = [];
-        foreach ($this->attachements as $value) {
-            array_push($files, public_path($value));
-        }
-        return $files;
+        return [];
     }
 }

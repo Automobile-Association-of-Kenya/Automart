@@ -194,19 +194,20 @@ class SettingsController extends Controller
     }
 
     public function bulkMail(Request $request) {
+        
         $files = collect();
         if ($request->hasFile('attachments')) {
             foreach ($request->file('attachments') as $file) {
-                $filepath = $file->store('public/attachments');
-                $files->push($filepath);
+                $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->move("attachments/", $fileName);
+                $files->push($fileName);
             }
         }
-        // return $files;
         if ($request->sendrange == "manual") {
             if (count($request->users) > 0) {
                 foreach ($request->users as $value) {
                     $user = $this->user->find($value);
-                    Mail::to($user,$user->name)->send(new Bulk($request->subject, $request->message,$files));
+                    Mail::to("magaben33@gmail.com",$user->name)->send(new Bulk($request->subject, $request->message,$files));
                 }
             }else {
                 return json_encode(['status'=>"error", 'message'=>"No users selected to email"]);

@@ -30,7 +30,7 @@ class Loan extends Mailable
         return new Envelope(
             from: new Address('automart@aakenya.co.ke', 'Automart AA Kenya Limited'),
             replyTo: [
-                new Address('taylor@example.com', 'Taylor Otwell'),
+                new Address('automart@aakenya.co.ke', 'Automart AA Kenya Limited'),
             ],
             subject: $this->subject,
         );

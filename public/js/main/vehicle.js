@@ -655,6 +655,7 @@
                 processData: false,
                 contentType: false,
                 success: function (params) {
+                    console.log(params);
                     submit.prop({ disabled: false });
                     let result = JSON.parse(params);
                     if (result.status == "success") {
@@ -667,6 +668,7 @@
                     }
                 },
                 error: function (error) {
+                    console.log(error);
                     submit.prop({ disabled: false });
                     if (error.status == 422) {
                         var errors = "";

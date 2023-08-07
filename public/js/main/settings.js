@@ -652,7 +652,7 @@
                         "</td></tr>";
                 });
                 let table =
-                    "<table class='table table-bordered table-sm'><thead style='position:sticky;'><th>#</th><th>User</th><th>Email</th><th>Phone</th></thead><tbody id='maualUsersSelect'>" +
+                    "<table class='table table-bordered table-sm'><thead style='position:sticky;'><th>#</th><th>User</th><th>Email</th><th>Phone</th></thead><tbody id='manualUsersSelect'>" +
                     tr +
                     "</tbody></table>";
                 $("#mailingSections").html(table);
@@ -684,10 +684,10 @@
         }
     });
 
-    $("#emailAttachements").on('change', function () {
+    $("#emailAttachements").on("change", function () {
         const files = $("#emailAttachements")[0].files;
         const allowedTypes = ["image/jpeg", "image/png"]; // Add other allowed MIME types here
-        const maxFileSize = 5 * 1024*1024;
+        const maxFileSize = 5 * 1024 * 1024;
         const errorMessages = [];
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
@@ -696,7 +696,6 @@
                     `File "${file.name}" is not an allowed type.`
                 );
             }
-            console.log(file.size);
             if (file.size > maxFileSize) {
                 errorMessages.push(
                     `File "${file.name}" exceeds the maximum size of 5 MB.`
@@ -704,13 +703,10 @@
             }
         }
         const errorMessageContainer = $("#errorMessages");
-        if (errorMessages.length === 0) {
-            errorMessageContainer.html(""); // Clear previous error messages
-            // Your file upload logic here (e.g., using AJAX to upload files to the server)
-            $("#emailAttachements").val(""); // Clear the file input if no errors
-        } else {
+        if (errorMessages.length > 0) {
+            errorMessageContainer.html("");
+            $("#emailAttachements").val("");
             errorMessageContainer.html(errorMessages.join("<br>"));
-            $("#emailAttachements").val(""); // Clear the file input if errors exist
         }
     });
 
@@ -733,21 +729,24 @@
             token = $this.find("input[name='_token']").val(),
             users = [];
         var formData = new FormData();
+
         if (sendrange == "manual") {
             $("input[name='selected_user']:checked").each(function (
                 key,
-                input
+                checkbox
             ) {
-                users.push($(input).data("value"));
+                formData.append("users[]", $(checkbox).data("value"));
             });
         }
-        var files = document.getElementById("emailAttachements");
-        formData.append("attachments", files.files);
+
+        var files = $("#emailAttachements")[0].files;
+        for (var i = 0; i < files.length; i++) {
+            formData.append("attachments[]", files[i]);
+        }
         formData.append("usage", usage);
         formData.append("recipient_type", recipient_type);
         formData.append("sendrange", sendrange);
         formData.append("message", message);
-        formData.append("users", users);
         formData.append("subject", subject);
 
         $.ajaxSetup({
@@ -763,18 +762,21 @@
             processData: false,
             contentType: false,
             success: function (params) {
-                $("#sendmail").prop("disabled", true);
+                console.log(params);
+                $(".lds-roller").hide();
+                $("#sendmail").prop("disabled", false);
                 let result = JSON.parse(params);
                 if (result.status == "success") {
                     showSuccess(result.message, "#mailfeedback");
-                    makeCreateID.val("");
                     $this.trigger("reset");
                 } else {
                     showError(result.error, "#mailfeedback");
                 }
             },
             error: function (error) {
-                $("#sendmail").prop("disabled", true);
+                console.error(error);
+                $(".lds-roller").hide();
+                $("#sendmail").prop("disabled", false);
                 if (error.status == 422) {
                     var errors = "";
                     $.each(error.responseJSON.errors, function (key, value) {
@@ -789,51 +791,6 @@
                 }
             },
         });
-        // let data = {
-        //     _token: token,
-        //     usage: usage,
-        //     recipient_type: recipient_type,
-        //     sendrange: sendrange,
-        //     message: message,
-        //     users: users,
-        //     subject: subject,
-        // };
-        // console.log(data);
-        // $.post("/bulk-mail", data)
-        //     .done(function (params) {
-        //         $("#sendmail").prop("disabled", false);
-        //         $(".lds-roller").hide();
-        //         let result = JSON.parse(params);
-        //         if (result.status == "success") {
-        //             showSuccess(result.message, "#mailfeedback");
-        //             getServices();
-        //             $(this).trigger('reset');
-        //         } else {
-        //             showError(
-        //                 "Error occured during processing",
-        //                 "#mailfeedback"
-        //             );
-        //         }
-        //     })
-        //     .fail(function (error) {
-        //         $("#sendmail").prop("disabled", false);
-        //         $(".lds-roller").hide();
-        //         if (error.status == 422) {
-        //             var errors = "";
-        //             $.each(
-        //                 error.responseJSON.errors,
-        //                 function (key, value) {
-        //                     errors += value + "!";
-        //                 }
-        //             );
-        //             showError(errors, "#mailfeedback");
-        //         } else {
-        //             showError(
-        //                 "Error occurred during processing",
-        //                 "#mailfeedback"
-        //             );
-        //         }
-        //     });
     });
 
     function toMoney(number) {
