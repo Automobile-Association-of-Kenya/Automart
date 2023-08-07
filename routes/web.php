@@ -200,7 +200,7 @@ Route::prefix('admin')->group(function () {
     Route::get('vehicles', [AdminController::class, 'vehicles'])->name('admin.vehicles');
     Route::get('users', [AdminController::class, 'users'])->name('admin.users');
     Route::get('accounts', [AdminController::class, 'accounts'])->name('admin.accounts');
-    Route::get('requests', [AdminController::class, 'requefsts'])->name('admin.requests');
+    Route::get('requests', [AdminController::class, 'requests'])->name('admin.requests');
     Route::get('settings', [SettingsController::class, 'index'])->name('admin.settings');
     Route::get('reports', [AdminController::class, 'reports'])->name('admin.reports');
     Route::get('customers', [UsersController::class, 'customers']);
