@@ -221,7 +221,6 @@ class SettingsController extends Controller
                 Mail::to($emails)->send(new Bulk($request->subject, $request->message,$files));
             }
         }
-
         return json_encode(['status'=>'success','message'=>'Messages sent successfully.']);
     }
 

@@ -153,6 +153,7 @@ Route::post('paypalsuccess', [PaymentController::class, 'successTransaction'])->
 Route::post('payments-get', [PaymentController::class, 'get']);
 
 Route::resource('reports', ReportController::class);
+Route::post('reports-filter', [ReportController::class, 'filter']);
 
 Route::prefix('vehicles')->group(function () {
     Route::get('show/{id}', [VehicleController::class, 'show'])->name('vehicles.show');
