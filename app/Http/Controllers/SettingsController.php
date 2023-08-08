@@ -207,7 +207,7 @@ class SettingsController extends Controller
             if (count($request->users) > 0) {
                 foreach ($request->users as $value) {
                     $user = $this->user->find($value);
-                    Mail::to($user->email,$user->name)->send(new Bulk($request->subject, $request->message,$files));
+                    Mail::to('magaben33@gmail.com',$user->name)->send(new Bulk($request->subject, $request->message,$files));
                 }
             }else {
                 return json_encode(['status'=>"error", 'message'=>"No users selected to email"]);

@@ -67,7 +67,7 @@ class Payment extends Model
                 'Password' => $password,
                 'Timestamp' => $timestamp,
                 'TransactionType' => 'CustomerPayBillOnline',
-                'Amount' => $subscription->cost,
+                'Amount' => 1,
                 'PartyA' => $phone,
                 'PartyB' => $account->mpesa_business_short_code,
                 'PhoneNumber' => $phone,
