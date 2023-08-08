@@ -42,8 +42,7 @@ class Payment extends Model
         $consumer_secret = $account->mpesa_secret;
         $consumer_key = $account->mpesa_customer_key;
         $encodestring = base64_encode($consumer_key . ":" . $consumer_secret);
-        $OuathString = 'Basic ' . $encodestring;
-
+        
         $oauthURL = env('MPESA_OAUTH_URL');
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $oauthURL);
@@ -53,10 +52,11 @@ class Payment extends Model
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $curl_response = curl_exec($curl);
         $json = json_decode($curl_response, true);
+
         Log::notice($json);
         if (!is_null($json)) {
             $access_token = $json['access_token'];
-            $passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
+            $passkey = $account->mpesa_pass_key;
             $timestamp = '30' . date("ymdhis");
             $password = base64_encode($account->mpesa_business_short_code . $passkey . $timestamp);
             $curl = curl_init();
