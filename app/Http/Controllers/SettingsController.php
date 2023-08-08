@@ -207,7 +207,7 @@ class SettingsController extends Controller
             if (count($request->users) > 0) {
                 foreach ($request->users as $value) {
                     $user = $this->user->find($value);
-                    Mail::to('magaben33@gmail.com',$user->name)->send(new Bulk($request->subject, $request->message,$files));
+                    Mail::to($user->email,$user->name)->send(new Bulk($request->subject, $request->message,$files));
                 }
             }else {
                 return json_encode(['status'=>"error", 'message'=>"No users selected to email"]);
@@ -215,11 +215,15 @@ class SettingsController extends Controller
         }else {
             if ($request->recepient_type === "customers") {
                 $emails =  $this->user->where('role','<>','admin')->pluck('email');
-                Mail::to($emails)->send(new Bulk($request->subject, $request->message,$files));
+                foreach ($emails as $key => $value) {
+                    Mail::to($value)->send(new Bulk($request->subject, $request->message, $files));
+                }
             }
             if ($request->recepient_type === "partners") {
                 $emails =  $this->partner->pluck('email');
-                Mail::to($emails)->send(new Bulk($request->subject, $request->message,$files));
+                foreach ($emails as $key => $value) {
+                    Mail::to($emails)->send(new Bulk($request->subject, $request->message, $files));
+                }
             }
         }
         return json_encode(['status'=>'success','message'=>'Messages sent successfully.']);

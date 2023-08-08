@@ -42,7 +42,7 @@ class Payment extends Model
         $consumer_secret = $account->mpesa_secret;
         $consumer_key = $account->mpesa_customer_key;
         $encodestring = base64_encode($consumer_key . ":" . $consumer_secret);
-        
+
         $oauthURL = env('MPESA_OAUTH_URL');
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $oauthURL);
@@ -67,7 +67,7 @@ class Payment extends Model
                 'Password' => $password,
                 'Timestamp' => $timestamp,
                 'TransactionType' => 'CustomerPayBillOnline',
-                'Amount' => 1,
+                'Amount' => $subscription->cost,
                 'PartyA' => $phone,
                 'PartyB' => $account->mpesa_business_short_code,
                 'PhoneNumber' => $phone,
