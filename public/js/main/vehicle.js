@@ -1827,15 +1827,19 @@
                     status,
                     created_at,
                 } = value;
+
+                // console.log(value.dealer);
+                console.log(value.user);
+
                 let sponsored = value.sponsored
                         ? "<i class='fa fa-check-circle text-success'></i>"
                         : "<span class='text-danger'>&times;</span>",
                     dealer =
                         value.dealer !== null
-                            ? value.dealer.name
+                            ? value.dealer
                             : value.user !== null
-                            ? value.user.name
-                            : "", phone = value.dealer?.phone ?? value.user?.phone;
+                            ? value.user
+                            : "", phone = dealer.phone;
                 tr +=
                     "<tr><td><input type='checkbox' class='vehicleselect' id='vehicleSelect' data-id=" +
                     id +
@@ -1845,8 +1849,10 @@
                     "</td><td>" +
                     vehicle_no +
                     "</td><td>" +
-                    dealer +
-                    "</td><td>"+phone+"</td><td>" +
+                    dealer.name +
+                    "</td><td>" +
+                    phone +
+                    "</td><td>" +
                     make.make +
                     "</td><td>" +
                     model.model +

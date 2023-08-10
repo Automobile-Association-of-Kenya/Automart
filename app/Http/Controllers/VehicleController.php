@@ -371,7 +371,7 @@ class VehicleController extends Controller
         if (isset($request->model_id) && !is_null($request->model_id)) {
             $query->where('vehicle_model_id', $request->model_id);
         }
-        $vehicles = $query->latest()->with(['dealer:id,name', 'user:id,name', 'make:id,make', 'model:id,model', 'prices'])->get();
+        $vehicles = $query->latest()->get();
         return json_encode($vehicles);
     }
 

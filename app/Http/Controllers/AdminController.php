@@ -51,7 +51,6 @@ class AdminController extends Controller
         return view('accounts.index');
     }
 
-
     public function requests()
     {
         $quotes = $this->quote->with('vehicle')->latest()->paginate(10);

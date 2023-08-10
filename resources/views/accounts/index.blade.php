@@ -35,6 +35,8 @@
                             <div class="nav nav-tabs " id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="pop1-tab" data-toggle="tab" href="#chartsTab"
                                     role="tab" aria-controls="pop1" aria-selected="true">Chart of accounts</a>
+                                <a class="nav-item nav-link" id="pop1-tab" data-toggle="tab" href="#subscriptionsTab"
+                                    role="tab" aria-controls="pop1" aria-selected="true">Subscriptions</a>
                                 <a class="nav-item nav-link" id="makes-tab" data-toggle="tab" href="#transactionsTab"
                                     role="tab" aria-controls="pop2" aria-selected="false">Transactions</a>
                             </div>
@@ -183,6 +185,11 @@
                                     </div>
 
                                 </div>
+                            </div>
+
+                            <div class="tab-pane fade mb-3" id="subscriptionsTab" role="tabpanel"
+                                aria-labelledby="pop2-tab">
+                                
                             </div>
 
                             <div class="tab-pane fade mb-3" id="transactionsTab" role="tabpanel"
