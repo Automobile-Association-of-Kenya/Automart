@@ -18,7 +18,7 @@ class Payment extends Model
 
     public function subscription(): BelongsTo
     {
-        return $this->belongsTo(Subscription::class, 'subscription_id');
+        return $this->belongsTo(ModelsSubscription::class, 'subscription_id');
     }
 
     public function account(): BelongsTo

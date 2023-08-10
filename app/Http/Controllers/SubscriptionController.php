@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SubscriptionRequest;
+use App\Models\DealerSubscription;
 use App\Models\Subscription;
 use App\Models\Subsproperty;
 use App\Models\Visit;
@@ -16,6 +17,7 @@ class SubscriptionController extends Controller
         $this->middleware('auth');
         $this->subscription = new Subscription();
         $this->subsprop = new Subsproperty();
+        $this->dealersubscription = new DealerSubscription();
     }
 
     /**
@@ -42,9 +44,6 @@ class SubscriptionController extends Controller
         Visit::visit(request()->server());
         $title = "Subscription Plans";
         $properties = Subsproperty::get();
-
-        // return $this->subscription->packages();
-        // dd($subscriptions);
         return view('subscriptions.index', compact('title','properties'));
     }
 
@@ -108,5 +107,21 @@ class SubscriptionController extends Controller
     {
         $subsprops = $this->subsprop->get();
         return json_encode($subsprops);
+    }
+
+    public function getSubscriptions(Request $request) {
+        $query = $this->dealersubscription->query();
+        if (!is_null($request->subscription_id)) {
+            $query->where('subscription_id',$request->subscription_id);
+        }
+        if (!is_null($request->start_date)) {
+            $query->whereDate('start_date','>=', $request->start_date);
+        }
+        if (!is_null($request->end_date)) {
+            $query->whereDate('start_date', '<=', $request->end_date);
+        }
+        $subscriptions = $query->where('status',1)->with(['dealer','user','subscription'])->latest()->get();
+
+        return json_encode($subscriptions);
     }
 }

@@ -150,7 +150,7 @@ Route::resource('payments', PaymentController::class);
 Route::get('paymentconfirm/{checkoutid}', [PaymentController::class, 'paymentconfirm']);
 Route::post('paypalcancel', [PaymentController::class, 'cancelTransaction'])->name('paypal.cancel');
 Route::post('paypalsuccess', [PaymentController::class, 'successTransaction'])->name('paypal.success');
-Route::post('payments-get', [PaymentController::class, 'get']);
+Route::post('payments-get', [PaymentController::class, 'get'])->name('payments.get');
 
 Route::resource('reports', ReportController::class);
 Route::post('reports-filter', [ReportController::class, 'filter'])->name('reports.filter');
@@ -208,6 +208,7 @@ Route::prefix('admin')->group(function () {
     Route::get('dealer/subscriptions',[AdminController::class, 'dealersWithSubscriptions']);
     Route::get('vehicles/subscriptions',[AdminController::class, 'vehiclesWithSubscription']);
     Route::get('revenue/{year?}',[AdminController::class, 'revenue']);
+    Route::post('getsubscriptions', [SubscriptionController::class, 'getSubscriptions']);
 });
 
 Route::get('dealers-get', [DealerController::class, 'getDealers']);

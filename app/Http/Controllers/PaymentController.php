@@ -88,7 +88,6 @@ class PaymentController extends Controller
     function get(Request $request)
     {
         $query = $this->payment->query();
-        $query->where('complete',1);
         if (!is_null($request->dealer_id)) {
             $query->where('dealer_id', $request->dealer_id);
         }
@@ -101,7 +100,7 @@ class PaymentController extends Controller
         if (!is_null($request->end_date)) {
             $query->where('created_at', '<=', $request->end_date);
         }
-        $payments = $query->with('subscription:id,name','user:id,name', 'dealer:id,name', 'account:id,provider,mpesa_business_short_code')->latest()->get();
+        $payments = $query->where('complete', 1)->with('subscription:id,name','user:id,name', 'dealer:id,name', 'account:id,provider,mpesa_business_short_code')->latest()->get();
         return json_encode($payments);
     }
 

@@ -59,24 +59,19 @@ class Dealer extends Model
         return $this->hasMany(Vehicle::class, 'dealer_id', 'id');
     }
 
-    /**
-     * Get all of the users for the Dealer
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function users(): HasMany
     {
         return $this->hasMany(User::class, 'dealer_id', 'id');
     }
 
-    /**
-     * Get all of the yards for the Dealer
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function yards(): HasMany
     {
         return $this->hasMany(Yard::class, 'dealer_id', 'id');
+    }
+
+    public function dealersubscription(): HasMany
+    {
+        return $this->hasMany(DealerSubscription::class, 'dealer_id', 'id');
     }
 
     public function subscription($dealer_id)
@@ -88,11 +83,6 @@ class Dealer extends Model
         }
     }
 
-    /**
-     * Get all of the payments for the Dealer
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class, 'dealer_id', 'id');
