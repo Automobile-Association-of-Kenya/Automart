@@ -59,7 +59,11 @@
                         value.mpesa_secret +
                         "</td><td>" +
                         value.mpesa_pass_key +
-                        '</td><td>'+toMoney(balance)+'</td><td>'+value.currency+'</td><td><li class="dropdown"><a href="#" data-toggle="dropdown" class="btn btn-success btn-sm">Action</a><ul class="dropdown-menu"><li class="dropdown-item"><a href="#" id="assignSubscriptionToggle" data-toggle="modal" data-target="#assignToSubscriptionModal" data-id=' +
+                        "</td><td>" +
+                        toMoney(balance) +
+                        "</td><td>" +
+                        value.currency +
+                        '</td><td><li class="dropdown"><a href="#" data-toggle="dropdown" class="btn btn-success btn-sm">Action</a><ul class="dropdown-menu"><li class="dropdown-item"><a href="#" id="assignSubscriptionToggle" data-toggle="modal" data-target="#assignToSubscriptionModal" data-id=' +
                         value.id +
                         '><i class="fa fa-edit text-warning"></i>&nbsp;Add subscription</a></li></ul></li></td></tr>';
                 }
@@ -172,7 +176,8 @@
 
     let accountAssignForm = $("#accountAssignForm"),
         assignAccountID = $("#assignAccountID"),
-        subscriptionAssignID = $("#subscriptionAssignID");
+        subscriptionAssignID = $("#subscriptionAssignID"),
+        filterSubscriptionID = $("#filterSubscriptionID");
 
     function getSubscription() {
         $.getJSON("/subscriptions", function (subscriptions) {
@@ -187,6 +192,7 @@
                     "</option>";
             });
             subscriptionAssignID.html(option);
+            filterSubscriptionID.html(option);
         });
     }
     getSubscription();
@@ -196,9 +202,7 @@
         assignAccountID.val(account_id);
     });
 
-    subscriptionAssignID.on("change", function () {
-    });
-
+    subscriptionAssignID.on("change", function () {});
 
     accountAssignForm.on("submit", function (event) {
         event.preventDefault();
@@ -267,7 +271,7 @@
                 $.each(payments, function (key, value) {
                     if (value.account.provider === "Mpesa") {
                         tr +=
-                            "<tr><td><input type=\"checkbox\" name=\"payment-select\" id=\"payment-select\">&nbsp;&nbsp;" +
+                            '<tr><td><input type="checkbox" name="payment-select" id="payment-select">&nbsp;&nbsp;' +
                             i++ +
                             "</td><td>" +
                             value.account.provider +
@@ -323,8 +327,7 @@
                     });
                 }
             })
-            .fail(function (error) {
-            });
+            .fail(function (error) {});
     });
 
     function toMoney(number) {
@@ -332,7 +335,82 @@
         return actul.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
     }
 
-    function getSubscriptions(params) {
+    function getSubscriptions() {
+        let filterSubscriptionID = $("#filterSubscriptionID"),
+            filterStartDate = $("#filterStartDate"),
+            filterEndDate = $("#filterEndDate"),
+            data = {
+                _token: $("input[name='_token']").val(),
+                subscription_id: filterSubscriptionID.val(),
+                start_date: filterStartDate.val(),
+                end_date: filterEndDate.val(),
+            };
+        $.post("/admin/getsubscriptions", data)
+            .done(function (params) {
+                let subscriptions = JSON.parse(params),
+                    tr = "",
+                    amount = 0,
+                    i = 1;
+                $.each(subscriptions, function (key, value) {
+                    let dealer = value.dealer !== null ? value.dealer : value.user;
+                    amount += parseFloat(value.subscription.cost);
+                    tr +=
+                        "<tr><td>"+ i++ +"</td><td>" +
+                        dealer.name +
+                        "</td><td>" +
+                        dealer.phone +
+                        "</td><td>" +
+                        dealer.email +
+                        "</td><td>" +
+                        value.subscription.name +
+                        "</td><td>" +
+                        value.subscription.priority +
+                        "</td><td>" +
+                        value.start_date +
+                        "</td><td>" +
+                        value.expiry_date +
+                        "</td><td>" +
+                        toMoney(parseFloat(value.subscription.cost)) +
+                        "</td></tr>";
+                });
+                let tfooter =
+                        "<tr><td colspan='8'><b>Total</b></td><td><b>" +
+                        toMoney(amount) +
+                        "</b></td></tr>",
+                    table =
+                        "<table class='table table-bordered table-sm' id='subscriptiontable'><thead><th>#</th><th>Dealer</th><th>Phone</th><th>Email</th><th>Plan</th><th>Priority</th><th>Start</th><th>Expiry</th><th>Cost</th></thead><tbody>"+tr+"</tbody>"+tfooter+"</table>";
 
+                $("#subscriptionsTable").html(table);
+                if ($.fn.DataTable.isDataTable("#subscriptiontable")) {
+                    $("#subscriptiontable").destroy();
+                    $("#subscriptiontable").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            "copyHtml5",
+                            "excelHtml5",
+                            "csvHtml5",
+                            "pdfHtml5",
+                        ],
+                    });
+                } else {
+                    $("#subscriptiontable").DataTable({
+                        dom: "Bfrtip",
+                        buttons: [
+                            "copyHtml5",
+                            "excelHtml5",
+                            "csvHtml5",
+                            "pdfHtml5",
+                        ],
+                    });
+                }
+            })
+            .fail(function (error) {
+                showError("An error occured during processing. ","#subscriptionsTable");
+            });
     }
+
+    $("#filterSubscriptionForm").on('submit', function(event) {
+        event.preventDefault();
+        getSubscriptions();
+    });
 })();

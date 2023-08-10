@@ -26,6 +26,11 @@ class Subscription extends Model
         'description'
     ];
 
+    public function dealersubscription(): HasMany
+    {
+        return $this->hasMany(DealerSubscription::class, 'subscription_id', 'id');
+    }
+
     public function createProperties($id, $properties)
     {
         foreach ($properties as $value) {

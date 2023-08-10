@@ -208,6 +208,7 @@ Route::prefix('admin')->group(function () {
     Route::get('dealer/subscriptions',[AdminController::class, 'dealersWithSubscriptions']);
     Route::get('vehicles/subscriptions',[AdminController::class, 'vehiclesWithSubscription']);
     Route::get('revenue/{year?}',[AdminController::class, 'revenue']);
+    Route::post('getsubscriptions', [SubscriptionController::class, 'getSubscriptions']);
 });
 
 Route::get('dealers-get', [DealerController::class, 'getDealers']);

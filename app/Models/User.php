@@ -49,6 +49,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
+    public function subscription(): HasMany
+    {
+        return $this->hasMany(Subscription::class, 'user_id', 'id');
+    }
+
     public function getUserBy($key, $value)
     {
         return $this->where("$key", "$value")->first();

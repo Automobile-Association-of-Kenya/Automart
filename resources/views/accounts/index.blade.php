@@ -4,7 +4,6 @@
     Accounts @parent
 @endsection
 
-
 @section('header_styles')
     <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
@@ -19,7 +18,6 @@
         }
     </style>
 @endsection
-
 
 @section('page')
     Accounts
@@ -189,13 +187,42 @@
 
                             <div class="tab-pane fade mb-3" id="subscriptionsTab" role="tabpanel"
                                 aria-labelledby="pop2-tab">
-                                
+                                <div class="alert-success pb-3 pt-3 pl-2 pr-1 border-rounded filterSection"
+                                    style="border-radius: 6px;">
+                                    <form id="filterSubscriptionForm" class="form-row">
+                                        @csrf
+                                        <div class="col-md-5">
+                                            <label>Plan</label>
+                                            <select name="filtersubscription_id" class="form-control  chzn-select"
+                                                id="filterSubscriptionID" style="width: 100%;">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Start</label>
+                                            <input type="date" name="start_date" id="filterStartDate"
+                                                class="form-control form-control-sm">
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label>End</label>
+                                            <input type="date" name="end_date" id="filterEndDate"
+                                                class="form-control form-control-sm">
+                                        </div>
+
+                                        <div class="col-md-1">
+                                            <button type="submit" class="btn btn-success btn-md mt-4"><i
+                                                    class="fas fa-search"></i>&nbsp;Find</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="subscriptionsTable" class="mt-2"></div>
                             </div>
 
                             <div class="tab-pane fade mb-3" id="transactionsTab" role="tabpanel"
                                 aria-labelledby="pop2-tab">
 
-                                <div class="bg-primary pb-3 pt-3 pl-2 pr-1 border-rounded filterSection"
+                                <div class="alert-success pb-3 pt-3 pl-2 pr-1 border-rounded filterSection"
                                     style="border-radius: 6px;">
                                     <form id="filterTransactionsForm" class="form-row">
                                         @csrf
@@ -216,12 +243,14 @@
 
                                         <div class="col-md-3">
                                             <label>Start</label>
-                                            <input type="date" name="start_date" id="startDate" class="form-control form-control-sm date">
+                                            <input type="date" name="start_date" id="startDate"
+                                                class="form-control form-control-sm date">
                                         </div>
 
                                         <div class="col-md-2">
                                             <label>End</label>
-                                            <input type="date" name="end_date" id="endDate" class="form-control form-control-sm date">
+                                            <input type="date" name="end_date" id="endDate"
+                                                class="form-control form-control-sm date">
                                         </div>
 
                                         <div class="col-md-1">
@@ -239,7 +268,6 @@
                                 </div>
 
                             </div>
-
 
                             <div class="tab-pane fade mb-3" id="emailsTab" role="tabpanel" aria-labelledby="pop2-tab">
 
@@ -307,7 +335,6 @@
     <script src="{{ asset('js/main/pdfmake.min.js') }}"></script>
     <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
-
     <script src="{{ asset('js/main/accounts.js') }}"></script>
     <script>
         (function() {

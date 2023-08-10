@@ -39,4 +39,5 @@ class Controller extends BaseController
     protected $industry;
     protected $message;
     protected $visit;
+    protected $dealersubscription;
 }
