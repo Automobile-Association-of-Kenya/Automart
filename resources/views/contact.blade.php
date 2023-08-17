@@ -185,7 +185,7 @@
                                         </a>
                                     @endif
 
-                                    @if ($item->name == 'Tiktok')
+                                    @if ($item->name == 'Youtube')
                                         <a href="{{ $item->link }}" target="_blank">
                                             <div class="icon {{ strtolower($item?->name) }}">
                                                 <div class="tooltip">{{ $item?->name }}</div>
@@ -194,7 +194,16 @@
                                         </a>
                                     @endif
 
-                                    @if ($item->name == 'Youtube')
+                                    @if ($item->name == 'whatsapp')
+                                        <a href="{{ $item->link }}" target="_blank">
+                                            <div class="icon {{ strtolower($item?->name) }}">
+                                                <div class="tooltip">{{ $item?->name }}</div>
+                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                            </div>
+                                        </a>
+                                    @endif
+
+                                    @if ($item->name == 'Tiktok')
                                         <a href="{{ $item->link }}" target="_blank">
                                             <div class="icon {{ strtolower($item?->name) }}">
                                                 <div class="tooltip">{{ $item?->name }}</div>

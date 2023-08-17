@@ -409,6 +409,7 @@ $(function () {
                   console.error(error);
                   $(".lds-roller").hide();
                   $this.find("button[type='submit']").prop("disabled", false);
+                  $this.trigger("reset");
                   if (error.status == 422) {
                       var errors = "";
                       $.each(error.responseJSON.errors, function (key, value) {
