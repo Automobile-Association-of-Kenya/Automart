@@ -375,6 +375,8 @@ $(function () {
 
      $("#contactUsForm").on("submit", function (event) {
          event.preventDefault();
+         console.log("hererhssg");
+         $(".lds-roller").show();
          let $this = $(this),
              name = $("#fullName").val(),
              email = $("#emailAddress").val(),
@@ -382,38 +384,44 @@ $(function () {
              phone = $("#phoneNumber").val(),
              message = $("#Message").val(),
              _token = $this.find("input[name='_token']").val();
+         $this.find("button[type='submit']").prop("disabled", true);
          let data = {
-             _token:_token,
+             _token: _token,
              name: name,
              email: email,
              subject: subject,
              phone: phone,
              message: message,
          };
-         $.post("/contact-us", data)
-             .done(function (params) {
-                 let result = JSON.parse(params);
-                 if (result.status === "success") {
-                     showSuccess(result.message, "#contactfeedback");
-                 } else {
-                     showError('An error occurred during processing', '#contactfeedback');
-                 }
-             })
-             .fail(function (error) {
-                 console.error(error);
-                 if (error.status == 422) {
-                     var errors = "";
-                     $.each(error.responseJSON.errors, function (key, value) {
-                         errors += value + "!";
-                     });
-                     showError(errors, "#makefeedback");
-                 } else {
-                     showError(
-                         "Error occurred during processing",
-                         "#modelfeedback"
-                     );
-                 }
-             });
+          $.post("/contact-us", data)
+              .done(function (params) {
+                 $(".lds-roller").hide();
+                  $this.find("button[type='submit']").prop('disabled', false);
+                  $this.trigger('reset');
+                  let result = JSON.parse(params);
+                  if (result.status === "success") {
+                      showSuccess(result.message, "#contactfeedback");
+                  } else {
+                      showError('An error occurred during processing', '#contactfeedback');
+                  }
+              })
+              .fail(function (error) {
+                  console.error(error);
+                  $(".lds-roller").hide();
+                  $this.find("button[type='submit']").prop("disabled", false);
+                  if (error.status == 422) {
+                      var errors = "";
+                      $.each(error.responseJSON.errors, function (key, value) {
+                          errors += value + "!";
+                      });
+                      showError(errors, "#contactfeedback");
+                  } else {
+                      showError(
+                          "Error occurred during processing",
+                          "#contactfeedback"
+                      );
+                  }
+              });
      });
 
     // Counter

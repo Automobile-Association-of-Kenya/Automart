@@ -5,6 +5,11 @@
 @endsection
 
 @section('header_styles')
+<style>
+    .lds-roller {
+        display: none;
+    }
+</style>
 @endsection
 
 @section('main')
@@ -33,13 +38,13 @@
                         <h3 class="mb-20">Send us a Message</h3>
                         <form action="{{ route('contactus') }}" method="post" enctype="multipart/form-data"
                             id="contactUsForm">
-                            <div id="contactfeedback"></div>
                             @csrf
                             <div class="row">
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-floating mb-20">
-                                        <input type="text" class="form-control" id="fullName" placeholder="Full Name">
+                                        <input type="text" class="form-control" id="fullName" placeholder="Full Name"
+                                            required>
                                         <label for="fullName">Full Name</label>
                                     </div>
                                 </div>
@@ -47,14 +52,15 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-floating mb-20">
                                         <input type="email" class="form-control" id="emailAddress"
-                                            placeholder="Email Address">
+                                            placeholder="Email Address" required>
                                         <label for="emailAddress">Email address</label>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-floating mb-20">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                        <input type="text" class="form-control" id="subject" placeholder="Subject"
+                                            required>
                                         <label for="subject">Subject</label>
                                     </div>
                                 </div>
@@ -62,16 +68,29 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-floating mb-20">
                                         <input type="text" class="form-control" id="phoneNumber"
-                                            placeholder="Phone Number">
+                                            placeholder="Phone Number" required>
                                         <label for="phoneNumber">Phone Number</label>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-floating mb-20">
-                                        <textarea class="form-control" placeholder="Leave a message here" id="Message"></textarea>
-                                        <label for="message">Comments</label>
+                                        <textarea class="form-control" placeholder="Leave a message here" id="Message" required></textarea>
+                                        <label for="message">Message</label>
                                     </div>
+                                </div>
+
+                            <div id="contactfeedback"></div>
+
+                                <div class="lds-roller">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
                                 </div>
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -135,7 +154,7 @@
                                             <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
                                         </div>
                                     @endif
-                                    
+
                                     @if ($item->name == 'twitter')
                                         <div class="icon {{ strtolower($item?->name) }}">
                                             <div class="tooltip">{{ $item?->name }}</div>
@@ -182,4 +201,25 @@
 @endsection
 
 @section('footer_scripts')
+    {{-- <script>
+        (function() {
+            let contactUsForm = $('#contactUsForm'),
+                fullName = $('#fullName'),
+                emailAddress = $('#emailAddress'),
+                subject = $('#subject'),
+                phoneNumber = $('#phoneNumber'),
+                Message = $('#Message');
+            contactUsForm.on('submit', function(event) {
+                event.preventDefault();
+                let data = {
+                    name: fullName.val(),
+                    email: emailAddress.val(),
+                    subject: subject.val(),
+                    phone: phoneNumber.val(),
+                    message: Message.val()
+                }
+                $.post('/').done().fail();
+            })
+        })()
+    </script> --}}
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MailRequest;
 use App\Mail\Bulk;
+use App\Mail\Contact;
 use App\Mail\Loan as MailLoan;
 use App\Mail\Purchase as MailPurchase;
 use App\Mail\Quote as MailQuote;
@@ -28,7 +29,7 @@ class SettingsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('contact','socials');
+        $this->middleware('auth')->except('contact','socials', 'message');
         $this->service = new Services();
         $this->maillist = new Maillist();
         $this->message = new Messages();
@@ -40,6 +41,7 @@ class SettingsController extends Controller
         $this->loan = new Loan();
         $this->partner = new Partner();
         $this->user = new User();
+        $this->social = new Social();
     }
 
     public function index()
@@ -190,6 +192,7 @@ class SettingsController extends Controller
             'message' => ['required','max:255'],
         ]);
         $this->message->create($validated+['type'=>'contact']);
+        Mail::to('automart@aakenya.co.ke', 'Automart AA Kenya')->send(new Contact($validated["subject"], $validated["message"], $validated["email"],$validated["name"]));
         return json_encode(['status'=>'success', 'message'=>'Your message was received successfully. We will check your issue and get back to you as appropriate']);
     }
 
@@ -232,6 +235,12 @@ class SettingsController extends Controller
     public function visits($date) {
         $visits = $this->visit->whereDate('created_at',$date)->latest()->get();
         return json_encode($visits);
+    }
+
+    function socialdelete(Request $request) {
+        $social = $this->social->find($request->id);
+        $social->delete();
+        return json_encode(['status'=>'success','message'=>'Social deleted successfully']);
     }
 
 }

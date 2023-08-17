@@ -32,11 +32,10 @@
                                 <i class="flaticon-mail"></i><a href="mailto:customercare@aakenya.co.ke">customercare@aakenya.co.ke</a>
                             </li>
                             <li>
-                                <i class="flaticon-phone"></i><a href="tel:+55-417-634-7071">+254709933999 </a>
+                                <i class="flaticon-phone"></i><a href="tel:+254709933999">+254709933999 </a>
                             </li>
-
                             <li>
-                                <i class="flaticon-fax"></i>+254709933000
+                                <i class="flaticon-phone"></i><a href="tel:+254709933000">+254709933000 </a>
                             </li>
 
                         </ul>

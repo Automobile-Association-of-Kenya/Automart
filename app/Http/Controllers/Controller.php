@@ -40,4 +40,5 @@ class Controller extends BaseController
     protected $message;
     protected $visit;
     protected $dealersubscription;
+    protected $social;
 }

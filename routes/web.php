@@ -113,6 +113,7 @@ Route::controller(SettingsController::class)->group(function () {
     Route::post('mails', 'mailCreate');
     Route::get('socials/{id?}', 'socials');
     Route::post('socials', 'socialStore')->name('social.store');
+    Route::post('social-delete', 'socialdelete');
 });
 
 Route::resource('services', ServicesController::class);

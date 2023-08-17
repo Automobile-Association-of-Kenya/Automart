@@ -623,6 +623,32 @@
         });
     });
 
+    $("body").on("click", "#deleteSocialToggle", function(event) {
+        event.preventDefault();
+        let social_id = $(this).data('id');
+        if (social_id !== "") {
+            $.post("/social-delete", { _token: $("input[name='_token']").val(), id: social_id})
+                .done(function (params) {
+                    let result = JSON.parse(params);
+                    if (result.status === "success") {
+                        getSocials();
+                        showSuccess(result.message, "#socialfeedback");
+                    } else {
+                        showError(
+                            "Error occured during processing",
+                            "#socialfeedback"
+                        );
+                    }
+                })
+                .fail(function (error) {
+                    showError(
+                        "Error occured during processing",
+                        "#socialfeedback"
+                    );
+                });
+        }
+    });
+
     $("#clearsocial").on("click", function (event) {
         event.preventDefault();
         socialCreateID.val("");

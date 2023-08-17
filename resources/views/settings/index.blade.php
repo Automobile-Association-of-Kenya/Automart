@@ -370,7 +370,7 @@
                                                                 <div></div>
                                                                 <div></div>
                                                             </div>
-                                                            
+
                                                             <div class="col-md-12 mt-3">
                                                                 <button class='btn btn-success btn-md' id='sendmail'><i
                                                                         class="fal fa-save fa-lg fa-fw"></i> Send
