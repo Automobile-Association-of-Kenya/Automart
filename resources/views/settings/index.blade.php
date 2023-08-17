@@ -580,7 +580,7 @@
                                                         <select id="socialType" name="type" class="form-control">
                                                             <option value="">Select One</option>
                                                             <option value="social">Social</option>
-                                                            <option value="address">Adrress</option>
+                                                            <option value="address">Address</option>
                                                             <option value="contact">Contact</option>
                                                         </select>
                                                     </div>

@@ -60,6 +60,7 @@ class SettingsController extends Controller
         $address = Social::where('name', 'address')->first();
         $emails = Social::where('name', 'email')->get();
         $socials = Social::where('type','social')->get();
+        // return $socials;
         return view('contact', compact('phones','address', 'emails', 'socials'));
     }
 

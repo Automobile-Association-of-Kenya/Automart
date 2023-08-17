@@ -5,11 +5,11 @@
 @endsection
 
 @section('header_styles')
-<style>
-    .lds-roller {
-        display: none;
-    }
-</style>
+    <style>
+        .lds-roller {
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('main')
@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
 
-                            <div id="contactfeedback"></div>
+                                <div id="contactfeedback"></div>
 
                                 <div class="lds-roller">
                                     <div></div>
@@ -148,39 +148,59 @@
                         <div class="social-media social-media-two">
                             <div class="social-list">
                                 @foreach ($socials as $item)
-                                    @if ($item->name == 'facebook')
-                                        <div class="icon {{ strtolower($item?->name) }}">
-                                            <div class="tooltip">{{ $item?->name }}</div>
-                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
-                                        </div>
+                                    @if ($item->name == 'Facebook')
+                                        <a href="{{ $item->link }}" target="_blank">
+
+                                            <div class="icon {{ strtolower($item?->name) }}">
+                                                <div class="tooltip">{{ $item?->name }}</div>
+                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                            </div>
+                                        </a>
                                     @endif
 
-                                    @if ($item->name == 'twitter')
-                                        <div class="icon {{ strtolower($item?->name) }}">
-                                            <div class="tooltip">{{ $item?->name }}</div>
-                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
-                                        </div>
+                                    @if ($item->name == 'Twitter')
+                                        <a href="{{ $item->link }}" target="_blank">
+                                            <div class="icon {{ strtolower($item?->name) }}">
+                                                <div class="tooltip">{{ $item?->name }}</div>
+                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                            </div>
+                                        </a>
                                     @endif
 
-                                    @if ($item->name == 'instagram')
-                                        <div class="icon {{ strtolower($item?->name) }}">
-                                            <div class="tooltip">{{ $item?->name }}</div>
-                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
-                                        </div>
+                                    @if ($item->name == 'Instagram')
+                                        <a href="{{ $item->link }}" target="_blank">
+                                            <div class="icon {{ strtolower($item?->name) }}">
+                                                <div class="tooltip">{{ $item?->name }}</div>
+                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                            </div>
+                                        </a>
                                     @endif
 
-                                    @if ($item->name == 'linkedin')
-                                        <div class="icon {{ strtolower($item?->name) }}">
-                                            <div class="tooltip">{{ $item?->name }}</div>
-                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
-                                        </div>
+                                    @if ($item->name == 'Linkedin')
+                                        <a href="{{ $item->link }}" target="_blank">
+                                            <div class="icon {{ strtolower($item?->name) }}">
+                                                <div class="tooltip">{{ $item?->name }}</div>
+                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                            </div>
+                                        </a>
                                     @endif
 
-                                    @if ($item->name == 'whatsapp')
-                                        <div class="icon {{ strtolower($item?->name) }}">
-                                            <div class="tooltip">{{ $item?->name }}</div>
-                                            <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
-                                        </div>
+                                    @if ($item->name == 'Tiktok')
+                                        <a href="{{ $item->link }}" target="_blank">
+                                            <div class="icon {{ strtolower($item?->name) }}">
+                                                <div class="tooltip">{{ $item?->name }}</div>
+                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                            </div>
+                                        </a>
+                                    @endif
+
+                                    @if ($item->name == 'Youtube')
+                                        <a href="{{ $item->link }}" target="_blank">
+                                            <div class="icon {{ strtolower($item?->name) }}">
+                                                <div class="tooltip">{{ $item?->name }}</div>
+                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
+                                            </div>
+                                        </a>
                                     @endif
                                 @endforeach
                             </div>
