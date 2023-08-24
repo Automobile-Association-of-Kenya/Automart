@@ -12,13 +12,14 @@
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner banner-slider-inner text-center">
                 <div class="carousel-item active item-bg">
-                    {{-- <img class="d-block w-100" src="images/automart.jpg" alt="banner"> --}}
+                    <img class="d-block w-100" src="{{ asset('images/automart.jpg') }}" alt="banner">
                     <div class="carousel-content container banner-info-2">
                         <div class="row">
+                            <div class="col-md-5"></div>
                             <div class="col-lg-7 text-start">
                                 <div class="p-3" style="background: rgb(0, 65, 44, 0.8);border-radius: 5px;">
                                     <h4 class="mb-30 text-white">Vehicle Financing</h4>
-                                    <div class="price">
+                                    <div class="price" style="text-align: justify;">
                                         <p>With our Financing Product, owning the car of your dreams has never been easier. You can find
 your ideal car on our platform and secure the financing you need seamlessly, all in one place. We
 have partnered with reputable financial institutions to bring you the best-in-class financing

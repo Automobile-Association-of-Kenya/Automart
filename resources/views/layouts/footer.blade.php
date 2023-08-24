@@ -10,7 +10,7 @@
                         <div class="s-border"></div>
                         <div class="m-border"></div>
                         <div class="text">
-                            <P class="mb-0">With AA Automart, car sellers have the opportunity to showcase their
+                            <P class="mb-0"  style="text-align: justify;">With AA Automart, car sellers have the opportunity to showcase their
                                 vehicles to a wide audience of potential buyers, maximizing their chances of making a
                                 successful sale. On the other hand, car buyers can browse through a diverse inventory of
                                 cars available for purchase, making the platform a one-stop destination for all their
@@ -34,7 +34,7 @@
 
                             <li>
                                 <i class="flaticon-mail"></i><a
-                                    href="mailto:customercare@aakenya.co.ke">customercare@aakenya.co.ke</a>
+                                    href="mailto:automart@aakenya.co.ke">automart@aakenya.co.ke</a>
                             </li>
                             <li>
                                 <i class="flaticon-phone"></i><a href="tel:+254709933999">+254709933999 </a>
