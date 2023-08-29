@@ -47,7 +47,7 @@
                             </div>
 
                             <div class="card-body">
-                                @include('layouts.alert')
+                                {{-- @include('layouts.alert') --}}
                                 <form action="{{ route('login') }}" id="loginForm" method="POST">
                                     @csrf
                                     <div class="form-group">

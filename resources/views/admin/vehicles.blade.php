@@ -56,7 +56,7 @@
                         <div class="tab-pane fade show active" id="vehicledetails" role="tabpanel">
                             <div class="text-right">
                                 <button type="button" class="btn btn-success btn-sm mt-1 mb-1 btn-floated"
-                                    id="filterToggle"><i class="fa fa-edit fa-1x text-warning"></i></button>
+                                    id="filterToggle"><i class="fa fa-edit fa-1x text-warning"></i>Edit Vehicle</button>
                             </div>
 
                             <div class="alert-success pb-3 pt-3 pl-2 pr-1 border-rounded filterSection"
