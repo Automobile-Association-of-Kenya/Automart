@@ -37,12 +37,11 @@
                                     href="mailto:automart@aakenya.co.ke">automart@aakenya.co.ke</a>
                             </li>
                             <li>
-                                <i class="flaticon-phone"></i><a href="tel:+254709933999">+254709933999 </a>
+                                <i class="flaticon-phone"></i><a href="tel:+254703877817">+254703877817 </a>
                             </li>
                             <li>
                                 <i class="flaticon-phone"></i><a href="tel:+254709933000">+254709933000 </a>
                             </li>
-
                         </ul>
                     </div>
                 </div>
