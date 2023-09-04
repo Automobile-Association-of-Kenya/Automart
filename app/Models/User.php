@@ -137,7 +137,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $salescount = Vehicle::where('status', 'sold')->count();
         $todaysales = Vehicle::whereDate('sold_at', $today)->count();
         $dealerscount = Dealer::count();
-        $todaynewdealers = User::whereDate('created_at', $today)->count();
+        $todaynewdealers = Dealer::whereDate('created_at', $today)->count();
         $tradeinscount = Tradein::count();
         $tradeinscounttoday = Tradein::whereDate('created_at', $today)->count();
         $quotescount = Quote::count();

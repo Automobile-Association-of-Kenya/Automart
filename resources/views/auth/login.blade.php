@@ -47,7 +47,6 @@
                             </div>
 
                             <div class="card-body">
-                                {{-- @include('layouts.alert') --}}
                                 <form action="{{ route('login') }}" id="loginForm" method="POST">
                                     @csrf
                                     <div class="form-group">
@@ -202,9 +201,6 @@
                             <div class="sign-up">
                                 <h5 class="m-0">Already have an account? &nbsp;<a href="#" id="loginToggle"
                                         class="text-primary">Login</a></h5>
-
-                                {{-- <h5 class="m-0">Partner with us? &nbsp;<a href="#" id="partnerToggle"
-                                        class="text-success">Click here</a></h5> --}}
                             </div>
                         </div>
 
