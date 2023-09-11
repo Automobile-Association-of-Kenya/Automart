@@ -1241,4 +1241,8 @@ $(function () {
         // });
     }
 
+    $("body").on("click", ".car-thumbnail", function () {
+        window.location = $(this).find('a:first').attr('href');
+    });
+
 })(jQuery);
