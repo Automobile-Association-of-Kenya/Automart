@@ -1223,26 +1223,49 @@ $(function () {
                 }
             });
         }
-        console.log(Notification.permission);
-        console.log("Notification enabled");
     } else {
         console.error("Notification disabled");
     }
 
     function notify() {
-        // let notification = new Notification("New Vehicle Alert", {
-        //     body: "2022 Toyota Landcruiser V-8 twin turbo engine",
-        //     icon: "../../public/vehicleimages/img20321689394325.jpg",
-        //     image: "../../public/vehicleimages/img20321689394325.jpg",
-        //     vibrate: [200, 100, 200],
-        // });
-        // notification.addEventListener("click", () => {
-        //     window.open("http://automart.aakenya.co.ke");
-        // });
+        $.getJSON("/vehicles/notification", function (vehicles) {
+
+            $.each(vehicles, function (key, value) {
+                let vehicle_no = value.vehicle_no ?? value.id;
+                let notification = new Notification("New Vehicle Alert", {
+                    body:
+                        value.year +
+                        " " +
+                        value.make.make +
+                        " " +
+                        value.model.model +
+                        " \n " +
+                        value.description,
+                    icon: "/vehicleimages/" + value.images[0].image,
+                    image: "/vehicleimages/" + value.images[1].image,
+                    vibrate: [200, 100, 200],
+                });
+
+                notification.addEventListener("click", () => {
+                    window.open(
+                        "http://automart.aakenya.co.ke/vehicle/" + vehicle_no
+                    );
+                });
+            });
+        });
     }
 
     $("body").on("click", ".car-thumbnail", function () {
         window.location = $(this).find('a:first').attr('href');
     });
+
+    // function notifyUs() {
+    //     new Notification("New Vehicle Alert", {
+    //         body: "Here we go for the best",
+    //         // icon: "/vehicleimages/" + value.images[0].image,
+    //         // image: "/vehicleimages/" + value.images[1].image,
+    //         // vibrate: [200, 100, 200],
+    //     });
+    // }
 
 })(jQuery);

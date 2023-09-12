@@ -172,6 +172,7 @@ Route::prefix('vehicles')->group(function () {
     Route::post('sold',[VehicleController::class,'sold']);
     Route::get('dealer', [ApplicationController::class, 'dealervehicles'])->name('dealer.listing');
     Route::get('financing',[ApplicationController::class, 'financing'])->name('financing');
+    Route::get('notification', [ApplicationController::class, 'notification']);
 });
 
 

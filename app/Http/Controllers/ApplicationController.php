@@ -158,16 +158,7 @@ class ApplicationController extends Controller
 
     public function vehiclesLatest()
     {
-        $newarrivals = $this->vehicle
-            ->with(['dealer' => function ($dealer) {
-                return $dealer->select('id', 'name');
-            }, 'type' => function ($type) {
-                return $type->select('id', 'type');
-            }, 'make' => function ($make) {
-                return $make->select('id', 'make');
-            }, 'model' => function ($model) {
-                return $model->select('id', 'model');
-            }, 'prices'])->orderBy('created_at', 'DESC')->limit(100)->get();
+        $newarrivals = $this->vehicle->orderBy('created_at', 'DESC')->limit(50)->get();
         return json_encode($newarrivals);
     }
 
@@ -306,12 +297,13 @@ class ApplicationController extends Controller
         return view('vehicles.show', compact('vehicle', 'relatedvehicles', 'dealervehicles'));
     }
 
-    // public function dealervehicles($id) {
-    //     $dealer = $this->dealer->find($id);
-    //     $vehicles = $this->vehicle->where('dealer_id',$id)->latest()->get();
-    //     return $vehicles;
-    //     return view('vehicles.dealer', compact('vehicles', 'dealer'));
-    // }
+    public function notification() {
+        $vehicles = $this->vehicle->where('sponsored',1)->inRandomOrder()->limit(5)->get();
+        if (count($vehicles) <= 0) {
+            $vehicles = $this->vehicle->latest()->limit(5)->get();
+        }
+        return json_encode($vehicles);
+    }
 
     public function about()
     {
