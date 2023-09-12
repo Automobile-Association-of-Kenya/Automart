@@ -1211,11 +1211,11 @@ $(function () {
 
     if ("Notification" in window) {
         if (Notification.permission === "granted") {
-            notify();
+            showNotification();
         } else {
             Notification.requestPermission().then((res) => {
                 if (res === "granted") {
-                    notify();
+                    showNotification();
                 } else if (res === "denied") {
                     console.error("Notification access denied");
                 } else if (res === "default") {
@@ -1227,33 +1227,33 @@ $(function () {
         console.error("Notification disabled");
     }
 
-    function notify() {
-        $.getJSON("/vehicles/notification", function (vehicles) {
+    // function notify() {
+    //     $.getJSON("/vehicles/notification", function (vehicles) {
 
-            $.each(vehicles, function (key, value) {
-                let vehicle_no = value.vehicle_no ?? value.id;
-                let notification = new Notification("New Vehicle Alert", {
-                    body:
-                        value.year +
-                        " " +
-                        value.make.make +
-                        " " +
-                        value.model.model +
-                        " \n " +
-                        value.description,
-                    icon: "/vehicleimages/" + value.images[0].image,
-                    image: "/vehicleimages/" + value.images[1].image,
-                    vibrate: [200, 100, 200],
-                });
+    //         $.each(vehicles, function (key, value) {
+    //             let vehicle_no = value.vehicle_no ?? value.id;
+    //             let notification = new Notification("New Vehicle Alert", {
+    //                 body:
+    //                     value.year +
+    //                     " " +
+    //                     value.make.make +
+    //                     " " +
+    //                     value.model.model +
+    //                     " \n " +
+    //                     value.description,
+    //                 icon: "/vehicleimages/" + value.images[0].image,
+    //                 image: "/vehicleimages/" + value.images[1].image,
+    //                 vibrate: [200, 100, 200],
+    //             });
 
-                notification.addEventListener("click", () => {
-                    window.open(
-                        "http://automart.aakenya.co.ke/vehicle/" + vehicle_no
-                    );
-                });
-            });
-        });
-    }
+    //             notification.addEventListener("click", () => {
+    //                 window.open(
+    //                     "http://automart.aakenya.co.ke/vehicle/" + vehicle_no
+    //                 );
+    //             });
+    //         });
+    //     });
+    // }
 
     $("body").on("click", ".car-thumbnail", function () {
         window.location = $(this).find('a:first').attr('href');
@@ -1267,5 +1267,24 @@ $(function () {
     //         // vibrate: [200, 100, 200],
     //     });
     // }
+
+    function showNotification() {
+        if (window.Notification) {
+            Notification.requestPermission(function (status) {
+                console.log("Status: ", status); // show notification permission if permission granted then show otherwise message will not show
+                var options = {
+                    body: "Test notification message.", // body part of the notification
+                    dir: "ltr", // use for direction of message
+                    image: "download.png", // use for show image
+                };
+
+                var n = new Notification("Title", options);
+            });
+        } else {
+            alert("Your browser doesn't support notifications.");
+        }
+    }
+
+    showNotification();
 
 })(jQuery);
