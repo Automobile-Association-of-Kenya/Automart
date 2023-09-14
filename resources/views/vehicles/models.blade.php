@@ -39,9 +39,13 @@
 
                                     <div class="car-thumbnail">
                                         <a href="{{ url('/vehicle/' . $vehicle_no) }}" class="car-img">
-                                            <div class="for">{{ $item->usage }}</div>
-                                            <div class="price-box">
+                                            @if ($item->sponsored === 1)
+                                                <div class="tag-2 bg-active">Sponsored</div>
+                                            @else
+                                                <div class="for">{{ $item->usage }}</div>
+                                            @endif
 
+                                            <div class="price-box">
                                                 <span>Kes: {{ number_format($item->price, 2) }}</span>
                                             </div>
                                             <img class="d-block w-100"
@@ -141,7 +145,7 @@
         </div>
     </div>
 
-            @include('layouts.brands')
+    @include('layouts.brands')
 
 @endsection
 

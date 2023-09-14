@@ -27,12 +27,16 @@
                         <div class="car-box-3">
                             <div class="car-thumbnail">
                                 <a href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}" class="car-img">
-                                    <div class="for">{{ $item->usage }}</div>
+                                    @if ($item->sponsored === 1)
+                                        <div class="tag-2 bg-active">Sponsored</div>
+                                    @else
+                                        <div class="for">{{ $item->usage }}</div>
+                                    @endif
                                     <div class="price-box">
                                         <span>Kes: {{ number_format($item->price, 2) }}</span>
                                     </div>
-                                        <img class="d-block w-100" src="{{ asset('/vehicleimages/' . $image) }}"
-                                            alt="{{ $item->make->make . ' ' . $item->model->model }}">
+                                    <img class="d-block w-100" src="{{ asset('/vehicleimages/' . $image) }}"
+                                        alt="{{ $item->make->make . ' ' . $item->model->model }}">
                                 </a>
                                 <div class="carbox-overlap-wrapper">
                                     <div class="overlap-box">
@@ -91,7 +95,8 @@
 
                                 <ul class="custom-list">
                                     <li>
-                                        <i class="flaticon-way text-warning"></i> {{ $item->mileage ?? 0 }} km &nbsp;|&nbsp;
+                                        <i class="flaticon-way text-warning"></i> {{ $item->mileage ?? 0 }} km
+                                        &nbsp;|&nbsp;
                                     </li>
                                     <li>
                                         <i class="flaticon-gear text-warning"></i> {{ $item->enginecc }} cc
@@ -137,12 +142,16 @@
                         <div class="car-box-3">
                             <div class="car-thumbnail">
                                 <a href="{{ url('/vehicle/' . $vehicle_no . '/latest') }}" class="car-img">
-                                    <div class="for">{{ $item->usage }}</div>
+                                    @if ($item->sponsored === 1)
+                                        <div class="tag-2 bg-active">Sponsored</div>
+                                    @else
+                                        <div class="for">{{ $item->usage }}</div>
+                                    @endif
                                     <div class="price-box">
                                         <span>Kes: {{ number_format($item->price, 2) }}</span>
                                     </div>
-                                        <img class="d-block w-100" src="{{ asset('/vehicleimages/' . $image) }}"
-                                            alt="{{ $item->make->make . ' ' . $item->model->model }}">
+                                    <img class="d-block w-100" src="{{ asset('/vehicleimages/' . $image) }}"
+                                        alt="{{ $item->make->make . ' ' . $item->model->model }}">
 
                                 </a>
                                 <div class="carbox-overlap-wrapper">
@@ -167,10 +176,9 @@
                                                         alt="{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}">
                                                 </a>
 
-
                                                 @if (is_array($images))
                                                     @foreach ($images as $image)
-                                                    <a href="{{ asset('/vehicleimages/' . $image->image . '') }}"
+                                                        <a href="{{ asset('/vehicleimages/' . $image->image . '') }}"
                                                             class="hidden"
                                                             data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                             <img src="{{ asset('/vehicleimages/' . $image->image . '') }}"
@@ -205,7 +213,8 @@
                                 <ul class="custom-list">
 
                                     <li>
-                                        <i class="flaticon-way text-warning"></i> {{ $item->mileage ?? 0 }} km &nbsp;|&nbsp;
+                                        <i class="flaticon-way text-warning"></i> {{ $item->mileage ?? 0 }} km
+                                        &nbsp;|&nbsp;
                                     </li>
                                     <li>
                                         <i class="flaticon-gear text-warning"></i> {{ $item->enginecc }} cc
@@ -253,14 +262,20 @@
                             <div class="car-box-3">
                                 <div class="car-thumbnail">
                                     <a href="{{ url('/vehicle/' . $vehicle_no . '/discount') }}" class="car-img">
-                                        <div class="for">{{ $item->usage }}</div>
+                                        @if ($item->sponsored === 1)
+                                            <div class="tag-2 bg-active">Sponsored</div>
+                                        @else
+                                            <div class="for">{{ $item->usage }}</div>
+                                        @endif
                                         <div class="price-box">
                                             <span
                                                 class="del"><del>{{ number_format($item->initial_price, 2) }}</del></span>
                                             <br>
                                             <span>Kes: {{ number_format($item->current_price, 2) }}</span>
                                         </div>
-                                            <img class="d-block w-100" src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}" alt="{{ $item->make->make . ' ' . $item->model->model }}">
+                                        <img class="d-block w-100"
+                                            src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                            alt="{{ $item->make->make . ' ' . $item->model->model }}">
                                     </a>
 
                                     <div class="carbox-overlap-wrapper">
@@ -321,13 +336,14 @@
                                     </ul>
                                     <ul class="custom-list">
 
-                                    <li>
-                                        <i class="flaticon-way text-warning"></i> {{ $item->mileage ?? 0 }} km &nbsp;|&nbsp;
-                                    </li>
-                                    <li>
-                                        <i class="flaticon-gear text-warning"></i> {{ $item->enginecc }} cc
-                                    </li>
-                                </ul>
+                                        <li>
+                                            <i class="flaticon-way text-warning"></i> {{ $item->mileage ?? 0 }} km
+                                            &nbsp;|&nbsp;
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-gear text-warning"></i> {{ $item->enginecc }} cc
+                                        </li>
+                                    </ul>
                                 </div>
                                 <div class="footer">
                                     <div class="buttons mb-2 text-center">
@@ -336,8 +352,8 @@
                                             Enquire</a>
                                         <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm mt-2"><i
                                                 class="fa fa-hand"></i> Buy</a>
-                                        <a href="{{ route('loan', $vehicle_no) }}"
-                                            class="btn btn-success btn-sm"><i class="fa fa-"></i> Apply
+                                        <a href="{{ route('loan', $vehicle_no) }}" class="btn btn-success btn-sm"><i
+                                                class="fa fa-"></i> Apply
                                             Loan</a>
                                     </div>
                                 </div>
@@ -355,9 +371,9 @@
         </div>
     @endif
 
-@include('layouts.brands')
+    @include('layouts.brands')
 
-    <div class="service-section-2">
+    {{-- <div class="service-section-2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -378,7 +394,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+    
 @endsection
 
 @section('footer_scripts')

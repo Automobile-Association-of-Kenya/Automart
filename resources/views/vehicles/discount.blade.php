@@ -45,7 +45,11 @@
                                 <div class="car-box-3">
                                     <div class="car-thumbnail">
                                         <a href="{{ url('/vehicle/' .$vehicle_no.'/discount') }}" class="car-img">
-                                            <div class="for">{{ $item->usage }}</div>
+                                            @if ($item->sponsored === 1)
+                                                <div class="tag-2 bg-active">Sponsored</div>
+                                            @else
+                                                <div class="for">{{ $item->usage }}</div>
+                                            @endif
                                             <div class="price-box">
                                                 <span
                                                     class="del"><del>{{ number_format($item->initial_price, 2) }}</del></span>

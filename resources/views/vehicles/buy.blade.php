@@ -211,7 +211,11 @@
 
                                 <div class="car-thumbnail">
                                     <a href="{{ url('/vehicle/' . $vehicle_no) }}" class="car-img">
-                                        <div class="for">{{ $item->usage }}</div>
+                                        @if ($item->sponsored === 1)
+                                            <div class="tag-2 bg-active">Sponsored</div>
+                                        @else
+                                            <div class="for">{{ $item->usage }}</div>
+                                        @endif
                                         <div class="price-box">
                                             <span>Kes: {{ number_format($item->price, 2) }}</span>
                                         </div>

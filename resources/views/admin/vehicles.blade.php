@@ -64,20 +64,20 @@
                                 <form id="filterVehiclesForm" class="form-row">
                                     @csrf
                                     <div class="col-md-3">
-                                        <label>Dealer</label>
+                                        <label for="filterDealerID">Dealer</label>
                                         <select name="filterlistdealer_id" class="form-control  chzn-select"
                                             id="filterDealerID" style="width: 100%;">
                                         </select>
                                     </div>
                                     <div class="col-md-3">
-                                        <label>Make</label>
+                                        <label for="filterMakeID">Make</label>
                                         <select name="filterlistmake_id" class="form-control  chzn-select" id="filterMakeID"
                                             style="width: 100%;">
                                         </select>
                                     </div>
 
                                     <div class="col-md-2">
-                                        <label for="filterliststatus">Model</label>
+                                        <label for="filterModelID">Model</label>
                                         <select name="filterlistmodel_id" class="form-control  chzn-select"
                                             id="filterModelID" style="width: 100%;">
 
@@ -85,7 +85,7 @@
                                     </div>
 
                                     <div class="col-md-3">
-                                        <label for="vehicles">Vehicles</label>
+                                        <label for="filterVehiclesID">Vehicles</label>
                                         <select name="vehicleslist_id" style="width: 100%;"
                                             class="form-control  chzn-select" id="filterVehiclesID" style="width: 100%;">
                                         </select>
@@ -109,7 +109,7 @@
                                                     <input type="hidden" name="vehicle_id" id="vehicleID"
                                                         value="">
                                                     <div class="col-md-3 form-group">
-                                                        <label for="type">Dealer: <sup>*</sup></label>
+                                                        <label for="vehicleDealer">Dealer: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select class="form-control  chzn-select" name="dealer_id"
                                                                 id="vehicleDealer" style="width: 100%;"></select>
@@ -117,7 +117,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="type">Vehicle Type:<sup>*</sup></label>
+                                                        <label for="vehicleType">Vehicle Type:<sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select class="form-control  chzn-select" name="type"
                                                                 id="vehicleType" style="width: 100%;"></select>
@@ -125,7 +125,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="make">Vehicle Make: <sup>*</sup></label>
+                                                        <label for="vehicleMake">Vehicle Make: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select class="form-control  chzn-select" name="make"
                                                                 id="vehicleMake" required style="width: 100%;"></select>
@@ -133,7 +133,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="firstname">Vehicle Model: <sup>*</sup></label>
+                                                        <label for="vehicleModel">Vehicle Model: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select name="model" id="vehicleModel"
                                                                 class="form-control  chzn-select" required
@@ -142,7 +142,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label>Location </label><span for="yard"
+                                                        <label for="location">Location </label><span for="yard"
                                                             class="float-right"><input type="checkbox" name="yard_check"
                                                                 id="yardToggle">&nbsp;&nbsp;Yard</span>
 
@@ -159,7 +159,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Year of manufacture: <sup>*</sup></label>
+                                                        <label for="yearOfManufacture">Year of manufacture: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select name="year" id="yearOfManufacture"
                                                                 class="form-control  chzn-select" required
@@ -175,7 +175,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Usage:</label>
+                                                        <label for="usageCondition">Usage:</label>
                                                         <div class="input-group">
                                                             <select name="usage" id="usageCondition"
                                                                 class="form-control  chzn-select" style="width: 100%;">
@@ -189,7 +189,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Transmission:</label>
+                                                        <label for="transmission">Transmission:</label>
                                                         <div class="input-group">
                                                             <select name="transmission" id="transmission"
                                                                 class="form-control  chzn-select" style="width: 100%;">
@@ -204,7 +204,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Mileage: <sup>*</sup></label>
+                                                        <label for="mileAge">Mileage: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <input type="number" name="mileage" id="mileAge"
                                                                 class="form-control " required>
@@ -212,7 +212,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Price: <sup>*</sup></label>
+                                                        <label for="vehiclePrice">Price: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <input type="number" name="price" id="vehiclePrice"
                                                                 class="form-control " required>
@@ -220,7 +220,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="enginecc">Engine CC: <sup>*</sup></label>
+                                                        <label for="engineCC">Engine CC: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <input type="number" name="enginecc" id="engineCC"
                                                                 class="form-control " required>
@@ -228,7 +228,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Fuel Type:</label>
+                                                        <label for="fuelType">Fuel Type:</label>
                                                         <div class="input-group">
                                                             <select name="fuel_type" id="fuelType"
                                                                 class="form-control  chzn-select" style="width: 100%;">
@@ -245,7 +245,7 @@
                                                     </div>
 
                                                     <div class="col-md-12">
-                                                        <label for="company">Description:</label>
+                                                        <label for="description">Description:</label>
                                                         <div class="input-group">
                                                             <textarea name="description" id="description" class="form-control" required></textarea>
                                                         </div>
@@ -266,7 +266,7 @@
                                             <div class="card-body" id="additionInfo">
                                                 <div class="row">
                                                     <div class="col-md-3 form-group">
-                                                        <label for="middlename">Country of origin:</label>
+                                                        <label for="countryofOrigin">Country of origin:</label>
                                                         <div class="input-group">
                                                             <select name="country_of_origin" id="countryofOrigin"
                                                                 class="form-control  chzn-select"
@@ -284,7 +284,7 @@
                                                     </div> --}}
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Color:</label>
+                                                        <label for="vehicleColor">Color:</label>
                                                         <select name="color" id="vehicleColor"
                                                             class="form-control   chzn-select" style="width: 100%;">
                                                             <option value="">Select One</option>
@@ -312,7 +312,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Interior:</label>
+                                                        <label for="interior">Interior:</label>
                                                         <div class="input-group">
                                                             <select name="inetrior" id="interior"
                                                                 class="form-control  chzn-select" style="width: 100%;">
@@ -325,7 +325,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="gear">NO Seats: </label>
+                                                        <label for="noOfSeats">NO Seats: </label>
                                                         <div class="input-group">
                                                             <input type="text" name="seats" id="noOfSeats"
                                                                 class="form-control ">
@@ -375,7 +375,7 @@
 
 
                                                     <div class="col-md-4 form-group">
-                                                        <label for="company">Tags:</label>
+                                                        <label for="vehicleTags">Tags:</label>
                                                         <div class="input-group">
                                                             <select name="tags" id="vehicleTags" class="form-control "
                                                                 multiple="multiple" style="width: 100%;">
@@ -396,7 +396,7 @@
                                         <div class="card mt-2">
                                             <div class="card-header bg-white">
                                                 <div class="form-group">
-                                                    <label for="documentnumber"><span id="images">Images:</label>
+                                                    <label for="addionalImages"><span id="images">Images:</label>
                                                     <div class="input-group">
                                                         <input type="file" name="images" id="addionalImages"
                                                             multiple>
@@ -446,21 +446,21 @@
                                         @endif --}}
 
                                     <div class="col-md-4">
-                                        <label>Dealer</label>
+                                        <label for="filterListDealerID">Dealer</label>
                                         <select name="filterlistdealer_id" class="form-control  chzn-select"
                                             id="filterListDealerID" style="width: 100%;">
                                         </select>
                                     </div>
 
                                     <div class="col-md-4">
-                                        <label>Make</label>
+                                        <label for="filterListMakeID">Make</label>
                                         <select name="filterlistmake_id" class="form-control  chzn-select"
                                             id="filterListMakeID" style="width: 100%;">
                                         </select>
                                     </div>
 
                                     <div class="col-md-3">
-                                        <label for="filterliststatus">Model</label>
+                                        <label for="filterListModelID">Model</label>
                                         <select name="filterlistmodel_id" class="form-control  chzn-select"
                                             id="filterListModelID" style="width: 100%;">
 
@@ -524,7 +524,7 @@
                                                     <input type="hidden" name="make_id" id="makeCreateID"
                                                         value="">
                                                     <div class="col-md-12 form-group">
-                                                        <label for="make">Make:</label>
+                                                        <label for="makeName">Make:</label>
                                                         <div class="input-group">
                                                             <input type="text" name="make" id="makeName"
                                                                 class="form-control ">
@@ -532,7 +532,7 @@
                                                     </div>
 
                                                     <div class="col-md-12 form-group">
-                                                        <label for="make">Logo:</label>
+                                                        <label for="makeLogo">Logo:</label>
                                                         <div class="input-group">
                                                             <input type="file" name="logo" id="makeLogo">
                                                         </div>
@@ -580,7 +580,7 @@
                                                         <input type="hidden" name="model_id" id="modelID"
                                                             value="">
                                                         <div class="col-md-12 form-group">
-                                                            <label for="make_id">Make:</label>
+                                                            <label for="modelMakeID">Make:</label>
                                                             <div class="input-group">
                                                                 <select name="make_id" id="modelMakeID"
                                                                     class="form-control "></select>
@@ -588,7 +588,7 @@
                                                         </div>
 
                                                         <div class="col-md-12 form-group">
-                                                            <label for="make">Model:</label>
+                                                            <label for="modelName">Model:</label>
                                                             <div class="input-group">
                                                                 <input type="text" name="model" id="modelName"
                                                                     class="form-control ">
@@ -637,7 +637,7 @@
                                                     <div class="row">
 
                                                         <div class="col-md-12 form-group">
-                                                            <label for="make">Feature:</label>
+                                                            <label for="featureName">Feature:</label>
                                                             <div class="input-group">
                                                                 <input type="text" name="feature" id="featureName"
                                                                     class="form-control ">
@@ -645,7 +645,7 @@
                                                         </div>
 
                                                         <div class="col-md-12 form-group">
-                                                            <label for="make">Description:</label>
+                                                            <label for="featureDescription">Description:</label>
                                                             <div class="input-group">
                                                                 <textarea name="description" id="featureDescription" class="form-control "></textarea>
                                                             </div>
@@ -690,9 +690,9 @@
                                                     <div class="row">
 
                                                         <div class="col-md-12 form-group">
-                                                            <label for="make">Name:</label>
+                                                            <label for="typeName">Name:</label>
                                                             <div class="input-group">
-                                                                <input type="text" name="feature" id="typeName"
+                                                                <input type="text" name="type" id="typeName"
                                                                     class="form-control ">
                                                             </div>
                                                         </div>
@@ -734,7 +734,7 @@
                                                 <div class="row">
 
                                                     <div class="col-md-12 form-group">
-                                                        <label for="make">Dealer:</label>
+                                                        <label for="dealerYardID">Dealer:</label>
                                                         <div class="input-group">
                                                             <select type="text" name="dealer_id" id="dealerYardID"
                                                                 class="form-control chzn-select"
@@ -743,28 +743,28 @@
                                                     </div>
 
                                                     <div class="col-md-12 form-group">
-                                                        <label for="make">Name:</label>
+                                                        <label for="yardName">Name:</label>
                                                         <div class="input-group">
                                                             <input type="text" name="yard" id="yardName"
                                                                 class="form-control ">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 form-group">
-                                                        <label for="make">Address:</label>
+                                                        <label for="yardAddress">Address:</label>
                                                         <div class="input-group">
                                                             <input type="text" name="yardaddress" id="yardAddress"
                                                                 class="form-control ">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 form-group">
-                                                        <label for="make">Email:</label>
+                                                        <label for="yardEmail">Email:</label>
                                                         <div class="input-group">
                                                             <input type="text" name="yardemail" id="yardEmail"
                                                                 class="form-control ">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 form-group">
-                                                        <label for="make">Phone:</label>
+                                                        <label for="yardPhone">Phone:</label>
                                                         <div class="input-group">
                                                             <input type="text" name="yardphone" id="yardPhone"
                                                                 class="form-control ">
@@ -830,7 +830,7 @@
     <script src="{{ asset('js/main/pdfmake.min.js') }}"></script>
     <script src="{{ asset('js/main/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/main/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('js/jquery_ui.js') }}"></script>
+    <script src="{{ asset('js/main/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/main/vehicle.js') }}"></script>
     <script>
         (function() {

@@ -53,7 +53,7 @@
                                     {!! Session::get('dealerinfo') !!}
                                 </div>
                             @endif
-                            
+
                             <div class="alert-success pb-3 pt-3 pl-2 pr-1 border-rounded filterSection"
                                 style="border-radius: 6px; display:none;">
                                 <form id="filterVehiclesForm" class="form-row">
@@ -63,28 +63,28 @@
                                     <input type="hidden" name="dealer_id" id="vehicleDealer"
                                         value="{{ auth()->user()->dealer_id }}">
                                     <div class="col-md-3">
-                                        <label>Yard</label>
+                                        <label for="filterVehicleYardID">Yard</label>
                                         <select name="filterlistyard_id" id="filterVehicleYardID"
                                             class="form-control form-control--md chzn-select" style="width: 100%;">
                                         </select>
                                     </div>
 
                                     <div class="col-md-3">
-                                        <label>Make</label>
+                                        <label for="filterMakeID">Make</label>
                                         <select name="filterlistmake_id" class="form-control form-control--md chzn-select"
                                             id="filterMakeID" style="width: 100%;">
                                         </select>
                                     </div>
 
                                     <div class="col-md-2">
-                                        <label for="filterliststatus">Model</label>
+                                        <label for="filterModelID">Model</label>
                                         <select name="filterlistmodel_id" class="form-control form-control--md chzn-select"
                                             id="filterModelID" style="width: 100%;">
                                         </select>
                                     </div>
 
                                     <div class="col-md-3">
-                                        <label for="vehicles">Vehicles</label>
+                                        <label for="filterVehiclesID">Vehicles</label>
                                         <select name="vehicleslist_id" style="width: 100%;"
                                             class="form-control form-control--md chzn-select" id="filterVehiclesID"
                                             style="width: 100%;">
@@ -111,7 +111,7 @@
                                                         value="{{ $str }}">
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="type">Vehicle Type:</label>
+                                                        <label for="vehicleType">Vehicle Type:</label>
                                                         <div class="input-group">
                                                             <select class="form-control form-control--md chzn-select"
                                                                 name="type" id="vehicleType"
@@ -119,7 +119,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 form-group">
-                                                        <label for="make">Vehicle Make: <sup>*</sup></label>
+                                                        <label for="vehicleMake">Vehicle Make: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select class="form-control form-control--md chzn-select"
                                                                 name="make" id="vehicleMake" required
@@ -128,7 +128,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="firstname">Vehicle Model: <sup>*</sup></label>
+                                                        <label for="vehicleModel">Vehicle Model: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select name="model" id="vehicleModel"
                                                                 class="form-control form-control--md chzn-select" required
@@ -137,7 +137,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Year of manufacture: <sup>*</sup></label>
+                                                        <label for="yearOfManufacture">Year of manufacture: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select name="year" id="yearOfManufacture"
                                                                 class="form-control form-control--md chzn-select" required
@@ -153,7 +153,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Fuel Type: <sup>*</sup></label>
+                                                        <label for="fuelType">Fuel Type: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select name="fuel_type" id="fuelType"
                                                                 class="form-control form-control--md chzn-select"
@@ -171,7 +171,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Transmission: <sup>*</sup></label>
+                                                        <label for="transmission">Transmission: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select name="transmission" id="transmission"
                                                                 class="form-control form-control--md chzn-select"
@@ -187,7 +187,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Usage: <sup>*</sup></label>
+                                                        <label for="usageCondition">Usage: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select name="usage" id="usageCondition"
                                                                 class="form-control form-control--md chzn-select"
@@ -202,7 +202,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Price: <sup>*</sup></label>
+                                                        <label for="vehiclePrice">Price: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <input type="number" name="price" id="vehiclePrice"
                                                                 class="form-control form-control--md" required>
@@ -210,7 +210,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="enginecc">Engine CC: <sup>*</sup></label>
+                                                        <label for="engineCC">Engine CC: <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <input type="number" name="enginecc" id="engineCC"
                                                                 class="form-control form-control--md" required>
@@ -218,7 +218,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Mileage:</label>
+                                                        <label for="mileAge">Mileage:</label>
                                                         <div class="input-group">
                                                             <input type="number" name="mileage" id="mileAge"
                                                                 class="form-control form-control--md">
@@ -226,9 +226,9 @@
                                                     </div>
 
                                                     <div class="col-md-6 form-group">
-                                                        <label>Location </label><span for="yard"
-                                                            class="float-right"><input type="checkbox" name="yard_check"
-                                                                id="yardToggle">&nbsp;&nbsp;Yard</span>
+                                                        <label for="location">Location </label><span for="yard"
+                                                            class="float-right">
+                                                            <input type="checkbox" name="yard_check" id="yardToggle">&nbsp;&nbsp;Yard</span>
 
                                                         <div class="input-group locationInput">
                                                             <input type="text"
@@ -265,7 +265,7 @@
                                             <div class="card-body" id="additionInfo">
                                                 <div class="row">
                                                     <div class="col-md-3 form-group">
-                                                        <label for="middlename">Country of origin:</label>
+                                                        <label for="countryofOrigin">Country of origin:</label>
                                                         <div class="input-group">
                                                             <select name="country_of_origin" id="countryofOrigin"
                                                                 class="form-control form-control--md chzn-select"
@@ -281,29 +281,11 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-3 form-group">
-                                                        <label>Location </label><span for="yard"
-                                                            class="float-right"><input type="checkbox" name="yard_check"
-                                                                id="yardToggle">&nbsp;&nbsp;Yard</span>
-
-                                                        <div class="input-group locationInput">
-                                                            <input type="text"
-                                                                class="form-control form-control--md location"
-                                                                id="location" name="location">
-                                                        </div>
-
-                                                        <div class="input-group yardInput">
-                                                            <select name="yard_id"
-                                                                id="yardID"class="form-control form-control--md location chzn-select"
-                                                                style="width: 100%;"></select>
-                                                        </div>
-                                                    </div>
-
                                                     <input type="hidden" name="vehicle_id" id="vehicleID"
                                                         value="">
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Color:</label>
+                                                        <label for="vehicleColor">Color:</label>
                                                         <select name="color" id="vehicleColor"
                                                             class="form-control  form-control--md chzn-select"
                                                             style="width: 100%;">
@@ -332,7 +314,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="company">Interior:</label>
+                                                        <label for="interior">Interior:</label>
                                                         <div class="input-group">
                                                             <select name="inetrior" id="interior"
                                                                 class="form-control form-control--md chzn-select"
@@ -346,7 +328,7 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="gear">NO Seats: </label>
+                                                        <label for="noOfSeats">NO Seats: </label>
                                                         <div class="input-group">
                                                             <input type="number" name="seats" id="noOfSeats"
                                                                 class="form-control">
@@ -421,7 +403,7 @@
                                         <div class="card mt-2">
                                             <div class="card-header bg-white">
                                                 <div class="form-group">
-                                                    <label for="documentnumber"><span id="images">Images:</label>
+                                                    <label for="addionalImages"><span id="images">Images:</label>
                                                     <div class="input-group">
                                                         <input type="file" name="images" id="addionalImages"
                                                             multiple>
@@ -467,7 +449,7 @@
                                 <form id="filterVehiclesListForm" class="form-row">
                                     @csrf
                                     <div class="col-md-4">
-                                        <label>Yard</label>
+                                        <label for="filterListVehicleYardID">Yard</label>
                                         <select name="filterlistyard_id" id="filterListVehicleYardID"
                                             class="form-control form-control--md chzn-select" style="width: 100%;">
                                         </select>
@@ -476,14 +458,14 @@
                                         value="{{ auth()->user()->dealer_id }}">
 
                                     <div class="col-md-4">
-                                        <label>Make</label>
+                                        <label for="filterListMakeID">Make</label>
                                         <select name="filterlistmake_id" class="form-control form-control--md chzn-select"
                                             id="filterListMakeID" style="width: 100%;">
                                         </select>
                                     </div>
 
                                     <div class="col-md-3">
-                                        <label for="filterliststatus">Model</label>
+                                        <label for="filterListModelID">Model</label>
                                         <select name="filterlistmodel_id"
                                             class="form-control form-control--md chzn-select" id="filterListModelID"
                                             style="width: 100%;">
@@ -551,28 +533,28 @@
                                                             value="{{ auth()->user()->dealer_id }}">
 
                                                         <div class="col-md-12 form-group">
-                                                            <label for="make">Name:</label>
+                                                            <label for="yardName">Name:</label>
                                                             <div class="input-group">
                                                                 <input type="text" name="yard" id="yardName"
                                                                     class="form-control form-control--md">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 form-group">
-                                                            <label for="make">Address:</label>
+                                                            <label for="yardAddress">Address:</label>
                                                             <div class="input-group">
                                                                 <input type="text" name="yardaddress" id="yardAddress"
                                                                     class="form-control form-control--md">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 form-group">
-                                                            <label for="make">Email:</label>
+                                                            <label for="yardEmail">Email:</label>
                                                             <div class="input-group">
                                                                 <input type="text" name="yardemail" id="yardEmail"
                                                                     class="form-control form-control--md">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 form-group">
-                                                            <label for="make">Phone:</label>
+                                                            <label for="yardPhone">Phone:</label>
                                                             <div class="input-group">
                                                                 <input type="text" name="yardphone" id="yardPhone"
                                                                     class="form-control form-control--md">
