@@ -13,14 +13,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
         $schedule->call(function() {
             $subscriptions = DB::table('dealer_subscription')->where('status', '1')->whereDate('expiry_date','<',date('Y-m-d'))->get();
-
             foreach ($subscriptions as $key => $value) {
-
+                DB::table('vehicles')->where('user_id',$value->user_id)->orWhere('dealer_id',$value->dealer_id)->update(['priority'=>9,'sponsored'=>0]);
             }
-
         })->daily();
     }
 

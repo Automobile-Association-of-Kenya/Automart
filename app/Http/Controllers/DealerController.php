@@ -134,7 +134,9 @@ class DealerController extends Controller
         $purchase->update(['status' => 'approved', 'completed_at' => date('Y-m-d H:i:s')]);
         DB::commit();
         $subject = "Purchase Approval Mail";
-        Mail::to($purchase->email,$purchase->name)->send(new MailPurchase($purchase,$subject, $request->message));
+        $replyto = $purchase->vehicle->user?->email ?? $purchase->vehicle->dealer?->naemaile;
+        $replyname = $purchase->vehicle->user?->name ?? $purchase->vehicle->dealer?->name;
+        Mail::to($purchase->email,$purchase->name)->send(new MailPurchase($purchase,$subject,$request->message,$replyto,$replyname));
         return redirect()->back()->with('success', 'Purchase approval was successful.');
     }
 
@@ -142,8 +144,10 @@ class DealerController extends Controller
     {
         $subject = 'Purchase Request Decline Email';
         $purchase = $this->purchase->with('vehicle')->findOrFail($request->purchase_decline_request_id);
+        $replyto = $purchase->vehicle->user?->email ?? $purchase->vehicle->dealer?->naemaile;
+        $replyname = $purchase->vehicle->user?->name ?? $purchase->vehicle->dealer?->name;
         if (!is_null($purchase->email)) {
-            Mail::to($purchase->email, $purchase->name)->send(new MailPurchase($purchase, $subject, $request->message));
+            Mail::to($purchase->email, $purchase->name)->send(new MailPurchase($purchase, $subject, $request->message, $replyto, $replyname));
         }
         return redirect()->back()->with('success', 'Decline message sent successfully.');
     }
