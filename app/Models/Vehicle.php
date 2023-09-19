@@ -19,7 +19,7 @@ class Vehicle extends Model
         'speed',
         'terrain',
         'engine','seats',
-        'horsepower', 'status', 'sponsored', 'priority','location'
+        'horsepower', 'status', 'sponsored', 'priority','location', 'cover_photo'
     ];
 
     public $with = ['user:id,name,email,phone','make:id,make', 'model:id,model', 'images:id,vehicle_id,image', 'dealer:id,name,phone,email', 'type:id,type', 'prices:id,price', 'yard:id,yard,address', 'features:id,feature'];

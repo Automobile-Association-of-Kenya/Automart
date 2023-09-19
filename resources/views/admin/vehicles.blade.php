@@ -159,7 +159,8 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="yearOfManufacture">Year of manufacture: <sup>*</sup></label>
+                                                        <label for="yearOfManufacture">Year of manufacture:
+                                                            <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select name="year" id="yearOfManufacture"
                                                                 class="form-control  chzn-select" required
@@ -372,8 +373,6 @@
                                                         </div>
                                                     </div>
 
-
-
                                                     <div class="col-md-4 form-group">
                                                         <label for="vehicleTags">Tags:</label>
                                                         <div class="input-group">
@@ -395,13 +394,25 @@
 
                                         <div class="card mt-2">
                                             <div class="card-header bg-white">
-                                                <div class="form-group">
-                                                    <label for="addionalImages"><span id="images">Images:</label>
-                                                    <div class="input-group">
-                                                        <input type="file" name="images" id="addionalImages"
-                                                            multiple>
+
+                                                <div class="row">
+                                                    <div class="col-md-6 form-group">
+                                                        <label for="coverPhoto"><span id="images">Main Image/Cover
+                                                                Photo:</label>
+                                                        <div class="input-group">
+                                                            <input type="file" name="cover_photo" id="coverPhoto">
+                                                        </div>
                                                     </div>
-                                                    <p class="text-danger">You can upload from 1 - 20 photos</p>
+
+                                                    <div class="col-md-6 form-group">
+                                                        <label for="addionalImages"><span id="images">Additional
+                                                                Images:</label>
+                                                        <div class="input-group">
+                                                            <input type="file" name="images" id="addionalImages"
+                                                                multiple>
+                                                        </div>
+                                                        <p class="text-danger">You can upload from 1 - 20 photos</p>
+                                                    </div>
                                                 </div>
 
                                             </div>

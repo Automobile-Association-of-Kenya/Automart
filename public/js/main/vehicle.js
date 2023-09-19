@@ -1121,13 +1121,10 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                $("#coverPhotoPreview").append(
-                    '<img src="' +
+                $("#image-preview").prepend(
+                    '<div class="col-md-3"><img src="' +
                         e.target.result +
-                        '"width="100%" height="200px" alt="Image Preview">'
-                );
-                $("#coverPhotoPreview").append(
-                    '<button class="btn btn-outline-danger"><i class="fal fa-trash btn-danger" id="coverPhotoRemve"></i></button>'
+                        '"width="100%" height="200px" alt="Image Preview"><button class="btn btn-outline-danger" id="coverPhotoRemve"><i class="fal fa-trash btn-danger"></i></button></div>'
                 );
             };
             reader.readAsDataURL(input.files[0]);
@@ -1138,7 +1135,7 @@
 
     $(document).on("click", "#coverPhotoRemve", function () {
         $("#coverPhoto").val("");
-        $("#coverPhotoPreview").html("");
+        $(this).parent().remove();
     });
 
     $("#addionalImages").on("change", function () {
@@ -1414,6 +1411,45 @@
             showError("" + p + "", "#vehiclefeedback");
             savevehicle.prop("disabled", false);
         } else {
+            var coverImagePromise = new Promise(function(resolve, reject) {
+                var file = input.files[0];
+                if (input.files.length > 0) {
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        var img = new Image();
+                        img.onload = function () {
+                            var width = 850;
+                            var height = 500;
+                            var canvas = document.createElement("canvas");
+                            canvas.width = width;
+                            canvas.height = height;
+                            canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+                            var compressedFile = canvas.toDataURL("image/jpeg", 0.8);
+                            $.post("/upload", {
+                                _token: token,
+                                str_id: uniqueStrID.val(),
+                                image: compressedFile,
+                                vehicle_id: vehicleID.val(),
+                                cover_image: true,
+                            })
+                                .done(function (params) {
+                                    console.log(params);
+                                    if (params == "success") {
+                                        resolve();
+                                        $("#coverPhotoPreview").children().remove();
+                                    }
+                                })
+                                .fail(function (error) {
+                                    reject();
+                                });
+                        };
+                        img.src = reader.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            imagesUploadPromises.push(coverImagePromise);
+
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 var imageUploadPromise = new Promise(function (
@@ -1488,6 +1524,7 @@
                         url: "/vehicles/store",
                         data: data,
                         success: function (params) {
+                            console.log(params);
                             savevehicle.prop("disabled", false);
                             let result = JSON.parse(params);
                             if (result.status == "success") {
@@ -1665,8 +1702,51 @@
                             $(input).prop("checked", true);
                         }
                     });
+
+
+                    let previewContainer = $("#image-preview");
+
+                    let cover = $("<img>")
+                        .attr("src", "/vehicleimages/" + value.cover_photo)
+                        .attr("width", "100%")
+                        .attr("height", "200px");
+                    let coverpreview = $('<div class="col-md-3">')
+                        .addClass("image-preview")
+                        .append(cover);
+
+                    previewContainer.prepend(coverpreview);
+                    const removeButton = $(
+                        "<button class='btn btn-outline-danger' id='imgDeleteBtn' data-id='" +
+                            vehicle.id +
+                            "' data-image='" +
+                            vehicle.cover_photo +
+                            "'>"
+                    )
+                        .html("<i class='fal fa-trash btn-danger'></i>")
+                        .on("click", function (event) {
+                            event.preventDefault();
+                            let $this = $(this),
+                                data = {
+                                    _token: token,
+                                    vehicle_id: vehicle.id,
+                                    image: vehicle.cover_photo,
+                                    cover_photo: true,
+                                    photo_delete: true,
+                                };
+                            $.post("/image-delete", data)
+                                .done(function (params) {
+                                    let result = JSON.parse(params);
+                                    if (result.status == "success") {
+                                        coverpreview.remove();
+                                    }
+                                })
+                                .fail(function (error) {
+                                    console.error(error);
+                                });
+                        });
+                    coverpreview.append(removeButton);
+
                     if (vehicle.images !== "[]" && vehicle.images !== null) {
-                        let previewContainer = $("#image-preview");
                         $.each(vehicle.images, function (key, value) {
                             let image = $("<img>")
                                 .attr("src", "/vehicleimages/" + value.image)

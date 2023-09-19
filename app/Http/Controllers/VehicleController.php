@@ -233,7 +233,6 @@ class VehicleController extends Controller
                 session()->put($str_id . 'images', [$imageString[1]]);
             }
         }
-
         return 'success';
     }
 
@@ -271,6 +270,26 @@ class VehicleController extends Controller
             }
         }
 
+        if (session()->has($strkey . 'cover')) {
+            $jsone = session($strkey . 'cover');
+            $image = base64_decode($jsone);
+            $coverImage = 'img' . auth()->id() . 'cover' . strtotime(now()) . '.jpg'; // or any other desired file name
+            $img = Image::make($image);
+            $img->text(' ' . $name . ' via AA Kenya', 150, 120, function ($font) {
+                $font->file(public_path('fonts/font.ttf'));
+                $font->size(18);
+                $font->color('#CECECE');
+                $font->align('center');
+                $font->valign('center');
+                $font->angle(0);
+            });
+            $validated["cover_photo"] = $coverImage;
+            $img->save(public_path('vehicleimages/' . $coverImage));
+        }
+
+        // return json_encode($validated);
+
+
         if (session()->has($strkey . 'images')) {
             foreach (session($strkey . 'images') as $key => $value) {
                 $image = base64_decode($value);
@@ -288,7 +307,11 @@ class VehicleController extends Controller
                 array_push($images, $fileName);
             }
         }
+
+
         $validated['tags'] = (isset($validated['tags'])) ? json_encode($validated['tags']) : null;
+        // return $validated;
+
         DB::beginTransaction();
         if (isset($request->vehicle_id) && $request->vehicle_id !== null) {
             if ($vehicle->price !== $validated["price"]) {
@@ -301,6 +324,8 @@ class VehicleController extends Controller
             }
             $message = "Vehicle updated successfully";
         } else {
+            // return $validated;
+
             $vehicle = Vehicle::create(['user_id' => auth()->id(), 'vehicle_no' => strtoupper(Str::random(3)) . strtotime(now()), 'views' => 0] + $validated);
             if (isset($validated["features"]) && count($validated["features"]) > 0) {
                 $this->vehicle->addfeatures($vehicle->id, $validated["features"]);
@@ -308,10 +333,12 @@ class VehicleController extends Controller
             VehiclePrice::create(['vehicle_id' => $vehicle->id, 'price' => $validated['price']]);
             $message = "Vehicle added successfully";
         }
+
         if (!empty($images)) {
             VehicleImage::new($vehicle->id, $images);
         }
         DB::commit();
+
         session()->forget($strkey . "images");
         session()->forget($strkey . 'cover');
         if (session()->has('advertinfo')) {
@@ -341,7 +368,12 @@ class VehicleController extends Controller
     public function imageDelete(Request $request)
     {
         $image = $request->image;
-        if (isset($request->photo_delete) && $request->photo_delete) {
+        if (isset($request->cover_photo) && $request->photo_delete) {
+            if (File::exists(public_path('vehicleimages/' . $image["image"]))) {
+                Storage::delete('vehicleimages/' . $image["image"]);
+            }
+            $this->vehicle->where('id',$request->vehicle_id)->update(['cover_photo'=>'']);
+        }else {
             if (File::exists(public_path('vehicleimages/' . $image["image"]))) {
                 Storage::delete('vehicleimages/' . $image["image"]);
             }

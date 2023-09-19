@@ -372,30 +372,6 @@
     @endif
 
     @include('layouts.brands')
-
-    {{-- <div class="service-section-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row" id="servicesSection">
-                        <div class="text-center">
-                            <div class="lds-roller">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    
 @endsection
 
 @section('footer_scripts')

@@ -46,7 +46,8 @@
                         <div class="tab-pane fade show active" id="vehicledetails" role="tabpanel">
                             <div class="text-right">
                                 <button type="button" class="btn btn-success btn-sm mt-1 mb-1 btn-floated"
-                                    id="filterToggle"><i class="fa fa-edit fa-1x text-warning"></i>&nbsp;Edit Vehicle</button>
+                                    id="filterToggle"><i class="fa fa-edit fa-1x text-warning"></i>&nbsp;Edit
+                                    Vehicle</button>
                             </div>
                             @if (Session::has('dealerinfo'))
                                 <div class="alert alert-warning" role="alert">
@@ -137,7 +138,8 @@
                                                     </div>
 
                                                     <div class="col-md-3 form-group">
-                                                        <label for="yearOfManufacture">Year of manufacture: <sup>*</sup></label>
+                                                        <label for="yearOfManufacture">Year of manufacture:
+                                                            <sup>*</sup></label>
                                                         <div class="input-group">
                                                             <select name="year" id="yearOfManufacture"
                                                                 class="form-control form-control--md chzn-select" required
@@ -228,7 +230,8 @@
                                                     <div class="col-md-6 form-group">
                                                         <label for="location">Location </label><span for="yard"
                                                             class="float-right">
-                                                            <input type="checkbox" name="yard_check" id="yardToggle">&nbsp;&nbsp;Yard</span>
+                                                            <input type="checkbox" name="yard_check"
+                                                                id="yardToggle">&nbsp;&nbsp;Yard</span>
 
                                                         <div class="input-group locationInput">
                                                             <input type="text"
@@ -402,14 +405,26 @@
 
                                         <div class="card mt-2">
                                             <div class="card-header bg-white">
-                                                <div class="form-group">
-                                                    <label for="addionalImages"><span id="images">Images:</label>
-                                                    <div class="input-group">
-                                                        <input type="file" name="images" id="addionalImages"
-                                                            multiple>
+
+                                                <div class="row">
+                                                    <div class="col-md-6 form-group">
+                                                        <label for="coverPhoto"><span id="images">Cover Photo:</label>
+                                                        <div class="input-group">
+                                                            <input type="file" name="cover_photo" id="coverPhoto">
+                                                        </div>
                                                     </div>
-                                                    <p class="text-danger">You can upload from 1 - 20 photos</p>
+
+                                                    <div class="col-md-6 form-group">
+                                                        <label for="addionalImages"><span id="images">Additional
+                                                                Images:</label>
+                                                        <div class="input-group">
+                                                            <input type="file" name="images" id="addionalImages"
+                                                                multiple>
+                                                        </div>
+                                                        <p class="text-danger">You can upload from 1 - 20 photos</p>
+                                                    </div>
                                                 </div>
+
                                             </div>
                                             <div class="card-body">
 
