@@ -131,12 +131,12 @@ for you. Happy car shopping!</p>
                                             </a>
 
                                             <div class="car-magnify-gallery">
-                                                <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                <a href="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                     class="overlap-btn"
                                                     data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                     <i class="fa fa-expand"></i>
                                                     <img class="hidden"
-                                                        src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                        src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                         alt="{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}">
                                                 </a>
 

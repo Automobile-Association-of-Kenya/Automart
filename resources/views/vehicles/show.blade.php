@@ -402,7 +402,7 @@
 
                                 <div class="car-thumbnail">
                                     <a href="{{ url('/vehicle/' . $vehicle_no) }}" class="car-img">
-                                    
+
                                         @if ($item->sponsored === 1)
                                             <div class="tag-2 bg-active">Sponsored</div>
                                         @else
@@ -413,7 +413,7 @@
                                             <span>Kes: {{ number_format($item->price, 2) }}</span>
                                         </div>
                                         <img class="d-block w-100"
-                                            src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                            src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                             alt="car">
                                     </a>
                                     <div class="carbox-overlap-wrapper">
@@ -429,12 +429,12 @@
                                                 </a>
 
                                                 <div class="car-magnify-gallery">
-                                                    <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                    <a href="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                         class="overlap-btn"
                                                         data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                         <i class="fa fa-expand"></i>
                                                         <img class="hidden"
-                                                            src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                            src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                             alt="hidden-img">
                                                     </a>
 
@@ -531,7 +531,7 @@
                                             <span>Kes: {{ number_format($item->price, 2) }}</span>
                                         </div>
                                         <img class="d-block w-100"
-                                            src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                            src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                             alt="car">
                                     </a>
                                     <div class="carbox-overlap-wrapper">
@@ -547,12 +547,12 @@
                                                 </a>
 
                                                 <div class="car-magnify-gallery">
-                                                    <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                    <a href="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                         class="overlap-btn"
                                                         data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                         <i class="fa fa-expand"></i>
                                                         <img class="hidden"
-                                                            src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                            src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                             alt="hidden-img">
                                                     </a>
 

@@ -1117,7 +1117,6 @@
 
     $("#coverPhoto").on("change", function () {
         var input = $(this)[0];
-
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -1415,11 +1414,12 @@
                 var file = input.files[0];
                 if (input.files.length > 0) {
                     var reader = new FileReader();
+
                     reader.onload = function () {
                         var img = new Image();
                         img.onload = function () {
-                            var width = 850;
-                            var height = 500;
+                            var width = (img.width > 1000) ? 1000 : img.width;
+                            var height = width / (img.width / img.height);
                             var canvas = document.createElement("canvas");
                             canvas.width = width;
                             canvas.height = height;
@@ -1463,16 +1463,10 @@
                         img.onload = function () {
                             var canvas = document.createElement("canvas");
                             var ctx = canvas.getContext("2d");
-                            canvas.width = 600;
-                            canvas.height = 450;
+                            canvas.width = (img.width > 1000) ? 1000 : img.width;
+                            canvas.height = canvas.width / (img.width / img.height);
                             let leet = "image_" + i;
-                            ctx.drawImage(
-                                img,
-                                0,
-                                0,
-                                canvas.width,
-                                canvas.height
-                            );
+                            ctx.drawImage(img,0,0,canvas.width,canvas.height);
                             var compressedDataUrl = canvas.toDataURL(
                                 "image/jpeg",
                                 0.5
@@ -1524,7 +1518,6 @@
                         url: "/vehicles/store",
                         data: data,
                         success: function (params) {
-                            console.log(params);
                             savevehicle.prop("disabled", false);
                             let result = JSON.parse(params);
                             if (result.status == "success") {
@@ -1543,7 +1536,6 @@
                         },
 
                         error: function (error) {
-                            console.error(error);
                             savevehicle.prop("disabled", false);
                             if (error.status == 422) {
                                 var errors = "";
@@ -1707,7 +1699,7 @@
                     let previewContainer = $("#image-preview");
 
                     let cover = $("<img>")
-                        .attr("src", "/vehicleimages/" + value.cover_photo)
+                        .attr("src", "/vehicleimages/" + vehicle.cover_photo)
                         .attr("width", "100%")
                         .attr("height", "200px");
                     let coverpreview = $('<div class="col-md-3">')
@@ -1795,7 +1787,6 @@
                                 const newFiles = new DataTransfer();
                             },
                         });
-                    } else {
                     }
                 } else {
                     showError(

@@ -408,7 +408,7 @@
 
                                                 <div class="row">
                                                     <div class="col-md-6 form-group">
-                                                        <label for="coverPhoto"><span id="images">Cover Photo:</label>
+                                                        <label for="coverPhoto"><span id="images">Main Image / 'Cover' Photo:</label>
                                                         <div class="input-group">
                                                             <input type="file" name="cover_photo" id="coverPhoto">
                                                         </div>

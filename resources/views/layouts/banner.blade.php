@@ -21,7 +21,7 @@
                                         <span class="text-white">Buy a Car</span> <i class="fa fa-arrow-right text-white"></i>
                                     </a>&nbsp;&nbsp;&nbsp;
 
-                                    <a href="{{ route('dealer.vehicles') }}" class="btn btn-lg btn-outline-warning">
+                                    <a href="{{ route('dealer.vehicles') }}" class="btn btn-lg btn-warning">
                                         <span class='text-white'>Sell Your Car</span> <i class="fa fa-arrow-right text-white"></i>
                                     </a>
                                 </div>

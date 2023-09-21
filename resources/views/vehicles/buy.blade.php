@@ -43,7 +43,7 @@
                             @php
                                 $images = $vehicle->images;
                             @endphp
-                            <img src="{{ asset('vehicleimages/' . $images[0]->image) }}"
+                            <img src="{{ asset('vehicleimages/' . $item->cover_photo) }}"
                                 alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}"
                                 width="100%" max-height="350px">
                         </div>
@@ -221,7 +221,7 @@
                                         </div>
                                         @if (count($images) > 0)
                                             <img class="d-block w-100"
-                                                src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}" alt="car">
+                                                src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}" alt="car">
                                         @endif
                                     </a>
                                     <div class="carbox-overlap-wrapper">
@@ -237,12 +237,12 @@
                                                 </a>
 
                                                 <div class="car-magnify-gallery">
-                                                    <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                    <a href="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                         class="overlap-btn"
                                                         data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                         <i class="fa fa-expand"></i>
                                                         <img class="hidden"
-                                                            src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                            src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                             alt="hidden-img">
                                                     </a>
                                                     @foreach ($images as $image)

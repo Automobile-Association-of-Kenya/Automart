@@ -8,7 +8,7 @@
                     <span>Kes: {{ number_format($item->price, 2) }}</span>
                 </div>
                 <img class="d-block w-100"
-                    src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}" alt="car">
+                    src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}" alt="car">
             </a>
         </div>
 

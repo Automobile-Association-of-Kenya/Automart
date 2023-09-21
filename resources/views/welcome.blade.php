@@ -6,13 +6,11 @@
 
 @section('main')
     @include('layouts.banner')
-    <!-- Banner end -->
 
-    <!-- Search box 2 start -->
-    {{-- <div class="search-box-2"> --}}
+
     @include('layouts.search')
-    {{-- </div> --}}
-    <!-- Featured car start -->
+
+
     <div class="featured-car content-area-21 bg-white">
         <div class="container">
             <div class="featured-slider row slide-box-btn slider"
@@ -50,12 +48,12 @@
                                                 <i class="fa fa-heart-o"></i>
                                             </a>
                                             <div class="car-magnify-gallery">
-                                                <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                <a href="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                     class="overlap-btn"
                                                     data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                     <i class="fa fa-expand"></i>
                                                     <img class="hidden"
-                                                        src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                        src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                         alt="{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}">
                                                 </a>
 
@@ -150,7 +148,7 @@
                                     <div class="price-box">
                                         <span>Kes: {{ number_format($item->price, 2) }}</span>
                                     </div>
-                                    <img class="d-block w-100" src="{{ asset('/vehicleimages/' . $image) }}"
+                                    <img class="d-block w-100" src="{{ asset('/vehicleimages/' . $item->cover_photo) }}"
                                         alt="{{ $item->make->make . ' ' . $item->model->model }}">
 
                                 </a>
@@ -167,12 +165,12 @@
                                             </a>
 
                                             <div class="car-magnify-gallery">
-                                                <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                <a href="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                     class="overlap-btn"
                                                     data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                     <i class="fa fa-expand"></i>
                                                     <img class="hidden"
-                                                        src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                        src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                         alt="{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}">
                                                 </a>
 
@@ -274,7 +272,7 @@
                                             <span>Kes: {{ number_format($item->current_price, 2) }}</span>
                                         </div>
                                         <img class="d-block w-100"
-                                            src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                            src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                             alt="{{ $item->make->make . ' ' . $item->model->model }}">
                                     </a>
 
@@ -291,12 +289,12 @@
                                                 </a>
 
                                                 <div class="car-magnify-gallery">
-                                                    <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                    <a href="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                         class="overlap-btn"
                                                         data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                         <i class="fa fa-expand"></i>
                                                         <img class="hidden"
-                                                            src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                            src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                             alt="{{ $item->year . ' ' . $item->make->make . ' ' . $item->model->model }}">
                                                     </a>
 

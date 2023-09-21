@@ -57,7 +57,7 @@
                                                 <span>Kes: {{ number_format($item->current_price, 2) }}</span>
                                             </div>
                                             <img class="d-block w-100"
-                                                src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}" alt="car">
+                                                src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}" alt="car">
                                         </a>
                                         <div class="carbox-overlap-wrapper">
                                             <div class="overlap-box">
@@ -72,12 +72,12 @@
                                                     </a>
 
                                                     <div class="car-magnify-gallery">
-                                                        <a href="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                        <a href="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                             class="overlap-btn"
                                                             data-sub-html="<h4>{{ $item->model->model }}</h4><p>{{ $item->description }}</p>">
                                                             <i class="fa fa-expand"></i>
                                                             <img class="hidden"
-                                                                src="{{ asset('/vehicleimages/' . @$images[0]->image . '') }}"
+                                                                src="{{ asset('/vehicleimages/' . $item->cover_photo . '') }}"
                                                                 alt="hidden-img">
                                                         </a>
                                                         @foreach ($images as $image)
