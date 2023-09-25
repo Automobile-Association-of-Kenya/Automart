@@ -23,7 +23,7 @@
     <div class="sidebar">
         <div class="sidebar-brand">
             <h2>
-                <a href="{{ url('/') }}"><i class="fas fa-home text-white"></i><b><span class="text-white">AA
+                <a href="{{ url('/') }}"><i class="fa fa-home text-white"></i><b><span class="text-white">AA
                             KENYA</span></b></a>
             </h2>
         </div>
@@ -75,13 +75,13 @@
         <div class="header">
             <h2 class="text text-white">
                 <label for="nav-toggle">
-                    <i class="fas fa-bars"></i>
+                    <i class="fa fa-bars"></i>
                 </label>
                 @yield('page')
             </h2>
 
             {{-- <div class="search-wrapper">
-                <i class="fas fa-search text-white"></i>
+                <i class="fa fa-search text-white"></i>
                 <input type="text" name="search" id="search" placeholder="Search here ...">
             </div> --}}
 

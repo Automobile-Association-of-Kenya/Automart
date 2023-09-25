@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet"> --}}
     <link href="{{ asset('css/all.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/components.css') }}" rel="stylesheet" id="bootstrap-css">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" id="master-css">
@@ -25,7 +25,7 @@
     <div class="sidebar">
         <div class="sidebar-brand">
             <h2>
-                <a href="{{ url('/') }}"><i class="fas fa-home fa-2x text-white"></i><b><span class="text-white">Automart</span></b></a>
+                <a href="{{ url('/') }}"><i class="fa fa-home fa-2x text-white"></i><b><span class="text-white">Automart</span></b></a>
             </h2>
         </div>
 
@@ -86,7 +86,7 @@
         <div class="header">
             <h2 class="text text-white">
                 <label for="nav-toggle">
-                    <i class="fas fa-bars"></i>
+                    <i class="fa fa-bars"></i>
                 </label>
                 @yield('page')
             </h2>

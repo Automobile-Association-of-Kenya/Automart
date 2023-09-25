@@ -101,9 +101,9 @@
                     type +
                     '</td><td><a href="#" id="editTypeToggle" data-id=' +
                     id +
-                    '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteTypeToggle" data-id=' +
+                    '><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteTypeToggle" data-id=' +
                     id +
-                    '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+                    '><i class="fa fa-trash text-danger"></i></a></td></tr>';
             });
             vehicleType.html(option);
             let table =
@@ -157,9 +157,9 @@
                     phone +
                     '</td><td><a href="#" id="editYardToggle" data-id=' +
                     id +
-                    '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteYardToggle" data-id=' +
+                    '><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteYardToggle" data-id=' +
                     id +
-                    '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+                    '><i class="fa fa-trash text-danger"></i></a></td></tr>';
             });
             let table =
                 '<table class="table table-bordered table-sm hover yardsDataTable"><thead><th>#</th><th>Name</th><th>Address</th><th>Email</th><th>Phone</th><th>Action</th></thead><tbody>' +
@@ -212,9 +212,9 @@
                     vehicles_count +
                     '</td><td><a href="#" id="editMakeToggle" data-id=' +
                     id +
-                    '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteMakeToggle" data-id=' +
+                    '><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteMakeToggle" data-id=' +
                     id +
-                    '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+                    '><i class="fa fa-trash text-danger"></i></a></td></tr>';
             });
             vehicleMake.html(option);
             filterMakeID.html(option1);
@@ -305,11 +305,11 @@
                         vehicles_count +
                         '</td><td><a href="#" id="editModelToggle" data-id=' +
                         id +
-                        '><i class="fas fa-edit text-warning" id="editVehicleModelToggle" data-id=' +
+                        '><i class="fa fa-edit text-warning" id="editVehicleModelToggle" data-id=' +
                         id +
                         '></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteModelToggle" data-id=' +
                         id +
-                        '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+                        '><i class="fa fa-trash text-danger"></i></a></td></tr>';
                 }
             });
 
@@ -385,9 +385,9 @@
                     descript +
                     '</td><td><a href="#" id="editFeatureToggle" data-id=' +
                     id +
-                    '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteFeatureToggle" data-id=' +
+                    '><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteFeatureToggle" data-id=' +
                     id +
-                    '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+                    '><i class="fa fa-trash text-danger"></i></a></td></tr>';
             });
 
             $("#featuresSection").html(label);
@@ -1210,94 +1210,6 @@
         usage = $("#usageCondition"),
         multiImagesUpload = document.getElementById("addionalImages");
 
-    $("#vehicleImagesUpload").on("click", function (event) {
-        event.preventDefault();
-
-        // var file = input.files[0];
-        // if (input.files.length > 0) {
-        //     var reader = new FileReader();
-        //     reader.onload = function () {
-        //         var img = new Image();
-        //         img.onload = function () {
-        //             var width = 850;
-        //             var height = 500;
-        //             var canvas = document.createElement("canvas");
-        //             canvas.width = width;
-        //             canvas.height = height;
-        //             canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-        //             var compressedFile = canvas.toDataURL("image/jpeg", 0.8);
-        //             $.post("/upload", {
-        //                 _token: token,
-        //                 str_id: uniqueStrID.val(),
-        //                 image: compressedFile,
-        //                 vehicle_id: vehicleID.val(),
-        //                 cover_image: true,
-        //             })
-        //                 .done(function (params) {
-        //                     if (params == "success") {
-        //                         $("#coverPhotoPreview").children().remove();
-        //                     }
-        //                 })
-        //                 .fail(function (error) {
-        //                 });
-        //         };
-        //         img.src = reader.result;
-        //     };
-        //     reader.readAsDataURL(file);
-        // }
-
-        // var files = multiImagesUpload.files;
-        // if (multiImagesUpload.files.length > 0) {
-        //     for (var i = 0; i < files.length; i++) {
-        //         var file = files[i];
-        //         var read = new FileReader();
-        //         read.onload = function (e) {
-        //             var img = new Image();
-        //             img.src = e.target.result;
-        //             img.onload = function () {
-        //                 var canvas = document.createElement("canvas");
-        //                 var ctx = canvas.getContext("2d");
-        //                 canvas.width = 800;
-        //                 canvas.height = 500;
-        //                 let leet = "image_" + i;
-        //                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        //                 var compressedDataUrl = canvas.toDataURL(
-        //                     "image/jpeg",
-        //                     0.5
-        //                 );
-        //                 $.post("/upload", {
-        //                     _token: token,
-        //                     str_id: uniqueStrID.val(),
-        //                     vehicle_id: vehicleID.val(),
-        //                     image: compressedDataUrl,
-        //                 })
-        //                     .done(function (params) {
-
-        //                         if (params == "success") {
-        //                             $('img[src="' + img.src + '"]')
-        //                                 .parent()
-        //                                 .remove();
-        //                             if (
-        //                                 $("#image-preview").children().length ==
-        //                                     0 &&
-        //                                 $("#coverPhotoPreview").children()
-        //                                     .length == 0
-        //                             ) {
-        //                                 showSuccess(
-        //                                     "Images uploaded successfully. Complete filling this form and click on save. ",
-        //                                     "#imageFeedback"
-        //                                 );
-        //                             }
-        //                         }
-        //                     })
-        //                     .fail(function (error) {
-        //                     });
-        //             };
-        //         };
-        //         read.readAsDataURL(file);
-        //     }
-        // }
-    });
 
     vehicleCreateForm.on("submit", function (event) {
         event.preventDefault();
@@ -1885,7 +1797,8 @@
         $.post("/vehicles-filter", data, function (params) {
             let vehicles = JSON.parse(params);
             let tr = "",
-                i = 1;
+                i = 1,
+                loggedInUserRole = $("#loggedInUserRole").val();
             $.each(vehicles, function (key, value) {
                 let {
                     id,
@@ -1902,9 +1815,6 @@
                     created_at,
                 } = value;
 
-                // console.log(value.dealer);
-                console.log(value.user);
-
                 let sponsored = value.sponsored
                         ? "<i class='fa fa-check-circle text-success'></i>"
                         : "<span class='text-danger'>&times;</span>",
@@ -1913,7 +1823,16 @@
                             ? value.dealer
                             : value.user !== null
                             ? value.user
-                            : "", phone = dealer.phone;
+                            : "",
+                    phone = dealer.phone,
+                    addedtd =
+                        loggedInUserRole == "admin"
+                            ? "<td>" +
+                              dealer.name +
+                              "</td><td>" +
+                              phone +
+                              "</td>"
+                            : "";
                 tr +=
                     "<tr><td><input type='checkbox' class='vehicleselect' id='vehicleSelect' data-id=" +
                     id +
@@ -1922,11 +1841,9 @@
                     i++ +
                     "</td><td>" +
                     vehicle_no +
-                    "</td><td>" +
-                    dealer.name +
-                    "</td><td>" +
-                    phone +
-                    "</td><td>" +
+                    "</td>" +
+                    addedtd +
+                    "<td>" +
                     make.make +
                     "</td><td>" +
                     model.model +
@@ -1948,10 +1865,15 @@
                     status +
                     "</td><td><a href='#' data-toggle='modal' data-target='#vehicleDetailsModal' id='vehicleDetailsToggle' data-id=" +
                     id +
-                    "><i class='fas fa-eye fa-lg text-success'></i></a></td></tr>";
+                    "><i class='fa fa-eye fa-lg text-success'></i>&nbsp;View</a>&nbsp;<a href='#' class='btn btn-sm btn-success' data-toggle='modal' data-target='#vehicleEditModal' id='vehicleEditToggle' data-id=" +
+                    id +
+                    "><i class='fa fa-edit text-success'></i>&nbsp;Edit</a></td></tr>";
             });
+            let thadded = loggedInUserRole === "admin" ? '<th>Dealer</th><th>Phone</th>' : '';
             let table =
-                '<table class="table table-bordered hover vehicleDataTable "><thead><th>#</th><th>#</th><th>NO</th><th>Dealer</th><th>Phone</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>CC</th><th>Mileage</th><th>Fuel</th><th>Trans</th><th>created</th><th>Status</th><th>Action</th></thead><tbody id="vehiclesListTable">' +
+                '<table class="table table-bordered hover vehicleDataTable "><thead><th>#</th><th>#</th><th>NO</th>' +
+                thadded +
+                '<th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>CC</th><th>Mileage</th><th>Fuel</th><th>Trans</th><th>created</th><th>Status</th><th>Action</th></thead><tbody id="vehiclesListTable">' +
                 tr +
                 "</tbody></table>";
             $("#vehicledatasection").html(table);
@@ -1959,13 +1881,6 @@
             if ($.fn.DataTable.isDataTable(".vehicleDataTable")) {
                 $(".vehicleDataTable").destroy();
                 $(".vehicleDataTable").DataTable({
-                    // dom: "Bfrtip",
-                    // buttons: [
-                    //     "copyHtml5",
-                    //     "excelHtml5",
-                    //     "csvHtml5",
-                    //     "pdfHtml5",
-                    // ],
                     sDom: 'T<"clear">Bfrtilp',
                     oTableTools: {
                         sRowSelect: "multi",
@@ -1977,13 +1892,6 @@
                 });
             } else {
                 $(".vehicleDataTable").DataTable({
-                    // dom: "Bfrtip",
-                    // buttons: [
-                    //     "copyHtml5",
-                    //     "excelHtml5",
-                    //     "csvHtml5",
-                    //     "pdfHtml5",
-                    // ],
                     sDom: 'T<"clear">Bfrtilp',
                     oTableTools: {
                         sRowSelect: "multi",
@@ -2071,9 +1979,9 @@
                 "</td><td><b>H.P </b></td><td>" +
                 horsepower +
                 "</td></tr>" +
-                "<tr><td><b><i class='fas fa-eye fa-lg'></i></b></td><td>" +
+                "<tr><td><b><i class='fa fa-eye fa-lg'></i></b></td><td>" +
                 vehicle.views +
-                "</td><td><b><i class='fas fa-heart fa-lg'></i></b></td><td>" +
+                "</td><td><b><i class='fa fa-heart fa-lg'></i></b></td><td>" +
                 vehicle.likes +
                 "</td><td><b>Priority</b></td><td>" +
                 vehicle.priority +
@@ -2142,11 +2050,11 @@
             //         value.firstname +
             //         " " +
             //         value.lastname +
-            //         "<i class='fas fa-calender'></i>" +
+            //         "<i class='fa fa-calender'></i>" +
             //         moment(new Date(value.date_of_birth)).format("DD-MM-YYYY");
-            //     "</span><br><span><i class='fas fa-envelope'></i>" +
+            //     "</span><br><span><i class='fa fa-envelope'></i>" +
             //         value.email +
-            //         "<i class='fas fa-phone'></i>" +
+            //         "<i class='fa fa-phone'></i>" +
             //         value.phone +
             //         "</span><br><span><b>Tax pin:</b>" +
             //         value.kra_pin +

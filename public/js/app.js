@@ -104,9 +104,9 @@ $(function () {
         slidesToScroll: 3,
         centerMode: true,
         // nextArrow:
-        //     '<button class="slick-next"><i class="fas fa-chevron-right"></i></button>',
+        //     '<button class="slick-next"><i class="fa fa-chevron-right"></i></button>',
         // prevArrow:
-        //     '<button class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
+        //     '<button class="slick-prev"><i class="fa fa-chevron-left"></i></button>',
     });
 
     // Partners strat

@@ -211,7 +211,7 @@
 
                                         <div class="col-md-1">
                                             <button type="submit" class="btn btn-success btn-md mt-4"><i
-                                                    class="fas fa-search"></i>&nbsp;Find</button>
+                                                    class="fa fa-search"></i>&nbsp;Find</button>
                                         </div>
                                     </form>
                                 </div>
@@ -255,7 +255,7 @@
 
                                         <div class="col-md-1">
                                             <button type="submit" class="btn btn-success btn-md mt-4"><i
-                                                    class="fas fa-search"></i>&nbsp; sort</button>
+                                                    class="fa fa-search"></i>&nbsp; sort</button>
                                         </div>
                                     </form>
                                 </div>

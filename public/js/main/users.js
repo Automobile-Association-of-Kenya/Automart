@@ -62,9 +62,9 @@
                     date.format("D MMM, YYYY") +
                     '</td><td><a href="#" id="editUserToggle" data-id=' +
                     id +
-                    '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteUserToggle" data-id=' +
+                    '><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteUserToggle" data-id=' +
                     id +
-                    '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+                    '><i class="fa fa-trash text-danger"></i></a></td></tr>';
             });
             let table =
                 '<table class="usersDataTable"><thead><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Alt phone</th><th>Role</th><th>Joined on</th><th>Action</th></thead><tbody>' +
@@ -140,9 +140,9 @@
                     moment(created_at).format("D MMM, YYYY H:mm:s") +
                     '</td><td><a href="#" id="editDealerToggle" data-id=' +
                     id +
-                    '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteDealerToggle" data-id=' +
+                    '><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteDealerToggle" data-id=' +
                     id +
-                    '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+                    '><i class="fa fa-trash text-danger"></i></a></td></tr>';
             });
             let table =
                 '<table class="dealersDataTable"><thead><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Alt Phone</th><th>Address</th><th>Vehicles</th><th>Created</th><th>Action</th></thead><tbody>' +
@@ -204,9 +204,9 @@
                     address +
                     '</td><td><a href="#" id="editPartnerToggle" data-id=' +
                     id +
-                    '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deletePartnerToggle" data-id=' +
+                    '><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deletePartnerToggle" data-id=' +
                     id +
-                    '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+                    '><i class="fa fa-trash text-danger"></i></a></td></tr>';
             });
             let table =
                 '<table class="partnersDataTable"><thead><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Alt Phone</th><th>Address</th><th>Action</th></thead><tbody>' +

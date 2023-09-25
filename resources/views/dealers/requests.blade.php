@@ -317,7 +317,7 @@
                         <div class="col-md-12">
                             <div class="text-center">
                                 <button type="submit" class="btn btn-md btn-success"><i
-                                        class="fas fa-paper-plane"></i>&nbsp;Send</button>
+                                        class="fa fa-paper-plane"></i>&nbsp;Send</button>
                             </div>
                         </div>
                     </div>

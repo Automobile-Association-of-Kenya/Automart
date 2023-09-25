@@ -104,9 +104,9 @@
                         td +
                         '</td><td><a href="#" id="editSubscriptionToggle" data-id=' +
                         id +
-                        '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteSubscriptionToggle" data-id=' +
+                        '><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteSubscriptionToggle" data-id=' +
                         id +
-                        '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+                        '><i class="fa fa-trash text-danger"></i></a></td></tr>';
                 });
 
                 $("#subscriptionTable").html(tr);
@@ -284,9 +284,9 @@
                     active +
                     '</td><td><a href="#" id="editMailToggle" data-id=' +
                     id +
-                    '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteMailToggle" data-id=' +
+                    '><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteMailToggle" data-id=' +
                     id +
-                    '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+                    '><i class="fa fa-trash text-danger"></i></a></td></tr>';
             });
 
             $("#mailsTable").html(tr);
@@ -496,9 +496,9 @@
                     caret +
                     '</td><td><a href="#" id="editServiceToggle" data-id=' +
                     id +
-                    '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteServiceToggle" data-id=' +
+                    '><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteServiceToggle" data-id=' +
                     id +
-                    '><i class="fas fa-trash text-danger"></i></a></td></tr>';
+                    '><i class="fa fa-trash text-danger"></i></a></td></tr>';
             });
             servicesTable.html(tr);
         });
@@ -589,9 +589,9 @@
                     value.link +
                     '</td><td><a href="#" id="editSocialToggle" data-id=' +
                     value.id +
-                    '><i class="fas fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteSocialToggle" data-id=' +
+                    '><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" id="deleteSocialToggle" data-id=' +
                     value.id +
-                    '><i class="fas fa-trash text-danger"></i></a></tr>';
+                    '><i class="fa fa-trash text-danger"></i></a></tr>';
             });
             $("#socialTable").html(tr);
         });

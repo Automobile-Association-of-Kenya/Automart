@@ -247,7 +247,7 @@
                                                     <p><b>Reg NO: </b>{!! $item->business_reg_no !!}</p>
                                                     <p><b>Address: &nbsp;</b>{{ $item->businessaddress }}</p>
                                                     <p><b>Owner: </b> {!! $item->businessowner === 'Owner'
-                                                        ? "<i class='fas fa-check-circle text-success'></i>"
+                                                        ? "<i class='fa fa-check-circle text-success'></i>"
                                                         : "<b class='text-danger'>X</b>" !!}</p>
                                                 @endif
                                             </td>
@@ -439,7 +439,7 @@
                         <div class="col-md-12">
                             <div class="text-center">
                                 <button type="submit" class="btn btn-md btn-success"><i
-                                        class="fas fa-paper-plane"></i>&nbsp;Send</button>
+                                        class="fa fa-paper-plane"></i>&nbsp;Send</button>
                             </div>
                         </div>
                     </div>
@@ -489,7 +489,7 @@
                         <div class="col-md-12">
                             <div class="text-center">
                                 <button type="submit" class="btn btn-md btn-success"><i
-                                        class="fas fa-paper-plane"></i>&nbsp;Send</button>
+                                        class="fa fa-paper-plane"></i>&nbsp;Send</button>
                             </div>
                         </div>
                     </div>

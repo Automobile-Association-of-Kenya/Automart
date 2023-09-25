@@ -11,7 +11,7 @@
 
             <div class="col badge alert-primary text-left" id="innovators">
                 <div class="image" style="display: inline-block">
-                    <i class="fas fa-file-invoice-dollar fa-lg"></i>
+                    <i class="fa fa-file-invoice-dollar fa-lg"></i>
                 </div>
 
                 <div class="heading" style="display: inline-block">
@@ -26,7 +26,7 @@
 
             <div class="col badge alert-info" id="openreceivables">
                 <div class="image" style="display: inline-block">
-                    <i class="fas fa-usd-circle fa-lg"></i>
+                    <i class="fa fa-usd-circle fa-lg"></i>
                 </div>
 
                 <div class="heading" style="display: inline-block">
@@ -41,7 +41,7 @@
 
             <div class="col badge alert-warning" id="openpayables">
                 <div class="image" style="display: inline-block">
-                    <i class="fas fa-cars fa-lg"></i>
+                    <i class="fa fa-cars fa-lg"></i>
                 </div>
 
                 <div class="heading" style="display: inline-block">
@@ -56,7 +56,7 @@
 
             <div class="col badge alert-success" id="openorders">
                 <div class="image" style="display: inline-block">
-                    <i class="fas fa-users fa-lg"></i>
+                    <i class="fa fa-users fa-lg"></i>
                 </div>
 
                 <div class="heading" style="display: inline-block">

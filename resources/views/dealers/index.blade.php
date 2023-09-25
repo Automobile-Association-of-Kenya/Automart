@@ -20,7 +20,7 @@
                 {!! Session::get('subscriptioninfo') !!}
             </div>
         @endif
-        <div class="p-2"><a href="{{ route('dealer.vehicles') }}" class="btn btn-success btn-md"><i class="fas fa-plus"></i>
+        <div class="p-2"><a href="{{ route('dealer.vehicles') }}" class="btn btn-success btn-md"><i class="fa fa-plus"></i>
                 Advertise</a></div>
         <div class="row mt-2 p-2">
             <div class="col-md-3 mb-2">
