@@ -143,11 +143,11 @@
 
                     <div class="form-group">
                         <button class='btn btn-success btn-md' type="submit" id='savedealer'><i
-                                class="fal fa-save fa-lg fa-fw"></i>
+                                class="fa fa-save fa-lg fa-fw"></i>
                             Save
                         </button>
                         <button class='btn btn-outline-warning btn-md' id='cleardealer'><i
-                                class="fal fa-broom fa-lg fa-fw"></i>
+                                class="fa fa-broom fa-lg fa-fw"></i>
                             Clear Fields</button>
                     </div>
                 </form>
@@ -245,11 +245,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <button class='btn btn-success btn-md' type="submit" id='savedealer'><i
-                                            class="fal fa-save fa-lg fa-fw"></i>
+                                            class="fa fa-save fa-lg fa-fw"></i>
                                         Save
                                     </button>
                                     <button class='btn btn-outline-warning btn-md' id='cleardealer'><i
-                                            class="fal fa-broom fa-lg fa-fw"></i>
+                                            class="fa fa-broom fa-lg fa-fw"></i>
                                         Clear Fields</button>
                                 </div>
                             </div>

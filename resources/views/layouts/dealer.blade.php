@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet"> --}}
-    <link href="{{ asset('css/all.css') }}" rel="stylesheet" type="text/css" />
+
+    <script src="https://kit.fontawesome.com/4930f74824.js" crossorigin="anonymous"></script>
+
     <link href="{{ asset('css/components.css') }}" rel="stylesheet" id="bootstrap-css">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" id="master-css">
     <link href="{{ asset('css/master.css') }}" rel="stylesheet" id="master-css">
@@ -15,6 +16,7 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+
     <title>Dealer | @yield('title')</title>
     @yield('header_styles')
 </head>
@@ -33,14 +35,14 @@
             <ul>
                 <li>
                     <a href="{{ url('/') }}">
-                        <span><i class="fal fa-home"></i></span>
+                        <span><i class="fa fa-home"></i></span>
                         <span>Home</span>
                     </a>
                 </li>
 
                 <li class="{{ Request::is('dealer') ? 'active' : '' }}">
                     <a href="{{ route('dealer.index') }}">
-                        <span><i class="fal fa-tachometer"></i></span>
+                        <span><i class="fa fa-tachometer"></i></span>
                         <span>Dashboard</span>
                     </a>
                 </li>
@@ -54,14 +56,14 @@
 
                 <li class="{{ Request::is('dealer/requests') ? 'active' : '' }}">
                     <a href="{{ route('dealer.requests') }}" class='validation'>
-                        <span><i class="fal fa-hand-heart"></i></span>
+                        <span><i class="fa fa-hand-heart"></i></span>
                         <span>Requests</span>
                     </a>
                 </li>
 
                 <li class="{{ Request::is('profile') ? 'active' : '' }}">
                     <a href="{{ route('profile') }}" class='validation'>
-                        <span><i class="fal fa-user"></i></span>
+                        <span><i class="fa fa-user"></i></span>
                         <span>My profile</span>
                     </a>
                 </li>
@@ -72,7 +74,7 @@
                         <a class="validation text-warning" :href="route('logout')"
                             onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                            <span><i class="fal fa-sign-out-alt"></i></span>
+                            <span><i class="fa fa-sign-out-alt"></i></span>
                             <span>{{ __('Log Out') }}</span>
                         </a>
                     </form>
@@ -213,11 +215,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <button class='btn btn-success btn-md' type="submit" id='savedealer'><i
-                                            class="fal fa-save fa-lg fa-fw"></i>
+                                            class="fa fa-save fa-lg fa-fw"></i>
                                         Save
                                     </button>
                                     <button class='btn btn-outline-warning btn-md' id='cleardealer'><i
-                                            class="fal fa-broom fa-lg fa-fw"></i>
+                                            class="fa fa-broom fa-lg fa-fw"></i>
                                         Clear Fields</button>
                                 </div>
                             </div>

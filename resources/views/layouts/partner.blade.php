@@ -32,14 +32,14 @@
             <ul>
                 <li class="{{ Request::is('partner') ? 'active' : '' }}">
                     <a href="{{ route('partner.index') }}">
-                        <span><i class="fal fa-tachometer"></i></span>
+                        <span><i class="fa fa-tachometer"></i></span>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li class="{{ Request::is('partner/loans') ? 'active' : '' }}">
                     <a href="{{ route('partner.loans') }}">
-                        <span><i class="fal fa-usd-circle"></i></span>
+                        <span><i class="fa fa-usd-circle"></i></span>
                         <span>Loans</span>
                     </a>
                 </li>
@@ -55,14 +55,14 @@
                 <li class="#">
                     <a href="#">
                         {{-- {{ route('partner.customers') }} --}}
-                        <span><i class="fal fa-users-crown"></i></span>
+                        <span><i class="fa fa-users-crown"></i></span>
                         <span>Customers</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="#" id="logoutuser">
-                        <span><i class="fal fa-sign-out-alt"></i></span>
+                        <span><i class="fa fa-sign-out-alt"></i></span>
                         <span>Logout</span>
                     </a>
                 </li>

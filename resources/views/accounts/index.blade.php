@@ -165,11 +165,11 @@
 
                                                             <div class="col-md-12 mt-3">
                                                                 <button class='btn btn-success btn-md' id='saveuser'><i
-                                                                        class="fal fa-save fa-lg fa-fw"></i> Save
+                                                                        class="fa fa-save fa-lg fa-fw"></i> Save
                                                                 </button>
                                                                 <button class='btn btn-outline-warning btn-md'
                                                                     id='clearuser'><i
-                                                                        class="fal fa-broom fa-lg fa-fw"></i>
+                                                                        class="fa fa-broom fa-lg fa-fw"></i>
                                                                     Clear
                                                                     Fields</button>
                                                             </div>

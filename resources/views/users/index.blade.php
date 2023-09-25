@@ -91,11 +91,11 @@
 
                                                             <div class="col-md-12 text-center mt-3">
                                                                 <button class='btn btn-success btn-sm' id='saveuser'><i
-                                                                        class="fal fa-save fa-lg fa-fw"></i> Save
+                                                                        class="fa fa-save fa-lg fa-fw"></i> Save
                                                                     </button>
                                                                 <button class='btn btn-outline-warning btn-sm'
                                                                     id='clearuser'><i
-                                                                        class="fal fa-broom fa-lg fa-fw"></i> Clear
+                                                                        class="fa fa-broom fa-lg fa-fw"></i> Clear
                                                                     Fields</button>
 
                                                             </div>
@@ -163,11 +163,11 @@
 
                                                             <div class="col-md-12 mt-3">
                                                                 <button class='btn btn-success btn-sm' id='savedealer'><i
-                                                                        class="fal fa-save fa-lg fa-fw"></i> Save
+                                                                        class="fa fa-save fa-lg fa-fw"></i> Save
                                                                     </button>
                                                                 <button class='btn btn-outline-warning btn-sm'
                                                                     id='cleardealer'><i
-                                                                        class="fal fa-broom fa-lg fa-fw"></i>
+                                                                        class="fa fa-broom fa-lg fa-fw"></i>
                                                                     Clear
                                                                     Fields</button>
 
@@ -236,11 +236,11 @@
 
                                                             <div class="col-md-12 mt-3">
                                                                 <button class='btn btn-success btn-sm' id='savepartner'><i
-                                                                        class="fal fa-save fa-lg fa-fw"></i> Save
+                                                                        class="fa fa-save fa-lg fa-fw"></i> Save
                                                                 </button>
                                                                 <button class='btn btn-outline-warning btn-sm'
                                                                     id='clearpartner'><i
-                                                                        class="fal fa-broom fa-lg fa-fw"></i>
+                                                                        class="fa fa-broom fa-lg fa-fw"></i>
                                                                     Clear
                                                                     Fields</button>
 

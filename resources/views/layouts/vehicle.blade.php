@@ -308,9 +308,9 @@
 @endif
 
 <div class="col-md-12">
-    <button class='btn btn-success btn-md' type="submit" id='savevehicle'><i class="fal fa-save fa-lg fa-fw"></i>
+    <button class='btn btn-success btn-md' type="submit" id='savevehicle'><i class="fa fa-save fa-lg fa-fw"></i>
         Save
         vehicle</button>
-    <button class='btn btn-outline-warning btn-md' id='clearvehicle'><i class="fal fa-broom fa-lg fa-fw"></i>
+    <button class='btn btn-outline-warning btn-md' id='clearvehicle'><i class="fa fa-broom fa-lg fa-fw"></i>
         Clear Fields</button>
 </div>

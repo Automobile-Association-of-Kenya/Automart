@@ -229,9 +229,9 @@
                                                         </div>
                                                         <div class="col-md-12 form-group">
                                                             <button type="submit" class="btn btn-sm btn-success"><i
-                                                                    class="fal fa-save fa-lg fa-fw"></i>save</button>
+                                                                    class="fa fa-save fa-lg fa-fw"></i>save</button>
                                                             <button class='btn btn-outline-warning btn-sm'
-                                                                id='clearYard'><i class="fal fa-broom fa-lg fa-fw"></i>
+                                                                id='clearYard'><i class="fa fa-broom fa-lg fa-fw"></i>
                                                                 Reset</button>
                                                         </div>
                                                     </div>

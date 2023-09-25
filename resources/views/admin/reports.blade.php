@@ -47,7 +47,7 @@
                         <div class="col-md-1 form-group">
                             <label for="filtergradealoanreport">&nbsp;</label>
                             <button class="btn btn-success btn-sm d-block" id="filtergradealoanreport"><i
-                                    class="fal fa-lg fa-fw fa-search"></i> Filter</button>
+                                    class="fa fa-lg fa-fw fa-search"></i> Filter</button>
                         </div>
                     </div>
                 </form>

@@ -1123,7 +1123,7 @@
                 $("#image-preview").prepend(
                     '<div class="col-md-3"><img src="' +
                         e.target.result +
-                        '"width="100%" height="200px" alt="Image Preview"><button class="btn btn-outline-danger" id="coverPhotoRemve"><i class="fal fa-trash btn-danger"></i></button></div>'
+                        '"width="100%" height="200px" alt="Image Preview"><button class="btn btn-outline-danger" id="coverPhotoRemve"><i class="fa fa-trash btn-danger"></i></button></div>'
                 );
             };
             reader.readAsDataURL(input.files[0]);
@@ -1159,7 +1159,7 @@
                 previewContainer.append(preview);
                 const removeButton = $(
                     "<button class='btn btn-outline-danger'>"
-                ).html("<i class='fal fa-trash btn-danger'></i>");
+                ).html("<i class='fa fa-trash btn-danger'></i>");
                 removeButton.on("click", function () {
                     preview.remove();
                     files.splice(i, 1);
@@ -1476,9 +1476,10 @@
     });
 
     /** Toggle vehicle for editing */
-
-    filterVehiclesID.on("change", function () {
-        let vehicle_id = $(this).val();
+    $("body").on("click", "#vehicleEditToggle", function () {
+        let vehicle_id = $(this).data("id");
+        $("#vehicles-list-tab").removeClass("active");
+        $('#nav-tab a[href="#vehicledetails"]').tab("show");
         if (vehicle_id !== null) {
             $("#image-preview").children().remove();
             $("#coverPhotoPreview").children().remove();
@@ -1489,7 +1490,6 @@
                         "Vehicle accepted for editing, You can make changes and click save to save changes",
                         "#vehiclefeedback"
                     );
-
                     $(
                         "#vehicleDealer option[value='" +
                             vehicle.dealer?.id +
@@ -1609,7 +1609,6 @@
                         }
                     });
 
-
                     let previewContainer = $("#image-preview");
 
                     let cover = $("<img>")
@@ -1628,7 +1627,7 @@
                             vehicle.cover_photo +
                             "'>"
                     )
-                        .html("<i class='fal fa-trash btn-danger'></i>")
+                        .html("<i class='fa fa-trash btn-danger'></i>")
                         .on("click", function (event) {
                             event.preventDefault();
                             let $this = $(this),
@@ -1670,7 +1669,7 @@
                                     value +
                                     "'>"
                             )
-                                .html("<i class='fal fa-trash btn-danger'></i>")
+                                .html("<i class='fa fa-trash btn-danger'></i>")
                                 .on("click", function (event) {
                                     event.preventDefault();
                                     let $this = $(this),
@@ -1865,7 +1864,7 @@
                     status +
                     "</td><td><a href='#' data-toggle='modal' data-target='#vehicleDetailsModal' id='vehicleDetailsToggle' data-id=" +
                     id +
-                    "><i class='fa fa-eye fa-lg text-success'></i>&nbsp;View</a>&nbsp;<a href='#' class='btn btn-sm btn-success' data-toggle='modal' data-target='#vehicleEditModal' id='vehicleEditToggle' data-id=" +
+                    "><i class='fa fa-eye fa-lg text-success'></i>&nbsp;View</a>&nbsp;<a href='#' class='btn btn-sm btn-success' id='vehicleEditToggle' data-id=" +
                     id +
                     "><i class='fa fa-edit text-success'></i>&nbsp;Edit</a></td></tr>";
             });
@@ -2180,4 +2179,6 @@
         event.preventDefault();
         $('#vehicleDiscountRateModal').modal('toggle');
     });
+
+
 })();

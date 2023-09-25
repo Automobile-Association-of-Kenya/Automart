@@ -26,29 +26,28 @@
                 {{-- <div class="card-header bg-white"> --}}
                 <nav class="nav-justified">
                     <div class="nav nav-tabs " id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="pop1-tab" data-toggle="tab" href="#vehicledetails"
-                            role="tab" aria-controls="pop1" aria-selected="true">Vehicle Details</a>
+                        <a class="nav-item nav-link active" id="vehicles-details-tab" data-toggle="tab" href="#vehicledetails"
+                            role="tab" aria-controls="vehicles-details-tab" aria-selected="true">Vehicle Details</a>
 
                         <a class="nav-item nav-link" id="vehicles-list-tab" data-toggle="tab" href="#vehicleListTab"
-                            role="tab" aria-controls="pop1" aria-selected="true">Vehicle List</a>
+                            role="tab" aria-controls="vehicles-list-tab" aria-selected="true">Vehicle List</a>
 
                         <a class="nav-item nav-link" id="makes-tab" data-toggle="tab" href="#makesTab" role="tab"
-                            aria-controls="pop2" aria-selected="false">Makes</a>
+                            aria-controls="makes-tab" aria-selected="false">Makes</a>
 
                         <a class="nav-item nav-link" id="models-tab" data-toggle="tab" href="#vehicleModelsTab"
-                            role="tab" aria-controls="pop5" aria-selected="false">Models</a>
+                            role="tab" aria-controls="models-tab" aria-selected="false">Models</a>
 
                         <a class="nav-item nav-link" id="features-tab" data-toggle="tab" href="#featuresTab" role="tab"
-                            aria-controls="pop2" aria-selected="false">Features</a>
+                            aria-controls="features-tab" aria-selected="false">Features</a>
 
                         <a class="nav-item nav-link" id="types-tab" data-toggle="tab" href="#vehicleTypesTab" role="tab"
-                            aria-controls="pop2" aria-selected="false">Vehicle Types</a>
+                            aria-controls="types-tab" aria-selected="false">Vehicle Types</a>
 
                         <a class="nav-item nav-link" id="yards-tab" data-toggle="tab" href="#yardsTab" role="tab"
-                            aria-controls="pop2" aria-selected="false">Yards</a>
+                            aria-controls="yards-tab" aria-selected="false">Yards</a>
                     </div>
                 </nav>
-                {{-- </div> --}}
 
                 <div class="card-body">
                     <div class="tab-content text-left" id="nav-tabContent">
@@ -101,9 +100,7 @@
                                 <form action="{{ route('vehicles.store') }}" id="vehicleCreateForm">
                                     @include('layouts.vehicle')
                                 </form>
-
                             </div>
-
                         </div>
 
                         <div class="tab-pane fade mb-3" id="vehicleListTab" role="tabpanel" aria-labelledby="pop2-tab">
@@ -215,9 +212,9 @@
                                                     <div class="col-md-12 form-group">
                                                         <button type="submit" class="btn btn-sm btn-success"
                                                             id="submitMake"><i
-                                                                class="fal fa-save fa-lg fa-fw"></i>save</button>
+                                                                class="fa fa-save fa-lg fa-fw"></i>save</button>
                                                         <button class='btn btn-outline-warning btn-sm' id='clearMake'><i
-                                                                class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
+                                                                class="fa fa-broom fa-lg fa-fw"></i> Reset</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -272,9 +269,9 @@
                                                         <div class="col-md-12 form-group">
                                                             <button type="submit" class="btn btn-sm btn-success"
                                                                 id="submitModel"><i
-                                                                    class="fal fa-save fa-lg fa-fw"></i>save</button>
+                                                                    class="fa fa-save fa-lg fa-fw"></i>save</button>
                                                             <button class='btn btn-outline-warning btn-sm'
-                                                                id='clearModel'><i class="fal fa-broom fa-lg fa-fw"></i>
+                                                                id='clearModel'><i class="fa fa-broom fa-lg fa-fw"></i>
                                                                 Reset</button>
                                                         </div>
                                                     </div>
@@ -327,9 +324,9 @@
 
                                                         <div class="col-md-12 form-group">
                                                             <button type="submit" class="btn btn-sm btn-success"><i
-                                                                    class="fal fa-save fa-lg fa-fw"></i>save</button>
+                                                                    class="fa fa-save fa-lg fa-fw"></i>save</button>
                                                             <button class='btn btn-outline-warning btn-sm'
-                                                                id='clearFeature'><i class="fal fa-broom fa-lg fa-fw"></i>
+                                                                id='clearFeature'><i class="fa fa-broom fa-lg fa-fw"></i>
                                                                 Reset</button>
                                                         </div>
                                                     </div>
@@ -373,9 +370,9 @@
 
                                                         <div class="col-md-12 form-group">
                                                             <button type="submit" class="btn btn-sm btn-success"><i
-                                                                    class="fal fa-save fa-lg fa-fw"></i>save</button>
+                                                                    class="fa fa-save fa-lg fa-fw"></i>save</button>
                                                             <button class='btn btn-outline-warning btn-sm'
-                                                                id='clearType'><i class="fal fa-broom fa-lg fa-fw"></i>
+                                                                id='clearType'><i class="fa fa-broom fa-lg fa-fw"></i>
                                                                 Reset</button>
                                                         </div>
                                                     </div>
@@ -447,9 +444,9 @@
 
                                                     <div class="col-md-12 form-group">
                                                         <button type="submit" class="btn btn-sm btn-success"><i
-                                                                class="fal fa-save fa-lg fa-fw"></i>save</button>
+                                                                class="fa fa-save fa-lg fa-fw"></i>save</button>
                                                         <button class='btn btn-outline-warning btn-sm' id='clearYard'><i
-                                                                class="fal fa-broom fa-lg fa-fw"></i> Reset</button>
+                                                                class="fa fa-broom fa-lg fa-fw"></i> Reset</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -504,17 +501,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-8" id="vehicledetailsSection">
 
-                    </div>
-                    <div class="col-md-4">
-                        <h3 class="text-success">Messages</h3>
-                        <div id="vehicleMessagesSection">
-
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

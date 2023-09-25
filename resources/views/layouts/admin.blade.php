@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet"> --}}
-    {{-- <link href="{{ asset('css/all.css') }}" rel="stylesheet" type="text/css" /> --}}
+    
     <script src="https://kit.fontawesome.com/4930f74824.js" crossorigin="anonymous"></script>
     <link href="{{ asset('css/components.css') }}" rel="stylesheet" id="bootstrap-css">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -45,7 +44,7 @@
                         <span>Home</span>
                     </a>
                 </li>
-                
+
                 <li class="{{ Request::is('admin') ? 'active' : '' }}">
                     <a href="{{ route('admin.index') }}">
                         <span><i class="fa fa-tachometer"></i></span>
