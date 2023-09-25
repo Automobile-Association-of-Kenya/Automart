@@ -28,19 +28,18 @@
                         <div class="m-border"></div>
                         <ul class="contact-info">
                             <li>
-                                <i class="flaticon-pin"></i>8th Floor, Renaissance Corporate Park, Upper Hill, Nairobi,
+                                <i class="fa-solid fa-location-dot"></i>&nbsp;8th Floor, Renaissance Corporate Park, Upper Hill, Nairobi,
                                 Kenya
                             </li>
 
-                            <li>
-                                <i class="flaticon-mail"></i><a
+                            <li><i class="fa-solid fa-square-envelope"></i><a
                                     href="mailto:automart@aakenya.co.ke">automart@aakenya.co.ke</a>
                             </li>
                             <li>
-                                <i class="flaticon-phone"></i><a href="tel:+254703877817">+254703877817 </a>
+                                <i class="fa fa-phone"></i><a href="tel:+254703877817">+254703877817 </a>
                             </li>
                             <li>
-                                <i class="flaticon-phone"></i><a href="tel:+254709933000">+254709933000 </a>
+                                <i class="fa fa-phone"></i><a href="tel:+254709933000">+254709933000 </a>
                             </li>
                         </ul>
                     </div>
@@ -107,28 +106,28 @@
                             <a href=" https://www.facebook.com/AAKenya" target="_blank">
                                 <div class="icon facebook">
                                     <div class="tooltip">Facebook</div>
-                                    <span><i class="fa fa-facebook"></i></span>
+                                    <span><i class="fa-brands fa-facebook"></i></span>
                                 </div>
                             </a>
 
                             <a href="https://twitter.com/AAKenya" target="_blank">
                                 <div class="icon twitter">
                                     <div class="tooltip">Twitter</div>
-                                    <span><i class="fa fa-twitter"></i></span>
+                                    <span><i class="fa-brands fa-square-x-twitter"></i></span>
                                 </div>
                             </a>
 
                             <a href=" https://www.instagram.com/aa_kenya_/" target="_blank">
                                 <div class="icon instagram">
                                     <div class="tooltip">Instagram</div>
-                                    <span><i class="fa fa-instagram"></i></span>
+                                    <span><i class="fa-brands fa-instagram"></i></span>
                                 </div>
                             </a>
 
                             <a href="https://www.youtube.com/@AA_Kenya" target="_blank">
                                 <div class="icon youtube mr-0">
                                     <div class="tooltip">Youtube</div>
-                                    <span><i class="fa fa-youtube"></i></span>
+                                    <span><i class="fa-brands fa-youtube"></i></span>
                                 </div>
                             </a>
                         </div>

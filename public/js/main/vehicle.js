@@ -1518,6 +1518,7 @@
                         url: "/vehicles/store",
                         data: data,
                         success: function (params) {
+                            console.log(params);
                             savevehicle.prop("disabled", false);
                             let result = JSON.parse(params);
                             if (result.status == "success") {
@@ -1536,6 +1537,7 @@
                         },
 
                         error: function (error) {
+                            console.error(error);
                             savevehicle.prop("disabled", false);
                             if (error.status == 422) {
                                 var errors = "";
@@ -1725,6 +1727,7 @@
                                     cover_photo: true,
                                     photo_delete: true,
                                 };
+                            console.log(data);
                             $.post("/image-delete", data)
                                 .done(function (params) {
                                     let result = JSON.parse(params);

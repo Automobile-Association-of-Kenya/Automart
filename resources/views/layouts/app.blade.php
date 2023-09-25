@@ -9,13 +9,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-submenu.css') }}">
 
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-select.min.css') }}"> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/magnific-popup.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/flaticon/font/flaticon.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/linearicons/style.css') }}">
     <link rel="stylesheet" type="text/css"  href="{{ asset('css/jquery.mCustomScrollbar.css') }}">
-    <link rel="stylesheet" type="text/css"  href="{{ asset('css/slick.css') }}">
+    {{-- <link rel="stylesheet" type="text/css"  href="{{ asset('css/slick.css') }}"> --}}
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
     <link rel="stylesheet" type="text/css"  href="{{ asset('css/lightbox.min.css') }}">
     <link rel="stylesheet" type="text/css"  href="{{ asset('css/jnoty.css') }}">
 
@@ -27,15 +25,19 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}" />
     <link rel="stylesheet" href="{{ asset('css/iziToast.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/some.css') }}">
+    <script src="https://kit.fontawesome.com/4930f74824.js" crossorigin="anonymous"></script>
+
     @yield('header_styles')
 </head>
 
+
 <body>
 <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&appId=252559983962502&autoLogAppEvents=1" nonce="szqnHbC5"></script>
+
     <header class="main-header sticky-header sh-2">
         @include('layouts.header')
     </header>
+
     @include('sidebar')
 
     @yield('main')
@@ -61,88 +63,6 @@
         </div>
     </div>
 
-    <div class="car-model-2">
-        <div class="modal fade" id="carOverviewModal" tabindex="-1" role="dialog"
-            aria-labelledby="carOverviewModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="modal-title" id="carOverviewModalLabel">
-                            <h4>Find Your Dream Car</h4>
-                            <h5><i class="flaticon-pin"></i> 123 Kathal St. Tampa City,</h5>
-                        </div>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row modal-raw">
-                            <div class="col-lg-6 modal-left">
-                                <div class="item active">
-                                    <img src="img/car-11.jpg" alt="best-car" class="img-fluid">
-                                    <div class="sobuz">
-                                        <div class="price-box">
-                                            <span class="del"><del>$950.00</del></span>
-                                            <br>
-                                            <span class="del-2">$1050.00</span>
-                                        </div>
-                                        <div class="ratings-2">
-                                            <span class="ratings-box">4.5/5</span>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            ( 7 Reviews )
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 modal-right">
-                                <div class="modal-right-content">
-                                    <section>
-                                        <h3>Features</h3>
-                                        <div class="features">
-                                            <ul class="bullets">
-                                                <li>Cruise Control</li>
-                                                <li>Airbags</li>
-                                                <li>Air Conditioning</li>
-                                                <li>Alarm System</li>
-                                                <li>Audio Interface</li>
-                                                <li>CDR Audio</li>
-                                                <li>Seat Heating</li>
-                                                <li>ParkAssist</li>
-                                            </ul>
-                                        </div>
-                                    </section>
-                                    <section>
-                                        <h3>Overview</h3>
-                                        <ul class="bullets">
-                                            <li>Model</li>
-                                            <li>Year</li>
-                                            <li>Condition</li>
-                                            <li>Price</li>
-                                            <li>Audi</li>
-                                            <li>2020</li>
-                                            <li>Brand New</li>
-                                            <li>$178,000</li>
-                                        </ul>
-                                    </section>
-                                    <div class="description">
-                                        <h3>Description</h3>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard.</p>
-                                        <a href="car-details.html" class="btn btn-md btn-round btn-theme">Show
-                                            Detail</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     @include('cookie-consent::index')
 
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
@@ -154,7 +74,9 @@
 <script  src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
 <script  src="{{ asset('js/jquery.scrollUp.js') }}"></script>
 <script  src="{{ asset('js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-<script  src="{{ asset('js/slick.min.js') }}"></script>
+{{-- <script  src="{{ asset('js/slick.min.js') }}"></script> --}}
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 <script  src="{{ asset('js/jquery.filterizr.js') }}"></script>
 <script  src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 <script  src="{{ asset('js/jquery.countdown.js') }}"></script>

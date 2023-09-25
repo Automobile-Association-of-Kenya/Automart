@@ -190,14 +190,57 @@ $(function () {
         verticalSwiping: true,
     });
 
+
     //featured-slider
+    // $(".slider").slick({
+    //     infinite: true,
+    //     slidesToShow: 3,
+    //     slidesToScroll: 1,
+    //     arrows: true,
+    //     autoplay: true,
+    //     autoplaySpeed: 2000,
+
+    // });
+
     $(".slider").slick({
+        // arrows: true,
+        // dots: true,
         infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        arrows: true,
+        // speed: 300,
+        // nextArrow: true,
+        // prevArrow:true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 3000,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true,
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ],
     });
 
     //slide-container
@@ -990,108 +1033,6 @@ $(function () {
 
     modelsWithVehicles();
 
-    // function highEndCars() {
-    //     $.getJSON("/vehicles/highend", function (cars) {
-    //         let image = "";
-    //         $.each(cars, function (key, value) {
-    //             var images = value.images,
-    //                 vehicle_no = value.vehicle_no ?? value.id;
-    //             image +=
-    //                 "<a href='vehicle/" +
-    //                 vehicle_no +
-    //                 "/highend'><img src='/vehicleimages/" +
-    //                 images[0].image +
-    //                 "' alt=" +
-    //                 value.year +
-    //                 " " +
-    //                 value.make.make +
-    //                 " " +
-    //                 value.model.model +
-    //                 "></a>";
-    //         });
-    //         $("#highendVehicles").html(image);
-    //     });
-    // }
-
-    // highEndCars();
-
-    function getSocials() {
-        // $.getJSON("/socials", function (socials) {
-        //     let li = "",
-        //         phone = "";
-        //     $.each(socials, function (key, value) {
-        //         if (value.type === "address") {
-        //             $("#contact-info").append(
-        //                 '<li><i class="flaticon-pin"></i>' +
-        //                     value.address +
-        //                     "</li>"
-        //             );
-        //         }
-
-        //         if (value.type === "phone") {
-        //             phone +=
-        //                 '<a href="tel:' +
-        //                 value.link +
-        //                 '"><i class="fa fa-phone"></i>Need Support? ' +
-        //                 value.link +
-        //                 "</a>";
-        //             $("#contact-info").append(
-        //                 '<li><i class="flaticon-phone"></i><a href="tel:' +
-        //                     value.link +
-        //                     '">' +
-        //                     value.link +
-        //                     "</a></li>"
-        //             );
-        //         }
-
-        //         if (value.type == "mail") {
-        //             phone +=
-        //                 '<a href="tel:' +
-        //                 value.link +
-        //                 '"><i class="fa fa-envelope"></i>' +
-        //                 value.link +
-        //                 "</a>";
-        //             li +=
-        //                 '<li><i class="flaticon-mail"></i><a  href="mailto:' +
-        //                 value.link +
-        //                 '">' +
-        //                 value.link +
-        //                 "</a></li>";
-        //         }
-
-        //         if (value.type === "social" && value.name === "facebook") {
-        //             li +=
-        //                 '<div class="icon facebook"><div class="tooltip">Facebook</div><a href=\'' +
-        //                 value.link +
-        //                 "' target='_blank'><span><i class=\"fa fa-facebook\"></i></span></a></div>";
-        //         } else if (value.type == "social" && value.name == "twitter") {
-        //             li +=
-        //                 '<div class="icon twitter"><div class="tooltip">Twitter</div><a href=\'' +
-        //                 value.link +
-        //                 "' target='_blank'><span><i class=\"fa fa-twitter\"></i></span></a></div>";
-        //         } else if (
-        //             value.type === "social" &&
-        //             value.name === "instagram"
-        //         ) {
-        //             li +=
-        //                 '<div class="icon instagram"><div class="tooltip">Instagram</div><a href=\'' +
-        //                 value.link +
-        //                 "' target='_blank'><span><i class=\"fa fa-instagram\"></i></span></div>";
-        //         } else if (
-        //             value.type === "social" &&
-        //             value.name === "whatsapp"
-        //         ) {
-        //             li +=
-        //                 '<div class="icon whatsapp"><div class="tooltip">Whatsapp</div><a href=\'' +
-        //                 value.link +
-        //                 "' target='_blank'><span><i class=\"fa fa-whatsapp\"></i></span></div>";
-        //         }
-        //     });
-        //     $("#socialheader").html(phone);
-        //     $(".social-list").html(li);
-        // });
-    }
-    getSocials();
 
     function getPartners() {
         $.getJSON("/partners", function (partners) {

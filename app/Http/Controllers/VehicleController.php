@@ -365,20 +365,21 @@ class VehicleController extends Controller
         return 'success';
     }
 
+
     public function imageDelete(Request $request)
     {
         $image = $request->image;
         if (isset($request->cover_photo) && $request->photo_delete) {
-            if (File::exists(public_path('vehicleimages/' . $image["image"]))) {
-                Storage::delete('vehicleimages/' . $image["image"]);
+            if (File::exists(public_path('vehicleimages/' . $image))) {
+                Storage::delete('vehicleimages/' . $image);
             }
             $this->vehicle->where('id',$request->vehicle_id)->update(['cover_photo'=>'']);
         }else {
             if (File::exists(public_path('vehicleimages/' . $image["image"]))) {
                 Storage::delete('vehicleimages/' . $image["image"]);
             }
+            DB::table('vehicle_images')->where('id', $image["id"])->delete();
         }
-        DB::table('vehicle_images')->where('id',$image["id"])->delete();
         return json_encode(['status' => 'success', 'message' => 'Image deleted successfully']);
     }
 
