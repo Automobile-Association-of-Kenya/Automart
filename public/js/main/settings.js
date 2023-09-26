@@ -825,8 +825,8 @@
     }
 
     function getVisits() {
-        let date = $("#visitorsDate").val();
-        $.getJSON("/visits/" + date, function (visitors) {
+        let start_date = $("#startDate").val(), end_date = $('#endDate').val();
+        $.getJSON("/visits/" + start_date+"/"+end_date, function (visitors) {
             let tr = "",
                 i = 1;
             $.each(visitors, function (key, value) {
@@ -872,9 +872,11 @@
             }
         });
     }
-    getVisits();
+    // getVisits();
 
-    $("#visitorsdate").on("change", function () {
+    $("#filterVisitorsForm").on('submit', function(event) {
+        event.preventDefault();
         getVisits();
     });
+    
 })();

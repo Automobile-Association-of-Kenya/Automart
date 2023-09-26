@@ -233,8 +233,15 @@ class SettingsController extends Controller
         return json_encode(['status'=>'success','message'=>'Messages sent successfully.']);
     }
 
-    public function visits($date) {
-        $visits = $this->visit->whereDate('created_at',$date)->latest()->get();
+    public function visits($startdate, $enddate) {
+        $query = $this->visit->query();
+        if (!is_null($startdate)) {
+            $query->whereDate('created_at','>=',$startdate);
+        }
+        if (!is_null($enddate)) {
+            $query->whereDate('created_at', '<=', $enddate);
+        }
+        $visits = $query->get();
         return json_encode($visits);
     }
 

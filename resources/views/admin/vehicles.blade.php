@@ -89,10 +89,10 @@
                                             class="form-control  chzn-select" id="filterVehiclesID" style="width: 100%;">
                                         </select>
                                     </div>
-                                    <div class="col-md-1">
-                                        <button type="submit" class="btn btn-success btn-md mt-4"><i
-                                                class="fa fa-search"></i>&nbsp;Find</button>
-                                    </div>
+                                        <div class="col-md-1">
+                                            <button type="submit" class="btn btn-success btn-md mt-4"><i
+                                                    class="fa fa-search"></i>&nbsp;Find</button>
+                                        </div>
                                 </form>
                             </div>
 

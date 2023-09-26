@@ -15,16 +15,20 @@
             max-height: 300px;
             overflow-y: auto;
         }
+
         table {
             width: 100%;
         }
+
         .phone,
         .mail {
             display: none;
         }
+
         .onetime {
             display: none;
         }
+
         .repetetive {
             display: none;
         }
@@ -184,8 +188,7 @@
                                                                         class="fa fa-save fa-lg fa-fw"></i> Save
                                                                 </button>
                                                                 <button class='btn btn-outline-warning btn-md'
-                                                                    id='clearuser'><i
-                                                                        class="fa fa-broom fa-lg fa-fw"></i>
+                                                                    id='clearuser'><i class="fa fa-broom fa-lg fa-fw"></i>
                                                                     Clear
                                                                     Fields</button>
 
@@ -353,8 +356,10 @@
                                                             </div>
 
                                                             <div class="col-md-12">
-                                                                <label for="phone">You can also upload images, banners</label><br>
-                                                                <input type="file" name="attachments" id="emailAttachements" multiple>
+                                                                <label for="phone">You can also upload images,
+                                                                    banners</label><br>
+                                                                <input type="file" name="attachments"
+                                                                    id="emailAttachements" multiple>
                                                                 <div id="errorMessages"></div>
                                                             </div>
 
@@ -376,8 +381,7 @@
                                                                         class="fa fa-save fa-lg fa-fw"></i> Send
                                                                 </button>
                                                                 <button class='btn btn-outline-warning btn-md'
-                                                                    id='clearm'><i
-                                                                        class="fa fa-broom fa-lg fa-fw"></i>
+                                                                    id='clearm'><i class="fa fa-broom fa-lg fa-fw"></i>
                                                                     Clear
                                                                     Fields</button>
                                                             </div>
@@ -596,7 +600,7 @@
                                                         <input type="text" class="form-control" name="link"
                                                             id="socialLink">
                                                     </div>
-{{--
+                                                    {{--
                                                     <div class="col-md-12 form-group phone">
                                                         <label for="contactPhone">Phone</label>
                                                         <input type="text" class="form-control" name="phone"
@@ -626,8 +630,40 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade mb-3" id="visitorsTabs" role="tabpanel" aria-labelledby="pop2-tab">
-                                <input type="date" class="float-right" name="visitorsdate" id="visitorsDate" value="{{ date('Y-m-d') }}"><br><br>
+                            <div class="tab-pane fade mb-3" id="visitorsTabs" role="tabpanel"
+                                aria-labelledby="pop2-tab">
+
+                                <div class="alert-success pl-2 pr-1 border-rounded filterSection"
+                                style="border-radius: 6px;">
+                                <form action="#" id="filterVisitorsForm" class="alert-success p-2">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label for="startDate">Start Date</label>
+                                                <input type="date" class="form-control form-control-md"
+                                                    name="start_date" id="startDate" value="{{ date('Y-m-d') }}"><br><br>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label for="endDate">End Date</label>
+                                                <input type="date" class="form-control form-control-md"
+                                                    name="end_date" id="endDate" value="{{ date('Y-m-d') }}"><br><br>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <br>
+                                            <button type="submit" class="btn btn-success btn-md mt-1"><i
+                                                    class="fa fa-search"></i>&nbsp;Find</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+
+
                                 <div id="visitsSection">
 
                                 </div>
@@ -655,7 +691,7 @@
             });
 
             $('#sendMailUsage').on('change', function() {
-                $('.'+$(this).val()).show();
+                $('.' + $(this).val()).show();
             });
         })()
     </script>

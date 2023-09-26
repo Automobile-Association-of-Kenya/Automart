@@ -1337,7 +1337,6 @@
                                 showError(result.error, "#vehiclefeedback");
                             }
                         },
-
                         error: function (error) {
                             console.error(error);
                             savevehicle.prop("disabled", false);

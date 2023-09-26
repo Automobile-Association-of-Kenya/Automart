@@ -235,4 +235,4 @@ Route::post('purchase/decline', [DealerController::class, 'purchasedecline'])->n
 
 
 Route::get('webtraffic/{date?}', [SettingsController::class, 'webtraffic']);
-Route::get('visits/{date?}', [SettingsController::class,'visits']);
+Route::get('visits/{startdate?}/{enddate?}', [SettingsController::class,'visits']);
