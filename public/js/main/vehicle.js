@@ -1480,6 +1480,17 @@
         let vehicle_id = $(this).data("id");
         $("#vehicles-list-tab").removeClass("active");
         $('#nav-tab a[href="#vehicledetails"]').tab("show");
+        getVehicleForEditing(vehicle_id);
+    });
+
+    $("#filterVehiclesID").on('change', function() {
+        let vehicle_id = $(this).val();
+        if (vehicle_id !== "") {
+            getVehicleForEditing(vehicle_id);
+        }
+    });
+
+    function getVehicleForEditing(vehicle_id) {
         if (vehicle_id !== null) {
             $("#image-preview").children().remove();
             $("#coverPhotoPreview").children().remove();
@@ -1495,7 +1506,6 @@
                             vehicle.dealer?.id +
                             "']"
                     ).prop("selected", true);
-
                     $(
                         "#vehicleType option[value='" + vehicle.type?.id + "']"
                     ).prop("selected", true);
@@ -1710,7 +1720,7 @@
                 }
             });
         }
-    });
+    }
 
     /** Clear form fields */
     clearvehicle.on("click", function (event) {
