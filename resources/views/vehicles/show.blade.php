@@ -76,8 +76,8 @@
                         <div class="product-slider-box cds-2 clearfix mb-30">
                             <div class="product-img-slide">
                                 <div class="slider-for">
-                                    {{-- <img src="{{ '/vehicleimages/' . $vehicle->cover_photo }}" class="img-fluid w-100"
-                                        alt="slider-car"> --}}
+                                    <img src="{{ '/vehicleimages/' . $vehicle->cover_photo }}" class="img-fluid w-100"
+                                        alt="slider-car">
                                     @foreach ($images as $image)
                                         <img src="{{ '/vehicleimages/' . $image->image }}" class="img-fluid w-100"
                                             alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}">
@@ -85,9 +85,9 @@
                                 </div>
 
                                 <div class="slider-nav">
-                                    {{-- <div class="thumb-slide"><img src="{{ '/vehicleimages/' . $vehicle->cover_photo }}"
+                                    <div class="thumb-slide"><img src="{{ '/vehicleimages/' . $vehicle->cover_photo }}"
                                             class="img-fluid" alt="small-car">
-                                    </div> --}}
+                                    </div>
                                     @foreach ($images as $image)
                                         <div class="thumb-slide"><img src="{{ '/vehicleimages/' . $image->image }}"
                                                 class="img-fluid"

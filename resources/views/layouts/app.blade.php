@@ -11,8 +11,8 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/magnific-popup.css') }}">
     <link rel="stylesheet" type="text/css"  href="{{ asset('css/jquery.mCustomScrollbar.css') }}">
-    {{-- <link rel="stylesheet" type="text/css"  href="{{ asset('css/slick.css') }}"> --}}
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css"  href="{{ asset('css/slick.css') }}">
+{{-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/> --}}
 
     <link rel="stylesheet" type="text/css"  href="{{ asset('css/lightbox.min.css') }}">
     <link rel="stylesheet" type="text/css"  href="{{ asset('css/jnoty.css') }}">
@@ -74,8 +74,8 @@
 <script  src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
 <script  src="{{ asset('js/jquery.scrollUp.js') }}"></script>
 <script  src="{{ asset('js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-{{-- <script  src="{{ asset('js/slick.min.js') }}"></script> --}}
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script  src="{{ asset('js/slick.min.js') }}"></script>
+{{-- <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> --}}
 
 <script  src="{{ asset('js/jquery.filterizr.js') }}"></script>
 <script  src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
