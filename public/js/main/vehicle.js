@@ -269,8 +269,8 @@
 
     getCountries();
 
-    function getCounties(country_id) {
-        $.getJSON("/counties/" + country_id, function (counties) {
+    function getCounties() {
+        $.getJSON("/counties/" + 110, function (counties) {
             var option = '<option value="">Select One</option>';
             var option1 = '<option value="Global">Global</option>';
             $.each(counties, (key, value) => {
@@ -281,6 +281,8 @@
             countyID.html(option);
         });
     }
+
+    getCounties();
 
     function getVehicleModels(make_id = null) {
         $.getJSON("/models/" + make_id ?? "", function (models) {
@@ -447,123 +449,6 @@
     }
 
     getDealerYards();
-
-    // countryLocated.on("change", function () {
-    //     let country_id = $(this).val();
-    //     if (country_id !== "") {
-    //         getCounties(country_id);
-    //     }
-    // });
-
-    // function getVehicles() {
-    //     $.getJSON("/list-vehicles", function (vehicles) {
-    //         let tr = "",
-    //             option = "",
-    //             li = "",
-    //             i = 1;
-    //         $("#listcount").text(vehicles.length);
-    //         $.each(vehicles, function (key, value) {
-    //             let {
-    //                 id,
-    //                 vehicle_no,
-    //                 dealer,
-    //                 make,
-    //                 model,
-    //                 year,
-    //                 prices,
-    //                 enginecc,
-    //                 // color,
-    //                 // interior,
-    //                 mileage,
-    //                 fuel_type,
-    //                 transmission,
-    //                 status,
-    //                 created_at,
-    //             } = value;
-
-    //             option +=
-    //                 '<option value="' +
-    //                 id +
-    //                 '">' +
-    //                 vehicle_no +
-    //                 " -" +
-    //                 model.model +
-    //                 "</option>";
-    //             li +=
-    //                 '<label class="custom-control custom-radio"><input type="checkbox" value=' +
-    //                 id +
-    //                 ' class="vehicleoptionid" name="vehicleoptionid"><span>&nbsp;&nbsp;&nbsp;' +
-    //                 vehicle_no +
-    //                 " - " +
-    //                 model.model +
-    //                 "</span></label>";
-    //             // <td>" +
-    //             // color +
-    //             // "</td><td>" +
-    //             // interior +
-    //             // "</td>
-    //             tr +=
-    //                 "<tr><td>" +
-    //                 i++ +
-    //                 "</td><td>" +
-    //                 vehicle_no +
-    //                 "</td><td>" +
-    //                 dealer.name +
-    //                 "</td><td>" +
-    //                 make.make +
-    //                 "</td><td>" +
-    //                 model.model +
-    //                 "</td><td>" +
-    //                 year +
-    //                 "</td><td>" +
-    //                 prices[0]?.price +
-    //                 "</td><td>" +
-    //                 enginecc +
-    //                 "</td><td>" +
-    //                 mileage +
-    //                 "</td><td>" +
-    //                 fuel_type +
-    //                 "</td><td>" +
-    //                 transmission +
-    //                 "</td><td>" +
-    //                 status +
-    //                 "</td><td>" +
-    //                 moment(new Date(created_at)).format("DD-MM-YYYY") +
-    //                 "</td><td></td></tr>";
-    //         });
-    //         // <th>Color</th><th>Interior</th>
-    //         let table =
-    //             '<table class="table table-bordered hover vehicleDataTable "><thead><th>#</th><th>NO</th><th>Dealer</th><th>Make</th><th>Model</th><th>Year</th><th>Price</th><th>CC</th><th>Mileage</th><th>Fuel</th><th>Trans</th><th>Status</th><th>created</th><th>Action</th></thead><tbody' +
-    //             tr +
-    //             "</tbody></table>";
-    //         $("#vehicledatasection").html(table);
-
-    //         if ($.fn.DataTable.isDataTable(".vehicleDataTable")) {
-    //             $(".vehicleDataTable").destroy();
-    //             $(".vehicleDataTable").DataTable({
-    //                 dom: "Bfrtip",
-    //                 buttons: [
-    //                     "copyHtml5",
-    //                     "excelHtml5",
-    //                     "csvHtml5",
-    //                     "pdfHtml5",
-    //                 ],
-    //             });
-    //         } else {
-    //             $(".vehicleDataTable").DataTable({
-    //                 dom: "Bfrtip",
-    //                 buttons: [
-    //                     "copyHtml5",
-    //                     "excelHtml5",
-    //                     "csvHtml5",
-    //                     "pdfHtml5",
-    //                 ],
-    //             });
-    //         }
-    //     });
-    // }
-
-    // getVehicles();
 
     var fileInput = document.getElementById("addionalImages");
     var maxFiles = 20; // Set the maximum file limit
@@ -1233,6 +1118,7 @@
             str_id = uniqueStrID.val(),
             location = locationHtm.val(),
             yard_id = yardID.val(),
+            county_id = countyID.val(),
             year = yearOfManufacture.val(),
             mileage = mileAge.val(),
             color = vehicleColor.val(),
@@ -1263,6 +1149,7 @@
             country_of_origin: country_of_origin,
             shipping_to: shipping_to,
             str_id: str_id,
+            county_id,
             location: location,
             yard_id: yard_id,
             year: year,
@@ -1292,6 +1179,9 @@
         }
         if (vehicle_id === "" && files.length <= 0) {
             errors.push("Vehicle Images are required");
+        }
+        if (location == "" && yard_id == "") {
+            errors.push('Location or yard is required');
         }
         if (model == "" && model == undefined) {
             errors.push("Model is required");

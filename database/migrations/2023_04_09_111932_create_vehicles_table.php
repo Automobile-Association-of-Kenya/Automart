@@ -28,7 +28,6 @@ return new class extends Migration
             $table->foreignIdFor(VehicleModel::class)->constrained();
             $table->unsignedBigInteger('country_of_origin')->nullable()->foreign()->references('id')->on(Country::class);
             // $table->unsignedBigInteger('country_located')->nullable()->foreign()->references('id')->on(Country::class);
-            // $table->foreignIdFor(County::class)->nullable()->constrained();
             $table->foreignIdFor(Yard::class)->nullable();
             $table->string('vehicle_no', 20)->unique()->nullable();
             $table->string('shipping_to')->nullable();

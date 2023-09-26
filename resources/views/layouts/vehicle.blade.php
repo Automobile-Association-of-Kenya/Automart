@@ -156,6 +156,15 @@
 
     <div class="card-body" id="additionInfo">
         <div class="row">
+
+            <div class="col-md-3 form-group">
+                <label for="countyID">County Located:</label>
+                <div class="input-group">
+                    <select name="county_id" id="countyID"
+                        class="form-control form-control--md chzn-select" style="width: 100%;"></select>
+                </div>
+            </div>
+
             <div class="col-md-3 form-group">
                 <label for="countryofOrigin">Country of origin:</label>
                 <div class="input-group">
