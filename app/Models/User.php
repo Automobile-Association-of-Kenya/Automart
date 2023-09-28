@@ -147,6 +147,8 @@ class User extends Authenticatable implements MustVerifyEmail
         $visitscount = Visit::count();
         $loanscount = Loan::count();
         $todayloanscount = Loan::whereDate('created_at', date('Y-m-d'))->count();
+        $users = User::where('role','<>','admin')->orWhereNull('role')->count();
+        $todayusers = User::where('role','<>','admin')->orWhereNull('role')->whereDate('created_at', date('Y-m-d'))->count();
         $visitstoday = Visit::whereDate('time', date('Y-m-d'))->count();
         $activesubscriptions = DB::table('dealer_subscription')->where('expiry_date', '>', date('Y-m-d H:i:s'))->count();
 
@@ -167,7 +169,9 @@ class User extends Authenticatable implements MustVerifyEmail
             'visitstoday' => $visitstoday,
             'activesubscriptions' => $activesubscriptions,
             'loanscount' => $loanscount,
-            'todayloanscount' => $todayloanscount
+            'todayloanscount' => $todayloanscount,
+            'users' => $users,
+            'todayusers' => $todayusers,
         ];
     }
 }

@@ -5169,11 +5169,11 @@ input[type=checkbox]:checked+label:before {
     color: #ffffff;
 }
 
-.social-media .github:hover,
-.social-media .github:hover .tooltip,
-.social-media .github:hover .tooltip::before {
-    background-color: #333333;
-    color: #ffffff;
+.social-media .whatsapp:hover,
+.social-media .whatsapp:hover .tooltip,
+.social-media .whatsapp:hover .tooltip::before {
+    background-color: #25d366;
+    color: #fff;
 }
 
 .social-media .youtube:hover,
@@ -5195,12 +5195,16 @@ input[type=checkbox]:checked+label:before {
     background-color: #e1306c;
 }
 
-.social-media .github {
-    background-color: #333333;
+.social-media .whatsapp {
+    background-color: #fff;
 }
 
 .social-media .youtube {
     background-color: #de463b;
+}
+.social-media .whatsapp {
+    background-color: #075e54;
+    color: #fff;
 }
 
 /** Blog 1 start **/

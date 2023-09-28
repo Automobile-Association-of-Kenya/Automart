@@ -103,6 +103,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="social-media clearfix">
                         <div class="social-list">
+
                             <a href=" https://www.facebook.com/AAKenya" target="_blank">
                                 <div class="icon facebook">
                                     <div class="tooltip">Facebook</div>
@@ -130,6 +131,14 @@
                                     <span><i class="fa-brands fa-youtube"></i></span>
                                 </div>
                             </a>
+
+                            <a href="https://api.whatsapp.com/send/?phone=+254703877817 " target="_blank">
+                                <div class="icon youtube mr-0">
+                                    <div class="tooltip" style="background: #fff;color:#0f0;">WhatsApp</div>
+                                    <span><i class="fa-brands fa-whatsapp"></i></span>
+                                </div>
+                            </a>
+
                         </div>
                     </div>
                 </div>

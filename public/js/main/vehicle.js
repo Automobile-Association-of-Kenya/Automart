@@ -1797,6 +1797,7 @@
                             extend: "excel",
                             messageTop:
                                 "<caption style=\"caption-side: top\"><img src=\"/images/logo.png\" alt=\"AA Kenya\"/>Automart AA Kenya Vehicles</caption>",
+                            title: "Vehicles Automart",
                         },
                         {
                             extend: "pdf",
@@ -1821,7 +1822,7 @@
                         // },
                     ],
                 });
-                
+
             } else {
 
                 $(".vehicleDataTable").DataTable({

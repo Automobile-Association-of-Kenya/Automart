@@ -147,71 +147,42 @@
                         <h3 class="mb-20">Follow Us</h3>
                         <div class="social-media social-media-two">
                             <div class="social-list">
-                                @foreach ($socials as $item)
-                                    @if ($item->name == 'Facebook')
-                                        <a href="{{ $item->link }}" target="_blank">
 
-                                            <div class="icon {{ strtolower($item?->name) }}">
-                                                <div class="tooltip">{{ $item?->name }}</div>
-                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
-                                            </div>
-                                        </a>
-                                    @endif
+                                <a href="https://www.facebook.com/AAKenya" target="_blank">
+                                    <div class="icon facebook">
+                                        <div class="tooltip">Facebook</div>
+                                        <span style="font-size:27px;"><i class="fa fa-facebook"></i></span>
+                                    </div>
+                                </a>
 
-                                    @if ($item->name == 'Twitter')
-                                        <a href="{{ $item->link }}" target="_blank">
-                                            <div class="icon {{ strtolower($item?->name) }}">
-                                                <div class="tooltip">{{ $item?->name }}</div>
-                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
-                                            </div>
-                                        </a>
-                                    @endif
+                                <a href="https://twitter.com/AAKenya" target="_blank">
+                                    <div class="icon twitter">
+                                        <div class="tooltip">Twitter</div>
+                                        <span style="font-size:27px;"><i class="fa fa-twitter"></i></span>
+                                    </div>
+                                </a>
 
-                                    @if ($item->name == 'Instagram')
-                                        <a href="{{ $item->link }}" target="_blank">
-                                            <div class="icon {{ strtolower($item?->name) }}">
-                                                <div class="tooltip">{{ $item?->name }}</div>
-                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
-                                            </div>
-                                        </a>
-                                    @endif
+                                <a href="https://www.instagram.com/aa_kenya_/" target="_blank">
+                                    <div class="icon instagram">
+                                        <div class="tooltip">Instagram</div>
+                                        <span style="font-size:27px;"><i class="fa fa-instagram"></i></span>
+                                    </div>
+                                </a>
 
-                                    @if ($item->name == 'Linkedin')
-                                        <a href="{{ $item->link }}" target="_blank">
-                                            <div class="icon {{ strtolower($item?->name) }}">
-                                                <div class="tooltip">{{ $item?->name }}</div>
-                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
-                                            </div>
-                                        </a>
-                                    @endif
+                                <a href="https://www.youtube.com/@AA_Kenya" target="_blank">
+                                    <div class="icon youtube">
+                                        <div class="tooltip">Youtube</div>
+                                        <span style="font-size:27px;"><i class="fa fa-youtube"></i></span>
+                                    </div>
+                                </a>
 
-                                    @if ($item->name == 'Youtube')
-                                        <a href="{{ $item->link }}" target="_blank">
-                                            <div class="icon {{ strtolower($item?->name) }}">
-                                                <div class="tooltip">{{ $item?->name }}</div>
-                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
-                                            </div>
-                                        </a>
-                                    @endif
+                                <a href="https://api.whatsapp.com/send/?phone=+254703877817&text=Hello" target="_blank">
+                                    <div class="icon whatsapp">
+                                        <div class="tooltip">Whatsapp</div>
+                                        <span style=" font-size:27px;"><i class="fa fa-whatsapp"></i></span>
+                                    </div>
+                                </a>
 
-                                    @if ($item->name == 'whatsapp')
-                                        <a href="{{ $item->link }}" target="_blank">
-                                            <div class="icon {{ strtolower($item?->name) }}">
-                                                <div class="tooltip">{{ $item?->name }}</div>
-                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
-                                            </div>
-                                        </a>
-                                    @endif
-
-                                    @if ($item->name == 'Tiktok')
-                                        <a href="{{ $item->link }}" target="_blank">
-                                            <div class="icon {{ strtolower($item?->name) }}">
-                                                <div class="tooltip">{{ $item?->name }}</div>
-                                                <span><i class="fa fa-{{ strtolower($item?->name) }}"></i></span>
-                                            </div>
-                                        </a>
-                                    @endif
-                                @endforeach
                             </div>
                         </div>
                     </div>

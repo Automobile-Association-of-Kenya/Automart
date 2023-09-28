@@ -108,7 +108,18 @@
 
         <div class="row mb-2 mt-2 p-2">
             <div class="col-md-4 mb-2">
-                <div class="card">
+
+                <div class="mb-2">
+                    <div class="badge bg-success" style="width: 98%;">
+                        <h4 class="text-start text-white" style="padding: .4em;">Users</h4>
+                        <div class="number" style="display: inline-block" id=''>
+                            {{ $summary['users'] }}<br>
+                        </div>
+                    <p class="text-start ml-3">{{ $summary["todayusers"] }} Today</p>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
                     <div class="card-header">
                         <span class="text-left font-weight-bold">Subscriptions</span>
                     </div>
