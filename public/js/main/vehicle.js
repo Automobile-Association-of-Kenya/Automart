@@ -1776,6 +1776,10 @@
                 "</tbody></table>";
             $("#vehicledatasection").html(table);
 
+            $("#example").append(
+                '<caption style="caption-side: top"><img src="/images/logo.png" alt="AA Kenya"/>Automart AA Kenya Vehicles</caption>'
+            );
+
             if ($.fn.DataTable.isDataTable(".vehicleDataTable")) {
                 $(".vehicleDataTable").destroy();
                 $(".vehicleDataTable").DataTable({
@@ -1787,8 +1791,39 @@
                         style: "multi", // Enable multi-row selection
                         selector: "td:first-child", // Use the first column as the checkbox column
                     },
+                    buttons: [
+                        "copy",
+                        {
+                            extend: "excel",
+                            messageTop:
+                                "<caption style=\"caption-side: top\"><img src=\"/images/logo.png\" alt=\"AA Kenya\"/>Automart AA Kenya Vehicles</caption>",
+                        },
+                        {
+                            extend: "pdf",
+                            messageBottom: null,
+                        },
+                        // {
+                        //     extend: "print",
+                        //     messageTop: function () {
+                        //         printCounter++;
+
+                        //         if (printCounter === 1) {
+                        //             return "This is the first time you have printed this document.";
+                        //         } else {
+                        //             return (
+                        //                 "You have printed this document " +
+                        //                 printCounter +
+                        //                 " times"
+                        //             );
+                        //         }
+                        //     },
+                        //     messageBottom: null,
+                        // },
+                    ],
                 });
+                
             } else {
+
                 $(".vehicleDataTable").DataTable({
                     sDom: 'T<"clear">Bfrtilp',
                     oTableTools: {
@@ -1798,6 +1833,38 @@
                         style: "multi", // Enable multi-row selection
                         selector: "td:first-child", // Use the first column as the checkbox column
                     },
+                    title: [
+                        ''
+                    ],
+                    buttons: [
+                        "copy",
+                        {
+                            extend: "excel",
+                            messageTop:
+                                '<caption style="caption-side: top"><img src="/images/logo.png" alt="AA Kenya"/>Automart AA Kenya Vehicles</caption>',
+                        },
+                        {
+                            extend: "pdf",
+                            messageBottom: null,
+                        },
+                        // {
+                        //     extend: "print",
+                        //     messageTop: function () {
+                        //         printCounter++;
+
+                        //         if (printCounter === 1) {
+                        //             return "This is the first time you have printed this document.";
+                        //         } else {
+                        //             return (
+                        //                 "You have printed this document " +
+                        //                 printCounter +
+                        //                 " times"
+                        //             );
+                        //         }
+                        //     },
+                        //     messageBottom: null,
+                        // },
+                    ],
                 });
             }
         });

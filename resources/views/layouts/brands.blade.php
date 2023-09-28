@@ -19,5 +19,11 @@
                     </div>
                 </div>
             </div>
+
+            <div class="slider-nav-main">
+                <div>
+                    <i class="fa-solid fa-arrow-left-long" id="slider-brand-prev"></i><i class="fa-solid fa-arrow-right-long"  id="slider-brand-next"></i>
+                </div>
+            </div>
         </div>
     </div>

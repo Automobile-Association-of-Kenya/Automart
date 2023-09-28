@@ -43,12 +43,12 @@
                             @php
                                 $images = $vehicle->images;
                             @endphp
-                            <img src="{{ asset('vehicleimages/' . $item->cover_photo) }}"
+                            <img src="{{ asset('vehicleimages/' . $vehicle->cover_photo) }}"
                                 alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}"
                                 width="100%" max-height="350px">
                         </div>
 
-                        <div class="introtext mt-2">
+                        <div class="introtext" style="margin-top: 4em;">
                             <a href="{{ url('vehicle/' . $vehicle_no) }}">
                                 <h3 class="text text-success">
                                     {{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}
@@ -186,8 +186,8 @@
                 @foreach ($services as $item)
                     <div class="slide slide-box">
                         <div class="card" style="border-radius: 8px; padding:1.5em;">
-                            <h5 class="card-title white">{{ $item->service }}</h5>
-                            <p class="card-text white">{{ $item->description }}</p>
+                            <h5 class="card-title white" style="font-size: 34px;font-style: none;">{{ $item->service }}</h5>
+                            <p class="card-text white" style="font-size: x-large;font-style: none;">{{ $item->description }}</p>
                             <a href="{{ route('services.index') }}" class="btn btn-success btn-sm">Learn More ...</a>
                         </div>
                     </div>

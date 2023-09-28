@@ -7,7 +7,6 @@
 @section('main')
     @include('layouts.banner')
 
-
     @include('layouts.search')
 
     <div class="featured-car content-area-21 bg-white">
@@ -103,7 +102,8 @@
                                 <div class="buttons mb-2 text-center">
                                     <a href="#" class="btn btn-success btn-sm mt-2" id="whatsappToggle"
                                         data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp; Enquire</a>
-                                    <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm mt-2"><i class="fa-solid fa-money-check"></i> Buy</a>
+                                    <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm mt-2"><i
+                                            class="fa-solid fa-money-check"></i> Buy</a>
                                     <a href="{{ route('loan', $vehicle_no) }}" class="btn btn-success btn-sm mt-2"><i
                                             class="fa fa-"></i> Apply
                                         Loan</a>
@@ -113,6 +113,12 @@
                         </div>
                     </div>
                 @endforeach
+            </div>
+
+            <div class="slider-nav-main">
+                <div>
+                    <i class="fa-solid fa-arrow-left-long" id="slider-main-prev"></i><i class="fa-solid fa-arrow-right-long"  id="slider-main-next"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -221,7 +227,8 @@
                                 <div class="buttons mb-2 text-center">
                                     <a href="#" class="btn btn-success btn-sm  mt-2" id="whatsappToggle"
                                         data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp; Enquire</a>
-                                    <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm mt-2"><i class="fa-solid fa-money-check"></i> Buy</a>
+                                    <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm mt-2"><i
+                                            class="fa-solid fa-money-check"></i> Buy</a>
                                     <a href="{{ route('loan', $vehicle_no) }}" class="btn btn-success btn-sm mt-2"><i
                                             class="fa fa-"></i> Apply
                                         Loan</a>
@@ -345,7 +352,8 @@
                                         <a href="#" class="btn btn-success btn-sm mt-2" id="whatsappToggle"
                                             data-id="{{ $item->id }}"><i class="fa fa-whatsapp"></i>&nbsp;
                                             Enquire</a>
-                                        <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm mt-2"><i class="fa-solid fa-money-check"></i> Buy</a>
+                                        <a href="{{ route('buy', $vehicle_no) }}" class="btn btn-success btn-sm mt-2"><i
+                                                class="fa-solid fa-money-check"></i> Buy</a>
                                         <a href="{{ route('loan', $vehicle_no) }}" class="btn btn-success btn-sm"><i
                                                 class="fa fa-"></i> Apply
                                             Loan</a>

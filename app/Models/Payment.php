@@ -53,6 +53,7 @@ class Payment extends Model
         $curl_response = curl_exec($curl);
         $json = json_decode($curl_response, true);
 
+
         Log::notice($json);
         if (!is_null($json)) {
             $access_token = $json['access_token'];

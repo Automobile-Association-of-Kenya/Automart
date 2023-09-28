@@ -1494,6 +1494,28 @@ input[type=checkbox]:checked+label:before {
     text-align: center;
 }
 
+.slider-nav-main {
+    display: flex;
+    justify-content: right;
+    text-align: center;
+}
+.slider-nav-main div {
+    width: 6em;
+}
+.slider-nav-main div i {
+    background: #fed925;
+    color: #fff;
+    padding: .7em;
+    border-radius: 50%;
+}
+.slider-nav-main div i:nth-child(1) {
+    margin-right: .5em;
+}
+.slick-disabled {
+    opacity: 0.6;
+}
+
+
 .banner .carousel-content.banner-info-2 .search-fields {
     border-radius: 0;
 }
@@ -8258,7 +8280,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 .content-area-21 {
-    padding: 30px 0 30px;
+    padding: 30px 0 10px;
 }
 
 .content-area-22 {
@@ -11658,7 +11680,7 @@ input[type="tel"] {
     }
 
     .content-area-21 {
-        padding: 100px 0 70px;
+        padding: 20px 0 10px;
     }
 
     .contact-section .authsection {
@@ -12442,7 +12464,7 @@ input[type="tel"] {
     }
 
     .content-area-21 {
-        padding: 80px 0 50px;
+        padding: 80px 0 10px;
     }
 
     .section-header {

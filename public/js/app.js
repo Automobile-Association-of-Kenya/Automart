@@ -192,27 +192,13 @@ $(function () {
 
 
     //featured-slider
-    // $(".slider").slick({
-    //     infinite: true,
-    //     slidesToShow: 3,
-    //     slidesToScroll: 1,
-    //     arrows: true,
-    //     autoplay: true,
-    //     autoplaySpeed: 2000,
-
-    // });
-
     $(".slider").slick({
-        // arrows: true,
-        // dots: true,
         infinite: true,
-        // speed: 300,
-        // nextArrow: true,
-        // prevArrow:true,
         slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToScroll: 1,
+        // arrows: true,
         autoplay: true,
-        autoplaySpeed: 3000,
+        autoplaySpeed: 2000,
         responsive: [
             {
                 breakpoint: 1024,
@@ -238,6 +224,28 @@ $(function () {
                 },
             },
         ],
+    });
+
+    $("#slider-main-prev").click(function () {
+
+        $(".slider").slick("slickPrev");
+    });
+
+    $("#slider-main-next").click(function () {
+        $(".slider").slick("slickNext");
+    });
+    $("#slider-main-prev").addClass("slick-disabled");
+    $(".slider").on("afterChange", function () {
+        if ($(".slick-prev").hasClass("slick-disabled")) {
+            $("#slider-main-prev").addClass("slick-disabled");
+        } else {
+            $("#slider-main-prev").removeClass("slick-disabled");
+        }
+        if ($(".slick-next").hasClass("slick-disabled")) {
+            $("#slider-main-next").addClass("slick-disabled");
+        } else {
+            $("#slider-main-next").removeClass("slick-disabled");
+        }
     });
 
     //slide-container
@@ -799,6 +807,28 @@ $(function () {
             ],
         });
     }
+
+
+    $("#slider-brand-prev").click(function () {
+        $(".custom-slider").slick("slickPrev");
+    });
+
+    $("#slider-brand-next").click(function () {
+        $(".custom-slider").slick("slickNext");
+    });
+    $("#slider-brand-prev").addClass("slick-disabled");
+    $(".custom-slider").on("afterChange", function () {
+        if ($(".slick-prev").hasClass("slick-disabled")) {
+            $("#slider-brand-prev").addClass("slick-disabled");
+        } else {
+            $("#slider-brand-prev").removeClass("slick-disabled");
+        }
+        if ($(".slick-next").hasClass("slick-disabled")) {
+            $("#slider-brand-next").addClass("slick-disabled");
+        } else {
+            $("#slider-brand-next").removeClass("slick-disabled");
+        }
+    });
 
     function showSuccess(message, target) {
         iziToast.success({
