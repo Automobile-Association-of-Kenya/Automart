@@ -12,9 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::table('vehicles', function (Blueprint $table) {
+
             $table->foreignIdFor(County::class)->nullable()->constrained();
+            
         });
+
     }
 
     /**
