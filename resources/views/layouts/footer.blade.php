@@ -132,7 +132,7 @@
                                 </div>
                             </a>
 
-                            <a href="https://api.whatsapp.com/send/?phone=+254703877817 " target="_blank">
+                            <a href="https://api.whatsapp.com/send/?phone=+254703877817" target="_blank">
                                 <div class="icon youtube mr-0">
                                     <div class="tooltip" style="background: #fff;color:#0f0;">WhatsApp</div>
                                     <span><i class="fa-brands fa-whatsapp"></i></span>

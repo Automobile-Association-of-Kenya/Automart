@@ -44,13 +44,6 @@
 
     @include('layouts.footer')
 
-    <div id="full-page-search">
-        <button type="button" class="close">×</button>
-        <form action="" class="full-page-search-inner">
-            <input type="search" value="" placeholder="type keyword(s) here" />
-            <button type="submit" class="btn btn-sm button-theme">Search</button>
-        </form>
-    </div>
 
     <div class="car-model-2">
         <div class="modal fade" id="vehicleDetailsModal" tabindex="-1" role="dialog"
@@ -61,6 +54,11 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="page-whatsapp-chat">
+        <a href="https://api.whatsapp.com/send/?phone=+254703877817&text=Hello" target="_blank"><i class="fa-brands fa-whatsapp"></i>
+        <br><span>WhatsApp us</span></a>
     </div>
 
     @include('cookie-consent::index')

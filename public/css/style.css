@@ -206,41 +206,6 @@ ul {
     -webkit-animation-delay: 2.0s
 }
 
-/** Btn **/
-/* .btn-sm {
-    cursor: pointer;
-    padding: 7px 12px;
-    letter-spacing: 1px;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    transition: .5s;
-    border-radius: 2px;
-    border: none;
-    color: #fff;
-} */
-
-/* .btn-sm:hover {
-    color: #fff;
-    text-decoration: none;
-} */
-
-/* .btn-md {
-    cursor: pointer;
-    padding: 13px 26px;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #fff;
-    transition: .5s;
-    border-radius: 2px;
-    border: none;
-} */
-
-/* .btn-md:hover {
-    color: #fff;
-} */
-
 button:focus {
     outline: 0 auto -webkit-focus-ring-color;
 }
@@ -262,23 +227,6 @@ button:focus {
 .btn {
     border-radius: 2px;
 }
-
-/* .btn-sm {
-    padding: 8px 30px 6px;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 1px;
-} */
-
-/* .btn-md {
-    cursor: pointer;
-    padding: 15.5px 30px 13.5px 30px;
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: uppercase;
-    border-radius: 3px;
-} */
 
 .btn:focus,
 .btn:active,
@@ -398,25 +346,49 @@ button:focus {
     }
 }
 
-#page_scroller {
+.page-whatsapp-chat {
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-    -webkit-animation-name: fadeInRight;
+    /* -webkit-animation-name: fadeInRight;
     animation-name: fadeInRight;
     animation-delay: 0.3s;
-    -webkit-animation-delay: 0.3s;
+    -webkit-animation-delay: 0.3s; */
     cursor: pointer;
-    color: #FFF;
     padding: 10px 11px;
-    font-size: 12px;
     position: fixed;
     bottom: 25px;
     right: 25px;
     box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
+    margin: 0;
+    background: #FFF;
     z-index: 1000 !important;
+    text-align: center;
+}
+.page-whatsapp-chat i {
+    font-size: 54px;
+    color: #128c7e;
+}
+
+.page-whatsapp-chat span {
+    font-size: .75em;
+    color: #128c7e;
+}
+
+.js-cookie-consent {
+    position: fixed;
+    bottom: 25px;
+    background: #fff;
+    z-index: 100;
+    padding: 1em 1.5em;
+    border: 1px solid #999;
+    border-radius: 10px;
+}
+
+.js-cookie-consent button {
+    background: #006544;
+    color: #fff;
 }
 
 .margin-t-10 {
