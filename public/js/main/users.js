@@ -79,20 +79,60 @@
                 $(".usersDataTable").DataTable({
                     dom: "Bfrtip",
                     buttons: [
-                        "copyHtml5",
-                        "excelHtml5",
-                        "csvHtml5",
-                        "pdfHtml5",
+                        {
+                            extend: "excel",
+                            filename: "Automart Dealers",
+                            titleAttr: "Automart Vehicle Dealers",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6],
+                            },
+                        },
+                        {
+                            extend: "csv",
+                            filename: "Automart Dealers",
+                            titleAttr: "Automart Vehicle Dealers",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6],
+                            },
+                        },
+                        {
+                            extend: "pdf",
+                            filename: "Automart Dealers",
+                            titleAttr: "Automart Vehicle Dealers",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6],
+                            },
+                        },
                     ],
                 });
             } else {
                 $(".usersDataTable").DataTable({
                     dom: "Bfrtip",
                     buttons: [
-                        "copyHtml5",
-                        "excelHtml5",
-                        "csvHtml5",
-                        "pdfHtml5",
+                        {
+                            extend: "excel",
+                            filename: "Automart Dealers",
+                            titleAttr: "Automart Vehicle Dealers",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6],
+                            },
+                        },
+                        {
+                            extend: "csv",
+                            filename: "Automart Dealers",
+                            titleAttr: "Automart Vehicle Dealers",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6],
+                            },
+                        },
+                        {
+                            extend: "pdf",
+                            filename: "Automart Dealers",
+                            titleAttr: "Automart Vehicle Dealers",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6],
+                            },
+                        },
                     ],
                 });
             }
@@ -155,20 +195,60 @@
                 $(".dealersDataTable").DataTable({
                     dom: "Bfrtip",
                     buttons: [
-                        "copyHtml5",
-                        "excelHtml5",
-                        "csvHtml5",
-                        "pdfHtml5",
+                        {
+                            extend: "excel",
+                            filename: "Automart Dealers",
+                            titleAttr: "Automart Vehicle Dealers",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                            },
+                        },
+                        {
+                            extend: "csv",
+                            filename: "Automart Dealers",
+                            titleAttr: "Automart Vehicle Dealers",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                            },
+                        },
+                        {
+                            extend: "pdf",
+                            filename: "Automart Dealers",
+                            titleAttr: "Automart Vehicle Dealers",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                            },
+                        },
                     ],
                 });
             } else {
                 $(".dealersDataTable").DataTable({
                     dom: "Bfrtip",
                     buttons: [
-                        "copyHtml5",
-                        "excelHtml5",
-                        "csvHtml5",
-                        "pdfHtml5",
+                        {
+                            extend: "excel",
+                            filename: "Automart Dealers",
+                            titleAttr: "Automart Vehicle Dealers",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                            },
+                        },
+                        {
+                            extend: "csv",
+                            filename: "Automart Dealers",
+                            titleAttr: "Automart Vehicle Dealers",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                            },
+                        },
+                        {
+                            extend: "pdf",
+                            filename: "Automart Vehicle Dealers",
+                            titleAttr: "Automart Vehicle Dealers",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                            },
+                        },
                     ],
                 });
             }
@@ -219,20 +299,60 @@
                 $(".partnersDataTable").DataTable({
                     dom: "Bfrtip",
                     buttons: [
-                        "copyHtml5",
-                        "excelHtml5",
-                        "csvHtml5",
-                        "pdfHtml5",
+                        {
+                            extend: "excel",
+                            filename: "Automart Partners",
+                            titleAttr: "Automart Partners",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6],
+                            },
+                        },
+                        {
+                            extend: "csv",
+                            filename: "Automart Partners",
+                            titleAttr: "Automart Partners",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6],
+                            },
+                        },
+                        {
+                            extend: "pdf",
+                            filename: "Automart Partners",
+                            titleAttr: "Automart Partners",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6],
+                            },
+                        },
                     ],
                 });
             } else {
                 $(".partnersDataTable").DataTable({
                     dom: "Bfrtip",
                     buttons: [
-                        "copyHtml5",
-                        "excelHtml5",
-                        "csvHtml5",
-                        "pdfHtml5",
+                        {
+                            extend: "excel",
+                            filename: "Automart Partners",
+                            titleAttr: "Automart Partners",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6],
+                            },
+                        },
+                        {
+                            extend: "csv",
+                            filename: "Automart Partners",
+                            titleAttr: "Automart Partners",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6],
+                            },
+                        },
+                        {
+                            extend: "pdf",
+                            filename: "Automart Partners",
+                            titleAttr: "Automart Partners",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6],
+                            },
+                        },
                     ],
                 });
             }

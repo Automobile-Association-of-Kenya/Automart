@@ -633,36 +633,31 @@
                             <div class="tab-pane fade mb-3" id="visitorsTabs" role="tabpanel"
                                 aria-labelledby="pop2-tab">
 
-                                <div class="alert-success pl-2 pr-1 border-rounded filterSection"
+                                <div class="alert-success pb-3 pt-3 pl-2 pr-1 border-rounded filterSection"
                                 style="border-radius: 6px;">
-                                <form action="#" id="filterVisitorsForm" class="alert-success p-2">
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="form-group">
+                                    <form action="#" id="filterVisitorsForm" class="form-row">
+                                        @csrf
+                                            <div class="col-md-6">
                                                 <label for="startDate">Start Date</label>
-                                                <input type="date" class="form-control form-control-md"
-                                                    name="start_date" id="startDate" value="{{ date('Y-m-d') }}"><br><br>
+                                                <input type="date" class="form-control form-control-sm"
+                                                    name="start_date" id="startDate"
+                                                    value="{{ date('Y-m-d') }}">
                                             </div>
-                                        </div>
 
-                                        <div class="col-md-5">
-                                            <div class="form-group">
+                                            <div class="col-md-5">
                                                 <label for="endDate">End Date</label>
-                                                <input type="date" class="form-control form-control-md"
-                                                    name="end_date" id="endDate" value="{{ date('Y-m-d') }}"><br><br>
+                                                <input type="date" class="form-control form-control-sm"
+                                                    name="end_date" id="endDate"
+                                                    value="{{ date('Y-m-d') }}">
                                             </div>
-                                        </div>
 
-                                        <div class="col-md-2">
-                                            <br>
-                                            <button type="submit" class="btn btn-success btn-md mt-1"><i
-                                                    class="fa fa-search"></i>&nbsp;Find</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-
+                                            <div class="col-md-1">
+                                                <br>
+                                                <button type="submit" class="btn btn-success btn-sm mt-1"><i
+                                                        class="fa fa-search"></i>&nbsp;Find</button>
+                                            </div>
+                                    </form>
+                                </div>
 
                                 <div id="visitsSection">
 

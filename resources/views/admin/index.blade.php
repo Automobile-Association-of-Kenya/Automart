@@ -107,7 +107,7 @@
         </div>
 
         <div class="row mb-2 mt-2 p-2">
-            <div class="col-md-4 mb-2">
+            <div class="col-md-4 mb-2 mt-2">
 
                 <div class="mb-2">
                     <div class="badge bg-success" style="width: 98%;">

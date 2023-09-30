@@ -1788,83 +1788,77 @@
                         sRowSelect: "multi",
                     },
                     select: {
-                        style: "multi", // Enable multi-row selection
-                        selector: "td:first-child", // Use the first column as the checkbox column
+                        style: "multi",
+                        selector: "td:first-child",
                     },
                     buttons: [
-                        "copy",
                         {
                             extend: "excel",
-                            messageTop:
-                                "<caption style=\"caption-side: top\"><img src=\"/images/logo.png\" alt=\"AA Kenya\"/>Automart AA Kenya Vehicles</caption>",
-                            title: "Vehicles Automart",
+                            filename: "Automart vehicles",
+                            exportOptions: {
+                                columns: [
+                                    2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+                                ],
+                            },
+                        },
+                        {
+                            extend: "csv",
+                            filename: "Automart_vehicles_csv",
+                            exportOptions: {
+                                columns: [
+                                    2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+                                ],
+                            },
                         },
                         {
                             extend: "pdf",
-                            messageBottom: null,
+                            filename: "Automart Vehicles",
+                            exportOptions: {
+                                columns: [
+                                    2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+                                ],
+                            },
                         },
-                        // {
-                        //     extend: "print",
-                        //     messageTop: function () {
-                        //         printCounter++;
-
-                        //         if (printCounter === 1) {
-                        //             return "This is the first time you have printed this document.";
-                        //         } else {
-                        //             return (
-                        //                 "You have printed this document " +
-                        //                 printCounter +
-                        //                 " times"
-                        //             );
-                        //         }
-                        //     },
-                        //     messageBottom: null,
-                        // },
                     ],
                 });
-
             } else {
-
                 $(".vehicleDataTable").DataTable({
                     sDom: 'T<"clear">Bfrtilp',
                     oTableTools: {
                         sRowSelect: "multi",
                     },
                     select: {
-                        style: "multi", // Enable multi-row selection
-                        selector: "td:first-child", // Use the first column as the checkbox column
+                        style: "multi",
+                        selector: "td:first-child",
                     },
-                    title: [
-                        ''
-                    ],
                     buttons: [
-                        "copy",
                         {
                             extend: "excel",
-                            messageTop:
-                                '<caption style="caption-side: top"><img src="/images/logo.png" alt="AA Kenya"/>Automart AA Kenya Vehicles</caption>',
+                            filename: "Automart vehicles",
+                            exportOptions: {
+                                columns: [
+                                    2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+                                ],
+                            },
+                        },
+                        {
+                            extend: "csv",
+                            filename: "Automart_vehicles_csv",
+                            exportOptions: {
+                                columns: [
+                                    2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+                                ],
+                            },
                         },
                         {
                             extend: "pdf",
-                            messageBottom: null,
+                            filename: "Automart Vehicles",
+                            exportOptions: {
+                                columns: [
+                                    2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+                                ],
+                            },
                         },
-                        // {
-                        //     extend: "print",
-                        //     messageTop: function () {
-                        //         printCounter++;
-
-                        //         if (printCounter === 1) {
-                        //             return "This is the first time you have printed this document.";
-                        //         } else {
-                        //             return (
-                        //                 "You have printed this document " +
-                        //                 printCounter +
-                        //                 " times"
-                        //             );
-                        //         }
-                        //     },
-                        //     messageBottom: null,
-                        // },
                     ],
                 });
             }
@@ -1986,69 +1980,6 @@
                 message +
                 "</div>";
             $("#vehicleMessagesSection").html(text);
-            // let quotediv = "";
-            // $.each(vehicle.quotes, function (key, quote) {
-            //     quotediv +=
-            //         "<div class='quote'><h5 class='text-success'>" +
-            //         quote.name +
-            //         "  " +
-            //         quote.phone +
-            //         "  " +
-            //         quote.email +
-            //         "</h5><div class='mt-1'><h6>" +
-            //         quote.subject +
-            //         "</h6><p>" +
-            //         quote.message +
-            //         "</p></div></div>";
-            // });
-            // let quotesection =
-            //     '<div class="accordion-item"><h2 class="accordion-header" id="headingOne"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Vehicle Quotes</button></h2><div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample"><div class="accordion-body">' +
-            //     quotediv +
-            //     "</div></div></div>";
-
-            // let loan = "";
-            // $.each(vehicle.loans, function (key, value) {
-            //     loan +=
-            //         "<table><thead><th>Customer</th><th>Employment</th><th>bank</th><th></th></thead><tbody>" +
-            //         "<tr><td><span>" +
-            //         value.title +
-            //         " " +
-            //         value.firstname +
-            //         " " +
-            //         value.lastname +
-            //         "<i class='fa fa-calender'></i>" +
-            //         moment(new Date(value.date_of_birth)).format("DD-MM-YYYY");
-            //     "</span><br><span><i class='fa fa-envelope'></i>" +
-            //         value.email +
-            //         "<i class='fa fa-phone'></i>" +
-            //         value.phone +
-            //         "</span><br><span><b>Tax pin:</b>" +
-            //         value.kra_pin +
-            //         "</span>&nbsp;<span><b>ID</b>" +
-            //         value.id_no +
-            //         "</span><br><span>" +
-            //         value.country.name +
-            //         " " +
-            //         value.city +
-            //         ", " +
-            //         value.estate +
-            //         " Hs NO: " +
-            //         value.house_no +
-            //         "</span></td><td><span>" +
-            //         value.occupation +
-            //         " " +
-            //         value.industry.name +
-            //         " " +
-            //         value.employement_type +
-            //         "</span><span>" +
-            //         value.proffession +
-            //         "</span><br><span>"+value.employer+" years "+value.years_of_employment+"</span</td></tr></tbody></table>";
-            // });
-
-            // let tradeins = "";
-            // $.each(vehicle.tradeins, function (key, value) {
-            //     tradeins += "";
-            // });
         });
     });
 
@@ -2145,7 +2076,5 @@
     $("#discountVehicles").on('click', function(event) {
         event.preventDefault();
         $('#vehicleDiscountRateModal').modal('toggle');
-    });
-
-
+    })
 })();

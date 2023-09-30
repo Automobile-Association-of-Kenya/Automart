@@ -311,20 +311,54 @@
                     $(".transactionsTable").DataTable({
                         dom: "Bfrtip",
                         buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
+                            {
+                                extend: "excel",
+                                filename: "Subscription Payments",
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                                },
+                            },
+                            {
+                                extend: "csv",
+                                filename: "Subscription_Payments_CSV",
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                                },
+                            },
+                            {
+                                extend: "pdf",
+                                filename: "Subscription Payments",
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                                },
+                            },
                         ],
                     });
                 } else {
                     $(".transactionsTable").DataTable({
                         dom: "Bfrtip",
                         buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
+                            {
+                                extend: "excel",
+                                filename: "Subscription Payments",
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                                },
+                            },
+                            {
+                                extend: "csv",
+                                filename: "Subscription_Payments_CSV",
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                                },
+                            },
+                            {
+                                extend: "pdf",
+                                filename: "Subscription Payments",
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                                },
+                            },
                         ],
                     });
                 }
@@ -391,20 +425,54 @@
                     $("#subscriptiontable").DataTable({
                         dom: "Bfrtip",
                         buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
+                            {
+                                extend: "excel",
+                                filename: "Automart Subscriptions",
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                                },
+                            },
+                            {
+                                extend: "csv",
+                                filename: "Automart Subscriptions",
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                                },
+                            },
+                            {
+                                extend: "pdf",
+                                filename: "Automart Subscriptions",
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                                },
+                            },
                         ],
                     });
                 } else {
                     $("#subscriptiontable").DataTable({
                         dom: "Bfrtip",
                         buttons: [
-                            "copyHtml5",
-                            "excelHtml5",
-                            "csvHtml5",
-                            "pdfHtml5",
+                            {
+                                extend: "excel",
+                                filename: "Automart Subscriptions",
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                                },
+                            },
+                            {
+                                extend: "csv",
+                                filename: "Automart_Subscriptions_CSV",
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                                },
+                            },
+                            {
+                                extend: "pdf",
+                                filename: "Automart Subscriptions",
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7],
+                                },
+                            },
                         ],
                     });
                 }

@@ -853,20 +853,54 @@
                 $("#visitstable").DataTable({
                     dom: "Bfrtip",
                     buttons: [
-                        "copyHtml5",
-                        "excelHtml5",
-                        "csvHtml5",
-                        "pdfHtml5",
+                        {
+                            extend: "excel",
+                            filename: "Automart Visitors",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4],
+                            },
+                        },
+                        {
+                            extend: "csv",
+                            filename: "Automart_isitors_csv",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4],
+                            },
+                        },
+                        {
+                            extend: "pdf",
+                            filename: "Automart Visitors",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4],
+                            },
+                        },
                     ],
                 });
             } else {
                 $("#visitstable").DataTable({
                     dom: "Bfrtip",
                     buttons: [
-                        "copyHtml5",
-                        "excelHtml5",
-                        "csvHtml5",
-                        "pdfHtml5",
+                        {
+                            extend: "excel",
+                            filename: "Automart Visitors",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4],
+                            },
+                        },
+                        {
+                            extend: "csv",
+                            filename: "Automart_visitors_csv",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4],
+                            },
+                        },
+                        {
+                            extend: "pdf",
+                            filename: "Automart Visitors",
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4],
+                            },
+                        },
                     ],
                 });
             }
@@ -876,7 +910,8 @@
 
     $("#filterVisitorsForm").on('submit', function(event) {
         event.preventDefault();
+        console.log("teher");
         getVisits();
     });
-    
+
 })();
