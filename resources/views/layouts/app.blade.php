@@ -57,7 +57,7 @@
     </div>
 
     <div class="page-whatsapp-chat">
-        <a href="https://api.whatsapp.com/send/?phone=+254703877817&text=Hello" target="_blank"><i class="fa-brands fa-whatsapp"></i>
+        <a href="https://api.whatsapp.com/send/?phone=+254703877817&text=Hello" target="_blank"><i class="fa-brands fa-square-whatsapp"></i>
         <br><span>WhatsApp us</span></a>
     </div>
 

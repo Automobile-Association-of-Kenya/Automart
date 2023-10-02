@@ -380,7 +380,6 @@
             target: target,
         });
     }
-
     createUserForm.on("submit", function (event) {
         event.preventDefault();
         let $this = $(this),

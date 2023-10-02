@@ -295,7 +295,7 @@
                                                 <div class="col-md-6 mail-create-section">
                                                     <h4 class="text text-center mb-2">Notification Form</h4>
                                                     <div id="mailsfeedback"></div>
-
+                                                    
                                                     <form action="#" method="post" id="sendMailForm">
                                                         @csrf
                                                         <div class="row">

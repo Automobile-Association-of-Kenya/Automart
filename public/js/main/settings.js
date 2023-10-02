@@ -742,9 +742,11 @@
         sendRange = $("#sendRange"),
         mailSubject = $("#mailSubject"),
         mailMessage = $("#mailMessage");
+
     sendMailForm.on("submit", function (event) {
         $(".lds-roller").show();
         event.preventDefault();
+        
         $("#sendmail").prop("disabled", true);
         let $this = $(this),
             usage = sendMailUsage.val(),
