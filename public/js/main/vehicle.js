@@ -6,6 +6,7 @@
         tokenSeparators: [",", " "],
         maximumSelectionLength: 4,
     });
+    
     let addNewVehicle = $("#addNewVehicle"),
         newVehicleForm = $("#newVehicleForm"),
         vehicleDealer = $("#vehicleDealer"),
@@ -1982,6 +1983,8 @@
             $("#vehicleMessagesSection").html(text);
         });
     });
+
+
 
 
     $("#vehicleDelist").on("click", function (event) {

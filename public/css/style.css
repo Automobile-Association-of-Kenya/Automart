@@ -361,7 +361,9 @@ button:focus {
     background: #FFF;
     z-index: 1000 !important;
     text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
 .page-whatsapp-chat i {
     font-size: 54px;
     color: #128c7e;

@@ -259,7 +259,7 @@
             <div class="col-md-4 form-group">
                 <label for="vehicleTags">Tags:</label>
                 <div class="input-group">
-                    <select name="tags" id="vehicleTags" class="form-control form-control--md"
+                    <select name="tags" id="vehicleTags" class="form-control form-control-md"
                         multiple="multiple" style="width: 100%;">
                         <option value="#Best deals">#Best deals</option>
                         <option value="#Cars on sale">#Cars on sale</option>

@@ -49,14 +49,14 @@
 
                 <li class="{{ Request::is('dealer/vehicles') ? 'active' : '' }}" class='validation'>
                     <a href="{{ route('dealer.vehicles') }}">
-                        <span><i class="fad fa-cars"></i></span>
+                        <span><i class="fa-solid fa-car-side"></i></span>
                         <span>Vehicles</span>
                     </a>
                 </li>
 
                 <li class="{{ Request::is('dealer/requests') ? 'active' : '' }}">
                     <a href="{{ route('dealer.requests') }}" class='validation'>
-                        <span><i class="fa fa-hand-heart"></i></span>
+                        <span><i class="fa fa-hand"></i></span>
                         <span>Requests</span>
                     </a>
                 </li>

@@ -746,7 +746,7 @@
     sendMailForm.on("submit", function (event) {
         $(".lds-roller").show();
         event.preventDefault();
-        
+
         $("#sendmail").prop("disabled", true);
         let $this = $(this),
             usage = sendMailUsage.val(),
@@ -756,6 +756,7 @@
             subject = mailSubject.val(),
             token = $this.find("input[name='_token']").val(),
             users = [];
+
         var formData = new FormData();
 
         if (sendrange == "manual") {
@@ -768,6 +769,9 @@
         }
 
         var files = $("#emailAttachements")[0].files;
+
+        console.log(files);
+
         for (var i = 0; i < files.length; i++) {
             formData.append("attachments[]", files[i]);
         }

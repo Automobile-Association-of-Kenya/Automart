@@ -46,7 +46,7 @@
                 <div class="row">
 
                     <div class="col-md-12">
-                        <nav class="nav-justified ">
+                        <nav class="nav-justified">
                             <div class="nav nav-tabs " id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="pop1-tab" data-toggle="tab" href="#subscriptionTab"
                                     role="tab" aria-controls="pop1" aria-selected="true">Subscription Packages</a>
@@ -295,13 +295,13 @@
                                                 <div class="col-md-6 mail-create-section">
                                                     <h4 class="text text-center mb-2">Notification Form</h4>
                                                     <div id="mailsfeedback"></div>
-                                                    
+
                                                     <form action="#" method="post" id="sendMailForm">
                                                         @csrf
                                                         <div class="row">
 
                                                             <div class="col-md-12 form-group">
-                                                                <label for="usage">Notification Type</label>
+                                                                <label for="sendMailUsage">Notification Type</label>
                                                                 <select name="usage" id="sendMailUsage"
                                                                     class="form-control form-control-md" required>
                                                                     <option value="">Select one</option>
@@ -311,21 +311,18 @@
                                                             </div>
 
                                                             <div class="col-md-12 mail">
-                                                                <label for="name">Email Type</label>
+                                                                <label for="emailType">Email Type</label>
                                                                 <select name="email_type" id="emailType"
                                                                     class="form-control form-control-sm" required>
                                                                     <option value="">Select one</option>
-                                                                    <option value="Authentication">Authentication / User
-                                                                        accounts
-                                                                    </option>
+                                                                    <option value="Authentication">Authentication / User accounts </option>
                                                                     <option value="Marketing">Marketing</option>
-                                                                    <option value="Subscription">Subscription Reminders
-                                                                    </option>
+                                                                    <option value="Subscription">Subscription Reminders </option>
                                                                 </select>
                                                             </div>
 
                                                             <div class="col-md-12">
-                                                                <label for="name">Recepients Type</label>
+                                                                <label for="recepientType">Recepients Type</label>
                                                                 <select name="recepient_type" id="recepientType"
                                                                     class="form-control form-control-sm" required>
                                                                     <option value="">Select One</option>
@@ -335,31 +332,29 @@
                                                             </div>
 
                                                             <div class="col-md-12">
-                                                                <label for="email">Range</label>
-                                                                <select name="sendrange" id="sendRange"
-                                                                    class="form-control" required>
+                                                                <label for="sendRange">Range</label>
+                                                                <select name="sendrange" id="sendRange"class="form-control" required>
                                                                     <option value="all">All</option>
                                                                     <option value="manual">Manually Select</option>
                                                                 </select>
                                                             </div>
 
                                                             <div class="col-md-12">
-                                                                <label for="subject">Subject</label>
+                                                                <label for="mailSubject">Subject</label>
                                                                 <textarea name="subject" id="mailSubject" class="form-control form-control-md" required></textarea>
                                                             </div>
 
                                                             <div class="col-md-12">
-                                                                <label for="phone">Message</label>
+                                                                <label for="mailMessage">Message</label>
                                                                 {{-- <div class="float-right box-tools"></div> --}}
                                                                 <textarea class="textarea form_editors_textarea_wysihtml form-control" name="mailMessage" id="mailMessage"
                                                                     placeholder="Type your message here" required></textarea>
                                                             </div>
 
                                                             <div class="col-md-12">
-                                                                <label for="phone">You can also upload images,
-                                                                    banners</label><br>
+                                                                <label for="emailAttachements"> Banner </label><br>
                                                                 <input type="file" name="attachments"
-                                                                    id="emailAttachements" multiple>
+                                                                    id="emailAttachements">
                                                                 <div id="errorMessages"></div>
                                                             </div>
 

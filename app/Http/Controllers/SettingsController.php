@@ -207,6 +207,7 @@ class SettingsController extends Controller
                 $files->push($fileName);
             }
         }
+
         if ($request->sendrange == "manual") {
             if (count($request->users) > 0) {
                 foreach ($request->users as $value) {
