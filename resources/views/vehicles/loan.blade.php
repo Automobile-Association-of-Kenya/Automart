@@ -71,7 +71,7 @@
                                 <div class="introimage" style="max-height: 500px;">
                                     @if (count($images) > 0)
                                         {{-- @if (Storage::has('/vehicleimages/' . $item->cover_photo)) --}}
-                                            <img src="{{ asset('vehicleimages/' .$item->cover_photo) }}"
+                                            <img src="{{ asset('vehicleimages/' .$vehicle->cover_photo) }}"
                                                 alt="{{ $vehicle->year . ' ' . $vehicle->make->make . ' ' . $vehicle->model->model }}"
                                                 width="100%">
                                         {{-- @endif --}}
