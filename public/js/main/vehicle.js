@@ -1313,6 +1313,7 @@
 
             Promise.all(imagesUploadPromises)
                 .then((result) => {
+                    console.log("All are resolved");
                     $.ajaxSetup({
                         headers: {
                             "X-CSRF-TOKEN": token,
@@ -1362,6 +1363,7 @@
                     });
                 })
                 .catch((errors) => {
+                    console.log('here not resolved');
                     console.log(errors);
                 });
         }
