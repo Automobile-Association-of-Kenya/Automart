@@ -29,7 +29,7 @@ class VehicleRequest extends FormRequest
             'vehicle_model_id' => ['required', 'exists:vehicle_models,id'],
             'country_of_origin' => ['nullable', 'exists:countries,id'],
             'country_located' => ['nullable', 'exists:countries,id'],
-            'county_id' => ['nullable', 'exists:counties,id'],
+            // 'county_id' => ['nullable', 'exists:counties,id'],
             'shipping_to' => ['nullable'],
             'year' => ['required', 'max:10'],
             'price' => ['required', 'max:12'],
