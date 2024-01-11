@@ -67,7 +67,7 @@
                                                         class="fa fa-eye"></i></span>
                                             </div>
                                             @if ($errors->has('password'))
-                                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                                    <span class="text-danger">{{ $errors->first('password') }}</span>
                                                 @endif
                                         </div>
                                     </div>

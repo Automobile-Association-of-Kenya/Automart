@@ -6,7 +6,7 @@
         tokenSeparators: [",", " "],
         maximumSelectionLength: 4,
     });
-    
+
     let addNewVehicle = $("#addNewVehicle"),
         newVehicleForm = $("#newVehicleForm"),
         vehicleDealer = $("#vehicleDealer"),
@@ -1181,9 +1181,9 @@
         if (vehicle_id === "" && files.length <= 0) {
             errors.push("Vehicle Images are required");
         }
-        if (location == "" && yard_id == "") {
-            errors.push('Location or yard is required');
-        }
+        // if (location == "" && yard_id == "") {
+        //     errors.push('Location or yard is required');
+        // }
         if (model == "" && model == undefined) {
             errors.push("Model is required");
         }
@@ -1221,7 +1221,7 @@
                     reader.onload = function () {
                         var img = new Image();
                         img.onload = function () {
-                            var width = (img.width > 1000) ? 1000 : img.width;
+                            var width = 700;
                             var height = width / (img.width / img.height);
                             var canvas = document.createElement("canvas");
                             canvas.width = width;
@@ -1249,6 +1249,8 @@
                         img.src = reader.result;
                     };
                     reader.readAsDataURL(file);
+                } else {
+                    resolve();
                 }
             });
             imagesUploadPromises.push(coverImagePromise);
@@ -1266,7 +1268,7 @@
                         img.onload = function () {
                             var canvas = document.createElement("canvas");
                             var ctx = canvas.getContext("2d");
-                            canvas.width = (img.width > 1000) ? 1000 : img.width;
+                            canvas.width = 700;
                             canvas.height = canvas.width / (img.width / img.height);
                             let leet = "image_" + i;
                             ctx.drawImage(img,0,0,canvas.width,canvas.height);

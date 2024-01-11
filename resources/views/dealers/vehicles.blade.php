@@ -265,7 +265,6 @@
             });
             $('#filterToggle').on('click', function() {
                 console.log('hsrsss');
-
                 $('.filterSection').toggle();
             });
         })()
